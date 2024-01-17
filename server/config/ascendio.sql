@@ -4,6 +4,7 @@ USE ascendio;
 
 CREATE TABLE user (
   user_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  nickname VARCHAR(50) UNIQUE,
   name VARCHAR(50) NOT NULL,
   lastname VARCHAR(100) NOT NULL,
   phonenumber VARCHAR (20) UNIQUE,
@@ -11,7 +12,6 @@ CREATE TABLE user (
   password VARCHAR(200) NOT NULL,
   img VARCHAR (150),
   type TINYINT NOT NULL DEFAULT 2, -- 1 admin, 2 user
-  nickname VARCHAR(50) UNIQUE,
   is_deleted BOOLEAN NOT NULL DEFAULT false, -- user
   is_confirmed BOOLEAN NOT NULL DEFAULT false, -- user
   is_disabled BOOLEAN NOT NULL DEFAULT  false -- admin
@@ -26,7 +26,6 @@ CREATE TABLE post (
   post_id BIGINT UNSIGNED PRIMARY KEY,
   user_id INT UNSIGNED NOT NULL, -- creador del post
   category_id TINYINT UNSIGNED NOT NULL,
-  -- title VARCHAR(100) NOT NULL,
   currency CHAR(10) NULL,
   description VARCHAR(255) NOT NULL,
   entry_price DECIMAL(7,2) UNSIGNED NULL,
@@ -145,6 +144,7 @@ CREATE TABLE user_wishes_course(
 );
 
 -- Borrado total!
+
 CREATE TABLE user_rates_course(
   user_id INT UNSIGNED NOT NULL,
   course_id INT UNSIGNEd NOT NULL,
