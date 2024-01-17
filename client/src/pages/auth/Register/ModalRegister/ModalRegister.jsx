@@ -1,22 +1,21 @@
-import React, { useState } from "react";
-
+import React from "react";
 import { Modal, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
-export const ModalRegister = ({ modal, setModal }) => {
-  
-
+export const ModalRegister = ({ showModal, setShowModal, email }) => {
+  const navigate = useNavigate();
   return (
-    <Modal modal={modal} >
-      <Modal.Header closeButton>
-        <Modal.Title>CONFIRMACION DE CORREO</Modal.Title>
+    <Modal show={showModal}>
+      <Modal.Header>
+        <Modal.Title>Confirmación email</Modal.Title>
       </Modal.Header>
-      <Modal.Body>VE A TU CORREO Y VALIDALO JODER</Modal.Body>
+      <Modal.Body>
+        Por favor, confirme su registro en el correo enviado a {email}.
+        {/* Ver si es posible dejar el correo en forma de link para que te mande a outlook, gmail o lo que sea */}
+      </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" >
-          Close
-        </Button>
-        <Button variant="primary">
-          Save Changes
+        <Button variant="primary" onClick={() => navigate("/login")}>
+          Aceptar
         </Button>
       </Modal.Footer>
     </Modal>

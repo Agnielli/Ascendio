@@ -18,7 +18,7 @@ const initialValue = {
 export const Register = () => {
   const [register, setRegister] = useState(initialValue);
   const [msgError, setMsgError] = useState("");
-  const [modal, setModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const navigate = useNavigate();
 
@@ -29,49 +29,48 @@ export const Register = () => {
   };
 
   const handleSubmit = () => {
-    setModal(true);
 
-     if (
-       !register.nickname ||
-       !register.name ||
-       !register.lastname ||
-       !register.email ||
-       !register.password ||
-       !register.email2 ||
-       !register.password2
-     ) {
-       setMsgError("Algun campo no está relleno");
-     } else if (register.email !== register.email2) {
-       setMsgError("Los correos no coinciden");
-     } else if (register.password !== register.password2) {
-       setMsgError("Las contraseñas no coinciden");
-     } else {
-       axios
-         .post("http://localhost:3000/users/createuser", register)
-         .then((res) => {
-            navigate('/login')
-           console.log(res.data);
-          //setModal(true);
-         })
-         .catch((err) => {
-           console.log(err);
-           if (
-             err.response.data.error?.errno === 1062 &&
-             err.response.data.error?.sqlMessage.includes("user.email")
-           ) {
-             setMsgError("Email duplicado");
-           } else if (
-             err.response.data.error?.errno === 1062 &&
-             err.response.data.error?.sqlMessage.includes("user.nickname")
-           ) {
-             setMsgError("Nombre de usuario duplicado");
-           } else if (err.response.data.error?.errno === 1406) {
-             setMsgError("Campo demasiado largo");
-           } else {
-             setMsgError("Upps ha habido algún error");
-           }
-         });
-   }
+    if (
+      !register.nickname ||
+      !register.name ||
+      !register.lastname ||
+      !register.email ||
+      !register.password ||
+      !register.email2 ||
+      !register.password2
+    ) {
+      setMsgError("Algun campo no está relleno");
+    } else if (register.email !== register.email2) {
+      setMsgError("Los correos no coinciden");
+    } else if (register.password !== register.password2) {
+      setMsgError("Las contraseñas no coinciden");
+    } else {
+      axios
+        .post("http://localhost:3000/users/createuser", register)
+        .then((res) => {
+          console.log(res.data);
+          setShowModal(true);
+        })
+        .catch((err) => {
+          console.log(err);
+          if (
+            err.response.data.error?.errno === 1062 &&
+            err.response.data.error?.sqlMessage.includes("user.email")
+          ) {
+            setMsgError("Email duplicado");
+          } else if (
+            err.response.data.error?.errno === 1062 &&
+            err.response.data.error?.sqlMessage.includes("user.nickname")
+          ) {
+            setMsgError("Nombre de usuario duplicado");
+          } else if (err.response.data.error?.errno === 1406) {
+            setMsgError("Campo demasiado largo");
+          } else {
+            setMsgError("Upps ha habido algún error");
+          }
+        });
+    }
+
   };
 
   return (
@@ -164,7 +163,12 @@ export const Register = () => {
             Ya estás registrado? <Link to="/login">Loguéate</Link>
           </p>
         </Form>
-        {/* {modal && <ModalRegister modal={modal} setModal={setModal}></ModalRegister>} */}
+        <ModalRegister
+          showModal={showModal}
+          setShowModal={setShowModal}
+          email={register?.email}
+        ></ModalRegister>
+        {/* <Button onClick={()=>{setShowModal(true)}}>Modal</Button> */}
       </Col>
     </Row>
   );
