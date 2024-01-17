@@ -1,7 +1,8 @@
 import React, { createContext, useEffect, useState } from 'react'
-// import { getLocalStorage } from '../helpers/localStorageUtils';
-// import { jwtDecode } from "jwt-decode";
-// import axios from 'axios';
+import { getLocalStorage } from '../helpers/localStorageUtils';
+import { jwtDecode } from "jwt-decode";
+import axios from 'axios';
+
 
 export const AscendioContext = createContext()
 
@@ -12,8 +13,18 @@ export const AscendioProvider= ({children}) => {
 
 
   useEffect(() => {
-
-  }, [])
+    const tokenLocalStorage = getLocalStorage("token")
+    setToken(tokenLocalStorage)
+    if(tokenLocalStorage){ 
+      const {id,type} = jwtDecode(tokenLocalStorage).user;
+      console.log("el token", id,type);
+      axios
+        .get(`http://localhost:3000/users/oneuser/${id}`)
+        .then((res)=>{console.log(res);})
+        .catch((err)=>{console.log(err);})
+    }
+    
+  }, [isLogged])
 
   return (
     <AscendioContext.Provider value={{

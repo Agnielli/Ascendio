@@ -4,6 +4,8 @@ import {Button, Form} from 'react-bootstrap'
 import { AscendioContext } from '../../../context/AscendioContext';
 import {useNavigate} from 'react-router-dom'
 import axios from 'axios'
+import { saveLocalStorage } from '../../../helpers/localStorageUtils';
+
 
 const initialValue = {
   email: "",
@@ -12,10 +14,11 @@ const initialValue = {
 
 export const Login = () => {
 
-  //const {setUser,setToken,setIsLogged} = useContext(AscendioContext);
+  const {setUser,setToken,setIsLogged} = useContext(AscendioContext);
   const [login, setLogin] = useState(initialValue);
   const [msgError, setMsgError] = useState("")
   const navigate = useNavigate();
+  
 
   const handleChange = (e) =>{
     const {name,value} = e.target;
@@ -26,12 +29,24 @@ export const Login = () => {
   const handleSubmit = () => {
     axios
       .post('http://localhost:3000/users/loginuser',login)
-      .then((res)=>console.log(res)
-          
-      )
+      .then((res)=>{
+          setIsLogged(true);
+          setUser(res.data.user)
+          setToken(res.data.token)
+          saveLocalStorage("token",res.data.token)
+
+          const type = res.data.user.type;
+          if(type === 1){
+            navigate('/admin')
+          }else if(type === 2){
+            navigate('/home')
+          }else{
+            navigate('/')
+          }
+  })
       .catch((err)=> {
         console.log(err);
-        //setMsgError(err.response.data)
+        setMsgError(err.response.data)
       })
   }
 
