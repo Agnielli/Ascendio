@@ -3,10 +3,13 @@ import React, { createContext, useEffect, useState } from 'react'
 // import { jwtDecode } from "jwt-decode";
 // import axios from 'axios';
 
-export const AscendioContext = () => {
-  const [user, setUser] = useState();
+export const AscendioContext = createContext()
+
+export const AscendioProvider= ({children}) => {
+  const [user, setUser] = useState("");
   const [token, setToken] = useState();
   const [isLogged, setIsLogged] = useState(false);
+
 
   useEffect(() => {
 
