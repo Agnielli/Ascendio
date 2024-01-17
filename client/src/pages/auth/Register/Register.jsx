@@ -29,6 +29,7 @@ export const Register = () => {
   };
 
   const handleSubmit = () => {
+
     if (
       !register.nickname ||
       !register.name ||
@@ -69,6 +70,7 @@ export const Register = () => {
           }
         });
     }
+
   };
 
   return (

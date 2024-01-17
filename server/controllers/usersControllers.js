@@ -9,8 +9,6 @@ class usersControllers {
   // 1.-crear un usuario
   createUser = (req, res) => {
     const { nickname, name, lastname, email, password } = req.body;
-    console.log(req.body);
-
     // falta validación del back
 
     let saltRounds = 8; // 8 saltos
@@ -49,6 +47,32 @@ class usersControllers {
         bcrypt.compare(password, hash, (error, response) => {
           if (error) return res.status(500).json(error);
 
+
+        if(response == true){
+          const token = jwt.sign(
+            {user:{
+              user: user.user_id,
+              type:user.type
+            }
+          },
+          process.env.SECRET,
+          {expiresIn:"1d"})//consultar cuanto tiempo queremos que se guarde la contraseña
+
+          res.status(200).json({token,user})
+        }else{
+          res.status(401).json("Email o contraseña incorrecta")
+        }
+        console.log("responseeeeeeeeeee",response);//con esto probamos si la contraseña coincide(true/false)
+      })
+    }
+    })
+  }
+  oneUser = (req,res)=>{
+    console.log(req.params.id);
+    /* const user_id = req.params.id;
+    console.log("hola usuario",user_id); */
+  }
+
           if (response == true) {
             const token = jwt.sign(
               {
@@ -60,6 +84,7 @@ class usersControllers {
               process.env.SECRET,
               { expiresIn: "1d" }
             ); //consultar cuanto tiempo queremos que se guarde la contraseña
+
 
             res.status(200).json({ token, user });
           } else {

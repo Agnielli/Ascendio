@@ -9,5 +9,6 @@ const multerSingle = require('../middleware/multerSingle')
 // router.get('/', usersControllers.home);
 router.post('/createuser', usersControllers.createUser);
 router.post('/loginuser', usersControllers.loginUser);
+router.get('/oneuser/:id', usersControllers.oneUser);
 
 module.exports = router;
