@@ -8,7 +8,7 @@ class usersControllers {
   // 1.-crear un usuario
   createUser = (req, res) => {
     const { nickname, name, lastname, email, password } = req.body;
-    console.log(req.body);
+    
     // validación
 
     // encriptar el password
@@ -64,6 +64,11 @@ class usersControllers {
       })
     }
     })
+  }
+  oneUser = (req,res)=>{
+    console.log(req.params.id);
+    /* const user_id = req.params.id;
+    console.log("hola usuario",user_id); */
   }
 
 }

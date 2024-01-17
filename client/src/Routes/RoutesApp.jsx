@@ -11,6 +11,8 @@ import { AboutApp } from '../pages/dashboard/About/AboutApp';
 import { Users } from '../pages/users/Users';
 import { AllCourses } from '../pages/courses/AllCourses';
 import { CreateCourse } from '../pages/courses/CreateCourse/CreateCourse';
+import { Landing } from '../pages/dashboard/Landing/Landing';
+import { Contact } from '../pages/dashboard/Contact/Contact';
 
 export const RoutesApp = () => {
   return (
@@ -18,8 +20,10 @@ export const RoutesApp = () => {
       <Row>
           <NavBarApp />
           <Routes>
-            <Route path='/' element={<Home />} />
+            <Route path='/' element={<Landing />} />
+            <Route path='/home' element={<Home />} />
             <Route path='/about' element={<AboutApp />} />
+            <Route path='/contact' element={<Contact />} />
             <Route path='/profile' element={<Users />} />
             <Route path='/allcourses' element={<AllCourses />} />
             <Route path='/createcourse' element={<CreateCourse />} />
