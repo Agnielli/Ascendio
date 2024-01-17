@@ -49,7 +49,7 @@ class usersControllers {
         if(response == true){
           const token = jwt.sign(
             {user:{
-              user: user.user_id,
+              user_id: user.user_id,
               type:user.type
             }
           },
@@ -66,9 +66,8 @@ class usersControllers {
     })
   }
   oneUser = (req,res)=>{
-    console.log(req.params.id);
-    /* const user_id = req.params.id;
-    console.log("hola usuario",user_id); */
+    const user_id = req.params.id;
+    console.log("hola usuario",user_id);
   }
 
 }
