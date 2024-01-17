@@ -8,12 +8,13 @@ const connection = mysql2.createConnection({
   database: process.env.DB_NAME
 })
 
+
 connection.connect((error) => {
   if(error) {
     throw error;
   } else {
     console.log("Conexión a bd correcta");
   }
-}); 
+});
 
 module.exports = connection; 
