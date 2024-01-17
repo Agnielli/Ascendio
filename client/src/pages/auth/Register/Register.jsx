@@ -163,12 +163,15 @@ export const Register = () => {
             Ya estás registrado? <Link to="/login">Loguéate</Link>
           </p>
         </Form>
+
+
         <ModalRegister
           showModal={showModal}
           setShowModal={setShowModal}
           email={register?.email}
         ></ModalRegister>
         {/* <Button onClick={()=>{setShowModal(true)}}>Modal</Button> */}
+
       </Col>
     </Row>
   );
