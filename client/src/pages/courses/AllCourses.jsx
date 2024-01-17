@@ -1,8 +1,8 @@
 import React from 'react';
 import './courses.scss';
 
-export const Courses = () => {
+export const AllCourses = () => {
   return (
-    <div>Courses</div>
+    <div>All Courses</div>
   )
 }

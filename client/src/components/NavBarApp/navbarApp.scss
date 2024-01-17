@@ -1,0 +1,20 @@
+.avatar{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgb(238, 165, 165);
+    color: white;
+    text-align: center;
+
+    p{
+        font-size: 30px;
+    }
+    img{
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+    }
+}
+.user{
+    cursor: pointer;
+}
