@@ -11,6 +11,7 @@ import { AboutApp } from '../pages/dashboard/About/AboutApp';
 import { Users } from '../pages/users/Users';
 import { AllCourses } from '../pages/courses/AllCourses';
 import { CreateCourse } from '../pages/courses/CreateCourse/CreateCourse';
+import { OneCourse } from '../pages/courses/OneCourse/OneCourse';
 
 export const RoutesApp = () => {
   return (
@@ -21,6 +22,7 @@ export const RoutesApp = () => {
             <Route path='/' element={<Home />} />
             <Route path='/about' element={<AboutApp />} />
             <Route path='/profile' element={<Users />} />
+            <Route path='/course' element={<OneCourse />} />
             <Route path='/allcourses' element={<AllCourses />} />
             <Route path='/createcourse' element={<CreateCourse />} />
             <Route path='/register' element={<Register />} />
