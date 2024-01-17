@@ -2,8 +2,6 @@ CREATE DATABASE ascendio;
 
 USE ascendio;
 
--- drop database ascendio;
-
 CREATE TABLE user (
   user_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
   name VARCHAR(50) NOT NULL,
@@ -15,6 +13,7 @@ CREATE TABLE user (
   type TINYINT NOT NULL DEFAULT 2, -- 1 admin, 2 user
   nickname VARCHAR(50) UNIQUE,
   is_deleted BOOLEAN NOT NULL DEFAULT false, -- user
+  is_confirmed BOOLEAN NOT NULL DEFAULT false, -- user
   is_disabled BOOLEAN NOT NULL DEFAULT  false -- admin
 );
 
@@ -30,9 +29,9 @@ CREATE TABLE post (
   -- title VARCHAR(100) NOT NULL,
   currency CHAR(10) NULL,
   description VARCHAR(255) NOT NULL,
-  entry_price DECIMAL(7,2) UNSIGNED NULL, 
-  stop_loss DECIMAL(7,2) UNSIGNED NULL, 
-  take_profit DECIMAL(7,2) UNSIGNED NULL, 
+  entry_price DECIMAL(7,2) UNSIGNED NULL,
+  stop_loss DECIMAL(7,2) UNSIGNED NULL,
+  take_profit DECIMAL(7,2) UNSIGNED NULL,
   correct BOOLEAN,
   date DATETIME not null default (CURRENT_DATE),
   type TINYINT NOT NULL, -- tipo 1: regular, tipo 2: trade
@@ -118,7 +117,7 @@ CREATE TABLE course (
   img VARCHAR (150),
   date DATETIME not null default (CURRENT_DATE),
   price DECIMAL(7, 2) UNSIGNED NOT NULL,  -- 99999.99
-  is_deleted BOOLEAN NOT NULL DEFAULT false, 
+  is_deleted BOOLEAN NOT NULL DEFAULT false,
   is_disabled BOOLEAN NOT NULL DEFAULT true,
   is_completed BOOLEAN NOT NULL DEFAULT	false,
   CONSTRAINT fk_user_7 FOREIGN KEY (user_id)
@@ -146,7 +145,6 @@ CREATE TABLE user_wishes_course(
 );
 
 -- Borrado total!
-
 CREATE TABLE user_rates_course(
   user_id INT UNSIGNED NOT NULL,
   course_id INT UNSIGNEd NOT NULL,
@@ -218,3 +216,5 @@ CREATE TABLE course_tag(
 	CONSTRAINT fk_course_6 FOREIGN KEY(course_id)
 	REFERENCES course(course_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+select * from user;
