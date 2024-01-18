@@ -15,6 +15,7 @@ import { OneCourse } from '../pages/courses/OneCourse/OneCourse';
 import { Landing } from '../pages/dashboard/Landing/Landing';
 import { Contact } from '../pages/dashboard/Contact/Contact';
 import { RecoverPassword } from '../pages/auth/RecoverPassword/RecoverPassword';
+import { CreateTrade } from '../pages/posts/trades/CreateTrade';
 import { Usuarios } from '../pages/admin/AdminUsuarios/Usuarios';
 import { Estadisticas } from '../pages/admin/AdminEstadisticas/Estadisticas';
 import { Cursos } from '../pages/admin/AdminCursos/Cursos';
@@ -49,7 +50,7 @@ export const RoutesApp = () => {
             <Route path='/contact' element={<Contact />} />
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<Login />} />
-            <Route path={`/recoverpassword/:user_id`} element={<RecoverPassword />} />
+            <Route path='/recoverpassword/:user_id' element={<RecoverPassword />} />
             <Route path="/mailrecoverpassword" element={<MailRecoverPassword />} />
                             
             </>

@@ -10,9 +10,7 @@ export const Users = () => {
   return (
     <div className='d-flex flex-column w-25 gap-2'>
       <Button onClick={()=>navigate('/createcourse')}>Crear curso</Button>
-
-
-
+      <button onClick={()=>navigate('/createtrade')}>Crear trade</button>
       <Button onClick={()=>navigate('/purchasecourse')}>Cursos adquiridos</Button>
       <Button onClick={()=>navigate('/savecourse')}>Cursos guardados</Button>
     </div>
