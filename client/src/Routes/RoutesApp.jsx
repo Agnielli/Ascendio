@@ -39,3 +39,35 @@ export const RoutesApp = () => {
     </BrowserRouter>
   )
 }
+
+/*          <Routes>
+            {!token &&
+            <>
+            <Route path='/' element={<Landing />} />
+            <Route path='/about' element={<AboutApp />} />
+            <Route path='/contact' element={<Contact />} />
+            <Route path='/register' element={<Register />} />
+            <Route path='/login' element={<Login />} />
+            </>
+            }
+
+            {token && type === 2 &&
+            <>
+            <Route path='/home' element={<Home />} />
+            <Route path='/profile' element={<Users />} />
+            <Route path='/course' element={<OneCourse />} />
+            <Route path='/allcourses' element={<AllCourses />} />
+            <Route path='/createcourse' element={<CreateCourse />} />
+            </>
+            }
+
+            {token && type === 1 &&
+            <>
+             <Route path='/admin' element={<AdminHome />} />
+            </>
+            }
+
+            <Route path='*' element={<ErrorPageApp />} />
+          </Routes>
+
+*/
