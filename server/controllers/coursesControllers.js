@@ -2,9 +2,7 @@ const connection = require('../config/db')
 
 class coursesControllers {
 
-
   createCourse = (req, res) => {
-
     const tags = JSON.parse(req.body.tags)
     const { title, description, price, user_id } = JSON.parse(req.body.crearCurso);
      
@@ -25,7 +23,6 @@ class coursesControllers {
       
       tags.forEach((elem) =>{
         let sql2 = `INSERT INTO course_tag (course_id, tag_id) VALUES (${course_id}, ${elem.value})`
-
         connection.query(sql2, (errtag, restag)=>{
           errtag && res.status(500).json(errtag)
           if(errtag){console.log(errtag)}
@@ -38,7 +35,6 @@ class coursesControllers {
 
   callTags = (req, res) =>{
     let sql = `SELECT * FROM tag`
-
     connection.query(sql, (err, result)=>{
       if(err){
         res.status(500).json(err)
@@ -60,21 +56,38 @@ class coursesControllers {
   }
 
   purchaseCourse = (req, res) => {
-    const {course_id} = req.body
-    console.log(req.body);
-    let sql = `UPDATE course SET is_completed = 1 WHERE course_id = ${course_id}`
-    connection.query(sql, (err, res)=>{
+    const {id} = req.params
+    let sql = `UPDATE course SET is_completed = 1 WHERE course_id = ${id} AND is_deleted = 0`
+    //TODO: cambiare is_completed con is_bought
+    connection.query(sql, (err, result)=>{
       if(err){
         res.status(500).json(err)
       }else{
-        res.status(200).json(res)
+        res.status(200).json(result)
       }
     })
-    
   }
 
-  saveCourse = (req, res) => {
-    console.log("HI");
+  viewPurchasedCourse = (req, res) => {
+    let sql = `SELECT * FROM course WHERE is_completed = 1 AND is_deleted = 0`
+    //TODO: cambiare is_completed con is_bought`
+    connection.query(sql, (err, result) => {
+      err ?
+      res.status(500).json(err)
+      :
+      res.status(200).json(result)
+    })
+  }
+
+  //este controlador es para los cursos guardados como favoritos
+  viewSavedCourse = (req, res) => {
+    let sql = `SELECT * FROM course WHERE IS_LIKED = 1 AND is_deleted = 0`
+    connection.query(sql, (err, result) => {
+      err ?
+      res.status(500).json(err)
+      :
+      res.status(200).json(result)
+    })
   }
 
 

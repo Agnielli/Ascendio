@@ -14,24 +14,21 @@ export const AllCourses = () => {
     axios
       .get('http://localhost:3000/courses/callcourses')
       .then((res)=>{
-        console.log("aa",res.data);
+        console.log(res.data);
         setAllcourses(res.data)})
       .catch((err)=>{
         console.log(err)})
   }, [])
 
-
-
-   const comprarCurso = () =>{
-    // axios
-    // //let id = res.data[0].course_id
-    //   .get(`http://localhost:3000/courses/purchasecourse/${id}`)
-    //   .then((res)=>{
-    //     setComprado(true) //se necesita este estado o ya hago el cambio con la select de la bbdd
-    //     navigate('/profile')
-    //     console.log(res)})
-    //   .catch((err)=>{
-    //     console.log(err)})
+   const comprarCurso = (id) =>{
+     axios
+      .get(`http://localhost:3000/courses/purchasecourse/${id}`)
+      .then((res)=>{
+        setComprado(true)
+        console.log(res)})
+        navigate('/profile')
+      .catch((err)=>{
+        console.log(err)})
   }
 
   return (
@@ -48,7 +45,7 @@ export const AllCourses = () => {
             <Card.Text>
               {elem.description}
             </Card.Text>
-            <Button variant="primary">Comprar</Button>
+            <Button onClick={()=>comprarCurso(elem.course_id)} variant="primary">Comprar</Button>
           </Card.Body>
         </Card>
         )

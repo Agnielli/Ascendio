@@ -9,6 +9,7 @@ router.post('/createcourse', multerSingle('cursos'), coursesControllers.createCo
 router.get('/calltags', coursesControllers.callTags)
 router.get('/callcourses', coursesControllers.callCourses)
 router.get('/purchasecourse/:id', coursesControllers.purchaseCourse)
-router.get('/savecourse/:id', coursesControllers.saveCourse)
+router.get('/viewpurchasedcourse', coursesControllers.viewPurchasedCourse)
+router.get('/viewsavedcourse', coursesControllers.viewSavedCourse)
 
 module.exports = router;
