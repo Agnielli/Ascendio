@@ -70,12 +70,53 @@ class usersControllers {
   };
   oneUser = (req, res) => {
     const user_id = req.params.id;
-    console.log("hola usuario", user_id);
-  };
-  //-------------------------------------------------------------------
-  recoverPassword = (req, res) => {
-    const { email, password } = req.body;
+    let sql = `SELECT * FROM user WHERE user_id = ${user_id} AND is_deleted = 0`
+    connection.query(sql, (err, result) => {
+      err ?
+      res.status(400).json({err})
+      :
+      res.status(200).json(result[0]);
+    })
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
+//-------------------------------------------------------------------
+recoverPassword = (req, res) => {
+    const { email, password } = req.body;
     bcrypt.genSalt(8, (err, salt) => {
       bcrypt.hash(password, salt, (err, hash) => {
         if (err) {

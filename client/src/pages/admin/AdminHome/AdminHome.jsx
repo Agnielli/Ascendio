@@ -3,6 +3,9 @@ import './adminHome.scss';
 
 export const AdminHome = () => {
   return (
-    <div>AdminHome</div>
+    <div>AdminHome
+      <h2>Hola</h2>
+    </div>
+
   )
 }
