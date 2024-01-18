@@ -23,6 +23,8 @@ import { AscendioContext } from '../context/AscendioContext';
 import { jwtDecode } from 'jwt-decode';
 import { PurchaseCourse } from '../pages/courses/PurchaseCourse/PurchaseCourse';
 import { SaveCourse } from '../pages/courses/SaveCourse/SaveCourse';
+import { RecoverPassword } from "../pages/auth/RecoverPassword/RecoverPassword";
+import { MailRecoverPassword } from "../pages/auth/MailRecoverPassword/MailRecoverPassword";
 
 export const RoutesApp = () => {
 
@@ -47,7 +49,9 @@ export const RoutesApp = () => {
             <Route path='/contact' element={<Contact />} />
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<Login />} />
-            <Route path='/recoverpassword' element={<RecoverPassword />} />
+            <Route path={`/recoverpassword/:user_id`} element={<RecoverPassword />} />
+            <Route path="/mailrecoverpassword" element={<MailRecoverPassword />} />
+                            
             </>
             }
 
@@ -76,7 +80,6 @@ export const RoutesApp = () => {
 
             <Route path='*' element={<ErrorPageApp />} />
           </Routes>
-
           </Row>
     </BrowserRouter>
   )

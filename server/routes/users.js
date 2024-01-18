@@ -10,7 +10,8 @@ const multerSingle = require('../middleware/multerSingle')
 router.post('/createuser', usersControllers.createUser);
 router.post('/loginuser', usersControllers.loginUser);
 router.get('/oneuser/:id', usersControllers.oneUser);
-router.put('/recoverpassword', usersControllers.recoverPassword);
+router.post('/mailrecoverpassword', usersControllers.mailRecoverPassword)
+router.put('/recoverpassword/:user_id', usersControllers.recoverPassword);
 
 
 module.exports = router;
