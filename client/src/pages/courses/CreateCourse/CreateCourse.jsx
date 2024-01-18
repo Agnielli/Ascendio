@@ -1,9 +1,10 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Form, Button, DropdownButton, InputGroup, Dropdown } from 'react-bootstrap'
 import './createCourse.scss'
 import { useNavigate } from 'react-router-dom'
 import { AscendioContext } from '../../../context/AscendioContext'
 import axios from 'axios'
+import Select from 'react-select';
 
 const initialValue = {
   title:'',
@@ -15,19 +16,36 @@ export const CreateCourse = () => {
   const [createOneCourse, setCreateOneCourse] = useState(initialValue);
   const [file, setFile] = useState();
   const [msgError, setMsgError] = useState('');
-
+  
   const { user, setUser } = useContext(AscendioContext);
-
+  const [selectedOption, setSelectedOption] = useState("");
+  const [options, setOptions] = useState([])
+  
+  useEffect(() => {
+    axios
+      .get('http://localhost:3000/courses/calltags')
+      .then((res)=>{
+        setOptions(res.data.map((elem)=>({value: elem.tag_id, label: elem.tag_name})))
+      })
+      .catch((err)=>{console.log(err)})
+  }, [])
+  
   const navigate = useNavigate();
 
   const handleFile = (e) => {
     setFile(e.target.files[0])
   }
 
+  const handleOption = option => {
+    setSelectedOption(option); 
+  };
+
   const handleChange = (e) => {
     const {name, value} = e.target;
     setCreateOneCourse({...createOneCourse, [name]:value})
+    console.log(handleChange)
   }
+  console.log(createOneCourse)
 
   const handleSubmit = () => {
     if(!createOneCourse.title || !createOneCourse.description || !createOneCourse.price){
@@ -35,11 +53,14 @@ export const CreateCourse = () => {
     }else{
       const newFormData = new FormData();
 
-      newFormData.append('crearCurso', JSON.stringify(createOneCourse))
+      let data = {...createOneCourse, user_id:user.user_id}
+
+      newFormData.append('crearCurso', JSON.stringify(data))
+      newFormData.append('tags', JSON.stringify(selectedOption))
       newFormData.append('file', file)
 
       axios
-      .put('http://localhost:3000/courses/createcourse', newFormData)
+      .post('http://localhost:3000/courses/createcourse', newFormData)
       .then((res) => {
         if(res.data.img){
           setUser({...createOneCourse, img:res.data.img})
@@ -50,7 +71,6 @@ export const CreateCourse = () => {
       .catch((err)=>{
         console.log(err)
       })
-
     }
   }
 
@@ -88,19 +108,14 @@ export const CreateCourse = () => {
         onChange={handleChange}
       />
       <br />
-      <InputGroup className="mb-3">
-        <DropdownButton
-          variant="outline-secondary"
-          title="Tags"
-          id="input-group-dropdown-1"
-        >
-          <Dropdown.Item href="#">Tag1</Dropdown.Item>
-          <Dropdown.Item href="#">Tag2</Dropdown.Item>
-          <Dropdown.Item href="#">tag3</Dropdown.Item>
-          <Dropdown.Item href="#">Tag4</Dropdown.Item>
-          </DropdownButton>
-        <Form.Control aria-label="Text input with dropdown button" />
-      </InputGroup>
+        <Select
+        options={options}
+        value={selectedOption}
+        onChange={handleOption}
+        isMulti
+        isOptionDisabled={(option) => selectedOption.length >= 4 && !selectedOption.includes(option)}
+      />
+      
       <Button onClick={handleSubmit}>Siguiente</Button>
       <Button onClick={()=>navigate('/profile')}>Cancelar</Button>
     </div>
