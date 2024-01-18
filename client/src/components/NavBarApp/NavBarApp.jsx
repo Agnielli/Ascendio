@@ -51,7 +51,7 @@ function NavBarApp() {
 
               {user?.type === 1 && (
                 <Nav.Link as={Link} to="/admin">
-                  Admin General
+                  Admin Home
                 </Nav.Link>
               )}
               {user?.type === 2 && (

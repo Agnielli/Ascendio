@@ -2,6 +2,7 @@ const connection = require("../config/db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const mailer = require("../utils/nodemailer");
+const recoverMailer = require("../utils/nodemailerRecover");
 require("dotenv").config();
 
 class usersControllers {
@@ -70,72 +71,82 @@ class usersControllers {
   };
   oneUser = (req, res) => {
     const user_id = req.params.id;
-    let sql = `SELECT * FROM user WHERE user_id = ${user_id} AND is_deleted = 0`
+    let sql = `SELECT * FROM user WHERE user_id = ${user_id} AND is_deleted = 0`;
     connection.query(sql, (err, result) => {
-      err ?
-      res.status(400).json({err})
-      :
-      res.status(200).json(result[0]);
-    })
-  }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-//-------------------------------------------------------------------
-recoverPassword = (req, res) => {
-    const { email, password } = req.body;
-    bcrypt.genSalt(8, (err, salt) => {
-      bcrypt.hash(password, salt, (err, hash) => {
-        if (err) {
-          return res.status(500).json({ error: err });
-        } else {
-          let sql = `UPDATE user SET password = '${hash}' WHERE email = '${email}'`;
-
-          connection.query(sql, (error, result) => {
-            if (error) {
-              return res.status(500).json({ error });
-            } else {
-              res
-                .status(200).json({ mensaje: "Contraseña actualizada con éxito" });
-            }
-          });
-        }
-      });
+      err ? res.status(400).json({ err }) : res.status(200).json(result[0]);
     });
   };
+
+  //-------------------------------------------------------------------
+  mailRecoverPassword = (req, res) => {
+    try {
+      const { email } = req.body;
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Aseguramos que llega un correo electrónico válido.
+      if (!emailRegex.test(email)) {
+        res
+          .status(400)
+          .json({ error: "Formato de correo electrónico inválido" });
+      } else {
+        let sql = `SELECT * FROM user WHERE email = '${email}'`;
+
+        connection.query(sql, (error, result) => {
+          if (error) {
+            res.status(500).json({ error });
+          } else {
+            console.log(result[0].user_id);
+            let mess = `http://localhost:5173/recoverpassword/${result[0].user_id}`;
+            if (result != "") {
+              recoverMailer(email, mess);
+              res.status(200).json({ message: "Email recibido correctamente" });
+            } else {
+              res.status(400).json({ message: "Email no existe en la DB" });
+            }
+          }
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        error: "Error al enviar el correo electrónico de recuperación",
+      });
+    }
+  };
+
+  recoverPassword = (req, res) => {
+    const { user_id } = req.params;
+    const { password } = req.body;
+
+    let sql = `select * from user where user_id = '${user_id}'`;
+    connection.query(sql, (err, result) => {
+      console.log(result)
+      if (err) {
+        console.log(err);
+      } else if (result == "") {
+        res.status(400).json({ message: "Usuario no existe en la DB" });
+      } else {
+        bcrypt.genSalt(8, (err, salt) => {
+          bcrypt.hash(password, salt, (err, hash) => {
+            if (err) {
+              res.status(500).json({ error: err });
+            } else {
+              let sql2 = `UPDATE user SET password = '${hash}' WHERE user_id = '${user_id}'`;
+              connection.query(sql2, (error, result) => {
+                if (error) {
+                  res.status(500).json({ error });
+                } else {
+                  res
+                    .status(200)
+                    .json({ mensaje: "Contraseña actualizada con éxito" });
+                }
+              });
+            }
+          });
+        });
+      }
+    });
+  };
+
+  // ---------------------------------------------
 }
 
 module.exports = new usersControllers();
