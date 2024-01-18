@@ -21,8 +21,11 @@ export const AscendioProvider= ({children}) => {
       console.log("el token", user_id,type);
       axios
         .get(`http://localhost:3000/users/oneuser/${user_id}`)
-        .then((res)=>{console.log(res);})
-        .catch((err)=>{console.log(err);})
+        .then((res)=>{
+          console.log(res)
+          setUser(res.data)
+        })
+        .catch((err)=>{console.log(err)})
     }
     
   }, [isLogged])
