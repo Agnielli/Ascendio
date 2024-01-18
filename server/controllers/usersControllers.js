@@ -68,6 +68,7 @@ class usersControllers {
       }
     });
   };
+  
   oneUser = (req, res) => {
     const user_id = req.params.id;
     let sql = `SELECT * FROM user WHERE user_id = ${user_id} AND is_deleted = 0`
