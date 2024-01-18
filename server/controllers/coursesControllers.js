@@ -34,7 +34,6 @@ class coursesControllers {
       res.status(200)
     })
 
-    console.log("hola")
 
   }
 
