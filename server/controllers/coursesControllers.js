@@ -33,7 +33,6 @@ class coursesControllers {
       })
       res.status(200)
     })
-console.log("hey")
 
   }
 
