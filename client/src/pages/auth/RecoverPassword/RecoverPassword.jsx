@@ -1,17 +1,21 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 const initialValue = {
   password: "",
   password2: "",
 };
 export const RecoverPassword = () => {
+  const { user_id } = useParams();
   const [recover, setRecover] = useState(initialValue);
   const [msgError, setMsgError] = useState("");
 
   const handleChange = (e) => {
     setRecover({
-      ...recover, [e.target.name]: e.target.value,});
+      ...recover,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const handleSubmit = () => {
@@ -21,9 +25,10 @@ export const RecoverPassword = () => {
       setMsgError("Las contraseñas no coinciden");
     } else {
       axios
-        .put("http://localhost:3000/users/recoverpassword", recover) 
+        .put(`http://localhost:3000/users/recoverpassword/${user_id}`, recover)
         .then((res) => {
           console.log(res.data);
+          setMsgError("Contraseña actualizada con exito");
         })
         .catch((err) => {
           console.log(err);
