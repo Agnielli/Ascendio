@@ -11,7 +11,7 @@ router.post('/createuser', usersControllers.createUser);
 router.post('/loginuser', usersControllers.loginUser);
 router.get('/oneuser/:id', usersControllers.oneUser);
 router.post('/mailrecoverpassword', usersControllers.mailRecoverPassword)
-router.put('/recoverpassword', usersControllers.recoverPassword);
+router.put('/recoverpassword/:user_id', usersControllers.recoverPassword);
 
 
 module.exports = router;

@@ -79,35 +79,74 @@ class usersControllers {
 
   //-------------------------------------------------------------------
   mailRecoverPassword = (req, res) => {
-    const { email } = req.body;
-    console.log(req.body);
-    let mess = ".";
-    recoverMailer(email, mess);
-    res.status(200).json("Email recibido correctamente");
+    try {
+      const { email } = req.body;
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Aseguramos que llega un correo electrónico válido.
+      if (!emailRegex.test(email)) {
+        res
+          .status(400)
+          .json({ error: "Formato de correo electrónico inválido" });
+      } else {
+        let sql = `SELECT * FROM user WHERE email = '${email}'`;
+
+        connection.query(sql, (error, result) => {
+          if (error) {
+            res.status(500).json({ error });
+          } else {
+            console.log(result[0].user_id);
+            let mess = `http://localhost:5173/recoverpassword/${result[0].user_id}`;
+            if (result != "") {
+              recoverMailer(email, mess);
+              res.status(200).json({ message: "Email recibido correctamente" });
+            } else {
+              res.status(400).json({ message: "Email no existe en la DB" });
+            }
+          }
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        error: "Error al enviar el correo electrónico de recuperación",
+      });
+    }
   };
 
   recoverPassword = (req, res) => {
-    const { email, password } = req.body;
-    bcrypt.genSalt(8, (err, salt) => {
-      bcrypt.hash(password, salt, (err, hash) => {
-        if (err) {
-          return res.status(500).json({ error: err });
-        } else {
-          let sql = `UPDATE user SET password = '${hash}' WHERE email = '${email}'`;
+    const { user_id } = req.params;
+    const { password } = req.body;
 
-          connection.query(sql, (error, result) => {
-            if (error) {
-              return res.status(500).json({ error });
+    let sql = `select * from user where user_id = '${user_id}'`;
+    connection.query(sql, (err, result) => {
+      console.log(result)
+      if (err) {
+        console.log(err);
+      } else if (result == "") {
+        res.status(400).json({ message: "Usuario no existe en la DB" });
+      } else {
+        bcrypt.genSalt(8, (err, salt) => {
+          bcrypt.hash(password, salt, (err, hash) => {
+            if (err) {
+              res.status(500).json({ error: err });
             } else {
-              res
-                .status(200)
-                .json({ mensaje: "Contraseña actualizada con éxito" });
+              let sql2 = `UPDATE user SET password = '${hash}' WHERE user_id = '${user_id}'`;
+              connection.query(sql2, (error, result) => {
+                if (error) {
+                  res.status(500).json({ error });
+                } else {
+                  res
+                    .status(200)
+                    .json({ mensaje: "Contraseña actualizada con éxito" });
+                }
+              });
             }
           });
-        }
-      });
+        });
+      }
     });
   };
+
+  // ---------------------------------------------
 }
 
 module.exports = new usersControllers();

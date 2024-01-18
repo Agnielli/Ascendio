@@ -19,7 +19,7 @@ async function recoverMailer(email, message) {
       to: email, // list of receivers
       subject: "Solicitud cambio de contraseña", // Subject line
       // text: "Hola algo bonito", // plain text body
-      html: `<p>Hola,</p><p>Este es un correo de ejemplo con un <a href="http://localhost:5173/recoverpassword">enlace</a></p>${message}`, // html body
+      html: `<p>Hola,</p><p>Este es un correo de ejemplo con un <a href=${message}>enlace</a></p>$`, // html body
     });
 
     console.log("Message sent: %s", info.messageId);

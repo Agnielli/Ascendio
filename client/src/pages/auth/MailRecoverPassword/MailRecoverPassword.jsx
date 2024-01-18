@@ -19,7 +19,7 @@ export const MailRecoverPassword = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setEmailRecover({...emailRecover, [name]: value });
+    setEmailRecover({ ...emailRecover, [name]: value });
   };
   console.log(emailRecover?.email);
 
@@ -30,13 +30,21 @@ export const MailRecoverPassword = () => {
       setMsgError("email no valido");
     } else {
       axios
-        .post("http://localhost:3000/users/mailrecoverpassword", {email: emailRecover.email})
+        .post("http://localhost:3000/users/mailrecoverpassword", {
+          email: emailRecover.email,
+        })
         .then((res) => {
           console.log(res);
           setShowModal(true);
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((err) => {
+          if (err.response.data.error?.errno === 400) {
+            setMsgError("Email no valido");
+          } else if (err.response.data.message) {
+            setMsgError("Email no valido");
+          } else {
+            console.log(err);
+          }
         });
     }
   };
