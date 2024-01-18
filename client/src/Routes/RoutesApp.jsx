@@ -15,6 +15,7 @@ import { OneCourse } from '../pages/courses/OneCourse/OneCourse';
 import { Landing } from '../pages/dashboard/Landing/Landing';
 import { Contact } from '../pages/dashboard/Contact/Contact';
 import { RecoverPassword } from '../pages/auth/RecoverPassword/RecoverPassword';
+import { CreateTrade } from '../pages/posts/trades/CreateTrade';
 export const RoutesApp = () => {
   return (
     <BrowserRouter> {/* de react-rouer-dom para llevar a cabo enrutamientos en una sola páginas */}
@@ -29,6 +30,7 @@ export const RoutesApp = () => {
             <Route path='/course' element={<OneCourse />} />
             <Route path='/allcourses' element={<AllCourses />} />
             <Route path='/createcourse' element={<CreateCourse />} />
+            <Route path='/createtrade' element={<CreateTrade />} />
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<Login />} />
             <Route path='/recoverpassword' element={<RecoverPassword />} />

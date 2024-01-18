@@ -9,7 +9,9 @@ export const Users = () => {
   return (
     <div>
       <button onClick={()=>navigate('/createcourse')}>Crear curso</button>
-
+      <br />
+      <br />
+      <button onClick={()=>navigate('/createtrade')}>Crear trade</button>
     </div>
   )
 }

@@ -18,8 +18,8 @@ CREATE TABLE user (
 );
 
 CREATE TABLE category (
-  category_id TINYINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT, -- tipo 1 -> Crypto, tipo 2->  Bolsa, tipo 3
-  category_name VARCHAR(50) NOT NULL UNIQUE
+  category_id TINYINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT, -- tipo 1 -> Crypto, tipo 2->  Bolsa, tipo 3 ->Forex
+  category_name VARCHAR(50) NOT NULL UNIQUE -- Crypto, Bolsa, Forex
 );
 
 CREATE TABLE post (
@@ -218,3 +218,4 @@ CREATE TABLE course_tag(
 );
 
 select * from user;
+select * from post; 
