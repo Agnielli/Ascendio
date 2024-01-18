@@ -46,8 +46,38 @@ class coursesControllers {
         res.status(200).json(result)
       }
     })
-
   }
+
+  callCourses = (req, res) =>{
+    let sql = `SELECT * FROM course WHERE is_completed = 0`
+    connection.query(sql, (err, result)=>{
+      if(err){
+        res.status(500).json(err)
+      }else{
+        res.status(200).json(result)
+      }
+    })
+  }
+
+  purchaseCourse = (req, res) => {
+    const {course_id} = req.body
+    console.log(req.body);
+    let sql = `UPDATE course SET is_completed = 1 WHERE course_id = ${course_id}`
+    connection.query(sql, (err, res)=>{
+      if(err){
+        res.status(500).json(err)
+      }else{
+        res.status(200).json(res)
+      }
+    })
+    
+  }
+
+  saveCourse = (req, res) => {
+    console.log("HI");
+  }
+
+
 }
 
 module.exports = new coursesControllers();
