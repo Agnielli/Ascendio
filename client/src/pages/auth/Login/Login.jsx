@@ -76,11 +76,11 @@ export const Login = () => {
           <Button  className="me-3" variant="outline-success" onClick={handleSubmit}>
             Aceptar
           </Button>
-          <Button onClick={() => navigate("/")} variant="outline-success">
-            Cancelar
+          <Button onClick={() => navigate("/register")} variant="outline-success">
+            Regístrate
           </Button>
           <p>
-            ¿Aún no estás registrado? <Link to="/register">Registrate</Link>
+            ¿Has olvidado tu contraseña? <Link to="/mailrecoverpassword">Recuperar contraseña</Link>
           </p>
         </Form>
       </Col>

@@ -15,6 +15,7 @@ import { OneCourse } from '../pages/courses/OneCourse/OneCourse';
 import { Landing } from '../pages/dashboard/Landing/Landing';
 import { Contact } from '../pages/dashboard/Contact/Contact';
 import { RecoverPassword } from '../pages/auth/RecoverPassword/RecoverPassword';
+import { MailRecoverPassword } from '../pages/auth/MailRecoverPassword/MailRecoverPassword';
 export const RoutesApp = () => {
   return (
     <BrowserRouter> {/* de react-rouer-dom para llevar a cabo enrutamientos en una sola páginas */}
@@ -32,6 +33,7 @@ export const RoutesApp = () => {
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<Login />} />
             <Route path='/recoverpassword' element={<RecoverPassword />} />
+            <Route path='/mailrecoverpassword' element={<MailRecoverPassword />} />
             <Route path='/admin' element={<AdminHome />} />
             <Route path='*' element={<ErrorPageApp />} />
           </Routes>

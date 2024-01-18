@@ -2,6 +2,7 @@ const connection = require("../config/db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const mailer = require("../utils/nodemailer");
+const recoverMailer = require("../utils/nodemailerRecover");
 require("dotenv").config();
 
 class usersControllers {
@@ -70,52 +71,22 @@ class usersControllers {
   };
   oneUser = (req, res) => {
     const user_id = req.params.id;
-    let sql = `SELECT * FROM user WHERE user_id = ${user_id} AND is_deleted = 0`
+    let sql = `SELECT * FROM user WHERE user_id = ${user_id} AND is_deleted = 0`;
     connection.query(sql, (err, result) => {
-      err ?
-      res.status(400).json({err})
-      :
-      res.status(200).json(result[0]);
-    })
-  }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+      err ? res.status(400).json({ err }) : res.status(200).json(result[0]);
+    });
+  };
 
-//-------------------------------------------------------------------
-recoverPassword = (req, res) => {
+  //-------------------------------------------------------------------
+  mailRecoverPassword = (req, res) => {
+    const { email } = req.body;
+    console.log(req.body);
+    let mess = ".";
+    recoverMailer(email, mess);
+    res.status(200).json("Email recibido correctamente");
+  };
+
+  recoverPassword = (req, res) => {
     const { email, password } = req.body;
     bcrypt.genSalt(8, (err, salt) => {
       bcrypt.hash(password, salt, (err, hash) => {
@@ -129,7 +100,8 @@ recoverPassword = (req, res) => {
               return res.status(500).json({ error });
             } else {
               res
-                .status(200).json({ mensaje: "Contraseña actualizada con éxito" });
+                .status(200)
+                .json({ mensaje: "Contraseña actualizada con éxito" });
             }
           });
         }
