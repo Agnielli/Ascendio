@@ -3,17 +3,14 @@ import "./UserMiniCard.scss";
 import { Button } from "react-bootstrap";
 import axios from "axios";
 
-export const UserMiniCard = ({ elem }) => {
+export const UserMiniCard = ({ elem, allUsers, setAllUsers }) => {
   const [show, setShow] = useState(true);
-  const [disable, setDisable] = useState(elem.disabled === 1)
-  const [activate, setActivate] = useState(elem.disabled === 0)
 
   const disableUser = async (id) => {
     await axios
       .put(`http://localhost:3000/admin/disableuser/${id}`)
       .then((res) => {
         setShow(!show);
-        setDisable(disable)
       })
       .catch((err) => {
         console.log(err);
@@ -24,16 +21,25 @@ export const UserMiniCard = ({ elem }) => {
     await axios
       .put(`http://localhost:3000/admin/activateuser/${id}`)
       .then((res) => {
-        console.log(res.data);
+        console.log(res.data); 
         setShow(!show);
-        setActivate(activate)
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  useEffect(() => {}, [show]);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/admin/adminusers`)
+      .then(
+        (res) => {
+          console.log(res)
+          setAllUsers(res.data)
+        }
+      )
+      .catch((err) => {console.log(err)})
+  }, [show]);
 
   return (
     <div className="userMiniCardAdminView">
