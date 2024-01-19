@@ -60,13 +60,12 @@ export const CreateCourse = () => {
   console.log(createOneCourse);
 
   const handleSubmit = () => {
-    if (
-      !createOneCourse.title ||
-      !createOneCourse.description ||
-      !createOneCourse.price
-    ) {
-      setMsgError("Por favor, completa todos los campos");
-    } else {
+
+    navigate('/course')
+    if(!createOneCourse.title || !createOneCourse.description || !createOneCourse.price){
+      setMsgError('Por favor, completa todos los campos');
+    }else{
+
       const newFormData = new FormData();
 
       let data = { ...createOneCourse, user_id: user.user_id };
@@ -91,6 +90,7 @@ export const CreateCourse = () => {
   };
 
   return (
+
     <Row className="d-flex justify-content-center p-5">
       <Col md={4}>
         <Form>
