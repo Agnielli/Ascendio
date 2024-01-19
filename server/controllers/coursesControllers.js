@@ -1,12 +1,16 @@
-const connection = require('../config/db')
+const connection = require("../config/db");
+
+
 class coursesControllers {
   createCourse = (req, res) => {
     const tags = JSON.parse(req.body.tags)
     const { title, description, price, user_id } = JSON.parse(req.body.crearCurso);
+
+    let img=""
     if(req.file){
-       const img = req.file.filename;
+       img = req.file.filename;
      }
-    let sql = `INSERT INTO course (title, description, price, user_id) VALUES ('${title}', '${description}', ${price}, ${user_id})`
+    let sql = `INSERT INTO course (title, description, price, user_id, img) VALUES ('${title}', '${description}', ${price}, ${user_id}, 'default.jpg')`
     if(req.file !== undefined){
       sql = `INSERT INTO course (title, description, price, user_id, img) VALUES ('${title}', '${description}', ${price}, ${user_id}, '${img}')`
     }
@@ -24,9 +28,23 @@ class coursesControllers {
       res.status(200)
     })
   }
-  callTags = (req, res) =>{
-    let sql = `SELECT * FROM tag`
-    connection.query(sql, (err, result)=>{
+
+  callTags = (req, res) => {
+    let sql = `SELECT * FROM tag`;
+    connection.query(sql, (err, result) => {
+      if (err) {
+        res.status(500).json(err);
+      } else {
+        res.status(200).json(result);
+      }
+    });
+  };
+
+  allCoursesOneUser = (req,res) =>{
+    const { user_id } = req.params;
+    let sql = `SELECT course.* FROM course WHERE user_id = ${user_id} AND is_deleted = 0 `
+    
+    connection.query(sql,(err,result)=>{
       if(err){
         res.status(500).json(err)
       }else{
@@ -35,7 +53,8 @@ class coursesControllers {
     })
   }
   callCourses = (req, res) =>{
-    let sql = `SELECT * FROM course WHERE is_completed = 0`
+    let sql = `SELECT * FROM course WHERE is_disabled = 1 AND is_deleted = 0`
+    // TODO is disabled = 0
     connection.query(sql, (err, result)=>{
       if(err){
         res.status(500).json(err)
@@ -44,50 +63,63 @@ class coursesControllers {
       }
     })
   }
-  oneCourse = (req,res)=>{
-    const course_id = req.params.id;
-    console.log(req.params.id);
-    let sql = `SELECT * FROM course WHERE course_id = ${course_id} AND is_deleted = 0`
-    let sqlUser = `SELECT * from user WHERE course_id = ${course_id} AND is_deleted = 0 `
-  }
+
   purchaseCourse = (req, res) => {
-    const {id} = req.params
-    let sql = `UPDATE course SET is_completed = 1 WHERE course_id = ${id} AND is_deleted = 0`
+    const { id } = req.params;
+    let sql = `UPDATE course SET is_completed = 1 WHERE course_id = ${id} AND is_deleted = 0`;
     //TODO: cambiare is_completed con is_bought
     connection.query(sql, (err, result)=>{
       if(err){
         res.status(500).json(err)
       }else{
         res.status(200).json(result)
+    }}
+  )}
+    
+
+  oneCourse = (req, res) => {
+    const { id } = req.params;
+    console.log("aqui van los paramss",req.params);
+    console.log(req.params.id);
+    let sql = `SELECT * FROM course WHERE course_id = ${id} AND is_deleted = 0 AND user_id = ${user_id}` ;
+    let sqlUser = `SELECT * from user WHERE course_id = ${course_id} AND is_deleted = 0 `;
+
+    connection.query(sql, (err, result) => {
+      if (err) {
+        res.status(500).json(err);
       }
-    })
+      connection.query(sqlUser, (errUser, resultUser) => {
+        if (errUser) {
+          res.status(500).json(errUser);
+        }
+      });
+    });
   }
-  /* editCourse = (req,res) =>{
+
+    /* editCourse = (req,res) =>{
    const {title,description,price,course_id} = req.body;
    let sql = `UPDATE course SET title="${title}",description="${description}",price="${price}" WHERE course_id = ${course_id}`
    connection.query(sql,(err,result)=>{
     err? res.status(500).json(err): res.status(200).json(result)
    });
   }; */
+
   viewPurchasedCourse = (req, res) => {
-    let sql = `SELECT * FROM course WHERE is_completed = 1 AND is_deleted = 0`
+    let sql = `SELECT * FROM course WHERE is_completed = 1 AND is_deleted = 0`;
     //TODO: cambiare is_completed con is_bought`
     connection.query(sql, (err, result) => {
-      err ?
-      res.status(500).json(err)
-      :
-      res.status(200).json(result)
-    })
-  }
+
+      err ? res.status(500).json(err) : res.status(200).json(result);
+    });
+  };
+
   //este controlador es para los cursos guardados como favoritos
   viewSavedCourse = (req, res) => {
-    let sql = `SELECT * FROM course WHERE IS_LIKED = 1 AND is_deleted = 0`
+    let sql = `SELECT * FROM course WHERE IS_LIKED = 1 AND is_deleted = 0`;
     connection.query(sql, (err, result) => {
-      err ?
-      res.status(500).json(err)
-      :
-      res.status(200).json(result)
-    })
-  }
+      err ? res.status(500).json(err) : res.status(200).json(result);
+    });
+  };
 }
 module.exports = new coursesControllers();
+

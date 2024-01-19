@@ -2,6 +2,8 @@ CREATE DATABASE ascendio;
 
 USE ascendio;
 
+-- drop database ascendio;
+
 CREATE TABLE user (
   user_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
   nickname VARCHAR(50) UNIQUE,
@@ -12,9 +14,9 @@ CREATE TABLE user (
   password VARCHAR(200) NOT NULL,
   img VARCHAR (150),
   type TINYINT NOT NULL DEFAULT 2, -- 1 admin, 2 user
-  is_deleted BOOLEAN NOT NULL DEFAULT false, -- user
   is_confirmed BOOLEAN NOT NULL DEFAULT false, -- user
-  is_disabled BOOLEAN NOT NULL DEFAULT  false -- admin
+  is_disabled BOOLEAN NOT NULL DEFAULT  false, -- admin
+  is_deleted BOOLEAN NOT NULL DEFAULT false -- user 
 );
 
 CREATE TABLE category (
@@ -119,6 +121,7 @@ CREATE TABLE course (
   is_deleted BOOLEAN NOT NULL DEFAULT false,
   is_disabled BOOLEAN NOT NULL DEFAULT true,
   is_completed BOOLEAN NOT NULL DEFAULT	false,
+  is_bought BOOLEAN NOT NULL DEFAULT false,
   CONSTRAINT fk_user_7 FOREIGN KEY (user_id)
   references user(user_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -215,9 +218,4 @@ CREATE TABLE course_tag(
 	REFERENCES tag(tag_id) ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT fk_course_6 FOREIGN KEY(course_id)
 	REFERENCES course(course_id) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
-select * from user;
-select * from post; 
-select * from post_resource; 
-select * from category; 
+)

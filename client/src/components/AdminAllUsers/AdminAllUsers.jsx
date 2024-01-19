@@ -3,28 +3,26 @@ import axios from "axios";
 import { UserMiniCard } from "../UserMiniCard/UserMiniCard";
 
 
-export const AdminAllUsers = ({allUsers, setAllusers}) => {
-  const [reset, setReset] = useState(false)
+export const AdminAllUsers = ({allUsers, setAllUsers}) => {
   useEffect(() => {
     axios
       .get("http://localhost:3000/admin/adminusers")
       .then((res) => {
-        console.log(res.data);
-        setAllusers(res.data);
+        setAllUsers(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [reset]);
+  }, []);
   return (
     <>
-      {allUsers?.map((elem, index) => {
+      {allUsers?.map((elem) => {
             return (
-              <UserMiniCard
-                reset={reset}
-                setReset={setReset}
-                key={index}
+              <UserMiniCard            
+                key={elem.user_id}
                 elem={elem}
+                allUsers={allUsers}
+                setAllUsers={setAllUsers}
               />
             );
           })}
