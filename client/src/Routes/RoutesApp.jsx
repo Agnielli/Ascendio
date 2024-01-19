@@ -66,13 +66,14 @@ export const RoutesApp = () => {
 
           {token && type === 2 && (
             <>
-              <Route path="/home" element={<Home />} />
-              <Route path="/profile" element={<Users />} />
-              <Route path="/course" element={<OneCourse />} />
-              <Route path="/allcourses" element={<AllCourses />} />
-              <Route path="/createcourse" element={<CreateCourse />} />
-              <Route path="/purchasecourse" element={<PurchaseCourse />} />
-              <Route path="/savecourse" element={<SaveCourse />} />
+            <Route path='/home' element={<Home />} />
+            <Route path='/profile' element={<Users />} />
+            <Route path='/course' element={<OneCourse />} />
+            <Route path='/allcourses' element={<AllCourses />} />
+            <Route path='/createtrade' element={<CreateTrade />} />
+            <Route path='/createcourse' element={<CreateCourse />} />
+            <Route path='/purchasecourse' element={<PurchaseCourse/>} />
+            <Route path='/savecourse' element={<SaveCourse/>} />
             </>
           )}
 
