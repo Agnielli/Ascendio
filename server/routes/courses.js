@@ -8,6 +8,7 @@ const multerSingle = require('../middleware/multerSingle')
 router.post('/createcourse', multerSingle('cursos'), coursesControllers.createCourse);
 router.get('/onecourse/:course_id', coursesControllers.oneCourse);
 /* router.post('/editcourse/:course_id', multerSingle('cursos'), coursesControllers.editCourse); */
+router.get('/allcourses/:user_id', coursesControllers.allCoursesOneUser);
 router.get('/calltags', coursesControllers.callTags)
 router.get('/callcourses', coursesControllers.callCourses)
 router.get('/purchasecourse/:id', coursesControllers.purchaseCourse)
