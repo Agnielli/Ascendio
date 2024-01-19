@@ -24,7 +24,6 @@ import { AscendioContext } from '../context/AscendioContext';
 import { jwtDecode } from 'jwt-decode';
 import { PurchaseCourse } from '../pages/courses/PurchaseCourse/PurchaseCourse';
 import { SaveCourse } from '../pages/courses/SaveCourse/SaveCourse';
-import { RecoverPassword } from "../pages/auth/RecoverPassword/RecoverPassword";
 import { MailRecoverPassword } from "../pages/auth/MailRecoverPassword/MailRecoverPassword";
 
 export const RoutesApp = () => {
