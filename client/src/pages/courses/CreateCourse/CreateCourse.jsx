@@ -9,7 +9,7 @@ import {
   Col,
 } from "react-bootstrap";
 import "./createCourse.scss";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AscendioContext } from "../../../context/AscendioContext";
 import axios from "axios";
 import Select from "react-select";
@@ -24,10 +24,13 @@ export const CreateCourse = () => {
   const [createOneCourse, setCreateOneCourse] = useState(initialValue);
   const [file, setFile] = useState();
   const [msgError, setMsgError] = useState("");
-
-  const { user, setUser } = useContext(AscendioContext);
   const [selectedOption, setSelectedOption] = useState("");
   const [options, setOptions] = useState([]);
+
+  const { user, setUser,userCourse,setUserCourse } = useContext(AscendioContext);
+
+  const {course_id} = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -42,7 +45,7 @@ export const CreateCourse = () => {
       });
   }, []);
 
-  const navigate = useNavigate();
+  
 
   const handleFile = (e) => {
     setFile(e.target.files[0]);
@@ -55,17 +58,16 @@ export const CreateCourse = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCreateOneCourse({ ...createOneCourse, [name]: value });
-    console.log(handleChange);
+    
   };
   console.log(createOneCourse);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    navigate('/course')
     if(!createOneCourse.title || !createOneCourse.description || !createOneCourse.price){
       setMsgError('Por favor, completa todos los campos');
     }else{
-
       const newFormData = new FormData();
 
       let data = { ...createOneCourse, user_id: user.user_id };
@@ -73,19 +75,15 @@ export const CreateCourse = () => {
       newFormData.append("crearCurso", JSON.stringify(data));
       newFormData.append("tags", JSON.stringify(selectedOption));
       newFormData.append("file", file);
-
+        
       axios
         .post("http://localhost:3000/courses/createcourse", newFormData)
-        .then((res) => {
-          if (res.data.img) {
-            setUser({ ...createOneCourse, img: res.data.img });
-          } else {
-            setUser(createOneCourse);
-          }
+        .then((res)=>{console.log(res)
+        setUserCourse(res.data)
+        navigate(`/course/28`)
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err)=>{console.log(err)})
+        
     }
   };
 
@@ -93,7 +91,7 @@ export const CreateCourse = () => {
 
     <Row className="d-flex justify-content-center p-5">
       <Col md={4}>
-        <Form>
+        <Form onSubmit={handleSubmit}> 
           <h3>Crea tu curso</h3>
           <Form.Group controlId="formFile" className="mb-3">
             <Form.Label>.jpg/.pdf</Form.Label>
@@ -146,7 +144,7 @@ export const CreateCourse = () => {
           <Button
             variant="outline-success"
             className="me-3"
-            onClick={handleSubmit}
+            type="submit"
           >
             Siguiente
           </Button>
