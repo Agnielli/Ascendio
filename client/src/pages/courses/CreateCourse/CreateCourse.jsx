@@ -48,6 +48,7 @@ export const CreateCourse = () => {
   console.log(createOneCourse)
 
   const handleSubmit = () => {
+    navigate('/course')
     if(!createOneCourse.title || !createOneCourse.description || !createOneCourse.price){
       setMsgError('Por favor, completa todos los campos');
     }else{
@@ -84,6 +85,7 @@ export const CreateCourse = () => {
           hidden
         />
       </Form.Group>
+      <Form.Label>Título</Form.Label>
       <Form.Control 
         type="text" 
         placeholder="Titulo" 
@@ -92,6 +94,7 @@ export const CreateCourse = () => {
         onChange={handleChange}
       />
       <br />
+      <Form.Label>Descripción</Form.Label>
       <Form.Control 
         type="text" 
         placeholder="Descripción" 
@@ -100,6 +103,7 @@ export const CreateCourse = () => {
         onChange={handleChange}
       />
       <br />
+      <Form.Label>Precio</Form.Label>
       <Form.Control 
         type="text" 
         placeholder="Precio" 
@@ -108,6 +112,7 @@ export const CreateCourse = () => {
         onChange={handleChange}
       />
       <br />
+      <Form.Label>Tags</Form.Label>
         <Select
         options={options}
         value={selectedOption}

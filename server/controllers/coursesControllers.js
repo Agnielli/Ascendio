@@ -46,8 +46,23 @@ class coursesControllers {
         res.status(200).json(result)
       }
     })
+  }
+  
+  oneCourse = (req,res)=>{
+    const course_id = req.params.id;
+    console.log(req.params.id);
+    let sql = `SELECT * FROM course WHERE course_id = ${course_id} AND is_deleted = 0`
+    let sqlUser = `SELECT * from user WHERE course_id = ${course_id} AND is_deleted = 0 `
 
   }
+  /* editCourse = (req,res) =>{
+   const {title,description,price,course_id} = req.body;
+   let sql = `UPDATE course SET title="${title}",description="${description}",price="${price}" WHERE course_id = ${course_id}`
+   connection.query(sql,(err,result)=>{
+    err? res.status(500).json(err): res.status(200).json(result)
+   });
+  }; */
+
 }
 
 module.exports = new coursesControllers();
