@@ -25,7 +25,6 @@ export const Register = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setRegister({ ...register, [name]: value });
-    console.log(e.target.value);
   };
 
   const handleSubmit = () => {
