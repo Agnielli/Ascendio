@@ -7,7 +7,7 @@ import { AdminAllUsers } from "../../../components/AdminAllUsers/AdminAllUsers";
 export const AdminHome = () => {
   const navigate = useNavigate();
   const [showUsers, setShowUsers] = useState(false);
-  const [allUsers, setAllusers] = useState();
+  const [allUsers, setAllUsers] = useState();
 
   const showAllUsers = () => {
     setShowUsers(!showUsers);
@@ -27,7 +27,7 @@ export const AdminHome = () => {
         <h3>Aquí va toda la información</h3>
         <div className="UsersViewAdmin">
           {showUsers === true &&
-          <AdminAllUsers allUsers={allUsers} setAllusers={setAllusers} />}
+          <AdminAllUsers allUsers={allUsers} setAllUsers={setAllUsers} />}
         </div>
       </Col>
     </Row>
