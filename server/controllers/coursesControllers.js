@@ -4,12 +4,13 @@ class coursesControllers {
   createCourse = (req, res) => {
     const tags = JSON.parse(req.body.tags)
     const { title, description, price, user_id } = JSON.parse(req.body.crearCurso);
-    
+
     let img=""
 
     if(req.file){
        img = req.file.filename;
      }
+
     let sql = `INSERT INTO course (title, description, price, user_id, img) VALUES ('${title}', '${description}', ${price}, ${user_id}, 'default.jpg')`
     
     if(req.file !== undefined){
@@ -19,7 +20,6 @@ class coursesControllers {
       err && res.status(500).json(err)
       if(err){console.log(err)}
       let course_id = result.insertId
-      
       tags.forEach((elem) =>{
         let sql2 = `INSERT INTO course_tag (course_id, tag_id) VALUES (${course_id}, ${elem.value})`
         connection.query(sql2, (errtag, restag)=>{
@@ -54,7 +54,6 @@ class coursesControllers {
       }
     })
   }
-
   callCourses = (req, res) =>{
     let sql = `SELECT * FROM course WHERE is_disabled = 1 AND is_deleted = 0`
     // TODO is disabled = 0
@@ -114,6 +113,7 @@ class coursesControllers {
       err ? res.status(500).json(err) : res.status(200).json(result);
     });
   };
+
   //este controlador es para los cursos guardados como favoritos
   viewSavedCourse = (req, res) => {
     let sql = `SELECT * FROM course WHERE IS_LIKED = 1 AND is_deleted = 0`;
