@@ -20,7 +20,7 @@ export const AscendioProvider= ({children}) => {
     if(tokenLocalStorage){ 
       const {user_id,type} = jwtDecode(tokenLocalStorage).user;
       console.log(jwtDecode(tokenLocalStorage));
-      console.log("el token", user_id,type);
+      console.log("el token", user_id, type);
       axios
         .get(`http://localhost:3000/users/oneuser/${user_id}`)
         .then((res)=>{
