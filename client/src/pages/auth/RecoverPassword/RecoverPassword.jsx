@@ -7,10 +7,10 @@ const initialValue = {
   password2: "",
 };
 export const RecoverPassword = () => {
-  const { user_id } = useParams();
+  const { token } = useParams();
   const [recover, setRecover] = useState(initialValue);
   const [msgError, setMsgError] = useState("");
-
+  console.log(token)
   const handleChange = (e) => {
     setRecover({
       ...recover,
@@ -25,7 +25,7 @@ export const RecoverPassword = () => {
       setMsgError("Las contraseñas no coinciden");
     } else {
       axios
-        .put(`http://localhost:3000/users/recoverpassword/${user_id}`, recover)
+        .put(`http://localhost:3000/users/recoverpassword/${token}`, recover)
         .then((res) => {
           console.log(res.data);
           setMsgError("Contraseña actualizada con exito");
@@ -39,7 +39,9 @@ export const RecoverPassword = () => {
     <Row className="d-flex justify-content-center p-5">
       <Col md={4}>
         <Form>
+          <h2>ASCENDIO</h2>
           <h3>Recupera tu contraseña</h3>
+          <p>Introduce una nueva contraseña para tu cuenta</p>
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Introduce nueva contraseña</Form.Label>
             <Form.Control

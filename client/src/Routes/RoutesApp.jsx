@@ -25,6 +25,7 @@ import { jwtDecode } from "jwt-decode";
 import { PurchaseCourse } from "../pages/courses/PurchaseCourse/PurchaseCourse";
 import { SaveCourse } from "../pages/courses/SaveCourse/SaveCourse";
 import { MailRecoverPassword } from "../pages/auth/MailRecoverPassword/MailRecoverPassword";
+import { ConfirmationUser } from "../pages/auth/Register/ConfirmationUser/ConfirmationUser";
 
 export const RoutesApp = () => {
   const { token } = useContext(AscendioContext);
@@ -47,9 +48,13 @@ export const RoutesApp = () => {
               <Route path="/about" element={<AboutApp />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/register" element={<Register />} />
+              <Route
+                path="/confirmationuser/:token"
+                element={<ConfirmationUser />}
+              />
               <Route path="/login" element={<Login />} />
               <Route
-                path="/recoverpassword/:user_id"
+                path="/recoverpassword/:token"
                 element={<RecoverPassword />}
               />
               <Route
@@ -58,16 +63,16 @@ export const RoutesApp = () => {
               />
             </>
           )}
-
           {token && type === 2 && (
             <>
-              <Route path="/home" element={<Home />} />
-              <Route path="/profile" element={<Users />} />
-              <Route path="/course" element={<OneCourse />} />
-              <Route path="/allcourses" element={<AllCourses />} />
-              <Route path="/createcourse" element={<CreateCourse />} />
-              <Route path="/purchasecourse" element={<PurchaseCourse />} />
-              <Route path="/savecourse" element={<SaveCourse />} />
+            <Route path='/home' element={<Home />} />
+            <Route path='/profile' element={<Users />} />
+            <Route path='/course' element={<OneCourse />} />
+            <Route path='/allcourses' element={<AllCourses />} />
+            <Route path='/createtrade' element={<CreateTrade />} />
+            <Route path='/createcourse' element={<CreateCourse />} />
+            <Route path='/purchasecourse' element={<PurchaseCourse/>} />
+            <Route path='/savecourse' element={<SaveCourse/>} />
             </>
           )}
 

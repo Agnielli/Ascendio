@@ -22,7 +22,7 @@ async function recoverMailer(email, message) {
       html: `<p>Hola,</p><p>Este es un correo de ejemplo con un <a href=${message}>enlace</a></p>$`, // html body
     });
 
-    console.log("Message sent: %s", info.messageId);
+    // console.log("Message sent: %s", info.messageId);
   }
 }
 

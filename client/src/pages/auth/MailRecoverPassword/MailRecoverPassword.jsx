@@ -57,7 +57,7 @@ export const MailRecoverPassword = () => {
         <Form>
           <h2>Ascendio</h2>
           <h3>Recupera tu contraseña</h3>
-          <p>Introduce tu email para crear la nueva contraseña de tu cuenta </p>
+          <p>Introduce tu email para crear una nueva contraseña para tu cuenta </p>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email </Form.Label>
             <Form.Control
