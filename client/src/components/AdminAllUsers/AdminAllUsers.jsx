@@ -9,7 +9,6 @@ export const AdminAllUsers = ({allUsers, setAllusers}) => {
     axios
       .get("http://localhost:3000/admin/adminusers")
       .then((res) => {
-        console.log(res.data);
         setAllusers(res.data);
       })
       .catch((err) => {

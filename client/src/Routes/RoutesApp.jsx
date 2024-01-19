@@ -63,7 +63,6 @@ export const RoutesApp = () => {
               />
             </>
           )}
-
           {token && type === 2 && (
             <>
             <Route path='/home' element={<Home />} />
