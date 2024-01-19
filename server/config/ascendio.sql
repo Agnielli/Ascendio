@@ -23,7 +23,7 @@ CREATE TABLE category (
 );
 
 CREATE TABLE post (
-  post_id BIGINT UNSIGNED PRIMARY KEY,
+  post_id BIGINT UNSIGNED PRIMARY KEY auto_increment,
   user_id INT UNSIGNED NOT NULL, -- creador del post
   category_id TINYINT UNSIGNED NOT NULL,
   currency CHAR(10) NULL,
@@ -86,7 +86,7 @@ CREATE TABLE user_likes_post (
 );
 
 CREATE TABLE post_resource(
-  resource_id BIGINT UNSIGNED PRIMARY KEY NOT NULL,
+  resource_id BIGINT UNSIGNED PRIMARY KEY NOT NULL auto_increment,
   post_id BIGINT UNSIGNED NOT NULL,
   resource_type TINYINT NOT NULL, -- tipo 1 -> imagen, tipo 2 -> URL,
   text VARCHAR(250) NOT NULL,
@@ -219,3 +219,5 @@ CREATE TABLE course_tag(
 
 select * from user;
 select * from post; 
+select * from post_resource; 
+select * from category; 

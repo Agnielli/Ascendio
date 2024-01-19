@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './createTrade.scss';
 import { Form, Button, InputGroup } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
@@ -10,15 +10,29 @@ const initialValue = {
   description:'',
   entryPrice:'',
   stopLoss: '', 
-  takeProfit: ''
+  takeProfit: '',
+  category_id: ''
 }
 
 export const CreateTrade = () => {
   const [createOneTrade, setCreateOneTrade] = useState(initialValue);
-  // const [file, setFile] = useState();
+  const [file, setFile] = useState();
   const [msgError, setMsgError] = useState('');
 
-  // const { user, setUser } = useContext(AscendioContext);
+  const { user, setUser } = useContext(AscendioContext);
+  const [options, setOptions] = useState([]);
+
+
+  useEffect(() => {
+    axios 
+      .get('http://localhost:3000/posts/callcategorys')
+      .then((res) => {
+        setOptions(res.data.map((elem)=>({
+          value: elem.category_id, 
+          label: elem.category_name
+        })))
+      })
+  }, [])
 
   const navigate = useNavigate();
 
@@ -27,40 +41,49 @@ export const CreateTrade = () => {
     setCreateOneTrade({...createOneTrade, [name]:value})
   }
 
-  // const handleFile = (e) => {
-  //   setFile(e.target.files[0])
-  // }
+  const handleFile = (e) => {
+    setFile(e.target.files[0])
+  }
 
   const handleSubmit = () => {
-    if(!createOneTrade.currency || !createOneTrade.description || !createOneTrade.entryPrice || !createOneTrade.stopLoss || !createOneTrade.takeProfit || !createOneTrade.category ){
+    if(!createOneTrade.currency || !createOneTrade.description || !createOneTrade.entryPrice || !createOneTrade.stopLoss || !createOneTrade.takeProfit || !createOneTrade.category_id ){
       setMsgError('Por favor, completa todos los campos');
-    // }else{
-      // const newFormData = new FormData();
+    }else{
+      const newFormData = new FormData();
 
-      // newFormData.append('creartrade', JSON.stringify(createOneCourse))
-      // newFormData.append('file', file)
+      let data = {...createOneTrade, user_id:user.user_id}
+      // console.log(data); me hace bien el data
+
+      newFormData.append('crearTrade', JSON.stringify(data))
+      newFormData.append('file', file)
 
       axios
-      .post('http://localhost:3000/posts/createtrade', createOneTrade)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err)=>{
-        console.log(err)
-      })
-    }
+        .post('http://localhost:3000/posts/createtrade', newFormData)
+        .then((res) => {
+          if(res.data.img){
+            setUser({...createOneTrade, img:res.data.img})
+            navigate('/profile');
+          }else{
+            setUser(createOneTrade)
+            navigate('/profile');
+          }
+        })
+        .catch((err)=>{
+          console.log(err)
+        })
+      }
   }
 
   return (
     <div>
-      {/* <Form.Group controlId="formFile" className="mb-3">
+      <Form.Group controlId="formFile" className="mb-3">
         <Form.Label>Imagen</Form.Label>
         <Form.Control 
           type="file" 
           onChange={handleFile}
           hidden
         />
-      </Form.Group> */}
+      </Form.Group>
       <Form.Control 
         type="text" 
         placeholder="Escribir la moneda o acción" 
@@ -105,19 +128,21 @@ export const CreateTrade = () => {
         required
       />
       <br />
-      {/* <InputGroup className="mb-3">
-      <label htmlFor="options">Categoría</label>
-      <select 
-          name="category"
-          id="options"
-          value={createOneTrade.category}
+      <InputGroup className="mb-3">
+        <label htmlFor="category">Categorías</label>
+        <select
+          id="category"
+          name="category_id"
+          value={createOneTrade.category_id}
           onChange={handleChange}
-      >
-        <option value="Crypto">Crypto</option>
-        <option value="Bolsa">Bolsa</option>
-        <option value="Forex">Forex</option>
-      </select>
-      </InputGroup> */}
+        >
+          {options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </InputGroup>
       <br />
       <Button onClick={handleSubmit}>Aceptar</Button>
       <Button onClick={()=>navigate('/profile')}>Cancelar</Button>

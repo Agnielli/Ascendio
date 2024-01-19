@@ -61,6 +61,7 @@ export const RoutesApp = () => {
             <Route path='/profile' element={<Users />} />
             <Route path='/course' element={<OneCourse />} />
             <Route path='/allcourses' element={<AllCourses />} />
+            <Route path='/createtrade' element={<CreateTrade />} />
             <Route path='/createcourse' element={<CreateCourse />} />
             <Route path='/purchasecourse' element={<PurchaseCourse/>} />
             <Route path='/savecourse' element={<SaveCourse/>} />

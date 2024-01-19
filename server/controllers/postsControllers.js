@@ -7,30 +7,73 @@ require("dotenv").config();
 class postsControllers {
 
   createTrade = (req, res) => {
-    console.log(req.body);
-    const { currency, description, entryPrice, stopLoss, takeProfit} = req.body;
+    const { currency, description, entryPrice, stopLoss, takeProfit, category_id, user_id} = JSON.parse(req.body.crearTrade);
+
+    // let img = "";
     
-    // probando en el workbench: 
-    //INSERT INTO post (post_id, user_id, currency, description, entry_price, stop_loss, take_profit, category_id, type) VALUES (1, 1, 'a', 'b', '1', '2', '1', 1, 2);
-    // hay que hacer: 
-    //  - user_id -> hay que obtenerlo
-    //  - post_id -> debería crearse solo en MySQL 
-    //  - category?id -> debe depender de lo que se elija en el select 
-    //  - type -> como es trade debería ser en este caso siempre 2
+    // if(req.file){
+    //   img = req.file.filename; // me trae la img
+    // } 
 
-    // esta llamada está relacionada con las tablas: user, post y category
-    //  let sql = `INSERT INTO post (currency, description, entry_price, stop_loss, take_profit, category) VALUES ('${currency}', '${description}', ${entryPrice}, ${stopLoss}, ${takeProfit})`;
+    let sql = `INSERT INTO post (currency, description, entry_price, stop_loss, take_profit, category_id, user_id, type) VALUES ('${currency}', '${description}', ${entryPrice}, ${stopLoss}, ${takeProfit}, ${category_id}, ${user_id}, 2)`
 
+    if(req.file !== undefined){
 
+      let img = req.file.filename; // me trae la img
 
-    //  connection.query(sql, (error, result) => {
-    //   if (error) {
-    //     res.status(500).json({ error });
-    //   } else {
-    //     res.status(200).json(result);
+      let sql2 = `INSERT INTO post_resource (post_id, resource_type, text, img) VALUES (${post_id}, 1, ${takeProfit}, '${img}')`
+
+      connection.query(sql2, (err2, result2)=>{
+        err2 && res.status(500).json(err2)
+        if(err2){console.log(err2)}
+        })
+      }
+
+    connection.query(sql, (err, result)=>{
+      if(err){
+        res.status(500).json({err})
+      }else{
+        res.status(200).json(result)
+      }
+    })
+    
+    // connection.query(sql, (err, result)=>{
+    //   err && res.status(500).json(err)
+    //   if(err){console.log(err)}
+    //   let post_id = result.insertId; // obtengo del result el post_id
+
+    //   if(req.file !== undefined){
+
+    //     let img = "";
+    //     let sql2 = `INSERT INTO post_resource (post_id, resource_type, text) VALUES (${post_id}, 1, '${img}')`
+
+    //     connection.query(sql2, (err2, result2)=>{
+    //       err2 && res.status(500).json(err2)
+    //       if(err2){console.log(err2)}
+    //     })
     //   }
-    // });
+    //   res.status(200);
+    // })
+
+
+
+    // se puede poner auto-increment en post y post_resource? 
+    // para que sirve la tabla de resource-post? 
+    // por que me rompe al darle aceptar en crear trade?
   }
+
+  callCategorys = (req, res) =>{
+    let sql = `SELECT * FROM category`;
+
+    connection.query(sql, (err, result)=>{
+      if(err){
+        res.status(500).json(err)
+      }else{
+        res.status(200).json(result)
+      }
+    })
+  }
+
 }
 
 module.exports = new postsControllers();
