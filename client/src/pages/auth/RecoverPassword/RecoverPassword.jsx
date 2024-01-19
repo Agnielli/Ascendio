@@ -39,7 +39,9 @@ export const RecoverPassword = () => {
     <Row className="d-flex justify-content-center p-5">
       <Col md={4}>
         <Form>
+          <h2>ASCENDIO</h2>
           <h3>Recupera tu contraseña</h3>
+          <p>Introduce una nueva contraseña para tu cuenta</p>
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Introduce nueva contraseña</Form.Label>
             <Form.Control
