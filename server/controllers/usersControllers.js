@@ -9,27 +9,90 @@ class usersControllers {
   // ---------------------------------------------------------------
   // 1.-crear un usuario
   createUser = (req, res) => {
-    const { nickname, name, lastname, email, password } = req.body;
-    // falta validación del back
-
-    let saltRounds = 8; // 8 saltos
-    bcrypt.genSalt(saltRounds, function (err, saltRounds) {
-      bcrypt.hash(password, saltRounds, function (err, hash) {
-        if (err) {
-          console.log(err);
-        } else {
-          let sql = `INSERT INTO user (nickname, name, lastname, email, password) VALUES ('${nickname}','${name}', '${lastname}','${email}', '${hash}')`;
-          connection.query(sql, (error, result) => {
-            if (error) {
-              res.status(500).json({ error });
-            } else {
-              let mess = ".";
-              mailer(email, mess);
-              res.status(200).json(result);
-            }
-          });
-        }
+    try {
+      const { nickname, name, lastname, email, password } = req.body;
+      // falta validación del back
+      let saltRounds = 8; // 8 saltos
+      bcrypt.genSalt(saltRounds, function (err, saltRounds) {
+        bcrypt.hash(password, saltRounds, function (err, hash) {
+          if (err) {
+            console.log(err);
+          } else {
+            let sql = `INSERT INTO user (nickname, name, lastname, email, password) VALUES ('${nickname}','${name}', '${lastname}','${email}', '${hash}')`;
+            connection.query(sql, (error, result) => {
+              if (error) {
+                res.status(500).json({ message: "Error en sql" });
+              } else {
+                let sql2 = `select * from user where email = '${email}'`;
+                connection.query(sql2, (error2, result2) => {
+                  if (error2) {
+                    console.log(error2);
+                    res.status(500).json({ message: "Error en sql2" });
+                  } else {
+                    console.log(result2[0].email);
+                    const token = jwt.sign(
+                      result2[0].email,
+                      process.env.T_PASS
+                    );
+                    let mess = `http://localhost:5173/confirmationuser/${token}`;
+                    if (result != "") {
+                      mailer(email, mess);
+                      res.status(200).json({
+                        message:
+                          "Usuario registrado con exito, email de confirmación enviado",
+                      });
+                    } else {
+                      res.status(400).json({
+                        message:
+                          "No se ha podido registrar el usuario por algun motivo",
+                      });
+                    }
+                  }
+                });
+              }
+            });
+          }
+        });
       });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        error: "Error al enviar el correo electrónico de registro",
+      });
+    }
+  };
+
+  confirmateUser = (req, res) => {
+    const { token } = req.params;
+    jwt.verify(token, process.env.T_PASS, (err, decoded) => {
+      console.log(decoded);
+      if (err) {
+        res.status(401).json({ message: "Token no válido" });
+      } else {
+        const email = decoded;
+        console.log(email);
+        let sql = `SELECT * FROM user WHERE email = '${email}'`;
+        connection.query(sql, (error, result) => {
+          if (error) {
+            console.log(error);
+            res.status(400).json({ message: "Error en sql" });
+          } else if (result.length === 0) {
+            res.status(404).json({ message: "Usuario no encontrado" });
+          } else {
+            let sql2 = `UPDATE user SET is_confirmed = true WHERE user_id = '${result[0].user_id}'`;
+            connection.query(sql2, (error2, result2) => {
+              if (error2) {
+                console.log(error);
+                res.status(400).json({ message: "Error en sql2" });
+              } else {
+                res
+                  .status(200)
+                  .json({ message: "Usuario confirmado con exito" });
+              }
+            });
+          }
+        });
+      }
     });
   };
 
@@ -69,7 +132,7 @@ class usersControllers {
       }
     });
   };
-  
+
   oneUser = (req, res) => {
     const user_id = req.params.id;
     let sql = `SELECT * FROM user WHERE user_id = ${user_id} AND is_deleted = 0`;
@@ -95,7 +158,8 @@ class usersControllers {
             res.status(500).json({ error });
           } else {
             console.log(result[0].user_id);
-            let mess = `http://localhost:5173/recoverpassword/${result[0].user_id}`;
+            const token = jwt.sign(result[0].user_id, process.env.T_PASS);
+            let mess = `http://localhost:5173/recoverpassword/${token}`;
             if (result != "") {
               recoverMailer(email, mess);
               res.status(200).json({ message: "Email recibido correctamente" });
@@ -114,34 +178,42 @@ class usersControllers {
   };
 
   recoverPassword = (req, res) => {
-    const { user_id } = req.params;
+    const { token } = req.params;
     const { password } = req.body;
-
-    let sql = `select * from user where user_id = '${user_id}'`;
-    connection.query(sql, (err, result) => {
-      console.log(result)
+    console.log(token);
+    jwt.verify(token, process.env.T_PASS, (err, decoded) => {
+      console.log(decoded);
       if (err) {
-        console.log(err);
-      } else if (result == "") {
-        res.status(400).json({ message: "Usuario no existe en la DB" });
+        res.status(401).json({ message: "Token no válido" });
       } else {
-        bcrypt.genSalt(8, (err, salt) => {
-          bcrypt.hash(password, salt, (err, hash) => {
-            if (err) {
-              res.status(500).json({ error: err });
-            } else {
-              let sql2 = `UPDATE user SET password = '${hash}' WHERE user_id = '${user_id}'`;
-              connection.query(sql2, (error, result) => {
-                if (error) {
-                  res.status(500).json({ error });
+        const user_id = decoded;
+        let sql = `SELECT * FROM user WHERE user_id = '${user_id}'`;
+        connection.query(sql, (err, result) => {
+          console.log(result);
+          if (err) {
+            console.log(err);
+          } else if (result.length === 0) {
+            res.status(400).json({ message: "Usuario no existe en la DB" });
+          } else {
+            bcrypt.genSalt(8, (err, salt) => {
+              bcrypt.hash(password, salt, (err, hash) => {
+                if (err) {
+                  res.status(500).json({ error: err });
                 } else {
-                  res
-                    .status(200)
-                    .json({ mensaje: "Contraseña actualizada con éxito" });
+                  let sql2 = `UPDATE user SET password = '${hash}' WHERE user_id = '${user_id}'`;
+                  connection.query(sql2, (error, result) => {
+                    if (error) {
+                      res.status(500).json({ error });
+                    } else {
+                      res
+                        .status(200)
+                        .json({ mensaje: "Contraseña actualizada con éxito" });
+                    }
+                  });
                 }
               });
-            }
-          });
+            });
+          }
         });
       }
     });
