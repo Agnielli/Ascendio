@@ -1,18 +1,16 @@
 const connection = require("../config/db");
 
+
 class coursesControllers {
   createCourse = (req, res) => {
     const tags = JSON.parse(req.body.tags)
     const { title, description, price, user_id } = JSON.parse(req.body.crearCurso);
 
     let img=""
-
     if(req.file){
        img = req.file.filename;
      }
-
     let sql = `INSERT INTO course (title, description, price, user_id, img) VALUES ('${title}', '${description}', ${price}, ${user_id}, 'default.jpg')`
-    
     if(req.file !== undefined){
       sql = `INSERT INTO course (title, description, price, user_id, img) VALUES ('${title}', '${description}', ${price}, ${user_id}, '${img}')`
     }
@@ -110,6 +108,7 @@ class coursesControllers {
     let sql = `SELECT * FROM course WHERE is_completed = 1 AND is_deleted = 0`;
     //TODO: cambiare is_completed con is_bought`
     connection.query(sql, (err, result) => {
+
       err ? res.status(500).json(err) : res.status(200).json(result);
     });
   };
@@ -123,3 +122,4 @@ class coursesControllers {
   };
 }
 module.exports = new coursesControllers();
+
