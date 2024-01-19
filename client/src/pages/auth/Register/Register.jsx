@@ -4,6 +4,7 @@ import { Form, Button, Col, Row } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { ModalRegister } from "./ModalRegister/ModalRegister";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const initialValue = {
   nickname: "",
@@ -19,6 +20,7 @@ export const Register = () => {
   const [register, setRegister] = useState(initialValue);
   const [msgError, setMsgError] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
 
@@ -27,8 +29,11 @@ export const Register = () => {
     setRegister({ ...register, [name]: value });
   };
 
-  const handleSubmit = () => {
+  const verPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
+  const handleSubmit = () => {
     if (
       !register.nickname ||
       !register.name ||
@@ -69,7 +74,6 @@ export const Register = () => {
           }
         });
     }
-
   };
 
   return (
@@ -129,27 +133,40 @@ export const Register = () => {
               autoComplete="off"
             />
           </Form.Group>
+
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Contraseña</Form.Label>
-            <Form.Control
-              name="password"
-              onChange={handleChange}
-              type="password"
-              placeholder="Introduce una contraseña"
-              value={register.password}
-              autoComplete="new-password"
-            />
+            <div className="password-container">
+              <Form.Control
+                name="password"
+                onChange={handleChange}
+                type={showPassword ? "text" : "password"}
+                placeholder="Introduce una contraseña"
+                value={register.password}
+                autoComplete="new-password"
+              />
+              <span className="eye-icon" onClick={verPassword}>
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </span>
+            </div>
           </Form.Group>
+
           <Form.Group className="mb-3" controlId="formBasicPassword2">
             <Form.Label>Confirma la contraseña</Form.Label>
+            <div className="password-container">
+            
             <Form.Control
               name="password2"
               onChange={handleChange}
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Introduce una contraseña"
               value={register.password2}
               autoComplete="new-password"
             />
+            <span className="eye-icon" onClick={verPassword}>
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </span>
+              </div>
           </Form.Group>
           <p>{msgError}</p>
           <Button className="me-3" onClick={handleSubmit}>
@@ -163,14 +180,11 @@ export const Register = () => {
           </p>
         </Form>
 
-
         <ModalRegister
           showModal={showModal}
           setShowModal={setShowModal}
           email={register?.email}
         ></ModalRegister>
-        {/* <Button onClick={()=>{setShowModal(true)}}>Modal</Button> */}
-
       </Col>
     </Row>
   );

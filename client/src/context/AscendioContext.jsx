@@ -10,6 +10,7 @@ export const AscendioProvider= ({children}) => {
   const [user, setUser] = useState("");
   const [token, setToken] = useState();
   const [isLogged, setIsLogged] = useState(false);
+  const [course, setCourse] = useState("");
 
 
   useEffect(() => {
@@ -37,7 +38,9 @@ export const AscendioProvider= ({children}) => {
       token,
       setToken, 
       isLogged, 
-      setIsLogged
+      setIsLogged,
+      course,
+      setCourse
     }}>
     {children}
     </AscendioContext.Provider>
