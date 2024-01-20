@@ -1,16 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './courses.scss';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Button, Card } from 'react-bootstrap';
 import { AscendioContext } from '../../context/AscendioContext';
 export const AllCourses = () => {
-  const { user } = useContext(AscendioContext);
+  // const { user } = useContext(AscendioContext);
   const [allcourses, setAllcourses] = useState([]);
-  const [guardado, setGuardado] = useState({});
   const navigate = useNavigate();
   
   useEffect(() => {
+
     axios
       .get(`http://localhost:3000/courses/callcourses`)
       .then((res) => {
@@ -21,12 +21,7 @@ export const AllCourses = () => {
         console.log(err);
       });
   }, []);
-  const guardar = (courseId) => {
-    setGuardado((prevGuardado) => ({
-      ...prevGuardado,
-      [courseId]: !prevGuardado[courseId],
-    }));
-  };
+  
   return (
     <div>
       <h1>ALL courses</h1>
@@ -40,18 +35,10 @@ export const AllCourses = () => {
               <Card.Subtitle>{elem.tags}</Card.Subtitle>
               <Card.Text>{elem.description}</Card.Text>
               <Card.Text>{elem.price}€</Card.Text>
-              <Button onClick={() => comprarCurso(elem.course_id)} variant="outline-success" className="me-3">
-                Comprar
+              <Button onClick={() => navigate(`/course/${elem.course_id}`)} variant="outline-success" className="me-3">
+                Más info
               </Button>
-              {guardado[elem.course_id] ? (
-                <Button onClick={() => guardar(elem.course_id)} variant="outline-success" className="me-3">
-                  Quitar de favoritos
-                </Button>
-              ) : (
-                <Button onClick={() => guardar(elem.course_id)} variant="outline-success" className="me-3">
-                  Guardar entre favoritos
-                </Button>
-              )}
+              
             </Card.Body>
           </Card>
         );
