@@ -18,14 +18,15 @@ class coursesControllers {
       err && res.status(500).json(err)
       if(err){console.log(err)}
       let course_id = result.insertId
-      tags.forEach((elem) =>{
+      /* tags.forEach((elem) =>{
         let sql2 = `INSERT INTO course_tag (course_id, tag_id) VALUES (${course_id}, ${elem.value})`
         connection.query(sql2, (errtag, restag)=>{
           errtag && res.status(500).json(errtag)
           if(errtag){console.log(errtag)}
+          
         })
-      })
-      res.status(200)
+      }) */
+      res.status(200).json(result)
     })
   }
 
@@ -78,31 +79,69 @@ class coursesControllers {
     
 
   oneCourse = (req, res) => {
-    const { id } = req.params;
-    console.log("aqui van los paramss",req.params);
-    console.log(req.params.id);
-    let sql = `SELECT * FROM course WHERE course_id = ${id} AND is_deleted = 0 AND user_id = ${user_id}` ;
-    let sqlUser = `SELECT * from user WHERE course_id = ${course_id} AND is_deleted = 0 `;
-
+    const { course_id } = req.params;
+    console.log(course_id);
+    let sql = `SELECT * FROM course WHERE course_id = ${course_id} AND is_deleted = 0` ;
     connection.query(sql, (err, result) => {
       if (err) {
+        console.log("errrrrrrrror",err);
         res.status(500).json(err);
       }
-      connection.query(sqlUser, (errUser, resultUser) => {
-        if (errUser) {
-          res.status(500).json(errUser);
-        }
+        console.log(result);
+        res.status(200).json(result)
       });
-    });
-  }
+    }
+  
 
-    /* editCourse = (req,res) =>{
-   const {title,description,price,course_id} = req.body;
-   let sql = `UPDATE course SET title="${title}",description="${description}",price="${price}" WHERE course_id = ${course_id}`
-   connection.query(sql,(err,result)=>{
-    err? res.status(500).json(err): res.status(200).json(result)
-   });
-  }; */
+    editOneCourse = (req, res) => {
+      
+      const { title, description, price, user_id, course_id } = req.body;
+      console.log(req.body);
+      let img=""
+      if(req.file){
+         img = req.file.filename;
+       }
+      let sql = `UPDATE INTO course SET title = "${title}", description = "${description}", price = ${price}, user_id = ${user_id} , img = "default.jpg" WHERE course_id = 1 `
+
+      if(req.file !== undefined){
+        sql = `UPDATE INTO course SET title = "${title}", description = "${description}", price = ${price}, user_id = ${user_id} , img = "${img}" WHERE course_id = 1 `
+      }
+      connection.query(sql, (err, result)=>{
+        err && res.status(500).json(err)
+        if(err){console.log(err)}
+        /* let course_id = result.insertId
+        tags.forEach((elem) =>{
+          let sql2 = `INSERT INTO course_tag (course_id, tag_id) VALUES (${course_id}, ${elem.value})`
+          connection.query(sql2, (errtag, restag)=>{
+            errtag && res.status(500).json(errtag)
+            if(errtag){console.log(errtag)}
+          })
+        }) */
+        res.status(200)
+      })
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   viewPurchasedCourse = (req, res) => {
     let sql = `SELECT * FROM course WHERE is_completed = 1 AND is_deleted = 0`;
