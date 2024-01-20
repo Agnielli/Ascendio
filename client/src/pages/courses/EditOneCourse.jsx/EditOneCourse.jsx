@@ -8,8 +8,8 @@ import {
   Row,
   Col,
 } from "react-bootstrap";
-import "./createCourse.scss";
-import { useNavigate } from "react-router-dom";
+/* import "./createCourse.scss"; */
+import { useNavigate, useParams } from "react-router-dom";
 import { AscendioContext } from "../../../context/AscendioContext";
 import axios from "axios";
 import Select from "react-select";
@@ -20,7 +20,7 @@ const initialValue = {
   price: "",
 };
 
-export const CreateCourse = () => {
+export const EditOneCourse = () => {
   const [createOneCourse, setCreateOneCourse] = useState(initialValue);
   const [file, setFile] = useState();
   const [msgError, setMsgError] = useState("");
@@ -29,7 +29,8 @@ export const CreateCourse = () => {
 
   const { user, setUser,userCourse,setUserCourse } = useContext(AscendioContext);
 
-  
+  const {course_id} = useParams();
+  console.log(course_id);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -60,7 +61,7 @@ export const CreateCourse = () => {
     setCreateOneCourse({ ...createOneCourse, [name]: value });
     
   };
- 
+  console.log(createOneCourse);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -78,9 +79,8 @@ export const CreateCourse = () => {
         
       axios
         .post("http://localhost:3000/courses/createcourse", newFormData)
-        .then((res)=>{
+        .then((res)=>{console.log(res)
         setUserCourse(res.data)
-        let course_id = res.data.insertId
         navigate(`/course/${course_id}`)
         })
         .catch((err)=>{console.log(err)})
@@ -93,7 +93,7 @@ export const CreateCourse = () => {
     <Row className="d-flex justify-content-center p-5">
       <Col md={4}>
         <Form onSubmit={handleSubmit}> 
-          <h3>Crea tu curso</h3>
+          <h3>Editar curso</h3>
           <Form.Group controlId="formFile" className="mb-3">
             <Form.Label>.jpg/.pdf</Form.Label>
             <Form.Control type="file" onChange={handleFile} hidden />
