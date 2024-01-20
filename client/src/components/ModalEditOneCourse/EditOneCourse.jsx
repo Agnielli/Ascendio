@@ -1,36 +1,60 @@
 import React, { useContext, useEffect, useState } from "react";
-import {
-  Form,
-  Button,
-  DropdownButton,
-  InputGroup,
-  Dropdown,
-  Row,
-  Col,
-  Modal,
-} from "react-bootstrap";
-/* import "./createCourse.scss"; */
-import { useNavigate, useParams } from "react-router-dom";
+import { Form, Button, Row, Col, Modal } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 import { AscendioContext } from "../../context/AscendioContext";
 import axios from "axios";
-import Select from "react-select";
 
-export const EditOneCourse = ({ showModal, setShowModal, oneCoursePpal, setOneCoursePpal }) => {
-  
-  // const { courses, setCourses } = useContext(AscendioContext)
+const initialValue = {
+  title: "",
+  description: "",
+  price: "",
+};
+
+export const EditOneCourse = ({
+  showModal,
+  setShowModal,
+  oneCoursePpal,
+  setOneCoursePpal,
+}) => {
+  const { user } = useContext(AscendioContext);
   const course_id = useParams().course_id;
+  const [file, setFile] = useState();
+  const [editCourse, setEditCourse] = useState(initialValue);
 
-   const handleChange = (e) => {
+  useEffect(() => {
+    if (oneCoursePpal) {
+      setEditCourse(oneCoursePpal);
+    }
+  }, [oneCoursePpal]);
+
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    setOneCoursePpal({...oneCoursePpal, [name]: value})
+    setEditCourse({ ...editCourse, [name]: value });
   };
-
-  const handleFile = () => {};
-
-  const handleClose = () =>{
-    setShowModal(false)
-  }
-
+  const handleFile = (e) => {
+    setFile(e.target.files[0]);
+  };
+  const handleClose = () => {
+    setShowModal(false);
+  };
+  const handleSubmit = (e) => {
+    const formData = new FormData();
+    formData.append(
+      "editarCurso",
+      JSON.stringify({ ...editCourse, user_id: user.user_id })
+    );
+    formData.append("file", file);
+    axios
+      .put(`http://localhost:3000/courses/editcourse/${course_id}`, formData)
+      .then((res) => {
+        console.log(res);
+        setShowModal(false);
+        setOneCoursePpal(editCourse);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <Row className="d-flex justify-content-center p-5">
       <Col md={4}>
@@ -38,7 +62,6 @@ export const EditOneCourse = ({ showModal, setShowModal, oneCoursePpal, setOneCo
           <Modal.Header closeButton>
             <Modal.Title>Editar curso</Modal.Title>
           </Modal.Header>
-
           <Modal.Body>
             <Form>
               <Form.Group controlId="formFile" className="mb-3">
@@ -51,7 +74,7 @@ export const EditOneCourse = ({ showModal, setShowModal, oneCoursePpal, setOneCo
                   type="text"
                   placeholder="Titulo"
                   name="title"
-                  value={oneCoursePpal?.title}
+                  value={editCourse?.title}
                   onChange={handleChange}
                 />
               </Form.Group>
@@ -61,7 +84,7 @@ export const EditOneCourse = ({ showModal, setShowModal, oneCoursePpal, setOneCo
                   type="text"
                   placeholder="Descripción"
                   name="description"
-                  value={oneCoursePpal?.description}
+                  value={editCourse?.description}
                   onChange={handleChange}
                 />
               </Form.Group>
@@ -71,24 +94,27 @@ export const EditOneCourse = ({ showModal, setShowModal, oneCoursePpal, setOneCo
                   type="text"
                   placeholder="€"
                   name="price"
-                  value={oneCoursePpal?.price}
+                  value={editCourse?.price}
                   onChange={handleChange}
                 />
               </Form.Group>
-              </Form>
-            
+            </Form>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="outline-success" className="me-3">
-                Aceptar
-              </Button>
-              <Button
-                variant="outline-success"
-                className="me-3"
-                onClick={()=>handleClose(false)}
-                >
-                Cancelar
-              </Button>
+            <Button
+              variant="outline-success"
+              className="me-3"
+              onClick={handleSubmit}
+            >
+              Aceptar
+            </Button>
+            <Button
+              variant="outline-success"
+              className="me-3"
+              onClick={handleClose}
+            >
+              Cancelar
+            </Button>
           </Modal.Footer>
         </Modal>
       </Col>

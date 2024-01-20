@@ -91,27 +91,22 @@ class coursesControllers {
   }
   
   editOneCourse = (req, res) => {
-    const {course_id} = req.params
-    const { title, description, price } = JSON.parse(req.body.editOneCourse)
+    console.log(req.body);
+    const { title, description, price, course_id, user_id } = JSON.parse(req.body.editarCurso);
+    let sql = `UPDATE course SET title = '${title}', description = '${description}', price = ${price} WHERE course_id = ${course_id} AND user_id = ${user_id} AND is_deleted = 0`;
     
-    let sql = `UPDATE course SET title = '${title}', description = '${description}', price = ${price} WHERE course_id = ${course_id}`
-
-    // let img
-
-    // if(req.file){
-    //   img = req.file.filename
-    //   sql = `UPDATE course SET title = '${title}', description = '${description}', price = ${price}, img = '${img}' WHERE course_id = ${course_id}`
-    // }
-
-    connection.query(sql, (err, result)=>{
+    let img
+    if (req.file) {
+      img = req.file.filename
+      sql = `UPDATE course SET title = '${title}', description = '${description}', price = ${price}, img = '${img}' WHERE course_id = ${course_id} AND user_id = ${user_id} AND is_deleted = 0`
+    }
+    connection.query(sql, (err, result) => {
       if (err) {
-        console.log("eeeeeee", err)
-        res.status(500).json(err);
+        console.log("Error en la consulta SQL:", err);
+        return res.status(500).json(err);
       }
-        console.log("rrrrrr", result)
-        res.status(200).json(result)
-
-      });
+      res.status(200).json({ result, img: req.file ? req.file.filename : null });
+    });
   }
 
 }
