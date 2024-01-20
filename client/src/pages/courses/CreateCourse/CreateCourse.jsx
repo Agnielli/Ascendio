@@ -24,7 +24,7 @@ export const CreateCourse = () => {
   const [createOneCourse, setCreateOneCourse] = useState(initialValue);
   const [file, setFile] = useState();
   const [msgError, setMsgError] = useState("");
-  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOption, setSelectedOption] = useState([]);
   const [options, setOptions] = useState([]);
 
   const { user, setUser,userCourse,setUserCourse } = useContext(AscendioContext);
