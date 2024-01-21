@@ -14,5 +14,6 @@ router.get('/callcourses', coursesControllers.callCourses)
 router.get('/purchasecourse/:id', coursesControllers.purchaseCourse)
 /* router.get('/viewpurchasedcourse', coursesControllers.viewPurchasedCourse)
 router.get('/viewsavedcourse', coursesControllers.viewSavedCourse) */
+router.post('/addsection', coursesControllers.addSection)
 
 module.exports = router;

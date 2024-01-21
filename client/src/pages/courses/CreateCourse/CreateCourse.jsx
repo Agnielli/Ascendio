@@ -2,9 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import {
   Form,
   Button,
-  DropdownButton,
-  InputGroup,
-  Dropdown,
   Row,
   Col,
 } from "react-bootstrap";
@@ -29,7 +26,6 @@ export const CreateCourse = () => {
 
   const { user, setUser,userCourse,setUserCourse } = useContext(AscendioContext);
 
-  
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -45,8 +41,6 @@ export const CreateCourse = () => {
       });
   }, []);
 
-  
-
   const handleFile = (e) => {
     setFile(e.target.files[0]);
   };
@@ -58,10 +52,8 @@ export const CreateCourse = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCreateOneCourse({ ...createOneCourse, [name]: value });
-    
   };
  
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -83,8 +75,7 @@ export const CreateCourse = () => {
         let course_id = res.data.insertId
         navigate(`/course/${course_id}`)
         })
-        .catch((err)=>{console.log(err)})
-        
+        .catch((err)=>{console.log(err)})  
     }
   };
 

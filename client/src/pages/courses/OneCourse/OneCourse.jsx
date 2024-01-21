@@ -42,11 +42,10 @@ export const OneCourse = () => {
       [courseId]: !prevGuardado[courseId],
     }));
   };
-  console.log(oneCoursePpal, "+++++");
 
   return (
     <>
-      <section className="d-flex justify-content-center p-5">
+      <section className="d-flex flex-column align-items-center justify-content-center p-5">
         <Card style={{ width: "40rem" }}>
           <Card.Img
             variant="top"
