@@ -40,18 +40,19 @@ class coursesControllers {
     });
   };
 
-  allCoursesOneUser = (req,res) =>{
-    const { user_id } = req.params;
-    let sql = `SELECT course.* FROM course WHERE user_id = ${user_id} AND is_deleted = 0 `
+  // allCoursesOneUser = (req,res) =>{
+  //   const { user_id } = req.params;
+  //   let sql = `SELECT course.* FROM course WHERE user_id = ${user_id} AND is_deleted = 0 `
     
-    connection.query(sql,(err,result)=>{
-      if(err){
-        res.status(500).json(err)
-      }else{
-        res.status(200).json(result)
-      }
-    })
-  }
+  //   connection.query(sql,(err,result)=>{
+  //     if(err){
+  //       res.status(500).json(err)
+  //     }else{
+  //       res.status(200).json(result)
+  //     }
+  //   })
+  // }
+
   callCourses = (req, res) =>{
     let sql = `SELECT * FROM course WHERE is_disabled = 1 AND is_deleted = 0`
     // TODO is disabled = 0
@@ -91,7 +92,6 @@ class coursesControllers {
   }
   
   editOneCourse = (req, res) => {
-    console.log(req.body);
     const { title, description, price, course_id, user_id } = JSON.parse(req.body.editarCurso);
     let sql = `UPDATE course SET title = '${title}', description = '${description}', price = ${price} WHERE course_id = ${course_id} AND user_id = ${user_id} AND is_deleted = 0`;
     
@@ -107,6 +107,22 @@ class coursesControllers {
       }
       res.status(200).json({ result, img: req.file ? req.file.filename : null });
     });
+  }
+
+  addSection = (req, res) => {
+    //no se si la ruta es dínamica
+    console.log("****", req.body);
+    const {course_id, section_id, section_title} = req.body
+    //llega sólo el section_title. Los demás valores: undefined
+    let sql = `INSERT INTO section (course_id, section_id, section_title) VALUES ('${course_id}', '${section_id}', '${section_title}')`
+
+    connection.query(sql, (err, result)=>{
+      if(err){
+        res.status(500).json(err)
+      }else{
+        res.status(200).json(result)
+      }
+    })
   }
 
 }
