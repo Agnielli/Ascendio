@@ -23,9 +23,9 @@ export const AllCourses = () => {
   }, []);
   
   return (
-    <div>
-      <h1>ALL courses</h1>
-      <p> TODO: mapeo y Use Effect -array de dependencia con comprado- con todos los cursos</p>
+    <div >
+      <h2 className='text-center'>All courses</h2>
+      <section className='d-flex justify-content-center gap-2 flex-wrap'> 
       {allcourses?.map((elem) => {
         return (
           <Card style={{ width: '22rem' }} key={elem.course_id}>
@@ -43,6 +43,7 @@ export const AllCourses = () => {
           </Card>
         );
       })}
+      </section>
     </div>
   );
 };
