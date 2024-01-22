@@ -51,7 +51,8 @@ class postsControllers {
     }
   };
 
-  callCategorys = (req, res) => {
+  callCategorys = (req, res) =>{
+
     let sql = `SELECT * FROM category`;
     connection.query(sql, (err, result) => {
       if (err) {
