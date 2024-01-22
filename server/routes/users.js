@@ -15,6 +15,8 @@ router.post("/mailrecoverpassword", usersControllers.mailRecoverPassword);
 router.put("/recoverpassword/:token", usersControllers.recoverPassword);
 router.get("/statisticsuser/:id", usersControllers.getStatisticsUser);
 router.post("/followuser", usersControllers.followUser);
+router.delete("/unfollowuser", usersControllers.unfollowUser);
+router.get("/getfollowuser/:id", usersControllers.getFollowUser);
 router.put('/edituser', multerSingle("users") ,usersControllers.editUser)
 
 module.exports = router;

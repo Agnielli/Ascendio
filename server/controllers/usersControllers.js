@@ -225,12 +225,43 @@ class usersControllers {
 
   // ---------------------------------------------
   followUser = (req, res) => {
-
     const user_id = req.body[0];
     const id_followed = req.body[1];
     console.log(user_id, id_followed);
     
-    let sql = ` INSERT INTO user_follows_user (user_id, followed_user_id) VALUES (${user_id}, ${id_followed});`
+    let sql = `INSERT INTO user_follows_user (user_id, followed_user_id) VALUES (${user_id}, ${id_followed});`
+
+    connection.query(sql, (err, result)=>{
+      if(err){
+        res.status(500).json(err)
+      }else{
+        res.status(200).json(result)
+      }
+    })
+  }
+
+  // comprobar con los console.log
+  unfollowUser = (req, res) => {
+    const user_id = req.body[0];
+    const id_followed = req.body[1];
+    console.log(user_id, id_followed);
+    
+    let sql = `DELETE FROM user_follows_user WHERE user_id = ${user_id} and followed_user_id = ${id_followed}`
+
+    connection.query(sql, (err, result)=>{
+      if(err){
+        res.status(500).json(err)
+      }else{
+        res.status(200).json(result)
+      }
+    })
+  }
+
+  getFollowUser = (req, res) => {
+    // const user_id = req.body;
+    const user_id = req.params.id;
+
+    let sql = `SELECT * FROM user_follows_user WHERE user_id = ${user_id}`;
 
     connection.query(sql, (err, result)=>{
       if(err){
