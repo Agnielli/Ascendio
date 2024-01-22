@@ -16,5 +16,7 @@ router.put("/recoverpassword/:token", usersControllers.recoverPassword);
 router.get("/statisticsuser/:id", usersControllers.getStatisticsUser);
 router.post("/followuser", usersControllers.followUser);
 router.put('/edituser', multerSingle("users") ,usersControllers.editUser)
+router.get('/followersuser/:id', usersControllers.getFollowersUser)
+router.get('/postsuser/:id', usersControllers.getPostsUser)
 
 module.exports = router;

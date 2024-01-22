@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./users.scss";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { AscendioContext } from "../../context/AscendioContext";
 import axios from "axios";
@@ -14,7 +14,7 @@ export const Users = () => {
 
   const navigate = useNavigate();
 
-  console.log(user.user_id)
+  console.log(user.user_id);
   //SACAR numero de seguidores del usuario logueado
   useEffect(() => {
     axios
@@ -36,7 +36,7 @@ export const Users = () => {
   return (
     <div className="d-flex flex-column w-25 gap-2">
       <div className="avatar">
-        {user?.user_img ? (
+        {user?.img ? (
           <img src={`http://localhost:3000/images/users/${user.img}`} />
         ) : (
           <p>{user?.name.charAt(0).toUpperCase()}</p>
@@ -49,8 +49,9 @@ export const Users = () => {
       </p>
       {statisticsUser && (
         <>
-          <p>seguidores: {statisticsUser.num_followers}</p>
-          <p>posts: {statisticsUser.num_posts}</p>
+        
+        <p>seguidores: <Link to={`/userfollowers/${user.user_id}`}>{statisticsUser.num_followers}</Link></p>
+        <Link to={`/userposts/${user.user_id}`}><p>posts: {statisticsUser.num_posts}</p></Link>
           <p>Aciertos: {statisticsUser.num_correct_posts}</p>
           <p>Errores: {statisticsUser.num_incorrect_posts}</p>
           <p>Cursos publicados: {statisticsUser.num_courses}</p>{" "}
