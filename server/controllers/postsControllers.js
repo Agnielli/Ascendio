@@ -4,7 +4,9 @@ const connection = require("../config/db");
 // const mailer = require("../utils/nodemailer");
 require("dotenv").config();
 
+
 class postsControllers {
+
   createTrade = (req, res) => {
     try {
       const {
@@ -51,8 +53,7 @@ class postsControllers {
     }
   };
 
-  callCategorys = (req, res) =>{
-
+  callCategorys = (req, res) => {
     let sql = `SELECT * FROM category`;
     connection.query(sql, (err, result) => {
       if (err) {
@@ -68,7 +69,7 @@ class postsControllers {
     let sql = `INSERT INTO post (description, user_id, type, category_id) VALUES ('${description}', '${user_id}', 1, 4)`;
     connection.query(sql, (error, result) => {
       if (error) {
-        res.status(500).json({ message: "Hay un error en la SQL" });
+        res.status(500).json({ message: "Hay un error en la SQL", error });
       } else {
         let post_id = result.insertId;
         if (req.file !== undefined) {
@@ -149,4 +150,7 @@ class postsControllers {
     }
   };
 }
+
+
+
 module.exports = new postsControllers();
