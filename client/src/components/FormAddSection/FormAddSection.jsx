@@ -20,15 +20,16 @@ export const FormAddSection = ({sections, setSections, addSection, setAddSection
   }
 
   const handleSubmit = () =>{
-    let data = {newSection,course_id}
+    let data = {newSection, course_id}
     if(newSection !== ''){
-      
+      console.log("llllllllLlll", data)
     axios
       .post("http://localhost:3000/courses/addsection", data)
       .then((res)=>{
         console.log(res)
         setSections([ ... sections, {section_id: res.data.section_id, section_title:newSection}])
         setNewSection('')
+        setAddSection(false)
       })
       .catch((err)=> {
         console.log(err);
@@ -41,10 +42,10 @@ export const FormAddSection = ({sections, setSections, addSection, setAddSection
       <Col>
         <Form>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Título de la unidad </Form.Label>
+            <Form.Label>Título de la sección </Form.Label>
             <Form.Control
               type="text"
-              placeholder="Título de la unidad"
+              placeholder="Título de la sección"
               value={newSection}
               onChange={handleChange}
             />

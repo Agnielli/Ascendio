@@ -186,7 +186,38 @@ class coursesControllers {
     })
   }
 
+  addTopic = (req, res) =>{
+    const {course_id, newTopic, section_id} = req.body
 
+    console.log(req.body)
+
+    let sql_cont = `SELECT max(topic_id) as id FROM topic WHERE section_id = ${section_id}`;
+
+    connection.query(sql_cont, (err, result)=>{
+      if(err){
+        return res.status(500).json(err)
+      }
+     
+      let topic_id = result[0].id ;
+      if(topic_id == null){
+      topic_id = 1
+      }else{
+      topic_id ++;
+      }
+
+      let sql_insert = `INSERT INTO topic (course_id, section_id topic_id, topic_title) VALUES (${course_id}, ${section_id}, ${topic_id}, "${newTopic}")`
+
+        connection.query(sql_insert, (err2, result_insert )=>{
+        if(err2){
+          return res.status(500).json(err2)
+        }
+        res.status(201).json({result_insert, topic_id})
+
+     })
+
+    })
+
+  }
 
 
 }

@@ -16,5 +16,6 @@ router.get('/purchasecourse/:id', coursesControllers.purchaseCourse)
 router.get('/viewsavedcourse', coursesControllers.viewSavedCourse) */
 router.post('/addsection', coursesControllers.addSection)
 router.delete('/deletesection/:course_id/:section_id', coursesControllers.deleteSection)
+router.post('/addtopic', coursesControllers.addTopic)
 
 module.exports = router;
