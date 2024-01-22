@@ -259,10 +259,7 @@ class usersControllers {
 
     let sql = `SELECT * FROM user_follows_user WHERE user_id = ${user_id}`;
 
-     // Al hacer el  mergeo.. no sé cual de los dos SQL es el valido
-    // let sql = ` INSERT INTO user_follows_user (user_id, followed_user_id) VALUES (${user_id}, ${id_followed});`; 
-
-    connection.query(sql, (err, result) => {
+     connection.query(sql, (err, result) => {
       if (err) {
         res.status(500).json(err);
       } else {
