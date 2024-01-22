@@ -35,21 +35,6 @@ export const Trades = () => {
               .catch((err) => {console.log(err)})
           }, [])
 
-  // NO SEGUIDOS
-
-  // const seguirUsuario = (id_followed) => {
-  //   // id del seguido, user.user_id es quien sigue
-  //   const data = [ user.user_id, id_followed];
-  //   // console.log(data); /* me llegan la data */
-
-  //   axios 
-  //   .post(`http://localhost:3000/users/followUser`, data)
-  //   .then((res) => {
-  //     console.log(res.data);
-  //   })
-  //   .catch((err) => {console.log(err)})
-  // }
-
   // Función para seguir o dejar de seguir a un usuario
   const pulsarSeguirONo = (id_followed) => {
     const data = [user.user_id, id_followed];
