@@ -15,6 +15,7 @@ export const OneCourse = () => {
   const [courseToEdit, setCourseToEdit] = useState();
   const [addSection, setAddSection] = useState(false);
   const [sections, setSections] = useState([]);
+  const [resetCourse, setResetCourse] = useState(false)
 
   const openModal = () => {
     setShowModal(true);
@@ -33,7 +34,7 @@ export const OneCourse = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, [showModal]);
+  }, [showModal, resetCourse]);
 
   const formatearFecha = (date) => {
     return date.split("T")[0].split("-").reverse().join("-");
@@ -45,6 +46,23 @@ export const OneCourse = () => {
       [courseId]: !prevGuardado[courseId],
     }));
   };
+
+  const addNewSection = () => {
+   setAddSection(true)
+  }
+
+  const deleteSection = (section_id) =>{
+    axios
+      .delete(`http://localhost:3000/courses/deletesection/${course_id}/${section_id}`)
+      .then((res)=>{
+        console.log(res.data);
+        setResetCourse(!resetCourse)
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+  }
+
 
   return (
     <>
@@ -72,7 +90,7 @@ export const OneCourse = () => {
             <Button
               variant="outline-success"
               className="me-3"
-              onClick={() => setAddSection(true)}
+              onClick={addNewSection}
               disabled={addSection ? true : false}
             >
               Añadir Tema
@@ -96,19 +114,23 @@ export const OneCourse = () => {
               </Button>
             )}
 
+            {addSection && (
+              <FormAddSection
+                sections={sections}
+                addSection={addSection}
+                setAddSection={setAddSection}
+                course_id={course_id}
+              />
+            )}
+
             {sections.map((elem) => {
-              return <div>{elem.section_title}</div>;
+              return <Card>
+              <Card.Body> {elem.section_title} <Button variant="outline-success">Añadir contenido</Button> <Button variant="outline-success" onClick={()=>deleteSection(elem.section_id)}>Eliminar</Button> </Card.Body>
+            </Card>
+          
             })}
           </Card.Body>
         </Card>
-
-        {addSection && (
-          <FormAddSection
-            addSection={addSection}
-            setAddSection={setAddSection}
-            course_id={course_id}
-          />
-        )}
 
         <EditOneCourse
           showModal={showModal}

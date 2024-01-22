@@ -38,19 +38,6 @@ class coursesControllers {
     });
   };
 
-  // allCoursesOneUser = (req,res) =>{
-  //   const { user_id } = req.params;
-  //   let sql = `SELECT course.* FROM course WHERE user_id = ${user_id} AND is_deleted = 0 `
-    
-  //   connection.query(sql,(err,result)=>{
-  //     if(err){
-  //       res.status(500).json(err)
-  //     }else{
-  //       res.status(200).json(result)
-  //     }
-  //   })
-  // }
-
   callCourses = (req, res) =>{
     let sql = `SELECT * FROM course WHERE is_disabled = 1 AND is_deleted = 0`
     // TODO is disabled = 0
@@ -85,7 +72,7 @@ class coursesControllers {
       if (err) {
         res.status(500).json(err);
       }
-      console.log(result);
+      //console.log(result);
       const {title,description, img, date, price, is_completed} = result[0];
       
       let data = {
@@ -126,8 +113,6 @@ class coursesControllers {
   }
 
   addSection = (req, res) => {
-    //no se si la ruta es dínamica
-    console.log("****", req.body);
     const {course_id, newSection} = req.body;
 
     let sql_cont = `SELECT max(section_id) as id FROM section WHERE course_id = ${course_id}`;
@@ -143,7 +128,7 @@ class coursesControllers {
      }else{
       section_id ++;
      }
-     console.log(section_id);
+     //console.log(section_id);
      let sql_insert = `INSERT INTO section (course_id, section_id, section_title) VALUES (${course_id} , ${section_id} , "${newSection}")`
 
      connection.query(sql_insert, (err2, result_insert )=>{
@@ -153,8 +138,6 @@ class coursesControllers {
         res.status(201).json({result_insert, section_id})
 
      })
-
-      
     })
 
     /* let sql = `INSERT INTO section (course_id, section_id, section_title) VALUES ('${course_id}', '${section_id}', '${section_title}')` */
@@ -167,16 +150,6 @@ class coursesControllers {
       }
     }) */
   }
-
-  /* editCourse = (req,res) =>{
-   const {title,description,price,course_id} = req.body;
-   let sql = `UPDATE course SET title="${title}",description="${description}",price="${price}" WHERE course_id = ${course_id}`
-   connection.query(sql,(err,result)=>{
-    err? res.status(500).json(err): res.status(200).json(result)
-   });
-  }; */
-  
-
 
   viewPurchasedCourse = (req, res) => {
     let sql = `SELECT * FROM course WHERE is_completed = 1 AND is_deleted = 0`
@@ -199,6 +172,22 @@ class coursesControllers {
       res.status(200).json(result)
     })
   }
+
+  deleteSection = (req, res) => {
+    const {course_id, section_id} = req.params;
+    console.log("PARAMS", req.params);
+    let sql = `DELETE FROM section WHERE course_id = ${course_id} and section_id =${section_id}`
+
+    connection.query(sql, (err, result) =>{
+      err ?
+      res.status(500).json(err)
+      :
+      res.status(200).json(result)
+    })
+  }
+
+
+
 
 }
 module.exports = new coursesControllers();
