@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { UserMiniCard } from "../UserMiniCard/UserMiniCard";
-
-
 export const AdminAllUsers = ({allUsers, setAllUsers}) => {
   useEffect(() => {
     axios
@@ -18,7 +16,7 @@ export const AdminAllUsers = ({allUsers, setAllUsers}) => {
     <>
       {allUsers?.map((elem) => {
             return (
-              <UserMiniCard            
+              <UserMiniCard
                 key={elem.user_id}
                 elem={elem}
                 allUsers={allUsers}

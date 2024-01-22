@@ -11,7 +11,10 @@ class usersControllers {
   createUser = (req, res) => {
     try {
       const { nickname, name, lastname, email, password } = req.body;
-      // falta validación del back
+      //const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      //if (!emailRegex.test(email)) {
+      //res.status(400).json({  message: "Correo no valido" });
+      //} else {
       let saltRounds = 8; // 8 saltos
       bcrypt.genSalt(saltRounds, function (err, saltRounds) {
         bcrypt.hash(password, saltRounds, function (err, hash) {
@@ -36,7 +39,7 @@ class usersControllers {
                     );
                     let mess = `http://localhost:5173/confirmationuser/${token}`;
                     if (result != "") {
-                      mailer(email, mess);
+                      //mailer(email, mess);
                       res.status(200).json({
                         message:
                           "Usuario registrado con exito, email de confirmación enviado",
@@ -54,6 +57,7 @@ class usersControllers {
           }
         });
       });
+      //}
     } catch (error) {
       console.log(error);
       res.status(500).json({
@@ -222,27 +226,46 @@ class usersControllers {
   // ---------------------------------------------
   //4-editar info de un usuario:
   editUser = (req, res) => {
-    const {nickname, name, lastname, email, phonenumber, user_id} = JSON.parse(req.body.editUser)
-    let sql = `UPDATE user SET nickname = "${nickname}" , name = "${name}", lastname = "${lastname}", email = "${email}", phonenumber = "${phonenumber}" WHERE user_id = ${user_id}`
+    const { nickname, name, lastname, email, phonenumber, user_id } =
+      JSON.parse(req.body.editUser);
+    let sql = `UPDATE user SET nickname = "${nickname}" , name = "${name}", lastname = "${lastname}", email = "${email}", phonenumber = "${phonenumber}" WHERE user_id = ${user_id}`;
 
-    let img
+    let img;
 
-    if (req.file){
-        img = req.file.filename;
-        sql = `UPDATE user SET name = "${name}", lastname = "${lastname}", address = "${address}", user_city = "${user_city}", img = "${img}" WHERE user_id = ${user_id}`
+    if (req.file !== undefined) {
+      img = req.file.filename;
+      sql = `UPDATE user SET nickname = "${nickname}" , name = "${name}", lastname = "${lastname}", email = "${email}", phonenumber = "${phonenumber}", img = "${img}" WHERE user_id = ${user_id}`;
     }
 
     connection.query(sql, (err, result) => {
-        if(err) {
-            res.status(400).json(err)
-        }
-        else {
-            res.status(200).json({result, img})
-        }
-    })
+      if (err) {
+        res.status(400).json(err);
+      } else {
+        res.status(200).json({ result, img });
+      }
+    });
+  };
 
-}
-
+  // -------------
+  getStatisticsUser = (req, res) => {
+    try {
+      const { id } = req.params;
+      const user_id = id;
+      let sql = `SELECT (SELECT COUNT(*) FROM user_follows_user WHERE user_id = '${user_id}') AS num_followers, (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}') AS num_posts, (SELECT COUNT(*) FROM course WHERE user_id = '${user_id}') AS num_courses, (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}' AND correct = true) AS num_correct_posts, (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}' AND correct = false) AS num_incorrect_posts;`;
+      connection.query(sql, (error, result) => {
+        if (error) {
+          console.log(error);
+          res.status(400).json({ message: "Error en la SQL" });
+        } else {
+          console.log(result);
+          res.status(200).json({ datos: result[0] });
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).JSON({ message: "Error inesperado (CATCH)" });
+    }
+  };
 }
 
 module.exports = new usersControllers();

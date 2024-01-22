@@ -52,6 +52,7 @@ export const EditUser = () => {
             setUser({...editUser, img:res.data.img})
           }
           else {
+            
             setUser(editUser)
           }
           navigate('/profile')

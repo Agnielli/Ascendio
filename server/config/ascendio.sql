@@ -34,7 +34,7 @@ CREATE TABLE post (
   stop_loss DECIMAL(7,2) UNSIGNED NULL,
   take_profit DECIMAL(7,2) UNSIGNED NULL,
   correct BOOLEAN,
-  date DATETIME not null default (CURRENT_DATE),
+  date DATETIME not null default CURRENT_TIMESTAMP,
   type TINYINT NOT NULL, -- tipo 1: regular, tipo 2: trade
   is_deleted BOOLEAN NOT NULL DEFAULT false, -- el usuario "borra" el post
   is_disabled BOOLEAN NOT NULL DEFAULT false,  -- el admin deshabilita el post
@@ -49,7 +49,7 @@ CREATE TABLE comments (
   comment_id SMALLINT UNSIGNED NOT NULL,
   primary key(post_id, comment_id),
   user_id INT UNSIGNED NOT NULL, -- autor del comentario
-  date DATETIME not null default (CURRENT_DATE),
+  date DATETIME not null default CURRENT_TIMESTAMP,
   message VARCHAR(250) NOT NULL,
   CONSTRAINT fk_post_1 FOREIGN KEY (post_id)
   REFERENCES post(post_id) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -116,7 +116,7 @@ CREATE TABLE course (
   title VARCHAR(50) NOT NULL,
   description VARCHAR(250) NOT NULL,
   img VARCHAR (150),
-  date DATETIME not null default (CURRENT_DATE),
+  date DATETIME not null default CURRENT_TIMESTAMP,
   price DECIMAL(7, 2) UNSIGNED NOT NULL,  -- 99999.99
   is_deleted BOOLEAN NOT NULL DEFAULT false,
   is_disabled BOOLEAN NOT NULL DEFAULT true,

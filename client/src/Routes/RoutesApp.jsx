@@ -27,6 +27,7 @@ import { SaveCourse } from "../pages/courses/SaveCourse/SaveCourse";
 import { MailRecoverPassword } from "../pages/auth/MailRecoverPassword/MailRecoverPassword";
 import { ConfirmationUser } from "../pages/auth/Register/ConfirmationUser/ConfirmationUser";
 import { EditUser } from "../pages/users/EditUser/EditUser";
+import { CreateGeneralPost } from "../pages/posts/PostGeneral/CreateGeneralPost";
 
 export const RoutesApp = () => {
   const { token } = useContext(AscendioContext);
@@ -72,6 +73,7 @@ export const RoutesApp = () => {
             <Route path='/course/:course_id' element={<OneCourse />} />
             <Route path='/allcourses' element={<AllCourses />} />
             <Route path='/createtrade' element={<CreateTrade />} />
+            <Route path='/creategeneralpost' element={<CreateGeneralPost />} />
             <Route path='/createcourse' element={<CreateCourse />} />
             <Route path='/purchasecourse' element={<PurchaseCourse/>} />
             <Route path='/savecourse' element={<SaveCourse/>} />

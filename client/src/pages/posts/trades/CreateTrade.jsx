@@ -79,10 +79,10 @@ export const CreateTrade = () => {
         .then((res) => {
           console.log(res);
           if (res.data.img) {
-            setCreateOneTrade({ ...createOneTrade, img: res.data.img }); // creo que esto también
+            setCreateOneTrade({ ...createOneTrade, img: res.data.img });
             navigate("/profile");
           } else {
-            setCreateOneTrade(createOneTrade); //esto está mal
+            setCreateOneTrade(createOneTrade); 
             navigate("/profile");
           }
         })

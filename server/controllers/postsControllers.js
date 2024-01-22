@@ -62,5 +62,36 @@ class postsControllers {
       }
     });
   };
+
+  createPostGeneral = (req, res) => {
+    const { description, user_id } = JSON.parse(req.body.crearPostGeneral)
+    console.log(req.body);
+    let sql = `INSERT INTO post (description, user_id, type, category_id) VALUES ('${description}', '${user_id}', 1, 4)`;
+    connection.query(sql, (error, result) => {
+      if (error) {
+        res.status(500).json({ message: "Hay un error en la SQL" });
+      } else {
+        console.log(result);
+        let post_id = result.insertId;
+        console.log(post_id);
+        if (req.file !== undefined) {
+          let img = req.file.filename;
+          let sql2 = `INSERT INTO post_resource (post_id, resource_type, text) VALUES (${post_id}, 1, '${img}')`;
+          connection.query(sql2, (err2, result2) => {
+            if (err2) {
+              console.log(err2);
+              res.status(500).json({ message: "Hay un error en la SQL2" });
+            } else {
+              res.status(200).json({ message: "todo OK" });
+            }
+          });
+        } else {
+          res
+            .status(200)
+            .json({ message: "Post creado correctamente", result });
+        }
+      }
+    });
+  };
 }
 module.exports = new postsControllers();

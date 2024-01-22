@@ -13,6 +13,6 @@ router.post("/loginuser", usersControllers.loginUser);
 router.get("/oneuser/:id", usersControllers.oneUser);
 router.post("/mailrecoverpassword", usersControllers.mailRecoverPassword);
 router.put("/recoverpassword/:token", usersControllers.recoverPassword);
-router.put('/edituser', multerSingle("users") ,usersControllers.editUser)
-
+router.put("/edituser", multerSingle("users"), usersControllers.editUser);
+router.get("/statisticsuser/:id", usersControllers.getStatisticsUser);
 module.exports = router;
