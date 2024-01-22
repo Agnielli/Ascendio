@@ -13,5 +13,6 @@ router.post("/loginuser", usersControllers.loginUser);
 router.get("/oneuser/:id", usersControllers.oneUser);
 router.post("/mailrecoverpassword", usersControllers.mailRecoverPassword);
 router.put("/recoverpassword/:token", usersControllers.recoverPassword);
+router.post("/followuser", usersControllers.followUser);
 
 module.exports = router;

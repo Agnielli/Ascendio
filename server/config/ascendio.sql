@@ -32,7 +32,7 @@ CREATE TABLE post (
   stop_loss DECIMAL(7,2) UNSIGNED NULL,
   take_profit DECIMAL(7,2) UNSIGNED NULL,
   correct BOOLEAN,
-  date DATETIME not null default (CURRENT_DATE),
+  date DATETIME not null default CURRENT_TIMESTAMP,
   type TINYINT NOT NULL, -- tipo 1: regular, tipo 2: trade
   is_deleted BOOLEAN NOT NULL DEFAULT false, -- el usuario "borra" el post
   is_disabled BOOLEAN NOT NULL DEFAULT false,  -- el admin deshabilita el post
@@ -66,14 +66,18 @@ CREATE TABLE user_category (  -- un user va a poder hablar de varias categorias
 );
 
 CREATE TABLE user_follows_user (
-  user_id INT UNSIGNED NOT NULL,
-  followed_user_id INT UNSIGNED NOT NULL,
+  user_id INT UNSIGNED NOT NULL, -- este es el usuario que va siguiendo 
+  followed_user_id INT UNSIGNED NOT NULL, -- este es el usuario a quien siguen
   primary key(user_id, followed_user_id),
   CONSTRAINT fk_user_4 FOREIGN KEY (user_id)
   REFERENCES user(user_id) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT fk_user_5 FOREIGN KEY (followed_user_id)
   REFERENCES user(user_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+-- update followed_user_id
+-- from user_follows_user
+-- where user_id = x; 
 
 CREATE TABLE user_likes_post (
   user_id INT UNSIGNED NOT NULL ,
@@ -221,3 +225,26 @@ select * from user;
 select * from post; 
 select * from post_resource; 
 select * from category; 
+select * from user_follows_user;
+
+-- user: usuario que va siguiendo 
+-- followed_user_id: usuario a quien siguen
+
+-- INSERT INTO user_follows_user (user_id, followed_user_id) VALUES (5, 4);
+
+-- para los trades
+select * from post 
+where type = 2
+order by date asc;
+
+select nickname 
+from user, post 
+where user.user_id = post.user_id;
+
+select post.currency, post.description, post.entry_price, post.stop_loss, post.take_profit, post.correct, user.nickname
+from user, post 
+where user.user_id = post.user_id 
+order by post.date desc;
+
+-- para los seguidos 
+
