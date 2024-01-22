@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./formAddSection.scss";
 import { Form, Col, Row, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -9,27 +9,37 @@ export const FormAddSection = ({sections, setSections, addSection, setAddSection
 
   const [newSection, setNewSection] = useState("");
 
+  useEffect(()=> {
+    if(sections){
+    setSections(sections)
+    }
+  }, [sections])
+
   const handleChange = (e) =>{
     setNewSection(e.target.value)
   }
 
   const handleSubmit = () =>{
     let data = {newSection,course_id}
-
+    if(newSection !== ''){
+      
     axios
       .post("http://localhost:3000/courses/addsection", data)
       .then((res)=>{
         console.log(res)
+        setSections([ ... sections, {section_id: res.data.section_id, section_title:newSection}])
+        setNewSection('')
       })
       .catch((err)=> {
         console.log(err);
       })
+    }
   }
 
   return (
     <Row>
       <Col>
-        <Form onSubmit={handleSubmit}>
+        <Form>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Título de la unidad </Form.Label>
             <Form.Control
@@ -39,7 +49,7 @@ export const FormAddSection = ({sections, setSections, addSection, setAddSection
               onChange={handleChange}
             />
             <Button variant="outline-success"
-              className="me-3" type="submit" >Aceptar</Button>
+              className="me-3"  onClick={handleSubmit} >Aceptar</Button>
             <Button variant="outline-success"
               className="me-3" onClick={()=>setAddSection(false)}>Cancelar</Button>
           </Form.Group>
