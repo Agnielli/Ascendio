@@ -5,6 +5,7 @@ import { Button, Card } from "react-bootstrap";
 import { EditOneCourse } from "../../../components/ModalEditOneCourse/EditOneCourse";
 import { useParams } from "react-router-dom";
 import { FormAddSection } from "../../../components/FormAddSection/FormAddSection";
+import { CardSection } from "../../../components/CardSection/CardSection";
 
 export const OneCourse = () => {
   const [oneCoursePpal, setOneCoursePpal] = useState();
@@ -63,6 +64,7 @@ export const OneCourse = () => {
       })
   }
 
+  console.log(sections);
 
   return (
     <>
@@ -117,6 +119,7 @@ export const OneCourse = () => {
             {addSection && (
               <FormAddSection
                 sections={sections}
+                setSections={setSections}
                 addSection={addSection}
                 setAddSection={setAddSection}
                 course_id={course_id}
@@ -124,9 +127,9 @@ export const OneCourse = () => {
             )}
 
             {sections.map((elem) => {
-              return <Card>
-              <Card.Body> {elem.section_title} <Button variant="outline-success">Añadir contenido</Button> <Button variant="outline-success" onClick={()=>deleteSection(elem.section_id)}>Eliminar</Button> </Card.Body>
-            </Card>
+              return <CardSection 
+                elem={elem}
+              />
           
             })}
           </Card.Body>
@@ -138,6 +141,7 @@ export const OneCourse = () => {
           setOneCoursePpal={setOneCoursePpal}
           oneCoursePpal={oneCoursePpal}
         />
+
       </section>
     </>
   );
