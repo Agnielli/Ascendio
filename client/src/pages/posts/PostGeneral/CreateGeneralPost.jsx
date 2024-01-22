@@ -13,11 +13,8 @@ export const CreateGeneralPost = () => {
   const [msgError, setMsgError] = useState("");
   const [file, setFile] = useState();
   const [options, setOptions] = useState([]);
-
   const { user, setUser } = useContext(AscendioContext);
-
   const navigate = useNavigate();
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setGeneralPost({ ...generalPost, [name]: value });
