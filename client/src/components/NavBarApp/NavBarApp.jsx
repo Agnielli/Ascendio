@@ -82,10 +82,10 @@ function NavBarApp() {
                     onClick={() => navigate("/profile")}
                   >
                     <p className="mt-3 me-3">
-                      {user.name} {user.lastname}
+                      {user.nickname}
                     </p>
                     <div className="avatar">
-                      {user?.user_img ? (
+                      {user?.img ? (
                         <img
                           src={`http://localhost:3000/images/users/${user.img}`}
                         />

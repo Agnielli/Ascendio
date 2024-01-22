@@ -70,6 +70,7 @@ export const RoutesApp = () => {
             <Route path='/profile' element={<Users />} />
             <Route path='/edituser' element={<EditUser/>} />
             <Route path='/course/:course_id' element={<OneCourse />} />
+            <Route path='/course' element={<OneCourse />} />
             <Route path='/allcourses' element={<AllCourses />} />
             <Route path='/createtrade' element={<CreateTrade />} />
             <Route path='/createcourse' element={<CreateCourse />} />
