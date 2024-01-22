@@ -220,6 +220,33 @@ class usersControllers {
   };
 
   // ---------------------------------------------
+  //4-editar info de un usuario:
+  
+  editUser = (req, res) => {
+    const { nickname, name, lastname, email, phonenumber, user_id } =
+      JSON.parse(req.body.editUser);
+    let sql;
+    let img;
+
+    if (req.file) {
+      
+      const img = req.file.filename;
+      sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}", email = "${email}", phonenumber = "${phonenumber}", img = "${img}" WHERE user_id = ${user_id}`;
+    } else {
+
+
+      
+      sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}", email = "${email}", phonenumber = "${phonenumber}" WHERE user_id = ${user_id} AND img = "${img}" IS NULL`;
+    }
+
+    connection.query(sql, (err, result) => {
+      if (err) {
+        res.status(400).json(err);
+      } else {
+        res.status(200).json({ result, img });
+      }
+    });
+  };
 }
 
 module.exports = new usersControllers();

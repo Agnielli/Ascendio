@@ -36,7 +36,7 @@ export const ConfirmationUser = () => {
   return (
     <Row className="d-flex justify-content-center p-5">
       <Col md={4}>
-        <h2>Su correo ha sido confirmado, bienvenido a Ascendio</h2>
+        <h2>No se ha podido confirmar su registro</h2>
         {/* <Button
           onClick={handleSubmit}
         >
