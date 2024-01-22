@@ -5,8 +5,6 @@ class coursesControllers {
   createCourse = (req, res) => {
     const tags = JSON.parse(req.body.tags)
     const { title, description, price, user_id } = JSON.parse(req.body.crearCurso);
-    // console.log(tags)
-    let img=""
     if(req.file){
        img = req.file.filename;
      }
@@ -65,6 +63,12 @@ class coursesControllers {
     })
   }
 
+  oneCourse = (req,res)=>{
+    const course_id = req.params.id;
+    console.log(req.params.id);
+    let sql = `SELECT * FROM course WHERE course_id = ${course_id} AND is_deleted = 0`
+    let sqlUser = `SELECT * from user WHERE course_id = ${course_id} AND is_deleted = 0 `
+  }
   purchaseCourse = (req, res) => {
     const { id } = req.params;
     let sql = `UPDATE course SET is_completed = 1 WHERE course_id = ${id} AND is_deleted = 0`;
@@ -122,6 +126,38 @@ class coursesControllers {
       }else{
         res.status(200).json(result)
       }
+    })
+  }
+
+  /* editCourse = (req,res) =>{
+   const {title,description,price,course_id} = req.body;
+   let sql = `UPDATE course SET title="${title}",description="${description}",price="${price}" WHERE course_id = ${course_id}`
+   connection.query(sql,(err,result)=>{
+    err? res.status(500).json(err): res.status(200).json(result)
+   });
+  }; */
+  
+
+
+  viewPurchasedCourse = (req, res) => {
+    let sql = `SELECT * FROM course WHERE is_completed = 1 AND is_deleted = 0`
+    //TODO: cambiare is_completed con is_bought`
+    connection.query(sql, (err, result) => {
+      err ?
+      res.status(500).json(err)
+      :
+      res.status(200).json(result)
+    })
+  }
+
+  //este controlador es para los cursos guardados como favoritos
+  viewSavedCourse = (req, res) => {
+    let sql = `SELECT * FROM course WHERE IS_LIKED = 1 AND is_deleted = 0`
+    connection.query(sql, (err, result) => {
+      err ?
+      res.status(500).json(err)
+      :
+      res.status(200).json(result)
     })
   }
 
