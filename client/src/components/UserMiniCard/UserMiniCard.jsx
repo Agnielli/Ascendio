@@ -67,10 +67,10 @@ export const UserMiniCard = ({ elem, setAllUsers, allUsers, updateUsers, setUpda
                 {elem.is_disabled ? "Activar" :
                 "Desactivar"}
               </Button>
-            
           </div>
         </div>
       </div>
     </div>
   );
 };
+

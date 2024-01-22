@@ -147,6 +147,7 @@ export const CreateTrade = () => {
           value={createOneTrade.category_id}
           onChange={handleChange}
         >
+          <option value=""></option>
           {options.map((option) => (
             <option key={option.value} value={option.value}>
               {option.label}

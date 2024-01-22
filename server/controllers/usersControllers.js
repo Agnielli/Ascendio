@@ -220,6 +220,23 @@ class usersControllers {
   };
 
   // ---------------------------------------------
+  followUser = (req, res) => {
+
+    const user_id = req.body[0];
+    const id_followed = req.body[1];
+    console.log(user_id, id_followed);
+    
+    let sql = ` INSERT INTO user_follows_user (user_id, followed_user_id) VALUES (${user_id}, ${id_followed});`
+
+    connection.query(sql, (err, result)=>{
+      if(err){
+        res.status(500).json(err)
+      }else{
+        res.status(200).json(result)
+      }
+    })
+  }
+
   //4-editar info de un usuario:
   
   editUser = (req, res) => {

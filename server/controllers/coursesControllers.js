@@ -5,6 +5,7 @@ class coursesControllers {
   createCourse = (req, res) => {
     const tags = JSON.parse(req.body.tags)
     const { title, description, price, user_id } = JSON.parse(req.body.crearCurso);
+
     if(req.file){
        img = req.file.filename;
      }
@@ -16,6 +17,7 @@ class coursesControllers {
       err && res.status(500).json(err)
       if(err){console.log(err)}
       let course_id = result.insertId
+
       tags.forEach((elem) =>{
         let sql2 = `INSERT INTO course_tag (course_id, tag_id) VALUES (${course_id}, ${elem.value})`
         connection.query(sql2, (errtag, restag)=>{
@@ -70,6 +72,7 @@ class coursesControllers {
     let sqlUser = `SELECT * from user WHERE course_id = ${course_id} AND is_deleted = 0 `
   }
   purchaseCourse = (req, res) => {
+
     const { id } = req.params;
     let sql = `UPDATE course SET is_completed = 1 WHERE course_id = ${id} AND is_deleted = 0`;
     //TODO: cambiare is_completed con is_bought
