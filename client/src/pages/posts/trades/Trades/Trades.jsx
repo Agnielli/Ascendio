@@ -11,7 +11,7 @@ export const Trades = () => {
   const { user } = useContext(AscendioContext);
   const [followingUsers, setFollowingUsers] = useState([]); // Nuevo estado para almacenar usuarios seguidos
 
-  // para obtener los últimos trades 
+  // para obtener los trades ordenados por fecha de subida (últimos trades)
   useEffect(() => {
     axios 
       .get("http://localhost:3000/posts/lasttrades")
@@ -79,8 +79,7 @@ export const Trades = () => {
         }
   };
 
-
-
+  
   return (
     <div>
 
@@ -91,9 +90,9 @@ export const Trades = () => {
         <Button onClick={() => setShow(3)}>Top Acertados</Button>
 
         <h1>Últimos Trades</h1>
-        {lastTrades?.map((elem) => {
+        {lastTrades?.map((elem, index) => {
           return (
-            <Card style={{ width: '18rem', marginBottom: '1rem'}} key={elem.user_id}>
+            <Card style={{ width: '18rem', marginBottom: '1rem'}} key={index}>
               <Card.Body>
                 <div className='d-flex justify-content-between'>
                   <Card.Title>{elem.nickname}</Card.Title>
@@ -103,7 +102,7 @@ export const Trades = () => {
                 </div>
 
                 <Card.Text>{elem.currency}</Card.Text>
-                <Card.Img variant="top" src="holder.js/100px180" />
+                <Card.Img variant="top" src={`http://localhost:3000/images/trades/${elem.text}`} />
                 <Card.Text>{elem.description}</Card.Text>
               </Card.Body>
             </Card>

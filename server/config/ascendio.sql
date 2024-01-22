@@ -16,7 +16,6 @@ CREATE TABLE user (
   is_confirmed BOOLEAN NOT NULL DEFAULT false, -- user
   is_disabled BOOLEAN NOT NULL DEFAULT  false -- admin
 );
-
 CREATE TABLE category (
   category_id TINYINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT, -- tipo 1 -> Crypto, tipo 2->  Bolsa, tipo 3 ->Forex
   category_name VARCHAR(50) NOT NULL UNIQUE -- Crypto, Bolsa, Forex
@@ -99,6 +98,12 @@ CREATE TABLE post_resource(
   CONSTRAINT fk_post_3 FOREIGN KEY (post_id)
   REFERENCES post(post_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+select post.currency, post.description, post.entry_price, post.stop_loss, post.take_profit, post.correct, user.nickname, user.user_id, post_resource.text
+from user, post, post_resource
+where user.user_id = post.user_id and user.user_id = post_resource.user_id
+order by post.date desc;
+
 
 /*
 CREATE TABLE graphic(
@@ -243,8 +248,8 @@ select nickname
 from user, post 
 where user.user_id = post.user_id;
 
-select post.currency, post.description, post.entry_price, post.stop_loss, post.take_profit, post.correct, user.nickname
-from user, post 
+select post.currency, post.description, post.entry_price, post.stop_loss, post.take_profit, post.correct, user.nickname, user.user_id, post_resource.text
+from user, post, post_resource
 where user.user_id = post.user_id 
 order by post.date desc;
 
