@@ -32,6 +32,7 @@ export const CreateTrade = () => {
           label: elem.category_name
         })))
       })
+      .catch((err) => console.log(err));
   }, [])
 
   const navigate = useNavigate();
@@ -61,10 +62,10 @@ export const CreateTrade = () => {
         .post('http://localhost:3000/posts/createtrade', newFormData)
         .then((res) => {
           if(res.data.img){
-            setUser({...createOneTrade, img:res.data.img})
+            setCreateOneTrade({...createOneTrade, img:res.data.img})
             navigate('/profile');
           }else{
-            setUser(createOneTrade)
+            setCreateOneTrade(createOneTrade)
             navigate('/profile');
           }
         })
