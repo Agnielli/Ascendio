@@ -63,12 +63,6 @@ class coursesControllers {
     })
   }
 
-  oneCourse = (req,res)=>{
-    const course_id = req.params.id;
-    console.log(req.params.id);
-    let sql = `SELECT * FROM course WHERE course_id = ${course_id} AND is_deleted = 0`
-    let sqlUser = `SELECT * from user WHERE course_id = ${course_id} AND is_deleted = 0 `
-  }
   purchaseCourse = (req, res) => {
 
     const { id } = req.params;
