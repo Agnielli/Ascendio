@@ -79,7 +79,7 @@ export const Trades = () => {
         }
   };
 
-  
+
   return (
     <div>
 
@@ -96,9 +96,11 @@ export const Trades = () => {
               <Card.Body>
                 <div className='d-flex justify-content-between'>
                   <Card.Title>{elem.nickname}</Card.Title>
+                  {user.user_id !== elem.user_id && 
                   <Button variant="primary" onClick={() => pulsarSeguirONo(elem.user_id)}>
                     {followingUsers.includes(elem.user_id) ? 'Siguiendo' : 'Seguir'}
                   </Button>
+                  }
                 </div>
 
                 <Card.Text>{elem.currency}</Card.Text>

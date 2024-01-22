@@ -229,7 +229,7 @@ class usersControllers {
     const id_followed = req.body[1];
     console.log(user_id, id_followed);
     
-    let sql = ` INSERT INTO user_follows_user (user_id, followed_user_id) VALUES (${user_id}, ${id_followed});`
+    let sql = `INSERT INTO user_follows_user (user_id, followed_user_id) VALUES (${user_id}, ${id_followed});`
 
     connection.query(sql, (err, result)=>{
       if(err){
