@@ -5,22 +5,22 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
-export const FormAddSection = ({addSection, setAddSection}) => {
+export const FormAddSection = ({addSection, setAddSection,course_id}) => {
 
-  const [newSection, setNewSection] = useState()
+  const [newSection, setNewSection] = useState("");
   const navigate = useNavigate()
 
   const handleChange = (e) =>{
-    const { name, value} = e.target;
-    setNewSection({...newSection, [name]: value})
+    setNewSection(e.target.value)
   }
 
   const handleSubmit = () =>{
     //const newFormData = new FormData()
     //newFormData.append("section", JSON.stringify(newSection))
+    let data = {newSection,course_id}
 
     axios
-      .post("http://localhost:3000/courses/addsection", newSection)
+      .post("http://localhost:3000/courses/addsection", data)
       .then((res)=>{
         console.log(res)
       })
@@ -38,13 +38,13 @@ export const FormAddSection = ({addSection, setAddSection}) => {
             <Form.Control
               type="text"
               placeholder="Título de la unidad"
-              name="section_title"
+              value={newSection}
               onChange={handleChange}
             />
             <Button variant="outline-success"
               className="me-3" onClick={handleSubmit}>Aceptar</Button>
             <Button variant="outline-success"
-              className="me-3" onClick={()=>setAddSection(!addSection)}>Cancelar</Button>
+              className="me-3" onClick={()=>setAddSection(false)}>Cancelar</Button>
           </Form.Group>
         </Form>
       </Col>
