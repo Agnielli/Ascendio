@@ -2,39 +2,49 @@ import React, { useEffect, useState } from "react";
 import "./UserMiniCard.scss";
 import { Button } from "react-bootstrap";
 import axios from "axios";
-export const UserMiniCard = ({ elem, allUsers, setAllUsers }) => {
-  const [show, setShow] = useState(true);
 
-  const disableUser = async (id) => {
-    await axios
-      .put(`http://localhost:3000/admin/disableuser/${id}`)
-      .then((res) => {
-        setShow(!show);
-        reloadUser();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+export const UserMiniCard = ({ elem, setAllUsers, allUsers, updateUsers, setUpdateUsers}) => {
 
-  const activateUser = async (id) => {
-    await axios
-      .put(`http://localhost:3000/admin/activateuser/${id}`)
-      .then((res) => {
-        console.log(res.data);
-        setShow(!show);
-        reloadUser();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const reloadUser = () => {
+  const activateUser = (id, is_disabled) => {
+    let url = `http://localhost:3000/admin/activateuser/${id}`
+    if (is_disabled === 0) {
+      url = `http://localhost:3000/admin/disableuser/${id}`
+    }
+    
     axios
-      .get("http://localhost:3000/admin/adminusers")
+      .put(url)
       .then((res) => {
-        setAllUsers(res.data);
+        setUpdateUsers(!updateUsers)
+        /* let temp
+        if (is_disabled === 0) {
+          temp = allUsers?.map((elem) => {
+            if (elem.user_id === id) {
+              elem.is_disabled = 1
+              return (
+                elem
+              )
+            } else {
+              return (
+                elem
+              )
+            }
+          })
+        } else {
+          temp = allUsers?.map((elem) => {
+            if (elem.user_id === id) {
+              elem.is_disabled = 0
+              return (
+                elem
+              )
+            } else {
+              return (
+                elem
+              )
+            }
+          }) */
+    /*     } */
+       /*  setAllUsers(temp) */
+        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -52,20 +62,15 @@ export const UserMiniCard = ({ elem, allUsers, setAllUsers }) => {
         <div className="d-flex flex-column mt-5 ms-3">
           <p>Numero aciertos: </p>
           <p>Numero errores: </p>
-          <div className="d-flex flex-row justify-content-center">
-            {elem?.is_disabled === 1 ? (
-              <Button onClick={() => activateUser(elem.user_id)}>Active</Button>
-            ) : (
-              <Button
-                className="me-2"
-                onClick={() => disableUser(elem.user_id)}
-              >
-                Disable
+          <div className="d-flex flex-row justify-content-center">           
+              <Button onClick={() => activateUser(elem?.user_id, elem?.is_disabled)}>
+                {elem.is_disabled ? "Activar" :
+                "Desactivar"}
               </Button>
-            )}
           </div>
         </div>
       </div>
     </div>
   );
 };
+

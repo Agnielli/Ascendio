@@ -14,17 +14,15 @@ export const AscendioProvider= ({children}) => {
   
   const tokenLocalStorage = getLocalStorage("token") 
 
-
   useEffect(() => {
     setToken(tokenLocalStorage)
     if(tokenLocalStorage){ 
       const {user_id,type} = jwtDecode(tokenLocalStorage).user;
-      console.log(jwtDecode(tokenLocalStorage));
-      console.log("el token", user_id, type);
+      //console.log(jwtDecode(tokenLocalStorage));
+      //console.log("el token", user_id, type);
       axios
         .get(`http://localhost:3000/users/oneuser/${user_id}`)
         .then((res)=>{
-          console.log(res)
           setUser(res.data)
         })
         .catch((err)=>{console.log(err)})
@@ -32,21 +30,19 @@ export const AscendioProvider= ({children}) => {
     
   }, [isLogged,token])
 
-  useEffect(() => {
-    setToken(tokenLocalStorage)
-    if(tokenLocalStorage){ 
-      const {user_id} = jwtDecode(tokenLocalStorage).user;
+  // useEffect(() => {
+  //   setToken(tokenLocalStorage)
+  //   if(tokenLocalStorage){ 
+  //     const {user_id} = jwtDecode(tokenLocalStorage).user;
   
-      axios
-        .get(`http://localhost:3000/courses/allcourses/${user_id}`)
-        .then((res)=>{
-          console.log("cursosss",res.data)
-          setUserCourse(res.data)
-        })
-        .catch((err)=>{console.log(err)})
-    }
-    
-  }, [isLogged,token])
+  //     axios
+  //       .get(`http://localhost:3000/courses/allcourses/${user_id}`)
+  //       .then((res)=>{
+  //         setUserCourse(res.data)
+  //       })
+  //       .catch((err)=>{console.log(err)})
+  //   }
+  // }, [isLogged,token])
 
   return (
     <AscendioContext.Provider value={{

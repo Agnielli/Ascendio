@@ -33,10 +33,8 @@ export const CreateTrade = () => {
           }))
         );
       })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+      .catch((err) => console.log(err));
+  }, [])
 
   const navigate = useNavigate();
 
@@ -77,13 +75,12 @@ export const CreateTrade = () => {
       axios
         .post("http://localhost:3000/posts/createtrade", newFormData)
         .then((res) => {
-          console.log(res);
-          if (res.data.img) {
-            setCreateOneTrade({ ...createOneTrade, img: res.data.img });
-            navigate("/profile");
-          } else {
-            setCreateOneTrade(createOneTrade); 
-            navigate("/profile");
+          if(res.data.img){
+            setCreateOneTrade({...createOneTrade, img:res.data.img})
+            navigate('/profile');
+          }else{
+            setCreateOneTrade(createOneTrade)
+            navigate('/profile');
           }
         })
         .catch((err) => {
@@ -150,6 +147,7 @@ export const CreateTrade = () => {
           value={createOneTrade.category_id}
           onChange={handleChange}
         >
+          <option value=""></option>
           {options.map((option) => (
             <option key={option.value} value={option.value}>
               {option.label}

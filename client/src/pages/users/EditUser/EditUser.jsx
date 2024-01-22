@@ -3,6 +3,7 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AscendioContext } from "../../../context/AscendioContext";
+import "./EditUser.scss"
 
 const initialValue = {
   nickname: "",
@@ -49,13 +50,16 @@ export const EditUser = () => {
         .put("http://localhost:3000/users/edituser", newFormData)
         .then((res) => {
           if(res.data.img){
-            setUser({...editUser, img:res.data.img})
+            setUser({ ...editUser, img: res.data.img });
+            console.log(res.data.img);           
           }
           else {
             
             setUser(editUser)
+            console.log(res);
           }
           navigate('/profile')
+          
         })
         .catch((err) => {
           console.log(err);
@@ -70,13 +74,29 @@ export const EditUser = () => {
   return (
     <Row className="d-flex justify-content-center p-5">
       <Col md={4}>
-        <div className="avatar">
-          {user?.img ? (
-            <img src={`http://localhost:3000/images/users/${user.img}`} />
-          ) : (
-            <p>{user?.name.charAt(0).toUpperCase()}</p>
-          )}
+
+      <div className="avatar" >
+          <label htmlFor="fileInput">
+            {user?.img ? (
+              <img
+                src={`http://localhost:3000/images/users/${user?.img}`}
+                alt="Avatar"
+              />
+            ) : (
+              <p>{user?.name.charAt(0).toUpperCase()}</p>
+            )}
+          </label>
+          <input
+            id="fileInput"
+            type="file"
+            style={{ display: "none" }}
+            onChange={handleFile}
+          />
         </div>
+
+
+
+
         <h2>{user?.nickname}</h2>
         <p>
           {" "}
@@ -132,17 +152,12 @@ export const EditUser = () => {
               onChange={handleChange}
               type="text"
               placeholder="Introduce un número"
-              value={editUser.phonenumber}
+              value={editUser.phonenumber === null ? "" : editUser.phonenumber}
               autoComplete="tel"
             />
           </Form.Group>
 
-          <Form.Group controlId="formFileLg" className="mb-3">
-        <Form.Label>imagen</Form.Label>
-        <Form.Control 
-         type="file"
-         onChange={handleFile}/>
-        </Form.Group>
+         
 
           
           <p>{msgError}</p>
@@ -157,3 +172,4 @@ export const EditUser = () => {
     </Row>
   );
 };
+ 

@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { UserMiniCard } from "../UserMiniCard/UserMiniCard";
+
 export const AdminAllUsers = ({allUsers, setAllUsers}) => {
+  const [updateUsers, setUpdateUsers] = useState(false)
+  
   useEffect(() => {
     axios
       .get("http://localhost:3000/admin/adminusers")
@@ -11,7 +14,9 @@ export const AdminAllUsers = ({allUsers, setAllUsers}) => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+
+  }, [updateUsers]);
+
   return (
     <>
       {allUsers?.map((elem) => {
@@ -21,9 +26,12 @@ export const AdminAllUsers = ({allUsers, setAllUsers}) => {
                 elem={elem}
                 allUsers={allUsers}
                 setAllUsers={setAllUsers}
+                updateUsers={updateUsers}
+                setUpdateUsers={setUpdateUsers}
               />
             );
           })}
     </>
   );
 };
+

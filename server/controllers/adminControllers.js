@@ -1,5 +1,4 @@
 const connection = require("../config/db");
-
 class adminControllers {
   adminGetAllUsers = (req, res) => {
 
@@ -19,7 +18,6 @@ class adminControllers {
     const  { user_id } = req.params
 
     let sql = `UPDATE user SET is_disabled = 1 WHERE user_id = ${user_id}`
-
     connection.query(sql, (err, result) => {
       if (err) {
         res.status(500).json(err);
@@ -45,5 +43,4 @@ class adminControllers {
     })
   }
 }
-
 module.exports = new adminControllers();

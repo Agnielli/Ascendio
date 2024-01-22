@@ -7,10 +7,10 @@ export const AdminHome = () => {
   const navigate = useNavigate();
   const [showUsers, setShowUsers] = useState(false);
   const [allUsers, setAllUsers] = useState();
+
   const showAllUsers = () => {
     setShowUsers(!showUsers);
   };
-
   return (
     <Row>
       <Col className="d-flex flex-column gap-2">
@@ -38,3 +38,4 @@ export const AdminHome = () => {
     </Row>
   );
 };
+

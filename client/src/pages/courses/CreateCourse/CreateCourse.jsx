@@ -2,14 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import {
   Form,
   Button,
-  DropdownButton,
-  InputGroup,
-  Dropdown,
   Row,
   Col,
 } from "react-bootstrap";
 import "./createCourse.scss";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AscendioContext } from "../../../context/AscendioContext";
 import axios from "axios";
 import Select from "react-select";
@@ -24,12 +21,11 @@ export const CreateCourse = () => {
   const [createOneCourse, setCreateOneCourse] = useState(initialValue);
   const [file, setFile] = useState();
   const [msgError, setMsgError] = useState("");
-  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOption, setSelectedOption] = useState([]);
   const [options, setOptions] = useState([]);
 
   const { user, setUser,userCourse,setUserCourse } = useContext(AscendioContext);
 
-  const {course_id} = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -45,8 +41,6 @@ export const CreateCourse = () => {
       });
   }, []);
 
-  
-
   const handleFile = (e) => {
     setFile(e.target.files[0]);
   };
@@ -58,10 +52,8 @@ export const CreateCourse = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCreateOneCourse({ ...createOneCourse, [name]: value });
-    
   };
-  console.log(createOneCourse);
-
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -78,12 +70,12 @@ export const CreateCourse = () => {
         
       axios
         .post("http://localhost:3000/courses/createcourse", newFormData)
-        .then((res)=>{console.log(res)
+        .then((res)=>{
         setUserCourse(res.data)
-        navigate(`/course/28`)
+        let course_id = res.data.insertId
+        navigate(`/course/${course_id}`)
         })
-        .catch((err)=>{console.log(err)})
-        
+        .catch((err)=>{console.log(err)})  
     }
   };
 

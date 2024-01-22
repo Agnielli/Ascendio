@@ -6,9 +6,8 @@ const multerSingle = require('../middleware/multerSingle')
 
 //http:localhost:3000/posts
 router.post('/createtrade', multerSingle('trades'), postsControllers.createTrade);
-
 router.post('/createpostgeneral', multerSingle('generalPost'), postsControllers.createPostGeneral);
-
-router.get('/callcategorys', postsControllers.callCategorys)
+router.get('/callcategorys', postsControllers.callCategorys);
+router.get('/lasttrades', postsControllers.showLastTrades);
 
 module.exports = router;

@@ -224,17 +224,40 @@ class usersControllers {
   };
 
   // ---------------------------------------------
+  followUser = (req, res) => {
+
+    const user_id = req.body[0];
+    const id_followed = req.body[1];
+    console.log(user_id, id_followed);
+    
+    let sql = ` INSERT INTO user_follows_user (user_id, followed_user_id) VALUES (${user_id}, ${id_followed});`
+
+    connection.query(sql, (err, result)=>{
+      if(err){
+        res.status(500).json(err)
+      }else{
+        res.status(200).json(result)
+      }
+    })
+  }
+
   //4-editar info de un usuario:
+  
   editUser = (req, res) => {
     const { nickname, name, lastname, email, phonenumber, user_id } =
       JSON.parse(req.body.editUser);
-    let sql = `UPDATE user SET nickname = "${nickname}" , name = "${name}", lastname = "${lastname}", email = "${email}", phonenumber = "${phonenumber}" WHERE user_id = ${user_id}`;
-
+    let sql;
     let img;
+    // esto puede rompres, porque req.file al ser undefined puede ser que entienda que existe
+    if (req.file) {
+      
+      const img = req.file.filename;
+      sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}", email = "${email}", phonenumber = "${phonenumber}", img = "${img}" WHERE user_id = ${user_id}`;
+    } else {
 
-    if (req.file !== undefined) {
-      img = req.file.filename;
-      sql = `UPDATE user SET nickname = "${nickname}" , name = "${name}", lastname = "${lastname}", email = "${email}", phonenumber = "${phonenumber}", img = "${img}" WHERE user_id = ${user_id}`;
+
+      
+      sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}", email = "${email}", phonenumber = "${phonenumber}" WHERE user_id = ${user_id} AND img = "${img}" IS NULL`;
     }
 
     connection.query(sql, (err, result) => {
