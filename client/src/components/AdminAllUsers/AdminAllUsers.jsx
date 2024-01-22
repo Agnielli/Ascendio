@@ -21,7 +21,7 @@ export const AdminAllUsers = ({allUsers, setAllUsers}) => {
     <>
       {allUsers?.map((elem) => {
             return (
-              <UserMiniCard            
+              <UserMiniCard
                 key={elem.user_id}
                 elem={elem}
                 allUsers={allUsers}

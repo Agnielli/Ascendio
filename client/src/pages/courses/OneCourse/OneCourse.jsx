@@ -20,7 +20,6 @@ export const OneCourse = () => {
     setCourseToEdit();
   };
 
-
   useEffect(() => {
     axios
       .get(`http://localhost:3000/courses/onecourse/${course_id}`)

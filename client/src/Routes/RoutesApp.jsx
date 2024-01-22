@@ -29,6 +29,7 @@ import { ConfirmationUser } from "../pages/auth/Register/ConfirmationUser/Confir
 import { Trades } from "../pages/posts/trades/Trades";
 import { Traders } from "../pages/traders/Traders";
 import { EditUser } from "../pages/users/EditUser/EditUser";
+import { CreateGeneralPost } from "../pages/posts/PostGeneral/CreateGeneralPost";
 
 export const RoutesApp = () => {
   const { token } = useContext(AscendioContext);
@@ -76,6 +77,7 @@ export const RoutesApp = () => {
             <Route path='/course' element={<OneCourse />} />
             <Route path='/allcourses' element={<AllCourses />} />
             <Route path='/createtrade' element={<CreateTrade />} />
+            <Route path='/creategeneralpost' element={<CreateGeneralPost />} />
             <Route path='/trades' element={<Trades />} />
             <Route path='/createcourse' element={<CreateCourse />} />
             <Route path='/purchasecourse' element={<PurchaseCourse/>} />

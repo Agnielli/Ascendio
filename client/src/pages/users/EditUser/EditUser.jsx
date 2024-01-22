@@ -54,6 +54,7 @@ export const EditUser = () => {
             console.log(res.data.img);           
           }
           else {
+            
             setUser(editUser)
             console.log(res);
           }
