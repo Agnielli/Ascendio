@@ -6,11 +6,9 @@ class coursesControllers {
     const tags = JSON.parse(req.body.tags)
     const { title, description, price, user_id } = JSON.parse(req.body.crearCurso);
 
-    if(req.file){
-       img = req.file.filename;
-     }
     let sql = `INSERT INTO course (title, description, price, user_id, img) VALUES ('${title}', '${description}', ${price}, ${user_id}, 'default.jpg')`
     if(req.file !== undefined){
+     let img = req.file.filename;
       sql = `INSERT INTO course (title, description, price, user_id, img) VALUES ('${title}', '${description}', ${price}, ${user_id}, '${img}')`
     }
     connection.query(sql, (err, result)=>{
@@ -88,12 +86,29 @@ class coursesControllers {
   oneCourse = (req, res) => {
     const { course_id } = req.params;
     // console.log(course_id);
-    let sql = `SELECT * FROM course WHERE course_id = ${course_id} AND is_deleted = 0` ;
+    let sql = `SELECT course.title, course.img, course.date, course.is_completed, course.description, course.price , section.section_id, section.section_title FROM course LEFT JOIN  section ON course.course_id = section.course_id WHERE course.course_id = ${course_id} AND is_deleted = 0` ;
     connection.query(sql, (err, result) => {
       if (err) {
         res.status(500).json(err);
       }
-        res.status(200).json(result)
+      console.log(result);
+      const {title,description, img, date, price, is_completed} = result[0];
+      
+      let data = {
+        title,
+        img,
+        date,
+        price,
+        description,
+        sections:[]
+      }
+      result.forEach(elem=>{
+        if(elem.section_id != null){
+          data.sections.push({section_id: elem.section_id, section_title: elem.section_title})
+        }
+      })
+      /* console.log(data); */
+      res.status(200).json(data)
 
       });
   }
@@ -119,17 +134,44 @@ class coursesControllers {
   addSection = (req, res) => {
     //no se si la ruta es dínamica
     console.log("****", req.body);
-    const {course_id, section_id, section_title} = req.body
-    //llega sólo el section_title. Los demás valores: undefined
-    let sql = `INSERT INTO section (course_id, section_id, section_title) VALUES ('${course_id}', '${section_id}', '${section_title}')`
+    const {course_id, newSection} = req.body;
 
-    connection.query(sql, (err, result)=>{
+    let sql_cont = `SELECT max(section_id) as id FROM section WHERE course_id = ${course_id}`;
+
+    connection.query(sql_cont,(err1,result)=>{
+      if(err1){
+        return res.status(500).json(err1)
+      }
+     
+     let section_id = result[0].id ;
+     if(section_id == null){
+      section_id = 1
+     }else{
+      section_id ++;
+     }
+     console.log(section_id);
+     let sql_insert = `INSERT INTO section (course_id, section_id, section_title) VALUES (${course_id} , ${section_id} , "${newSection}")`
+
+     connection.query(sql_insert, (err2, result_insert )=>{
+        if(err2){
+          return res.status(500).json(err2)
+        }
+        res.status(201).json({result_insert, section_id})
+
+     })
+
+      
+    })
+
+    /* let sql = `INSERT INTO section (course_id, section_id, section_title) VALUES ('${course_id}', '${section_id}', '${section_title}')` */
+
+    /* connection.query(sql, (err, result)=>{
       if(err){
         res.status(500).json(err)
       }else{
         res.status(200).json(result)
       }
-    })
+    }) */
   }
 
   /* editCourse = (req,res) =>{
