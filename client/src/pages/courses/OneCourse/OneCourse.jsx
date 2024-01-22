@@ -95,7 +95,7 @@ export const OneCourse = () => {
               onClick={addNewSection}
               disabled={addSection ? true : false}
             >
-              Añadir Tema
+              Añadir Sección
             </Button>
 
             {guardado[course_id] ? (
@@ -129,6 +129,9 @@ export const OneCourse = () => {
             {sections.map((elem) => {
               return <CardSection 
                 elem={elem}
+                deleteSection={deleteSection}
+                course_id={course_id}
+                sections={sections}
               />
           
             })}
