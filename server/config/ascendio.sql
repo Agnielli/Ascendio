@@ -2,8 +2,6 @@ CREATE DATABASE ascendio;
 
 USE ascendio;
 
--- drop database ascendio;
-
 CREATE TABLE user (
   user_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
   nickname VARCHAR(50) UNIQUE,
@@ -14,9 +12,9 @@ CREATE TABLE user (
   password VARCHAR(200) NOT NULL,
   img VARCHAR (150),
   type TINYINT NOT NULL DEFAULT 2, -- 1 admin, 2 user
+  is_deleted BOOLEAN NOT NULL DEFAULT false, -- user
   is_confirmed BOOLEAN NOT NULL DEFAULT false, -- user
-  is_disabled BOOLEAN NOT NULL DEFAULT  false, -- admin
-  is_deleted BOOLEAN NOT NULL DEFAULT false -- user 
+  is_disabled BOOLEAN NOT NULL DEFAULT  false -- admin
 );
 
 CREATE TABLE category (
@@ -49,7 +47,7 @@ CREATE TABLE comments (
   comment_id SMALLINT UNSIGNED NOT NULL,
   primary key(post_id, comment_id),
   user_id INT UNSIGNED NOT NULL, -- autor del comentario
-  date DATETIME not null default CURRENT_TIMESTAMP,
+  date DATETIME not null default (CURRENT_DATE),
   message VARCHAR(250) NOT NULL,
   CONSTRAINT fk_post_1 FOREIGN KEY (post_id)
   REFERENCES post(post_id) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -120,12 +118,11 @@ CREATE TABLE course (
   title VARCHAR(50) NOT NULL,
   description VARCHAR(250) NOT NULL,
   img VARCHAR (150),
-  date DATETIME not null default CURRENT_TIMESTAMP,
+  date DATETIME not null default (CURRENT_DATE),
   price DECIMAL(7, 2) UNSIGNED NOT NULL,  -- 99999.99
   is_deleted BOOLEAN NOT NULL DEFAULT false,
   is_disabled BOOLEAN NOT NULL DEFAULT true,
   is_completed BOOLEAN NOT NULL DEFAULT	false,
-  is_bought BOOLEAN NOT NULL DEFAULT false,
   CONSTRAINT fk_user_7 FOREIGN KEY (user_id)
   references user(user_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -222,5 +219,34 @@ CREATE TABLE course_tag(
 	REFERENCES tag(tag_id) ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT fk_course_6 FOREIGN KEY(course_id)
 	REFERENCES course(course_id) ON DELETE CASCADE ON UPDATE CASCADE
-)
+);
+
+select * from user;
+select * from post; 
+select * from post_resource; 
+select * from category; 
+select * from user_follows_user;
+
+-- DELETE FROM user_follows_user WHERE user_id = 5 and followed_user_id = 3;
+
+-- user: usuario que va siguiendo 
+-- followed_user_id: usuario a quien siguen
+
+-- INSERT INTO user_follows_user (user_id, followed_user_id) VALUES (5, 4);
+
+-- para los trades
+select * from post 
+where type = 2
+order by date asc;
+
+select nickname 
+from user, post 
+where user.user_id = post.user_id;
+
+select post.currency, post.description, post.entry_price, post.stop_loss, post.take_profit, post.correct, user.nickname
+from user, post 
+where user.user_id = post.user_id 
+order by post.date desc;
+
+-- para los seguidos 
 
