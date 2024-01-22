@@ -13,7 +13,9 @@ export const OneCourse = () => {
   const course_id = useParams().course_id;
   const [guardado, setGuardado] = useState({});
   const [courseToEdit, setCourseToEdit] = useState();
-  const [addSection, setAddSection] = useState(false)
+  const [addSection, setAddSection] = useState(false);
+  const [sections, setSections] = useState([]);
+  const [resetCourse, setResetCourse] = useState(false)
 
   const openModal = () => {
     setShowModal(true);
@@ -24,13 +26,15 @@ export const OneCourse = () => {
     axios
       .get(`http://localhost:3000/courses/onecourse/${course_id}`)
       .then((res) => {
-        setOneCoursePpal(res.data[0]);
-        setCourseToEdit(res.data[0]);
+        console.log(res.data);
+        setOneCoursePpal(res.data);
+        setCourseToEdit(res.data);
+        setSections(res.data.sections);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [showModal]);
+  }, [showModal, resetCourse]);
 
   const formatearFecha = (date) => {
     return date.split("T")[0].split("-").reverse().join("-");
@@ -42,6 +46,23 @@ export const OneCourse = () => {
       [courseId]: !prevGuardado[courseId],
     }));
   };
+
+  const addNewSection = () => {
+   setAddSection(true)
+  }
+
+  const deleteSection = (section_id) =>{
+    axios
+      .delete(`http://localhost:3000/courses/deletesection/${course_id}/${section_id}`)
+      .then((res)=>{
+        console.log(res.data);
+        setResetCourse(!resetCourse)
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+  }
+
 
   return (
     <>
@@ -59,12 +80,21 @@ export const OneCourse = () => {
             <Card.Text>{oneCoursePpal?.description}</Card.Text>
             <Card.Text>{oneCoursePpal?.price}€</Card.Text>
 
-            <Button variant="outline-success"
-                className="me-3" onClick={openModal}>
+            <Button
+              variant="outline-success"
+              className="me-3"
+              onClick={openModal}
+            >
               Editar curso
             </Button>
-            <Button variant="outline-success"
-                className="me-3" onClick={()=>setAddSection(!addSection)}>Añadir Tema</Button>
+            <Button
+              variant="outline-success"
+              className="me-3"
+              onClick={addNewSection}
+              disabled={addSection ? true : false}
+            >
+              Añadir Tema
+            </Button>
 
             {guardado[course_id] ? (
               <Button
@@ -83,13 +113,24 @@ export const OneCourse = () => {
                 Guardar entre favoritos
               </Button>
             )}
+
+            {addSection && (
+              <FormAddSection
+                sections={sections}
+                addSection={addSection}
+                setAddSection={setAddSection}
+                course_id={course_id}
+              />
+            )}
+
+            {sections.map((elem) => {
+              return <Card>
+              <Card.Body> {elem.section_title} <Button variant="outline-success">Añadir contenido</Button> <Button variant="outline-success" onClick={()=>deleteSection(elem.section_id)}>Eliminar</Button> </Card.Body>
+            </Card>
+          
+            })}
           </Card.Body>
         </Card>
-
-        {addSection &&
-          <FormAddSection
-          addSection={addSection}
-          setAddSection={setAddSection} />}
 
         <EditOneCourse
           showModal={showModal}
@@ -97,7 +138,6 @@ export const OneCourse = () => {
           setOneCoursePpal={setOneCoursePpal}
           oneCoursePpal={oneCoursePpal}
         />
-
       </section>
     </>
   );

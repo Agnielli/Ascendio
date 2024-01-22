@@ -9,5 +9,7 @@ router.post('/createtrade', multerSingle('trades'), postsControllers.createTrade
 router.post('/createpostgeneral', multerSingle('generalPost'), postsControllers.createPostGeneral);
 router.get('/callcategorys', postsControllers.callCategorys);
 router.get('/lasttrades', postsControllers.showLastTrades);
+router.put('/markatrade/:id', postsControllers.markATrade);
+
 
 module.exports = router;

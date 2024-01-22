@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import "./createTrade.scss";
 import { Form, Button, InputGroup } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { AscendioContext } from "../../../context/AscendioContext";
+import { AscendioContext } from "../../../../context/AscendioContext";
 import axios from "axios";
 const initialValue = {
   currency: "",
