@@ -3,8 +3,8 @@ const connection = require("../config/db");
 // const jwt = require("jsonwebtoken");
 // const mailer = require("../utils/nodemailer");
 require("dotenv").config();
-class postsControllers {
 
+class postsControllers {
   createTrade = (req, res) => {
     try {
       const {
@@ -24,9 +24,7 @@ class postsControllers {
           console.log(error);
           res.status(500).json({ message: "Hay un error en la SQL" });
         } else {
-          console.log(result);
           let post_id = result.insertId;
-          console.log(post_id);
           if (req.file !== undefined) {
             let img = req.file.filename;
             let sql2 = `INSERT INTO post_resource (post_id, resource_type, text) VALUES (${post_id}, 1, '${img}')`;
@@ -51,9 +49,10 @@ class postsControllers {
         error: "Error del Catch",
       });
     }
-  }
+  };
 
   callCategorys = (req, res) =>{
+
     let sql = `SELECT * FROM category`;
     connection.query(sql, (err, result) => {
       if (err) {
@@ -65,16 +64,13 @@ class postsControllers {
   };
 
   createPostGeneral = (req, res) => {
-    const { description, user_id } = JSON.parse(req.body.crearPostGeneral)
-    console.log(req.body);
+    const { description, user_id } = JSON.parse(req.body.crearPostGeneral);
     let sql = `INSERT INTO post (description, user_id, type, category_id) VALUES ('${description}', '${user_id}', 1, 4)`;
     connection.query(sql, (error, result) => {
       if (error) {
         res.status(500).json({ message: "Hay un error en la SQL" });
       } else {
-        console.log(result);
         let post_id = result.insertId;
-        console.log(post_id);
         if (req.file !== undefined) {
           let img = req.file.filename;
           let sql2 = `INSERT INTO post_resource (post_id, resource_type, text) VALUES (${post_id}, 1, '${img}')`;
@@ -96,19 +92,61 @@ class postsControllers {
   };
 
   showLastTrades = (req, res) => {
-    let sql = `SELECT post.currency, post.description, post.entry_price, post.stop_loss, post.take_profit, post.correct, user.nickname, user.user_id, post.user_id, post_resource.text
-    FROM user
-    JOIN post ON user.user_id = post.user_id
-    LEFT JOIN post_resource ON post.post_id = post_resource.post_id
-    ORDER BY post.date DESC;`
-
-    connection.query(sql, (err, result)=>{
-      if(err){
-        res.status(500).json(err)
-      }else{
-        res.status(200).json(result)
+    let sql = `select post.currency, post.description, post.entry_price, post.stop_loss, post.take_profit, post.correct, user.nickname, user.user_id from user, post where user.user_id = post.user_id order by post.date desc;`;
+    connection.query(sql, (err, result) => {
+      if (err) {
+        res.status(500).json(err);
+      } else {
+        res.status(200).json(result);
       }
-    })
-  }
+    });
+  };
+
+  markATrade = (req, res) => {
+    try {
+      const { id } = req.params;
+      const { correct, mark } = req.body;
+      console.log(req.body);
+      if ((correct === 0 || correct === null) && mark === 1) {
+        let sql = `UPDATE post SET correct = 1 WHERE post_id = ${id};`;
+        connection.query(sql, (error, result) => {
+          if (error) {
+            res
+              .status(500)
+              .json({ message: "Hay un error en la SQ al marcar TRUE" });
+          } else {
+            res.status(200).json({ message: "Correct cambiado" });
+          }
+        });
+      } else if ((correct === 1 || correct === null) && mark === 0) {
+        let sql = ` UPDATE post SET correct = 0 WHERE post_id = ${id};`;
+        connection.query(sql, (error, result) => {
+          if (error) {
+            res
+              .status(500)
+              .json({ message: "Hay un error en la SQL al marcar FALSE" });
+          } else {
+            res.status(200).json({ message: "Correct cambiado" });
+          }
+        });
+      } else if ((correct === 1 || correct === 0) && mark === null) {
+        let sql = `UPDATE post SET correct = null WHERE post_id = ${id};`;
+        connection.query(sql, (error, result) => {
+          if (error) {
+            res
+              .status(500)
+              .json({ message: "Hay un error en la SQL al marcar NULL" });
+          } else {
+            res.status(200).json({ message: "Correct cambiado" });
+          }
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        error: "Error del Catch",
+      });
+    }
+  };
 }
 module.exports = new postsControllers();

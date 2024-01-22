@@ -30,6 +30,8 @@ import { Trades } from "../pages/posts/trades/Trades/Trades";
 import { Traders } from "../pages/traders/Traders";
 import { EditUser } from "../pages/users/EditUser/EditUser";
 import { CreateGeneralPost } from "../pages/posts/PostGeneral/CreateGeneralPost";
+import { UserFollowers } from "../pages/users/UserFollowers/UserFollowers";
+import { UserPosts } from "../pages/users/UserPosts/UserPosts";
 
 export const RoutesApp = () => {
   const { token } = useContext(AscendioContext);
@@ -82,6 +84,8 @@ export const RoutesApp = () => {
             <Route path='/createcourse' element={<CreateCourse />} />
             <Route path='/purchasecourse' element={<PurchaseCourse/>} />
             <Route path='/savecourse' element={<SaveCourse/>} />
+            <Route path='/userfollowers/:id' element={<UserFollowers/>} />
+            <Route path='/userposts/:id' element={<UserPosts/>} />
             </>
           )}
 
