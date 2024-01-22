@@ -3,9 +3,7 @@ const connection = require("../config/db");
 // const jwt = require("jsonwebtoken");
 // const mailer = require("../utils/nodemailer");
 require("dotenv").config();
-
 class postsControllers {
-
   createTrade = (req, res) => {
     const { currency, description, entryPrice, stopLoss, takeProfit, category_id, user_id} = JSON.parse(req.body.crearTrade);
 
@@ -36,13 +34,13 @@ class postsControllers {
   }
 
   callCategorys = (req, res) =>{
-    let sql = `SELECT * FROM category`;
 
-    connection.query(sql, (err, result)=>{
-      if(err){
-        res.status(500).json(err)
-      }else{
-        res.status(200).json(result)
+    let sql = `SELECT * FROM category`;
+    connection.query(sql, (err, result) => {
+      if (err) {
+        res.status(500).json(err);
+      } else {
+        res.status(200).json(result);
       }
     })
   }
@@ -61,7 +59,5 @@ class postsControllers {
       }
     })
   }
-
 }
-
 module.exports = new postsControllers();

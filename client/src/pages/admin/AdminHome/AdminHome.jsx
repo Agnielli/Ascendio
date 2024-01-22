@@ -7,6 +7,7 @@ export const AdminHome = () => {
   const navigate = useNavigate();
   const [showUsers, setShowUsers] = useState(false);
   const [allUsers, setAllUsers] = useState();
+  
   const showAllUsers = () => {
     setShowUsers(!showUsers);
   };
@@ -14,6 +15,7 @@ export const AdminHome = () => {
     <Row>
       <Col className="d-flex flex-column gap-2">
         <h3>Administrador</h3>
+        
         <Button onClick={() => showAllUsers()}>Usuarios</Button>
         <Button onClick={() => navigate("allcourses")}>Cursos</Button>
         <Button onClick={() => navigate("alldata")}>Estadisticas</Button>

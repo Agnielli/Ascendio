@@ -8,28 +8,41 @@ export const AscendioContext = createContext()
 
 export const AscendioProvider= ({children}) => {
   const [user, setUser] = useState("");
+  const [userCourse, setUserCourse] = useState([])
   const [token, setToken] = useState();
   const [isLogged, setIsLogged] = useState(false);
-  const [course, setCourse] = useState("");
-
+  
+  const tokenLocalStorage = getLocalStorage("token") 
 
   useEffect(() => {
-    const tokenLocalStorage = getLocalStorage("token")
     setToken(tokenLocalStorage)
     if(tokenLocalStorage){ 
       const {user_id,type} = jwtDecode(tokenLocalStorage).user;
-      console.log(jwtDecode(tokenLocalStorage));
-      console.log("el token", user_id,type);
+      //console.log(jwtDecode(tokenLocalStorage));
+      //console.log("el token", user_id, type);
       axios
         .get(`http://localhost:3000/users/oneuser/${user_id}`)
         .then((res)=>{
-          console.log(res)
           setUser(res.data)
         })
         .catch((err)=>{console.log(err)})
     }
     
-  }, [isLogged])
+  }, [isLogged,token])
+
+  // useEffect(() => {
+  //   setToken(tokenLocalStorage)
+  //   if(tokenLocalStorage){ 
+  //     const {user_id} = jwtDecode(tokenLocalStorage).user;
+  
+  //     axios
+  //       .get(`http://localhost:3000/courses/allcourses/${user_id}`)
+  //       .then((res)=>{
+  //         setUserCourse(res.data)
+  //       })
+  //       .catch((err)=>{console.log(err)})
+  //   }
+  // }, [isLogged,token])
 
   return (
     <AscendioContext.Provider value={{
@@ -39,8 +52,8 @@ export const AscendioProvider= ({children}) => {
       setToken, 
       isLogged, 
       setIsLogged,
-      course,
-      setCourse
+      userCourse,
+      setUserCourse
     }}>
     {children}
     </AscendioContext.Provider>
