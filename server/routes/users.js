@@ -25,4 +25,5 @@ router.put('/updatepassword/:id', usersControllers.updatePassword);
 // router.get('/postsuser/:id', usersControllers.getPostsUser)
 
 
+
 module.exports = router;
