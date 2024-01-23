@@ -279,12 +279,12 @@ class usersControllers {
     if (req.file) {
       img = req.file.filename;
       sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}", email = "${email}", phonenumber = "${phonenumber}", img = "${img}" WHERE user_id = ${user_id}`;
-    } else {      
+    } else {
       sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}", email = "${email}", phonenumber = "${phonenumber}" WHERE user_id = ${user_id} AND img = "${img}" IS NULL`;
     }
     connection.query(sql, (err, result) => {
       if (err) {
-        res.status(400).json(err);        
+        res.status(400).json(err);
       } else {
         console.log("*********************", img);
         res.status(200).json({ result, img });
@@ -311,34 +311,38 @@ class usersControllers {
       res.status(500).JSON({ message: "Error inesperado (CATCH)" });
     }
   };
-  
+
   verifyPassword = (req, res) => {
     const { id } = req.params;
     const { currentPassword } = req.body;
-  
+
     // Buscar el usuario por ID
     let sql = `SELECT * FROM user WHERE user_id = ${id}`;
     connection.query(sql, [id], (error, result) => {
       if (error) {
         console.error(error);
-        return res.status(500).json({ error: "Error en la verificación de la contraseña" });
+        return res
+          .status(500)
+          .json({ error: "Error en la verificación de la contraseña" });
       }
-  
+
       // Verificar si el usuario existe
       if (result.length === 0) {
         return res.status(404).json({ message: "Usuario no encontrado" });
       }
-  
+
       const user = result[0];
       const hash = user.password;
-  
+
       // Verificar la contraseña
       bcrypt.compare(currentPassword, hash, (error, response) => {
         if (error) {
           console.error(error);
-          return res.status(500).json({ error: "Error en la verificación de la contraseña" });
+          return res
+            .status(500)
+            .json({ error: "Error en la verificación de la contraseña" });
         }
-  
+
         if (response) {
           const token = jwt.sign(
             {
@@ -350,7 +354,7 @@ class usersControllers {
             process.env.SECRET,
             { expiresIn: "1d" }
           );
-  
+
           res.status(200).json({ token, user });
         } else {
           res.status(401).json({ message: "Contraseña actual incorrecta" });
@@ -358,11 +362,11 @@ class usersControllers {
       });
     });
   };
-  
+
   // Cambiar contraseña
   updatePassword = (req, res) => {
-    const { id, password } = req.body; 
-  
+    const { id, password } = req.body;
+
     // Consultar el usuario por user_id
     let sql = `SELECT * FROM user WHERE user_id = ${id}`;
     connection.query(sql, [id], (err, result) => {
@@ -370,40 +374,43 @@ class usersControllers {
         console.error(err);
         return res.status(500).json({ error: "Error al consultar el usuario" });
       }
-  
+
       // Verificar si el usuario existe
       if (result.length === 0) {
         return res.status(404).json({ message: "Usuario no encontrado" });
       }
-  
+
       // Generar el hash de la nueva contraseña
       bcrypt.genSalt(8, (err, salt) => {
         if (err) {
           return res.status(500).json({ error: err });
         }
-  
+
         bcrypt.hash(password, salt, (err, hash) => {
           if (err) {
             return res.status(500).json({ error: err });
           }
-  
+
           // Actualizar la contraseña en la base de datos
           let sql2 = `UPDATE user SET password = '${hash}' WHERE user_id = ${id}`;
           connection.query(sql2, [hash, id], (error, result) => {
             if (error) {
               return res.status(500).json({ error });
             }
-  
-            res.status(200).json({ mensaje: "Contraseña actualizada con éxito" });
+
+            res
+              .status(200)
+              .json({ mensaje: "Contraseña actualizada con éxito" });
           });
         });
       });
     });
+  };
 
   getFollowersUser = (req, res) => {
     try {
       const { id } = req.params;
-      let sql = `SELECT * FROM user WHERE user_id IN (SELECT follower_user_id FROM user_follows_user WHERE followed_user_id = ${id});`;
+      let sql = `SELECT * FROM user WHERE user_id IN (SELECT user_id FROM user_follows_user WHERE followed_user_id = '${id}');`;
       connection.query(sql, (error, result) => {
         if (error) {
           console.log("Error en sql", error);
@@ -453,7 +460,25 @@ class usersControllers {
       console.log(error);
       res.status(500).JSON({ message: "Error inesperado (CATCH)" });
     }
+  };
 
+  showAllUsers = (req, res) => {
+    try {
+      let sql = `SELECT user.*, (SELECT COUNT(*) FROM post WHERE user.user_id = post.user_id) AS total_posts, (SELECT COUNT(*) FROM post WHERE user.user_id = post.user_id AND post.correct = true) AS correct_posts,( SELECT COUNT(*) FROM post WHERE user.user_id = post.user_id AND post.correct = false) AS incorrect_posts, ( SELECT COUNT(*) FROM user_follows_user WHERE user.user_id = user_follows_user.user_id) AS following_count, ( SELECT COUNT(*) FROM user_follows_user WHERE user.user_id = user_follows_user.followed_user_id) AS followers_count, ( SELECT COUNT(*) FROM course WHERE user.user_id = course.user_id ) AS total_courses FROM user;`;
+      connection.query(sql, (err, result) => {
+        if (err) {
+          res.status(500).json({ message: "Error en la SQL" });
+        } else {
+          console.log(result);
+          res.status(200).json(result);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        error: "Error al enviar el correo electrónico de registro",
+      });
+    }
   };
 }
 

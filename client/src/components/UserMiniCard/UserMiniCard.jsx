@@ -60,8 +60,8 @@ export const UserMiniCard = ({ elem, updateUsers, setUpdateUsers}) => {
       </div>
       <div className="d-flex flex-row">
         <div className="d-flex flex-column mt-5 ms-3">
-          <p>Numero aciertos: </p>
-          <p>Numero errores: </p>
+          <p>Numero aciertos: {elem.correct_posts}</p>
+          <p>Numero errores: {elem.incorrect_posts}</p>
           <div className="d-flex flex-row justify-content-center">           
               <Button onClick={() => activateUser(elem?.user_id, elem?.is_disabled)}>
                 {elem.is_disabled ? "Activar" :
