@@ -62,3 +62,4 @@ export const FormAddTopic = ({ setShowTopic, course_id, sections, section_id }) 
     </Row>
   );
 };
+};
