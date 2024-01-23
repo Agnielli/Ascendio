@@ -6,6 +6,7 @@ import { Estadisticas } from "../AdminEstadisticas/Estadisticas";
 import { OneComment } from "../../../components/OneComment/OneComment";
 import { AdminDisabledUsers } from "../../../components/AdminDisabledUsers/AdminDisabledUsers";
 import { AdminActivateUser } from "../../../components/AdminActivateUser/AdminActivateUser";
+import { AdminCourses } from "../../../components/AdminCourses/AdminCourses";
 
 export const AdminHome = () => {
   const [showUserButtons, setShowUserButtons] = useState(false);
@@ -128,6 +129,7 @@ export const AdminHome = () => {
             </div>
           )}
         </div>
+        <div>{showCourses === true && <AdminCourses />}</div>
         <div>{showStats === true && <Estadisticas />}</div>
       </Col>
     </Row>

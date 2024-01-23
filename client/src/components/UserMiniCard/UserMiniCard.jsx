@@ -15,35 +15,6 @@ export const UserMiniCard = ({ elem, updateUsers, setUpdateUsers}) => {
       .put(url)
       .then((res) => {
         setUpdateUsers(!updateUsers)
-        /* let temp
-        if (is_disabled === 0) {
-          temp = allUsers?.map((elem) => {
-            if (elem.user_id === id) {
-              elem.is_disabled = 1
-              return (
-                elem
-              )
-            } else {
-              return (
-                elem
-              )
-            }
-          })
-        } else {
-          temp = allUsers?.map((elem) => {
-            if (elem.user_id === id) {
-              elem.is_disabled = 0
-              return (
-                elem
-              )
-            } else {
-              return (
-                elem
-              )
-            }
-          }) */
-    /*     } */
-       /*  setAllUsers(temp) */
         console.log(res.data);
       })
       .catch((err) => {
@@ -60,8 +31,8 @@ export const UserMiniCard = ({ elem, updateUsers, setUpdateUsers}) => {
       </div>
       <div className="d-flex flex-row">
         <div className="d-flex flex-column mt-5 ms-3">
-          <p>Numero aciertos: </p>
-          <p>Numero errores: </p>
+          <p>Numero aciertos: {elem.correct_posts}</p>
+          <p>Numero errores: {elem.incorrect_posts}</p>
           <div className="d-flex flex-row justify-content-center">           
               <Button onClick={() => activateUser(elem?.user_id, elem?.is_disabled)}>
                 {elem.is_disabled ? "Activar" :
