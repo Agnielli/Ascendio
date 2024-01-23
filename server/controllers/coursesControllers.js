@@ -148,16 +148,6 @@ class coursesControllers {
         res.status(201).json({ result_insert, section_id });
       });
     });
-
-    /* let sql = `INSERT INTO section (course_id, section_id, section_title) VALUES ('${course_id}', '${section_id}', '${section_title}')` */
-
-    /* connection.query(sql, (err, result)=>{
-      if(err){
-        res.status(500).json(err)
-      }else{
-        res.status(200).json(result)
-      }
-    }) */
   };
 
   viewPurchasedCourse = (req, res) => {
@@ -189,6 +179,9 @@ class coursesControllers {
   addTopic = (req, res) => {
     const { course_id, newTopic, section_id } = req.body;
     let sql_cont = `SELECT max(topic_id) as id FROM topic WHERE section_id = ${section_id}`;
+    
+    console.log(req.body)
+
     connection.query(sql_cont, (err, result) => {
       if (err) {
         return res.status(500).json(err);
