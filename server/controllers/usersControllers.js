@@ -406,25 +406,23 @@ class usersControllers {
         });
       });
     });
-  }
-
-    getFollowersUser = (req, res) => {
-      try {
-        const { id } = req.params;
-        let sql = `SELECT * FROM user WHERE user_id IN (SELECT follower_user_id FROM user_follows_user WHERE followed_user_id = ${id});`;
-        connection.query(sql, (error, result) => {
-          if (error) {
-            console.log("Error en sql", error);
-            res.status(400).json({ message: "Error en la SQL" });
-          } else {
-            res.status(200).json({ datos: result });
-          }
-        });
-      } catch (error) {
-        console.log(error);
-        res.status(500).JSON({ message: "Error inesperado (CATCH)" });
-      }
-    };
+  getFollowersUser = (req, res) => {
+    try {
+      const { id } = req.params;
+      let sql = `SELECT * FROM user WHERE user_id IN (SELECT user_id FROM user_follows_user WHERE followed_user_id = '${id}');`;
+      connection.query(sql, (error, result) => {
+        if (error) {
+          console.log("Error en sql", error);
+          res.status(400).json({ message: "Error en la SQL" });
+        } else {
+          res.status(200).json({ datos: result });
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).JSON({ message: "Error inesperado (CATCH)" });
+    }
+  };
 
     getFollowingUser = (req, res) => {
       try {
@@ -464,7 +462,43 @@ class usersControllers {
     };
   };
 
+  getPostsUser = (req, res) => {
+    try {
+      const { id } = req.params;
+      let sql = `SELECT post.*, post_resource.resource_type, post_resource.text as resource_text, category.category_name FROM post LEFT JOIN post_resource ON post.post_id = post_resource.post_id LEFT JOIN category ON post.category_id = category.category_id WHERE post.user_id = ${id};`;
+      connection.query(sql, (error, result) => {
+        if (error) {
+          console.log("Error en sql", error);
+          res.status(400).json({ message: "Error en la SQL" });
+        } else {
+          res.status(200).json({ datos: result });
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).JSON({ message: "Error inesperado (CATCH)" });
+    }
+  };
 
+  showAllUsers = (req, res) => {
+    try {
+      let sql = `SELECT user.*, (SELECT COUNT(*) FROM post WHERE user.user_id = post.user_id) AS total_posts, (SELECT COUNT(*) FROM post WHERE user.user_id = post.user_id AND post.correct = true) AS correct_posts,( SELECT COUNT(*) FROM post WHERE user.user_id = post.user_id AND post.correct = false) AS incorrect_posts, ( SELECT COUNT(*) FROM user_follows_user WHERE user.user_id = user_follows_user.user_id) AS following_count, ( SELECT COUNT(*) FROM user_follows_user WHERE user.user_id = user_follows_user.followed_user_id) AS followers_count, ( SELECT COUNT(*) FROM course WHERE user.user_id = course.user_id ) AS total_courses FROM user;`;
+      connection.query(sql, (err, result) => {
+        if (err) {
+          res.status(500).json({ message: "Error en la SQL" });
+        } else {
+          console.log(result);
+          res.status(200).json(result);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        error: "Error al enviar el correo electrónico de registro",
+      });
+    }
+  };
+}
 
 
 module.exports = new usersControllers();

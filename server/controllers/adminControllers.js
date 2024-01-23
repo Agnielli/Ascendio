@@ -1,7 +1,6 @@
 const connection = require("../config/db");
 
 class adminControllers {
-
   adminGetAllUsers = (req, res) => {
     let sql = `SELECT * FROM user WHERE type = 2`;
     let sql2 = `SELECT user.*, COUNT(post.post_id) AS total_posts,
@@ -9,7 +8,7 @@ class adminControllers {
     SUM(CASE WHEN post.correct = false THEN 1 ELSE 0 END) AS incorrect_posts
     FROM user LEFT JOIN post ON user.user_id = post.user_id WHERE user.type = 2 GROUP BY
     user.user_id`;
-
+    
     connection.query(sql2, (err, result) => {
       if (err) {
         res.status(500).json(err);

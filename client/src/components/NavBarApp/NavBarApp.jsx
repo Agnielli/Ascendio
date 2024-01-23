@@ -62,15 +62,15 @@ function NavBarApp() {
                   <Nav.Link as={Link} to="/allcourses">
                     Cursos
                   </Nav.Link>
-                  <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                    <NavDropdown.Item as={Link} to="/trades">
-                      Trades
+                  <NavDropdown title="Más opciones" id="basic-nav-dropdown">
+                    <NavDropdown.Item as={Link} to="/allpoststrades">
+                      Trade Post
                     </NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="/post">
-                      Post
+                    <NavDropdown.Item as={Link} to="/allpostsgenerals">
+                      General Post
                     </NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="/traders">
-                      Traders
+                    <NavDropdown.Item as={Link} to="/showAllUsers">
+                      Usuarios
                     </NavDropdown.Item>
                   </NavDropdown>
                 </>
@@ -81,9 +81,7 @@ function NavBarApp() {
                     className="d-flex user"
                     onClick={() => navigate("/profile")}
                   >
-                    <p className="mt-3 me-3">
-                      {user.nickname}
-                    </p>
+                    <p className="mt-3 me-3">{user.nickname}</p>
                     <div className="avatar">
                       {user?.img ? (
                         <img
