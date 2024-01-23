@@ -2,8 +2,10 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 
+
 export const FormAddTopic = ({ setShowTopic, course_id, sections, section_id }) => {
   const [newTopic, setNewTopic] = useState("");
+
 
   const handleChange = (e) => {
     setNewTopic(e.target.value);
@@ -12,9 +14,10 @@ export const FormAddTopic = ({ setShowTopic, course_id, sections, section_id }) 
   const handleSubmit = () => {
     let data = { course_id, section_id, newTopic };
 
-    console.log("data", data);
-    
-    if (newTopic !== "") {
+  const handleSubmit = () =>{
+    let data = {course_id, section_id, newTopic}
+    console.log("data", data)
+    if(newTopic !== ''){
 
       axios
         .post("http://localhost:3000/courses/addtopic", data)

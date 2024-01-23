@@ -12,8 +12,8 @@ class coursesControllers {
     if(req.file !== undefined){
      let img = req.file.filename;
       sql = `INSERT INTO course (title, description, price, user_id, img) VALUES ('${title}', '${description}', ${price}, ${user_id}, '${img}')`
-
-    }
+     }
+    
     connection.query(sql, (err, result) => {
       err && res.status(500).json(err);
       if (err) {
@@ -55,6 +55,36 @@ class coursesControllers {
         res.status(200).json(result);
       }
     });
+   
+    /* let sql = `SELECT course.title, course.img, course.description, course.price , tag.tag_id, tag.tag_name
+        FROM course 
+        LEFT JOIN course_tag ON course.course_id = course_tag.course_id 
+        LEFT JOIN tag ON course_tag.tag_id = tag.tag_id   
+          WHERE is_deleted = 0`;
+
+    // TODO is disabled = 0
+    connection.query(sql, (err, result) => {
+      if (err) {
+        res.status(500).json(err);
+      }
+      const { title, description, img, price } = result;
+
+      let data = {
+        title,
+        img,
+        price,
+        description,
+        tags: [],
+      };
+      result.forEach((elem) => {
+        if (elem.tag_id != null) {
+          data.tags.push({ tag_id: elem.tag_id, tag_title: elem.tag_name });
+        }
+        console.log("ESTA ES MI DATA TOTAL", data);
+      res.status(200).json(data);
+      });
+    }); */
+  };
   };
 
   purchaseCourse = (req, res) => {
@@ -71,14 +101,21 @@ class coursesControllers {
   };
 
   oneCourse = (req, res) => {
-    const { course_id } = req.params;
+    const { course_id, user_id } = req.params; //añadir el usuario que está logueado
     // console.log(course_id);
-    let sql = `SELECT course.title, course.img, course.date, course.is_completed, course.description, course.price , section.section_id, section.section_title FROM course LEFT JOIN  section ON course.course_id = section.course_id WHERE course.course_id = ${course_id} AND is_deleted = 0`;
+    /* let sql = `SELECT course.title, course.img, course.date, course.is_completed, course.description, course.price , section.section_id, section.section_title FROM course LEFT JOIN  section ON course.course_id = section.course_id WHERE course.course_id = ${course_id} AND is_deleted = 0` ; */
+    let sql = `SELECT course.title, course.img, course.date, course.is_completed, course.description, course.price , section.section_id, section.section_title, tag.tag_id, tag.tag_name
+      FROM course 
+        LEFT JOIN  section ON course.course_id = section.course_id 
+        LEFT JOIN course_tag ON course.course_id = course_tag.course_id 
+        LEFT JOIN tag ON course_tag.tag_id = tag.tag_id   
+          WHERE course.course_id = ${course_id} AND is_deleted = 0`;
+
     connection.query(sql, (err, result) => {
       if (err) {
         res.status(500).json(err);
       }
-      //console.log(result);
+
       const { title, description, img, date, price, is_completed } = result[0];
 
       let data = {
@@ -87,8 +124,15 @@ class coursesControllers {
         date,
         price,
         description,
+        tags: [],
         sections: [],
       };
+      result.forEach((elem) => {
+        if (elem.tag_id != null) {
+          data.tags.push({ tag_id: elem.tag_id, tag_title: elem.tag_name });
+        }
+      });
+
       result.forEach((elem) => {
         if (elem.section_id != null) {
           data.sections.push({
@@ -97,16 +141,17 @@ class coursesControllers {
           });
         }
       });
-      /* console.log(data); */
+      console.log("ESTA ES MI DATA TOTAL", data);
       res.status(200).json(data);
     });
   };
 
+        
   editOneCourse = (req, res) => {
 
     const { title, description, price, user_id } = JSON.parse(req.body.editarCurso);
     const {course_id} = req.params;
-
+    
     let sql = `UPDATE course SET title = '${title}', description = '${description}', price = ${price} WHERE course_id = ${course_id} AND user_id = ${user_id} AND is_deleted = 0`;
 
     let img;
@@ -178,7 +223,6 @@ class coursesControllers {
       err ? res.status(500).json(err) : res.status(200).json(result);
     });
   };
-
 
   addTopic = (req, res) => {
     const { course_id, newTopic, section_id } = req.body;
