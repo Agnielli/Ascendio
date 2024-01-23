@@ -33,6 +33,7 @@ import { CreateGeneralPost } from "../pages/posts/PostGeneral/CreateGeneralPost"
 import { UserFollowers } from "../pages/users/UserFollowers/UserFollowers";
 import { UserPosts } from "../pages/users/UserPosts/UserPosts";
 import { UserFollowing } from "../pages/users/UserFollowing/UserFollowing";
+import { OneUserCourses } from "../pages/courses/OneUserCourses/OneUserCourses";
 
 export const RoutesApp = () => {
   const { token } = useContext(AscendioContext);
@@ -91,6 +92,7 @@ export const RoutesApp = () => {
               <Route path="/userfollowers/:id" element={<UserFollowers />} />
               <Route path="/userfollowing/:id" element={<UserFollowing />} />
               <Route path="/userposts/:id" element={<UserPosts />} />
+              <Route path="/oneusercourses/:user_id" element={<OneUserCourses />} />
             </>
           )}
 
