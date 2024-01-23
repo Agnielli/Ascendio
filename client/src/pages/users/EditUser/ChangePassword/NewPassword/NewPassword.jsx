@@ -1,33 +1,37 @@
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import React, { useState } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { Button, Form } from 'react-bootstrap'
+
+
 const initialValue = {
   password: "",
   password2: "",
-};
+}
 
-export const RecoverPassword = () => {
-  const { token } = useParams();
-  const [recover, setRecover] = useState(initialValue);
+export const NewPassword = ({user}) => {
+  const [NewPassword, setNewPassword] = useState(initialValue);
   const [msgError, setMsgError] = useState("");
-  console.log(token)
+ 
   
+
   const handleChange = (e) => {
-    setRecover({
-      ...recover,
+    setNewPassword({
+      ...NewPassword,
       [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = () => {
-    if (!recover.password || !recover.password2) {
+    if (!NewPassword.password || !NewPassword.password2) {
       setMsgError("Algun campo no está relleno");
-    } else if (recover.password !== recover.password2) {
+    } else if (NewPassword.password !== NewPassword.password2) {
       setMsgError("Las contraseñas no coinciden");
     } else {
       axios
-        .put(`http://localhost:3000/users/recoverpassword/${token}`, recover)
+        .put(`http://localhost:3000/users/updatepassword/${user?.user_id}`, {
+          id: user?.user_id,
+          password: NewPassword.password,
+        })
         .then((res) => {
           console.log(res.data);
           setMsgError("Contraseña actualizada con exito");
@@ -38,12 +42,8 @@ export const RecoverPassword = () => {
     }
   };
   return (
-    <Row className="d-flex justify-content-center p-5">
-      <Col md={4}>
+   
         <Form>
-          <h2>ASCENDIO</h2>
-          <h3>Recupera tu contraseña</h3>
-          <p>Introduce una nueva contraseña para tu cuenta</p>
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Introduce nueva contraseña</Form.Label>
             <Form.Control
@@ -51,7 +51,7 @@ export const RecoverPassword = () => {
               onChange={handleChange}
               type="password"
               placeholder="Introduce nueva contraseña"
-              value={recover.password}
+              value={NewPassword.password}
               autoComplete="new-password"
             />
           </Form.Group>
@@ -62,7 +62,7 @@ export const RecoverPassword = () => {
               onChange={handleChange}
               type="password"
               placeholder="Confirma la nueva contraseña"
-              value={recover.password2}
+              value={NewPassword.password2}
               autoComplete="new-password"
             />
           </Form.Group>
@@ -71,7 +71,6 @@ export const RecoverPassword = () => {
             Aceptar
           </Button>
         </Form>
-      </Col>
-    </Row>
-  );
-};
+      
+  )
+}

@@ -32,6 +32,7 @@ import { EditUser } from "../pages/users/EditUser/EditUser";
 import { CreateGeneralPost } from "../pages/posts/PostGeneral/CreateGeneralPost";
 import { UserFollowers } from "../pages/users/UserFollowers/UserFollowers";
 import { UserPosts } from "../pages/users/UserPosts/UserPosts";
+import { UserFollowing } from "../pages/users/UserFollowing/UserFollowing";
 
 export const RoutesApp = () => {
   const { token } = useContext(AscendioContext);
@@ -71,21 +72,25 @@ export const RoutesApp = () => {
           )}
           {token && type === 2 && (
             <>
-            <Route path='/home' element={<Home />} />
-            <Route path='/profile' element={<Users />} />
-            <Route path='/traders' element={<Traders />} />
-            <Route path='/edituser' element={<EditUser/>} />
-            <Route path='/course/:course_id' element={<OneCourse />} />
-            <Route path='/course' element={<OneCourse />} />
-            <Route path='/allcourses' element={<AllCourses />} />
-            <Route path='/createtrade' element={<CreateTrade />} />
-            <Route path='/creategeneralpost' element={<CreateGeneralPost />} />
-            <Route path='/trades' element={<Trades />} />
-            <Route path='/createcourse' element={<CreateCourse />} />
-            <Route path='/purchasecourse' element={<PurchaseCourse/>} />
-            <Route path='/savecourse' element={<SaveCourse/>} />
-            <Route path='/userfollowers/:id' element={<UserFollowers/>} />
-            <Route path='/userposts/:id' element={<UserPosts/>} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/profile" element={<Users />} />
+              <Route path="/traders" element={<Traders />} />
+              <Route path="/edituser" element={<EditUser />} />
+              <Route path="/course/:course_id" element={<OneCourse />} />
+              <Route path="/course" element={<OneCourse />} />
+              <Route path="/allcourses" element={<AllCourses />} />
+              <Route path="/createtrade" element={<CreateTrade />} />
+              <Route
+                path="/creategeneralpost"
+                element={<CreateGeneralPost />}
+              />
+              <Route path="/trades" element={<Trades />} />
+              <Route path="/createcourse" element={<CreateCourse />} />
+              <Route path="/purchasecourse" element={<PurchaseCourse />} />
+              <Route path="/savecourse" element={<SaveCourse />} />
+              <Route path="/userfollowers/:id" element={<UserFollowers />} />
+              <Route path="/userfollowing/:id" element={<UserFollowing />} />
+              <Route path="/userposts/:id" element={<UserPosts />} />
             </>
           )}
 

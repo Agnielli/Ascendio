@@ -3,7 +3,7 @@ import "./UserMiniCard.scss";
 import { Button } from "react-bootstrap";
 import axios from "axios";
 
-export const UserMiniCard = ({ elem, setAllUsers, allUsers, updateUsers, setUpdateUsers}) => {
+export const UserMiniCard = ({ elem, updateUsers, setUpdateUsers}) => {
 
   const activateUser = (id, is_disabled) => {
     let url = `http://localhost:3000/admin/activateuser/${id}`

@@ -26,13 +26,6 @@ export const Users = () => {
       .catch((err) => console.log(err));
   }, [user]);
 
-  // const getFollowers = () => {
-  //   axios
-  //     .get(`http://localhost:3000/users//statisticsuser/${user.user_id}`)
-  //     .then((res) => console.log(res))
-  //     .catch((err) => console.log(err));
-  // };
-
   return (
     <div className="d-flex flex-column w-25 gap-2">
       <div className="avatar">
@@ -49,9 +42,25 @@ export const Users = () => {
       </p>
       {statisticsUser && (
         <>
-        
-        <p>seguidores: <Link to={`/userfollowers/${user.user_id}`}>{statisticsUser.num_followers}</Link></p>
-        <Link to={`/userposts/${user.user_id}`}><p>posts: {statisticsUser.num_posts}</p></Link>
+          <p>
+            Seguidores:{" "}
+            <Link to={`/userfollowers/${user.user_id}`}>
+              {statisticsUser.num_followers}
+            </Link>
+          </p>
+          <p>
+          Siguiendo:{" "}
+            <Link to={`/userfollowing/${user.user_id}`}>
+              {statisticsUser.num_following_users}
+            </Link>
+          </p>
+          <p>
+            Posts publicados:{" "}
+            <Link to={`/userposts/${user.user_id}`}>
+              {" "}
+              {statisticsUser.num_posts}
+            </Link>
+          </p>
           <p>Aciertos: {statisticsUser.num_correct_posts}</p>
           <p>Errores: {statisticsUser.num_incorrect_posts}</p>
           <p>Cursos publicados: {statisticsUser.num_courses}</p>{" "}

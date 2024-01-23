@@ -224,34 +224,34 @@ class usersControllers {
     const user_id = req.body[0];
     const id_followed = req.body[1];
     console.log(user_id, id_followed);
-    
-    let sql = `INSERT INTO user_follows_user (user_id, followed_user_id) VALUES (${user_id}, ${id_followed});`
 
-    connection.query(sql, (err, result)=>{
-      if(err){
-        res.status(500).json(err)
-      }else{
-        res.status(200).json(result)
+    let sql = `INSERT INTO user_follows_user (user_id, followed_user_id) VALUES (${user_id}, ${id_followed});`;
+
+    connection.query(sql, (err, result) => {
+      if (err) {
+        res.status(500).json(err);
+      } else {
+        res.status(200).json(result);
       }
-    })
-  }
+    });
+  };
 
   // comprobar con los console.log
   unfollowUser = (req, res) => {
     const user_id = req.body[0];
     const id_followed = req.body[1];
     console.log(user_id, id_followed);
-    
-    let sql = `DELETE FROM user_follows_user WHERE user_id = ${user_id} and followed_user_id = ${id_followed}`
 
-    connection.query(sql, (err, result)=>{
-      if(err){
-        res.status(500).json(err)
-      }else{
-        res.status(200).json(result)
+    let sql = `DELETE FROM user_follows_user WHERE user_id = ${user_id} and followed_user_id = ${id_followed}`;
+
+    connection.query(sql, (err, result) => {
+      if (err) {
+        res.status(500).json(err);
+      } else {
+        res.status(200).json(result);
       }
-    })
-  }
+    });
+  };
 
   getFollowUser = (req, res) => {
     // const user_id = req.body;
@@ -259,7 +259,7 @@ class usersControllers {
 
     let sql = `SELECT * FROM user_follows_user WHERE user_id = ${user_id}`;
 
-     connection.query(sql, (err, result) => {
+    connection.query(sql, (err, result) => {
       if (err) {
         res.status(500).json(err);
       } else {
@@ -275,18 +275,18 @@ class usersControllers {
       JSON.parse(req.body.editUser);
     let sql;
     let img;
-    // esto puede rompres, porque req.file al ser undefined puede ser que entienda que existe
+
     if (req.file) {
-      const img = req.file.filename;
+      img = req.file.filename;
       sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}", email = "${email}", phonenumber = "${phonenumber}", img = "${img}" WHERE user_id = ${user_id}`;
-    } else {
+    } else {      
       sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}", email = "${email}", phonenumber = "${phonenumber}" WHERE user_id = ${user_id} AND img = "${img}" IS NULL`;
     }
-
     connection.query(sql, (err, result) => {
       if (err) {
-        res.status(400).json(err);
+        res.status(400).json(err);        
       } else {
+        console.log("*********************", img);
         res.status(200).json({ result, img });
       }
     });
@@ -297,7 +297,7 @@ class usersControllers {
     try {
       const { id } = req.params;
       const user_id = id;
-      let sql = `SELECT (SELECT COUNT(*) FROM user_follows_user WHERE user_id = '${user_id}') AS num_followers, (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}') AS num_posts, (SELECT COUNT(*) FROM course WHERE user_id = '${user_id}') AS num_courses, (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}' AND correct = true) AS num_correct_posts, (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}' AND correct = false) AS num_incorrect_posts;`;
+      let sql = `SELECT (SELECT COUNT(*) FROM user_follows_user WHERE followed_user_id = '${user_id}') AS num_followers, (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}') AS num_posts, (SELECT COUNT(*) FROM course WHERE user_id = '${user_id}') AS num_courses, (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}' AND correct = true) AS num_correct_posts, (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}' AND correct = false) AS num_incorrect_posts, (SELECT COUNT(DISTINCT followed_user_id) FROM user_follows_user WHERE user_id = '${user_id}') AS num_following_users;`;
       connection.query(sql, (error, result) => {
         if (error) {
           console.log(error);
@@ -311,11 +311,118 @@ class usersControllers {
       res.status(500).JSON({ message: "Error inesperado (CATCH)" });
     }
   };
+  
+  verifyPassword = (req, res) => {
+    const { id } = req.params;
+    const { currentPassword } = req.body;
+  
+    // Buscar el usuario por ID
+    let sql = `SELECT * FROM user WHERE user_id = ${id}`;
+    connection.query(sql, [id], (error, result) => {
+      if (error) {
+        console.error(error);
+        return res.status(500).json({ error: "Error en la verificación de la contraseña" });
+      }
+  
+      // Verificar si el usuario existe
+      if (result.length === 0) {
+        return res.status(404).json({ message: "Usuario no encontrado" });
+      }
+  
+      const user = result[0];
+      const hash = user.password;
+  
+      // Verificar la contraseña
+      bcrypt.compare(currentPassword, hash, (error, response) => {
+        if (error) {
+          console.error(error);
+          return res.status(500).json({ error: "Error en la verificación de la contraseña" });
+        }
+  
+        if (response) {
+          const token = jwt.sign(
+            {
+              user: {
+                user_id: user.user_id,
+                type: user.type,
+              },
+            },
+            process.env.SECRET,
+            { expiresIn: "1d" }
+          );
+  
+          res.status(200).json({ token, user });
+        } else {
+          res.status(401).json({ message: "Contraseña actual incorrecta" });
+        }
+      });
+    });
+  };
+  
+  // Cambiar contraseña
+  updatePassword = (req, res) => {
+    const { id, password } = req.body; 
+  
+    // Consultar el usuario por user_id
+    let sql = `SELECT * FROM user WHERE user_id = ${id}`;
+    connection.query(sql, [id], (err, result) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: "Error al consultar el usuario" });
+      }
+  
+      // Verificar si el usuario existe
+      if (result.length === 0) {
+        return res.status(404).json({ message: "Usuario no encontrado" });
+      }
+  
+      // Generar el hash de la nueva contraseña
+      bcrypt.genSalt(8, (err, salt) => {
+        if (err) {
+          return res.status(500).json({ error: err });
+        }
+  
+        bcrypt.hash(password, salt, (err, hash) => {
+          if (err) {
+            return res.status(500).json({ error: err });
+          }
+  
+          // Actualizar la contraseña en la base de datos
+          let sql2 = `UPDATE user SET password = '${hash}' WHERE user_id = ${id}`;
+          connection.query(sql2, [hash, id], (error, result) => {
+            if (error) {
+              return res.status(500).json({ error });
+            }
+  
+            res.status(200).json({ mensaje: "Contraseña actualizada con éxito" });
+          });
+        });
+      });
+    });
 
   getFollowersUser = (req, res) => {
     try {
       const { id } = req.params;
+      let sql = `SELECT * FROM user WHERE user_id IN (SELECT follower_user_id FROM user_follows_user WHERE followed_user_id = ${id});`;
+      connection.query(sql, (error, result) => {
+        if (error) {
+          console.log("Error en sql", error);
+          res.status(400).json({ message: "Error en la SQL" });
+        } else {
+          res.status(200).json({ datos: result });
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).JSON({ message: "Error inesperado (CATCH)" });
+    }
+  };
+
+  getFollowingUser = (req, res) => {
+    try {
+      const { id } = req.params;
       let sql = `SELECT * FROM user WHERE user_id IN (SELECT followed_user_id FROM user_follows_user WHERE user_id = ${id});`;
+      let sql2 = `SELECT * FROM user WHERE user_id IN (SELECT user_id FROM user_follows_user WHERE followed_user_id = ${id});`;
       connection.query(sql, (error, result) => {
         if (error) {
           console.log("Error en sql", error);
@@ -346,6 +453,7 @@ class usersControllers {
       console.log(error);
       res.status(500).JSON({ message: "Error inesperado (CATCH)" });
     }
+
   };
 }
 
