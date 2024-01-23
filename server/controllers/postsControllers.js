@@ -91,7 +91,6 @@ class postsControllers {
       }
     });
   };
-
   showLastTrades = (req, res) => {
     let sql = `select post.currency, post.description, post.entry_price, post.stop_loss, post.take_profit, post.correct, user.nickname, user.user_id from user, post where user.user_id = post.user_id order by post.date desc;`;
     connection.query(sql, (err, result) => {
