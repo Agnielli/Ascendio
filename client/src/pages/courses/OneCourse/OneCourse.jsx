@@ -9,7 +9,7 @@ import { CardSection } from "../../../components/CardSection/CardSection";
 
 export const OneCourse = () => {
   const [oneCoursePpal, setOneCoursePpal] = useState();
-  // const { user, setUser,userCourse,setUserCourse } = useContext(AscendioContext);
+  const { user, setUser,userCourse,setUserCourse } = useContext(AscendioContext);
   const [showModal, setShowModal] = useState(false);
   const course_id = useParams().course_id;
   const [guardado, setGuardado] = useState({});
@@ -65,6 +65,7 @@ export const OneCourse = () => {
   }
 
   console.log(sections);
+  console.log("REVISAMEEEEE",oneCoursePpal);
 
   return (
     <>
@@ -81,6 +82,9 @@ export const OneCourse = () => {
             </Card.Subtitle>
             <Card.Text>{oneCoursePpal?.description}</Card.Text>
             <Card.Text>{oneCoursePpal?.price}€</Card.Text>
+            <Card.Text>{oneCoursePpal?.tags.map((e,index)=>{
+              return   (e.tag_title) + " " 
+            })}</Card.Text>
 
             <Button
               variant="outline-success"

@@ -21,6 +21,8 @@ export const EditOneCourse = ({
   const [file, setFile] = useState();
   const [editCourse, setEditCourse] = useState(initialValue);
 
+  const [msgError, setMsgError] = useState("");
+
   useEffect(() => {
     if (oneCoursePpal) {
       setEditCourse(oneCoursePpal);
@@ -29,15 +31,31 @@ export const EditOneCourse = ({
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setEditCourse({ ...editCourse, [name]: value });
+    let newValue = value;
+    if (name === 'price') {
+    newValue = value.replace(/[^0-9]/g, '');
+    }
+    setEditCourse({ ...editCourse, [name]: newValue });
   };
+
   const handleFile = (e) => {
     setFile(e.target.files[0]);
   };
+
   const handleClose = () => {
     setShowModal(false);
   };
+
+  let regexTitle = /^[a-zA-Z0-9\s]{1,50}$/;
+  let regexDescription = /^[a-zA-Z0-9\s]{1,250}$/;
+
   const handleSubmit = (e) => {
+    if (!regexTitle.test(editCourse.title)) {
+      setMsgError("No se permiten más de 50 caracteres");
+    }else if (!regexDescription.test(editCourse.description)) {
+      setMsgError("No se permiten más de 250 caracteres");
+    }else{
+
     const formData = new FormData();
     formData.append(
       "editarCurso",
@@ -54,7 +72,9 @@ export const EditOneCourse = ({
       .catch((err) => {
         console.log(err);
       });
+    }
   };
+
   return (
     <Row className="d-flex justify-content-center p-5">
       <Col md={4}>
@@ -100,6 +120,9 @@ export const EditOneCourse = ({
               </Form.Group>
             </Form>
           </Modal.Body>
+          
+          <p>{msgError}</p>
+ 
           <Modal.Footer>
             <Button
               variant="outline-success"
