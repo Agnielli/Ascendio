@@ -2,7 +2,7 @@ const connection = require("../config/db");
 
 class coursesControllers {
   createCourse = (req, res) => {
-    
+
     const tags = JSON.parse(req.body.tags)
     const { title, description, price, user_id } = JSON.parse(req.body.crearCurso);
 
@@ -153,7 +153,6 @@ class coursesControllers {
     });
   };
 
-
   viewPurchasedCourse = (req, res) => {
     let sql = `SELECT * FROM course WHERE is_completed = 1 AND is_deleted = 0`;
     //TODO: cambiare is_completed con is_bought`
@@ -180,6 +179,7 @@ class coursesControllers {
     });
   };
 
+
   addTopic = (req, res) => {
     const { course_id, newTopic, section_id } = req.body;
     let sql_cont = `SELECT max(topic_id) as id FROM topic WHERE section_id = ${section_id}`;
@@ -190,6 +190,7 @@ class coursesControllers {
       if (err) {
         return res.status(500).json(err);
       }
+
       let topic_id = result[0].id;
       if (topic_id == null) {
         topic_id = 1;
@@ -198,10 +199,10 @@ class coursesControllers {
       }
 
       let sql_insert = `INSERT INTO topic (course_id, section_id, topic_id, topic_title) VALUES (${course_id}, ${section_id}, ${topic_id}, "${newTopic}")`;
+
       connection.query(sql_insert, (err2, result_insert) => {
         if (err2) {
           return res.status(500).json(err2);
-
         }
         res.status(201).json({ result_insert, topic_id });
       });

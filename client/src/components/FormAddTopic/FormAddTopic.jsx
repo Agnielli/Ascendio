@@ -15,6 +15,7 @@ export const FormAddTopic = ({ setShowTopic, course_id, sections, section_id }) 
     console.log("data", data);
     
     if (newTopic !== "") {
+
       axios
         .post("http://localhost:3000/courses/addtopic", data)
         .then((res) => {
