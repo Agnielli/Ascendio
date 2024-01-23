@@ -85,7 +85,6 @@ class coursesControllers {
       });
     }); */
   };
-  
 
   purchaseCourse = (req, res) => {
     const { id } = req.params;
