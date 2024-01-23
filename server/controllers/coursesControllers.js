@@ -85,7 +85,6 @@ class coursesControllers {
       });
     }); */
   };
-  
 
   purchaseCourse = (req, res) => {
     const { id } = req.params;
@@ -289,6 +288,7 @@ class coursesControllers {
 
   deleteTopic = (req, res) => {
     console.log("Hi to everyone");
+    let sql = `select nada form nada`
   }
 
 }
