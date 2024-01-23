@@ -36,7 +36,7 @@ export const Users = () => {
   return (
     <div className="d-flex flex-column w-25 gap-2">
       <div className="avatar">
-        {user?.user_img ? (
+        {user?.img ? (
           <img src={`http://localhost:3000/images/users/${user.img}`} />
         ) : (
           <p>{user?.name.charAt(0).toUpperCase()}</p>

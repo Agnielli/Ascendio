@@ -75,8 +75,7 @@ class postsControllers {
       }
     });
   };
-    })
-  }
+    
 
   showLastTrades = (req, res) => {
     let sql = `select post.currency, post.description, post.entry_price, post.stop_loss,            

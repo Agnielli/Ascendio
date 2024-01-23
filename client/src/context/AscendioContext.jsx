@@ -11,6 +11,7 @@ export const AscendioProvider= ({children}) => {
   const [userCourse, setUserCourse] = useState([])
   const [token, setToken] = useState();
   const [isLogged, setIsLogged] = useState(false);
+ 
   
   const tokenLocalStorage = getLocalStorage("token") 
 
@@ -29,6 +30,8 @@ export const AscendioProvider= ({children}) => {
     }
     
   }, [isLogged,token])
+
+
 
   // useEffect(() => {
   //   setToken(tokenLocalStorage)
@@ -54,6 +57,7 @@ export const AscendioProvider= ({children}) => {
       setIsLogged,
       userCourse,
       setUserCourse
+      
     }}>
     {children}
     </AscendioContext.Provider>
