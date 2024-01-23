@@ -24,8 +24,6 @@ export const AdminAllUsers = ({allUsers, setAllUsers}) => {
               <UserMiniCard
                 key={elem.user_id}
                 elem={elem}
-                allUsers={allUsers}
-                setAllUsers={setAllUsers}
                 updateUsers={updateUsers}
                 setUpdateUsers={setUpdateUsers}
               />
