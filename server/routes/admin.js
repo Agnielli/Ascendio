@@ -10,6 +10,9 @@ router.get('/allstatistics', adminControllers.allStats)
 router.get('/allcomments/:user_id', adminControllers.oneComment)
 router.get('/usercomment', adminControllers.adminComments)
 router.get('/admindisabledallusers', adminControllers.adminGetDisabledUsers)
+router.get('/adminactivatedallusers', adminControllers.adminGetActivatedUsers)
+router.get('/admingetallcourses', adminControllers.adminGetCourses)
+router.put('/admindisableonecourse/:course_id', adminControllers.disableCourse)
 
 
 

@@ -15,35 +15,6 @@ export const UserMiniCard = ({ elem, updateUsers, setUpdateUsers}) => {
       .put(url)
       .then((res) => {
         setUpdateUsers(!updateUsers)
-        /* let temp
-        if (is_disabled === 0) {
-          temp = allUsers?.map((elem) => {
-            if (elem.user_id === id) {
-              elem.is_disabled = 1
-              return (
-                elem
-              )
-            } else {
-              return (
-                elem
-              )
-            }
-          })
-        } else {
-          temp = allUsers?.map((elem) => {
-            if (elem.user_id === id) {
-              elem.is_disabled = 0
-              return (
-                elem
-              )
-            } else {
-              return (
-                elem
-              )
-            }
-          }) */
-    /*     } */
-       /*  setAllUsers(temp) */
         console.log(res.data);
       })
       .catch((err) => {

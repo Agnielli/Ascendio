@@ -43,27 +43,26 @@ export const Users = () => {
       {statisticsUser && (
         <>
           <p>
-            Seguidores:{" "}
+            Seguidores:
             <Link to={`/userfollowers/${user.user_id}`}>
               {statisticsUser.num_followers}
             </Link>
           </p>
           <p>
-          Siguiendo:{" "}
+          Siguiendo:
             <Link to={`/userfollowing/${user.user_id}`}>
               {statisticsUser.num_following_users}
             </Link>
           </p>
           <p>
-            Posts publicados:{" "}
+            Posts publicados:
             <Link to={`/userposts/${user.user_id}`}>
-              {" "}
               {statisticsUser.num_posts}
             </Link>
           </p>
           <p>Aciertos: {statisticsUser.num_correct_posts}</p>
           <p>Errores: {statisticsUser.num_incorrect_posts}</p>
-          <p>Cursos publicados: {statisticsUser.num_courses}</p>{" "}
+          <p>Cursos publicados: {statisticsUser.num_courses}</p>
         </>
       )}
 

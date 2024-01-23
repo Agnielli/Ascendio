@@ -25,4 +25,5 @@ router.get("/followingsuser/:id", usersControllers.getFollowingUser);
 router.get("/postsuser/:id", usersControllers.getPostsUser);
 router.get("/showallusers", usersControllers.showAllUsers);
 
+
 module.exports = router;

@@ -26,40 +26,52 @@ export const CreateCourse = () => {
 
   const { user, setUser,userCourse,setUserCourse } = useContext(AscendioContext);
 
+  
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     axios
-      .get("http://localhost:3000/courses/calltags")
-      .then((res) => {
-        setOptions(
-          res.data.map((elem) => ({ value: elem.tag_id, label: elem.tag_name }))
+    .get("http://localhost:3000/courses/calltags")
+    .then((res) => {
+      setOptions(
+        res.data.map((elem) => ({ value: elem.tag_id, label: elem.tag_name }))
         );
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+    }, []);
+    
+    const handleFile = (e) => {
+      setFile(e.target.files[0]);
+    };
+    
+    const handleOption = (option) => {
+      setSelectedOption(option);
+    };
+    
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      let newValue = value;
+      if (name === 'price') {
+        newValue = value.replace(/[^0-9]/g, '');
+      }
+      setCreateOneCourse({ ...createOneCourse, [name]: newValue });
+    };
+    
+    let regexTitle = /^[a-zA-Z0-9\s]{1,50}$/;
+    let regexDescription = /^[a-zA-Z0-9\s]{1,250}$/;
 
-  const handleFile = (e) => {
-    setFile(e.target.files[0]);
-  };
-
-  const handleOption = (option) => {
-    setSelectedOption(option);
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setCreateOneCourse({ ...createOneCourse, [name]: value });
-  };
- 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if(!createOneCourse.title || !createOneCourse.description || !createOneCourse.price){
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      
+      if(!createOneCourse.title || !createOneCourse.description || !createOneCourse.price){
       setMsgError('Por favor, completa todos los campos');
-    }else{
+      }else if (!regexTitle.test(createOneCourse.title)) {
+      setMsgError("No se permiten más de 50 caracteres");
+      }else if (!regexDescription.test(createOneCourse.description)) {
+      setMsgError("No se permiten más de 250 caracteres");
+      }else{
       const newFormData = new FormData();
 
       let data = { ...createOneCourse, user_id: user.user_id };
@@ -132,7 +144,9 @@ export const CreateCourse = () => {
               }
             />
           </Form.Group>
+
           <p>{msgError}</p>
+          
           <Button
             variant="outline-success"
             className="me-3"

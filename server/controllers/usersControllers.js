@@ -11,10 +11,10 @@ class usersControllers {
   createUser = (req, res) => {
     try {
       const { nickname, name, lastname, email, password } = req.body;
-      //const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      //if (!emailRegex.test(email)) {
-      //res.status(400).json({  message: "Correo no valido" });
-      //} else {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+      res.status(400).json({  message: "Correo no valido" });
+      } else {
       let saltRounds = 8; // 8 saltos
       bcrypt.genSalt(saltRounds, function (err, saltRounds) {
         bcrypt.hash(password, saltRounds, function (err, hash) {
@@ -39,7 +39,7 @@ class usersControllers {
                     );
                     let mess = `http://localhost:5173/confirmationuser/${token}`;
                     if (result != "") {
-                      //mailer(email, mess);
+                      mailer(email, nickname, mess);
                       res.status(200).json({
                         message:
                           "Usuario registrado con exito, email de confirmación enviado",
@@ -57,7 +57,7 @@ class usersControllers {
           }
         });
       });
-      //}
+      }
     } catch (error) {
       console.log(error);
       res.status(500).json({
@@ -161,10 +161,11 @@ class usersControllers {
           if (error) {
             res.status(500).json({ error });
           } else {
+            const nickname = result[0].nickname;
             const token = jwt.sign(result[0].user_id, process.env.T_PASS);
             let mess = `http://localhost:5173/recoverpassword/${token}`;
             if (result != "") {
-              recoverMailer(email, mess);
+              recoverMailer(email, nickname, mess);
               res.status(200).json({ message: "Email recibido correctamente" });
             } else {
               res.status(400).json({ message: "Email no existe en la DB" });
@@ -405,8 +406,6 @@ class usersControllers {
         });
       });
     });
-  };
-
   getFollowersUser = (req, res) => {
     try {
       const { id } = req.params;
@@ -425,23 +424,42 @@ class usersControllers {
     }
   };
 
-  getFollowingUser = (req, res) => {
-    try {
-      const { id } = req.params;
-      let sql = `SELECT * FROM user WHERE user_id IN (SELECT followed_user_id FROM user_follows_user WHERE user_id = ${id});`;
-      let sql2 = `SELECT * FROM user WHERE user_id IN (SELECT user_id FROM user_follows_user WHERE followed_user_id = ${id});`;
-      connection.query(sql, (error, result) => {
-        if (error) {
-          console.log("Error en sql", error);
-          res.status(400).json({ message: "Error en la SQL" });
-        } else {
-          res.status(200).json({ datos: result });
-        }
-      });
-    } catch (error) {
-      console.log(error);
-      res.status(500).JSON({ message: "Error inesperado (CATCH)" });
-    }
+    getFollowingUser = (req, res) => {
+      try {
+        const { id } = req.params;
+        let sql = `SELECT * FROM user WHERE user_id IN (SELECT followed_user_id FROM user_follows_user WHERE user_id = ${id});`;
+        let sql2 = `SELECT * FROM user WHERE user_id IN (SELECT user_id FROM user_follows_user WHERE followed_user_id = ${id});`;
+        connection.query(sql, (error, result) => {
+          if (error) {
+            console.log("Error en sql", error);
+            res.status(400).json({ message: "Error en la SQL" });
+          } else {
+            res.status(200).json({ datos: result });
+          }
+        });
+      } catch (error) {
+        console.log(error);
+        res.status(500).JSON({ message: "Error inesperado (CATCH)" });
+      }
+    };
+
+    getPostsUser = (req, res) => {
+      try {
+        const { id } = req.params;
+        let sql = `SELECT post.*, post_resource.resource_type, post_resource.text as resource_text, category.category_name FROM post LEFT JOIN post_resource ON post.post_id = post_resource.post_id LEFT JOIN category ON post.category_id = category.category_id WHERE post.user_id = ${id};`;
+        connection.query(sql, (error, result) => {
+          if (error) {
+            console.log("Error en sql", error);
+            res.status(400).json({ message: "Error en la SQL" });
+          } else {
+            res.status(200).json({ datos: result });
+          }
+        });
+      } catch (error) {
+        console.log(error);
+        res.status(500).JSON({ message: "Error inesperado (CATCH)" });
+      }
+    };
   };
 
   getPostsUser = (req, res) => {
@@ -481,5 +499,6 @@ class usersControllers {
     }
   };
 }
+
 
 module.exports = new usersControllers();
