@@ -263,5 +263,19 @@ class coursesControllers {
     })
   }
 
+
+
+
+
+
+
+
+
+
+
+  deleteCourse = (req,res) =>{
+    console.log("hola fede");
+  }
+
 }
 module.exports = new coursesControllers();
