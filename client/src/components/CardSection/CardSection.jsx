@@ -32,6 +32,7 @@ export const CardSection = ({ elem, deleteSection, course_id, sections }) => {
             setShowTopic = {setShowTopic}
             course_id={course_id}
             sections={sections}
+            section_id={elem.section_id}
           />
         }
       </Card.Body>
