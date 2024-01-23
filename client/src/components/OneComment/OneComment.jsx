@@ -17,6 +17,8 @@ export const OneComment = () => {
       });
   }, []);
 
+  console.log(userComment)
+
   return (
       <div>
         <CommentCard userComment={userComment} setUserComment={setUserComment}/>

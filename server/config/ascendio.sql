@@ -1,6 +1,7 @@
 CREATE DATABASE ascendio;
 USE ascendio;
 -- drop database ascendio;
+
 CREATE TABLE user (
   user_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
   nickname VARCHAR(50) UNIQUE,
@@ -19,6 +20,7 @@ CREATE TABLE category (
   category_id TINYINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT, -- tipo 1 -> Crypto, tipo 2->  Bolsa, tipo 3 ->Forex, tipo 4 -> General ( necesiario para post general )
   category_name VARCHAR(50) NOT NULL UNIQUE -- Crypto, Bolsa, Forex
 );
+    
 CREATE TABLE post (
   post_id BIGINT UNSIGNED PRIMARY KEY auto_increment,
   user_id INT UNSIGNED NOT NULL, -- creador del post
@@ -98,6 +100,7 @@ CREATE TABLE graphic(
   grapgic_isdeleted BOOLEAN NOT NULL DEFAULT false
 );
 */
+
 CREATE TABLE course (
   course_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
   user_id INT UNSIGNED NOT NULL,  -- creador
@@ -107,7 +110,7 @@ CREATE TABLE course (
   date DATETIME not null default (CURRENT_DATE),
   price DECIMAL(7, 2) UNSIGNED NOT NULL,  -- 99999.99
   is_deleted BOOLEAN NOT NULL DEFAULT false,
-  is_disabled BOOLEAN NOT NULL DEFAULT true,
+  is_disabled BOOLEAN NOT NULL DEFAULT false,
   is_completed BOOLEAN NOT NULL DEFAULT	false,
   is_bought BOOLEAN NOT NULL DEFAULT false,
   CONSTRAINT fk_user_7 FOREIGN KEY (user_id)
