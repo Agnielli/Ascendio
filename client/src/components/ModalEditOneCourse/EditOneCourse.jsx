@@ -46,15 +46,17 @@ export const EditOneCourse = ({
     setShowModal(false);
   };
 
-  let regexTitle = /^[a-zA-Z0-9\s]{1,50}$/;
-  let regexDescription = /^[a-zA-Z0-9\s]{1,250}$/;
-
+  let regexPrice = /^[a-zA-Z0-9\s.,:?¿!¡]{1,5}$/;
+  let regexTitle = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ.,:?¿!¡]{1,50}$/;
+  let regexDescription = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ.,:?¿!¡]{1,250}$/;
   const handleSubmit = (e) => {
-    if (!regexTitle.test(editCourse.title)) {
-      setMsgError("No se permiten más de 50 caracteres");
-    }else if (!regexDescription.test(editCourse.description)) {
-      setMsgError("No se permiten más de 250 caracteres");
-    }else{
+      if (!regexTitle.test(editCourse.title)) {
+      setMsgError('No se permiten más de 50 caracteres');
+      }else if (!regexDescription.test(editCourse.description)) {
+        setMsgError('No se permiten más de 250 caracteres');
+      }else if (!regexPrice.test(editCourse.price)) {
+      setMsgError('No se permiten más de 99999 euros');
+      }else{
 
     const formData = new FormData();
     formData.append(
