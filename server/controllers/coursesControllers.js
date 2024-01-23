@@ -6,6 +6,8 @@ class coursesControllers {
     const tags = JSON.parse(req.body.tags)
     const { title, description, price, user_id } = JSON.parse(req.body.crearCurso);
 
+    //posible validación en el back con reg.ex https://medium.com/codex/using-regular-expressions-in-javascript-edcd5942de89
+
     let sql = `INSERT INTO course (title, description, price, user_id, img) VALUES ('${title}', '${description}', ${price}, ${user_id}, 'default.jpg')`
     if(req.file !== undefined){
      let img = req.file.filename;
@@ -95,7 +97,9 @@ class coursesControllers {
   }
   
   editOneCourse = (req, res) => {
-    const { title, description, price, course_id, user_id } = JSON.parse(req.body.editarCurso);
+    const { title, description, price, user_id } = JSON.parse(req.body.editarCurso);
+    const {course_id} = req.params;
+
     let sql = `UPDATE course SET title = '${title}', description = '${description}', price = ${price} WHERE course_id = ${course_id} AND user_id = ${user_id} AND is_deleted = 0`;
     
     let img
@@ -139,16 +143,6 @@ class coursesControllers {
 
      })
     })
-
-    /* let sql = `INSERT INTO section (course_id, section_id, section_title) VALUES ('${course_id}', '${section_id}', '${section_title}')` */
-
-    /* connection.query(sql, (err, result)=>{
-      if(err){
-        res.status(500).json(err)
-      }else{
-        res.status(200).json(result)
-      }
-    }) */
   }
 
   viewPurchasedCourse = (req, res) => {
@@ -205,7 +199,7 @@ class coursesControllers {
       topic_id ++;
       }
 
-      let sql_insert = `INSERT INTO topic (course_id, section_id topic_id, topic_title) VALUES (${course_id}, ${section_id}, ${topic_id}, "${newTopic}")`
+      let sql_insert = `INSERT INTO topic (course_id, section_id, topic_id, topic_title) VALUES (${course_id}, ${section_id}, ${topic_id}, "${newTopic}")`
 
         connection.query(sql_insert, (err2, result_insert )=>{
         if(err2){
