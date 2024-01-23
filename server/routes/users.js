@@ -17,13 +17,13 @@ router.get("/statisticsuser/:id", usersControllers.getStatisticsUser);
 router.post("/followuser", usersControllers.followUser);
 router.delete("/unfollowuser", usersControllers.unfollowUser);
 router.get("/getfollowuser/:id", usersControllers.getFollowUser);
-router.put('/edituser', multerSingle("users") ,usersControllers.editUser)
-router.post('/verifypassword/:id', usersControllers.verifyPassword);
-router.put('/updatepassword/:id', usersControllers.updatePassword);
-// router.get('/followersuser/:id', usersControllers.getFollowersUser)
-// router.get('/followingsuser/:id', usersControllers.getFollowingUser)
-// router.get('/postsuser/:id', usersControllers.getPostsUser)
-
+router.put("/edituser", multerSingle("users"), usersControllers.editUser);
+router.post("/verifypassword/:id", usersControllers.verifyPassword);
+router.put("/updatepassword/:id", usersControllers.updatePassword);
+/* router.get("/followersuser/:id", usersControllers.getFollowersUser);
+router.get("/followingsuser/:id", usersControllers.getFollowingUser); */
+router.get("/postsuser/:id", usersControllers.getPostsUser);
+router.get("/showallusers", usersControllers.showAllUsers);
 
 
 module.exports = router;

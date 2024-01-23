@@ -136,7 +136,7 @@ export const CreateTrade = () => {
           onChange={handleChange}
         >
           <option value=""></option>
-          {options.map((option) => (
+          {options.filter(elem => elem.label !== "General").map((option) => (
             <option key={option.value} value={option.value}>
               {option.label}
             </option>

@@ -26,13 +26,16 @@ import { PurchaseCourse } from "../pages/courses/PurchaseCourse/PurchaseCourse";
 import { SaveCourse } from "../pages/courses/SaveCourse/SaveCourse";
 import { MailRecoverPassword } from "../pages/auth/MailRecoverPassword/MailRecoverPassword";
 import { ConfirmationUser } from "../pages/auth/Register/ConfirmationUser/ConfirmationUser";
-import { Trades } from "../pages/posts/trades/Trades/Trades";
-import { Traders } from "../pages/traders/Traders";
+import { AllTrades } from "../pages/posts/trades/AllTrades/AllTrades";
 import { EditUser } from "../pages/users/EditUser/EditUser";
 import { CreateGeneralPost } from "../pages/posts/PostGeneral/CreateGeneralPost";
 import { UserFollowers } from "../pages/users/UserFollowers/UserFollowers";
 import { UserPosts } from "../pages/users/UserPosts/UserPosts";
 import { UserFollowing } from "../pages/users/UserFollowing/UserFollowing";
+import { OneUserCourses } from "../pages/courses/OneUserCourses/OneUserCourses";
+import { AllPostsGenerals } from "../pages/posts/PostGeneral/AllPostsGenerals/AllPostsGenerals";
+import { ShowAllUsers } from "../pages/users/ShowAllUsers/ShowAllUsers";
+
 
 export const RoutesApp = () => {
   const { token } = useContext(AscendioContext);
@@ -74,7 +77,6 @@ export const RoutesApp = () => {
             <>
               <Route path="/home" element={<Home />} />
               <Route path="/profile" element={<Users />} />
-              <Route path="/traders" element={<Traders />} />
               <Route path="/edituser" element={<EditUser />} />
               <Route path="/course/:course_id" element={<OneCourse />} />
               <Route path="/course" element={<OneCourse />} />
@@ -84,13 +86,16 @@ export const RoutesApp = () => {
                 path="/creategeneralpost"
                 element={<CreateGeneralPost />}
               />
-              <Route path="/trades" element={<Trades />} />
+              <Route path="/allpoststrades" element={<AllTrades />} />
+              <Route path="/allpostsgenerals" element={<AllPostsGenerals />} />
+              <Route path="/showallusers" element={<ShowAllUsers />} />
               <Route path="/createcourse" element={<CreateCourse />} />
               <Route path="/purchasecourse" element={<PurchaseCourse />} />
               <Route path="/savecourse" element={<SaveCourse />} />
               <Route path="/userfollowers/:id" element={<UserFollowers />} />
               <Route path="/userfollowing/:id" element={<UserFollowing />} />
               <Route path="/userposts/:id" element={<UserPosts />} />
+              <Route path="/oneusercourses/:user_id" element={<OneUserCourses />} />
             </>
           )}
 

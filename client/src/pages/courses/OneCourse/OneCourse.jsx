@@ -133,6 +133,7 @@ export const OneCourse = () => {
             {sections.map((elem) => {
               return <CardSection 
                 elem={elem}
+                key={elem.section_id}
                 deleteSection={deleteSection}
                 course_id={course_id}
                 sections={sections}

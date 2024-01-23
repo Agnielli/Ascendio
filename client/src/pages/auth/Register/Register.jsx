@@ -18,8 +18,17 @@ export const Register = () => {
   const [register, setRegister] = useState(initialValue);
   const [msgError, setMsgError] = useState("");
   const [showModal, setShowModal] = useState(false);
-
   const [showPassword, setShowPassword] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
+
+  const verPassword = () => {
+    setShowPassword(!showPassword);
+  };
+  const verPassword2 = () => {
+    setShowPassword2(!showPassword2);
+  };
+
+  
 
   const navigate = useNavigate();
   const handleChange = (e) => {
@@ -27,9 +36,7 @@ export const Register = () => {
     setRegister({ ...register, [name]: value });
   };
 
-  const verPassword = () => {
-    setShowPassword(!showPassword);
-  };
+  
 
   const handleSubmit = () => {
     if (
@@ -139,16 +146,16 @@ export const Register = () => {
               <Form.Control
                 name="password"
                 onChange={handleChange}
-                type={showPassword ? "text" : "password"}
+                type={showPassword2 ? "text" : "password"}
                 placeholder="Introduce una contraseña"
                 value={register.password}
                 autoComplete="new-password"
               />
               <span
                 className="eye-icon pisition-absolute pointer password-icon"
-                onClick={verPassword}
+                onClick={verPassword2}
               >
-                {showPassword ? (
+                {showPassword2 ? (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"

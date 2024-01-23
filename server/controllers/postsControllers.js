@@ -4,9 +4,7 @@ const connection = require("../config/db");
 // const mailer = require("../utils/nodemailer");
 require("dotenv").config();
 
-
 class postsControllers {
-
   createTrade = (req, res) => {
     try {
       const {
@@ -91,8 +89,10 @@ class postsControllers {
       }
     });
   };
+  
   showLastTrades = (req, res) => {
-    let sql = `select post.currency, post.description, post.entry_price, post.stop_loss, post.take_profit, post.correct, user.nickname, user.user_id from user, post where user.user_id = post.user_id order by post.date desc;`;
+    let sql = `SELECT post.*, user.nickname, user.user_id, post_resource.text AS image_name FROM user INNER JOIN post ON user.user_id = post.user_id LEFT JOIN post_resource ON post.post_id = post_resource.post_id ORDER BY post.date DESC;`;
+
     connection.query(sql, (err, result) => {
       if (err) {
         res.status(500).json(err);
@@ -149,7 +149,5 @@ class postsControllers {
     }
   };
 }
-
-
 
 module.exports = new postsControllers();

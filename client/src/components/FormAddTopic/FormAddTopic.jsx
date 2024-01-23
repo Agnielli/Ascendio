@@ -14,8 +14,7 @@ export const FormAddTopic = ({
     setNewTopic(e.target.value);
   };
 
-  const handleSubmit = () => {
-    let data = { course_id, section_id, newTopic };
+  
 
     const handleSubmit = () => {
       let data = { course_id, section_id, newTopic };
@@ -65,3 +64,4 @@ export const FormAddTopic = ({
     );
   };
 };
+

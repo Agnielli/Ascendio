@@ -8,7 +8,7 @@ export const AdminActivateUser = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:3000/admin/admindisabledallusers')
+      .get('http://localhost:3000/admin/adminactivatedallusers')
       .then((res) => {
         console.log(res)
         setActivatedUsers(res.data)
