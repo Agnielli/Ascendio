@@ -2,16 +2,18 @@ const connection = require("../config/db");
 
 class coursesControllers {
   createCourse = (req, res) => {
-    const tags = JSON.parse(req.body.tags);
-    const { title, description, price, user_id } = JSON.parse(
-      req.body.crearCurso
-    );
 
-    let sql = `INSERT INTO course (title, description, price, user_id, img) VALUES ('${title}', '${description}', ${price}, ${user_id}, 'default.jpg')`;
-    if (req.file !== undefined) {
-      let img = req.file.filename;
-      sql = `INSERT INTO course (title, description, price, user_id, img) VALUES ('${title}', '${description}', ${price}, ${user_id}, '${img}')`;
-    }
+    const tags = JSON.parse(req.body.tags)
+    const { title, description, price, user_id } = JSON.parse(req.body.crearCurso);
+
+    //posible validación en el back con reg.ex https://medium.com/codex/using-regular-expressions-in-javascript-edcd5942de89
+
+    let sql = `INSERT INTO course (title, description, price, user_id, img) VALUES ('${title}', '${description}', ${price}, ${user_id}, 'default.jpg')`
+    if(req.file !== undefined){
+     let img = req.file.filename;
+      sql = `INSERT INTO course (title, description, price, user_id, img) VALUES ('${title}', '${description}', ${price}, ${user_id}, '${img}')`
+     }
+    
     connection.query(sql, (err, result) => {
       err && res.status(500).json(err);
       if (err) {
@@ -83,6 +85,7 @@ class coursesControllers {
       });
     }); */
   };
+  };
 
   purchaseCourse = (req, res) => {
     const { id } = req.params;
@@ -107,11 +110,12 @@ class coursesControllers {
         LEFT JOIN course_tag ON course.course_id = course_tag.course_id 
         LEFT JOIN tag ON course_tag.tag_id = tag.tag_id   
           WHERE course.course_id = ${course_id} AND is_deleted = 0`;
+
     connection.query(sql, (err, result) => {
       if (err) {
         res.status(500).json(err);
       }
-      /* console.log("RESULTADO PRUEBA",result); */
+
       const { title, description, img, date, price, is_completed } = result[0];
 
       let data = {
@@ -142,10 +146,12 @@ class coursesControllers {
     });
   };
 
+        
   editOneCourse = (req, res) => {
-    const { title, description, price, course_id, user_id } = JSON.parse(
-      req.body.editarCurso
-    );
+
+    const { title, description, price, user_id } = JSON.parse(req.body.editarCurso);
+    const {course_id} = req.params;
+    
     let sql = `UPDATE course SET title = '${title}', description = '${description}', price = ${price} WHERE course_id = ${course_id} AND user_id = ${user_id} AND is_deleted = 0`;
 
     let img;
@@ -220,10 +226,9 @@ class coursesControllers {
 
   addTopic = (req, res) => {
     const { course_id, newTopic, section_id } = req.body;
-
-    console.log(req.body);
-
     let sql_cont = `SELECT max(topic_id) as id FROM topic WHERE section_id = ${section_id}`;
+    
+    console.log(req.body)
 
     connection.query(sql_cont, (err, result) => {
       if (err) {
