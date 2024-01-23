@@ -15,12 +15,18 @@ const initialValue = {
 export const FormEdit = ({ user, setUser}) => {
   const [editUser, setEditUser] = useState(initialValue);
   const [msgError, setMsgError] = useState("");
+  const [file, setFile] = useState();
   const navigate = useNavigate();
+
   useEffect(() => {
     if (user) {
       setEditUser(user);
     }
   }, [user]);
+
+  const handleFile = (e) => {
+    setFile(e.target.files[0]);
+  };
 
 
   const handleSubmit = () => {
@@ -33,7 +39,7 @@ export const FormEdit = ({ user, setUser}) => {
           ) {
             setMsgError("*Los campos obligatorios deben estar rellenos");
           } else {
-            let file = [];
+            
             const newFormData = new FormData();
             newFormData.append("editUser", JSON.stringify(editUser));
             newFormData.append("file", file);
@@ -41,13 +47,13 @@ export const FormEdit = ({ user, setUser}) => {
             axios
               .put("http://localhost:3000/users/edituser", newFormData)
               .then((res) => {
-                // if (res.data.img) {
-                //   setUser({ ...editUser, img: res.data.img });
-                //   console.log(res.data.img);
-                // } else {
+                 if (res.data.img) {
+                setUser({ ...editUser, img: res.data.img });
+                 console.log(res.data.img);
+                 } else {
                   setUser(editUser);
                   console.log(res);
-                // }
+                 }
                 navigate("/profile");
               })
               .catch((err) => {
@@ -69,7 +75,30 @@ export const FormEdit = ({ user, setUser}) => {
   console.log(editUser);
 
   return (
+    <>
+    <div className="avatar">
+          <label htmlFor="fileInput">
+            {user?.img ? (
+              <img
+                src={`http://localhost:3000/images/users/${user?.img}`}
+                alt="Avatar"
+              />
+            ) : (
+               <p>{user?.name.charAt(0).toUpperCase()}</p> 
+            )}
+          </label>
+          <input
+            id="fileInput"
+            type="file"
+            style={{ display: "none" }}
+            onChange={handleFile}
+          />
+        </div>
+    
+    
     <Form>
+      
+      
     
         <h2>Editar usuario:</h2>
         <Form.Group className="mb-3" controlId="formBasicNickName">
@@ -136,5 +165,6 @@ export const FormEdit = ({ user, setUser}) => {
 
     <Button onClick={() => navigate("/profile")}>cancelar</Button>
   </Form>
+  </>
   )
 }
