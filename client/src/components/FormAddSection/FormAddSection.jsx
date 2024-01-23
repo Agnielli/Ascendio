@@ -8,6 +8,7 @@ import axios from "axios";
 export const FormAddSection = ({sections, setSections, addSection, setAddSection,course_id}) => {
 
   const [newSection, setNewSection] = useState("");
+  const [msgError, setMsgError] = useState("");
 
   useEffect(()=> {
     if(sections){
@@ -19,10 +20,14 @@ export const FormAddSection = ({sections, setSections, addSection, setAddSection
     setNewSection(e.target.value)
   }
 
+  let regex = /^[a-zA-Z0-9\s]{1,50}$/;
+
   const handleSubmit = () =>{
     let data = {newSection, course_id}
-    if(newSection !== ''){
-      console.log("llllllllLlll", data)
+      if (!regex.test(newSection)) {
+      setMsgError("No se permiten más de 50 caracteres");
+      }else if(newSection !== ''){
+
     axios
       .post("http://localhost:3000/courses/addsection", data)
       .then((res)=>{
@@ -49,6 +54,9 @@ export const FormAddSection = ({sections, setSections, addSection, setAddSection
               value={newSection}
               onChange={handleChange}
             />
+
+            <p>{msgError}</p>
+
             <Button variant="outline-success"
               className="me-3"  onClick={handleSubmit} >Aceptar</Button>
             <Button variant="outline-success"
