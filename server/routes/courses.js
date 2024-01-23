@@ -18,6 +18,7 @@ router.delete('/deletesection/:course_id/:section_id', coursesControllers.delete
 router.post('/addtopic', coursesControllers.addTopic);
 router.get('/oneusercourses/:user_id', coursesControllers.oneUserCourses);
 router.put('/deletecourse/:course_id', coursesControllers.deleteCourse);
+router.delete('/deletesection/:course_id/:section_id:/:topic_id', coursesControllers.deleteTopic);
 
 
 
