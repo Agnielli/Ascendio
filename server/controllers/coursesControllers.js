@@ -85,7 +85,7 @@ class coursesControllers {
       });
     }); */
   };
-  };
+  
 
   purchaseCourse = (req, res) => {
     const { id } = req.params;
@@ -252,5 +252,16 @@ class coursesControllers {
       });
     });
   };
+
+  oneUserCourses = (req,res) =>{
+    const {user_id} = req.params;
+    console.log("EEEEEEEEEEEEEA",req.params);
+    let sql = `SELECT * FROM course where user_id = ${user_id};`
+
+    connection.query(sql,(err,result)=>{
+      err ? res.status(500).json(err) : res.status(200).json(result);
+    })
+  }
+
 }
 module.exports = new coursesControllers();
