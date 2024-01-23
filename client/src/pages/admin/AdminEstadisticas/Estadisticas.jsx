@@ -22,7 +22,7 @@ export const Estadisticas = () => {
           <div key={index}>
             <p>Usuarios: {elem.count_type_2}</p>
             <p>Admins: {elem.count_type_1}</p>
-            <p>Trades Publicados: {elem.num_posts}</p>
+            <p>Posts Publicados: {elem.num_posts}</p>
             <p>Cursos Publicados: {elem.num_courses}</p>
           </div>
         )

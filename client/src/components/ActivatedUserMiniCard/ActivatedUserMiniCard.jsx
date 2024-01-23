@@ -6,7 +6,7 @@ export const ActivatedUserMiniCard = ({ elem, update, setUpdate }) => {
   
   const disableUser = (id) => {
     axios
-      .put(`http://localhost:3000/admin/activateuser/${id}`)
+      .put(`http://localhost:3000/admin/disableuser/${id}`)
       .then((res) => {
         console.log(res);
         setUpdate(true)
