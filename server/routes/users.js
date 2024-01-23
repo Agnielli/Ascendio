@@ -15,9 +15,13 @@ router.post("/mailrecoverpassword", usersControllers.mailRecoverPassword);
 router.put("/recoverpassword/:token", usersControllers.recoverPassword);
 router.get("/statisticsuser/:id", usersControllers.getStatisticsUser);
 router.post("/followuser", usersControllers.followUser);
+router.delete("/unfollowuser", usersControllers.unfollowUser);
+router.get("/getfollowuser/:id", usersControllers.getFollowUser);
 router.put('/edituser', multerSingle("users") ,usersControllers.editUser)
 router.post('/verifypassword/:id', usersControllers.verifyPassword);
 router.put('/updatepassword/:id', usersControllers.updatePassword);
+router.get('/followersuser/:id', usersControllers.getFollowersUser)
+router.get('/postsuser/:id', usersControllers.getPostsUser)
 
 
 module.exports = router;

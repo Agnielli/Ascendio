@@ -161,7 +161,6 @@ class usersControllers {
           if (error) {
             res.status(500).json({ error });
           } else {
-            console.log(result[0].user_id);
             const token = jwt.sign(result[0].user_id, process.env.T_PASS);
             let mess = `http://localhost:5173/recoverpassword/${token}`;
             if (result != "") {
@@ -184,16 +183,13 @@ class usersControllers {
   recoverPassword = (req, res) => {
     const { token } = req.params;
     const { password } = req.body;
-    console.log(token);
     jwt.verify(token, process.env.T_PASS, (err, decoded) => {
-      console.log(decoded);
       if (err) {
         res.status(401).json({ message: "Token no válido" });
       } else {
         const user_id = decoded;
         let sql = `SELECT * FROM user WHERE user_id = '${user_id}'`;
         connection.query(sql, (err, result) => {
-          console.log(result);
           if (err) {
             console.log(err);
           } else if (result.length === 0) {
@@ -225,12 +221,11 @@ class usersControllers {
 
   // ---------------------------------------------
   followUser = (req, res) => {
-
     const user_id = req.body[0];
     const id_followed = req.body[1];
     console.log(user_id, id_followed);
     
-    let sql = ` INSERT INTO user_follows_user (user_id, followed_user_id) VALUES (${user_id}, ${id_followed});`
+    let sql = `INSERT INTO user_follows_user (user_id, followed_user_id) VALUES (${user_id}, ${id_followed});`
 
     connection.query(sql, (err, result)=>{
       if(err){
@@ -241,8 +236,40 @@ class usersControllers {
     })
   }
 
+  // comprobar con los console.log
+  unfollowUser = (req, res) => {
+    const user_id = req.body[0];
+    const id_followed = req.body[1];
+    console.log(user_id, id_followed);
+    
+    let sql = `DELETE FROM user_follows_user WHERE user_id = ${user_id} and followed_user_id = ${id_followed}`
+
+    connection.query(sql, (err, result)=>{
+      if(err){
+        res.status(500).json(err)
+      }else{
+        res.status(200).json(result)
+      }
+    })
+  }
+
+  getFollowUser = (req, res) => {
+    // const user_id = req.body;
+    const user_id = req.params.id;
+
+    let sql = `SELECT * FROM user_follows_user WHERE user_id = ${user_id}`;
+
+     connection.query(sql, (err, result) => {
+      if (err) {
+        res.status(500).json(err);
+      } else {
+        res.status(200).json(result);
+      }
+    });
+  };
+
   //4-editar info de un usuario:
-  
+
   editUser = (req, res) => {
     const { nickname, name, lastname, email, phonenumber, user_id } =
       JSON.parse(req.body.editUser);
@@ -250,7 +277,6 @@ class usersControllers {
     let img;
 
     if (req.file) {
-      
       img = req.file.filename;
       sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}", email = "${email}", phonenumber = "${phonenumber}", img = "${img}" WHERE user_id = ${user_id}`;
     } else {      
@@ -277,7 +303,6 @@ class usersControllers {
           console.log(error);
           res.status(400).json({ message: "Error en la SQL" });
         } else {
-          console.log(result);
           res.status(200).json({ datos: result[0] });
         }
       });
@@ -286,8 +311,7 @@ class usersControllers {
       res.status(500).JSON({ message: "Error inesperado (CATCH)" });
     }
   };
-
-  //-------------------------------------------------------------
+  
   verifyPassword = (req, res) => {
     const { id } = req.params;
     const { currentPassword } = req.body;
@@ -335,9 +359,6 @@ class usersControllers {
     });
   };
   
-  
-  
-
   // Cambiar contraseña
   updatePassword = (req, res) => {
     const { id, password } = req.body; 
@@ -378,6 +399,42 @@ class usersControllers {
         });
       });
     });
+
+  getFollowersUser = (req, res) => {
+    try {
+      const { id } = req.params;
+      let sql = `SELECT * FROM user WHERE user_id IN (SELECT followed_user_id FROM user_follows_user WHERE user_id = ${id});`;
+      connection.query(sql, (error, result) => {
+        if (error) {
+          console.log("Error en sql", error);
+          res.status(400).json({ message: "Error en la SQL" });
+        } else {
+          res.status(200).json({ datos: result });
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).JSON({ message: "Error inesperado (CATCH)" });
+    }
+  };
+
+  getPostsUser = (req, res) => {
+    try {
+      const { id } = req.params;
+      let sql = `SELECT post.*, post_resource.resource_type, post_resource.text as resource_text, category.category_name FROM post LEFT JOIN post_resource ON post.post_id = post_resource.post_id LEFT JOIN category ON post.category_id = category.category_id WHERE post.user_id = ${id};`;
+      connection.query(sql, (error, result) => {
+        if (error) {
+          console.log("Error en sql", error);
+          res.status(400).json({ message: "Error en la SQL" });
+        } else {
+          res.status(200).json({ datos: result });
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).JSON({ message: "Error inesperado (CATCH)" });
+    }
+
   };
 }
 

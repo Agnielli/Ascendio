@@ -15,7 +15,7 @@ import { OneCourse } from "../pages/courses/OneCourse/OneCourse";
 import { Landing } from "../pages/dashboard/Landing/Landing";
 import { Contact } from "../pages/dashboard/Contact/Contact";
 import { RecoverPassword } from "../pages/auth/RecoverPassword/RecoverPassword";
-import { CreateTrade } from "../pages/posts/trades/CreateTrade";
+import { CreateTrade } from "../pages/posts/trades/CreateTrade/CreateTrade";
 import { Usuarios } from "../pages/admin/AdminUsuarios/Usuarios";
 import { Estadisticas } from "../pages/admin/AdminEstadisticas/Estadisticas";
 import { Cursos } from "../pages/admin/AdminCursos/Cursos";
@@ -26,10 +26,12 @@ import { PurchaseCourse } from "../pages/courses/PurchaseCourse/PurchaseCourse";
 import { SaveCourse } from "../pages/courses/SaveCourse/SaveCourse";
 import { MailRecoverPassword } from "../pages/auth/MailRecoverPassword/MailRecoverPassword";
 import { ConfirmationUser } from "../pages/auth/Register/ConfirmationUser/ConfirmationUser";
-import { Trades } from "../pages/posts/trades/Trades";
+import { Trades } from "../pages/posts/trades/Trades/Trades";
 import { Traders } from "../pages/traders/Traders";
 import { EditUser } from "../pages/users/EditUser/EditUser";
 import { CreateGeneralPost } from "../pages/posts/PostGeneral/CreateGeneralPost";
+import { UserFollowers } from "../pages/users/UserFollowers/UserFollowers";
+import { UserPosts } from "../pages/users/UserPosts/UserPosts";
 
 export const RoutesApp = () => {
   const { token } = useContext(AscendioContext);
@@ -82,6 +84,8 @@ export const RoutesApp = () => {
             <Route path='/createcourse' element={<CreateCourse />} />
             <Route path='/purchasecourse' element={<PurchaseCourse/>} />
             <Route path='/savecourse' element={<SaveCourse/>} />
+            <Route path='/userfollowers/:id' element={<UserFollowers/>} />
+            <Route path='/userposts/:id' element={<UserPosts/>} />
             </>
           )}
 

@@ -1,9 +1,6 @@
 CREATE DATABASE ascendio;
-
 USE ascendio;
-
 -- drop database ascendio;
-
 CREATE TABLE user (
   user_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
   nickname VARCHAR(50) UNIQUE,
@@ -16,14 +13,12 @@ CREATE TABLE user (
   type TINYINT NOT NULL DEFAULT 2, -- 1 admin, 2 user
   is_confirmed BOOLEAN NOT NULL DEFAULT false, -- user
   is_disabled BOOLEAN NOT NULL DEFAULT  false, -- admin
-  is_deleted BOOLEAN NOT NULL DEFAULT false -- user 
+  is_deleted BOOLEAN NOT NULL DEFAULT false -- user
 );
-
 CREATE TABLE category (
-  category_id TINYINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT, -- tipo 1 -> Crypto, tipo 2->  Bolsa, tipo 3 ->Forex
+  category_id TINYINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT, -- tipo 1 -> Crypto, tipo 2->  Bolsa, tipo 3 ->Forex, tipo 4 -> General ( necesiario para post general )
   category_name VARCHAR(50) NOT NULL UNIQUE -- Crypto, Bolsa, Forex
 );
-
 CREATE TABLE post (
   post_id BIGINT UNSIGNED PRIMARY KEY auto_increment,
   user_id INT UNSIGNED NOT NULL, -- creador del post
@@ -34,7 +29,7 @@ CREATE TABLE post (
   stop_loss DECIMAL(7,2) UNSIGNED NULL,
   take_profit DECIMAL(7,2) UNSIGNED NULL,
   correct BOOLEAN,
-  date DATETIME not null default CURRENT_TIMESTAMP,
+  date DATETIME not null default (CURRENT_DATE),
   type TINYINT NOT NULL, -- tipo 1: regular, tipo 2: trade
   is_deleted BOOLEAN NOT NULL DEFAULT false, -- el usuario "borra" el post
   is_disabled BOOLEAN NOT NULL DEFAULT false,  -- el admin deshabilita el post
@@ -43,20 +38,18 @@ CREATE TABLE post (
   CONSTRAINT fk_category_1 FOREIGN KEY (category_id)
   REFERENCES category(category_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
 CREATE TABLE comments (
   post_id BIGINT UNSIGNED NOT NULL,
   comment_id SMALLINT UNSIGNED NOT NULL,
   primary key(post_id, comment_id),
   user_id INT UNSIGNED NOT NULL, -- autor del comentario
-  date DATETIME not null default CURRENT_TIMESTAMP,
+  date DATETIME not null default (CURRENT_DATE),
   message VARCHAR(250) NOT NULL,
   CONSTRAINT fk_post_1 FOREIGN KEY (post_id)
   REFERENCES post(post_id) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT fk_user_2 FOREIGN KEY (user_id)
   REFERENCES user(user_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
 CREATE TABLE user_category (  -- un user va a poder hablar de varias categorias
   user_id INT UNSIGNED NOT NULL ,
   category_id TINYINT UNSIGNED NOT NULL,
@@ -66,21 +59,15 @@ CREATE TABLE user_category (  -- un user va a poder hablar de varias categorias
   CONSTRAINT fk_category_2 FOREIGN KEY (category_id)
   REFERENCES category(category_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
 CREATE TABLE user_follows_user (
-  user_id INT UNSIGNED NOT NULL, -- este es el usuario que va siguiendo 
-  followed_user_id INT UNSIGNED NOT NULL, -- este es el usuario a quien siguen
+  user_id INT UNSIGNED NOT NULL,
+  followed_user_id INT UNSIGNED NOT NULL,
   primary key(user_id, followed_user_id),
   CONSTRAINT fk_user_4 FOREIGN KEY (user_id)
   REFERENCES user(user_id) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT fk_user_5 FOREIGN KEY (followed_user_id)
   REFERENCES user(user_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
--- update followed_user_id
--- from user_follows_user
--- where user_id = x; 
-
 CREATE TABLE user_likes_post (
   user_id INT UNSIGNED NOT NULL ,
   post_id BIGINT UNSIGNED NOT NULL,
@@ -90,7 +77,6 @@ CREATE TABLE user_likes_post (
   CONSTRAINT fk_post_2 FOREIGN KEY (post_id)
   REFERENCES post(post_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
 CREATE TABLE post_resource(
   resource_id BIGINT UNSIGNED PRIMARY KEY NOT NULL auto_increment,
   post_id BIGINT UNSIGNED NOT NULL,
@@ -101,7 +87,6 @@ CREATE TABLE post_resource(
   CONSTRAINT fk_post_3 FOREIGN KEY (post_id)
   REFERENCES post(post_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
 /*
 CREATE TABLE graphic(
   graphic_id SMALLINT UNSIGNED PRIMARY KEY NOT NULL,
@@ -113,14 +98,13 @@ CREATE TABLE graphic(
   grapgic_isdeleted BOOLEAN NOT NULL DEFAULT false
 );
 */
-
 CREATE TABLE course (
   course_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
   user_id INT UNSIGNED NOT NULL,  -- creador
   title VARCHAR(50) NOT NULL,
   description VARCHAR(250) NOT NULL,
   img VARCHAR (150),
-  date DATETIME not null default CURRENT_TIMESTAMP,
+  date DATETIME not null default (CURRENT_DATE),
   price DECIMAL(7, 2) UNSIGNED NOT NULL,  -- 99999.99
   is_deleted BOOLEAN NOT NULL DEFAULT false,
   is_disabled BOOLEAN NOT NULL DEFAULT true,
@@ -129,7 +113,6 @@ CREATE TABLE course (
   CONSTRAINT fk_user_7 FOREIGN KEY (user_id)
   references user(user_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
 CREATE TABLE user_enrolls_course(
   user_id INT UNSIGNED NOT NULL,
   course_id INT UNSIGNED NOT NULL,
@@ -139,7 +122,6 @@ CREATE TABLE user_enrolls_course(
   CONSTRAINT fk_course_1 FOREIGN KEY (course_id)
   REFERENCES course(course_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
 CREATE TABLE user_wishes_course(
   user_id INT UNSIGNED NOT NULL,
   course_id INT UNSIGNEd NOT NULL,
@@ -149,9 +131,7 @@ CREATE TABLE user_wishes_course(
   CONSTRAINT fk_course_2 FOREIGN KEY (course_id)
   REFERENCES course(course_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
 -- Borrado total!
-
 CREATE TABLE user_rates_course(
   user_id INT UNSIGNED NOT NULL,
   course_id INT UNSIGNEd NOT NULL,
@@ -163,7 +143,6 @@ CREATE TABLE user_rates_course(
   CONSTRAINT fk_course_3 FOREIGN KEY (course_id)
   REFERENCES course(course_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
 CREATE TABLE section (
   course_id INT UNSIGNED NOT NULL,
   section_id TINYINT UNSIGNED NOT NULL,
@@ -172,7 +151,6 @@ CREATE TABLE section (
   CONSTRAINT fk_course_4 FOREIGN KEY(course_id)
   REFERENCES course (course_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
 CREATE TABLE topic (
   course_id INT UNSIGNED NOT NULL,
   section_id TINYINT UNSIGNED NOT NULL,
@@ -183,7 +161,6 @@ CREATE TABLE topic (
   CONSTRAINT fk_section_1 FOREIGN KEY(course_id, section_id)
   REFERENCES section (course_id, section_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
 create table user_completes_topic(
 	user_id INT UNSIGNED NOT NULL,
     course_id INT UNSIGNED NOT NULL,
@@ -195,7 +172,6 @@ create table user_completes_topic(
     CONSTRAINT fk_topic_1 FOREIGN KEY(course_id, section_id, topic_id)
 	REFERENCES topic (course_id, section_id, topic_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
 CREATE TABLE resource (
   resource_id BIGINT UNSIGNED NOT NULL PRIMARY KEY,
   course_id INT UNSIGNED NOT NULL,
@@ -209,18 +185,15 @@ CREATE TABLE resource (
   CONSTRAINT fk_topic_2 FOREIGN KEY(course_id, section_id, topic_id)
   REFERENCES topic(course_id, section_id, topic_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
 CREATE TABLE tag (
   tag_id BIGINT UNSIGNED NOT NULL PRIMARY KEY,
   tag_name VARCHAR(20) NOT NULL UNIQUE
 );
-
-CREATE TABLE course_tag(
+CREATE TABLE course_tag (
 	tag_id BIGINT UNSIGNED NOT NULL,
 	course_id INT UNSIGNED NOT NULL,
 	CONSTRAINT fk_tag_1 FOREIGN KEY(tag_id)
 	REFERENCES tag(tag_id) ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT fk_course_6 FOREIGN KEY(course_id)
 	REFERENCES course(course_id) ON DELETE CASCADE ON UPDATE CASCADE
-)
-
+);

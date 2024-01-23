@@ -2,9 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import "./createTrade.scss";
 import { Form, Button, InputGroup } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { AscendioContext } from "../../../context/AscendioContext";
+import { AscendioContext } from "../../../../context/AscendioContext";
 import axios from "axios";
-
 const initialValue = {
   currency: "",
   description: "",
@@ -13,15 +12,12 @@ const initialValue = {
   takeProfit: "",
   category_id: "",
 };
-
 export const CreateTrade = () => {
   const [createOneTrade, setCreateOneTrade] = useState(initialValue);
   const [file, setFile] = useState();
   const [msgError, setMsgError] = useState("");
-
   const { user, setUser } = useContext(AscendioContext);
   const [options, setOptions] = useState([]);
-
   useEffect(() => {
     axios
       .get("http://localhost:3000/posts/callcategorys")
@@ -35,18 +31,14 @@ export const CreateTrade = () => {
       })
       .catch((err) => console.log(err));
   }, [])
-
   const navigate = useNavigate();
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCreateOneTrade({ ...createOneTrade, [name]: value });
   };
-
   const handleFile = (e) => {
     setFile(e.target.files[0]);
   };
-
   const handleSubmit = () => {
     if (
       !createOneTrade.currency ||
@@ -65,13 +57,10 @@ export const CreateTrade = () => {
       setMsgError("Los ultimos tres campos, solo admiten numeros");
     } else {
       const newFormData = new FormData();
-
       let data = { ...createOneTrade, user_id: user.user_id };
       // console.log(data); me hace bien el data
-
       newFormData.append("crearTrade", JSON.stringify(data));
       newFormData.append("file", file);
-
       axios
         .post("http://localhost:3000/posts/createtrade", newFormData)
         .then((res) => {
@@ -88,7 +77,6 @@ export const CreateTrade = () => {
         });
     }
   };
-
   return (
     <div>
       <Form.Group controlId="formFile" className="mb-3">
@@ -162,3 +150,13 @@ export const CreateTrade = () => {
     </div>
   );
 };
+
+
+
+
+
+
+
+
+
+

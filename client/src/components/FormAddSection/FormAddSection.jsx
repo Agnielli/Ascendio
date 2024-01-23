@@ -1,32 +1,40 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./formAddSection.scss";
 import { Form, Col, Row, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
-export const FormAddSection = ({addSection, setAddSection}) => {
+export const FormAddSection = ({sections, setSections, addSection, setAddSection,course_id}) => {
 
-  const [newSection, setNewSection] = useState()
-  const navigate = useNavigate()
+  const [newSection, setNewSection] = useState("");
+
+  useEffect(()=> {
+    if(sections){
+    setSections(sections)
+    }
+  }, [sections])
 
   const handleChange = (e) =>{
-    const { name, value} = e.target;
-    setNewSection({...newSection, [name]: value})
+    setNewSection(e.target.value)
   }
 
   const handleSubmit = () =>{
-    //const newFormData = new FormData()
-    //newFormData.append("section", JSON.stringify(newSection))
-
+    let data = {newSection, course_id}
+    if(newSection !== ''){
+      console.log("llllllllLlll", data)
     axios
-      .post("http://localhost:3000/courses/addsection", newSection)
+      .post("http://localhost:3000/courses/addsection", data)
       .then((res)=>{
         console.log(res)
+        setSections([ ... sections, {section_id: res.data.section_id, section_title:newSection}])
+        setNewSection('')
+        setAddSection(false)
       })
       .catch((err)=> {
         console.log(err);
       })
+    }
   }
 
   return (
@@ -34,17 +42,17 @@ export const FormAddSection = ({addSection, setAddSection}) => {
       <Col>
         <Form>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Título de la unidad </Form.Label>
+            <Form.Label>Título de la sección </Form.Label>
             <Form.Control
               type="text"
-              placeholder="Título de la unidad"
-              name="section_title"
+              placeholder="Título de la sección"
+              value={newSection}
               onChange={handleChange}
             />
             <Button variant="outline-success"
-              className="me-3" onClick={handleSubmit}>Aceptar</Button>
+              className="me-3"  onClick={handleSubmit} >Aceptar</Button>
             <Button variant="outline-success"
-              className="me-3" onClick={()=>setAddSection(!addSection)}>Cancelar</Button>
+              className="me-3" onClick={()=>setAddSection(false)}>Cancelar</Button>
           </Form.Group>
         </Form>
       </Col>
