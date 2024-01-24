@@ -23,6 +23,7 @@ export const OneCourse = () => {
   const [isIntoWishes, setIsIntoWishes] = useState(false);
   const [courseTags, setCourseTags] = useState([]);
   const [isIntoPurchase, setIsIntoPurchase] = useState(false)
+  const [showModalDelete, setShowModalDelete] = useState(false)
   const navigate = useNavigate();
 
   const openModal = () => {
@@ -30,7 +31,9 @@ export const OneCourse = () => {
     setCourseToEdit();
   };
 
-  console.log("PRUEBAAAAAAAAAA",courseTags);
+  const openModalDelete = () => {
+    setShowModalDelete(true);
+  };
 
   useEffect(() => {
     axios
