@@ -44,15 +44,28 @@ export const OneCourse = () => {
 
   useEffect(() => {
     axios
-    .get(`http://localhost:3000/courses/getwishcourse/${course_id}/${user?.user_id}`)
+    .get(`http://localhost:3000/courses/getalltagsonecourse/${course_id}`)
     .then((res) => {
-      if(res.data.length){
-        setIsIntoWishes(true)
-      }
+      setCourseTags(res.data)
     })
     .catch((err) => {
       console.log(err);
     });
+  }, [showModal, resetCourse]);
+
+  useEffect(() => {
+    if(user){
+      axios
+      .get(`http://localhost:3000/courses/getwishcourse/${course_id}/${user.user_id}`)
+      .then((res) => {
+        if(res.data.length){
+          setIsIntoWishes(true)
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    }
   }, [user]);
   
   
@@ -142,7 +155,7 @@ export const OneCourse = () => {
               {oneCoursePpal && "Creado:" + formatearFecha(oneCoursePpal.date)}
             </Card.Subtitle>
             <Card.Text>{oneCoursePpal?.description}</Card.Text>
-            <Card.Text>{oneCoursePpal?.price}€</Card.Text>
+            <Card.Text>{oneCoursePpal?.price === 0 ? 'GRATIS' : `${oneCoursePpal?.price}€`}</Card.Text>
             <Card.Text>
               {courseTags?.map((e, index) => {
                 return e.tag_name + " ";
