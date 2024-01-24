@@ -7,8 +7,13 @@ import { ShowAllCommentsPost } from "./ShowAllCommentsPost/ShowAllCommentsPost";
 
 export const OneTradePost = () => {
   const [oneTrade, setOneTrade] = useState();
+
   const [showModal, setShowModal] = useState(false);
+
   const post = useParams();
+
+  console.log(post);
+
   const navigate = useNavigate();
 
   if (post) {
@@ -21,8 +26,9 @@ export const OneTradePost = () => {
         .catch((error) => {
           console.log(error);
         });
-    }, []);
+    }, [post]);
   }
+  console.log(oneTrade);
 
   return (
     <>

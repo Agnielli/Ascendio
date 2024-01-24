@@ -43,6 +43,15 @@ export const AllPosts = ({
                     {elem.correct === 0 && "trade errado"}
                     {elem.correct === 1 && "trade Acertado"}
                   </ListGroup.Item>{" "}
+                  <div className="d-flex justify-content-center mt-1 mb-1">
+                    <Button
+                      onClick={() => {
+                        navigate(`/onetradepost/${elem.post_id}`);
+                      }}
+                    >
+                      Ir a comentarios del post
+                    </Button>
+                  </div>
                   {elem.correct === null ? (
                     <div className="d-flex gap-1">
                       <Button
@@ -98,15 +107,6 @@ export const AllPosts = ({
                             Marcar Pendiente
                           </Button>
                         </div>
-                      </div>
-                      <div className="d-flex justify-content-center">
-                        <Button
-                          onClick={() => {
-                            navigate(`/onetradepost/${elem.post_id}`);
-                          }}
-                        >
-                          Ir a comentarios del post
-                        </Button>
                       </div>
                     </>
                   )}

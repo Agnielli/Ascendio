@@ -8,7 +8,7 @@ class CommentsControllers {
 
       const comentario = req.body.comment.message;
       const post_id = req.body.oneTrade.post_id;
-      const user_id = req.body.oneTrade.user_id;
+      const user_id = req.body.user.user_id;
 
       let sql = `SELECT COUNT(*) AS num_comentarios
       FROM comments
@@ -41,11 +41,11 @@ class CommentsControllers {
     }
   };
 
-  showAllComments = (req,res) =>{
-    const post_id = req.params.id
+  showAllComments = (req, res) => {
+    const post_id = req.params.id;
     let sql = `select * from comments WHERE post_id = ${post_id}`;
-    let sql2 = `SELECT comments.*, user.nickname FROM comments JOIN user ON comments.user_id = user.user_id WHERE comments.post_id = ${post_id};`
-    connection.query(sql2,(error, result) =>{
+    let sql2 = `SELECT comments.*, user.nickname FROM comments JOIN user ON comments.user_id = user.user_id WHERE comments.post_id = ${post_id};`;
+    connection.query(sql2, (error, result) => {
       if (error) {
         console.log(error);
         res.status(400).json({ message: "Error en la SQL2" });
@@ -54,9 +54,23 @@ class CommentsControllers {
           .status(200)
           .json({ message: "Todos los comentarios", result: result });
       }
-    })
-  }
+    });
+  };
 
+  deleteComments = (req, res) => {
+    const comment_id = req.params.id;
+
+    let sql = `DELETE FROM comments
+    WHERE comment_id = ${comment_id};`;
+    connection.query(sql, (error, result) => {
+      if (error) {
+        console.log(error);
+        res.status(400).json({ message: "Error en la SQL" });
+      } else {
+        res.status(200).json({ message: "Comentario borrado" });
+      }
+    });
+  };
 }
 
 module.exports = new CommentsControllers();
