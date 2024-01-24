@@ -298,7 +298,7 @@ class usersControllers {
     try {
       const { id } = req.params;
       const user_id = id;
-      let sql = `SELECT (SELECT COUNT(*) FROM user_follows_user WHERE followed_user_id = '${user_id}') AS num_followers, (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}') AS num_posts, (SELECT COUNT(*) FROM course WHERE user_id = '${user_id}') AS num_courses, (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}' AND correct = true) AS num_correct_posts, (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}' AND correct = false) AS num_incorrect_posts, (SELECT COUNT(DISTINCT followed_user_id) FROM user_follows_user WHERE user_id = '${user_id}') AS num_following_users;`;
+      let sql = `SELECT (SELECT COUNT(*) FROM user_follows_user WHERE followed_user_id = '${user_id}') AS num_followers, (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}') AS num_posts, (SELECT COUNT(*) FROM course WHERE user_id = '${user_id}' AND is_deleted = 0) AS num_courses, (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}' AND correct = true) AS num_correct_posts, (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}' AND correct = false) AS num_incorrect_posts, (SELECT COUNT(DISTINCT followed_user_id) FROM user_follows_user WHERE user_id = '${user_id}') AS num_following_users;`;
       connection.query(sql, (error, result) => {
         if (error) {
           console.log(error);
@@ -406,6 +406,7 @@ class usersControllers {
         });
       });
     });
+  };
 
   getFollowersUser = (req, res) => {
     try {

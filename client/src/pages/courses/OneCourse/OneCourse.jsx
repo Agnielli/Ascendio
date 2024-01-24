@@ -20,7 +20,8 @@ export const OneCourse = () => {
   const [course, setCourse] = useState()
   const [isIntoWishes, setIsIntoWishes] = useState(false)
   const [courseTags, setCourseTags] = useState([]);
-
+  const [isIntoPurchase, setIsIntoPurchase] = useState(false)
+  
 
   const openModal = () => {
     setShowModal(true);
@@ -54,6 +55,20 @@ export const OneCourse = () => {
       console.log(err);
     });
   }, [user]);
+
+  useEffect(()=>{
+    axios
+    .get(`http://localhost:3000/courses/getpurchasedcourse/${course_id}/${user?.user_id}`)
+    .then((res) => {
+      if(res.data.length){
+        setIsIntoPurchase(true)
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }, [user]);
+
   
   
   const formatearFecha = (date) => {
@@ -77,6 +92,14 @@ export const OneCourse = () => {
         .catch((err)=>console.log(err))
   }
 
+  const addToPurchase = () =>{
+    console.log ("aquí se compra un curso")
+      axios
+        .put(`http://localhost:3000/courses/addtopurchasecourse/${course_id}`, {usuario: user.user_id})
+        .then((res)=>console.log(res))
+        .catch((err)=>console.log(err))
+  }
+
   const handleWishes = () =>{
     if(isIntoWishes){
       delFromWishes()
@@ -84,6 +107,15 @@ export const OneCourse = () => {
     }else{
       addToWishes()
       setIsIntoWishes(true)
+    }
+  }
+
+  const handlePurchase = () =>{
+    if(isIntoWishes){
+      setIsIntoPurchase(false)
+    }else{
+      addToPurchase()
+      setIsIntoPurchase(true)
     }
   }
 
@@ -170,6 +202,16 @@ export const OneCourse = () => {
             >
               {isIntoWishes ? "Borrar de deseados" : "Añadir a deseados"}
             </Button>
+
+            <Button 
+              onClick={handlePurchase}
+              disabled={isIntoPurchase ? true : false}
+            >
+              {isIntoPurchase ? "Comprado" : "Comprar"}
+            </Button>
+            
+
+            
 
             <Button
               onClick={() => deleteCourse(course_id)}
