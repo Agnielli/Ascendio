@@ -408,6 +408,7 @@ class usersControllers {
     });
   };
 
+
   getFollowersUser = (req, res) => {
     try {
       const { id } = req.params;
