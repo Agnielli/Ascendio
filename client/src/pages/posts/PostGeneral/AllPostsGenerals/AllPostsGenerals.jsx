@@ -5,7 +5,6 @@ import { AscendioContext } from "../../../../context/AscendioContext";
 import { Link, useNavigate } from "react-router-dom";
 
 export const AllPostsGenerals = () => {
-  const [show, setShow] = useState(1);
   const [lastTrades, setLastTrades] = useState([]); // para enseñar: ULTIMOS TRADES o TOP SEGUIDORES o TOP ACERTADOS
   const { user } = useContext(AscendioContext);
   const [followingUsers, setFollowingUsers] = useState([]); // Nuevo estado para almacenar usuarios seguidos
@@ -79,8 +78,6 @@ export const AllPostsGenerals = () => {
 
   return (
     <div>
-      {/* ULTIMOS TRADES */}
-      {show === 1 && (
         <>
           <h2>General Posts</h2>
           <div className="d-flex flex-wrap gap-2">
@@ -127,6 +124,9 @@ export const AllPostsGenerals = () => {
                               src={`http://localhost:3000/images/generalPost/${elem.image_name}`}
                             />
                           )}
+                        <div className="d-flex gap-1 mt-2">
+                          <Button onClick={()=>{navigate(`/onegeneralpost/${elem.post_id}`)}}>Ver más</Button>
+                        </div>
                         </Card.Body>
                       </div>
                     </Card.Body>
@@ -135,41 +135,6 @@ export const AllPostsGenerals = () => {
               })}
           </div>
         </>
-      )}
-
-      {/* TOP SEGUIDORES */}
-      {show === 2 && (
-        <>
-          <Button onClick={() => setShow(1)}>Últimos Trades</Button>
-          <Button onClick={() => setShow(3)}>Top Acertados</Button>
-
-          <h1>Top Seguidores</h1>
-          {/* {lastTrades.map(() => {
-          return (
-
-          )
-        })} */}
-        </>
-      )}
-
-      {/* TOP ACERTADOS */}
-      {show === 3 && (
-        <>
-          <Button onClick={() => setShow(1)}>Últimos Trades</Button>
-          <Button onClick={() => setShow(2)}>Top Seguidores</Button>
-
-          <h1>Top Acertados</h1>
-          {/* {lastTrades.map(() => {
-          return (
-
-          )
-        })} */}
-        </>
-      )}
-
-      {/* BOTON DE TOP SEGUIDORES Y BOTON DE TOP ACERTADOS */}
-
-      {/* MAPEO DE LOS ULTIMOS TRADES  */}
     </div>
   );
 };

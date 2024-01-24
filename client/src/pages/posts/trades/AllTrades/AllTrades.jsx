@@ -5,7 +5,6 @@ import { AscendioContext } from "../../../../context/AscendioContext";
 import { Link, useNavigate } from "react-router-dom";
 
 export const AllTrades = () => {
-  const [show, setShow] = useState(1);
   const [lastTrades, setLastTrades] = useState([]); // para enseñar: ULTIMOS TRADES o TOP SEGUIDORES o TOP ACERTADOS
   const { user } = useContext(AscendioContext);
   const [followingUsers, setFollowingUsers] = useState([]); // Nuevo estado para almacenar usuarios seguidos

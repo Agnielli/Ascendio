@@ -34,9 +34,11 @@ import { OneUserCourses } from "../pages/courses/OneUserCourses/OneUserCourses";
 import { AllPostsGenerals } from "../pages/posts/PostGeneral/AllPostsGenerals/AllPostsGenerals";
 import { ShowAllUsers } from "../pages/users/ShowAllUsers/ShowAllUsers";
 import { CreateGeneralPost } from "../pages/posts/PostGeneral/CreateGeneralPost/CreateGeneralPost";
-import { OneTradePost } from "../pages/posts/Trades/OneTradePost/OneTradePost";
+
 import { CreateTrade } from "../pages/posts/Trades/CreateTrade/CreateTrade";
 import { TraderProfile } from "../pages/users/TraderProfile/TraderProfile";
+import { OneTradePost } from "../pages/posts/trades/OneTradePost/OneTradePost";
+import { OneGeneralPost } from "../pages/posts/PostGeneral/OneGeneralPost/OneGeneralPost";
 
 
 export const RoutesApp = () => {
@@ -90,6 +92,7 @@ export const RoutesApp = () => {
               />
               <Route path="/allpoststrades" element={<AllTrades />} />
               <Route path="/onetradepost/:post_id" element={<OneTradePost />} />
+              <Route path="/onegeneralpost/:post_id" element={<OneGeneralPost />} />
               <Route path="/allpostsgenerals" element={<AllPostsGenerals />} />
               <Route path="/showallusers" element={<ShowAllUsers />} />
               <Route path="/createcourse" element={<CreateCourse />} />
