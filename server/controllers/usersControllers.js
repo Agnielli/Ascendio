@@ -406,7 +406,8 @@ class usersControllers {
         });
       });
     });
-  }
+  };
+
 
   getFollowersUser = (req, res) => {
     try {
