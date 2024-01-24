@@ -29,6 +29,8 @@ export const OneCourse = () => {
     setCourseToEdit();
   };
 
+  console.log("PRUEBAAAAAAAAAA",courseTags);
+
 
   useEffect(() => {
     axios
@@ -172,7 +174,6 @@ export const OneCourse = () => {
       })
   }
 
-  console.log("OOOOOOOOOOOOOOOOOOOOOOOOOOO",courseTags);
   return (
     <>
       <section className="d-flex flex-column align-items-center justify-content-center p-5">
