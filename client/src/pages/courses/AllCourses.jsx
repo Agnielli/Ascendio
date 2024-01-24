@@ -50,7 +50,7 @@ export const AllCourses = () => {
       {findCourse?.map((elem) => {
         return (
           <Card style={{ width: '22rem' }} key={elem.course_id}>
-            <Card.Img variant="top" src={`http://localhost:3000/images/cursos/${elem.img}`} />
+            <Card.Img style={{ height: '22rem', objectFit:'cover' }} variant="top" src={`http://localhost:3000/images/cursos/${elem.img}`} />
             <Card.Body>
               <Card.Title> {elem.title} </Card.Title>
               <Card.Subtitle>{elem.tags}</Card.Subtitle>

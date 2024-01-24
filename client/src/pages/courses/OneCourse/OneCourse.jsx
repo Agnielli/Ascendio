@@ -22,6 +22,7 @@ export const OneCourse = () => {
   const [isIntoWishes, setIsIntoWishes] = useState(false)
   const [courseTags, setCourseTags] = useState([]);
   const [isIntoPurchase, setIsIntoPurchase] = useState(false)
+  const navigate = useNavigate();
   
   const navigate = useNavigate();
   
@@ -37,11 +38,22 @@ export const OneCourse = () => {
     axios
     .get(`http://localhost:3000/courses/onecourse/${course_id}`)
     .then((res) => {
-      console.log(res.data);
+      
       setOneCoursePpal(res.data);
       setCourseToEdit(res.data);
       setSections(res.data.sections);
       setTopics(res.data.topics)
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }, [showModal, resetCourse]);
+
+  useEffect(() => {
+    axios
+    .get(`http://localhost:3000/courses/getalltagsonecourse/${course_id}`)
+    .then((res) => {
+      setCourseTags(res.data)
     })
     .catch((err) => {
       console.log(err);
@@ -166,6 +178,7 @@ export const OneCourse = () => {
       })
   }
 
+  console.log("OOOOOOOOOOOOOOOOOOOOOOOOOOO",courseTags);
   return (
     <>
       <section className="d-flex flex-column align-items-center justify-content-center p-5">
