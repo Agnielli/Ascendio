@@ -6,6 +6,7 @@ import { EditOneCourse } from "../../../components/ModalEditOneCourse/EditOneCou
 import { useNavigate, useParams } from "react-router-dom";
 import { FormAddSection } from "../../../components/FormAddSection/FormAddSection";
 import { CardSection } from "../../../components/CardSection/CardSection";
+import { ModalDelOneCourse } from "../../../components/ModalDelOneCourse/ModalDelOneCourse";
 
 export const OneCourse = () => {
   const [oneCoursePpal, setOneCoursePpal] = useState();
@@ -22,6 +23,7 @@ export const OneCourse = () => {
   const [isIntoWishes, setIsIntoWishes] = useState(false)
   const [courseTags, setCourseTags] = useState([]);
   const [isIntoPurchase, setIsIntoPurchase] = useState(false)
+  const [showModalDelete, setShowModalDelete] = useState(false)
   const navigate = useNavigate();
 
   const openModal = () => {
@@ -29,7 +31,9 @@ export const OneCourse = () => {
     setCourseToEdit();
   };
 
-  console.log("PRUEBAAAAAAAAAA",courseTags);
+  const openModalDelete = () => {
+    setShowModalDelete(true);
+  };
 
   useEffect(() => {
     axios
@@ -237,12 +241,9 @@ export const OneCourse = () => {
             >
               {isIntoPurchase ? "Comprado" : "Comprar"}
             </Button>
-            
-
-            
-
             <Button
-              onClick={() => deleteCourse(course_id)}
+              // onClick={() => deleteCourse(course_id)}
+              onClick={openModalDelete}
               variant="outline-danger"
               className="me-3"
             >
@@ -293,6 +294,13 @@ export const OneCourse = () => {
           setShowModal={setShowModal}
           setOneCoursePpal={setOneCoursePpal}
           oneCoursePpal={oneCoursePpal}
+        />
+
+        <ModalDelOneCourse
+            showModalDelete={showModalDelete}
+            setShowModalDelete={setShowModalDelete}
+            deleteCourse={deleteCourse}
+            course_id={course_id}
         />
       </section>
     </>
