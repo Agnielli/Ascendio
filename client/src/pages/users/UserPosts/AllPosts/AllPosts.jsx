@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Card, ListGroup } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 export const AllPosts = ({
   posts,
@@ -7,6 +8,7 @@ export const AllPosts = ({
   markAIncorrect,
   markAPending,
 }) => {
+  const navigate = useNavigate();
   return (
     <div className="d-flex gap-5 flex-wrap pe-5 ps-5">
       {posts?.map((elem) => {
@@ -41,6 +43,15 @@ export const AllPosts = ({
                     {elem.correct === 0 && "trade errado"}
                     {elem.correct === 1 && "trade Acertado"}
                   </ListGroup.Item>{" "}
+                  <div className="d-flex justify-content-center mt-1 mb-1">
+                    <Button
+                      onClick={() => {
+                        navigate(`/onetradepost/${elem.post_id}`);
+                      }}
+                    >
+                      Ir a comentarios del post
+                    </Button>
+                  </div>
                   {elem.correct === null ? (
                     <div className="d-flex gap-1">
                       <Button
@@ -76,24 +87,47 @@ export const AllPosts = ({
                       </Button>
                     </div>
                   ) : (
-                    <div className="d-flex gap-1">
-                      <Button
-                        onClick={() => markACorrect(elem.post_id, elem.correct)}
-                        variant="primary"
-                      >
-                        Marcar Acertado
-                      </Button>
-                      <Button
-                        onClick={() => markAPending(elem.post_id, elem.correct)}
-                        variant="primary"
-                      >
-                        Marcar Pendiente
-                      </Button>
-                    </div>
+                    <>
+                      <div>
+                        <div className="d-flex gap-1 mb-1">
+                          <Button
+                            onClick={() =>
+                              markACorrect(elem.post_id, elem.correct)
+                            }
+                            variant="primary"
+                          >
+                            Marcar Acertado
+                          </Button>
+                          <Button
+                            onClick={() =>
+                              markAPending(elem.post_id, elem.correct)
+                            }
+                            variant="primary"
+                          >
+                            Marcar Pendiente
+                          </Button>
+                        </div>
+                      </div>
+                    </>
                   )}
                 </ListGroup>
               ) : (
-                <Card.Text>Descripción: {elem.description}</Card.Text>
+                <div>
+                  <Card.Img
+                    variant="top"
+                    src={`http://localhost:3000/images/generalPost/${elem.resource_text}`}
+                  />
+                  <Card.Text className="d-flex flex-column">
+                    Descripción: {elem.description}
+                  </Card.Text>
+                  <Button
+                    onClick={() => {
+                      navigate(`/oneGeneralPost/${elem.post_id}`);
+                    }}
+                  >
+                    Ir a comentarios del post
+                  </Button>
+                </div>
               )}
             </Card.Body>
           </Card>

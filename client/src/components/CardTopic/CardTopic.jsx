@@ -1,11 +1,12 @@
 import React from 'react'
 import { Button, Card } from 'react-bootstrap';
 
-export const CardTopic = () => {
+export const CardTopic = ({topics, setTopics, elem, deleteTopic}) => {
+  console.log('OOOOOOOOOOOO', topics)
   return (
     <Card>
       <Card.Body>
-         topic
+         {elem.topic_title}
         <Button 
           variant="outline-success"
         >
@@ -13,11 +14,12 @@ export const CardTopic = () => {
         </Button>
         <Button
           variant="outline-success"
+
         >
           Eliminar
         </Button>
        
-        <CardTopic/>
+
       </Card.Body>
     </Card>
   );

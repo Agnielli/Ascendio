@@ -106,7 +106,6 @@ class postsControllers {
     try {
       const { id } = req.params;
       const { correct, mark } = req.body;
-      console.log(req.body);
       if ((correct === 0 || correct === null) && mark === 1) {
         let sql = `UPDATE post SET correct = 1 WHERE post_id = ${id};`;
         connection.query(sql, (error, result) => {
@@ -152,8 +151,19 @@ class postsControllers {
   OneTradePost = (req, res) => {
     try {
       const post_id = req.params.id;
-      let sql = `SELECT  post.*, category.category_name, post_resource.text AS resource_text, user.user_id AS post_user_id,user.nickname AS post_user_nickname, comments.* FROM post LEFT JOIN category ON post.category_id = category.category_id LEFT JOIN post_resource ON post.post_id = post_resource.post_id LEFT JOIN user ON post.user_id = user.user_id LEFT JOIN comments ON post.post_id = comments.post_id WHERE post.post_id = ${post_id};`;
-      connection.query(sql, (error, result) => {
+      
+      // let sql2 = `SELECT post.*, user.nickname AS post_user_nickname 
+      //             FROM post 
+      //             LEFT JOIN user ON post.user_id = user.user_id 
+      //             WHERE post.post_id = ${post_id};`;
+
+      let sql2 = `SELECT post.*, user.nickname AS post_user_nickname, post_resource.text AS resource_text
+                  FROM post
+                  LEFT JOIN user ON post.user_id = user.user_id
+                  LEFT JOIN post_resource ON post.post_id = post_resource.post_id
+                  WHERE post.post_id = ${post_id};`;                  
+
+      connection.query(sql2, (error, result) => {
         if (error) {
           res.status(400).json({ message: "Error en la SQL" });
         } else {
@@ -167,6 +177,19 @@ class postsControllers {
       });
     }
   };
+
+  getAllPostGeneral = (req, res) => {
+    console.log(req.body)
+    let sql = `SELECT post.*, user.nickname FROM post INNER JOIN user ON post.user_id = user.user_id;`
+    
+    connection.query(sql, (err, result) => {
+      if(err) {
+        res.status(500).json({err})
+      } else {
+        res.status(200).json(result)
+      }
+    })
+  }
 }
 
 module.exports = new postsControllers();

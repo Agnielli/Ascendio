@@ -3,7 +3,7 @@ import { AscendioContext } from '../../../../../context/AscendioContext';
 import axios from 'axios'
 import { Button, Form } from 'react-bootstrap';
 
-export const VeryFyPassword = ({setShowNewPassword, setShowVerifyPassword}) => {
+export const VeryFyPassword = ({setShowNewPassword, setShowVerifyPassword, setShowChangePassword}) => {
   const { user, setUser } = useContext(AscendioContext);
   const [currentPassword , setCurrentPassword] = useState('');
   const [msgError, setMsgError] = useState("");
@@ -37,9 +37,9 @@ export const VeryFyPassword = ({setShowNewPassword, setShowVerifyPassword}) => {
     <>
 
     <Form>
-    <h2>Verificar Contraseña Actual:</h2>
+    <h2>Verificar contraseña:</h2>
         <Form.Group className="mb-3" controlId="formCurrentPassword">
-          <Form.Label>Contraseña Actual</Form.Label>
+          <Form.Label>Contraseña:</Form.Label>
           <div className="password-container">
           <Form.Control
             type={showPassword ? "text" : "password"}
@@ -73,8 +73,15 @@ export const VeryFyPassword = ({setShowNewPassword, setShowVerifyPassword}) => {
         >
           Siguiente
         </Button>
+        <Button
+          variant="primary me-2"
+          onClick={()=>setShowChangePassword(false)}
+        >
+         cancelar
+        </Button>
 
     </Form>
+    
 
     
     

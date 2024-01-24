@@ -49,7 +49,7 @@ export const UserFollowing = () => {
               <Card.Body>
                 <Card.Title>{elem.nickname}</Card.Title>
                 <Card.Text></Card.Text>
-                <Button variant="primary">Seguir tambien</Button>
+                <Button variant="primary">Dejar de seguir</Button>
               </Card.Body>
             </Card>
           );

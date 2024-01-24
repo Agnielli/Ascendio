@@ -15,7 +15,6 @@ import { OneCourse } from "../pages/courses/OneCourse/OneCourse";
 import { Landing } from "../pages/dashboard/Landing/Landing";
 import { Contact } from "../pages/dashboard/Contact/Contact";
 import { RecoverPassword } from "../pages/auth/RecoverPassword/RecoverPassword";
-import { CreateTrade } from "../pages/posts/trades/CreateTrade/CreateTrade";
 import { Usuarios } from "../pages/admin/AdminUsuarios/Usuarios";
 import { Estadisticas } from "../pages/admin/AdminEstadisticas/Estadisticas";
 import { Cursos } from "../pages/admin/AdminCursos/Cursos";
@@ -28,7 +27,6 @@ import { MailRecoverPassword } from "../pages/auth/MailRecoverPassword/MailRecov
 import { ConfirmationUser } from "../pages/auth/Register/ConfirmationUser/ConfirmationUser";
 import { AllTrades } from "../pages/posts/trades/AllTrades/AllTrades";
 import { EditUser } from "../pages/users/EditUser/EditUser";
-
 import { UserFollowers } from "../pages/users/UserFollowers/UserFollowers";
 import { UserPosts } from "../pages/users/UserPosts/UserPosts";
 import { UserFollowing } from "../pages/users/UserFollowing/UserFollowing";
@@ -36,7 +34,12 @@ import { OneUserCourses } from "../pages/courses/OneUserCourses/OneUserCourses";
 import { AllPostsGenerals } from "../pages/posts/PostGeneral/AllPostsGenerals/AllPostsGenerals";
 import { ShowAllUsers } from "../pages/users/ShowAllUsers/ShowAllUsers";
 import { CreateGeneralPost } from "../pages/posts/PostGeneral/CreateGeneralPost/CreateGeneralPost";
-import { OneTradePost } from "../pages/posts/Trades/OneTradePost/OneTradePost";
+
+import { CreateTrade } from "../pages/posts/Trades/CreateTrade/CreateTrade";
+import { TraderProfile } from "../pages/users/TraderProfile/TraderProfile";
+import { OneTradePost } from "../pages/posts/trades/OneTradePost/OneTradePost";
+import { OneGeneralPost } from "../pages/posts/PostGeneral/OneGeneralPost/OneGeneralPost";
+
 
 export const RoutesApp = () => {
   const { token } = useContext(AscendioContext);
@@ -89,6 +92,7 @@ export const RoutesApp = () => {
               />
               <Route path="/allpoststrades" element={<AllTrades />} />
               <Route path="/onetradepost/:post_id" element={<OneTradePost />} />
+              <Route path="/onegeneralpost/:post_id" element={<OneGeneralPost />} />
               <Route path="/allpostsgenerals" element={<AllPostsGenerals />} />
               <Route path="/showallusers" element={<ShowAllUsers />} />
               <Route path="/createcourse" element={<CreateCourse />} />
@@ -101,6 +105,7 @@ export const RoutesApp = () => {
                 path="/oneusercourses/:user_id"
                 element={<OneUserCourses />}
               />
+              <Route path="/traderprofile/:user_id" element={<TraderProfile />}/>
             </>
           )}
 

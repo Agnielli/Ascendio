@@ -14,13 +14,12 @@ export const Users = () => {
 
   const navigate = useNavigate();
 
-  console.log(user.user_id);
+
   //SACAR numero de seguidores del usuario logueado
   useEffect(() => {
     axios
       .get(`http://localhost:3000/users/statisticsuser/${user.user_id}`)
       .then((res) => {
-        console.log(res);
         setStatisticsUser(res.data.datos);
       })
       .catch((err) => console.log(err));

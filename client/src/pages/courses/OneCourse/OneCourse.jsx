@@ -16,10 +16,16 @@ export const OneCourse = () => {
   const [courseToEdit, setCourseToEdit] = useState();
   const [addSection, setAddSection] = useState(false);
   const [sections, setSections] = useState([]);
+  const [topics, setTopics] = useState([])
   const [resetCourse, setResetCourse] = useState(false);
   const [course, setCourse] = useState()
   const [isIntoWishes, setIsIntoWishes] = useState(false)
   const [courseTags, setCourseTags] = useState([]);
+  const [isIntoPurchase, setIsIntoPurchase] = useState(false)
+  const navigate = useNavigate();
+  
+  const navigate = useNavigate();
+  
 
 
   const openModal = () => {
@@ -32,10 +38,22 @@ export const OneCourse = () => {
     axios
     .get(`http://localhost:3000/courses/onecourse/${course_id}`)
     .then((res) => {
-      console.log(res.data);
+      
       setOneCoursePpal(res.data);
       setCourseToEdit(res.data);
       setSections(res.data.sections);
+      setTopics(res.data.topics)
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }, [showModal, resetCourse]);
+
+  useEffect(() => {
+    axios
+    .get(`http://localhost:3000/courses/getalltagsonecourse/${course_id}`)
+    .then((res) => {
+      setCourseTags(res.data)
     })
     .catch((err) => {
       console.log(err);
@@ -67,6 +85,20 @@ export const OneCourse = () => {
       });
     }
   }, [user]);
+
+  useEffect(()=>{
+    axios
+    .get(`http://localhost:3000/courses/getpurchasedcourse/${course_id}/${user?.user_id}`)
+    .then((res) => {
+      if(res.data.length){
+        setIsIntoPurchase(true)
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }, [user]);
+
   
   
   const formatearFecha = (date) => {
@@ -90,6 +122,14 @@ export const OneCourse = () => {
         .catch((err)=>console.log(err))
   }
 
+  const addToPurchase = () =>{
+    console.log ("aquí se compra un curso")
+      axios
+        .put(`http://localhost:3000/courses/addtopurchasecourse/${course_id}`, {usuario: user.user_id})
+        .then((res)=>console.log(res))
+        .catch((err)=>console.log(err))
+  }
+
   const handleWishes = () =>{
     if(isIntoWishes){
       delFromWishes()
@@ -97,6 +137,15 @@ export const OneCourse = () => {
     }else{
       addToWishes()
       setIsIntoWishes(true)
+    }
+  }
+
+  const handlePurchase = () =>{
+    if(isIntoWishes){
+      setIsIntoPurchase(false)
+    }else{
+      addToPurchase()
+      setIsIntoPurchase(true)
     }
   }
 
@@ -130,17 +179,19 @@ export const OneCourse = () => {
   };
 
   //pte comprobar la ruta y hacer el axios.
-  const deleteTopic = () => {
+  const deleteTopic = (section_id, topic_id) => {
     axios
-      .delete(`http://localhost:3000/courses/${course_id}/${section_id}/${topic_id}`)
+      .delete(`http://localhost:3000/courses/deletetopic/${course_id}/${section_id}/${topic_id}`)
       .then((res)=>{
         console.log(res);
+        setResetCourse(!resetCourse);
       })
       .catch((err)=>{
         console.log(err);
       })
   }
 
+  console.log("OOOOOOOOOOOOOOOOOOOOOOOOOOO",courseTags);
   return (
     <>
       <section className="d-flex flex-column align-items-center justify-content-center p-5">
@@ -184,6 +235,16 @@ export const OneCourse = () => {
               {isIntoWishes ? "Borrar de deseados" : "Añadir a deseados"}
             </Button>
 
+            <Button 
+              onClick={handlePurchase}
+              disabled={isIntoPurchase ? true : false}
+            >
+              {isIntoPurchase ? "Comprado" : "Comprar"}
+            </Button>
+            
+
+            
+
             <Button
               onClick={() => deleteCourse(course_id)}
               variant="outline-danger"
@@ -211,6 +272,11 @@ export const OneCourse = () => {
                   deleteSection={deleteSection}
                   course_id={course_id}
                   sections={sections}
+                  topics={topics}
+                  setTopics={setTopics}
+                  setResetCourse={setResetCourse}
+                  resetCourse={resetCourse}
+                  deleteTopic={deleteTopic}
                 />
               );
             })}

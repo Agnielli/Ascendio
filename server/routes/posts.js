@@ -18,5 +18,6 @@ router.get("/callcategorys", postsControllers.callCategorys);
 router.get("/lasttrades", postsControllers.showLastTrades);
 router.put("/markatrade/:id", postsControllers.markATrade);
 router.get("/onetradepost/:id", postsControllers.OneTradePost);
+router.get("/getgeneralposts", postsControllers.getAllPostGeneral)
 
 module.exports = router;

@@ -12,19 +12,24 @@ export const ModalCreateComment = ({ showModal, setShowModal, oneTrade }) => {
   const [comment, setComment] = useState(initialValue);
   const { user } = useContext(AscendioContext);
   const navigate = useNavigate();
-
+  console.log(user);
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setRegister({ ...comment, [name]: value });
+    setComment({ [name]: value });
   };
 
   const handleSubmit = () => {
-    setShowModal(false);
+    console.log(oneTrade);
+    console.log(comment);
     axios
-      .post()
+      .post("http://localhost:3000/comments/createcomment", {
+        comment,
+        oneTrade,
+        user,
+      })
       .then((res) => {
         console.log(res);
-        navigate(`/onetradepost/${oneTrade.post_id}`);
+        setShowModal(false);
       })
       .catch((error) => console.log(error));
   };
@@ -40,6 +45,7 @@ export const ModalCreateComment = ({ showModal, setShowModal, oneTrade }) => {
             <Form.Label>Exprésate</Form.Label>
             <Form.Control
               type="text"
+              name="message"
               placeholder="¿Que quieres decir?"
               onChange={handleChange}
             />
@@ -53,7 +59,6 @@ export const ModalCreateComment = ({ showModal, setShowModal, oneTrade }) => {
         <Button
           variant="primary"
           onClick={() => {
-            navigate("/OneTradePost/1");
             setShowModal(false);
           }}
         >

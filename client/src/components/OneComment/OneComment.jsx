@@ -3,26 +3,24 @@ import React, { useEffect, useState } from "react";
 import { CommentCard } from "../Comment/CommentCard";
 
 export const OneComment = () => {
-  const [userComment, setUserComment] = useState();
+  const [generalPost, setGeneralPost] = useState();
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/admin/usercomment`)
+      .get(`http://localhost:3000/posts/getgeneralposts`)
       .then((res) => {
-        console.log(res);
-        setUserComment(res.data);
+        setGeneralPost(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
-  console.log(userComment)
-
   return (
-      <div>
-        <CommentCard userComment={userComment} setUserComment={setUserComment}/>
-      </div>
-  )
-   
+    <div>
+      {generalPost?.map((elem) => {
+        return <CommentCard key={elem.post_id} elem={elem} />;
+      })}
+    </div>
+  );
 };

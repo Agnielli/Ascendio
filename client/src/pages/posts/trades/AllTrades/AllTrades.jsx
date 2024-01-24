@@ -5,7 +5,6 @@ import { AscendioContext } from "../../../../context/AscendioContext";
 import { Link, useNavigate } from "react-router-dom";
 
 export const AllTrades = () => {
-  const [show, setShow] = useState(1);
   const [lastTrades, setLastTrades] = useState([]); // para enseñar: ULTIMOS TRADES o TOP SEGUIDORES o TOP ACERTADOS
   const { user } = useContext(AscendioContext);
   const [followingUsers, setFollowingUsers] = useState([]); // Nuevo estado para almacenar usuarios seguidos
@@ -78,14 +77,6 @@ export const AllTrades = () => {
   return (
     <div>
       <>
-        {/* <div className="d-flex gap-2 mb-2">
-          <Button>Todos los trades</Button>
-          <Button>Acertados</Button>
-          <Button>Errados</Button>
-          <Button>Pendientes</Button>
-          <Button>Trades de mis amigos</Button>
-          <Button>Categorías</Button>
-        </div> */}
         <h2>Trade Posts</h2>
         <div className="d-flex flex-wrap gap-2 mb-2">
           {lastTrades

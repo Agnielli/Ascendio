@@ -44,6 +44,7 @@ export const EditOneCourse = ({
 
   const handleClose = () => {
     setShowModal(false);
+    setMsgError("")
   };
 
   let regexPrice = /^[a-zA-Z0-9\s.,:?¿!¡]{1,5}$/;
@@ -70,6 +71,7 @@ export const EditOneCourse = ({
         console.log(res);
         setShowModal(false);
         setOneCoursePpal(editCourse);
+        setMsgError("")
       })
       .catch((err) => {
         console.log(err);
