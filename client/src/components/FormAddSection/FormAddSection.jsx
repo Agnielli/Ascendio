@@ -19,15 +19,12 @@ export const FormAddSection = ({sections, setSections, addSection, setAddSection
   const handleChange = (e) =>{
     setNewSection(e.target.value)
   }
-
-  let regex = /^[a-zA-Z0-9\s]{1,50}$/;
-
+  let regexSection = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ.,:?¿!¡]{1,50}$/;
   const handleSubmit = () =>{
     let data = {newSection, course_id}
-      if (!regex.test(newSection)) {
+      if (!regexSection.test(newSection)) {
       setMsgError("No se permiten más de 50 caracteres");
       }else if(newSection !== ''){
-
     axios
       .post("http://localhost:3000/courses/addsection", data)
       .then((res)=>{
@@ -42,7 +39,6 @@ export const FormAddSection = ({sections, setSections, addSection, setAddSection
       })
     }
   }
-
   return (
     <Row>
       <Col>
@@ -55,9 +51,7 @@ export const FormAddSection = ({sections, setSections, addSection, setAddSection
               value={newSection}
               onChange={handleChange}
             />
-
             <p>{msgError}</p>
-
             <Button variant="outline-success"
               className="me-3"  onClick={handleSubmit} >Aceptar</Button>
             <Button variant="outline-success"

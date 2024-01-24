@@ -16,12 +16,16 @@ export const OneCourse = () => {
   const [courseToEdit, setCourseToEdit] = useState();
   const [addSection, setAddSection] = useState(false);
   const [sections, setSections] = useState([]);
+  const [topics, setTopics] = useState([])
   const [resetCourse, setResetCourse] = useState(false);
   const [course, setCourse] = useState()
   const [isIntoWishes, setIsIntoWishes] = useState(false)
   const [courseTags, setCourseTags] = useState([]);
   const [isIntoPurchase, setIsIntoPurchase] = useState(false)
   
+  const navigate = useNavigate();
+  
+
 
   const openModal = () => {
     setShowModal(true);
@@ -37,6 +41,7 @@ export const OneCourse = () => {
       setOneCoursePpal(res.data);
       setCourseToEdit(res.data);
       setSections(res.data.sections);
+      setTopics(res.data.topics)
     })
     .catch((err) => {
       console.log(err);
@@ -149,11 +154,12 @@ export const OneCourse = () => {
   };
 
   //pte comprobar la ruta y hacer el axios.
-  const deleteTopic = () => {
+  const deleteTopic = (section_id, topic_id) => {
     axios
-      .delete(`http://localhost:3000/courses/${course_id}/${section_id}/${topic_id}`)
+      .delete(`http://localhost:3000/courses/deletetopic/${course_id}/${section_id}/${topic_id}`)
       .then((res)=>{
         console.log(res);
+        setResetCourse(!resetCourse);
       })
       .catch((err)=>{
         console.log(err);
@@ -240,6 +246,11 @@ export const OneCourse = () => {
                   deleteSection={deleteSection}
                   course_id={course_id}
                   sections={sections}
+                  topics={topics}
+                  setTopics={setTopics}
+                  setResetCourse={setResetCourse}
+                  resetCourse={resetCourse}
+                  deleteTopic={deleteTopic}
                 />
               );
             })}

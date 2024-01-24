@@ -93,9 +93,12 @@ class coursesControllers {
     const { course_id, user_id } = req.params; //añadir el usuario que está logueado
     // console.log(course_id);
 
-    let sql = `SELECT course.title, course.img, course.date, course.is_completed, course.description, course.price , section.section_id, section.section_title
-    FROM course LEFT JOIN  section ON course.course_id = section.course_id
+    let sql = `SELECT course.title, course.img, course.date, course.is_completed, course.description, course.price , section.section_id, section.section_title, topic.topic_id, topic.topic_title
+    FROM course 
+    LEFT JOIN section ON course.course_id = section.course_id
+    LEFT JOIN topic ON course.course_id = topic.course_id
     WHERE course.course_id = ${course_id} AND is_deleted = 0` ;
+
     
     /* let sql = `SELECT course.title, course.img, course.date, course.is_completed, course.description, course.price , section.section_id, section.section_title, tag.tag_id, tag.tag_name
         LEFT JOIN tag ON course_tag.tag_id = tag.tag_id
@@ -127,6 +130,7 @@ class coursesControllers {
 
       const uniqueTags = new Set()
       const uniqueSections = new Set();
+      const uniqueTopics = new Set();
 
       result.forEach((elem) => {
         if (elem.tag_id != null && !uniqueTags.has(elem.tag_id)) {
@@ -140,6 +144,14 @@ class coursesControllers {
             section_title: elem.section_title,
           });
           uniqueSections.add(elem.section_id);
+        }
+
+        if (elem.topic_id != null && !uniqueTopics.has(elem.topic_id)) {
+          data.topics.push({
+            topic_id: elem.topic_id,
+            topic_title: elem.topic_title,
+          });
+          uniqueTopics.add(elem.topic_id);
         }
       });
 
@@ -270,8 +282,12 @@ class coursesControllers {
   };
 
   deleteTopic = (req, res) => {
-    console.log("Hi to everyone");
-    let sql = `select nada form nada`
+    const { course_id, section_id, topic_id } = req.params;
+    let sql = `DELETE FROM topic WHERE course_id = ${course_id} and section_id =${section_id} AND topic_id = ${topic_id}`;
+    console.log('PPPPPPPPPPPPPP', req.params)
+    connection.query(sql, (err, result) => {
+      err ? res.status(500).json(err) : res.status(200).json(result);
+    });
   }
 
   getWishCourse = (req, res) =>{
