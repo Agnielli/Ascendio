@@ -92,65 +92,41 @@ class coursesControllers {
   oneCourse = (req, res) => {
     const { course_id } = req.params; //añadir el usuario que está logueado
     // console.log(course_id);
-
-
     let sql = `SELECT course.title, course.img, course.date, course.is_completed, course.description, course.price , section.section_id, section.section_title, topic.topic_id, topic.topic_title
-    FROM course 
+    FROM course
     LEFT JOIN section ON course.course_id = section.course_id
     LEFT JOIN topic ON course.course_id = topic.course_id
     WHERE course.course_id = ${course_id} AND is_deleted = 0` ;
-
-    
     /* let sql = `SELECT course.title, course.img, course.date, course.is_completed, course.description, course.price , section.section_id, section.section_title, tag.tag_id, tag.tag_name
         LEFT JOIN tag ON course_tag.tag_id = tag.tag_id
-        LEFT JOIN topic ON course.course_id = topic.course_id   
+        LEFT JOIN topic ON course.course_id = topic.course_id
           WHERE course.course_id = ${course_id} AND is_deleted = 0`;
-        LEFT JOIN tag ON course_tag.tag_id = tag.tag_id   
+        LEFT JOIN tag ON course_tag.tag_id = tag.tag_id
           WHERE course.course_id = ${course_id} AND is_deleted = 0`; */
-
-
-
     connection.query(sql, (err, result) => {
       console.log("++++++++++++", result);
       if (err) {
         res.status(500).json(err);
       }
-
-      const { title, user_id, description, img, date, price, is_completed } = result[0];
-
-
-      let data
-
-      let creatorUser = {}
-      
-      let sql2 = `SELECT nickname from user WHERE user_id = ${user_id}`
-      
-      connection.query(sql2, (err, result2) => {
-        console.log("----------------", result2);
-        if (err) {
-          res.status(500).json(err);
-        }
-
-        creatorUser = result2[0]
-        
-        data = {
-          creatorUser,
-          title,
-          img,
-          date,
-          price,
-          description,
-          sections: [],
-          topics:[],
-        };
-        // const uniqueTags = new Set()
-
+      const { title, description, img, date, price, is_completed } = result[0];
+      let data = {
+        title,
+        img,
+        date,
+        price,
+        description,
+        sections: [],
+        topics:[],
+      };
+      //const uniqueTags = new Set()
       const uniqueSections = new Set();
       const uniqueTopics = new Set();
 
       result.forEach((elem) => {
-
-
+        /* if (elem.tag_id != null && !uniqueTags.has(elem.tag_id)) {
+          data.tags.push({ tag_id: elem.tag_id, tag_title: elem.tag_name });
+          uniqueTags.add(elem.tag_id)
+        } */
         if (elem.section_id != null && !uniqueSections.has(elem.section_id)) {
           data.sections.push({
             section_id: elem.section_id,
@@ -158,7 +134,7 @@ class coursesControllers {
           });
           uniqueSections.add(elem.section_id);
         }
-
+        
         if (elem.topic_id != null && !uniqueTopics.has(elem.topic_id)) {
           data.topics.push({
             topic_id: elem.topic_id,
@@ -167,9 +143,7 @@ class coursesControllers {
           uniqueTopics.add(elem.topic_id);
         }
       });
-
       res.status(200).json(data);
-      })
     });
   };
 

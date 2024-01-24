@@ -23,10 +23,6 @@ export const OneCourse = () => {
   const [courseTags, setCourseTags] = useState([]);
   const [isIntoPurchase, setIsIntoPurchase] = useState(false)
   const navigate = useNavigate();
-  
-  const navigate = useNavigate();
-  
-
 
   const openModal = () => {
     setShowModal(true);
@@ -34,7 +30,6 @@ export const OneCourse = () => {
   };
 
   console.log("PRUEBAAAAAAAAAA",courseTags);
-
 
   useEffect(() => {
     axios
