@@ -1,7 +1,7 @@
 import React from 'react'
 
-export const CommentCard = () => {
+export const CommentCard = ({elem}) => {
   return (
-    <div>Comment</div>
+    <div>{elem.description}</div>
   )
 }
