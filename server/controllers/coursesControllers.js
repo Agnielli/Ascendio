@@ -103,13 +103,14 @@ class coursesControllers {
   oneCourse = (req, res) => {
     const { course_id, user_id } = req.params; //añadir el usuario que está logueado
     // console.log(course_id);
-    /* let sql = `SELECT course.title, course.img, course.date, course.is_completed, course.description, course.price , section.section_id, section.section_title FROM course LEFT JOIN  section ON course.course_id = section.course_id WHERE course.course_id = ${course_id} AND is_deleted = 0` ; */
-    let sql = `SELECT course.title, course.img, course.date, course.is_completed, course.description, course.price , section.section_id, section.section_title, tag.tag_id, tag.tag_name
+    let sql = `SELECT course.title, course.img, course.date, course.is_completed, course.description, course.price , section.section_id, section.section_title FROM course LEFT JOIN  section ON course.course_id = section.course_id WHERE course.course_id = ${course_id} AND is_deleted = 0` ;
+    /* let sql = `SELECT course.title, course.img, course.date, course.is_completed, course.description, course.price , section.section_id, section.section_title, tag.tag_id, tag.tag_name
       FROM course 
         LEFT JOIN  section ON course.course_id = section.course_id 
         LEFT JOIN course_tag ON course.course_id = course_tag.course_id 
         LEFT JOIN tag ON course_tag.tag_id = tag.tag_id   
-          WHERE course.course_id = ${course_id} AND is_deleted = 0`;
+          WHERE course.course_id = ${course_id} AND is_deleted = 0`; */
+
 
     connection.query(sql, (err, result) => {
       if (err) {
@@ -291,6 +292,47 @@ class coursesControllers {
     console.log("Hi to everyone");
     let sql = `select nada form nada`
   }
+
+  getAllTagsOneCourse = (req,res) =>{
+
+    const {course_id} = req.params;
+
+    let sql = `SELECT tag.tag_id, tag.tag_name
+    FROM tag
+      LEFT JOIN  course_tag ON course_tag.tag_id = tag.tag_id 
+        WHERE course_tag.course_id = ${course_id}`
+
+        connection.query(sql,(err,result)=>{
+          err ? res.status(500).json(err) : res.status(200).json(result);
+        })
+        
+  }
+
+
+
+
+  /* const uniqueTags = new Set()
+  const uniqueSections = new Set();
+  result.forEach((elem) => {
+    if (elem.tag_id != null && !uniqueTags.has(elem.tag_id)) {
+      data.tags.push({ tag_id: elem.tag_id, tag_title: elem.tag_name });
+      uniqueTags.add(elem.tag_id)
+    }
+    if (elem.section_id != null && !uniqueSections.has(elem.section_id)) {
+      data.sections.push({
+        section_id: elem.section_id,
+        section_title: elem.section_title,
+      });
+      uniqueSections.add(elem.section_id);
+    }
+  }); */
+
+
+
+
+
+
+
 
 }
 module.exports = new coursesControllers();
