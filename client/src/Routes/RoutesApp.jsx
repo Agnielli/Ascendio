@@ -27,7 +27,6 @@ import { MailRecoverPassword } from "../pages/auth/MailRecoverPassword/MailRecov
 import { ConfirmationUser } from "../pages/auth/Register/ConfirmationUser/ConfirmationUser";
 import { AllTrades } from "../pages/posts/trades/AllTrades/AllTrades";
 import { EditUser } from "../pages/users/EditUser/EditUser";
-
 import { UserFollowers } from "../pages/users/UserFollowers/UserFollowers";
 import { UserPosts } from "../pages/users/UserPosts/UserPosts";
 import { UserFollowing } from "../pages/users/UserFollowing/UserFollowing";
@@ -37,6 +36,8 @@ import { ShowAllUsers } from "../pages/users/ShowAllUsers/ShowAllUsers";
 import { CreateGeneralPost } from "../pages/posts/PostGeneral/CreateGeneralPost/CreateGeneralPost";
 import { OneTradePost } from "../pages/posts/Trades/OneTradePost/OneTradePost";
 import { CreateTrade } from "../pages/posts/Trades/CreateTrade/CreateTrade";
+import { TraderProfile } from "../pages/users/TraderProfile/TraderProfile";
+
 
 export const RoutesApp = () => {
   const { token } = useContext(AscendioContext);
@@ -101,6 +102,7 @@ export const RoutesApp = () => {
                 path="/oneusercourses/:user_id"
                 element={<OneUserCourses />}
               />
+              <Route path="/traderprofile/:user_id" element={<TraderProfile />}/>
             </>
           )}
 

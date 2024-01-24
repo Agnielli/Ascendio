@@ -278,9 +278,13 @@ class usersControllers {
 
     if (req.file) {
       img = req.file.filename;
-      sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}", email = "${email}", phonenumber = "${phonenumber}", img = "${img}" WHERE user_id = ${user_id}`;
+      sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}", email = "${email}", phonenumber = ${
+        phonenumber !== null ? `"${phonenumber}"` : null
+      }, img = "${img}" WHERE user_id = ${user_id}`;
     } else {
-      sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}", email = "${email}", phonenumber = "${phonenumber}" WHERE user_id = ${user_id} AND img = "${img}" IS NULL`;
+      sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}", email = "${email}", phonenumber = ${
+        phonenumber !== null ? `"${phonenumber}"` : null
+      } WHERE user_id = ${user_id} AND (img IS NULL OR img = "")`;
     }
     connection.query(sql, (err, result) => {
       if (err) {
@@ -461,6 +465,24 @@ class usersControllers {
     }
   };
 
+  getPostsUser = (req, res) => {
+    try {
+      const { id } = req.params;
+      let sql = `SELECT post.*, post_resource.resource_type, post_resource.text as resource_text, category.category_name FROM post LEFT JOIN post_resource ON post.post_id = post_resource.post_id LEFT JOIN category ON post.category_id = category.category_id WHERE post.user_id = ${id};`;
+      connection.query(sql, (error, result) => {
+        if (error) {
+          console.log("Error en sql", error);
+          res.status(400).json({ message: "Error en la SQL" });
+        } else {
+          res.status(200).json({ datos: result });
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).JSON({ message: "Error inesperado (CATCH)" });
+    }
+  };
+
   showAllUsers = (req, res) => {
     try {
       let sql = `SELECT user.*, (SELECT COUNT(*) FROM post WHERE user.user_id = post.user_id) AS total_posts, (SELECT COUNT(*) FROM post WHERE user.user_id = post.user_id AND post.correct = true) AS correct_posts,( SELECT COUNT(*) FROM post WHERE user.user_id = post.user_id AND post.correct = false) AS incorrect_posts, ( SELECT COUNT(*) FROM user_follows_user WHERE user.user_id = user_follows_user.user_id) AS following_count, ( SELECT COUNT(*) FROM user_follows_user WHERE user.user_id = user_follows_user.followed_user_id) AS followers_count, ( SELECT COUNT(*) FROM course WHERE user.user_id = course.user_id ) AS total_courses FROM user;`;
@@ -477,6 +499,34 @@ class usersControllers {
         error: "Error al enviar el correo electrónico de registro",
       });
     }
+  };
+
+  traderProfile = (req, res) => {
+    const { id: user_id } = req.params;
+
+    let sql = `SELECT * FROM user WHERE type = 2 AND user_id = ${user_id}`;
+    let sql2 = `SELECT 
+    u.*,
+    p.post_id,
+    (SELECT COUNT(*) FROM post p WHERE u.user_id = p.user_id) AS total_posts,
+    (SELECT COUNT(*) FROM post p WHERE u.user_id = p.user_id AND p.correct = true) AS correct_posts,
+    (SELECT COUNT(*) FROM post p WHERE u.user_id = p.user_id AND p.correct = false) AS incorrect_posts,
+    (SELECT COUNT(*) FROM user_follows_user uf WHERE u.user_id = uf.user_id) AS following_count,
+    (SELECT COUNT(*) FROM user_follows_user uf WHERE u.user_id = uf.followed_user_id) AS followers_count,
+    (SELECT COUNT(*) FROM course c WHERE u.user_id = c.user_id) AS total_courses,
+    GROUP_CONCAT(p.description SEPARATOR ', ') AS user_posts
+    FROM user u
+    LEFT JOIN post p ON u.user_id = p.user_id
+    WHERE u.type = 2 AND u.user_id = ${user_id}
+    GROUP BY u.user_id, p.post_id;`;
+
+    connection.query(sql2, (err, result) => {
+      if (err) {
+        res.status(500).json(err);
+      } else {
+        res.status(200).json(result);
+      }
+    });
   };
 }
 

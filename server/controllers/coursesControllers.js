@@ -2,18 +2,19 @@ const connection = require("../config/db");
 
 class coursesControllers {
   createCourse = (req, res) => {
-
-    const tags = JSON.parse(req.body.tags)
-    const { title, description, price, user_id } = JSON.parse(req.body.crearCurso);
+    const tags = JSON.parse(req.body.tags);
+    const { title, description, price, user_id } = JSON.parse(
+      req.body.crearCurso
+    );
 
     //posible validación en el back con reg.ex https://medium.com/codex/using-regular-expressions-in-javascript-edcd5942de89
 
-    let sql = `INSERT INTO course (title, description, price, user_id, img) VALUES ('${title}', '${description}', ${price}, ${user_id}, 'default.jpg')`
-    if(req.file !== undefined){
-     let img = req.file.filename;
-      sql = `INSERT INTO course (title, description, price, user_id, img) VALUES ('${title}', '${description}', ${price}, ${user_id}, '${img}')`
-     }
-    
+    let sql = `INSERT INTO course (title, description, price, user_id, img) VALUES ('${title}', '${description}', ${price}, ${user_id}, 'default.jpg')`;
+    if (req.file !== undefined) {
+      let img = req.file.filename;
+      sql = `INSERT INTO course (title, description, price, user_id, img) VALUES ('${title}', '${description}', ${price}, ${user_id}, '${img}')`;
+    }
+
     connection.query(sql, (err, result) => {
       err && res.status(500).json(err);
       if (err) {
@@ -55,7 +56,7 @@ class coursesControllers {
         res.status(200).json(result);
       }
     });
-   
+
     /* let sql = `SELECT course.title, course.img, course.description, course.price , tag.tag_id, tag.tag_name
         FROM course 
         LEFT JOIN course_tag ON course.course_id = course_tag.course_id 
@@ -86,7 +87,6 @@ class coursesControllers {
     }); */
   };
 
-
   purchaseCourse = (req, res) => {
     const { id } = req.params;
     let sql = `UPDATE course SET is_completed = 1 WHERE course_id = ${id} AND is_deleted = 0`;
@@ -103,15 +103,22 @@ class coursesControllers {
   oneCourse = (req, res) => {
     const { course_id, user_id } = req.params; //añadir el usuario que está logueado
     // console.log(course_id);
-    /* let sql = `SELECT course.title, course.img, course.date, course.is_completed, course.description, course.price , section.section_id, section.section_title FROM course LEFT JOIN  section ON course.course_id = section.course_id WHERE course.course_id = ${course_id} AND is_deleted = 0` ; */
-    let sql = `SELECT course.title, course.img, course.date, course.is_completed, course.description, course.price , section.section_id, section.section_title, tag.tag_id, tag.tag_name
-      FROM course 
-        LEFT JOIN  section ON course.course_id = section.course_id 
-        LEFT JOIN course_tag ON course.course_id = course_tag.course_id 
-        LEFT JOIN tag ON course_tag.tag_id = tag.tag_id   
+
+    let sql = `SELECT course.title, course.img, course.date, course.is_completed, course.description, course.price , section.section_id, section.section_title
+    FROM course LEFT JOIN  section ON course.course_id = section.course_id
+    WHERE course.course_id = ${course_id} AND is_deleted = 0` ;
+    
+    /* let sql = `SELECT course.title, course.img, course.date, course.is_completed, course.description, course.price , section.section_id, section.section_title, tag.tag_id, tag.tag_name
+        LEFT JOIN tag ON course_tag.tag_id = tag.tag_id
+        LEFT JOIN topic ON course.course_id = topic.course_id   
           WHERE course.course_id = ${course_id} AND is_deleted = 0`;
+        LEFT JOIN tag ON course_tag.tag_id = tag.tag_id   
+          WHERE course.course_id = ${course_id} AND is_deleted = 0`; */
+
+
 
     connection.query(sql, (err, result) => {
+      console.log("++++++++++++", result);
       if (err) {
         res.status(500).json(err);
       }
@@ -126,31 +133,37 @@ class coursesControllers {
         description,
         tags: [],
         sections: [],
+        topics:[],
       };
-      result.forEach((elem) => {
-        if (elem.tag_id != null) {
-          data.tags.push({ tag_id: elem.tag_id, tag_title: elem.tag_name });
-        }
-      });
+
+      const uniqueTags = new Set()
+      const uniqueSections = new Set();
 
       result.forEach((elem) => {
-        if (elem.section_id != null) {
+        if (elem.tag_id != null && !uniqueTags.has(elem.tag_id)) {
+          data.tags.push({ tag_id: elem.tag_id, tag_title: elem.tag_name });
+          uniqueTags.add(elem.tag_id)
+        }
+
+        if (elem.section_id != null && !uniqueSections.has(elem.section_id)) {
           data.sections.push({
             section_id: elem.section_id,
             section_title: elem.section_title,
           });
+          uniqueSections.add(elem.section_id);
         }
       });
-      console.log("ESTA ES MI DATA TOTAL", data);
+
       res.status(200).json(data);
     });
   };
 
-        
   editOneCourse = (req, res) => {
-    const { title, description, price, user_id } = JSON.parse(req.body.editarCurso);
-    const {course_id} = req.params;
-    
+    const { title, description, price, user_id } = JSON.parse(
+      req.body.editarCurso
+    );
+    const { course_id } = req.params;
+
     let sql = `UPDATE course SET title = '${title}', description = '${description}', price = ${price} WHERE course_id = ${course_id} AND user_id = ${user_id} AND is_deleted = 0`;
 
     let img;
@@ -174,6 +187,7 @@ class coursesControllers {
     let sql_cont = `SELECT max(section_id) as id FROM section WHERE course_id = ${course_id}`;
 
     connection.query(sql_cont, (err1, result) => {
+      console.log("...........", err1);
       if (err1) {
         return res.status(500).json(err1);
       }
@@ -188,6 +202,7 @@ class coursesControllers {
       let sql_insert = `INSERT INTO section (course_id, section_id, section_title) VALUES (${course_id} , ${section_id} , "${newSection}")`;
 
       connection.query(sql_insert, (err2, result_insert) => {
+        console.log("...........", err2);
         if (err2) {
           return res.status(500).json(err2);
         }
@@ -248,38 +263,58 @@ class coursesControllers {
     });
   };
 
-  oneUserCourses = (req,res) =>{
-    const {user_id} = req.params;
-    console.log("EEEEEEEEEEEEEA",req.params);
-    let sql = `SELECT * FROM course where user_id = ${user_id} AND is_deleted = 0;`
+  oneUserCourses = (req, res) => {
+    const { user_id } = req.params;
+    console.log("EEEEEEEEEEEEEA", req.params);
+    let sql = `SELECT * FROM course where user_id = ${user_id} AND is_deleted = 0;`;
 
-    connection.query(sql,(err,result)=>{
+    connection.query(sql, (err, result) => {
       err ? res.status(500).json(err) : res.status(200).json(result);
-    })
-  }
+    });
+  };
 
-
-
-
-
-
-
-
-
-
-
-  deleteCourse = (req,res) =>{
-    const {course_id} = req.params;
-    let sql =
-    `UPDATE course 
+  deleteCourse = (req, res) => {
+    const { course_id } = req.params;
+    let sql = `UPDATE course 
       LEFT JOIN  section ON course.course_id = section.course_id
       LEFT JOIN course_tag ON course.course_id = course_tag.course_id
       LEFT JOIN tag ON course_tag.tag_id = tag.tag_id
       LEFT JOIN topic ON course.course_id = topic.course_id
         SET course.is_deleted = 1
-          WHERE course.course_id = ${course_id};`
+          WHERE course.course_id = ${course_id};`;
 
-    connection.query(sql, (err, res)=>{
+    connection.query(sql, (err, result) => {
+      err ? res.status(500).json(err) : res.status(200).json(result);
+    });
+  };
+
+  deleteTopic = (req, res) => {
+    console.log("Hi to everyone");
+    let sql = `select nada form nada`
+  }
+
+  getWishCourse = (req, res) =>{
+    const {course_id, user_id} = req.params
+    console.log("lakjfdoasjdiafosjdfa2f")
+    let sql = `SELECT * FROM user_wishes_course WHERE user_id = ${user_id} and course_id = ${course_id}`
+
+    connection.query(sql, (err, result)=>{
+      err ?
+      res.status(500).json(err)
+      :
+      res.status(200).json(result);
+   
+    })
+
+  }
+
+  addWishesCourse = (req, res) =>{
+    const {course_id} = req.params
+    const {usuario} = req.body
+
+    let sql = `INSERT INTO user_wishes_course (user_id, course_id) VALUES (${usuario}, ${course_id})`
+
+    connection.query(sql, (err, result)=>{
       err ?
       res.status(500).json(err)
       :
@@ -287,10 +322,60 @@ class coursesControllers {
     })
   }
 
-  deleteTopic = (req, res) => {
-    console.log("Hi to everyone");
-    let sql = `select nada form nada`
+  delFromWishes = (req, res) =>{
+    const {course_id} = req.params
+    const {usuario} = req.body
+    console.log("ieiieieiei", req.body)
+
+    let sql = `DELETE FROM user_wishes_course WHERE course_id = ${course_id} and user_id = ${usuario}`;
+
+    connection.query(sql, (err, result)=>{
+      err ?
+      res.status(500).json(err)
+      :
+      res.status(200).json(result);
+    })
   }
+  getAllTagsOneCourse = (req,res) =>{
+
+    const {course_id} = req.params;
+
+    let sql = `SELECT tag.tag_id, tag.tag_name
+    FROM tag
+      LEFT JOIN  course_tag ON course_tag.tag_id = tag.tag_id 
+        WHERE course_tag.course_id = ${course_id}`
+
+        connection.query(sql,(err,result)=>{
+          err ? res.status(500).json(err) : res.status(200).json(result);
+        })
+        
+  }
+
+
+
+
+  /* const uniqueTags = new Set()
+  const uniqueSections = new Set();
+  result.forEach((elem) => {
+    if (elem.tag_id != null && !uniqueTags.has(elem.tag_id)) {
+      data.tags.push({ tag_id: elem.tag_id, tag_title: elem.tag_name });
+      uniqueTags.add(elem.tag_id)
+    }
+    if (elem.section_id != null && !uniqueSections.has(elem.section_id)) {
+      data.sections.push({
+        section_id: elem.section_id,
+        section_title: elem.section_title,
+      });
+      uniqueSections.add(elem.section_id);
+    }
+  }); */
+
+
+
+
+
+
+
 
 }
 module.exports = new coursesControllers();

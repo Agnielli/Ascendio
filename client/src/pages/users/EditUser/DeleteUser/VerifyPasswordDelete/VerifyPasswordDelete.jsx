@@ -1,14 +1,14 @@
-import React, { useContext, useState } from 'react'
-import { AscendioContext } from '../../../../../context/AscendioContext';
+import React, { useContext, useState } from "react";
+import { Button, Form } from "react-bootstrap";
 import axios from 'axios'
-import { Button, Form } from 'react-bootstrap';
+import { AscendioContext } from "../../../../../context/AscendioContext";
 
-export const VeryFyPassword = ({setShowNewPassword, setShowVerifyPassword, setShowChangePassword}) => {
+export const VerifyPasswordDelete = ({ setShowDeleteUser, setShowConfirmDeleteUser, setShowVerifyPasswordDelete }) => {
+
   const { user, setUser } = useContext(AscendioContext);
   const [currentPassword , setCurrentPassword] = useState('');
   const [msgError, setMsgError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-
   const verPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -17,13 +17,12 @@ export const VeryFyPassword = ({setShowNewPassword, setShowVerifyPassword, setSh
     setCurrentPassword(e.target.value)
     
   }
- 
   const handleSubmit = () => {
     axios
       .post(`http://localhost:3000/users/verifypassword/${user?.user_id}`, { currentPassword })
       .then((res) => {
-        setShowNewPassword(true)
-        setShowVerifyPassword(false)
+        setShowConfirmDeleteUser(true)
+        setShowVerifyPasswordDelete(false)
         
         console.log("eeeeeeeeeeeeeeee", res.data);
       })
@@ -35,7 +34,6 @@ export const VeryFyPassword = ({setShowNewPassword, setShowVerifyPassword, setSh
   };
   return (
     <>
-
     <Form>
     <h2>Verificar contraseña:</h2>
         <Form.Group className="mb-3" controlId="formCurrentPassword">
@@ -75,18 +73,13 @@ export const VeryFyPassword = ({setShowNewPassword, setShowVerifyPassword, setSh
         </Button>
         <Button
           variant="primary me-2"
-          onClick={()=>setShowChangePassword(false)}
+          onClick={()=>setShowDeleteUser(false)}
         >
          cancelar
         </Button>
 
     </Form>
-    
-
-    
-    
-        
-        
-      </>
-  )
-}
+     
+    </>
+  );
+};
