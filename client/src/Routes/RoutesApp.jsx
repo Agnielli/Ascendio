@@ -28,14 +28,15 @@ import { MailRecoverPassword } from "../pages/auth/MailRecoverPassword/MailRecov
 import { ConfirmationUser } from "../pages/auth/Register/ConfirmationUser/ConfirmationUser";
 import { AllTrades } from "../pages/posts/trades/AllTrades/AllTrades";
 import { EditUser } from "../pages/users/EditUser/EditUser";
-import { CreateGeneralPost } from "../pages/posts/PostGeneral/CreateGeneralPost";
+
 import { UserFollowers } from "../pages/users/UserFollowers/UserFollowers";
 import { UserPosts } from "../pages/users/UserPosts/UserPosts";
 import { UserFollowing } from "../pages/users/UserFollowing/UserFollowing";
 import { OneUserCourses } from "../pages/courses/OneUserCourses/OneUserCourses";
 import { AllPostsGenerals } from "../pages/posts/PostGeneral/AllPostsGenerals/AllPostsGenerals";
 import { ShowAllUsers } from "../pages/users/ShowAllUsers/ShowAllUsers";
-
+import { CreateGeneralPost } from "../pages/posts/PostGeneral/CreateGeneralPost/CreateGeneralPost";
+import { OneTradePost } from "../pages/posts/Trades/OneTradePost/OneTradePost";
 
 export const RoutesApp = () => {
   const { token } = useContext(AscendioContext);
@@ -87,6 +88,7 @@ export const RoutesApp = () => {
                 element={<CreateGeneralPost />}
               />
               <Route path="/allpoststrades" element={<AllTrades />} />
+              <Route path="/onetradepost/:post_id" element={<OneTradePost />} />
               <Route path="/allpostsgenerals" element={<AllPostsGenerals />} />
               <Route path="/showallusers" element={<ShowAllUsers />} />
               <Route path="/createcourse" element={<CreateCourse />} />
@@ -95,7 +97,10 @@ export const RoutesApp = () => {
               <Route path="/userfollowers/:id" element={<UserFollowers />} />
               <Route path="/userfollowing/:id" element={<UserFollowing />} />
               <Route path="/userposts/:id" element={<UserPosts />} />
-              <Route path="/oneusercourses/:user_id" element={<OneUserCourses />} />
+              <Route
+                path="/oneusercourses/:user_id"
+                element={<OneUserCourses />}
+              />
             </>
           )}
 
