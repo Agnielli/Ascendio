@@ -11,13 +11,14 @@ export const OneUserCourses = () => {
   const [filter, setFilter] = useState("");
   const { userCourse, setUserCourse } = useContext(AscendioContext);
   const user_id = useParams().user_id;
+  const [course, setCourse] = useState()
   const navigate = useNavigate();
 
   useEffect(() => {
     axios
       .get(`http://localhost:3000/courses/oneusercourses/${user_id}`)
       .then((res) => {
-        setAllCoursesOneUser(res.data)
+        setAllCoursesOneUser(res.data);
         setFindCourse(res.data);
         console.log(res.data);
       })
@@ -36,6 +37,20 @@ export const OneUserCourses = () => {
     });
     setFindCourse(tempArray);
   }, [allCoursesOneUser, filter]);
+
+  useEffect(()=>{
+    const deleteCourse = () => {
+      axios
+        .put(`http://localhost:3000/courses/deletecourse/${course_id}`)
+        .then((res) => {
+          console.log(res.data);
+          setCourse(course.filter(e=>e.course_id != id))
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [setCourse])
 
   return (
     <section>
@@ -62,6 +77,13 @@ export const OneUserCourses = () => {
                   className="me-3"
                 >
                   Más info
+                </Button>
+                <Button
+                  onClick={() => deleteCourse(course_id)}
+                  variant="outline-danger"
+                  className="me-3"
+                >
+                  Eliminar curso
                 </Button>
               </Card.Body>
             </Card>

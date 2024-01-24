@@ -60,8 +60,8 @@ export const CreateCourse = () => {
     };
     
     let regexPrice = /^[a-zA-Z0-9\s.,:?¿!¡]{1,5}$/;
-  let regexTitle = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ.,:?¿!¡]{1,50}$/;
-  let regexDescription = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ.,:?¿!¡]{1,250}$/;
+    let regexTitle = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ.,:?¿!¡]{1,50}$/;
+    let regexDescription = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ.,:?¿!¡]{1,250}$/;
 
     const handleSubmit = (e) => {
       e.preventDefault();
@@ -74,7 +74,7 @@ export const CreateCourse = () => {
       setMsgError("No se permiten más de 250 caracteres");
       }else if (!regexPrice.test(createOneCourse.price)) {
         setMsgError('No se permiten más de 99999 euros');
-        }else{
+      }else{
       const newFormData = new FormData();
 
       let data = { ...createOneCourse, user_id: user.user_id };

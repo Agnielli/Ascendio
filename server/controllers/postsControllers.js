@@ -89,7 +89,7 @@ class postsControllers {
       }
     });
   };
-  
+
   showLastTrades = (req, res) => {
     let sql = `SELECT post.*, user.nickname, user.user_id, post_resource.text AS image_name FROM user INNER JOIN post ON user.user_id = post.user_id LEFT JOIN post_resource ON post.post_id = post_resource.post_id ORDER BY post.date DESC;`;
 
@@ -141,6 +141,25 @@ class postsControllers {
           }
         });
       }
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        error: "Error del Catch",
+      });
+    }
+  };
+
+  OneTradePost = (req, res) => {
+    try {
+      const post_id = req.params.id;
+      let sql = `SELECT  post.*, category.category_name, post_resource.text AS resource_text, user.user_id AS post_user_id,user.nickname AS post_user_nickname, comments.* FROM post LEFT JOIN category ON post.category_id = category.category_id LEFT JOIN post_resource ON post.post_id = post_resource.post_id LEFT JOIN user ON post.user_id = user.user_id LEFT JOIN comments ON post.post_id = comments.post_id WHERE post.post_id = ${post_id};`;
+      connection.query(sql, (error, result) => {
+        if (error) {
+          res.status(400).json({ message: "Error en la SQL" });
+        } else {
+          res.status(200).json(result);
+        }
+      });
     } catch (error) {
       console.log(error);
       res.status(500).json({

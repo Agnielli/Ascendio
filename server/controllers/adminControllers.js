@@ -138,7 +138,7 @@ class adminControllers {
    
     let sql = `SELECT
     course.course_id, course.title, course.user_id, course.description, course.img AS course_img,
-    course.date, course.price, user.name, user.lastname, user.nickname, user.email
+    course.date, course.price, course.is_disabled, user.name, user.lastname, user.nickname, user.email
     FROM course LEFT JOIN user ON course.user_id = user.user_id`;
     
     connection.query(sql, (err, result) => {
@@ -153,6 +153,19 @@ class adminControllers {
   disableCourse = (req, res) => {
     const { course_id } = req.params
     let sql = `UPDATE course SET is_disabled = 1 WHERE course_id = ${course_id}`
+
+    connection.query(sql,(err, result) => {
+      if(err) {
+        res.status(500).json(err)
+      } else {
+        res.status(200).json(result)
+      }
+    })
+  }
+
+  enableCourse = (req, res) => {
+    const { course_id } = req.params
+    let sql = `UPDATE course SET is_disabled = 0 WHERE course_id = ${course_id}`
 
     connection.query(sql,(err, result) => {
       if(err) {
