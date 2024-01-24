@@ -187,7 +187,7 @@ class postsControllers {
 
   getAllPostGeneral = (req, res) => {
     console.log(req.body)
-    let sql = `SELECT * FROM post`
+    let sql = `SELECT post.*, user.nickname FROM post INNER JOIN user ON post.user_id = user.user_id;`
     
     connection.query(sql, (err, result) => {
       if(err) {
