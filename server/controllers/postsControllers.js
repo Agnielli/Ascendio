@@ -90,6 +90,22 @@ class postsControllers {
     });
   };
 
+  showLastPosts = (req, res) => {
+    let sql = `SELECT post.*, user.nickname, user.user_id, post_resource.text AS image_name 
+               FROM user 
+               INNER JOIN post ON user.user_id = post.user_id 
+                LEFT JOIN post_resource ON post.post_id = post_resource.post_id 
+                ORDER BY post.date DESC;`;
+
+    connection.query(sql, (err, result) => {
+      if (err) {
+        res.status(500).json(err);
+      } else {
+        res.status(200).json(result);
+      }
+    });
+  };
+
   showLastTrades = (req, res) => {
     let sql = `SELECT post.*, user.nickname, user.user_id, post_resource.text AS image_name FROM user INNER JOIN post ON user.user_id = post.user_id LEFT JOIN post_resource ON post.post_id = post_resource.post_id ORDER BY post.date DESC;`;
 
