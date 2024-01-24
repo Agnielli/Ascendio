@@ -90,7 +90,7 @@ class coursesControllers {
  
 
   oneCourse = (req, res) => {
-    const { course_id, user_id } = req.params; //añadir el usuario que está logueado
+    const { course_id } = req.params; //añadir el usuario que está logueado
     // console.log(course_id);
 
     let sql = `SELECT course.title, course.img, course.date, course.is_completed, course.description, course.price , section.section_id, section.section_title
