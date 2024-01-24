@@ -19,6 +19,9 @@ router.post('/addtopic', coursesControllers.addTopic);
 router.get('/oneusercourses/:user_id', coursesControllers.oneUserCourses);
 router.put('/deletecourse/:course_id', coursesControllers.deleteCourse);
 router.delete('/deletesection/:course_id/:section_id:/:topic_id', coursesControllers.deleteTopic);
+router.get('/getwishcourse/:course_id/:user_id', coursesControllers.getWishCourse);
+router.put('/addwishescourse/:course_id', coursesControllers.addWishesCourse);
+router.post('/delfromwishes/:course_id', coursesControllers.delFromWishes);
 
 
 

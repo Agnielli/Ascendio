@@ -13,42 +13,77 @@ export const OneCourse = () => {
     useContext(AscendioContext);
   const [showModal, setShowModal] = useState(false);
   const course_id = useParams().course_id;
-  const [guardado, setGuardado] = useState({});
   const [courseToEdit, setCourseToEdit] = useState();
   const [addSection, setAddSection] = useState(false);
   const [sections, setSections] = useState([]);
   const [resetCourse, setResetCourse] = useState(false);
   const [course, setCourse] = useState()
+  const [isIntoWishes, setIsIntoWishes] = useState(false)
 
   const openModal = () => {
     setShowModal(true);
     setCourseToEdit();
   };
 
+
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/courses/onecourse/${course_id}`)
-      .then((res) => {
-        console.log(res.data);
-        setOneCoursePpal(res.data);
-        setCourseToEdit(res.data);
-        setSections(res.data.sections);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    .get(`http://localhost:3000/courses/onecourse/${course_id}`)
+    .then((res) => {
+      console.log(res.data);
+      setOneCoursePpal(res.data);
+      setCourseToEdit(res.data);
+      setSections(res.data.sections);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   }, [showModal, resetCourse]);
 
+  useEffect(() => {
+    axios
+    .get(`http://localhost:3000/courses/getwishcourse/${course_id}/${user?.user_id}`)
+    .then((res) => {
+      if(res.data.length){
+        setIsIntoWishes(true)
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }, [user]);
+  
+  
   const formatearFecha = (date) => {
     return date.split("T")[0].split("-").reverse().join("-");
   };
+  
+  const addToWishes = () =>{
+    console.log ("aquí se añade wish")
+      axios
+        .put(`http://localhost:3000/courses/addwishescourse/${course_id}`, {usuario: user.user_id})
+        .then((res)=>console.log(res))
+        .catch((err)=>console.log(err))
+  }
 
-  const guardar = (courseId) => {
-    setGuardado((prevGuardado) => ({
-      ...prevGuardado,
-      [courseId]: !prevGuardado[courseId],
-    }));
-  };
+  const delFromWishes = () => {
+    console.log("aquí se borra wish")
+    console.log("userrrr", user)
+      axios
+        .post(`http://localhost:3000/courses/delfromwishes/${course_id}`, {usuario: user.user_id})
+        .then((res)=>console.log(res))
+        .catch((err)=>console.log(err))
+  }
+
+  const handleWishes = () =>{
+    if(isIntoWishes){
+      delFromWishes()
+      setIsIntoWishes(false)
+    }else{
+      addToWishes()
+      setIsIntoWishes(true)
+    }
+  }
 
   const addNewSection = () => {
     setAddSection(true);
@@ -65,7 +100,6 @@ export const OneCourse = () => {
         console.log(err);
       });
   }
-
 
   const deleteSection = (section_id) => {
     axios
@@ -130,23 +164,12 @@ export const OneCourse = () => {
               Añadir Sección
             </Button>
 
-            {guardado[course_id] ? (
-              <Button
-                onClick={() => guardar(course_id)}
-                variant="outline-success"
-                className="me-3"
-              >
-                Quitar de favoritos
-              </Button>
-            ) : (
-              <Button
-                onClick={() => guardar(course_id)}
-                variant="outline-success"
-                className="me-3"
-              >
-                Guardar entre favoritos
-              </Button>
-            )}
+            <Button 
+              onClick={handleWishes}
+            >
+              {isIntoWishes ? "Borrar de deseados" : "Añadir a deseados"}
+            </Button>
+
             <Button
               onClick={() => deleteCourse(course_id)}
               variant="outline-danger"
