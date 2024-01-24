@@ -37,7 +37,6 @@ export const Users = () => {
       </div>
       <h2>{user?.nickname}</h2>
       <p>
-        {" "}
         {user?.name} {user?.lastname}
       </p>
       {statisticsUser && (

@@ -36,6 +36,7 @@ export const CardSection = ({ elem, deleteSection, course_id, sections }) => {
             section_id={elem.section_id}
           />
         }
+        {/* <CardTopic/> */}
       </Card.Body>
     </Card>
   );

@@ -4,14 +4,18 @@ import { Form, Col, Row, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-export const FormAddSection = ({sections, setSections, addSection, setAddSection,course_id}) => {
+
+export const FormAddSection = ({sections, setSections, addSection, setAddSection,course_id, resetCourse, setResetCourse}) => {
+
   const [newSection, setNewSection] = useState("");
   const [msgError, setMsgError] = useState("");
-  useEffect(()=> {
-    if(sections){
-    setSections(sections)
-    }
-  }, [sections])
+
+  // useEffect(()=> {
+  //   if(sections){
+  //   setSections(sections)
+  //   }
+  // }, [sections])
+
   const handleChange = (e) =>{
     setNewSection(e.target.value)
   }
@@ -25,7 +29,8 @@ export const FormAddSection = ({sections, setSections, addSection, setAddSection
       .post("http://localhost:3000/courses/addsection", data)
       .then((res)=>{
         console.log(res)
-        setSections([ ... sections, {section_id: res.data.section_id, section_title:newSection}])
+        //setSections([ ... sections, {section_id: res.data.section_id, section_title:newSection}])
+        setResetCourse(!resetCourse)
         setNewSection('')
         setAddSection(false)
       })
