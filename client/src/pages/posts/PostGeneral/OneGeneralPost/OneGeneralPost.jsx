@@ -5,7 +5,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ModalCreateComment } from "../../trades/OneTradePost/ModalCreateComment/ModalCreateComment";
 import { ShowAllCommentsPost } from "../../trades/OneTradePost/ShowAllCommentsPost/ShowAllCommentsPost";
 
-
 export const OneGeneralPost = () => {
   const [oneTrade, setOneTrade] = useState();
 
@@ -20,7 +19,9 @@ export const OneGeneralPost = () => {
   if (post) {
     useEffect(() => {
       axios
-        .get(`http://localhost:3000/posts/onetradepost/${post.post_id}`) /* cambiar */
+        .get(
+          `http://localhost:3000/posts/onetradepost/${post.post_id}`
+        ) /* cambiar */
         .then((res) => {
           setOneTrade(res.data[0]);
         })
@@ -30,8 +31,6 @@ export const OneGeneralPost = () => {
     }, [post]);
   }
   console.log(oneTrade);
-
-
 
   return (
     <>
@@ -53,12 +52,14 @@ export const OneGeneralPost = () => {
               <Card.Body>
                 <Card.Title className="row">
                   <div className="col-6">
-                    <img src={`http://localhost:3000/images/generalPost/${oneTrade.resource_text}`} alt="imagen" />
+                    <Card.Img
+                      src={`http://localhost:3000/images/generalPost/${oneTrade.resource_text}`}
+                    />
                   </div>
                   <div className="col-6">
                     <h4>{oneTrade.description}</h4>
                   </div>
-                  </Card.Title>
+                </Card.Title>
                 <Card.Title className="row">
                   <div className="d-flex gap-1 justify-content-center">
                     <Button
@@ -70,7 +71,7 @@ export const OneGeneralPost = () => {
                       Comentar
                     </Button>
                     <Button
-                      onClick={() => navigate("/allpoststrades")}
+                      onClick={() => navigate("/allpostsgenerals")}
                       variant="primary"
                     >
                       Volver
@@ -99,5 +100,5 @@ export const OneGeneralPost = () => {
         </>
       )}
     </>
-  )
-}
+  );
+};
