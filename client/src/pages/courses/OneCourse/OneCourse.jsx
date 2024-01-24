@@ -3,7 +3,7 @@ import { AscendioContext } from "../../../context/AscendioContext";
 import axios from "axios";
 import { Button, Card } from "react-bootstrap";
 import { EditOneCourse } from "../../../components/ModalEditOneCourse/EditOneCourse";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FormAddSection } from "../../../components/FormAddSection/FormAddSection";
 import { CardSection } from "../../../components/CardSection/CardSection";
 
@@ -19,6 +19,8 @@ export const OneCourse = () => {
   const [resetCourse, setResetCourse] = useState(false);
   const [course, setCourse] = useState()
   const [isIntoWishes, setIsIntoWishes] = useState(false)
+  const [courseTags, setCourseTags] = useState([]);
+
 
   const openModal = () => {
     setShowModal(true);
@@ -93,8 +95,7 @@ export const OneCourse = () => {
     axios
       .put(`http://localhost:3000/courses/deletecourse/${course_id}`)
       .then((res) => {
-        console.log(res.data);
-        setCourse(course.filter(e=>e.course_id != id))
+        navigate(`/oneusercourses/${user.user_id}`)
       })
       .catch((err) => {
         console.log(err);
@@ -143,8 +144,8 @@ export const OneCourse = () => {
             <Card.Text>{oneCoursePpal?.description}</Card.Text>
             <Card.Text>{oneCoursePpal?.price}€</Card.Text>
             <Card.Text>
-              {oneCoursePpal?.tags.map((e, index) => {
-                return e.tag_title + " ";
+              {courseTags?.map((e, index) => {
+                return e.tag_name + " ";
               })}
             </Card.Text>
 
@@ -184,6 +185,8 @@ export const OneCourse = () => {
                 addSection={addSection}
                 setAddSection={setAddSection}
                 course_id={course_id}
+                setResetCourse={setResetCourse}
+                resetCourse={resetCourse}
               />
             )}
 
@@ -198,6 +201,8 @@ export const OneCourse = () => {
                 />
               );
             })}
+
+          
 
             <Button
               variant="outline-warning"

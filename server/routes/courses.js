@@ -22,6 +22,7 @@ router.delete('/deletesection/:course_id/:section_id:/:topic_id', coursesControl
 router.get('/getwishcourse/:course_id/:user_id', coursesControllers.getWishCourse);
 router.put('/addwishescourse/:course_id', coursesControllers.addWishesCourse);
 router.post('/delfromwishes/:course_id', coursesControllers.delFromWishes);
+router.get('/getalltagsonecourse/:course_id', coursesControllers.getAllTagsOneCourse);
 
 
 
