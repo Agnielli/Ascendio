@@ -37,7 +37,6 @@ export const Users = () => {
       </div>
       <h2>{user?.nickname}</h2>
       <p>
-        {" "}
         {user?.name} {user?.lastname}
       </p>
       {statisticsUser && (
@@ -62,7 +61,7 @@ export const Users = () => {
           </p>
           <p>Aciertos: {statisticsUser.num_correct_posts}</p>
           <p>Errores: {statisticsUser.num_incorrect_posts}</p>
-          <p>Cursos publicados: {statisticsUser.num_courses}</p>
+          <p>Cursos publicados: <Link to={`/oneusercourses/${user.user_id}`}>{statisticsUser.num_courses}</Link> </p>
         </>
       )}
 

@@ -44,7 +44,6 @@ export const AllTrades = () => {
   const pulsarSeguirONo = (id_followed) => {
     const data = [user.user_id, id_followed];
     const isFollowing = followingUsers.includes(id_followed); // devuelve true o false
-
     if (isFollowing) {
       // Dejar de seguir
       axios
@@ -139,7 +138,7 @@ export const AllTrades = () => {
                         )}
                       </Card.Body>
                       <div className="d-flex gap-1">
-                        <Button>Ver más</Button>
+                        <Button onClick={()=>{navigate(`/OneTradePost/${elem.post_id}`)}}>Ver más</Button>
                       </div>
                     </div>
                   </Card.Body>
