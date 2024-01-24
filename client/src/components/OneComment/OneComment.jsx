@@ -4,14 +4,12 @@ import { CommentCard } from "../Comment/CommentCard";
 
 export const OneComment = () => {
   const [generalPost, setGeneralPost] = useState();
-  const [user, setUser] = useState();
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/users/showallusers`)
+      .get(`http://localhost:3000/posts/getgeneralposts`)
       .then((res) => {
-        console.log(res);
-        setUser(res.data);
+        setGeneralPost(res.data);
       })
       .catch((err) => {
         console.log(err);
