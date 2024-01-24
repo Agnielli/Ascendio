@@ -90,22 +90,6 @@ class postsControllers {
     });
   };
 
-  showLastPosts = (req, res) => {
-    let sql = `SELECT post.*, user.nickname, user.user_id, post_resource.text AS image_name 
-               FROM user 
-               INNER JOIN post ON user.user_id = post.user_id 
-                LEFT JOIN post_resource ON post.post_id = post_resource.post_id 
-                ORDER BY post.date DESC;`;
-
-    connection.query(sql, (err, result) => {
-      if (err) {
-        res.status(500).json(err);
-      } else {
-        res.status(200).json(result);
-      }
-    });
-  };
-
   showLastTrades = (req, res) => {
     let sql = `SELECT post.*, user.nickname, user.user_id, post_resource.text AS image_name FROM user INNER JOIN post ON user.user_id = post.user_id LEFT JOIN post_resource ON post.post_id = post_resource.post_id ORDER BY post.date DESC;`;
 
@@ -167,8 +151,17 @@ class postsControllers {
   OneTradePost = (req, res) => {
     try {
       const post_id = req.params.id;
+      
+      // let sql2 = `SELECT post.*, user.nickname AS post_user_nickname 
+      //             FROM post 
+      //             LEFT JOIN user ON post.user_id = user.user_id 
+      //             WHERE post.post_id = ${post_id};`;
 
-      let sql2 = `SELECT post.*, user.nickname AS post_user_nickname FROM post LEFT JOIN user ON post.user_id = user.user_id WHERE post.post_id = ${post_id};`;
+      let sql2 = `SELECT post.*, user.nickname AS post_user_nickname, post_resource.text AS resource_text
+                  FROM post
+                  LEFT JOIN user ON post.user_id = user.user_id
+                  LEFT JOIN post_resource ON post.post_id = post_resource.post_id
+                  WHERE post.post_id = ${post_id};`;                  
 
       connection.query(sql2, (error, result) => {
         if (error) {
