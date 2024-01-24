@@ -3,13 +3,13 @@ import React, { useEffect, useState } from "react";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { ModalCreateComment } from "./ModalCreateComment/ModalCreateComment";
+import { ShowAllCommentsPost } from "./ShowAllCommentsPost/ShowAllCommentsPost";
 
 export const OneTradePost = () => {
   const [oneTrade, setOneTrade] = useState();
   const [showModal, setShowModal] = useState(false);
   const post = useParams();
   const navigate = useNavigate();
-
 
   if (post) {
     useEffect(() => {
@@ -23,7 +23,6 @@ export const OneTradePost = () => {
         });
     }, []);
   }
-  console.log(oneTrade);
 
   return (
     <>
@@ -34,9 +33,9 @@ export const OneTradePost = () => {
               <Card.Header>
                 <h2>Trader: {oneTrade.post_user_nickname}</h2>
               </Card.Header>
-              <Card.Header className="row d-flex justify-content-evenly">
-                <h3 className="col-2">Categoría: {oneTrade.category_name}</h3>
-                <h3 className="col-2">Divisa: {oneTrade.currency}</h3>
+              <Card.Header className="row d-flex">
+                <h3 className="col-6">Categoría: {oneTrade.category_name}</h3>
+                <h3 className="col-6">Divisa: {oneTrade.currency}</h3>
               </Card.Header>
               <Card.Body>
                 <Card.Title className="row">
@@ -48,30 +47,40 @@ export const OneTradePost = () => {
                   <div className="col-6">
                     <h4>{oneTrade.description}</h4>
                   </div>
+
+                  <h4>
+                    {oneTrade.correct === 0
+                      ? "Trade Pediente"
+                      : oneTrade.correct === 1
+                      ? "Trade Acertado"
+                      : "Trade"}
+                  </h4>
+                  <div className="d-flex gap-1 justify-content-center">
+                    <Button
+                      onClick={() => {
+                        setShowModal(true);
+                      }}
+                      variant="primary"
+                    >
+                      Comentar
+                    </Button>
+                    <Button
+                      onClick={() => navigate("/allpoststrades")}
+                      variant="primary"
+                    >
+                      Volver
+                    </Button>
+                  </div>
                 </Card.Title>
               </Card.Body>
               <Card.Footer className="text-muted">
-                <h4>
-                  {oneTrade.correct === 0
-                    ? "Trade Pediente"
-                    : oneTrade.correct === 1
-                    ? "Trade Acertado"
-                    : "Trade"}
-                </h4>
-                <Button
-                  onClick={() => {
-                    setShowModal(true);
-                  }}
-                  variant="primary"
-                >
-                  Comentar
-                </Button>
-                <Button
-                  onClick={() => navigate("/allpoststrades")}
-                  variant="primary"
-                >
-                  Volver
-                </Button>
+                {!showModal && (
+                  <ShowAllCommentsPost
+                    showModal={showModal}
+                    setShowModal={setShowModal}
+                    oneTrade={oneTrade}
+                  />
+                )}
               </Card.Footer>
             </Card>
           </div>

@@ -15,7 +15,6 @@ import { OneCourse } from "../pages/courses/OneCourse/OneCourse";
 import { Landing } from "../pages/dashboard/Landing/Landing";
 import { Contact } from "../pages/dashboard/Contact/Contact";
 import { RecoverPassword } from "../pages/auth/RecoverPassword/RecoverPassword";
-import { CreateTrade } from "../pages/posts/trades/CreateTrade/CreateTrade";
 import { Usuarios } from "../pages/admin/AdminUsuarios/Usuarios";
 import { Estadisticas } from "../pages/admin/AdminEstadisticas/Estadisticas";
 import { Cursos } from "../pages/admin/AdminCursos/Cursos";
@@ -28,7 +27,6 @@ import { MailRecoverPassword } from "../pages/auth/MailRecoverPassword/MailRecov
 import { ConfirmationUser } from "../pages/auth/Register/ConfirmationUser/ConfirmationUser";
 import { AllTrades } from "../pages/posts/trades/AllTrades/AllTrades";
 import { EditUser } from "../pages/users/EditUser/EditUser";
-
 import { UserFollowers } from "../pages/users/UserFollowers/UserFollowers";
 import { UserPosts } from "../pages/users/UserPosts/UserPosts";
 import { UserFollowing } from "../pages/users/UserFollowing/UserFollowing";
@@ -37,7 +35,9 @@ import { AllPostsGenerals } from "../pages/posts/PostGeneral/AllPostsGenerals/Al
 import { ShowAllUsers } from "../pages/users/ShowAllUsers/ShowAllUsers";
 import { CreateGeneralPost } from "../pages/posts/PostGeneral/CreateGeneralPost/CreateGeneralPost";
 import { OneTradePost } from "../pages/posts/Trades/OneTradePost/OneTradePost";
+import { CreateTrade } from "../pages/posts/Trades/CreateTrade/CreateTrade";
 import { TraderProfile } from "../pages/users/TraderProfile/TraderProfile";
+
 
 export const RoutesApp = () => {
   const { token } = useContext(AscendioContext);

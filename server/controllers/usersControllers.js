@@ -241,7 +241,6 @@ class usersControllers {
   unfollowUser = (req, res) => {
     const user_id = req.body[0];
     const id_followed = req.body[1];
-    console.log(user_id, id_followed);
 
     let sql = `DELETE FROM user_follows_user WHERE user_id = ${user_id} and followed_user_id = ${id_followed}`;
 
@@ -291,7 +290,6 @@ class usersControllers {
       if (err) {
         res.status(400).json(err);
       } else {
-        console.log("*********************", img);
         res.status(200).json({ result, img });
       }
     });
@@ -412,7 +410,6 @@ class usersControllers {
     });
   };
 
-
   getFollowersUser = (req, res) => {
     try {
       const { id } = req.params;
@@ -493,7 +490,6 @@ class usersControllers {
         if (err) {
           res.status(500).json({ message: "Error en la SQL" });
         } else {
-          console.log(result);
           res.status(200).json(result);
         }
       });
