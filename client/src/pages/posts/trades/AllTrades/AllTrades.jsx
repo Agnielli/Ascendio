@@ -78,14 +78,6 @@ export const AllTrades = () => {
   return (
     <div>
       <>
-        {/* <div className="d-flex gap-2 mb-2">
-          <Button>Todos los trades</Button>
-          <Button>Acertados</Button>
-          <Button>Errados</Button>
-          <Button>Pendientes</Button>
-          <Button>Trades de mis amigos</Button>
-          <Button>Categorías</Button>
-        </div> */}
         <h2>Trade Posts</h2>
         <div className="d-flex flex-wrap gap-2 mb-2">
           {lastTrades

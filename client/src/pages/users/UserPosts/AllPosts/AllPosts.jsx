@@ -113,6 +113,10 @@ export const AllPosts = ({
                 </ListGroup>
               ) : (
                 <div>
+                  <Card.Img
+                    variant="top"
+                    src={`http://localhost:3000/images/generalPost/${elem.resource_text}`}
+                  />
                   <Card.Text className="d-flex flex-column">
                     Descripción: {elem.description}
                   </Card.Text>

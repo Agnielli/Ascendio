@@ -24,6 +24,7 @@ router.get("/followersuser/:id", usersControllers.getFollowersUser);
 router.get("/followingsuser/:id", usersControllers.getFollowingUser);
 router.get("/postsuser/:id", usersControllers.getPostsUser);
 router.get("/showallusers", usersControllers.showAllUsers);
+router.get("/showalluserssuccesses", usersControllers.showAllUsersSuccesses);
 router.get("/traderprofile/:id", usersControllers.traderProfile)
 
 

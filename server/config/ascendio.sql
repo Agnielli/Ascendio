@@ -16,6 +16,7 @@ CREATE TABLE user (
   is_disabled BOOLEAN NOT NULL DEFAULT  false, -- admin
   is_deleted BOOLEAN NOT NULL DEFAULT false -- user
 );
+
 CREATE TABLE category (
   category_id TINYINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT, -- tipo 1 -> Crypto, tipo 2->  Bolsa, tipo 3 ->Forex, tipo 4 -> General ( necesiario para post general )
   category_name VARCHAR(50) NOT NULL UNIQUE -- Crypto, Bolsa, Forex
@@ -116,6 +117,7 @@ CREATE TABLE course (
   CONSTRAINT fk_user_7 FOREIGN KEY (user_id)
   references user(user_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
 CREATE TABLE user_enrolls_course(
   user_id INT UNSIGNED NOT NULL,
   course_id INT UNSIGNED NOT NULL,
@@ -125,6 +127,7 @@ CREATE TABLE user_enrolls_course(
   CONSTRAINT fk_course_1 FOREIGN KEY (course_id)
   REFERENCES course(course_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
 CREATE TABLE user_wishes_course(
   user_id INT UNSIGNED NOT NULL,
   course_id INT UNSIGNEd NOT NULL,
@@ -188,10 +191,12 @@ CREATE TABLE resource (
   CONSTRAINT fk_topic_2 FOREIGN KEY(course_id, section_id, topic_id)
   REFERENCES topic(course_id, section_id, topic_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
 CREATE TABLE tag (
   tag_id BIGINT UNSIGNED NOT NULL PRIMARY KEY,
   tag_name VARCHAR(20) NOT NULL UNIQUE
 );
+ 
 CREATE TABLE course_tag (
 	tag_id BIGINT UNSIGNED NOT NULL,
 	course_id INT UNSIGNED NOT NULL,
@@ -200,3 +205,9 @@ CREATE TABLE course_tag (
 	CONSTRAINT fk_course_6 FOREIGN KEY(course_id)
 	REFERENCES course(course_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+select * from category;
+
+
+select * from user; 
+select * from post;

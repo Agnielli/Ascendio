@@ -17,7 +17,7 @@ export const AllGeneralPosts = ({
               {elem.resource_text !== null ? (
                 <Card.Img
                   variant="top"
-                  src={`http://localhost:3000/images/trades/${elem.resource_text}`}
+                  src={`http://localhost:3000/images/generalPost/${elem.resource_text}`}
                 />
               ) : null}
               <Card.Body>
