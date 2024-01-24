@@ -86,6 +86,7 @@ class coursesControllers {
     }); */
   };
 
+
   purchaseCourse = (req, res) => {
     const { id } = req.params;
     let sql = `UPDATE course SET is_completed = 1 WHERE course_id = ${id} AND is_deleted = 0`;
