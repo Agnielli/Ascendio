@@ -406,6 +406,7 @@ class usersControllers {
         });
       });
     });
+  };
 
   getFollowersUser = (req, res) => {
     try {
@@ -479,6 +480,34 @@ class usersControllers {
         error: "Error al enviar el correo electrónico de registro",
       });
     }
+  };
+
+  traderProfile = (req, res) => {
+    const { id: user_id } = req.params;
+
+    let sql = `SELECT * FROM user WHERE type = 2 AND user_id = ${user_id}`;
+    let sql2 = `SELECT 
+    u.*,
+    p.post_id,
+    (SELECT COUNT(*) FROM post p WHERE u.user_id = p.user_id) AS total_posts,
+    (SELECT COUNT(*) FROM post p WHERE u.user_id = p.user_id AND p.correct = true) AS correct_posts,
+    (SELECT COUNT(*) FROM post p WHERE u.user_id = p.user_id AND p.correct = false) AS incorrect_posts,
+    (SELECT COUNT(*) FROM user_follows_user uf WHERE u.user_id = uf.user_id) AS following_count,
+    (SELECT COUNT(*) FROM user_follows_user uf WHERE u.user_id = uf.followed_user_id) AS followers_count,
+    (SELECT COUNT(*) FROM course c WHERE u.user_id = c.user_id) AS total_courses,
+    GROUP_CONCAT(p.description SEPARATOR ', ') AS user_posts
+    FROM user u
+    LEFT JOIN post p ON u.user_id = p.user_id
+    WHERE u.type = 2 AND u.user_id = ${user_id}
+    GROUP BY u.user_id, p.post_id;`;
+
+    connection.query(sql2, (err, result) => {
+      if (err) {
+        res.status(500).json(err);
+      } else {
+        res.status(200).json(result);
+      }
+    });
   };
 }
 

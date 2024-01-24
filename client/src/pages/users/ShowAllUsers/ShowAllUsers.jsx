@@ -22,6 +22,7 @@ export const ShowAllUsers = () => {
         console.log(err);
       });
   }, [followingUsers, user]);
+  
 
   user &&
     useEffect(() => {
@@ -72,6 +73,8 @@ export const ShowAllUsers = () => {
         });
     }
   };
+
+  console.log(user)
 
   return (
     <div>
@@ -135,7 +138,7 @@ export const ShowAllUsers = () => {
                       )}
                     </Card.Body>
                     <div className="d-flex gap-1">
-                      <Button>Ver más</Button>
+                      <Button onClick={() => navigate(`/traderprofile/${elem.user_id}`)}>Ver más</Button>
                     </div>
                   </div>
                 </Card.Body>

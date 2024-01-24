@@ -37,6 +37,7 @@ import { AllPostsGenerals } from "../pages/posts/PostGeneral/AllPostsGenerals/Al
 import { ShowAllUsers } from "../pages/users/ShowAllUsers/ShowAllUsers";
 import { CreateGeneralPost } from "../pages/posts/PostGeneral/CreateGeneralPost/CreateGeneralPost";
 import { OneTradePost } from "../pages/posts/Trades/OneTradePost/OneTradePost";
+import { TraderProfile } from "../pages/users/TraderProfile/TraderProfile";
 
 export const RoutesApp = () => {
   const { token } = useContext(AscendioContext);
@@ -101,6 +102,7 @@ export const RoutesApp = () => {
                 path="/oneusercourses/:user_id"
                 element={<OneUserCourses />}
               />
+              <Route path="/traderprofile/:user_id" element={<TraderProfile />}/>
             </>
           )}
 
