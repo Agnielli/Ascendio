@@ -106,7 +106,6 @@ class postsControllers {
     try {
       const { id } = req.params;
       const { correct, mark } = req.body;
-      console.log(req.body);
       if ((correct === 0 || correct === null) && mark === 1) {
         let sql = `UPDATE post SET correct = 1 WHERE post_id = ${id};`;
         connection.query(sql, (error, result) => {

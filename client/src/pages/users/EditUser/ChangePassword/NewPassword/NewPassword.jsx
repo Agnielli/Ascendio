@@ -6,14 +6,23 @@ import { Button, Form } from 'react-bootstrap'
 const initialValue = {
   password: "",
   password2: "",
+  email: "",
 }
 
-export const NewPassword = ({user}) => {
+export const NewPassword = ({user, setUser, setShowChangePassword}) => {
   const [NewPassword, setNewPassword] = useState(initialValue);
   const [msgError, setMsgError] = useState("");
-
+  const [msgErrorEmail, setMsgErrorEmail] = useState("");
+  const [editUser, setEditUser] = useState(initialValue);
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
+  const [file, setFile] = useState();
+
+  useEffect(() => {
+    if (user) {
+      setEditUser(user);
+    }
+  }, [user]);
 
   const verPassword = () => {
     setShowPassword(!showPassword);
@@ -51,9 +60,68 @@ export const NewPassword = ({user}) => {
         });
     }
   };
+
+  const handleSubmitEmail = () => {
+    if (      
+      !editUser.email      
+    ) {
+      setMsgError("*Los campos obligatorios deben estar rellenos");
+    } else {
+      
+      const newFormData = new FormData();
+      newFormData.append("editUser", JSON.stringify(editUser));
+      newFormData.append("file", file);
+
+      axios
+        .put("http://localhost:3000/users/edituser", newFormData)
+        .then((res) => {
+           if (res.data.img) {
+          setUser({ ...editUser, img: res.data.img });
+           console.log(res.data.img);
+           } else {
+            setUser(editUser);
+            
+           }
+           setMsgErrorEmail("Email actualizado con exito");
+          
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }
+  const handleChangeEmail = (e) => {
+    const {name, value} = e.target
+    setEditUser ({...editUser, [name]: value})
+    
+  }
   return (
+    <>
+    <h2>Editar datos de Login:</h2>
+    <Form>    
+        <h3>Cambiar email:</h3>        
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Correo</Form.Label>
+          <Form.Control
+            name="email"
+            onChange={handleChangeEmail}
+            type="text"
+            placeholder="Introduce un correo"
+            value={editUser?.email}
+            autoComplete="email"
+          />
+        </Form.Group>
+        
+        <p>{msgErrorEmail}</p>
+     
+
+    <Button variant="primary me-2" onClick={handleSubmitEmail}>
+      Cambiar Email
+    </Button>
+  </Form>
    
         <Form>
+          <h3>Cambiar contraseña:</h3>          
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Introduce nueva contraseña</Form.Label>
             <div className="password-container">
@@ -111,9 +179,17 @@ export const NewPassword = ({user}) => {
           
           <p>{msgError}</p>
           <Button className="me-3" onClick={handleSubmit}>
-            Aceptar
+            Cambiar contraseña
           </Button>
+          
         </Form>
+
+        <Button className="me-3" onClick={()=> setShowChangePassword(false)}>
+            Cancelar
+          </Button>
+        
+
+        </>
       
   )
 }

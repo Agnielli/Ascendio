@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { VeryFyPassword } from './VerifyPassword/VeryFyPassword';
 import { NewPassword } from './NewPassword/NewPassword';
-import { useParams } from 'react-router-dom';
 
 
-export const ChangePassword = ({user}) => {
+
+export const ChangePassword = ({user, setUser, setShowChangePassword}) => {
   
   const [showVerifyPassword, setShowVerifyPassword] = useState(true)
   const [showNewPassword, setShowNewPassword] = useState(false)
@@ -14,10 +14,14 @@ export const ChangePassword = ({user}) => {
       {showVerifyPassword && <VeryFyPassword 
        setShowNewPassword = {setShowNewPassword}
        setShowVerifyPassword = {setShowVerifyPassword}
+       setShowChangePassword = {setShowChangePassword}
+       
       
       />}
       {showNewPassword && <NewPassword
-      user = {user}/>}
+      setShowChangePassword = {setShowChangePassword}
+      user = {user}
+      setUser = {setUser}/>}
     </>
   )
 }

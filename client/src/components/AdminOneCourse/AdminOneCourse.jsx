@@ -12,7 +12,7 @@ export const AdminOneCourse = ({elem, updateCourses, setUpdateCourses}) => {
     axios
       .put(url)
       .then((res) => {
-        setUpdateCourses(!updateCourses)
+        setUpdateCourses(!updateCourses) 
         console.log(res)
       })
       .catch((err) => {console.log(err)})

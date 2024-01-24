@@ -7,12 +7,11 @@ const initialValue = {
   nickname: "",
   name: "",
   lastname: "",
-  email: "",
   phonenumber: "",
   
 };
 
-export const FormEdit = ({ user, setUser}) => {
+export const FormEdit = ({ user, setUser, setShowForm}) => {
   const [editUser, setEditUser] = useState(initialValue);
   const [msgError, setMsgError] = useState("");
   const [file, setFile] = useState();
@@ -34,7 +33,6 @@ export const FormEdit = ({ user, setUser}) => {
             !editUser.nickname ||
             !editUser.name ||
             !editUser.lastname ||
-            !editUser.email ||
             !editUser.password
           ) {
             setMsgError("*Los campos obligatorios deben estar rellenos");
@@ -54,7 +52,7 @@ export const FormEdit = ({ user, setUser}) => {
                   setUser(editUser);
                   console.log(res);
                  }
-                navigate("/profile");
+                 setMsgError("Datos actualizadoos con exito")
               })
               .catch((err) => {
                 console.log(err);
@@ -131,17 +129,6 @@ export const FormEdit = ({ user, setUser}) => {
             autoComplete="lastname"
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Correo*</Form.Label>
-          <Form.Control
-            name="email"
-            onChange={handleChange}
-            type="text"
-            placeholder="Introduce un correo"
-            value={editUser?.email}
-            autoComplete="email"
-          />
-        </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPhonenumber">
           <Form.Label>Número de teléfono</Form.Label>
           <Form.Control
@@ -163,7 +150,7 @@ export const FormEdit = ({ user, setUser}) => {
       aceptar
     </Button>
 
-    <Button onClick={() => navigate("/profile")}>cancelar</Button>
+    <Button onClick={() => setShowForm(false)}>cancelar</Button>
   </Form>
   </>
   )

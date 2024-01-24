@@ -18,6 +18,7 @@ export const FormAddTopic = ({
     setNewTopic(e.target.value);
   };
 
+
   let regexTopic = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ.,:?¿!¡]{1,50}$/;
   const handleSubmit = () => {
     let data = { course_id, section_id, newTopic };
@@ -36,6 +37,7 @@ export const FormAddTopic = ({
           console.log(err);
         });
     }
+
   };
   return (
     <Row>
