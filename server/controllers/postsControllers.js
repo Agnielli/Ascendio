@@ -166,6 +166,19 @@ class postsControllers {
       });
     }
   };
+
+  getAllPostGeneral = (req, res) => {
+    console.log(req.body)
+    let sql = `SELECT * FROM post`
+    
+    connection.query(sql, (err, result) => {
+      if(err) {
+        res.status(500).json({err})
+      } else {
+        res.status(200).json(result)
+      }
+    })
+  }
 }
 
 module.exports = new postsControllers();

@@ -21,7 +21,7 @@ export const AdminHome = () => {
   const [allUsers, setAllUsers] = useState();
 
   const showButtons = () => {
-    setShowUserButtons(!false);
+    setShowUserButtons(!showUserButtons);
   };
 
   const showAllUsers = () => {
@@ -58,6 +58,7 @@ export const AdminHome = () => {
     setShowCourses(false);
     setShowDisabledUsers(false)
     setShowActivatedUsers(false)
+    setShowUserButtons(false);
   };
 
   const showAllCourses = () => {
@@ -67,6 +68,7 @@ export const AdminHome = () => {
     setShowUsers(false);
     setShowDisabledUsers(false)
     setShowActivatedUsers(false)
+    setShowUserButtons(false);
   };
 
   const showAllTrades = () => {
@@ -76,6 +78,7 @@ export const AdminHome = () => {
     setShowUsers(false);
     setShowDisabledUsers(false)
     setShowActivatedUsers(false)
+    setShowUserButtons(false);
   };
 
   const showAllComments = () => {
@@ -97,9 +100,10 @@ export const AdminHome = () => {
         <div>
           {showTrades && (
             <div>
-              <Button onClick={() => showAllPosts()}>Posts</Button>
+              <Button onClick={() => showAllPosts()}>Posts Trades</Button>
+              
 
-              <Button onClick={() => showAllComments()}>Comments</Button>
+              <Button onClick={() => showAllComments()}>Posts General</Button>
               {showComments && <OneComment />}
             </div>
           )}
