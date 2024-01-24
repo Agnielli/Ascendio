@@ -47,7 +47,9 @@ export const OneTradePost = () => {
               <Card.Body>
                 <Card.Title className="row">
                   <div className="col-4">
-                    <img src={`http://localhost:3000/images/trades/${oneTrade.resource_text}`} alt="imagen" />
+                    <Card.Img
+                      src={`http://localhost:3000/images/trades/${oneTrade.resource_text}`}
+                    />
                   </div>
                   <div className="col-4">
                     <h4>Precio de entrada: {oneTrade.entry_price}€</h4>
@@ -58,11 +60,11 @@ export const OneTradePost = () => {
                     <h4>{oneTrade.description}</h4>
                   </div>
                   <h4>
-                    {oneTrade.correct === 0
+                    {oneTrade.correct === null
                       ? "Trade Pediente"
                       : oneTrade.correct === 1
                       ? "Trade Acertado"
-                      : "Trade"}
+                      : "Trade Errado"}
                   </h4>
                   <div className="d-flex gap-1 justify-content-center">
                     <Button

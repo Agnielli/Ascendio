@@ -17,13 +17,12 @@ export const OneCourse = () => {
   const [courseToEdit, setCourseToEdit] = useState();
   const [addSection, setAddSection] = useState(false);
   const [sections, setSections] = useState([]);
-  const [topics, setTopics] = useState([])
+  const [topics, setTopics] = useState([]);
   const [resetCourse, setResetCourse] = useState(false);
-  const [course, setCourse] = useState()
-  const [isIntoWishes, setIsIntoWishes] = useState(false)
+  const [course, setCourse] = useState();
+  const [isIntoWishes, setIsIntoWishes] = useState(false);
   const [courseTags, setCourseTags] = useState([]);
   const [isIntoPurchase, setIsIntoPurchase] = useState(false)
-  const [showModalDelete, setShowModalDelete] = useState(false)
   const navigate = useNavigate();
 
   const openModal = () => {
@@ -31,34 +30,31 @@ export const OneCourse = () => {
     setCourseToEdit();
   };
 
-  const openModalDelete = () => {
-    setShowModalDelete(true);
-  };
+  console.log("PRUEBAAAAAAAAAA",courseTags);
 
   useEffect(() => {
     axios
-    .get(`http://localhost:3000/courses/onecourse/${course_id}`)
-    .then((res) => {
-      
-      setOneCoursePpal(res.data);
-      setCourseToEdit(res.data);
-      setSections(res.data.sections);
-      setTopics(res.data.topics)
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+      .get(`http://localhost:3000/courses/onecourse/${course_id}`)
+      .then((res) => {
+        setOneCoursePpal(res.data);
+        setCourseToEdit(res.data);
+        setSections(res.data.sections);
+        setTopics(res.data.topics);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, [showModal, resetCourse]);
 
   useEffect(() => {
     axios
-    .get(`http://localhost:3000/courses/getalltagsonecourse/${course_id}`)
-    .then((res) => {
-      setCourseTags(res.data)
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+      .get(`http://localhost:3000/courses/getalltagsonecourse/${course_id}`)
+      .then((res) => {
+        setCourseTags(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, [showModal, resetCourse]);
 
   useEffect(() => {
@@ -87,68 +83,74 @@ export const OneCourse = () => {
     }
   }, [user]);
 
-  useEffect(()=>{
+  useEffect(() => {
     axios
-    .get(`http://localhost:3000/courses/getpurchasedcourse/${course_id}/${user?.user_id}`)
-    .then((res) => {
-      if(res.data.length){
-        setIsIntoPurchase(true)
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+      .get(
+        `http://localhost:3000/courses/getpurchasedcourse/${course_id}/${user?.user_id}`
+      )
+      .then((res) => {
+        if (res.data.length) {
+          setIsIntoPurchase(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, [user]);
 
-  
-  
   const formatearFecha = (date) => {
     return date.split("T")[0].split("-").reverse().join("-");
   };
-  
-  const addToWishes = () =>{
-    console.log ("aquí se añade wish")
-      axios
-        .put(`http://localhost:3000/courses/addwishescourse/${course_id}`, {usuario: user.user_id})
-        .then((res)=>console.log(res))
-        .catch((err)=>console.log(err))
-  }
+
+  const addToWishes = () => {
+    console.log("aquí se añade wish");
+    axios
+      .put(`http://localhost:3000/courses/addwishescourse/${course_id}`, {
+        usuario: user.user_id,
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
 
   const delFromWishes = () => {
-    console.log("aquí se borra wish")
-    console.log("userrrr", user)
-      axios
-        .post(`http://localhost:3000/courses/delfromwishes/${course_id}`, {usuario: user.user_id})
-        .then((res)=>console.log(res))
-        .catch((err)=>console.log(err))
-  }
+    console.log("aquí se borra wish");
+    console.log("userrrr", user);
+    axios
+      .post(`http://localhost:3000/courses/delfromwishes/${course_id}`, {
+        usuario: user.user_id,
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
 
-  const addToPurchase = () =>{
-    console.log ("aquí se compra un curso")
-      axios
-        .put(`http://localhost:3000/courses/addtopurchasecourse/${course_id}`, {usuario: user.user_id})
-        .then((res)=>console.log(res))
-        .catch((err)=>console.log(err))
-  }
+  const addToPurchase = () => {
+    console.log("aquí se compra un curso");
+    axios
+      .put(`http://localhost:3000/courses/addtopurchasecourse/${course_id}`, {
+        usuario: user.user_id,
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
 
-  const handleWishes = () =>{
-    if(isIntoWishes){
-      delFromWishes()
-      setIsIntoWishes(false)
-    }else{
-      addToWishes()
-      setIsIntoWishes(true)
+  const handleWishes = () => {
+    if (isIntoWishes) {
+      delFromWishes();
+      setIsIntoWishes(false);
+    } else {
+      addToWishes();
+      setIsIntoWishes(true);
     }
-  }
+  };
 
-  const handlePurchase = () =>{
-    if(isIntoWishes){
-      setIsIntoPurchase(false)
-    }else{
-      addToPurchase()
-      setIsIntoPurchase(true)
+  const handlePurchase = () => {
+    if (isIntoWishes) {
+      setIsIntoPurchase(false);
+    } else {
+      addToPurchase();
+      setIsIntoPurchase(true);
     }
-  }
+  };
 
   const addNewSection = () => {
     setAddSection(true);
@@ -158,12 +160,12 @@ export const OneCourse = () => {
     axios
       .put(`http://localhost:3000/courses/deletecourse/${course_id}`)
       .then((res) => {
-        navigate(`/oneusercourses/${user.user_id}`)
+        navigate(`/oneusercourses/${user.user_id}`);
       })
       .catch((err) => {
         console.log(err);
       });
-  }
+  };
 
   const deleteSection = (section_id) => {
     axios
@@ -182,15 +184,17 @@ export const OneCourse = () => {
   //pte comprobar la ruta y hacer el axios.
   const deleteTopic = (section_id, topic_id) => {
     axios
-      .delete(`http://localhost:3000/courses/deletetopic/${course_id}/${section_id}/${topic_id}`)
-      .then((res)=>{
+      .delete(
+        `http://localhost:3000/courses/deletetopic/${course_id}/${section_id}/${topic_id}`
+      )
+      .then((res) => {
         console.log(res);
         setResetCourse(!resetCourse);
       })
-      .catch((err)=>{
+      .catch((err) => {
         console.log(err);
-      })
-  }
+      });
+  };
 
   return (
     <>
@@ -229,18 +233,20 @@ export const OneCourse = () => {
               Añadir Sección
             </Button>
 
-            <Button 
-              onClick={handleWishes}
-            >
+            <Button onClick={handleWishes}>
               {isIntoWishes ? "Borrar de deseados" : "Añadir a deseados"}
             </Button>
 
-            <Button 
+            <Button
               onClick={handlePurchase}
               disabled={isIntoPurchase ? true : false}
             >
               {isIntoPurchase ? "Comprado" : "Comprar"}
             </Button>
+            
+
+            
+
             <Button
               // onClick={() => deleteCourse(course_id)}
               onClick={openModalDelete}
@@ -278,12 +284,7 @@ export const OneCourse = () => {
               );
             })}
 
-          
-
-            <Button
-              variant="outline-warning"
-              className="me-3"
-            >
+            <Button variant="outline-warning" className="me-3">
               Validar curso
             </Button>
           </Card.Body>
