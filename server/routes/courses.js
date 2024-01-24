@@ -10,9 +10,9 @@ router.get('/onecourse/:course_id', coursesControllers.oneCourse);
 router.put('/editcourse/:course_id', multerSingle('cursos'), coursesControllers.editOneCourse);
 router.get('/calltags', coursesControllers.callTags);
 router.get('/callcourses', coursesControllers.callCourses);
-router.get('/purchasecourse/:id', coursesControllers.purchaseCourse);
-/* router.get('/viewpurchasedcourse', coursesControllers.viewPurchasedCourse)
-router.get('/viewsavedcourse', coursesControllers.viewSavedCourse) */
+router.get('/getpurchasedcourse/:course_id/:user_id', coursesControllers.getPurchaseCourse);
+router.put('/addtopurchasecourse/:course_id', coursesControllers.addToPurchaseCourse);
+ /* router.get('/viewpurchasedcourse', coursesControllers.viewPurchasedCourse) */
 router.post('/addsection', coursesControllers.addSection);
 router.delete('/deletesection/:course_id/:section_id', coursesControllers.deleteSection);
 router.post('/addtopic', coursesControllers.addTopic);
