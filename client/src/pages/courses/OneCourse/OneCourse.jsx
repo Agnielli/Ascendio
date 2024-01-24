@@ -29,9 +29,6 @@ export const OneCourse = () => {
     setCourseToEdit();
   };
 
-  console.log("PRUEBAAAAAAAAAA",courseTags);
-  console.log("PRUEBAAAAAAAAAaaaaaaaaaaaaaww2222222222",courseTags);
-
   useEffect(() => {
     axios
       .get(`http://localhost:3000/courses/onecourse/${course_id}`)
