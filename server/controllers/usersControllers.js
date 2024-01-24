@@ -279,9 +279,13 @@ class usersControllers {
 
     if (req.file) {
       img = req.file.filename;
-      sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}", email = "${email}", phonenumber = "${phonenumber}", img = "${img}" WHERE user_id = ${user_id}`;
+      sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}", email = "${email}", phonenumber = ${
+        phonenumber !== null ? `"${phonenumber}"` : null
+      }, img = "${img}" WHERE user_id = ${user_id}`;
     } else {
-      sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}", email = "${email}", phonenumber = "${phonenumber}" WHERE user_id = ${user_id} AND img = "${img}" IS NULL`;
+      sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}", email = "${email}", phonenumber = ${
+        phonenumber !== null ? `"${phonenumber}"` : null
+      } WHERE user_id = ${user_id} AND (img IS NULL OR img = "")`;
     }
     connection.query(sql, (err, result) => {
       if (err) {
@@ -408,6 +412,7 @@ class usersControllers {
     });
   };
 
+
   getFollowersUser = (req, res) => {
     try {
       const { id } = req.params;
@@ -431,6 +436,24 @@ class usersControllers {
       const { id } = req.params;
       let sql = `SELECT * FROM user WHERE user_id IN (SELECT followed_user_id FROM user_follows_user WHERE user_id = ${id});`;
       let sql2 = `SELECT * FROM user WHERE user_id IN (SELECT user_id FROM user_follows_user WHERE followed_user_id = ${id});`;
+      connection.query(sql, (error, result) => {
+        if (error) {
+          console.log("Error en sql", error);
+          res.status(400).json({ message: "Error en la SQL" });
+        } else {
+          res.status(200).json({ datos: result });
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).JSON({ message: "Error inesperado (CATCH)" });
+    }
+  };
+
+  getPostsUser = (req, res) => {
+    try {
+      const { id } = req.params;
+      let sql = `SELECT post.*, post_resource.resource_type, post_resource.text as resource_text, category.category_name FROM post LEFT JOIN post_resource ON post.post_id = post_resource.post_id LEFT JOIN category ON post.category_id = category.category_id WHERE post.user_id = ${id};`;
       connection.query(sql, (error, result) => {
         if (error) {
           console.log("Error en sql", error);

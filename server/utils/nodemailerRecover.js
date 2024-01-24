@@ -20,7 +20,7 @@ async function recoverMailer(email, nickname, message) {
       subject: "Solicitud cambio de contraseña", // Subject line
       // text: "Hola algo bonito", // plain text body
       html: `
-      <div style="font-family: Arial, sans-serif; background-color: #1D1D1B;">
+      <div style="font-family: Arial, sans-serif; background-color: #1D1D1B; padding-bottom: 1px">
 
     <div style="text-align: center; background-color: #e15252; padding: 10px; color: #fff;">
       <p style="margin: 0;">Recuperación de Contraseña</p>
@@ -30,9 +30,7 @@ async function recoverMailer(email, nickname, message) {
 
     <p style="margin: 20px; color: #fff;">Has solicitado un cambio de contraseña en Ascendio.</p>
 
-    <p style="margin: 20px; color: #fff;">Para completar el proceso, haz clic en el siguiente enlace:</p>
-
-    <a href="${message}" style="display: inline-block; margin: 0 20px 20px 20px; padding: 8px 35px; background-color: #e15252; color: #2e2d2d; font-weight: bold; text-decoration: none; border: none; border-radius: 35px; cursor: pointer;">CAMBIAR CONTRASEÑA</a>
+    <p style="margin: 20px; color: #fff;">Para completar el proceso, haz clic <a href="${message}" style="text-decoration: none; color: #e15252;">aquí</a>.</p>
 
   </div>
       

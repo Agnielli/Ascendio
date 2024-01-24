@@ -38,19 +38,19 @@ export const OneUserCourses = () => {
     setFindCourse(tempArray);
   }, [allCoursesOneUser, filter]);
 
-  useEffect(()=>{
-    const deleteCourse = () => {
+
+    const deleteCourse = (course_id) => {
       axios
         .put(`http://localhost:3000/courses/deletecourse/${course_id}`)
         .then((res) => {
           console.log(res.data);
-          setCourse(course.filter(e=>e.course_id != id))
+          setAllCoursesOneUser(allCoursesOneUser.filter(e=>e.course_id != course_id))
         })
         .catch((err) => {
           console.log(err);
         });
     }
-  }, [setCourse])
+ 
 
   return (
     <section>
@@ -79,7 +79,7 @@ export const OneUserCourses = () => {
                   Más info
                 </Button>
                 <Button
-                  onClick={() => deleteCourse(course_id)}
+                  onClick={() => deleteCourse(elem.course_id)}
                   variant="outline-danger"
                   className="me-3"
                 >
