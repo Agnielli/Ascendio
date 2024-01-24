@@ -25,7 +25,7 @@ function NavBarApp() {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container fluid>
-        <Navbar.Brand as={Link} to="/">
+        <Navbar.Brand as={Link} to="/home">
           ASCENDIO
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
