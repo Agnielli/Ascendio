@@ -19,6 +19,7 @@ export const OneCourse = () => {
   const [sections, setSections] = useState([]);
   const [resetCourse, setResetCourse] = useState(false);
   const [course, setCourse] = useState()
+  const [courseTags, setCourseTags] = useState([]);
 
   const openModal = () => {
     setShowModal(true);
@@ -39,15 +40,23 @@ export const OneCourse = () => {
       });
   }, [showModal, resetCourse]);
 
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/courses/getalltagsonecourse/${course_id}`)
+      .then((res) => {
+        console.log("miraaaaaaaaaaaaaaaa",res.data);
+        /* setOneCoursePpal(res.data);
+        setCourseToEdit(res.data);
+        setSections(res.data.sections); */
+        setCourseTags(res.data)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [showModal, resetCourse]);
+
   const formatearFecha = (date) => {
     return date.split("T")[0].split("-").reverse().join("-");
-  };
-
-  const guardar = (courseId) => {
-    setGuardado((prevGuardado) => ({
-      ...prevGuardado,
-      [courseId]: !prevGuardado[courseId],
-    }));
   };
 
   const addNewSection = () => {
@@ -109,8 +118,8 @@ export const OneCourse = () => {
             <Card.Text>{oneCoursePpal?.description}</Card.Text>
             <Card.Text>{oneCoursePpal?.price}€</Card.Text>
             <Card.Text>
-              {oneCoursePpal?.tags.map((e, index) => {
-                return e.tag_title + " ";
+              {courseTags?.map((e, index) => {
+                return e.tag_name + " ";
               })}
             </Card.Text>
 
