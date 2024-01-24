@@ -30,6 +30,7 @@ export const OneCourse = () => {
   };
 
   console.log("PRUEBAAAAAAAAAA",courseTags);
+  console.log("PRUEBAAAAAAAAAaaaaaaaaaaaaaww2222222222",courseTags);
 
 
   useEffect(() => {
