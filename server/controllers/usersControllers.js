@@ -406,8 +406,6 @@ class usersControllers {
         });
       });
     });
-  };
-
 
   getFollowersUser = (req, res) => {
     try {
@@ -483,5 +481,6 @@ class usersControllers {
     }
   };
 }
+
 
 module.exports = new usersControllers();

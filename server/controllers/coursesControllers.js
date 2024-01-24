@@ -293,6 +293,49 @@ class coursesControllers {
     let sql = `select nada form nada`
   }
 
+  getWishCourse = (req, res) =>{
+    const {course_id, user_id} = req.params
+    console.log("lakjfdoasjdiafosjdfa2f")
+    let sql = `SELECT * FROM user_wishes_course WHERE user_id = ${user_id} and course_id = ${course_id}`
+
+    connection.query(sql, (err, result)=>{
+      err ?
+      res.status(500).json(err)
+      :
+      res.status(200).json(result);
+   
+    })
+
+  }
+
+  addWishesCourse = (req, res) =>{
+    const {course_id} = req.params
+    const {usuario} = req.body
+
+    let sql = `INSERT INTO user_wishes_course (user_id, course_id) VALUES (${usuario}, ${course_id})`
+
+    connection.query(sql, (err, result)=>{
+      err ?
+      res.status(500).json(err)
+      :
+      res.status(200).json(result);
+    })
+  }
+
+  delFromWishes = (req, res) =>{
+    const {course_id} = req.params
+    const {usuario} = req.body
+    console.log("ieiieieiei", req.body)
+
+    let sql = `DELETE FROM user_wishes_course WHERE course_id = ${course_id} and user_id = ${usuario}`;
+
+    connection.query(sql, (err, result)=>{
+      err ?
+      res.status(500).json(err)
+      :
+      res.status(200).json(result);
+    })
+  }
   getAllTagsOneCourse = (req,res) =>{
 
     const {course_id} = req.params;
