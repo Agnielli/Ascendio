@@ -2,12 +2,19 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Button, Card } from 'react-bootstrap'
 
-export const AdminOneCourse = ({elem}) => {
+export const AdminOneCourse = ({elem, updateCourses, setUpdateCourses}) => {
 
-  const disableCourse = (course_id) => {
+  const disableEnableCourse = (course_id, is_disabled) => {
+    let url = `http://localhost:3000/admin/adminenableonecourse/${course_id}`
+    if (is_disabled === 0) {
+      url = `http://localhost:3000/admin/admindisableonecourse/${course_id}`
+    }
     axios
-      .put(`http://localhost:3000/admin/admindisableonecourse/${course_id}`)
-      .then((res) => {console.log(res)})
+      .put(url)
+      .then((res) => {
+        setUpdateCourses(!updateCourses)
+        console.log(res)
+      })
       .catch((err) => {console.log(err)})
   }
 
@@ -23,7 +30,10 @@ export const AdminOneCourse = ({elem}) => {
         <Card.Text>
           {elem.nickname}
         </Card.Text>
-        <Button variant="primary" onClick={() => disableCourse(elem.course_id)}>Desactivar</Button>
+        <Button onClick={() => disableEnableCourse(elem?.course_id, elem?.is_disabled)}>
+                {elem.is_disabled ? "Activar" :
+                "Desactivar"}
+              </Button>
       </Card.Body>
     </Card>
     </div>

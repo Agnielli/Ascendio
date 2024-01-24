@@ -406,6 +406,7 @@ class usersControllers {
         });
       });
     });
+  }
   getFollowersUser = (req, res) => {
     try {
       const { id } = req.params;
@@ -460,7 +461,7 @@ class usersControllers {
         res.status(500).JSON({ message: "Error inesperado (CATCH)" });
       }
     };
-  };
+  ;
 
   getPostsUser = (req, res) => {
     try {

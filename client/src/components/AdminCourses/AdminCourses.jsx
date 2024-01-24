@@ -4,6 +4,7 @@ import { AdminOneCourse } from '../AdminOneCourse/AdminOneCourse'
 
 export const AdminCourses = () => {
   const [course, setCourse]  = useState()
+  const [updateCourses, setUpdateCourses] = useState(false)
 
   useEffect(() => {
     axios
@@ -13,14 +14,14 @@ export const AdminCourses = () => {
           setCourse(res.data)
         })
         .catch((err) => {console.log(err)})
-  }, [])
+  }, [updateCourses])
 
  
   return (
     <>
     {course?.map((elem) => {
       return (
-        <AdminOneCourse elem={elem} key={elem.course_id}/>
+        <AdminOneCourse elem={elem} key={elem.course_id} updateCourses={updateCourses} setUpdateCourses={setUpdateCourses}/>
       )
     })}
     </>
