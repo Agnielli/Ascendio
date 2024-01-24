@@ -3,7 +3,7 @@ import { AscendioContext } from "../../../context/AscendioContext";
 import axios from "axios";
 import { Button, Card } from "react-bootstrap";
 import { EditOneCourse } from "../../../components/ModalEditOneCourse/EditOneCourse";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FormAddSection } from "../../../components/FormAddSection/FormAddSection";
 import { CardSection } from "../../../components/CardSection/CardSection";
 
@@ -13,12 +13,11 @@ export const OneCourse = () => {
     useContext(AscendioContext);
   const [showModal, setShowModal] = useState(false);
   const course_id = useParams().course_id;
-  const [guardado, setGuardado] = useState({});
   const [courseToEdit, setCourseToEdit] = useState();
   const [addSection, setAddSection] = useState(false);
   const [sections, setSections] = useState([]);
   const [resetCourse, setResetCourse] = useState(false);
-  const [course, setCourse] = useState()
+  const navigate = useNavigate()
 
   const openModal = () => {
     setShowModal(true);
@@ -43,13 +42,6 @@ export const OneCourse = () => {
     return date.split("T")[0].split("-").reverse().join("-");
   };
 
-  const guardar = (courseId) => {
-    setGuardado((prevGuardado) => ({
-      ...prevGuardado,
-      [courseId]: !prevGuardado[courseId],
-    }));
-  };
-
   const addNewSection = () => {
     setAddSection(true);
   };
@@ -58,14 +50,12 @@ export const OneCourse = () => {
     axios
       .put(`http://localhost:3000/courses/deletecourse/${course_id}`)
       .then((res) => {
-        console.log(res.data);
-        setCourse(course.filter(e=>e.course_id != id))
+        navigate(`/oneusercourses/${user.user_id}`)
       })
       .catch((err) => {
         console.log(err);
       });
   }
-
 
   const deleteSection = (section_id) => {
     axios
@@ -161,6 +151,8 @@ export const OneCourse = () => {
                 addSection={addSection}
                 setAddSection={setAddSection}
                 course_id={course_id}
+                setResetCourse={setResetCourse}
+                resetCourse={resetCourse}
               />
             )}
 
@@ -175,6 +167,8 @@ export const OneCourse = () => {
                 />
               );
             })}
+
+          
 
             <Button
               variant="outline-warning"
