@@ -9,14 +9,16 @@ import { CardSection } from "../../../components/CardSection/CardSection";
 
 export const OneCourse = () => {
   const [oneCoursePpal, setOneCoursePpal] = useState();
-  const { user, setUser,userCourse,setUserCourse } = useContext(AscendioContext);
+  const { user, setUser, userCourse, setUserCourse } =
+    useContext(AscendioContext);
   const [showModal, setShowModal] = useState(false);
   const course_id = useParams().course_id;
   const [guardado, setGuardado] = useState({});
   const [courseToEdit, setCourseToEdit] = useState();
   const [addSection, setAddSection] = useState(false);
   const [sections, setSections] = useState([]);
-  const [resetCourse, setResetCourse] = useState(false)
+  const [resetCourse, setResetCourse] = useState(false);
+  const [course, setCourse] = useState()
 
   const openModal = () => {
     setShowModal(true);
@@ -49,23 +51,47 @@ export const OneCourse = () => {
   };
 
   const addNewSection = () => {
-   setAddSection(true)
+    setAddSection(true);
+  };
+
+  const deleteCourse = () => {
+    axios
+      .put(`http://localhost:3000/courses/deletecourse/${course_id}`)
+      .then((res) => {
+        console.log(res.data);
+        setCourse(course.filter(e=>e.course_id != id))
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
-  const deleteSection = (section_id) =>{
+
+  const deleteSection = (section_id) => {
     axios
-      .delete(`http://localhost:3000/courses/deletesection/${course_id}/${section_id}`)
-      .then((res)=>{
+      .delete(
+        `http://localhost:3000/courses/deletesection/${course_id}/${section_id}`
+      )
+      .then((res) => {
         console.log(res.data);
-        setResetCourse(!resetCourse)
+        setResetCourse(!resetCourse);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  //pte comprobar la ruta y hacer el axios.
+  const deleteTopic = () => {
+    axios
+      .delete(`http://localhost:3000/courses/${course_id}/${section_id}/${topic_id}`)
+      .then((res)=>{
+        console.log(res);
       })
       .catch((err)=>{
         console.log(err);
       })
   }
-
-  console.log(sections);
-  console.log("REVISAMEEEEE",oneCoursePpal);
 
   return (
     <>
@@ -82,9 +108,11 @@ export const OneCourse = () => {
             </Card.Subtitle>
             <Card.Text>{oneCoursePpal?.description}</Card.Text>
             <Card.Text>{oneCoursePpal?.price}€</Card.Text>
-            <Card.Text>{oneCoursePpal?.tags.map((e,index)=>{
-              return   (e.tag_title) + " " 
-            })}</Card.Text>
+            <Card.Text>
+              {oneCoursePpal?.tags.map((e, index) => {
+                return e.tag_title + " ";
+              })}
+            </Card.Text>
 
             <Button
               variant="outline-success"
@@ -119,7 +147,13 @@ export const OneCourse = () => {
                 Guardar entre favoritos
               </Button>
             )}
-
+            <Button
+              onClick={() => deleteCourse(course_id)}
+              variant="outline-danger"
+              className="me-3"
+            >
+              Eliminar curso
+            </Button>
             {addSection && (
               <FormAddSection
                 sections={sections}
@@ -131,14 +165,23 @@ export const OneCourse = () => {
             )}
 
             {sections.map((elem) => {
-              return <CardSection 
-                elem={elem}
-                deleteSection={deleteSection}
-                course_id={course_id}
-                sections={sections}
-              />
-          
+              return (
+                <CardSection
+                  elem={elem}
+                  key={elem.section_id}
+                  deleteSection={deleteSection}
+                  course_id={course_id}
+                  sections={sections}
+                />
+              );
             })}
+
+            <Button
+              variant="outline-warning"
+              className="me-3"
+            >
+              Validar curso
+            </Button>
           </Card.Body>
         </Card>
 
@@ -148,7 +191,6 @@ export const OneCourse = () => {
           setOneCoursePpal={setOneCoursePpal}
           oneCoursePpal={oneCoursePpal}
         />
-
       </section>
     </>
   );

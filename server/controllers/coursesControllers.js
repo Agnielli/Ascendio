@@ -85,7 +85,7 @@ class coursesControllers {
       });
     }); */
   };
-  
+
 
   purchaseCourse = (req, res) => {
     const { id } = req.params;
@@ -148,7 +148,6 @@ class coursesControllers {
 
         
   editOneCourse = (req, res) => {
-
     const { title, description, price, user_id } = JSON.parse(req.body.editarCurso);
     const {course_id} = req.params;
     
@@ -172,7 +171,6 @@ class coursesControllers {
 
   addSection = (req, res) => {
     const { course_id, newSection } = req.body;
-
     let sql_cont = `SELECT max(section_id) as id FROM section WHERE course_id = ${course_id}`;
 
     connection.query(sql_cont, (err1, result) => {
@@ -216,7 +214,6 @@ class coursesControllers {
 
   deleteSection = (req, res) => {
     const { course_id, section_id } = req.params;
-    console.log("PARAMS", req.params);
     let sql = `DELETE FROM section WHERE course_id = ${course_id} and section_id =${section_id}`;
 
     connection.query(sql, (err, result) => {
@@ -227,8 +224,6 @@ class coursesControllers {
   addTopic = (req, res) => {
     const { course_id, newTopic, section_id } = req.body;
     let sql_cont = `SELECT max(topic_id) as id FROM topic WHERE section_id = ${section_id}`;
-    
-    console.log(req.body)
 
     connection.query(sql_cont, (err, result) => {
       if (err) {
@@ -252,5 +247,50 @@ class coursesControllers {
       });
     });
   };
+
+  oneUserCourses = (req,res) =>{
+    const {user_id} = req.params;
+    console.log("EEEEEEEEEEEEEA",req.params);
+    let sql = `SELECT * FROM course where user_id = ${user_id} AND is_deleted = 0;`
+
+    connection.query(sql,(err,result)=>{
+      err ? res.status(500).json(err) : res.status(200).json(result);
+    })
+  }
+
+
+
+
+
+
+
+
+
+
+
+  deleteCourse = (req,res) =>{
+    const {course_id} = req.params;
+    let sql =
+    `UPDATE course 
+      LEFT JOIN  section ON course.course_id = section.course_id
+      LEFT JOIN course_tag ON course.course_id = course_tag.course_id
+      LEFT JOIN tag ON course_tag.tag_id = tag.tag_id
+      LEFT JOIN topic ON course.course_id = topic.course_id
+        SET course.is_deleted = 1
+          WHERE course.course_id = ${course_id};`
+
+    connection.query(sql, (err, res)=>{
+      err ?
+      res.status(500).json(err)
+      :
+      res.status(200).json(result);
+    })
+  }
+
+  deleteTopic = (req, res) => {
+    console.log("Hi to everyone");
+    let sql = `select nada form nada`
+  }
+
 }
 module.exports = new coursesControllers();
