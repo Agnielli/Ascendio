@@ -120,19 +120,18 @@ class coursesControllers {
         date,
         price,
         description,
-        tags: [],
         sections: [],
         topics:[],
       };
 
-      const uniqueTags = new Set()
+      //const uniqueTags = new Set()
       const uniqueSections = new Set();
 
       result.forEach((elem) => {
-        if (elem.tag_id != null && !uniqueTags.has(elem.tag_id)) {
+        /* if (elem.tag_id != null && !uniqueTags.has(elem.tag_id)) {
           data.tags.push({ tag_id: elem.tag_id, tag_title: elem.tag_name });
           uniqueTags.add(elem.tag_id)
-        }
+        } */
 
         if (elem.section_id != null && !uniqueSections.has(elem.section_id)) {
           data.sections.push({
@@ -316,6 +315,7 @@ class coursesControllers {
       res.status(200).json(result);
     })
   }
+
   getAllTagsOneCourse = (req,res) =>{
 
     const {course_id} = req.params;
