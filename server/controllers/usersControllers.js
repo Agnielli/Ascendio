@@ -504,6 +504,7 @@ class usersControllers {
                 (SELECT COUNT(*) FROM user_follows_user WHERE user.user_id = user_follows_user.followed_user_id) AS followers_count, 
                 (SELECT COUNT(*) FROM course WHERE user.user_id = course.user_id ) AS total_courses 
                 FROM user
+                where user.is_deleted = 0
                 ORDER BY followers_count DESC;`;
       connection.query(sql, (err, result) => {
         if (err) {
@@ -570,8 +571,10 @@ class usersControllers {
   };
   // ---------------------------------------------------------------
   deleteUser = (req, res) => {
-    const { id: user_id, email, nickname } = req.params;
-    let sql = `UPDATE user SET is_deleted = 1 WHERE user_id = ${user_id}`;
+
+    const {id: user_id, email, nickname } = req.params;    
+    let sql = `UPDATE user SET is_deleted = 1, email = "${user_id}@deleteuser.com", nickname = "${user_id}deleteUser" WHERE user_id = ${user_id}`;
+  
 
     connection.query(sql, (err, result) => {
       let mess = `http://localhost:5173/deleteuser/${user_id}`;

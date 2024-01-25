@@ -39,10 +39,10 @@ export const OneCourse = () => {
     axios
       .get(`http://localhost:3000/courses/onecourse/${course_id}`)
       .then((res) => {
+        console.log("ppppppppppppp", res.data);
         setOneCoursePpal(res.data);
         setCourseToEdit(res.data);
         setSections(res.data.sections);
-        setTopics(res.data.topics);
       })
       .catch((err) => {
         console.log(err);
@@ -61,17 +61,6 @@ export const OneCourse = () => {
   }, [showModal, resetCourse]);
 
   useEffect(() => {
-    axios
-    .get(`http://localhost:3000/courses/getalltagsonecourse/${course_id}`)
-    .then((res) => {
-      setCourseTags(res.data)
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  }, [showModal, resetCourse]);
-
-  useEffect(() => {
     if(user){
       axios
       .get(`http://localhost:3000/courses/getwishcourse/${course_id}/${user.user_id}`)
@@ -86,20 +75,20 @@ export const OneCourse = () => {
     }
   }, [user]);
 
-  useEffect(() => {
-    axios
-      .get(
-        `http://localhost:3000/courses/getpurchasedcourse/${course_id}/${user?.user_id}`
-      )
-      .then((res) => {
-        if (res.data.length) {
-          setIsIntoPurchase(true);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [user]);
+  // useEffect(() => {
+  //   axios
+  //     .get(
+  //       `http://localhost:3000/courses/getpurchasedcourse/${course_id}/${user?.user_id}`
+  //     )
+  //     .then((res) => {
+  //       if (res.data.length) {
+  //         setIsIntoPurchase(true);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, [user]);
 
   const formatearFecha = (date) => {
     return date.split("T")[0].split("-").reverse().join("-");
@@ -246,12 +235,8 @@ export const OneCourse = () => {
             >
               {isIntoPurchase ? "Comprado" : "Comprar"}
             </Button>
-            
-
-            
 
             <Button
-              // onClick={() => deleteCourse(course_id)}
               onClick={openModalDelete}
               variant="outline-danger"
               className="me-3"

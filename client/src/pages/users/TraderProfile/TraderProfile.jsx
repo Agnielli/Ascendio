@@ -24,6 +24,19 @@ export const TraderProfile = () => {
 
   return (
     <>
+      <Card style={{ width: "18rem" }}>
+        <Card.Img variant="top" src="" />
+        <Card.Body>
+          <Card.Title>{traderprofile?.nickname}</Card.Title>
+          <p>Cursos totales:  {traderprofile?.total_courses}</p>
+          <p>Posts totales: {traderprofile?.total_posts}</p>
+          <p>Posts correctos: {traderprofile?.correct_posts}</p>
+          <p>Posts incorrectos: {traderprofile?.incorrect_posts}</p>
+          <Button variant="primary" onClick={() => navigate("/showallusers")}>
+            Volver
+          </Button>
+        </Card.Body>
+      </Card>
       <h5>Todos los trades de este usuario</h5>
 
       {traderprofile?.map((elem, index) => {
