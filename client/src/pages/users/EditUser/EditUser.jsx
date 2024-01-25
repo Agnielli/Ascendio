@@ -37,6 +37,7 @@ export const EditUser = () => {
       });
   }, []);
 
+
   {
     user &&
       useEffect(() => {
@@ -55,6 +56,7 @@ export const EditUser = () => {
   if (userCategory) {
     console.log(userCategory);
   }
+
 
   const handleOption = (option) => {
     setSelectedOption(option);
