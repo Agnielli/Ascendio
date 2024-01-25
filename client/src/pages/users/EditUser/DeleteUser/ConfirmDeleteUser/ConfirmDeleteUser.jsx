@@ -17,11 +17,16 @@ export const ConfirmDeleteUser = ({ setShowDeleteUser}) => {
     setIsLogged(false);
     navigate("/");
   };
+
+  const userData = {
+    email: user.email,
+    nickname: user.nickname,
+  };
   
   
   const handleSubmit = () => {
       axios
-        .put(`http://localhost:3000/users/deleteuser/${user.user_id}`)
+        .put(`http://localhost:3000/users/deleteuser/${user.user_id}`, userData)
         .then((res) => {
           logOut()
           

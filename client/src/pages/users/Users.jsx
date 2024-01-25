@@ -31,7 +31,7 @@ export const Users = () => {
         {user?.img ? (
           <img src={`http://localhost:3000/images/users/${user.img}`} />
         ) : (
-          <p>{user?.name.charAt(0).toUpperCase()}</p>
+          <p>{user?.nickname.charAt(0).toUpperCase()}</p>
         )}
       </div>
       <h2>{user?.nickname}</h2>
