@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AscendioContext } from "../../../context/AscendioContext";
 import { Button, Card, InputGroup, ListGroup } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const ShowAllUsers = () => {
   const [show, setShow] = useState(1);
@@ -144,9 +144,19 @@ export const ShowAllUsers = () => {
                   key={elem.user_id}
                 >
                   <Card.Body>
-                    <div>
-                      <Card.Title className="d-flex">
-                        <h3>Usuario: {elem.nickname}</h3>
+                    <div>                     
+                        <div className="avatar">
+                          {elem.img !== null ? (
+                            <Card.Img
+                              variant="top"
+                              src={`http://localhost:3000/images/users/${elem.img}`}
+                            />
+                          ) : (
+                            <p>{elem?.nickname.charAt(0).toUpperCase()}</p>
+                          )}
+                        </div>                    
+                      <Card.Title className="d-flex">                      
+                          <h3> {elem.nickname}</h3>                        
                       </Card.Title>
                       {user.user_id !== elem.user_id ? (
                         <Button
@@ -185,12 +195,6 @@ export const ShowAllUsers = () => {
                           </ListGroup.Item>
                           <ListGroup.Item></ListGroup.Item>
                         </ListGroup>
-                        {elem.image_name !== null && (
-                          <Card.Img
-                            variant="top"
-                            src={`http://localhost:3000/images/users/${elem.img}`}
-                          />
-                        )}
                       </Card.Body>
                       <div className="d-flex gap-1">
                         <Button
