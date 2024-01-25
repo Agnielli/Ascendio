@@ -21,8 +21,10 @@ router.put('/deletecourse/:course_id', coursesControllers.deleteCourse);
 router.delete('/deletetopic/:course_id/:section_id:/:topic_id', coursesControllers.deleteTopic);
 router.get('/getwishcourse/:course_id/:user_id', coursesControllers.getWishCourse);
 router.put('/addwishescourse/:course_id', coursesControllers.addWishesCourse);
+router.put('/addtovalidatecourse/:course_id', coursesControllers.addToValidateCourse);
 router.post('/delfromwishes/:course_id', coursesControllers.delFromWishes);
 router.get('/getalltagsonecourse/:course_id', coursesControllers.getAllTagsOneCourse);
+router.get('/getcreatoruser/:course_id', coursesControllers.getCreatorUser);
 
 //harta del git
 

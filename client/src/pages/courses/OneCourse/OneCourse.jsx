@@ -21,9 +21,11 @@ export const OneCourse = () => {
   const [resetCourse, setResetCourse] = useState(false);
   const [course, setCourse] = useState();
   const [isIntoWishes, setIsIntoWishes] = useState(false);
-  const [courseTags, setCourseTags] = useState([]);
   const [isIntoPurchase, setIsIntoPurchase] = useState(false)
+  const [isIntoValidate, setIsIntoValidate] = useState(false)
+  const [courseTags, setCourseTags] = useState([]);
   const [showModalDelete, setShowModalDelete] = useState(false)
+  const [creator, setCreator] = useState()
   const navigate = useNavigate();
 
   const openModal = () => {
@@ -43,6 +45,10 @@ export const OneCourse = () => {
         setCourseToEdit(res.data);
         setSections(res.data.sections);
         setTopics(res.data.topics);
+        if(res.data.is_completed === 1){
+          setIsIntoValidate(true)
+        }
+        setUserCourse(res.data.user_id)
       })
       .catch((err) => {
         console.log(err);
@@ -62,14 +68,14 @@ export const OneCourse = () => {
 
   useEffect(() => {
     axios
-    .get(`http://localhost:3000/courses/getalltagsonecourse/${course_id}`)
+    .get(`http://localhost:3000/courses/getcreatoruser/${course_id}`)
     .then((res) => {
-      setCourseTags(res.data)
+      setCreator(res.data[0])
     })
     .catch((err) => {
       console.log(err);
     });
-  }, [showModal, resetCourse]);
+  }, []);
 
   useEffect(() => {
     if(user){
@@ -87,9 +93,10 @@ export const OneCourse = () => {
   }, [user]);
 
   useEffect(() => {
+    if(user){
     axios
       .get(
-        `http://localhost:3000/courses/getpurchasedcourse/${course_id}/${user?.user_id}`
+        `http://localhost:3000/courses/getpurchasedcourse/${course_id}/${user.user_id}`
       )
       .then((res) => {
         if (res.data.length) {
@@ -99,6 +106,7 @@ export const OneCourse = () => {
       .catch((err) => {
         console.log(err);
       });
+    }
   }, [user]);
 
   const formatearFecha = (date) => {
@@ -116,8 +124,6 @@ export const OneCourse = () => {
   };
 
   const delFromWishes = () => {
-    console.log("aquí se borra wish");
-    console.log("userrrr", user);
     axios
       .post(`http://localhost:3000/courses/delfromwishes/${course_id}`, {
         usuario: user.user_id,
@@ -127,12 +133,20 @@ export const OneCourse = () => {
   };
 
   const addToPurchase = () => {
-    console.log("aquí se compra un curso");
     axios
       .put(`http://localhost:3000/courses/addtopurchasecourse/${course_id}`, {
         usuario: user.user_id,
       })
       .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
+  const addToValidate = () => {
+    axios
+      .put(`http://localhost:3000/courses/addtovalidatecourse/${course_id}`)
+      .then((res) => {
+        setIsIntoValidate(true)
+      })
       .catch((err) => console.log(err));
   };
 
@@ -154,6 +168,15 @@ export const OneCourse = () => {
       setIsIntoPurchase(true);
     }
   };
+  
+  const handleValidate = () => {
+    if (isIntoValidate) {
+      setIsIntoValidate(false);
+    } else {
+      addToValidate();
+      setIsIntoValidate(true);
+    }
+  };
 
   const addNewSection = () => {
     setAddSection(true);
@@ -169,6 +192,7 @@ export const OneCourse = () => {
         console.log(err);
       });
   };
+  let userId = user.user_id;
 
   const deleteSection = (section_id) => {
     axios
@@ -210,7 +234,10 @@ export const OneCourse = () => {
           <Card.Body>
             <Card.Title> Title: {oneCoursePpal?.title} </Card.Title>
             <Card.Subtitle>
-              {oneCoursePpal && "Creado:" + formatearFecha(oneCoursePpal.date)}
+              Autor del curso {creator?.nickname}
+            </Card.Subtitle>
+            <Card.Subtitle>
+              {oneCoursePpal && "Creado: " + formatearFecha(oneCoursePpal.date)}
             </Card.Subtitle>
             <Card.Text>{oneCoursePpal?.description}</Card.Text>
             <Card.Text>{oneCoursePpal?.price === 0 ? 'GRATIS' : `${oneCoursePpal?.price}€`}</Card.Text>
@@ -220,45 +247,44 @@ export const OneCourse = () => {
               })}
             </Card.Text>
 
-            <Button
+            {userId === userCourse &&<Button
               variant="outline-success"
               className="me-3"
               onClick={openModal}
             >
               Editar curso
-            </Button>
-            <Button
+            </Button>}
+            {userId === userCourse &&<Button
               variant="outline-success"
               className="me-3"
               onClick={addNewSection}
               disabled={addSection ? true : false}
             >
               Añadir Sección
-            </Button>
+            </Button>}
 
             <Button onClick={handleWishes}>
               {isIntoWishes ? "Borrar de deseados" : "Añadir a deseados"}
             </Button>
 
-            <Button
+            {userId !== userCourse &&<Button
               onClick={handlePurchase}
               disabled={isIntoPurchase ? true : false}
             >
               {isIntoPurchase ? "Comprado" : "Comprar"}
-            </Button>
-            
+            </Button>}
 
-            
-
-            <Button
+            {user.user_id === userCourse &&<Button
               // onClick={() => deleteCourse(course_id)}
               onClick={openModalDelete}
               variant="outline-danger"
               className="me-3"
             >
               Eliminar curso
-            </Button>
-            {addSection && (
+            </Button>}
+
+            
+            {addSection &&(
               <FormAddSection
                 sections={sections}
                 setSections={setSections}
@@ -273,6 +299,8 @@ export const OneCourse = () => {
             {sections.map((elem) => {
               return (
                 <CardSection
+                  userId={userId}
+                  userCourse={userCourse} 
                   elem={elem}
                   key={elem.section_id}
                   deleteSection={deleteSection}
@@ -287,9 +315,13 @@ export const OneCourse = () => {
               );
             })}
 
-            <Button variant="outline-warning" className="me-3">
-              Validar curso
-            </Button>
+            {userId === userCourse &&<Button
+              variant="outline-warning" 
+              onClick={handleValidate}
+              disabled={isIntoValidate ? true : false}
+            >
+              {isIntoValidate ? "Enviado al administrador" : "Validar curso"}
+            </Button>}
           </Card.Body>
         </Card>
 

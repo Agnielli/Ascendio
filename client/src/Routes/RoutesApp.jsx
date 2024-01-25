@@ -17,7 +17,6 @@ import { Contact } from "../pages/dashboard/Contact/Contact";
 import { RecoverPassword } from "../pages/auth/RecoverPassword/RecoverPassword";
 import { Usuarios } from "../pages/admin/AdminUsuarios/Usuarios";
 import { Estadisticas } from "../pages/admin/AdminEstadisticas/Estadisticas";
-import { Cursos } from "../pages/admin/AdminCursos/Cursos";
 import { useContext } from "react";
 import { AscendioContext } from "../context/AscendioContext";
 import { jwtDecode } from "jwt-decode";
@@ -114,7 +113,6 @@ export const RoutesApp = () => {
               <Route path="/admin" element={<AdminHome />}>
                 <Route index element={<Usuarios />} />
                 <Route path="allusers" element={<Usuarios />} />
-                <Route path="allcourses" element={<Cursos />} />
                 <Route path="alldata" element={<Estadisticas />} />
               </Route>
             </>

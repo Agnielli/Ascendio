@@ -56,35 +56,6 @@ class coursesControllers {
         res.status(200).json(result);
       }
     });
-
-    /* let sql = `SELECT course.title, course.img, course.description, course.price , tag.tag_id, tag.tag_name
-        FROM course 
-        LEFT JOIN course_tag ON course.course_id = course_tag.course_id 
-        LEFT JOIN tag ON course_tag.tag_id = tag.tag_id   
-          WHERE is_deleted = 0`;
-
-    // TODO is disabled = 0
-    connection.query(sql, (err, result) => {
-      if (err) {
-        res.status(500).json(err);
-      }
-      const { title, description, img, price } = result;
-
-      let data = {
-        title,
-        img,
-        price,
-        description,
-        tags: [],
-      };
-      result.forEach((elem) => {
-        if (elem.tag_id != null) {
-          data.tags.push({ tag_id: elem.tag_id, tag_title: elem.tag_name });
-        }
-        console.log("ESTA ES MI DATA TOTAL", data);
-      res.status(200).json(data);
-      });
-    }); */
   };
 
  
@@ -92,7 +63,7 @@ class coursesControllers {
   oneCourse = (req, res) => {
     const { course_id } = req.params; //añadir el usuario que está logueado
     // console.log(course_id);
-    let sql = `SELECT course.title, course.img, course.date, course.is_completed, course.description, course.price , section.section_id, section.section_title, topic.topic_id, topic.topic_title
+    let sql = `SELECT course.title, course.user_id, course.img, course.date, course.is_completed, course.description, course.price , section.section_id, section.section_title, topic.topic_id, topic.topic_title
     FROM course
     LEFT JOIN section ON course.course_id = section.course_id
     LEFT JOIN topic ON course.course_id = topic.course_id
@@ -108,11 +79,14 @@ class coursesControllers {
       if (err) {
         res.status(500).json(err);
       }
-      const { title, description, img, date, price, is_completed } = result[0];
+      const { title, user_id, description, img, date, price, is_completed } = result[0];
+      
       let data = {
         title,
         img,
         date,
+        user_id,
+        is_completed,
         price,
         description,
         sections: [],
@@ -146,6 +120,25 @@ class coursesControllers {
       res.status(200).json(data);
     });
   };
+
+  getCreatorUser = (req, res) => {
+    const {course_id} = req.params
+
+    let creatorUser = {}
+      
+    let sql = `SELECT user.nickname 
+    FROM user 
+    INNER JOIN course ON user.user_id = course.user_id 
+    WHERE course.course_id = ${course_id};`
+    connection.query(sql, (err, result) => {
+        console.log("----------------", result);
+        if (err) {
+          res.status(500).json(err);
+        }
+        res.status(200).json(result);
+        console.log(result)
+      })
+  }
 
   editOneCourse = (req, res) => {
     const { title, description, price, user_id } = JSON.parse(
@@ -361,8 +354,21 @@ class coursesControllers {
       res.status(200).json(result);
    
     })
-
   }
 
+  addToValidateCourse = (req, res) =>{
+    const {course_id} = req.params
+
+    let sql = `UPDATE course SET is_completed = 1
+    WHERE course_id = ${course_id}`
+
+    connection.query(sql, (err, result)=>{
+      err ?
+      res.status(500).json(err)
+      :
+      res.status(200).json(result);
+    })
+  }
 }
+
 module.exports = new coursesControllers();
