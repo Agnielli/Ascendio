@@ -148,7 +148,7 @@ class adminControllers {
     let sql = `SELECT
     course.course_id, course.title, course.user_id, course.description, course.img AS course_img,
     course.date, course.price, course.is_disabled, user.name, user.lastname, user.nickname, user.email
-    FROM course LEFT JOIN user ON course.user_id = user.user_id`;
+    FROM course LEFT JOIN user ON course.user_id = user.user_id WHERE course.is_completed = 1`;
 
     connection.query(sql, (err, result) => {
       if (err) {
