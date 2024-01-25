@@ -573,7 +573,7 @@ class usersControllers {
     
      
     console.log("reeeeeeeeeeeeeeq parraaaaams: ",req.params); 
-    const { id: user_id, email, nickname } = req.params;
+  
     let sql = `UPDATE user SET is_deleted = 1, email = "${user_id}@deleteuser.com", nickname = "${user_id}deleteUser" WHERE user_id = ${user_id}`;
 
     connection.query(sql, (err, result) => {

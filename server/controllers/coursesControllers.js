@@ -1,5 +1,7 @@
 const connection = require("../config/db");
+
 class coursesControllers {
+
   createCourse = (req, res) => {
     const tags = JSON.parse(req.body.tags);
     const { title, description, price, user_id } = JSON.parse(
@@ -29,6 +31,7 @@ class coursesControllers {
       res.status(200).json(result);
     });
   };
+
   callTags = (req, res) => {
     let sql = `SELECT * FROM tag`;
     connection.query(sql, (err, result) => {
@@ -39,6 +42,7 @@ class coursesControllers {
       }
     });
   };
+
   callCourses = (req, res) => {
     let sql = `SELECT * FROM course WHERE is_disabled = 1 AND is_deleted = 0`;
     // TODO is disabled = 0
@@ -155,6 +159,7 @@ class coursesControllers {
         .json({ result, img: req.file ? req.file.filename : null });
     });
   };
+
   addSection = (req, res) => {
     const { course_id, newSection } = req.body;
     let sql_cont = `SELECT max(section_id) as id FROM section WHERE course_id = ${course_id}`;
@@ -180,6 +185,7 @@ class coursesControllers {
       });
     });
   };
+
   viewPurchasedCourse = (req, res) => {
     let sql = `SELECT * FROM course WHERE is_completed = 1 AND is_deleted = 0`;
     //TODO: cambiare is_completed con is_bought`
@@ -187,6 +193,7 @@ class coursesControllers {
       err ? res.status(500).json(err) : res.status(200).json(result);
     });
   };
+
   deleteSection = (req, res) => {
     const { course_id, section_id } = req.params;
     let sql = `DELETE FROM section WHERE course_id = ${course_id} and section_id =${section_id}`;
@@ -194,6 +201,7 @@ class coursesControllers {
       err ? res.status(500).json(err) : res.status(200).json(result);
     });
   };
+
   addTopic = (req, res) => {
     const { course_id, newTopic, section_id } = req.body;
     let sql_cont = `SELECT max(topic_id) as id FROM topic WHERE section_id = ${section_id}`;
@@ -216,6 +224,7 @@ class coursesControllers {
       });
     });
   };
+
   oneUserCourses = (req, res) => {
     const { user_id } = req.params;
     console.log("EEEEEEEEEEEEEA", req.params);
@@ -224,6 +233,7 @@ class coursesControllers {
       err ? res.status(500).json(err) : res.status(200).json(result);
     });
   };
+
   deleteCourse = (req, res) => {
     const { course_id } = req.params;
     let sql = `UPDATE course
@@ -246,6 +256,7 @@ class coursesControllers {
       err ? res.status(500).json(err) : res.status(200).json(result);
     });
   };
+
   getWishCourse = (req, res) => {
     const { course_id, user_id } = req.params;
     let sql = `SELECT * FROM user_wishes_course WHERE user_id = ${user_id} and course_id = ${course_id}`;
@@ -253,6 +264,7 @@ class coursesControllers {
       err ? res.status(500).json(err) : res.status(200).json(result);
     });
   };
+
   addWishesCourse = (req, res) => {
     const { course_id } = req.params;
     const { usuario } = req.body;
@@ -261,6 +273,7 @@ class coursesControllers {
       err ? res.status(500).json(err) : res.status(200).json(result);
     });
   };
+
   delFromWishes = (req, res) => {
     const { course_id } = req.params;
     const { usuario } = req.body;
@@ -269,6 +282,7 @@ class coursesControllers {
       err ? res.status(500).json(err) : res.status(200).json(result);
     });
   };
+
   getAllTagsOneCourse = (req, res) => {
     const { course_id } = req.params;
     let sql = `SELECT tag.tag_id, tag.tag_name
@@ -279,6 +293,7 @@ class coursesControllers {
       err ? res.status(500).json(err) : res.status(200).json(result);
     });
   };
+
   addToPurchaseCourse = (req, res) => {
     const { course_id } = req.params;
     const { usuario } = req.body;
@@ -287,6 +302,7 @@ class coursesControllers {
       err ? res.status(500).json(err) : res.status(200).json(result);
     });
   };
+
   getPurchaseCourse = (req, res) => {
     const { course_id, user_id } = req.params;
     let sql = `SELECT * FROM user_enrolls_course WHERE user_id = ${user_id} and course_id = ${course_id}`;
@@ -295,9 +311,6 @@ class coursesControllers {
     });
   };
 
-  
-
-
   addResourcePdf = (req, res) =>{
     console.log("hi");
     ///multer acept pdf en el input
@@ -307,26 +320,14 @@ class coursesControllers {
     //sin modal
   }
   deleteResource = (req, res) =>{
-    console.log("hh");
+    const { course_id, section_id, topic_id, resource_id } = req.params;
+    let sql = `DELETE FROM resource WHERE course_id = ${course_id} AND section_id =${section_id} AND topic_id = ${topic_id} AND resource_id = ${resource_id}`;
+
+    connection.query(sql, (err, result) => {
+      err ? res.status(500).json(err) : res.status(200).json(result);
+    });
   }
-
-
-  addResourcePdf = (req, res) =>{
-    console.log("hi");
-    ///multer acept pdf en el input
-  }
-
-  addResourceVideo = (req, res) => {
-    console.log("ppp");
-    //sin modal
-  }
-
-  deleteResource = (req, res) =>{
-    console.log("hh");
-  }
-
   
-
 
  getPurchaseCourse = (req, res) => {
     const {course_id, user_id} = req.params
@@ -341,7 +342,6 @@ class coursesControllers {
     })
   }
 
-
   addToValidateCourse = (req, res) =>{
     const {course_id} = req.params
 
@@ -355,6 +355,10 @@ class coursesControllers {
       res.status(200).json(result);
     })
   }
+
+
+
+
 }
 
 module.exports = new coursesControllers();
