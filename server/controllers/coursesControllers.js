@@ -44,7 +44,10 @@ class coursesControllers {
   };
 
   callCourses = (req, res) => {
-    let sql = `SELECT * FROM course WHERE is_disabled = 1 AND is_deleted = 0`;
+    let sql = `SELECT course.course_id, course.title, course.description, course.price, course.is_disabled, course.img, REPLACE(GROUP_CONCAT(tag.tag_name), ',', ' ') AS tags FROM course
+    LEFT JOIN course_tag ON course.course_id = course_tag.course_id
+    LEFT JOIN tag ON course_tag.tag_id = tag.tag_id
+    WHERE course.is_disabled = 1 AND course.is_deleted = 0 GROUP BY course.course_id, course.title, course.description, course.price, course.is_disabled, course.img;`;
     // TODO is disabled = 0
     connection.query(sql, (err, result) => {
       if (err) {
@@ -54,7 +57,7 @@ class coursesControllers {
       }
     });
   };
-  
+
   oneCourse = (req, res) => {
     const { course_id } = req.params; //añadir el usuario que está logueado
     // console.log(course_id);
@@ -75,7 +78,8 @@ class coursesControllers {
         res.status(500).json(err);
       }
 
-      const { title, user_id, description, img, date, price, is_completed } = result[0];
+      const { title, user_id, description, img, date, price, is_completed } =
+        result[0];
       let sections = [];
       let topics = [];
       let last_section_id = null;
@@ -120,23 +124,23 @@ class coursesControllers {
   };
 
   getCreatorUser = (req, res) => {
-    const {course_id} = req.params
+    const { course_id } = req.params;
 
-    let creatorUser = {}
-      
+    let creatorUser = {};
+
     let sql = `SELECT user.nickname 
     FROM user 
     INNER JOIN course ON user.user_id = course.user_id 
-    WHERE course.course_id = ${course_id};`
+    WHERE course.course_id = ${course_id};`;
     connection.query(sql, (err, result) => {
-        console.log("----------------", result);
-        if (err) {
-          res.status(500).json(err);
-        }
-        res.status(200).json(result);
-        console.log(result)
-      })
-  }
+      console.log("----------------", result);
+      if (err) {
+        res.status(500).json(err);
+      }
+      res.status(200).json(result);
+      console.log(result);
+    });
+  };
 
   editOneCourse = (req, res) => {
     const { title, description, price, user_id } = JSON.parse(
@@ -227,8 +231,11 @@ class coursesControllers {
 
   oneUserCourses = (req, res) => {
     const { user_id } = req.params;
-    console.log("EEEEEEEEEEEEEA", req.params);
-    let sql = `SELECT * FROM course where user_id = ${user_id} AND is_deleted = 0;`;
+    
+    let sql = `SELECT course.course_id, course.title, course.description, course.price, course.is_disabled, course.img, REPLACE(GROUP_CONCAT(tag.tag_name), ',', ' ') AS tags FROM course
+    LEFT JOIN course_tag ON course.course_id = course_tag.course_id
+    LEFT JOIN tag ON course_tag.tag_id = tag.tag_id
+    WHERE course.user_id = ${user_id} AND course.is_deleted = 0 GROUP BY course.course_id, course.title, course.description, course.price, course.is_disabled, course.img;`
     connection.query(sql, (err, result) => {
       err ? res.status(500).json(err) : res.status(200).json(result);
     });
@@ -247,7 +254,7 @@ class coursesControllers {
       err ? res.status(500).json(err) : res.status(200).json(result);
     });
   };
-  
+
   deleteTopic = (req, res) => {
     const { course_id, section_id, topic_id } = req.params;
     let sql = `DELETE FROM topic WHERE course_id = ${course_id} and section_id =${section_id} AND topic_id = ${topic_id}`;
@@ -312,14 +319,28 @@ class coursesControllers {
   };
 
   addResourcePdf = (req, res) =>{
-    console.log("hi");
-    ///multer acept pdf en el input
+    console.log("HOLAAAAAAA", req.body.crearContenido);
+    const { course_id, section_id, topic_id, newResource} = JSON.parse(req.body.crearContenido);
+
+    let file = req.file.filename
+
+    let sql = `INSERT INTO resource (course_id, section_id, topic_id, resource_id, resource_type, file) VALUES (${course_id}, ${section_id}, ${topic_id}, ${resource_id}, '${newResource}', '${file}')`;
+
+    connection.query(sql, (err, res) => {
+      if (err) {
+        return res.status(500).json(err);
+      }
+      res.status(201).json(res)
+    })
   }
+
+
   addResourceVideo = (req, res) => {
     console.log("ppp");
     //sin modal
   }
-  deleteResource = (req, res) =>{
+  
+    deleteResource = (req, res) =>{
     const { course_id, section_id, topic_id, resource_id } = req.params;
     let sql = `DELETE FROM resource WHERE course_id = ${course_id} AND section_id =${section_id} AND topic_id = ${topic_id} AND resource_id = ${resource_id}`;
 
@@ -327,39 +348,27 @@ class coursesControllers {
       err ? res.status(500).json(err) : res.status(200).json(result);
     });
   }
-  
 
- getPurchaseCourse = (req, res) => {
-    const {course_id, user_id} = req.params
-    let sql = `SELECT * FROM user_enrolls_course WHERE user_id = ${user_id} and course_id = ${course_id}`
 
-    connection.query(sql, (err, result)=>{
-      err ?
-      res.status(500).json(err)
-      :
-      res.status(200).json(result);
-   
-    })
-  }
+  getPurchaseCourse = (req, res) => {
+    const { course_id, user_id } = req.params;
+    let sql = `SELECT * FROM user_enrolls_course WHERE user_id = ${user_id} and course_id = ${course_id}`;
+    
+    connection.query(sql, (err, result) => {
+      err ? res.status(500).json(err) : res.status(200).json(result);
+    });
+  };
 
-  addToValidateCourse = (req, res) =>{
-    const {course_id} = req.params
+  addToValidateCourse = (req, res) => {
+    const { course_id } = req.params;
 
     let sql = `UPDATE course SET is_completed = 1
-    WHERE course_id = ${course_id}`
+    WHERE course_id = ${course_id}`;
 
-    connection.query(sql, (err, result)=>{
-      err ?
-      res.status(500).json(err)
-      :
-      res.status(200).json(result);
-    })
-  }
-
-
-
-
+    connection.query(sql, (err, result) => {
+      err ? res.status(500).json(err) : res.status(200).json(result);
+    });
+  };
 }
 
 module.exports = new coursesControllers();
-

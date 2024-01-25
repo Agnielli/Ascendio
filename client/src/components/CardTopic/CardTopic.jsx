@@ -46,6 +46,10 @@ export const CardTopic = ({
           <ModalResource 
             showModalArchivo={showModalArchivo}
             setShowModalArchivo={setShowModalArchivo}
+            setResetCourse={setResetCourse}
+            resetCourse={resetCourse}
+            section_id={section_id}
+            topic_id={topic.topic_id}
           />
         )}
       </Card.Body>
