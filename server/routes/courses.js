@@ -18,7 +18,7 @@ router.delete('/deletesection/:course_id/:section_id', coursesControllers.delete
 router.post('/addtopic', coursesControllers.addTopic);
 router.get('/oneusercourses/:user_id', coursesControllers.oneUserCourses);
 router.put('/deletecourse/:course_id', coursesControllers.deleteCourse);
-router.delete('/deletetopic/:course_id/:section_id:/:topic_id', coursesControllers.deleteTopic);
+router.delete('/deletetopic/:course_id/:section_id/:topic_id', coursesControllers.deleteTopic);
 router.get('/getwishcourse/:course_id/:user_id', coursesControllers.getWishCourse);
 router.put('/addwishescourse/:course_id', coursesControllers.addWishesCourse);
 router.post('/delfromwishes/:course_id', coursesControllers.delFromWishes);
@@ -27,8 +27,9 @@ router.get('/getalldisabledcourses', coursesControllers.getAllDisabledCourses)
 router.get('/getallenabledcourses', coursesControllers.getAllEnabledCourses)
 router.put('/enableonecourse/:course_id', coursesControllers.enableOneCourse)
 router.put('/disableonecourse/:course_id', coursesControllers.disableOneCourse)
-
-//harta del git
+router.post('/addresourcepdf', multerSingle("resource"), coursesControllers.addResourcePdf)
+router.post('/addresourcevideo', coursesControllers.addResourceVideo)
+router.delete('/deleteResource', coursesControllers.deleteResource)
 
 
 

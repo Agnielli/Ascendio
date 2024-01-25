@@ -1,16 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 
-export const ModalDelOneCourse = (
-  {showModalDelete,
-    setShowModalDelete,
-    deleteCourse,
-    course_id,
-    elem }) => {
+export const ModalDelOneCourse = ({
+  showModalDelete,setShowModalDelete, deleteCourse,course_id}) => {
 
   const handleClose = () => {
     setShowModalDelete(false);
   };
+
+  
+
+  
 
   return (
     <Row className="d-flex justify-content-center p-5">
