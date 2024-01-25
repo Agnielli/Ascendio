@@ -1,8 +1,16 @@
 import React from 'react'
 import { Button, Card } from 'react-bootstrap';
 
-export const CardTopic = ({topics, setTopics, elem, deleteTopic}) => {
-  console.log('OOOOOOOOOOOO', topics)
+export const CardTopic = (
+  {topics,
+    setTopics,
+    elem,
+    deleteTopic,
+    section_id,
+    setResetCourse,
+    resetCourse
+  }) => {
+  
   return (
     <Card>
       <Card.Body>
@@ -14,6 +22,7 @@ export const CardTopic = ({topics, setTopics, elem, deleteTopic}) => {
         </Button>
         <Button
           variant="outline-success"
+          onClick={deleteTopic}
 
         >
           Eliminar

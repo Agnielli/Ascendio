@@ -13,6 +13,7 @@ export const FormAddTopic = ({
   resetCourse,
 }) => {
   const [newTopic, setNewTopic] = useState("");
+  const [msgError, setMsgError] = useState("");
 
   const handleChange = (e) => {
     setNewTopic(e.target.value);
