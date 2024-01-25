@@ -6,6 +6,9 @@ import { Link, useNavigate } from "react-router-dom";
 
 export const AllTrades = () => {
   const [lastTrades, setLastTrades] = useState([]); // para enseñar: ULTIMOS TRADES o TOP SEGUIDORES o TOP ACERTADOS
+  const [lastTradesFilter, setLastTradesFilter] = useState([]);
+  const [search, setSearch] = useState("");
+
   const { user } = useContext(AscendioContext);
   const [followingUsers, setFollowingUsers] = useState([]); // Nuevo estado para almacenar usuarios seguidos
   const navigate = useNavigate();
@@ -16,13 +19,14 @@ export const AllTrades = () => {
       .get("http://localhost:3000/posts/lasttrades")
       .then((res) => {
         // console.log(res.data);
-        setLastTrades(res.data);
+        setLastTrades(res.data.filter((elem) => elem.type === 2));
+        setLastTradesFilter(res.data.filter((elem) => elem.type === 2));
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
-
+ 
   // para poner los botones en seguir o siguiendo si user existe
   user &&
     useEffect(() => {
@@ -37,7 +41,7 @@ export const AllTrades = () => {
         .catch((err) => {
           console.log(err);
         });
-    }, []);
+    }, [user]);
 
   // Función para seguir o dejar de seguir a un usuario
   const pulsarSeguirONo = (id_followed) => {
@@ -74,68 +78,90 @@ export const AllTrades = () => {
     }
   };
 
+  const handleChange = (e) => {
+    const searchFilter = e.target.value;
+    setSearch(searchFilter);
+    console.log(search);
+    if (search !== "") {
+      setLastTradesFilter(
+        lastTrades.filter((patata) =>
+          patata.currency.toLowerCase().includes(searchFilter.toLowerCase())
+        )
+      );
+    } else {
+      setLastTradesFilter(lastTrades);
+    }
+  };
+
   return (
     <div>
       <>
         <h2>Trade Posts</h2>
+        <div className="d-flex gap-5 mb-1">
+          <input onChange={handleChange} placeholder="🔍..." value={search} />
+        </div>
         <div className="d-flex flex-wrap gap-2 mb-2">
-          {lastTrades
-            ?.filter((elem) => elem.type === 2)
-            .map((elem, index) => {
-              return (
-                <Card
-                  style={{ width: "18rem", marginBottom: "1rem" }}
-                  key={elem.post_id}
-                >
-                  <Card.Body>
-                    <div>
-                      <Card.Title className="d-flex">
-                        <h3>Trader: {elem.nickname}</h3>
-                      </Card.Title>
-                      {user.user_id !== elem.user_id ? (
-                        <Button
-                          variant="primary"
-                          onClick={() => pulsarSeguirONo(elem.user_id)}
-                        >
-                          {followingUsers.includes(elem.user_id)
-                            ? "Siguiendo"
-                            : "Seguir"}
-                        </Button>
-                      ) : (
-                        <Button
-                          onClick={() => navigate(`/userposts/${user.user_id}`)}
-                        >
-                          Ir a posts
-                        </Button>
+          {lastTradesFilter.map((elem) => {
+            return (
+              <Card
+                style={{ width: "18rem", marginBottom: "1rem" }}
+                key={elem.post_id}
+              >
+                <Card.Body>
+                  <div>
+                    <Card.Title className="d-flex">
+                      <h3>Trader: {elem.nickname}</h3>
+                    </Card.Title>
+                    {user.user_id !== elem.user_id ? (
+                      <Button
+                        variant="primary"
+                        onClick={() => pulsarSeguirONo(elem.user_id)}
+                      >
+                        {followingUsers.includes(elem.user_id)
+                          ? "Siguiendo"
+                          : "Seguir"}
+                      </Button>
+                    ) : (
+                      <Button
+                        onClick={() => navigate(`/userposts/${user.user_id}`)}
+                      >
+                        Ir a posts
+                      </Button>
+                    )}
+                    <Card.Body>
+                      <ListGroup variant="flush">
+                        <ListGroup.Item></ListGroup.Item>
+                        <ListGroup.Item>
+                          Currency: {elem.currency}
+                        </ListGroup.Item>
+                        <ListGroup.Item className="mb-1">
+                          Estado: {elem.correct === null && "Trade Pendiente"}
+                          {elem.correct === 0 && "Trade Errado"}
+                          {elem.correct === 1 && "Trade Acertado"}
+                        </ListGroup.Item>{" "}
+                        <ListGroup.Item></ListGroup.Item>
+                      </ListGroup>
+                      {elem.image_name !== null && (
+                        <Card.Img
+                          variant="top"
+                          src={`http://localhost:3000/images/trades/${elem.image_name}`}
+                        />
                       )}
-                      <Card.Body>
-                        <ListGroup variant="flush">
-                          <ListGroup.Item></ListGroup.Item>
-                          <ListGroup.Item>
-                            Currency: {elem.currency}
-                          </ListGroup.Item>
-                          <ListGroup.Item className="mb-1">
-                            Estado: {elem.correct === null && "Trade Pendiente"}
-                            {elem.correct === 0 && "Trade Errado"}
-                            {elem.correct === 1 && "Trade Acertado"}
-                          </ListGroup.Item>{" "}
-                          <ListGroup.Item></ListGroup.Item>
-                        </ListGroup>
-                        {elem.image_name !== null && (
-                          <Card.Img
-                            variant="top"
-                            src={`http://localhost:3000/images/trades/${elem.image_name}`}
-                          />
-                        )}
-                      </Card.Body>
-                      <div className="d-flex gap-1">
-                        <Button onClick={()=>{navigate(`/OneTradePost/${elem.post_id}`)}}>Ver más</Button>
-                      </div>
+                    </Card.Body>
+                    <div className="d-flex gap-1">
+                      <Button
+                        onClick={() => {
+                          navigate(`/OneTradePost/${elem.post_id}`);
+                        }}
+                      >
+                        Ver más
+                      </Button>
                     </div>
-                  </Card.Body>
-                </Card>
-              );
-            })}
+                  </div>
+                </Card.Body>
+              </Card>
+            );
+          })}
         </div>
       </>
     </div>

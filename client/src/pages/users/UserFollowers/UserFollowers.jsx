@@ -5,18 +5,23 @@ import { Button, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 export const UserFollowers = () => {
-  const [followers, setFollowers] = useState();
-  
+  const [followers, setFollowers] = useState([]);
+  const [followersFilter, setFollowersFilter] = useState([]);
+  const [search, setSearch] = useState("");
+
+  const [followingUsers, setFollowingUsers] = useState([]); // Nuevo estado para almacenar usuarios seguidos
+
   const { user } = useContext(AscendioContext);
   const navigate = useNavigate();
 
+  // para obtener los usuarios que me siguen
   useEffect(() => {
     if (user) {
       axios
         .get(`http://localhost:3000/users/followersuser/${user.user_id}`)
         .then((res) => {
-          console.log(res);
           setFollowers(res.data.datos);
+          setFollowersFilter(res.data.datos);
         })
         .catch((err) => {
           console.log(err);
@@ -24,14 +29,84 @@ export const UserFollowers = () => {
     }
   }, [user]);
 
+  // para poner los botones en seguir o siguiendo si user existe
+  user &&
+    useEffect(() => {
+      const user_id = user.user_id;
+      axios
+        .get(`http://localhost:3000/users/getfollowuser/${user_id}`)
+        .then((res) => {
+          // console.log(res.data);
+          // esto permite que al recargar me cargue el estado followingUsers con los usuarios a los que seguimos
+          setFollowingUsers(res.data.map((user) => user.followed_user_id));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }, [user]);
+
+  // Función para seguir o dejar de seguir a un usuario
+  const pulsarSeguirONo = (id_followed) => {
+    const data = [user.user_id, id_followed];
+    const isFollowing = followingUsers.includes(id_followed); // devuelve true o false
+    if (isFollowing) {
+      // Dejar de seguir
+      axios
+        .delete(`http://localhost:3000/users/unfollowUser`, { data })
+        .then((res) => {
+          // console.log(res.data);
+          setFollowingUsers((prevFollowingUsers) =>
+            prevFollowingUsers.filter((userId) => userId !== id_followed)
+          );
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      // Seguir
+      axios
+        .post(`http://localhost:3000/users/followUser`, data)
+        .then((res) => {
+          // setFollowingUsers([...followingUsers, id_followed]);
+          setFollowingUsers((prevFollowingUsers) => [
+            ...prevFollowingUsers,
+            id_followed,
+          ]);
+          // console.log([...followingUsers, id_followed]);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
+  const handleChange = (e) => {
+    const searchFilter = e.target.value;
+    setSearch(searchFilter);
+    if (search !== "") {
+      setFollowersFilter(
+        followers.filter((patata) =>
+          patata.nickname.toLowerCase().includes(searchFilter.toLowerCase())
+        )
+      );
+    } else {
+      setFollowersFilter(followers);
+    }
+  };
+
   return (
     <>
-      <div className="d-flex p-5 gap-5">
-        <h2>Mis seguidores</h2>
-        <Button onClick={()=>navigate('/profile')}>Volver</Button>
+      <div className="d-flex flex-column p-5">
+        <div className="d-flex gap-5">
+          <h2>Mis seguidores</h2>
+          <Button onClick={() => navigate("/profile")}>Volver</Button>
+        </div>
+        <div className="d-flex gap-5">
+          <input onChange={handleChange} placeholder="🔍..." value={search} />
+        </div>
       </div>
       <div className="d-flex gap-5 flex-wrap p-5">
-        {followers?.map((elem) => {
+        {followersFilter?.map((elem) => {
           return (
             <Card style={{ width: "18rem" }} key={elem.user_id}>
               {elem.img !== null ? (
@@ -49,7 +124,22 @@ export const UserFollowers = () => {
               <Card.Body>
                 <Card.Title>{elem.nickname}</Card.Title>
                 <Card.Text></Card.Text>
-                <Button variant="primary">Seguir tambien</Button>
+                {user.user_id !== elem.user_id ? (
+                  <Button
+                    variant="primary"
+                    onClick={() => pulsarSeguirONo(elem.user_id)}
+                  >
+                    {followingUsers.includes(elem.user_id)
+                      ? "Dejar de Seguir"
+                      : "Seguir También"}
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={() => navigate(`/userposts/${user.user_id}`)}
+                  >
+                    Ir a posts
+                  </Button>
+                )}
               </Card.Body>
             </Card>
           );

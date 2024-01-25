@@ -7,6 +7,9 @@ import { OneComment } from "../../../components/OneComment/OneComment";
 import { AdminDisabledUsers } from "../../../components/AdminDisabledUsers/AdminDisabledUsers";
 import { AdminActivateUser } from "../../../components/AdminActivateUser/AdminActivateUser";
 import { AdminCourses } from "../../../components/AdminCourses/AdminCourses";
+import { DisabledCoursesMap } from "../../../components/DisabledCoursesMap/DisabledCoursesMap";
+import { EnabledCoursesMap } from "../../../components/EnabledCoursesMap/EnabledCoursesMap";
+import { TradesPostMap } from "../../../components/TradesPostMap/TradesPostMap";
 
 export const AdminHome = () => {
   const [showUserButtons, setShowUserButtons] = useState(false);
@@ -18,11 +21,22 @@ export const AdminHome = () => {
   const [showPost, setShowPost] = useState(false);
   const [showComments, setShowComments] = useState(false);
   const [showCourses, setShowCourses] = useState(false);
+  const [showCourseButtons, setShowCourseButtons] = useState(false)
+  const [showDisabledCourses, setShowDisabledCourses] = useState(false)
+  const [showEnabledCourses, setShowEnabledCourses] = useState(false)
   const [allUsers, setAllUsers] = useState();
 
   const showButtons = () => {
     setShowUserButtons(!showUserButtons);
+    setShowCourseButtons(false)
+    setShowTrades(false);
   };
+
+  const showAllCourseButtons = () => {
+    setShowCourseButtons(!showCourseButtons)
+    setShowUserButtons(false);
+    setShowTrades(false);
+  }
 
   const showAllUsers = () => {
     setShowUsers(!showUsers);
@@ -31,6 +45,9 @@ export const AdminHome = () => {
     setShowTrades(false);
     setShowDisabledUsers(false)
     setShowActivatedUsers(false)
+    setShowEnabledCourses(false)
+    setShowDisabledCourses(false)
+    setShowCourseButtons(false)
   };
 
   const showAllDisabledUsers = () => {
@@ -40,6 +57,9 @@ export const AdminHome = () => {
     setShowStats(false);
     setShowTrades(false);
     setShowActivatedUsers(false)
+    setShowEnabledCourses(false)
+    setShowDisabledCourses(false)
+    setShowCourseButtons(false)
   }
 
   const showAllActivatedUsers = () => {
@@ -49,6 +69,9 @@ export const AdminHome = () => {
     setShowStats(false);
     setShowTrades(false);
     setShowDisabledUsers(false)
+    setShowEnabledCourses(false)
+    setShowDisabledCourses(false)
+    setShowCourseButtons(false)
   }
 
   const showStatistics = () => {
@@ -59,6 +82,9 @@ export const AdminHome = () => {
     setShowDisabledUsers(false)
     setShowActivatedUsers(false)
     setShowUserButtons(false);
+    setShowEnabledCourses(false)
+    setShowDisabledCourses(false)
+    setShowCourseButtons(false)
   };
 
   const showAllCourses = () => {
@@ -69,7 +95,33 @@ export const AdminHome = () => {
     setShowDisabledUsers(false)
     setShowActivatedUsers(false)
     setShowUserButtons(false);
+    setShowEnabledCourses(false)
+    setShowDisabledCourses(false)
   };
+
+  const showAllDisabledCourses = () => {
+    setShowDisabledCourses(!showDisabledCourses)
+    setShowCourses(false);
+    setShowStats(false);
+    setShowTrades(false);
+    setShowUsers(false);
+    setShowDisabledUsers(false)
+    setShowActivatedUsers(false)
+    setShowUserButtons(false);
+    setShowEnabledCourses(false)
+  }
+
+  const showAllEnabledCourses = () => {
+    setShowEnabledCourses(!showEnabledCourses)
+    setShowCourses(false);
+    setShowStats(false);
+    setShowTrades(false);
+    setShowUsers(false);
+    setShowDisabledUsers(false)
+    setShowActivatedUsers(false)
+    setShowUserButtons(false);
+    setShowDisabledCourses(false)
+  }
 
   const showAllTrades = () => {
     setShowTrades(!showTrades);
@@ -79,14 +131,19 @@ export const AdminHome = () => {
     setShowDisabledUsers(false)
     setShowActivatedUsers(false)
     setShowUserButtons(false);
+    setShowEnabledCourses(false)
+    setShowDisabledCourses(false)
+    setShowCourseButtons(false)
   };
 
   const showAllComments = () => {
     setShowComments(!showComments);
+    setShowPost(false);
   };
 
   const showAllPosts = () => {
     setShowPost(!showPost);
+    setShowComments(false);
   };
 
   return (
@@ -94,17 +151,16 @@ export const AdminHome = () => {
       <Col className="d-flex flex-column gap-2">
         <h3>Administrador</h3>
         <Button onClick={() => showButtons()}>Usuarios</Button>
-        <Button onClick={() => showAllCourses()}>Cursos</Button>
+        <Button onClick={() => showAllCourseButtons()}>Cursos</Button>
         <Button onClick={() => showStatistics()}>Estadisticas</Button>
         <Button onClick={() => showAllTrades()}>Trades</Button>
         <div>
           {showTrades && (
             <div>
               <Button onClick={() => showAllPosts()}>Posts Trades</Button>
-              
-
               <Button onClick={() => showAllComments()}>Posts General</Button>
               {showComments && <OneComment />}
+              {showPost && <TradesPostMap />}
             </div>
           )}
         </div>
@@ -133,9 +189,20 @@ export const AdminHome = () => {
             </div>
           )}
         </div>
-        <div>{showCourses === true && <AdminCourses />}</div>
+        
         <div>{showStats === true && <Estadisticas />}</div>
       </Col>
+        {showCourseButtons &&
+          <div>
+            <Button onClick={() => showAllCourses()}>Todos los cursos</Button>
+            <Button onClick={() => showAllEnabledCourses()}>Cursos Activos</Button>
+            <Button onClick={() => showAllDisabledCourses()}>Cursos Bloqueados</Button>
+
+            {showCourses && <AdminCourses />}
+            {showDisabledCourses && <DisabledCoursesMap />}
+            {showEnabledCourses && <EnabledCoursesMap />}
+          </div>
+        }
     </Row>
   );
 };
