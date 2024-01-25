@@ -8,6 +8,8 @@ export const ShowAllUsers = () => {
   const [show, setShow] = useState(1);
   const [followingUsers, setFollowingUsers] = useState([]);
   const [allUsers, setAllUsers] = useState();
+  const [allUsersFilter, setAllUsersFilter] = useState();
+  const [search, setSearch] = useState("");
   const { user } = useContext(AscendioContext);
   const navigate = useNavigate();
 
@@ -17,21 +19,22 @@ export const ShowAllUsers = () => {
         .get(`http://localhost:3000/users/showallusers`)
         .then((res) => {
           console.log(res);
-          setAllUsers(res.data);
+          setAllUsers(res.data.filter((elem) => elem.type === 2));
+          setAllUsersFilter(res.data.filter((elem) => elem.type === 2));
         })
         .catch((err) => {
           console.log(err);
         });
     } else if (show === 2) {
       axios
-      .get(`http://localhost:3000/users/showalluserssuccesses`)
-      .then((res) => {
-        console.log(res);
-        setAllUsers(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+        .get(`http://localhost:3000/users/showalluserssuccesses`)
+        .then((res) => {
+          setAllUsers(res.data.filter((elem) => elem.type === 2));
+          setAllUsersFilter(res.data.filter((elem) => elem.type === 2));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   }, [followingUsers, user, show]);
 
@@ -48,7 +51,7 @@ export const ShowAllUsers = () => {
         .catch((err) => {
           console.log(err);
         });
-    }, []);
+    }, [user]);
 
   const pulsarSeguirONo = (id_followed) => {
     const data = [user.user_id, id_followed];
@@ -85,156 +88,198 @@ export const ShowAllUsers = () => {
     }
   };
 
-  console.log(user)
+  const handleChange = (e) => {
+    const searchFilter = e.target.value;
+    setSearch(searchFilter);
+    if (search !== "") {
+      setAllUsersFilter(
+        allUsers.filter((patata) =>
+          patata.nickname.toLowerCase().includes(searchFilter.toLowerCase())
+        )
+      );
+    } else {
+      setLastTradesFilter(allUsers);
+    }
+  };
 
   return (
     <div>
-      {show === 1 && 
+      {show === 1 && (
         <>
-          <Button className="mb-2" onClick={() => setShow(2)}>Top Usuarios con más Aciertos</Button>
+          <div className="d-flex gap-1">
+            <Button className="mb-2" onClick={() => setShow(2)}>
+              Top Usuarios con más Aciertos
+            </Button>
+            <div className="d-flex gap-5 mb-1">
+              <input
+                onChange={handleChange}
+                placeholder="🔍..."
+                value={search}
+              />
+            </div>
+          </div>
           <h2>Top Usuarios con más Seguidores</h2>
           <div className="d-flex flex-wrap gap-2">
-            {allUsers
-              ?.filter((elem) => elem.type === 2)
-              .map((elem) => {
-                return (
-                  <Card
-                    style={{ width: "18rem", marginBottom: "1rem" }}
-                    key={elem.user_id}
-                  >
-                    <Card.Body>
-                      <div>
-                        <Card.Title className="d-flex">
-                          <h3>Usuario: {elem.nickname}</h3>
-                        </Card.Title>
-                        {user.user_id !== elem.user_id ? (
-                          <Button
-                            variant="primary"
-                            onClick={() => pulsarSeguirONo(elem.user_id)}
-                          >
-                            {followingUsers.includes(elem.user_id)
-                              ? "Siguiendo"
-                              : "Seguir"}
-                          </Button>
-                        ) : (
-                          <Button onClick={() => navigate(`/profile`)}>
-                            Ir a mi perfil
-                          </Button>
+            {allUsersFilter.map((elem) => {
+              return (
+                <Card
+                  style={{ width: "18rem", marginBottom: "1rem" }}
+                  key={elem.user_id}
+                >
+                  <Card.Body>
+                    <div>
+                      <Card.Title className="d-flex">
+                        <h3>Usuario: {elem.nickname}</h3>
+                      </Card.Title>
+                      {user.user_id !== elem.user_id ? (
+                        <Button
+                          variant="primary"
+                          onClick={() => pulsarSeguirONo(elem.user_id)}
+                        >
+                          {followingUsers.includes(elem.user_id)
+                            ? "Siguiendo"
+                            : "Seguir"}
+                        </Button>
+                      ) : (
+                        <Button onClick={() => navigate(`/profile`)}>
+                          Ir a mi perfil
+                        </Button>
+                      )}
+                      <Card.Body>
+                        <ListGroup variant="flush">
+                          <ListGroup.Item></ListGroup.Item>
+                          <ListGroup.Item>
+                            Seguidores: {elem.followers_count}
+                          </ListGroup.Item>
+                          <ListGroup.Item>
+                            Siguiendo: {elem.following_count}
+                          </ListGroup.Item>
+                          <ListGroup.Item>
+                            Cursos publicados: {elem.total_courses}
+                          </ListGroup.Item>
+                          <ListGroup.Item>
+                            Post publicados: {elem.total_posts}
+                          </ListGroup.Item>
+                          <ListGroup.Item>
+                            Trades Acertados: {elem.correct_posts}
+                          </ListGroup.Item>
+                          <ListGroup.Item>
+                            Trades Errados: {elem.incorrect_posts}
+                          </ListGroup.Item>
+                          <ListGroup.Item></ListGroup.Item>
+                        </ListGroup>
+                        {elem.image_name !== null && (
+                          <Card.Img
+                            variant="top"
+                            src={`http://localhost:3000/images/users/${elem.img}`}
+                          />
                         )}
-                        <Card.Body>
-                          <ListGroup variant="flush">
-                            <ListGroup.Item></ListGroup.Item>
-                            <ListGroup.Item>
-                              Seguidores: {elem.followers_count}
-                            </ListGroup.Item>
-                            <ListGroup.Item>
-                              Siguiendo: {elem.following_count}
-                            </ListGroup.Item>
-                            <ListGroup.Item>
-                              Cursos publicados: {elem.total_courses}
-                            </ListGroup.Item>
-                            <ListGroup.Item>
-                              Post publicados: {elem.total_posts}
-                            </ListGroup.Item>
-                            <ListGroup.Item>
-                              Trades Acertados: {elem.correct_posts}
-                            </ListGroup.Item>
-                            <ListGroup.Item>
-                              Trades Errados: {elem.incorrect_posts}
-                            </ListGroup.Item>
-                            <ListGroup.Item></ListGroup.Item>
-                          </ListGroup>
-                          {elem.image_name !== null && (
-                            <Card.Img
-                              variant="top"
-                              src={`http://localhost:3000/images/users/${elem.img}`}
-                            />
-                          )}
-                        </Card.Body>
-                        <div className="d-flex gap-1">
-                          <Button onClick={() => navigate(`/traderprofile/${elem.user_id}`)}>Ver más</Button>
-                        </div>
+                      </Card.Body>
+                      <div className="d-flex gap-1">
+                        <Button
+                          onClick={() =>
+                            navigate(`/traderprofile/${elem.user_id}`)
+                          }
+                        >
+                          Ver más
+                        </Button>
                       </div>
-                    </Card.Body>
-                  </Card>
-                );
-              })}
+                    </div>
+                  </Card.Body>
+                </Card>
+              );
+            })}
           </div>
         </>
-        }
-        {show === 2 && (
-          <>
-            <Button className="mb-2" onClick={() => setShow(1)}>Top Usuarios con más Seguidores</Button>
-            <h2>Top Usuarios con más Aciertos</h2>
-            <div className="d-flex flex-wrap gap-2">
-            {allUsers
-              ?.filter((elem) => elem.type === 2)
-              .map((elem) => {
-                return (
-                  <Card
-                    style={{ width: "18rem", marginBottom: "1rem" }}
-                    key={elem.user_id}
-                  >
-                    <Card.Body>
-                      <div>
-                        <Card.Title className="d-flex">
-                          <h3>Usuario: {elem.nickname}</h3>
-                        </Card.Title>
-                        {user.user_id !== elem.user_id ? (
-                          <Button
-                            variant="primary"
-                            onClick={() => pulsarSeguirONo(elem.user_id)}
-                          >
-                            {followingUsers.includes(elem.user_id)
-                              ? "Siguiendo"
-                              : "Seguir"}
-                          </Button>
-                        ) : (
-                          <Button onClick={() => navigate(`/profile`)}>
-                            Ir a mi perfil
-                          </Button>
-                        )}
-                        <Card.Body>
-                          <ListGroup variant="flush">
-                            <ListGroup.Item></ListGroup.Item>
-                            <ListGroup.Item>
-                              Seguidores: {elem.followers_count}
-                            </ListGroup.Item>
-                            <ListGroup.Item>
-                              Siguiendo: {elem.following_count}
-                            </ListGroup.Item>
-                            <ListGroup.Item>
-                              Cursos publicados: {elem.total_courses}
-                            </ListGroup.Item>
-                            <ListGroup.Item>
-                              Post publicados: {elem.total_posts}
-                            </ListGroup.Item>
-                            <ListGroup.Item>
-                              Trades Acertados: {elem.correct_posts}
-                            </ListGroup.Item>
-                            <ListGroup.Item>
-                              Trades Errados: {elem.incorrect_posts}
-                            </ListGroup.Item>
-                            <ListGroup.Item></ListGroup.Item>
-                          </ListGroup>
-                          {elem.image_name !== null && (
-                            <Card.Img
-                              variant="top"
-                              src={`http://localhost:3000/images/users/${elem.img}`}
-                            />
-                          )}
-                        </Card.Body>
-                        <div className="d-flex gap-1">
-                          <Button onClick={() => navigate(`/traderprofile/${elem.user_id}`)}>Ver más</Button>
-                        </div>
-                      </div>
-                    </Card.Body>
-                  </Card>
-                );
-              })}
+      )}
+      {show === 2 && (
+        <>
+          <div className="d-flex gap-1">
+            <Button className="mb-2" onClick={() => setShow(1)}>
+              Top Usuarios con más Seguidores
+            </Button>
+            <div className="d-flex gap-5 mb-1">
+              <input
+                onChange={handleChange}
+                placeholder="🔍..."
+                value={search}
+              />
             </div>
-          </>
-        )}
+          </div>
+          <h2>Top Usuarios con más Aciertos</h2>
+          <div className="d-flex flex-wrap gap-2">
+            {allUsersFilter.map((elem) => {
+              return (
+                <Card
+                  style={{ width: "18rem", marginBottom: "1rem" }}
+                  key={elem.user_id}
+                >
+                  <Card.Body>
+                    <div>
+                      <Card.Title className="d-flex">
+                        <h3>Usuario: {elem.nickname}</h3>
+                      </Card.Title>
+                      {user.user_id !== elem.user_id ? (
+                        <Button
+                          variant="primary"
+                          onClick={() => pulsarSeguirONo(elem.user_id)}
+                        >
+                          {followingUsers.includes(elem.user_id)
+                            ? "Siguiendo"
+                            : "Seguir"}
+                        </Button>
+                      ) : (
+                        <Button onClick={() => navigate(`/profile`)}>
+                          Ir a mi perfil
+                        </Button>
+                      )}
+                      <Card.Body>
+                        <ListGroup variant="flush">
+                          <ListGroup.Item></ListGroup.Item>
+                          <ListGroup.Item>
+                            Seguidores: {elem.followers_count}
+                          </ListGroup.Item>
+                          <ListGroup.Item>
+                            Siguiendo: {elem.following_count}
+                          </ListGroup.Item>
+                          <ListGroup.Item>
+                            Cursos publicados: {elem.total_courses}
+                          </ListGroup.Item>
+                          <ListGroup.Item>
+                            Post publicados: {elem.total_posts}
+                          </ListGroup.Item>
+                          <ListGroup.Item>
+                            Trades Acertados: {elem.correct_posts}
+                          </ListGroup.Item>
+                          <ListGroup.Item>
+                            Trades Errados: {elem.incorrect_posts}
+                          </ListGroup.Item>
+                          <ListGroup.Item></ListGroup.Item>
+                        </ListGroup>
+                        {elem.image_name !== null && (
+                          <Card.Img
+                            variant="top"
+                            src={`http://localhost:3000/images/users/${elem.img}`}
+                          />
+                        )}
+                      </Card.Body>
+                      <div className="d-flex gap-1">
+                        <Button
+                          onClick={() =>
+                            navigate(`/traderprofile/${elem.user_id}`)
+                          }
+                        >
+                          Ver más
+                        </Button>
+                      </div>
+                    </div>
+                  </Card.Body>
+                </Card>
+              );
+            })}
+          </div>
+        </>
+      )}
     </div>
   );
 };

@@ -5,7 +5,9 @@ import { Button, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 export const UserFollowing = () => {
-  const [following, setFollowing] = useState();
+  const [following, setFollowing] = useState([]);
+  const [followingFilter, setFollowingFilter] = useState([]);
+  const [search, setSearch] = useState("");
   const [followingUsers, setFollowingUsers] = useState([]); // Nuevo estado para almacenar usuarios seguidos
   const { user } = useContext(AscendioContext);
   const navigate = useNavigate();
@@ -18,6 +20,7 @@ export const UserFollowing = () => {
         .then((res) => {
           console.log(res);
           setFollowing(res.data.datos);
+          setFollowingFilter(res.data.datos)
         })
         .catch((err) => {
           console.log(err);
@@ -25,8 +28,8 @@ export const UserFollowing = () => {
     }
   }, [user]);
 
-    // para poner los botones en seguir o siguiendo si user existe
-    user &&
+  // para poner los botones en seguir o siguiendo si user existe
+  user &&
     useEffect(() => {
       const user_id = user.user_id;
       axios
@@ -39,7 +42,7 @@ export const UserFollowing = () => {
         .catch((err) => {
           console.log(err);
         });
-    }, []);
+    }, [user]);
 
   // Función para seguir o dejar de seguir a un usuario
   const pulsarSeguirONo = (id_followed) => {
@@ -76,14 +79,33 @@ export const UserFollowing = () => {
     }
   };
 
+  const handleChange = (e) => {
+    const searchFilter = e.target.value;
+    setSearch(searchFilter);
+    if (search !== "") {
+      setFollowingFilter(
+        following.filter((patata) =>
+          patata.nickname.toLowerCase().includes(searchFilter.toLowerCase())
+        )
+      );
+    } else {
+      setFollowingFilter(followers);
+    }
+  };
+
   return (
     <>
-      <div className="d-flex p-5 gap-5">
-        <h2>Siguiendo a:</h2>
-        <Button onClick={() => navigate("/profile")}>Volver</Button>
+      <div className="d-flex flex-column p-5">
+        <div className="d-flex  gap-5">
+          <h2>Siguiendo a:</h2>
+          <Button onClick={() => navigate("/profile")}>Volver</Button>
+        </div>
+        <div className="d-flex  gap-5">
+          <input onChange={handleChange} placeholder="🔍..." value={search} />
+        </div>
       </div>
       <div className="d-flex gap-5 flex-wrap p-5">
-        {following?.map((elem) => {
+        {followingFilter?.map((elem) => {
           return (
             <Card style={{ width: "18rem" }} key={elem.user_id}>
               {elem.img !== null ? (
@@ -102,21 +124,21 @@ export const UserFollowing = () => {
                 <Card.Title>{elem.nickname}</Card.Title>
                 <Card.Text></Card.Text>
                 {user.user_id !== elem.user_id ? (
-                        <Button
-                          variant="primary"
-                          onClick={() => pulsarSeguirONo(elem.user_id)}
-                        >
-                          {followingUsers.includes(elem.user_id)
-                            ? "Dejar de Seguir"
-                            : "Seguir"}
-                        </Button>
-                      ) : (
-                        <Button
-                          onClick={() => navigate(`/userposts/${user.user_id}`)}
-                        >
-                          Ir a posts
-                        </Button>
-                      )}
+                  <Button
+                    variant="primary"
+                    onClick={() => pulsarSeguirONo(elem.user_id)}
+                  >
+                    {followingUsers.includes(elem.user_id)
+                      ? "Dejar de Seguir"
+                      : "Seguir"}
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={() => navigate(`/userposts/${user.user_id}`)}
+                  >
+                    Ir a posts
+                  </Button>
+                )}
               </Card.Body>
             </Card>
           );

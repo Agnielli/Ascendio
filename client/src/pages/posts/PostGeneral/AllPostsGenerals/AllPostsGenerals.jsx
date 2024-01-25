@@ -6,6 +6,8 @@ import { Link, useNavigate } from "react-router-dom";
 
 export const AllPostsGenerals = () => {
   const [lastTrades, setLastTrades] = useState([]); // para enseñar: ULTIMOS TRADES o TOP SEGUIDORES o TOP ACERTADOS
+  const [lastTradesFilter, setLastTradesFilter] = useState([]);
+  const [search, setSearch] = useState("");
   const { user } = useContext(AscendioContext);
   const [followingUsers, setFollowingUsers] = useState([]); // Nuevo estado para almacenar usuarios seguidos
   const navigate = useNavigate();
@@ -16,7 +18,8 @@ export const AllPostsGenerals = () => {
       .get("http://localhost:3000/posts/lasttrades")
       .then((res) => {
         // console.log(res.data);
-        setLastTrades(res.data);
+        setLastTrades(res.data.filter((elem) => elem.type === 1));
+        setLastTradesFilter(res.data.filter((elem) => elem.type === 1));
       })
       .catch((err) => {
         console.log(err);
@@ -37,7 +40,7 @@ export const AllPostsGenerals = () => {
         .catch((err) => {
           console.log(err);
         });
-    }, []);
+    }, [user]);
 
   // Función para seguir o dejar de seguir a un usuario
   const pulsarSeguirONo = (id_followed) => {
@@ -74,67 +77,85 @@ export const AllPostsGenerals = () => {
         });
     }
   };
-  console.log(lastTrades);
+
+  const handleChange = (e) => {
+    const searchFilter = e.target.value;
+    setSearch(searchFilter);
+    if (search !== "") {
+      setLastTradesFilter(
+        lastTrades.filter((patata) =>
+          patata.description.toLowerCase().includes(searchFilter.toLowerCase())
+        )
+      );
+    } else {
+      setLastTradesFilter(lastTrades);
+    }
+  };
 
   return (
     <div>
-        <>
-          <h2>General Posts</h2>
-          <div className="d-flex flex-wrap gap-2">
-            {lastTrades
-              ?.filter((elem) => elem.type === 1)
-              .map((elem, index) => {
-                return (
-                  <Card
-                    style={{ width: "18rem", marginBottom: "1rem" }}
-                    key={elem.post_id}
-                  >
+      <>
+        <h2>General Posts</h2>
+        <div className="d-flex gap-5 mb-1">
+          <input onChange={handleChange} placeholder="🔍..." value={search} />
+        </div>
+        <div className="d-flex flex-wrap gap-2">
+          {lastTradesFilter.map((elem, index) => {
+            return (
+              <Card
+                style={{ width: "18rem", marginBottom: "1rem" }}
+                key={elem.post_id}
+              >
+                <Card.Body>
+                  <div>
+                    <Card.Title className="d-flex">
+                      <h3>Trader: {elem.nickname}</h3>
+                    </Card.Title>
+                    {user.user_id !== elem.user_id ? (
+                      <Button
+                        variant="primary"
+                        onClick={() => pulsarSeguirONo(elem.user_id)}
+                      >
+                        {followingUsers.includes(elem.user_id)
+                          ? "Siguiendo"
+                          : "Seguir"}
+                      </Button>
+                    ) : (
+                      <Button
+                        onClick={() => navigate(`/userposts/${user.user_id}`)}
+                      >
+                        Ir a posts
+                      </Button>
+                    )}
                     <Card.Body>
-                      <div>
-                        <Card.Title className="d-flex">
-                          <h3>Trader: {elem.nickname}</h3>
-                        </Card.Title>
-                        {user.user_id !== elem.user_id ? (
-                          <Button
-                            variant="primary"
-                            onClick={() => pulsarSeguirONo(elem.user_id)}
-                          >
-                            {followingUsers.includes(elem.user_id)
-                              ? "Siguiendo"
-                              : "Seguir"}
-                          </Button>
-                        ) : (
-                          <Button
-                            onClick={() =>
-                              navigate(`/userposts/${user.user_id}`)
-                            }
-                          >
-                            Ir a posts
-                          </Button>
-                        )}
-                        <Card.Body>
-                          <ListGroup variant="flush">
-                            <ListGroup.Item></ListGroup.Item>
-                            <ListGroup.Item>{elem.description}</ListGroup.Item>
-                            <ListGroup.Item></ListGroup.Item>
-                          </ListGroup>
-                          {elem.image_name !== null && (
-                            <Card.Img
-                              variant="top"
-                              src={`http://localhost:3000/images/generalPost/${elem.image_name}`}
-                            />
-                          )}
-                        <div className="d-flex gap-1 mt-2">
-                          <Button onClick={()=>{navigate(`/onegeneralpost/${elem.post_id}`)}}>Ver más</Button>
-                        </div>
-                        </Card.Body>
+                      <ListGroup variant="flush">
+                        <ListGroup.Item></ListGroup.Item>
+                        <ListGroup.Item>{elem.description}</ListGroup.Item>
+                        <ListGroup.Item></ListGroup.Item>
+                      </ListGroup>
+                      {elem.image_name !== null && (
+                        <Card.Img
+                          variant="top"
+                          src={`http://localhost:3000/images/generalPost/${elem.image_name}`}
+                        />
+                      )}
+                      <div className="d-flex gap-1 mt-2">
+                        <Button
+                          onClick={() => {
+                            navigate(`/onegeneralpost/${elem.post_id}`);
+                          }}
+                        >
+                          Ver más
+                        </Button>
                       </div>
                     </Card.Body>
-                  </Card>
-                );
-              })}
-          </div>
-        </>
+                  </div>
+                </Card.Body>
+              </Card>
+            );
+          })}
+        </div>
+      </>
     </div>
   );
 };
