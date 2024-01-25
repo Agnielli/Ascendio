@@ -12,7 +12,9 @@ export const CardSection = ({
   setTopics,
   setResetCourse,
   resetCourse,
-  deleteTopic
+  deleteTopic,
+  userId,
+  userCourse
 }) => {
   const [showTopic, setShowTopic] = useState(false);
   const handleClick = () => {
@@ -34,19 +36,19 @@ export const CardSection = ({
     <Card>
       <Card.Body>
         {elem.section_title}
-        <Button
+        {userId === userCourse &&<Button
           variant="outline-success"
           onClick={handleClick}
           disabled={showTopic ? true : false}
         >
           Añadir tema
-        </Button>
-        <Button
+        </Button>}
+        {userId === userCourse &&<Button
           variant="outline-success"
           onClick={() => deleteSection(elem.section_id)}
         >
           Eliminar
-        </Button>
+        </Button>}
         {showTopic && (
           <FormAddTopic
             setShowTopic={setShowTopic}
