@@ -25,6 +25,6 @@ router.get("/followingsuser/:id", usersControllers.getFollowingUser);
 router.get("/postsuser/:id", usersControllers.getPostsUser);
 router.get("/showallusers", usersControllers.showAllUsers);
 router.get("/traderprofile/:id", usersControllers.traderProfile)
-
+router.put("/deleteuser/:id", usersControllers.deleteUser);
 
 module.exports = router;

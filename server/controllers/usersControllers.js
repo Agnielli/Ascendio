@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const mailer = require("../utils/nodemailer");
 const recoverMailer = require("../utils/nodemailerRecover");
+const nodemailerDeleteUser = require("../utils/nodemailerDeleteUser");
 require("dotenv").config();
 
 class usersControllers {
@@ -525,6 +526,21 @@ class usersControllers {
         res.status(500).json(err);
       } else {
         res.status(200).json(result);
+      }
+    });
+  };
+  // ---------------------------------------------------------------
+  deleteUser = (req, res) => {
+    const {id: user_id, email, nickname } = req.params;    
+    let sql = `UPDATE user SET is_deleted = 1 WHERE user_id = ${user_id}`;
+  
+    connection.query(sql, (err, result) => {
+      let mess = `http://localhost:5173/deleteuser/${user_id}`;
+      if (err) {
+        res.status(500).json(err);
+      } else {
+        nodemailerDeleteUser(email, nickname, mess);
+              res.status(200).json({ message: "Email recibido correctamente", result });
       }
     });
   };
