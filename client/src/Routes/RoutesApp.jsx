@@ -42,6 +42,8 @@ import { OneGeneralPost } from "../pages/posts/PostGeneral/OneGeneralPost/OneGen
 import { ThermsNConditions } from "../pages/dashboard/Landing/ThermsNConditions/ThermsNConditions";
 import { Privacy } from "../pages/dashboard/Landing/Privacy/Privacy";
 import { CookiesPolicy } from "../pages/dashboard/Landing/CookiesPolicy/CookiesPolicy";
+import { TradingViewWidget } from "../components/TradingViewWidget/TradingViewWidget";
+
 
 
 export const RoutesApp = () => {
@@ -101,6 +103,7 @@ export const RoutesApp = () => {
               <Route path="/onegeneralpost/:post_id" element={<OneGeneralPost />} />
               <Route path="/allpostsgenerals" element={<AllPostsGenerals />} />
               <Route path="/showallusers" element={<ShowAllUsers />} />
+              <Route path="/tradingview" element={<TradingViewWidget />} />
               <Route path="/createcourse" element={<CreateCourse />} />
               <Route path="/purchasecourse" element={<PurchaseCourse />} />
               <Route path="/savecourse" element={<SaveCourse />} />

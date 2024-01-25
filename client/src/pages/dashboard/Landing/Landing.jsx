@@ -20,13 +20,9 @@ export const Landing = () => {
 
         <Link to="/cookiespolicy">
         Cookies Policy          
-        </Link>
-      
-
-    
-    </footer>
-    
-    
+        </Link>    
+    </footer>    
     </>
+
   )
 }

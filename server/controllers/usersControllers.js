@@ -301,7 +301,16 @@ class usersControllers {
     try {
       const { id } = req.params;
       const user_id = id;
-      let sql = `SELECT (SELECT COUNT(*) FROM user_follows_user WHERE followed_user_id = '${user_id}') AS num_followers, (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}') AS num_posts, (SELECT COUNT(*) FROM course WHERE user_id = '${user_id}' AND is_deleted = 0) AS num_courses, (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}' AND correct = true) AS num_correct_posts, (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}' AND correct = false) AS num_incorrect_posts, (SELECT COUNT(DISTINCT followed_user_id) FROM user_follows_user WHERE user_id = '${user_id}') AS num_following_users;`;
+      let sql = `SELECT 
+                 (SELECT COUNT(*) FROM user_follows_user WHERE followed_user_id = '${user_id}') AS num_followers, 
+                 (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}') AS num_posts, 
+                 (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}' AND type = 2) AS num_trades,
+                 (SELECT COUNT(*) FROM course WHERE user_id = '${user_id}' AND is_deleted = 0) AS num_courses, 
+                 (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}' AND correct = true) AS num_correct_posts, 
+                 (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}' AND correct = false) AS num_incorrect_posts, 
+                 (SELECT COUNT(DISTINCT followed_user_id) FROM user_follows_user 
+                 WHERE user_id = '${user_id}') AS num_following_users;`;
+
       connection.query(sql, (error, result) => {
         if (error) {
           console.log(error);
@@ -545,18 +554,12 @@ class usersControllers {
     let sql = `SELECT * FROM user WHERE type = 2 AND user_id = ${user_id}`;
     let sql2 = `SELECT 
     u.*,
-    p.post_id,
-    (SELECT COUNT(*) FROM post p WHERE u.user_id = p.user_id) AS total_posts,
-    (SELECT COUNT(*) FROM post p WHERE u.user_id = p.user_id AND p.correct = true) AS correct_posts,
-    (SELECT COUNT(*) FROM post p WHERE u.user_id = p.user_id AND p.correct = false) AS incorrect_posts,
-    (SELECT COUNT(*) FROM user_follows_user uf WHERE u.user_id = uf.user_id) AS following_count,
-    (SELECT COUNT(*) FROM user_follows_user uf WHERE u.user_id = uf.followed_user_id) AS followers_count,
-    (SELECT COUNT(*) FROM course c WHERE u.user_id = c.user_id) AS total_courses,
-    GROUP_CONCAT(p.description SEPARATOR ', ') AS user_posts
+    p.*
     FROM user u
     LEFT JOIN post p ON u.user_id = p.user_id
-    WHERE u.type = 2 AND u.user_id = ${user_id}
-    GROUP BY u.user_id, p.post_id;`;
+    LEFT JOIN user_follows_user uf ON u.user_id = uf.user_id
+    LEFT JOIN course c ON u.user_id = c.user_id
+    WHERE u.type = 2 AND u.user_id = ${user_id};`;
 
     connection.query(sql2, (err, result) => {
       if (err) {

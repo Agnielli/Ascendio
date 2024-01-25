@@ -14,13 +14,13 @@ export const Users = () => {
 
   const navigate = useNavigate();
 
-
-  //SACAR numero de seguidores del usuario logueado
+  //saca todas las estadísticas
   useEffect(() => {
     axios
       .get(`http://localhost:3000/users/statisticsuser/${user.user_id}`)
       .then((res) => {
         setStatisticsUser(res.data.datos);
+        console.log(res.data.datos);
       })
       .catch((err) => console.log(err));
   }, [user]);
@@ -58,6 +58,7 @@ export const Users = () => {
               {statisticsUser.num_posts}
             </Link>
           </p>
+          <p>Ratio de Pronósticos: {parseFloat(statisticsUser.num_correct_posts / statisticsUser.num_trades) * 100} %</p>
           <p>Aciertos: {statisticsUser.num_correct_posts}</p>
           <p>Errores: {statisticsUser.num_incorrect_posts}</p>
           <p>Cursos publicados: <Link to={`/oneusercourses/${user.user_id}`}>{statisticsUser.num_courses}</Link> </p>
@@ -94,7 +95,7 @@ export const Users = () => {
           </Button>
         </>
       )}
-      <Button onClick={() => setShowCourse(!swhowCourse)}>Cursos</Button>
+      <Button className="mb-2" onClick={() => setShowCourse(!swhowCourse)}>Cursos</Button>
       {swhowCourse && (
         <>
           <Button variant="success" onClick={() => navigate("/purchasecourse")}>

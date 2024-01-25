@@ -17,11 +17,12 @@ export const AdminOneCourse = ({elem, updateCourses, setUpdateCourses}) => {
       })
       .catch((err) => {console.log(err)})
   }
+  console.log(elem)
 
   return (
     <div>
     <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src="holder.js/100px180" />
+      <Card.Img variant="top" src={`http://localhost:3000/images/cursos/${elem.course_img}`} />
       <Card.Body>
         <Card.Title><p>{elem.title}</p></Card.Title>
         <Card.Text>
