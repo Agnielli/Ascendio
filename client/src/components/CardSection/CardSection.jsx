@@ -3,7 +3,6 @@ import { Button, Card } from "react-bootstrap";
 import { FormAddTopic } from "../FormAddTopic/FormAddTopic";
 import { CardTopic } from "../CardTopic/CardTopic";
 import axios from "axios";
-
 export const CardSection = ({
   elem,
   deleteSection,
@@ -16,11 +15,9 @@ export const CardSection = ({
   deleteTopic
 }) => {
   const [showTopic, setShowTopic] = useState(false);
-
   const handleClick = () => {
     setShowTopic(true);
   };
-
   // useEffect((section_id, topic_id)=>{
   //   axios
   //     .get(`http://localhost:3000/courses/topics/${course_id}/${section_id}/${topic_id}`)
@@ -33,7 +30,6 @@ export const CardSection = ({
   //       console.log(err);
   //     })
   // },[])
-
   return (
     <Card>
       <Card.Body>
@@ -65,10 +61,10 @@ export const CardSection = ({
         )}
         {elem.section_topics.map((topic) => {
               return (
-          <CardTopic 
+          <CardTopic
           key={elem.topic_id}
-          topics={topics} 
-          setTopics={setTopics} 
+          topics={topics}
+          setTopics={setTopics}
           topic={topic}
           deleteTopic={deleteTopic}
           section_id={elem.section_id}

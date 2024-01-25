@@ -89,7 +89,7 @@ export const CreateCourse = () => {
         setUserCourse(res.data)
         let course_id = res.data.insertId
         navigate(`/course/${course_id}`)
-        })
+      })
         .catch((err)=>{console.log(err)})  
     }
   };

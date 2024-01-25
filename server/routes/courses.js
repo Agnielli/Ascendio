@@ -23,16 +23,14 @@ router.get('/getwishcourse/:course_id/:user_id', coursesControllers.getWishCours
 router.put('/addwishescourse/:course_id', coursesControllers.addWishesCourse);
 router.post('/delfromwishes/:course_id', coursesControllers.delFromWishes);
 router.get('/getalltagsonecourse/:course_id', coursesControllers.getAllTagsOneCourse);
-<<<<<<< HEAD
-router.post('/addresourcepdf', multerSingle("resource"), coursesControllers.addResourcePdf)
-router.post('/addresourcevideo', coursesControllers.addResourceVideo)
-router.delete('/deleteResource', coursesControllers.deleteResource)
-=======
 router.get('/getalldisabledcourses', coursesControllers.getAllDisabledCourses)
 router.get('/getallenabledcourses', coursesControllers.getAllEnabledCourses)
 router.put('/enableonecourse/:course_id', coursesControllers.enableOneCourse)
 router.put('/disableonecourse/:course_id', coursesControllers.disableOneCourse)
->>>>>>> 6322e4132452be52cf443d4ca02396bfbf9a364d
+router.post('/addresourcepdf', multerSingle("resource"), coursesControllers.addResourcePdf)
+router.post('/addresourcevideo', coursesControllers.addResourceVideo)
+router.delete('/deleteResource', coursesControllers.deleteResource)
+
 
 
 module.exports = router;

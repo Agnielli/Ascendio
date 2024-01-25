@@ -27,5 +27,6 @@ router.get("/showallusers", usersControllers.showAllUsers);
 router.get("/showalluserssuccesses", usersControllers.showAllUsersSuccesses);
 router.get("/traderprofile/:id", usersControllers.traderProfile)
 router.put("/deleteuser/:id", usersControllers.deleteUser);
+router.post("/usersendcategory", usersControllers.userSendCategory)
 
 module.exports = router;
