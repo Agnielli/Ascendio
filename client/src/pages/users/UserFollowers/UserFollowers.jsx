@@ -6,10 +6,11 @@ import { useNavigate } from "react-router-dom";
 
 export const UserFollowers = () => {
   const [followers, setFollowers] = useState();
-  
+  const [followingUsers, setFollowingUsers] = useState([]); // Nuevo estado para almacenar usuarios seguidos
   const { user } = useContext(AscendioContext);
   const navigate = useNavigate();
 
+  // para obtener los usuarios que me siguen
   useEffect(() => {
     if (user) {
       axios
@@ -23,6 +24,58 @@ export const UserFollowers = () => {
         });
     }
   }, [user]);
+
+    // para poner los botones en seguir o siguiendo si user existe
+    user &&
+    useEffect(() => {
+      const user_id = user.user_id;
+      axios
+        .get(`http://localhost:3000/users/getfollowuser/${user_id}`)
+        .then((res) => {
+          // console.log(res.data);
+          // esto permite que al recargar me cargue el estado followingUsers con los usuarios a los que seguimos
+          setFollowingUsers(res.data.map((user) => user.followed_user_id));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }, []);
+
+    // Función para seguir o dejar de seguir a un usuario
+  const pulsarSeguirONo = (id_followed) => {
+    const data = [user.user_id, id_followed];
+    const isFollowing = followingUsers.includes(id_followed); // devuelve true o false
+    if (isFollowing) {
+      // Dejar de seguir
+      axios
+        .delete(`http://localhost:3000/users/unfollowUser`, { data })
+        .then((res) => {
+          // console.log(res.data);
+          setFollowingUsers((prevFollowingUsers) =>
+            prevFollowingUsers.filter((userId) => userId !== id_followed)
+          );
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      // Seguir
+      axios
+        .post(`http://localhost:3000/users/followUser`, data)
+        .then((res) => {
+          // setFollowingUsers([...followingUsers, id_followed]);
+          setFollowingUsers((prevFollowingUsers) => [
+            ...prevFollowingUsers,
+            id_followed,
+          ]);
+          // console.log([...followingUsers, id_followed]);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
 
   return (
     <>
@@ -49,7 +102,22 @@ export const UserFollowers = () => {
               <Card.Body>
                 <Card.Title>{elem.nickname}</Card.Title>
                 <Card.Text></Card.Text>
-                <Button variant="primary">Seguir tambien</Button>
+                {user.user_id !== elem.user_id ? (
+                        <Button
+                          variant="primary"
+                          onClick={() => pulsarSeguirONo(elem.user_id)}
+                        >
+                          {followingUsers.includes(elem.user_id)
+                            ? "Dejar de Seguir"
+                            : "Seguir También"}
+                        </Button>
+                      ) : (
+                        <Button
+                          onClick={() => navigate(`/userposts/${user.user_id}`)}
+                        >
+                          Ir a posts
+                        </Button>
+                      )}
               </Card.Body>
             </Card>
           );

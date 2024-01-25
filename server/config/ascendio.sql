@@ -41,6 +41,11 @@ CREATE TABLE post (
   CONSTRAINT fk_category_1 FOREIGN KEY (category_id)
   REFERENCES category(category_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+select * from user; 
+select * from post; 
+select count(*) from post where user_id = 5
+
 CREATE TABLE comments (
   post_id BIGINT UNSIGNED NOT NULL,
   comment_id SMALLINT UNSIGNED NOT NULL,
