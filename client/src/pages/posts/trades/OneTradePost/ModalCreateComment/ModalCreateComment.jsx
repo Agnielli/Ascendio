@@ -12,7 +12,7 @@ export const ModalCreateComment = ({ showModal, setShowModal, oneTrade }) => {
   const [comment, setComment] = useState(initialValue);
   const { user } = useContext(AscendioContext);
   const navigate = useNavigate();
-
+  console.log(user);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setComment({ [name]: value });
@@ -25,6 +25,7 @@ export const ModalCreateComment = ({ showModal, setShowModal, oneTrade }) => {
       .post("http://localhost:3000/comments/createcomment", {
         comment,
         oneTrade,
+        user,
       })
       .then((res) => {
         console.log(res);
@@ -58,7 +59,6 @@ export const ModalCreateComment = ({ showModal, setShowModal, oneTrade }) => {
         <Button
           variant="primary"
           onClick={() => {
-            navigate("/OneTradePost/1");
             setShowModal(false);
           }}
         >

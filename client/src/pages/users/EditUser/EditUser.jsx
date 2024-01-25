@@ -16,21 +16,21 @@ export const EditUser = () => {
   const navigate = useNavigate();
 
   const verSection = () => {
-    setShowForm(true);
+    setShowForm(!showForm);
     setShowChangePassword(false);
     setShowDeleteUser(false);
   };
 
   const verChangePassword = () => {
+    setShowChangePassword(!showChangePassword);
     setShowForm(false);
-    setShowChangePassword(true);
     setShowDeleteUser(false);
   };
 
   const verDeleteUser = () => {
+    setShowDeleteUser(!showDeleteUser);
     setShowForm(false);
     setShowChangePassword(false);
-    setShowDeleteUser(true);
   };
 
   return (
@@ -41,15 +41,14 @@ export const EditUser = () => {
           {" "}
           {user?.name} {user?.lastname}
         </p>
-        <Button onClick={() => verSection()}>Editar Usuario</Button>
-        <Button onClick={() => verChangePassword()}>
-          Editar datos de Login{" "}
-        </Button>
-        <Button onClick={() => verDeleteUser()}>Eliminar cuenta </Button>
+        <Button onClick={verSection}>Editar Usuario</Button>
+        <Button onClick={verChangePassword}>Editar datos de Login </Button>
+        <Button onClick={verDeleteUser}>Eliminar cuenta </Button>
 
         {showForm && (
           <FormEdit setShowForm={setShowForm} user={user} setUser={setUser} />
         )}
+
         {showChangePassword && (
           <ChangePassword
             setShowChangePassword={setShowChangePassword}
@@ -58,12 +57,13 @@ export const EditUser = () => {
           />
         )}
 
-        {showDeleteUser && <DeleteUser 
-        setShowDeleteUser={setShowDeleteUser}
-        user={user}
-        setUser={setUser}
-        
-        />}
+        {showDeleteUser && (
+          <DeleteUser
+            setShowDeleteUser={setShowDeleteUser}
+            user={user}
+            setUser={setUser}
+          />
+        )}
       </Col>
     </Row>
   );

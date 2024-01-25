@@ -43,6 +43,15 @@ export const AllPosts = ({
                     {elem.correct === 0 && "trade errado"}
                     {elem.correct === 1 && "trade Acertado"}
                   </ListGroup.Item>{" "}
+                  <div className="d-flex justify-content-center mt-1 mb-1">
+                    <Button
+                      onClick={() => {
+                        navigate(`/onetradepost/${elem.post_id}`);
+                      }}
+                    >
+                      Ir a comentarios del post
+                    </Button>
+                  </div>
                   {elem.correct === null ? (
                     <div className="d-flex gap-1">
                       <Button
@@ -99,26 +108,21 @@ export const AllPosts = ({
                           </Button>
                         </div>
                       </div>
-                      <div className="d-flex justify-content-center">
-                        <Button
-                          onClick={() => {
-                            navigate(`/onetradepost/${elem.post_id}`);
-                          }}
-                        >
-                          Ir a comentarios del post
-                        </Button>
-                      </div>
                     </>
                   )}
                 </ListGroup>
               ) : (
                 <div>
+                  <Card.Img
+                    variant="top"
+                    src={`http://localhost:3000/images/generalPost/${elem.resource_text}`}
+                  />
                   <Card.Text className="d-flex flex-column">
                     Descripción: {elem.description}
                   </Card.Text>
                   <Button
                     onClick={() => {
-                      navigate(`/onetradepost/${elem.post_id}`);
+                      navigate(`/oneGeneralPost/${elem.post_id}`);
                     }}
                   >
                     Ir a comentarios del post

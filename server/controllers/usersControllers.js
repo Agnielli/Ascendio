@@ -301,7 +301,7 @@ class usersControllers {
     try {
       const { id } = req.params;
       const user_id = id;
-      let sql = `SELECT (SELECT COUNT(*) FROM user_follows_user WHERE followed_user_id = '${user_id}') AS num_followers, (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}') AS num_posts, (SELECT COUNT(*) FROM course WHERE user_id = '${user_id}') AS num_courses, (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}' AND correct = true) AS num_correct_posts, (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}' AND correct = false) AS num_incorrect_posts, (SELECT COUNT(DISTINCT followed_user_id) FROM user_follows_user WHERE user_id = '${user_id}') AS num_following_users;`;
+      let sql = `SELECT (SELECT COUNT(*) FROM user_follows_user WHERE followed_user_id = '${user_id}') AS num_followers, (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}') AS num_posts, (SELECT COUNT(*) FROM course WHERE user_id = '${user_id}' AND is_deleted = 0) AS num_courses, (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}' AND correct = true) AS num_correct_posts, (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}' AND correct = false) AS num_incorrect_posts, (SELECT COUNT(DISTINCT followed_user_id) FROM user_follows_user WHERE user_id = '${user_id}') AS num_following_users;`;
       connection.query(sql, (error, result) => {
         if (error) {
           console.log(error);
@@ -409,7 +409,7 @@ class usersControllers {
         });
       });
     });
-  };
+  }
 
   getFollowersUser = (req, res) => {
     try {
@@ -484,9 +484,45 @@ class usersControllers {
     }
   };
 
+  // muestra los usuarios ordenados de mayor a menor nº seguidores
   showAllUsers = (req, res) => {
     try {
-      let sql = `SELECT user.*, (SELECT COUNT(*) FROM post WHERE user.user_id = post.user_id) AS total_posts, (SELECT COUNT(*) FROM post WHERE user.user_id = post.user_id AND post.correct = true) AS correct_posts,( SELECT COUNT(*) FROM post WHERE user.user_id = post.user_id AND post.correct = false) AS incorrect_posts, ( SELECT COUNT(*) FROM user_follows_user WHERE user.user_id = user_follows_user.user_id) AS following_count, ( SELECT COUNT(*) FROM user_follows_user WHERE user.user_id = user_follows_user.followed_user_id) AS followers_count, ( SELECT COUNT(*) FROM course WHERE user.user_id = course.user_id ) AS total_courses FROM user;`;
+      let sql = `SELECT user.*, 
+                (SELECT COUNT(*) FROM post WHERE user.user_id = post.user_id) AS total_posts, 
+                (SELECT COUNT(*) FROM post WHERE user.user_id = post.user_id AND post.correct = true) AS correct_posts,
+                (SELECT COUNT(*) FROM post WHERE user.user_id = post.user_id AND post.correct = false) AS incorrect_posts, 
+                (SELECT COUNT(*) FROM user_follows_user WHERE user.user_id = user_follows_user.user_id) AS following_count, 
+                (SELECT COUNT(*) FROM user_follows_user WHERE user.user_id = user_follows_user.followed_user_id) AS followers_count, 
+                (SELECT COUNT(*) FROM course WHERE user.user_id = course.user_id ) AS total_courses 
+                FROM user
+                ORDER BY followers_count DESC;`;
+      connection.query(sql, (err, result) => {
+        if (err) {
+          res.status(500).json({ message: "Error en la SQL" });
+        } else {
+          res.status(200).json(result);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        error: "Error al enviar el correo electrónico de registro",
+      });
+    }
+  };
+
+  // muestra los usuarios ordenados de mayor a menor nº aciertos
+  showAllUsersSuccesses = (req, res) => {
+    try {
+      let sql = `SELECT user.*, 
+                (SELECT COUNT(*) FROM post WHERE user.user_id = post.user_id) AS total_posts, 
+                (SELECT COUNT(*) FROM post WHERE user.user_id = post.user_id AND post.correct = true) AS correct_posts,
+                (SELECT COUNT(*) FROM post WHERE user.user_id = post.user_id AND post.correct = false) AS incorrect_posts, 
+                (SELECT COUNT(*) FROM user_follows_user WHERE user.user_id = user_follows_user.user_id) AS following_count, 
+                (SELECT COUNT(*) FROM user_follows_user WHERE user.user_id = user_follows_user.followed_user_id) AS followers_count, 
+                (SELECT COUNT(*) FROM course WHERE user.user_id = course.user_id ) AS total_courses 
+                FROM user
+                ORDER BY correct_posts DESC;`;
       connection.query(sql, (err, result) => {
         if (err) {
           res.status(500).json({ message: "Error en la SQL" });
