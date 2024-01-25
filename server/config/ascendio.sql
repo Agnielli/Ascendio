@@ -186,7 +186,7 @@ CREATE TABLE resource (
   resource_type TINYINT NOT NULL, -- tipo 1 -> imagen, tipo 2 -> pdf , tipo 3 -> link,
   text VARCHAR(250) NOT NULL,
 		-- /server/resources/img.jpg   		-- 1
-        -- /server/resources/algo.pfg   	-- 2
+        -- /server/resources/algo.pfg   	-- 2category
         -- youtube.com/az45u_i7g  			-- 3
   CONSTRAINT fk_topic_2 FOREIGN KEY(course_id, section_id, topic_id)
   REFERENCES topic(course_id, section_id, topic_id) ON DELETE CASCADE ON UPDATE CASCADE

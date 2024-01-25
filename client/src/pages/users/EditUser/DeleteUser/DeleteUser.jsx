@@ -15,7 +15,8 @@ export const DeleteUser = ({user, setUser, setShowDeleteUser}) => {
     
     />}
     {showConfirmDeleteUser && <ConfirmDeleteUser
-    setShowDeleteUser = {setShowDeleteUser}    
+    setShowDeleteUser = {setShowDeleteUser} 
+    user={user}   
     />}
     
     </>

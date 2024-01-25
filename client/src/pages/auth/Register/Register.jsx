@@ -61,7 +61,7 @@ export const Register = () => {
           setShowModal(true);
         })
         .catch((err) => {
-          console.log(err);
+          console.log(err.response.data);
           if (
             err.response.data.error?.errno === 1062 &&
             err.response.data.error?.sqlMessage.includes("user.email")

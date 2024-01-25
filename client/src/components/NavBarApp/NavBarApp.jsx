@@ -21,11 +21,14 @@ function NavBarApp() {
     setIsLogged(false);
     navigate("/");
   };
+  
+  const redirectTo = user ? "/home" : "/";
+
 
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container fluid>
-        <Navbar.Brand as={Link} to="/home">
+        <Navbar.Brand as={Link} to={redirectTo}>
           ASCENDIO
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -71,6 +74,9 @@ function NavBarApp() {
                     </NavDropdown.Item>
                     <NavDropdown.Item as={Link} to="/showAllUsers">
                       Usuarios
+                    </NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/tradingview">
+                      TradingView
                     </NavDropdown.Item>
                   </NavDropdown>
                 </>

@@ -41,6 +41,7 @@ export const OneCourse = () => {
     axios
       .get(`http://localhost:3000/courses/onecourse/${course_id}`)
       .then((res) => {
+        console.log("ppppppppppppp", res.data);
         setOneCoursePpal(res.data);
         setCourseToEdit(res.data);
         setSections(res.data.sections);
@@ -78,6 +79,7 @@ export const OneCourse = () => {
   }, []);
 
   useEffect(() => {
+
     if(user){
       axios
       .get(`http://localhost:3000/courses/getwishcourse/${course_id}/${user.user_id}`)
@@ -91,6 +93,7 @@ export const OneCourse = () => {
       });
     }
   }, [user]);
+
 
   useEffect(() => {
     if(user){
@@ -108,6 +111,7 @@ export const OneCourse = () => {
       });
     }
   }, [user]);
+
 
   const formatearFecha = (date) => {
     return date.split("T")[0].split("-").reverse().join("-");
@@ -272,10 +276,12 @@ export const OneCourse = () => {
               disabled={isIntoPurchase ? true : false}
             >
               {isIntoPurchase ? "Comprado" : "Comprar"}
+
             </Button>}
 
             {user.user_id === userCourse &&<Button
               // onClick={() => deleteCourse(course_id)}
+
               onClick={openModalDelete}
               variant="outline-danger"
               className="me-3"
