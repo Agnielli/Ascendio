@@ -36,11 +36,11 @@ export const CreateCourse = () => {
       setOptions(
         res.data.map((elem) => ({ value: elem.tag_id, label: elem.tag_name }))
         );
-      })
+    })
       .catch((err) => {
         console.log(err);
       });
-    }, []);
+  }, []);
     
     const handleFile = (e) => {
       setFile(e.target.files[0]);
