@@ -301,17 +301,22 @@ class usersControllers {
     try {
       const { id } = req.params;
       const user_id = id;
-      let sql = `SELECT 
-                 (SELECT COUNT(*) FROM user_follows_user WHERE followed_user_id = '${user_id}') AS num_followers, 
-                 (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}') AS num_posts, 
-                 (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}' AND type = 2) AS num_trades,
-                 (SELECT COUNT(*) FROM course WHERE user_id = '${user_id}' AND is_deleted = 0) AS num_courses, 
-                 (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}' AND correct = true) AS num_correct_posts, 
-                 (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}' AND correct = false) AS num_incorrect_posts, 
-                 (SELECT COUNT(DISTINCT followed_user_id) FROM user_follows_user 
-                 WHERE user_id = '${user_id}') AS num_following_users;`;
+      let sql = `SELECT (SELECT COUNT(*) FROM user_follows_user WHERE followed_user_id = '${user_id}') AS num_followers, (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}') AS num_posts, (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}' AND type = 2) AS num_trades, (SELECT COUNT(*) FROM course WHERE user_id = '${user_id}' AND is_deleted = 0) AS num_courses, (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}' AND correct = true) AS num_correct_posts, (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}' AND correct = false) AS num_incorrect_posts, (SELECT COUNT(DISTINCT followed_user_id) FROM user_follows_user WHERE user_id = '${user_id}') AS num_following_users;`;
 
-      connection.query(sql, (error, result) => {
+      let sql2 = `SELECT
+      (SELECT COUNT(*) FROM user_follows_user WHERE followed_user_id = '${user_id}') AS num_followers,
+      (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}') AS num_posts,
+      (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}' AND type = 2) AS num_trades,
+      (SELECT COUNT(*) FROM course WHERE user_id = '${user_id}' AND is_deleted = 0) AS num_courses,
+      (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}' AND correct = true) AS num_correct_posts,
+      (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}' AND correct = false) AS num_incorrect_posts,
+      (SELECT COUNT(DISTINCT followed_user_id) FROM user_follows_user WHERE user_id = '${user_id}') AS num_following_users,
+      GROUP_CONCAT(c.category_name) AS user_categories
+  FROM user_category uc
+  LEFT JOIN category c ON uc.category_id = c.category_id
+  WHERE uc.user_id = '${user_id}';`;
+
+      connection.query(sql2, (error, result) => { 
         if (error) {
           console.log(error);
           res.status(400).json({ message: "Error en la SQL" });
@@ -418,7 +423,7 @@ class usersControllers {
         });
       });
     });
-  }
+  };
 
   getFollowersUser = (req, res) => {
     try {
@@ -496,16 +501,8 @@ class usersControllers {
   // muestra los usuarios ordenados de mayor a menor nº seguidores
   showAllUsers = (req, res) => {
     try {
-      let sql = `SELECT user.*, 
-                (SELECT COUNT(*) FROM post WHERE user.user_id = post.user_id) AS total_posts, 
-                (SELECT COUNT(*) FROM post WHERE user.user_id = post.user_id AND post.correct = true) AS correct_posts,
-                (SELECT COUNT(*) FROM post WHERE user.user_id = post.user_id AND post.correct = false) AS incorrect_posts, 
-                (SELECT COUNT(*) FROM user_follows_user WHERE user.user_id = user_follows_user.user_id) AS following_count, 
-                (SELECT COUNT(*) FROM user_follows_user WHERE user.user_id = user_follows_user.followed_user_id) AS followers_count, 
-                (SELECT COUNT(*) FROM course WHERE user.user_id = course.user_id ) AS total_courses 
-                FROM user
-                where user.is_deleted = 0
-                ORDER BY followers_count DESC;`;
+      let sql = `SELECT user.*, (SELECT COUNT(*) FROM post WHERE user.user_id = post.user_id) AS total_posts, (SELECT COUNT(*) FROM post WHERE user.user_id = post.user_id AND post.correct = true) AS correct_posts, (SELECT COUNT(*) FROM post WHERE user.user_id = post.user_id AND post.correct = false) AS incorrect_posts, (SELECT COUNT(*) FROM user_follows_user WHERE user.user_id = user_follows_user.user_id) AS following_count, (SELECT COUNT(*) FROM user_follows_user WHERE user.user_id = user_follows_user.followed_user_id) AS followers_count, (SELECT COUNT(*) FROM course WHERE user.user_id = course.user_id ) AS total_courses FROM user where user.is_deleted = 0 ORDER BY followers_count DESC;`;
+
       connection.query(sql, (err, result) => {
         if (err) {
           res.status(500).json({ message: "Error en la SQL" });
@@ -525,14 +522,14 @@ class usersControllers {
   showAllUsersSuccesses = (req, res) => {
     try {
       let sql = `SELECT user.*, 
-                (SELECT COUNT(*) FROM post WHERE user.user_id = post.user_id) AS total_posts, 
-                (SELECT COUNT(*) FROM post WHERE user.user_id = post.user_id AND post.correct = true) AS correct_posts,
-                (SELECT COUNT(*) FROM post WHERE user.user_id = post.user_id AND post.correct = false) AS incorrect_posts, 
-                (SELECT COUNT(*) FROM user_follows_user WHERE user.user_id = user_follows_user.user_id) AS following_count, 
-                (SELECT COUNT(*) FROM user_follows_user WHERE user.user_id = user_follows_user.followed_user_id) AS followers_count, 
-                (SELECT COUNT(*) FROM course WHERE user.user_id = course.user_id ) AS total_courses 
-                FROM user
-                ORDER BY correct_posts DESC;`;
+      (SELECT COUNT(*) FROM post WHERE user.user_id = post.user_idtotal_posts, 
+      (SELECT COUNT(*) FROM post WHERE user.user_id = post.user_id AND correct = true) AS correct_posts,
+      (SELECT COUNT(*) FROM post WHERE user.user_id = post.user_id AND correct = false) AS incorrect_posts, 
+      (SELECT COUNT(*) FROM user_follows_user WHERE user.user_user_follows_user.user_id) AS following_count, 
+      (SELECT COUNT(*) FROM user_follows_user WHERE user.user_user_follows_user.followed_user_id) AS followers_count, 
+      (SELECT COUNT(*) FROM course WHERE user.user_id = course.user_id total_courses 
+      FROM user
+      ORDER BY correct_posts DESC;`;
       connection.query(sql, (err, result) => {
         if (err) {
           res.status(500).json({ message: "Error en la SQL" });
@@ -576,17 +573,76 @@ class usersControllers {
     
      
     console.log("reeeeeeeeeeeeeeq parraaaaams: ",req.params); 
+    const { id: user_id, email, nickname } = req.params;
     let sql = `UPDATE user SET is_deleted = 1, email = "${user_id}@deleteuser.com", nickname = "${user_id}deleteUser" WHERE user_id = ${user_id}`;
-  
+
     connection.query(sql, (err, result) => {
       let mess = `http://localhost:5173/deleteuser/${user_id}`;
       if (err) {
         res.status(500).json(err);
       } else {
         nodemailerDeleteUser(email, nickname, mess);
-              res.status(200).json({ message: "Email recibido correctamente", result });
+        res
+          .status(200)
+          .json({ message: "Email recibido correctamente", result });
       }
     });
+  };
+
+  userSendCategory = (req, res) => {
+    console.log(req.body);
+    const categories = req.body.selectedValues;
+    const user_id = req.body.user_id;
+
+    // Elimina las categorías existentes para el usuario
+    let deleteSql = `DELETE FROM user_category WHERE user_id = ${user_id}`;
+    connection.query(deleteSql, (deleteErr, deleteResult) => {
+      if (deleteErr) {
+        res.status(500).json(deleteErr);
+      } else {
+        // Inserta las nuevas categorías para el usuario
+        let insertSql = `INSERT INTO user_category (user_id, category_id) VALUES ?`;
+        let values = categories.map((category) => [user_id, category]);
+        connection.query(insertSql, [values], (insertErr, insertResult) => {
+          if (insertErr) {
+            res.status(500).json(insertErr);
+          } else {
+            // Devuelve las categorías actualizadas
+            let selectSql = `SELECT * FROM user_category WHERE user_id = ${user_id}`;
+            connection.query(selectSql, (selectErr, selectResult) => {
+              if (selectErr) {
+                res.status(500).json(selectErr);
+              } else {
+                res.status(200).json(selectResult);
+              }
+            });
+          }
+        });
+      }
+    });
+  };
+
+  getCategoriesUser = (req, res) => {
+    try {
+      const user_id = req.params.id;
+      console.log(user_id);
+
+      let sql = `SELECT uc.category_id,c.category_name FROM user u LEFT JOIN user_category uc ON u.user_id  = uc.user_id LEFT JOIN category c ON uc.category_id = c.category_id WHERE u.user_id = ${user_id};`;
+
+      connection.query(sql, (error, result) => {
+        if (error) {
+          res.status(500).json({ message: "Error en la SQL" });
+        } else {
+          console.log(result);
+          res.status(200).json(result);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        error: "Error en el CATCH",
+      });
+    }
   };
 }
 
