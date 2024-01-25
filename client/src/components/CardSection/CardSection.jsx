@@ -63,13 +63,13 @@ export const CardSection = ({
             resetCourse={resetCourse}
           />
         )}
-        {elem.section_topics.map((elem) => {
+        {elem.section_topics.map((topic) => {
               return (
           <CardTopic 
           key={elem.topic_id}
           topics={topics} 
           setTopics={setTopics} 
-          elem={elem}
+          topic={topic}
           deleteTopic={deleteTopic}
           section_id={elem.section_id}
           setResetCourse={setResetCourse}

@@ -23,6 +23,9 @@ router.get('/getwishcourse/:course_id/:user_id', coursesControllers.getWishCours
 router.put('/addwishescourse/:course_id', coursesControllers.addWishesCourse);
 router.post('/delfromwishes/:course_id', coursesControllers.delFromWishes);
 router.get('/getalltagsonecourse/:course_id', coursesControllers.getAllTagsOneCourse);
+router.post('/addresourcepdf', multerSingle("resource"), coursesControllers.addResourcePdf)
+router.post('/addresourcevideo', coursesControllers.addResourceVideo)
+router.delete('/deleteResource', coursesControllers.deleteResource)
 
 
 module.exports = router;

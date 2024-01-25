@@ -272,7 +272,7 @@ class coursesControllers {
   deleteTopic = (req, res) => {
     const { course_id, section_id, topic_id } = req.params;
     let sql = `DELETE FROM topic WHERE course_id = ${course_id} and section_id =${section_id} AND topic_id = ${topic_id}`;
-    console.log("PPPPPPPPPPPPPP", req.params);
+  
     connection.query(sql, (err, result) => {
       err ? res.status(500).json(err) : res.status(200).json(result);
     });
@@ -342,21 +342,22 @@ class coursesControllers {
     });
   };
 
-  // getTopics = (req,res) =>{
-  //   const {course_id, section_id, topic_id} = req.params;
-  //   console.log("eeee", req.params);
-  //   let sql =
-  //   `SELECT course.title, course.course_id, section.section_title, section.section_id, topic.topic_id, topic.topic_title
-  //     FROM course
-  //       LEFT JOIN section ON course.course_id = section.course_id
-  //       LEFT JOIN topic ON course.course_id = topic.course_id
-  //     WHERE course.course_id = ${course_id}
-  //     AND section_id = ${section_id}
-  //     AND topic_id = ${topic_id};`
+  addResourcePdf = (req, res) =>{
+    console.log("hi");
+    ///multer acept pdf en el input
+  }
 
-  //       connection.query(sql,(err,result)=>{
-  //         err ? res.status(500).json(err) : res.status(200).json(result);
-  //       })
-  // }
+  addResourceVideo = (req, res) => {
+    console.log("ppp");
+    //sin modal
+  }
+
+  deleteResource = (req, res) =>{
+    console.log("hh");
+  }
+
+
+
+
 }
 module.exports = new coursesControllers();
