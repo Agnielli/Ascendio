@@ -44,7 +44,6 @@ CREATE TABLE post (
 
 select * from user; 
 select * from post; 
-select count(*) from post where user_id = 5
 
 CREATE TABLE comments (
   post_id BIGINT UNSIGNED NOT NULL,
