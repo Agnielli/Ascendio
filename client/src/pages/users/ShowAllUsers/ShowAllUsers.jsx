@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AscendioContext } from "../../../context/AscendioContext";
-import { Button, Card, ListGroup } from "react-bootstrap";
+import { Button, Card, InputGroup, ListGroup } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 export const ShowAllUsers = () => {
@@ -10,6 +10,7 @@ export const ShowAllUsers = () => {
   const [allUsers, setAllUsers] = useState();
   const [allUsersFilter, setAllUsersFilter] = useState();
   const [search, setSearch] = useState("");
+  const [options, setOptions] = useState("nickname");
   const { user } = useContext(AscendioContext);
   const navigate = useNavigate();
 
@@ -94,13 +95,15 @@ export const ShowAllUsers = () => {
     if (search !== "") {
       setAllUsersFilter(
         allUsers.filter((patata) =>
-          patata.nickname.toLowerCase().includes(searchFilter.toLowerCase())
+          patata[options].toLowerCase().includes(searchFilter.toLowerCase())
         )
       );
     } else {
       setLastTradesFilter(allUsers);
     }
   };
+
+  console.log(options);
 
   return (
     <div>
@@ -117,10 +120,24 @@ export const ShowAllUsers = () => {
                 value={search}
               />
             </div>
+            <InputGroup className="d-flex justify-content-center flex-column align-items-start">
+              <label htmlFor="filter">Filtrar por:</label>
+              <select
+                id="filter"
+                name="filter"
+                value={options}
+                onChange={(e) => setOptions(e.target.value)}
+              >
+                <option value="nickname">Nickname</option>
+                <option value="email">Email</option>
+                <option value="name">Name</option>
+                <option value="lastname">Lastname</option>
+              </select>
+            </InputGroup>
           </div>
           <h2>Top Usuarios con más Seguidores</h2>
           <div className="d-flex flex-wrap gap-2">
-            {allUsersFilter.map((elem) => {
+            {allUsersFilter?.map((elem) => {
               return (
                 <Card
                   style={{ width: "18rem", marginBottom: "1rem" }}
@@ -208,7 +225,7 @@ export const ShowAllUsers = () => {
           </div>
           <h2>Top Usuarios con más Aciertos</h2>
           <div className="d-flex flex-wrap gap-2">
-            {allUsersFilter.map((elem) => {
+            {allUsersFilter?.map((elem) => {
               return (
                 <Card
                   style={{ width: "18rem", marginBottom: "1rem" }}
