@@ -5,7 +5,7 @@ import { Button, Card } from "react-bootstrap";
 export const EnabledCourses = ({ elem, setUpdateCourses }) => {
   const disableOneCourse = (id) => {
     axios
-      .put(`http://localhost:3000/courses/disableonecourse/${id}`)
+      .put(`http://localhost:3000/admin/disableonecourse/${id}`)
       .then((res) => {
         console.log(res);
         setUpdateCourses(true);
