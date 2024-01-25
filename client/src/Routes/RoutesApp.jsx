@@ -39,6 +39,7 @@ import { CreateTrade } from "../pages/posts/Trades/CreateTrade/CreateTrade";
 import { TraderProfile } from "../pages/users/TraderProfile/TraderProfile";
 import { OneTradePost } from "../pages/posts/trades/OneTradePost/OneTradePost";
 import { OneGeneralPost } from "../pages/posts/PostGeneral/OneGeneralPost/OneGeneralPost";
+import { TradingViewWidget } from "../components/TradingViewWidget/TradingViewWidget";
 
 
 export const RoutesApp = () => {
@@ -95,6 +96,7 @@ export const RoutesApp = () => {
               <Route path="/onegeneralpost/:post_id" element={<OneGeneralPost />} />
               <Route path="/allpostsgenerals" element={<AllPostsGenerals />} />
               <Route path="/showallusers" element={<ShowAllUsers />} />
+              <Route path="/tradingview" element={<TradingViewWidget />} />
               <Route path="/createcourse" element={<CreateCourse />} />
               <Route path="/purchasecourse" element={<PurchaseCourse />} />
               <Route path="/savecourse" element={<SaveCourse />} />

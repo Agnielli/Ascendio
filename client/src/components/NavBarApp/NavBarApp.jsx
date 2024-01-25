@@ -75,6 +75,9 @@ function NavBarApp() {
                     <NavDropdown.Item as={Link} to="/showAllUsers">
                       Usuarios
                     </NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/tradingview">
+                      TradingView
+                    </NavDropdown.Item>
                   </NavDropdown>
                 </>
               )}
