@@ -10,6 +10,7 @@ export const OneComment = () => {
       .get(`http://localhost:3000/posts/getgeneralposts`)
       .then((res) => {
         setGeneralPost(res.data);
+        console.log(res.data)
       })
       .catch((err) => {
         console.log(err);
@@ -24,3 +25,5 @@ export const OneComment = () => {
     </div>
   );
 };
+
+

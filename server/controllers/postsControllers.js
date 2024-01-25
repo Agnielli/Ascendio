@@ -180,7 +180,20 @@ class postsControllers {
 
   getAllPostGeneral = (req, res) => {
     console.log(req.body)
-    let sql = `SELECT post.*, user.nickname FROM post INNER JOIN user ON post.user_id = user.user_id;`
+    let sql = `SELECT *, user.nickname FROM post, user WHERE post.type = 1 AND post.user_id = user.user_id`
+    
+    connection.query(sql, (err, result) => {
+      if(err) {
+        res.status(500).json({err})
+      } else {
+        res.status(200).json(result)
+      }
+    })
+  }
+
+  getAllPostTrades = (req, res) => {
+    console.log(req.body)
+    let sql = `SELECT *, user.nickname FROM post, user WHERE post.type = 2 AND post.user_id = user.user_id`
     
     connection.query(sql, (err, result) => {
       if(err) {

@@ -15,8 +15,7 @@ export const TraderProfile = () => {
       .get(`http://localhost:3000/users/traderprofile/${user_id}`)
       .then((res) => {
         console.log(res);
-        setTraderprofile(res.data[0]);
-        console.log(traderprofile);
+        setTraderprofile(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -25,27 +24,20 @@ export const TraderProfile = () => {
 
   return (
     <>
-      <Card style={{ width: "18rem" }}>
-        <Card.Img variant="top" src="" />
-        <Card.Body>
-          <Card.Title>{traderprofile?.nickname}</Card.Title>
-          <p>Cursos totales: {traderprofile?.total_courses}</p>
-          <p>Posts totales: {traderprofile?.total_posts}</p>
-          <p>Posts correctos: {traderprofile?.correct_posts}</p>
-          <p>Posts incorrectos: {traderprofile?.incorrect_posts}</p>
-          <Button variant="primary" onClick={() => navigate("/showallusers")}>
-            Volver
-          </Button>
-        </Card.Body>
-      </Card>
+      <h5>Todos los trades de este usuario</h5>
+
+      {traderprofile?.map((elem, index) => {
+        return <OneUserAllPosts key={index} elem={elem} />;
+      })}
       <div>
-      {traderprofile?.user_posts &&
-        traderprofile?.user_posts
-          .split()
-          .map((elem, index) => (
-            <OneUserAllPosts key={index} elem={elem} traderprofile={traderprofile}/>
-          ))}
-        </div>
+        <Button
+          className="mt-5"
+          variant="primary"
+          onClick={() => navigate("/showallusers")}
+        >
+          Volver
+        </Button>
+      </div>
     </>
   );
 };
