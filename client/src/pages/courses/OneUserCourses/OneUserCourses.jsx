@@ -71,6 +71,7 @@ export const OneUserCourses = () => {
           return (
             <Card style={{ width: "22rem" }} key={elem.course_id}>
               <Card.Img
+                style={{ height: "22rem", objectFit: "cover" }}
                 variant="top"
                 src={`http://localhost:3000/images/cursos/${elem.img}`}
               />
