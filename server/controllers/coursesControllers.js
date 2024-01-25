@@ -238,9 +238,11 @@ class coursesControllers {
       err ? res.status(500).json(err) : res.status(200).json(result);
     });
   };
+  
   deleteTopic = (req, res) => {
     const { course_id, section_id, topic_id } = req.params;
     let sql = `DELETE FROM topic WHERE course_id = ${course_id} and section_id =${section_id} AND topic_id = ${topic_id}`;
+
     connection.query(sql, (err, result) => {
       err ? res.status(500).json(err) : res.status(200).json(result);
     });
@@ -304,5 +306,22 @@ class coursesControllers {
   deleteResource = (req, res) =>{
     console.log("hh");
   }
+
+
+  addResourcePdf = (req, res) =>{
+    console.log("hi");
+    ///multer acept pdf en el input
+  }
+
+  addResourceVideo = (req, res) => {
+    console.log("ppp");
+    //sin modal
+  }
+
+  deleteResource = (req, res) =>{
+    console.log("hh");
+  }
+
+
 }
 module.exports = new coursesControllers();

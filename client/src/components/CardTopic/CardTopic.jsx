@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import { ModalResource } from "../ModalResource/ModalResource";
+
 export const CardTopic = ({
   topics,
   setTopics,
@@ -10,11 +11,16 @@ export const CardTopic = ({
   setResetCourse,
   resetCourse,
 }) => {
+
+  //añadir contenido abre un modal con dos opciones input tipo file y tiipo text
+  //href atributo download para descargar
+  //bradcrumbs para cuando entramos en cada topic
+
   const [showModalArchivo, setShowModalArchivo] = useState(false)
   const handleClick = () => {
     setShowModalArchivo(true)
   }
-  //añadir contenido abre un modal con dos opciones input tipo file y tiipo text
+
   return (
     <Card>
       <Card.Body>
@@ -26,6 +32,7 @@ export const CardTopic = ({
         >
           Añadir contenido
         </Button>
+
 
         <Button
           variant="outline-success"
@@ -44,3 +51,4 @@ export const CardTopic = ({
     </Card>
   );
 };
+
