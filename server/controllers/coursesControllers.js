@@ -299,28 +299,26 @@ class coursesControllers {
 
 
   addResourcePdf = (req, res) =>{
-    console.log("hi");
+    console.log("HOLAAAAAAA", req.body.crearContenido);
     ///multer acept pdf en el input
+    const { course_id, section_id, topic_id, newResource} = JSON.parse(req.body.crearContenido);
+
+    let file = req.file.filename
+
+    let sql = `INSERT INTO resource (course_id, section_id, topic_id, resource_id, resource_type, file) VALUES (${course_id}, ${section_id}, ${topic_id}, ${resource_id}, '${newResource}', '${file}')`;
+
+    connection.query(sql, (err, res) => {
+      if (err) {
+        return res.status(500).json(err);
+      }
+      res.status(201).json(res)
+    })
   }
+
   addResourceVideo = (req, res) => {
     console.log("ppp");
     //sin modal
   }
-  deleteResource = (req, res) =>{
-    console.log("hh");
-  }
-
-
-  addResourcePdf = (req, res) =>{
-    console.log("hi");
-    ///multer acept pdf en el input
-  }
-
-  addResourceVideo = (req, res) => {
-    console.log("ppp");
-    //sin modal
-  }
-
   deleteResource = (req, res) =>{
     console.log("hh");
   }
