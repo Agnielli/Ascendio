@@ -8,11 +8,13 @@ export const EnabledCoursesMap = () => {
 
   useEffect(() => {
       axios
-        .get(`http://localhost:3000/courses/getallenabledcourses`)
+        .get(`http://localhost:3000/admin/getallenabledcourses`)
         .then((res) => {
           console.log(res)
+          console.log(res.data)
           setEnabledCourses(res.data)
           setUpdateCourses(false)
+          
         })
         .catch((err) => console.log(err))
 
