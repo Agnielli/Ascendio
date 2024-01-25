@@ -36,15 +36,6 @@ export const EditUser = () => {
       });
   }, []);
 
-  {
-    user &&
-      useEffect(() => {
-        axios
-          .get()
-          .then((res) => {console.log(res)})
-          .catch((err) => {console.log(err)})
-      }, []);
-  }
 
   const handleOption = (option) => {
     setSelectedOption(option);
