@@ -1,5 +1,7 @@
 const connection = require("../config/db");
+
 class coursesControllers {
+
   createCourse = (req, res) => {
     const tags = JSON.parse(req.body.tags);
     const { title, description, price, user_id } = JSON.parse(
@@ -29,6 +31,7 @@ class coursesControllers {
       res.status(200).json(result);
     });
   };
+
   callTags = (req, res) => {
     let sql = `SELECT * FROM tag`;
     connection.query(sql, (err, result) => {
@@ -39,6 +42,7 @@ class coursesControllers {
       }
     });
   };
+
   callCourses = (req, res) => {
     let sql = `SELECT course.course_id, course.title, course.description, course.price, course.is_disabled, course.img, REPLACE(GROUP_CONCAT(tag.tag_name), ',', ' ') AS tags FROM course
     LEFT JOIN course_tag ON course.course_id = course_tag.course_id
@@ -159,6 +163,7 @@ class coursesControllers {
         .json({ result, img: req.file ? req.file.filename : null });
     });
   };
+
   addSection = (req, res) => {
     const { course_id, newSection } = req.body;
     let sql_cont = `SELECT max(section_id) as id FROM section WHERE course_id = ${course_id}`;
@@ -184,6 +189,7 @@ class coursesControllers {
       });
     });
   };
+
   viewPurchasedCourse = (req, res) => {
     let sql = `SELECT * FROM course WHERE is_completed = 1 AND is_deleted = 0`;
     //TODO: cambiare is_completed con is_bought`
@@ -191,6 +197,7 @@ class coursesControllers {
       err ? res.status(500).json(err) : res.status(200).json(result);
     });
   };
+
   deleteSection = (req, res) => {
     const { course_id, section_id } = req.params;
     let sql = `DELETE FROM section WHERE course_id = ${course_id} and section_id =${section_id}`;
@@ -198,6 +205,7 @@ class coursesControllers {
       err ? res.status(500).json(err) : res.status(200).json(result);
     });
   };
+
   addTopic = (req, res) => {
     const { course_id, newTopic, section_id } = req.body;
     let sql_cont = `SELECT max(topic_id) as id FROM topic WHERE section_id = ${section_id}`;
@@ -220,6 +228,7 @@ class coursesControllers {
       });
     });
   };
+
   oneUserCourses = (req, res) => {
     const { user_id } = req.params;
     
@@ -231,6 +240,7 @@ class coursesControllers {
       err ? res.status(500).json(err) : res.status(200).json(result);
     });
   };
+
   deleteCourse = (req, res) => {
     const { course_id } = req.params;
     let sql = `UPDATE course
@@ -253,6 +263,7 @@ class coursesControllers {
       err ? res.status(500).json(err) : res.status(200).json(result);
     });
   };
+
   getWishCourse = (req, res) => {
     const { course_id, user_id } = req.params;
     let sql = `SELECT * FROM user_wishes_course WHERE user_id = ${user_id} and course_id = ${course_id}`;
@@ -260,6 +271,7 @@ class coursesControllers {
       err ? res.status(500).json(err) : res.status(200).json(result);
     });
   };
+
   addWishesCourse = (req, res) => {
     const { course_id } = req.params;
     const { usuario } = req.body;
@@ -268,6 +280,7 @@ class coursesControllers {
       err ? res.status(500).json(err) : res.status(200).json(result);
     });
   };
+
   delFromWishes = (req, res) => {
     const { course_id } = req.params;
     const { usuario } = req.body;
@@ -276,6 +289,7 @@ class coursesControllers {
       err ? res.status(500).json(err) : res.status(200).json(result);
     });
   };
+
   getAllTagsOneCourse = (req, res) => {
     const { course_id } = req.params;
     let sql = `SELECT tag.tag_id, tag.tag_name
@@ -286,6 +300,7 @@ class coursesControllers {
       err ? res.status(500).json(err) : res.status(200).json(result);
     });
   };
+
   addToPurchaseCourse = (req, res) => {
     const { course_id } = req.params;
     const { usuario } = req.body;
@@ -294,6 +309,7 @@ class coursesControllers {
       err ? res.status(500).json(err) : res.status(200).json(result);
     });
   };
+
   getPurchaseCourse = (req, res) => {
     const { course_id, user_id } = req.params;
     let sql = `SELECT * FROM user_enrolls_course WHERE user_id = ${user_id} and course_id = ${course_id}`;
@@ -304,7 +320,6 @@ class coursesControllers {
 
   addResourcePdf = (req, res) =>{
     console.log("HOLAAAAAAA", req.body.crearContenido);
-    ///multer acept pdf en el input
     const { course_id, section_id, topic_id, newResource} = JSON.parse(req.body.crearContenido);
 
     let file = req.file.filename
@@ -325,14 +340,20 @@ class coursesControllers {
     //sin modal
   }
   
-  deleteResource = (req, res) =>{
-    console.log("hh");
-  };
+    deleteResource = (req, res) =>{
+    const { course_id, section_id, topic_id, resource_id } = req.params;
+    let sql = `DELETE FROM resource WHERE course_id = ${course_id} AND section_id =${section_id} AND topic_id = ${topic_id} AND resource_id = ${resource_id}`;
+
+    connection.query(sql, (err, result) => {
+      err ? res.status(500).json(err) : res.status(200).json(result);
+    });
+  }
+
 
   getPurchaseCourse = (req, res) => {
     const { course_id, user_id } = req.params;
     let sql = `SELECT * FROM user_enrolls_course WHERE user_id = ${user_id} and course_id = ${course_id}`;
-
+    
     connection.query(sql, (err, result) => {
       err ? res.status(500).json(err) : res.status(200).json(result);
     });

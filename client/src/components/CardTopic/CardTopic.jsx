@@ -10,6 +10,7 @@ export const CardTopic = ({
   section_id,
   setResetCourse,
   resetCourse,
+  index
 }) => {
 
   //añadir contenido abre un modal con dos opciones input tipo file y tiipo text
@@ -24,7 +25,7 @@ export const CardTopic = ({
   return (
     <Card>
       <Card.Body>
-        {topic.topic_title}
+      {`${index}. ${topic.topic_title}`}
         <Button 
         variant="outline-success"
         onClick={handleClick}
