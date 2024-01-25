@@ -8,7 +8,7 @@ class adminControllers {
     SUM(CASE WHEN post.correct = false THEN 1 ELSE 0 END) AS incorrect_posts
     FROM user LEFT JOIN post ON user.user_id = post.user_id WHERE user.type = 2 GROUP BY
     user.user_id`;
-    
+
     connection.query(sql2, (err, result) => {
       if (err) {
         res.status(500).json(err);
@@ -74,11 +74,21 @@ class adminControllers {
 
   allStats = (req, res) => {
     let sql = `SELECT
-      (SELECT COUNT(user_id) FROM user WHERE type = 2) as count_type_2,
-      (SELECT COUNT(user_id) FROM user WHERE type = 1) as count_type_1,
-      (SELECT COUNT(*) FROM user) AS num_users,
-      (SELECT COUNT(*) FROM post) AS num_posts,
-      (SELECT COUNT(*) FROM course) AS num_courses`;
+    (SELECT COUNT(*) FROM user) AS num_users,
+    (SELECT COUNT(*) FROM user WHERE type = 1) AS num_type_1_users,
+    (SELECT COUNT(*) FROM user WHERE type = 2) AS num_type_2_users,
+    (SELECT COUNT(*) FROM user WHERE is_disabled = false AND type = 2) AS num_active_users,
+    (SELECT COUNT(*) FROM user WHERE is_disabled = true) AS num_disabled_users,
+    (SELECT COUNT(*) FROM user WHERE is_confirmed = true) AS num_confirmed_users,
+    (SELECT COUNT(*) FROM user WHERE is_confirmed = false) AS num_unconfirmed_users,
+    (SELECT COUNT(*) FROM post) AS num_posts,
+    (SELECT COUNT(*) FROM post WHERE correct = true) AS num_correct_posts,
+    (SELECT COUNT(*) FROM post WHERE correct = false) AS num_incorrect_posts,
+    (SELECT COUNT(*) FROM post WHERE type = 2) AS num_trade_posts,
+    (SELECT COUNT(*) FROM post WHERE type = 1) AS num_general_posts,
+    (SELECT COUNT(*) FROM course) AS num_courses,
+    (SELECT COUNT(*) FROM course WHERE is_disabled = false) AS num_active_courses,
+    (SELECT COUNT(*) FROM course WHERE is_disabled = true) AS num_disabled_courses;`;
 
     connection.query(sql, (err, result) => {
       if (err) {
@@ -135,12 +145,11 @@ class adminControllers {
   };
 
   adminGetCourses = (req, res) => {
-   
     let sql = `SELECT
     course.course_id, course.title, course.user_id, course.description, course.img AS course_img,
     course.date, course.price, course.is_disabled, user.name, user.lastname, user.nickname, user.email
     FROM course LEFT JOIN user ON course.user_id = user.user_id`;
-    
+
     connection.query(sql, (err, result) => {
       if (err) {
         res.status(500).json(err);
@@ -151,32 +160,30 @@ class adminControllers {
   };
 
   disableCourse = (req, res) => {
-    const { course_id } = req.params
-    let sql = `UPDATE course SET is_disabled = 1 WHERE course_id = ${course_id}`
+    const { course_id } = req.params;
+    let sql = `UPDATE course SET is_disabled = 1 WHERE course_id = ${course_id}`;
 
-    connection.query(sql,(err, result) => {
-      if(err) {
-        res.status(500).json(err)
+    connection.query(sql, (err, result) => {
+      if (err) {
+        res.status(500).json(err);
       } else {
-        res.status(200).json(result)
+        res.status(200).json(result);
       }
-    })
-  }
+    });
+  };
 
   enableCourse = (req, res) => {
-    const { course_id } = req.params
-    let sql = `UPDATE course SET is_disabled = 0 WHERE course_id = ${course_id}`
+    const { course_id } = req.params;
+    let sql = `UPDATE course SET is_disabled = 0 WHERE course_id = ${course_id}`;
 
-    connection.query(sql,(err, result) => {
-      if(err) {
-        res.status(500).json(err)
+    connection.query(sql, (err, result) => {
+      if (err) {
+        res.status(500).json(err);
       } else {
-        res.status(200).json(result)
+        res.status(200).json(result);
       }
-    })
-  }
-
-
+    });
+  };
 }
 
 module.exports = new adminControllers();
