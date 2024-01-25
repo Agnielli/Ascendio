@@ -39,6 +39,9 @@ import { CreateTrade } from "../pages/posts/Trades/CreateTrade/CreateTrade";
 import { TraderProfile } from "../pages/users/TraderProfile/TraderProfile";
 import { OneTradePost } from "../pages/posts/trades/OneTradePost/OneTradePost";
 import { OneGeneralPost } from "../pages/posts/PostGeneral/OneGeneralPost/OneGeneralPost";
+import { ThermsNConditions } from "../pages/dashboard/Landing/ThermsNConditions/ThermsNConditions";
+import { Privacy } from "../pages/dashboard/Landing/Privacy/Privacy";
+import { CookiesPolicy } from "../pages/dashboard/Landing/CookiesPolicy/CookiesPolicy";
 
 
 export const RoutesApp = () => {
@@ -62,6 +65,9 @@ export const RoutesApp = () => {
               <Route path="/about" element={<AboutApp />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/termsandconditions" element={<ThermsNConditions />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/cookiespolicy" element={<CookiesPolicy />} />
               <Route
                 path="/confirmationuser/:token"
                 element={<ConfirmationUser />}

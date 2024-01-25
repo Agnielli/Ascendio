@@ -29,7 +29,7 @@ export const TraderProfile = () => {
         <Card.Img variant="top" src="" />
         <Card.Body>
           <Card.Title>{traderprofile?.nickname}</Card.Title>
-          <p>Cursos totales: {traderprofile?.total_courses}</p>
+          <p>Cursos totales:  {traderprofile?.total_courses}</p>
           <p>Posts totales: {traderprofile?.total_posts}</p>
           <p>Posts correctos: {traderprofile?.correct_posts}</p>
           <p>Posts incorrectos: {traderprofile?.incorrect_posts}</p>
