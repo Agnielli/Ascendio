@@ -296,19 +296,9 @@ class coursesControllers {
     });
   };
 
-  disableOneCourse = (req, res) => {
-    const { course_id } = req.params
-    let sql = `UPDATE course SET is_disabled = 1 WHERE course_id = ${course_id}`
-    connection.query(sql, (err, result) => {
-      if (err) {
-        res.status(500).json(err)
-      } else {
-        res.status(200).json(result)
-      }
-    })
-  }
-
   
+
+
   addResourcePdf = (req, res) =>{
     console.log("hi");
     ///multer acept pdf en el input
