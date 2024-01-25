@@ -20,5 +20,7 @@ router.put("/markatrade/:id", postsControllers.markATrade);
 router.get("/onetradepost/:id", postsControllers.OneTradePost);
 router.get("/getgeneralposts", postsControllers.getAllPostGeneral)
 router.get("/getposttrades", postsControllers.getAllPostTrades)
+router.get('/getcategories', postsControllers.getCategories)
+
 
 module.exports = router;

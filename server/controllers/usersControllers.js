@@ -418,7 +418,7 @@ class usersControllers {
         });
       });
     });
-  }
+  };
 
   getFollowersUser = (req, res) => {
     try {
@@ -570,16 +570,51 @@ class usersControllers {
   };
   // ---------------------------------------------------------------
   deleteUser = (req, res) => {
-    const {id: user_id, email, nickname } = req.params;    
+    const { id: user_id, email, nickname } = req.params;
     let sql = `UPDATE user SET is_deleted = 1 WHERE user_id = ${user_id}`;
-  
+
     connection.query(sql, (err, result) => {
       let mess = `http://localhost:5173/deleteuser/${user_id}`;
       if (err) {
         res.status(500).json(err);
       } else {
         nodemailerDeleteUser(email, nickname, mess);
-              res.status(200).json({ message: "Email recibido correctamente", result });
+        res
+          .status(200)
+          .json({ message: "Email recibido correctamente", result });
+      }
+    });
+  };
+
+  userSendCategory = (req, res) => {
+    console.log(req.body);
+    const categories = req.body.selectedValues;
+    const user_id = req.body.user_id;
+
+    // Elimina las categorías existentes para el usuario
+    let deleteSql = `DELETE FROM user_category WHERE user_id = ${user_id}`;
+    connection.query(deleteSql, (deleteErr, deleteResult) => {
+      if (deleteErr) {
+        res.status(500).json(deleteErr);
+      } else {
+        // Inserta las nuevas categorías para el usuario
+        let insertSql = `INSERT INTO user_category (user_id, category_id) VALUES ?`;
+        let values = categories.map((category) => [user_id, category]);
+        connection.query(insertSql, [values], (insertErr, insertResult) => {
+          if (insertErr) {
+            res.status(500).json(insertErr);
+          } else {
+            // Devuelve las categorías actualizadas
+            let selectSql = `SELECT * FROM user_category WHERE user_id = ${user_id}`;
+            connection.query(selectSql, (selectErr, selectResult) => {
+              if (selectErr) {
+                res.status(500).json(selectErr);
+              } else {
+                res.status(200).json(selectResult);
+              }
+            });
+          }
+        });
       }
     });
   };
