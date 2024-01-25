@@ -2,21 +2,23 @@ import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios';
 import { Button, Card, ListGroup } from 'react-bootstrap';
 import { AscendioContext } from '../../../context/AscendioContext';
+import { useNavigate } from 'react-router-dom';
 
 export const Home = () => {
 
-const [lastPosts, setLastPosts] = useState([]);
-const { user } = useContext(AscendioContext);
-const [followingUsers, setFollowingUsers] = useState([]); // Nuevo estado para almacenar usuarios seguidos
+  const [lastTrades, setLastTrades] = useState([]);
+  const { user } = useContext(AscendioContext);
+  const [followingUsers, setFollowingUsers] = useState([]); // Nuevo estado para almacenar usuarios seguidos
 
+  const navigate = useNavigate();
 
   // para obtener los posts (generales y trades) ordenados por fecha de subida (últimos trades)
   useEffect(() => {
     axios
-      .get("http://localhost:3000/posts/lastposts")
+      .get("http://localhost:3000/posts/lasttrades")
       .then((res) => {
         // console.log(res.data);
-        setLastPosts(res.data);
+        setLastTrades(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -80,7 +82,7 @@ const [followingUsers, setFollowingUsers] = useState([]); // Nuevo estado para a
     <>
       <h2>Últimos Posts</h2>
       <div className="d-flex flex-wrap gap-2 mb-2">
-        {lastPosts.map((elem, index) => {
+        {lastTrades.map((elem, index) => {
             return (
               <Card
                 style={{ width: "18rem", marginBottom: "1rem" }}

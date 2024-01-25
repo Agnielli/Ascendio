@@ -2,10 +2,10 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
-import { ModalCreateComment } from "./ModalCreateComment/ModalCreateComment";
-import { ShowAllCommentsPost } from "./ShowAllCommentsPost/ShowAllCommentsPost";
+import { ModalCreateComment } from "../../trades/OneTradePost/ModalCreateComment/ModalCreateComment";
+import { ShowAllCommentsPost } from "../../trades/OneTradePost/ShowAllCommentsPost/ShowAllCommentsPost";
 
-export const OneTradePost = () => {
+export const OneGeneralPost = () => {
   const [oneTrade, setOneTrade] = useState();
 
   const [showModal, setShowModal] = useState(false);
@@ -19,7 +19,9 @@ export const OneTradePost = () => {
   if (post) {
     useEffect(() => {
       axios
-        .get(`http://localhost:3000/posts/onetradepost/${post.post_id}`)
+        .get(
+          `http://localhost:3000/posts/onetradepost/${post.post_id}`
+        ) /* cambiar */
         .then((res) => {
           setOneTrade(res.data[0]);
         })
@@ -40,32 +42,25 @@ export const OneTradePost = () => {
                 <h2>Trader: {oneTrade.post_user_nickname}</h2>
               </Card.Header>
               <Card.Header className="row d-flex">
-                <h3 className="col-4">Imagen {oneTrade.category_name}</h3>
-                <h3 className="col-4">Categoría: {oneTrade.category_name}</h3>
-                <h3 className="col-4">Divisa: {oneTrade.currency}</h3>
+                <div className="col-6">
+                  <h3>Imagen</h3>
+                </div>
+                <div className="col-6">
+                  <h3>Descripción</h3>
+                </div>
               </Card.Header>
               <Card.Body>
                 <Card.Title className="row">
-                  <div className="col-4">
+                  <div className="col-6">
                     <Card.Img
-                      src={`http://localhost:3000/images/trades/${oneTrade.resource_text}`}
+                      src={`http://localhost:3000/images/generalPost/${oneTrade.resource_text}`}
                     />
                   </div>
-                  <div className="col-4">
-                    <h4>Precio de entrada: {oneTrade.entry_price}€</h4>
-                    <h4>Detener perdida en: {oneTrade.stop_loss}€</h4>
-                    <h4>Coger Ganancias en: {oneTrade.take_profit}€</h4>
-                  </div>
-                  <div className="col-4">
+                  <div className="col-6">
                     <h4>{oneTrade.description}</h4>
                   </div>
-                  <h4>
-                    {oneTrade.correct === null
-                      ? "Trade Pediente"
-                      : oneTrade.correct === 1
-                      ? "Trade Acertado"
-                      : "Trade Errado"}
-                  </h4>
+                </Card.Title>
+                <Card.Title className="row">
                   <div className="d-flex gap-1 justify-content-center">
                     <Button
                       onClick={() => {
@@ -76,7 +71,7 @@ export const OneTradePost = () => {
                       Comentar
                     </Button>
                     <Button
-                      onClick={() => navigate("/allpoststrades")}
+                      onClick={() => navigate("/allpostsgenerals")}
                       variant="primary"
                     >
                       Volver

@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { Button, Card } from "react-bootstrap";
 import { textSensitive } from "../../../helpers/utils";
+import { ModalDelOneCourse } from "../../../components/ModalDelOneCourse/ModalDelOneCourse";
 
 export const OneUserCourses = () => {
   const [findCourse, setFindCourse] = useState();
@@ -11,7 +12,9 @@ export const OneUserCourses = () => {
   const [filter, setFilter] = useState("");
   const { userCourse, setUserCourse } = useContext(AscendioContext);
   const user_id = useParams().user_id;
-  const [course, setCourse] = useState()
+  const [course, setCourse] = useState();
+  const [showModalDelete, setShowModalDelete] = useState(false);
+  const course_id = useParams().course_id;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -38,19 +41,23 @@ export const OneUserCourses = () => {
     setFindCourse(tempArray);
   }, [allCoursesOneUser, filter]);
 
+  const deleteCourse = (course_id) => {
+    axios
+      .put(`http://localhost:3000/courses/deletecourse/${course_id}`)
+      .then((res) => {
+        console.log(res.data);
+        setAllCoursesOneUser(
+          allCoursesOneUser.filter((e) => e.course_id != course_id)
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-    const deleteCourse = (course_id) => {
-      axios
-        .put(`http://localhost:3000/courses/deletecourse/${course_id}`)
-        .then((res) => {
-          console.log(res.data);
-          setAllCoursesOneUser(allCoursesOneUser.filter(e=>e.course_id != course_id))
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
- 
+  const openModalDelete = () => {
+    setShowModalDelete(true);
+  };
 
   return (
     <section>
@@ -79,12 +86,20 @@ export const OneUserCourses = () => {
                   Más info
                 </Button>
                 <Button
-                  onClick={() => deleteCourse(elem.course_id)}
+                  // onClick={() => deleteCourse(elem.course_id)}
+                  onClick={openModalDelete}
                   variant="outline-danger"
                   className="me-3"
                 >
                   Eliminar curso
                 </Button>
+                {/* <ModalDelOneCourse
+                  showModalDelete={showModalDelete}
+                  setShowModalDelete={setShowModalDelete}
+                  deleteCourse={deleteCourse}
+                  course_id={course_id}
+                  elem = {elem}
+                /> */}
               </Card.Body>
             </Card>
           );

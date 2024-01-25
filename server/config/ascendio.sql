@@ -210,4 +210,4 @@ select * from category;
 
 
 select * from user; 
-select * from post;
+select * from post order by date desc;

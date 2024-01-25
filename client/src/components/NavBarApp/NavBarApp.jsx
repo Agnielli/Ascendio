@@ -21,11 +21,14 @@ function NavBarApp() {
     setIsLogged(false);
     navigate("/");
   };
+  
+  const redirectTo = user ? "/home" : "/";
+
 
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container fluid>
-        <Navbar.Brand as={Link} to="/">
+        <Navbar.Brand as={Link} to={redirectTo}>
           ASCENDIO
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

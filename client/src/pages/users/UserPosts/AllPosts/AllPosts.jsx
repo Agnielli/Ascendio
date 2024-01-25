@@ -122,7 +122,7 @@ export const AllPosts = ({
                   </Card.Text>
                   <Button
                     onClick={() => {
-                      navigate(`/onetradepost/${elem.post_id}`);
+                      navigate(`/oneGeneralPost/${elem.post_id}`);
                     }}
                   >
                     Ir a comentarios del post
