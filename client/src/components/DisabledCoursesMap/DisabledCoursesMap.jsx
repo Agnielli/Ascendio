@@ -8,7 +8,7 @@ export const DisabledCoursesMap = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/courses/getalldisabledcourses`)
+      .get(`http://localhost:3000/admin/getalldisabledcourses`)
       .then((res) => {
         console.log(res)
         setDisabledCourses(res.data)

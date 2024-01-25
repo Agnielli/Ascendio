@@ -14,6 +14,10 @@ router.get('/adminactivatedallusers', adminControllers.adminGetActivatedUsers)
 router.get('/admingetallcourses', adminControllers.adminGetCourses)
 router.put('/admindisableonecourse/:course_id', adminControllers.disableCourse)
 router.put('/adminenableonecourse/:course_id', adminControllers.enableCourse)
+router.get('/getalldisabledcourses', adminControllers.getAllDisabledCourses)
+router.get('/getallenabledcourses', adminControllers.getAllEnabledCourses)
+router.put('/enableonecourse/:course_id', adminControllers.enableOneCourse)
+router.put('/disableonecourse/:course_id', adminControllers.disableOneCourse)
 
 
 

@@ -36,6 +36,7 @@ export const AdminHome = () => {
     setShowCourseButtons(!showCourseButtons)
     setShowUserButtons(false);
     setShowTrades(false);
+    setShowStats(false);
   }
 
   const showAllUsers = () => {

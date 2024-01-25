@@ -25,10 +25,6 @@ router.put('/addtovalidatecourse/:course_id', coursesControllers.addToValidateCo
 router.post('/delfromwishes/:course_id', coursesControllers.delFromWishes);
 router.get('/getalltagsonecourse/:course_id', coursesControllers.getAllTagsOneCourse);
 router.get('/getcreatoruser/:course_id', coursesControllers.getCreatorUser);
-router.get('/getalldisabledcourses', coursesControllers.getAllDisabledCourses)
-router.get('/getallenabledcourses', coursesControllers.getAllEnabledCourses)
-router.put('/enableonecourse/:course_id', coursesControllers.enableOneCourse)
-router.put('/disableonecourse/:course_id', coursesControllers.disableOneCourse)
 router.post('/addresourcepdf', multerSingle("resource"), coursesControllers.addResourcePdf)
 router.post('/addresourcevideo', coursesControllers.addResourceVideo)
 router.delete('/deleteResource', coursesControllers.deleteResource)
