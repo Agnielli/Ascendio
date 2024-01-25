@@ -333,14 +333,70 @@ class coursesControllers {
     });
   };
 
+
   getPurchaseCourse = (req, res) => {
     const { course_id, user_id } = req.params;
     let sql = `SELECT * FROM user_enrolls_course WHERE user_id = ${user_id} and course_id = ${course_id}`;
 
+    connection.query(sql, (err, result)=>{
+      err ?
+      res.status(500).json(err)
+      :
+      res.status(200).json(result);
+   
+    })
+  }
+
+  getAllDisabledCourses = (req, res) => {
+    let sql = `SELECT * FROM course WHERE is_disabled = 1`
+
     connection.query(sql, (err, result) => {
-      err ? res.status(500).json(err) : res.status(200).json(result);
-    });
-  };
+      if(err) {
+        res.status(500).json(err)
+      } else {
+        res.status(200).json(result)
+      }
+    })
+  }
+
+  getAllEnabledCourses = (req, res) => {
+    let sql = `SELECT * FROM course WHERE is_disabled = 0`
+
+    connection.query(sql, (err, result) => {
+      if(err) {
+        res.status(500).json(err)
+      } else {
+        res.status(200).json(result)
+      }
+    })
+  }
+
+  enableOneCourse = (req, res) => {
+    const { course_id } = req.params
+    let sql = `UPDATE course SET is_disabled = 0 WHERE course_id = ${course_id}`
+
+    connection.query(sql, (err, result) => {
+      if(err) {
+        res.status(500).json(err)
+      } else {
+        res.status(200).json(result)
+      }
+    })
+  }
+
+  disableOneCourse = (req, res) => {
+    const { course_id } = req.params
+    let sql = `UPDATE course SET is_disabled = 1 WHERE course_id = ${course_id}`
+
+    connection.query(sql, (err, result) => {
+      if (err) {
+        res.status(500).json(err)
+      } else {
+        res.status(200).json(result)
+      }
+    })
+  }
+
 
   // getTopics = (req,res) =>{
   //   const {course_id, section_id, topic_id} = req.params;
