@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import "./login.scss";
+import "../../../../public/stylesheets/ButtonsApp/ButtonsApp.scss";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { AscendioContext } from "../../../context/AscendioContext";
 import { Link, useNavigate } from "react-router-dom";
@@ -96,12 +97,14 @@ export const Login = () => {
               </div>
           </Form.Group>
           <p>{msgError}</p>
-          <Button  className="me-3" variant="outline-success" onClick={handleSubmit}>
-            Aceptar
-          </Button>
-          <Button onClick={() => navigate("/register")} variant="outline-success">
-            Regístrate
-          </Button>
+          
+            <Button  className="Button5" variant="outline-success" onClick={handleSubmit}>
+              ACEPTAR
+            </Button>
+            <Button onClick={() => navigate("/register")} variant="outline-success">
+              REGISTRATE
+            </Button>
+          
           <p>
             ¿Has olvidado tu contraseña? <Link to="/mailrecoverpassword">Recuperar contraseña</Link>
           </p>
