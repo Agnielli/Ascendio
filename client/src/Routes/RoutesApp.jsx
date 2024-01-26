@@ -41,7 +41,8 @@ import { OneGeneralPost } from "../pages/posts/PostGeneral/OneGeneralPost/OneGen
 import { ThermsNConditions } from "../pages/dashboard/Landing/ThermsNConditions/ThermsNConditions";
 import { Privacy } from "../pages/dashboard/Landing/Privacy/Privacy";
 import { CookiesPolicy } from "../pages/dashboard/Landing/CookiesPolicy/CookiesPolicy";
-import { TradingViewWidget } from "../components/TradingViewWidget/TradingViewWidget";
+import { TradingViewWidget } from "../pages/dashboard/Landing/TradingViewWidget/TradingViewWidget";
+
 
 
 
