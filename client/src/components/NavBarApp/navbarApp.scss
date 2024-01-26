@@ -10,12 +10,11 @@ body {
   color: white;
   text-align: center;
 
-  img{
+  img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     object-fit: cover;
-
   }
 }
 
@@ -42,7 +41,7 @@ p {
 @media (min-width: 992px) {
   .BG-navbar {
     background-color: $accent-color;
-    padding: 0 5vw;
+    
   }
 }
 
@@ -64,12 +63,12 @@ p {
     }
 
     .ButtonLogin {
-        margin: 0 0 12px 0 !important;
-        padding: 6px 24.545px;
+      margin: 0 0 12px 0 !important;
+      padding: 6px 24.545px !important;
     }
 
     .ButtonRegister {
-        margin: 0 0 12px 0 !important;
+      margin: 0 0 12px 0 !important;
     }
 
     .ButtonLogin:hover {
@@ -80,6 +79,7 @@ p {
 }
 
 nav {
+    padding: 0 5vw !important;
   a.nav-link {
     color: white;
     font-weight: 500;
@@ -97,6 +97,7 @@ nav {
   }
 
   .ButtonRegister {
+    padding: 6px 12px !important;
     margin-left: 12px !important;
     color: white !important;
     font-weight: 500 !important;
@@ -108,9 +109,11 @@ nav {
   .ButtonRegister:hover {
     color: $tertiary-color !important;
     background-color: white !important;
+    border: 2px solid white !important;
   }
 
   .ButtonLogin {
+    padding: 6px 12px !important;
     margin: 0 12px !important;
     color: white !important;
     font-weight: 500 !important;
@@ -125,10 +128,20 @@ nav {
   }
 
   button.navbar-toggler.collapsed {
-    border: none;
+     border: none;
+    
+
+    .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg'  fill='white' class='bi bi-list' viewBox='0 0 16 16'%3e%3cpath d='M2 1.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zM2 5.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zM2 9.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zM2 13.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z'/%3e%3c/svg%3e");
+      }
   }
   button.navbar-toggler {
     border: none;
+    
+
+    .navbar-toggler-icon {
+        
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23e15252' class='bi bi-list' viewBox='0 0 16 16'%3e%3cpath d='M2 1.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zM2 5.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zM2 9.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zM2 13.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z'/%3e%3c/svg%3e");
+      }
   }
-  
 }
