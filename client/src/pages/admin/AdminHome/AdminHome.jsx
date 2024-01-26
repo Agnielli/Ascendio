@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./adminHome.scss";
+import "./AdminHome.scss";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { AdminAllUsers } from "../../../components/AdminAllUsers/AdminAllUsers";
 import { Estadisticas } from "../AdminEstadisticas/Estadisticas";
@@ -151,13 +151,13 @@ export const AdminHome = () => {
     <Container fluid className="AdminRow">
       <Col className="">
         <h3>Administrador</h3>
-        <Container className="d-flex flex-row justify-content-between">
+        <div className="ButtonsRow1">
           <Button onClick={() => showButtons()}>Usuarios</Button>
           <Button onClick={() => showAllCourseButtons()}>Cursos</Button>
           <Button onClick={() => showStatistics()}>Estadisticas</Button>
           <Button onClick={() => showAllTrades()}>Trades</Button>
-        </Container>
-        <Container>
+        </div>
+        <div>
           {showTrades && (
             <div>
               <Button className="Button1" onClick={() => showAllPosts()}>Posts Trades</Button>
@@ -166,35 +166,35 @@ export const AdminHome = () => {
               {showPost && <TradesPostMap />}
             </div>
           )}
-        </Container>
-        <Container className="">
+        </div>
+        <div className="">
           {showUserButtons === true && (
-            <div className="mt-5 mb-5 d-md-flex flex-md-row">
-              <div>
-                <Button onClick={() => showAllUsers()}>
+            <div className="">
+              <div className="ButtonsRow2">
+                <Button className="ButtonNoBG" onClick={() => showAllUsers()}>
                   Todos los usuarios
                 </Button>
-                <Button onClick={() => showAllActivatedUsers()}>Usuarios Activos</Button>
-                <Button onClick={() => showAllDisabledUsers()}>Usuarios Bloqueados</Button>
+                <Button className="ButtonNoBG" onClick={() => showAllActivatedUsers()}>Usuarios Activos</Button>
+                <Button className="ButtonNoBG" onClick={() => showAllDisabledUsers()}>Usuarios Bloqueados</Button>
               </div>
               <div>
                 {showUsers === true && (
                   <AdminAllUsers allUsers={allUsers} setAllUsers={setAllUsers} />
                 )}
                 {showDisabledUsers === true &&
-                <AdminDisabledUsers />
+                  <AdminDisabledUsers />
                 }
                 {showActivatedUsers === true &&
-                <AdminActivateUser />
+                  <AdminActivateUser />
                 }
-                            </div>
+                </div>
               </div>
           )}
-        </Container>
+        </div>
         
-        <Container>{showStats === true && <Estadisticas />}</Container>
+        <div>{showStats === true && <Estadisticas />}</div>
         {showCourseButtons &&
-          <Container className="">
+          <div className="">
             <Button onClick={() => showAllCourses()}>Todos los cursos</Button>
             <Button onClick={() => showAllEnabledCourses()}>Cursos Activos</Button>
             <Button onClick={() => showAllDisabledCourses()}>Cursos Bloqueados</Button>
@@ -202,7 +202,7 @@ export const AdminHome = () => {
             {showCourses && <AdminCourses />}
             {showDisabledCourses && <DisabledCoursesMap />}
             {showEnabledCourses && <EnabledCoursesMap />}
-          </Container>
+          </div>
         }
       </Col>    
     </Container>
