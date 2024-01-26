@@ -6,26 +6,22 @@ export const RatingStars = ({numberstars}) => {
   let stars = new Array(5);
 
   stars.fill("☆")
-  console.log(numberstars);
-  console.log(stars);  /* ⭐🤍★☆ */
-  console.log(ratingUser);
+  // console.log(numberstars);
+  // console.log(stars);  /* ⭐🤍★☆ */
+  // console.log(ratingUser);
   
     
     
       let prueba = stars.map((elem,i)=>{
-        console.log(i);
+        //console.log(i);
       if(i < numberstars ){
         return "★"
       }else{
         return "☆"
       }
     })
-    console.log(prueba);
+   // console.log(prueba);
     
-  
-  
-
-
   return (
     <div>{prueba.join("")}</div>
   )

@@ -25,7 +25,7 @@ export const ModalResource = ({
     setFile(e.target.files[0]);
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e) => { 
     setUrl(e.target.value)
   }
   
@@ -43,8 +43,9 @@ export const ModalResource = ({
       .post(`http://localhost:3000/courses/addresourcepdf`, newFormData)
       .then((res) => {
         console.log('PPPPPPPPP', res.data);
-        /* setResetCourse(!resetCourse)
-        setUrl(""); */
+        setResetCourse(!resetCourse)
+        setUrl(""); 
+        handleClose()
       })
       .catch((err) => {
         console.log(err);
