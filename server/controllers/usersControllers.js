@@ -301,7 +301,6 @@ class usersControllers {
     try {
       const { id } = req.params;
       const user_id = id;
-      let sql = `SELECT (SELECT COUNT(*) FROM user_follows_user WHERE followed_user_id = '${user_id}') AS num_followers, (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}') AS num_posts, (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}' AND type = 2) AS num_trades, (SELECT COUNT(*) FROM course WHERE user_id = '${user_id}' AND is_deleted = 0) AS num_courses, (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}' AND correct = true) AS num_correct_posts, (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}' AND correct = false) AS num_incorrect_posts, (SELECT COUNT(DISTINCT followed_user_id) FROM user_follows_user WHERE user_id = '${user_id}') AS num_following_users;`;
 
       let sql2 = `SELECT
       (SELECT COUNT(*) FROM user_follows_user WHERE followed_user_id = '${user_id}') AS num_followers,
@@ -548,15 +547,27 @@ class usersControllers {
   traderProfile = (req, res) => {
     const { id: user_id } = req.params;
 
-    let sql = `SELECT * FROM user WHERE type = 2 AND user_id = ${user_id}`;
     let sql2 = `SELECT 
-    u.*,
-    p.*
-    FROM user u
-    LEFT JOIN post p ON u.user_id = p.user_id
-    LEFT JOIN user_follows_user uf ON u.user_id = uf.user_id
-    LEFT JOIN course c ON u.user_id = c.user_id
-    WHERE u.type = 2 AND u.user_id = ${user_id};`;
+    u.nickname,
+    u.name,
+    u.lastname,
+    u.img AS user_image,
+    COUNT(DISTINCT p.post_id) AS total_posts,
+    COUNT(DISTINCT CASE WHEN p.correct = true THEN p.post_id END) AS correct_posts_count,
+    COUNT(DISTINCT CASE WHEN p.correct = false THEN p.post_id END) AS incorrect_posts_count,
+    COUNT(DISTINCT c.course_id) AS total_courses,
+    COUNT(DISTINCT uf.followed_user_id) AS followers_count,
+    COUNT(DISTINCT uf2.user_id) AS following_count,
+    GROUP_CONCAT(DISTINCT cat.category_name ORDER BY cat.category_name ASC) AS category_names
+FROM user u
+LEFT JOIN post p ON u.user_id = p.user_id
+LEFT JOIN course c ON u.user_id = c.user_id
+LEFT JOIN user_follows_user uf ON u.user_id = uf.followed_user_id
+LEFT JOIN user_follows_user uf2 ON u.user_id = uf2.followed_user_id
+LEFT JOIN user_category uc ON u.user_id = uc.user_id
+LEFT JOIN category cat ON uc.category_id = cat.category_id
+WHERE u.user_id = ${user_id}
+GROUP BY u.user_id;`;
 
     connection.query(sql2, (err, result) => {
       if (err) {

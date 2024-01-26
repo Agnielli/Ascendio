@@ -148,7 +148,7 @@ class adminControllers {
     let sql = `SELECT
     course.course_id, course.title, course.user_id, course.description, course.img AS course_img,
     course.date, course.price, course.is_disabled, user.name, user.lastname, user.nickname, user.email
-    FROM course LEFT JOIN user ON course.user_id = user.user_id WHERE course.is_completed = 1`;
+    FROM course LEFT JOIN user ON course.user_id = user.user_id`;
 
     connection.query(sql, (err, result) => {
       if (err) {
@@ -172,7 +172,7 @@ class adminControllers {
   }
 
   getAllDisabledCourses = (req, res) => {
-    let sql = `SELECT * FROM course WHERE is_disabled = 1 AND is_completed = 1`
+    let sql = `SELECT * FROM course WHERE is_disabled = 1`
     connection.query(sql, (err, result) => {
       if(err) {
         res.status(500).json(err)

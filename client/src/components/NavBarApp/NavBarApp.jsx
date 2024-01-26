@@ -3,7 +3,6 @@ import { Button } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link, useNavigate } from "react-router-dom";
 import { AscendioContext } from "../../context/AscendioContext";
 import { delLocalStorage } from "../../helpers/localStorageUtils";
@@ -30,12 +29,12 @@ function NavBarApp() {
         <Navbar.Brand className="logoNav p-0 m-0" as={Link} to={redirectTo}>
          ASCENDIO
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav"  />
-        <Navbar.Collapse id="basic-navbar-nav w-100">
+        <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+        <Navbar.Collapse id="basic-navbar-nav w-100" >
           <Nav className="me-auto d-flex w-100 ">
             <div className="d-flex justify-content-end w-100">
               {!user && (
-                <div className="d-flex align-items-center">
+                <div className=" navbarLinksBotones d-flex align-items-center">
                   <Nav.Link as={Link} to="/about">
                     ABOUT
                   </Nav.Link>
