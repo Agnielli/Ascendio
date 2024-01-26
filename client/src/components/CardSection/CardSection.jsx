@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import { FormAddTopic } from "../FormAddTopic/FormAddTopic";
 import { CardTopic } from "../CardTopic/CardTopic";
-
+import axios from "axios";
 export const CardSection = ({
   elem,
   deleteSection,
@@ -12,32 +12,43 @@ export const CardSection = ({
   setTopics,
   setResetCourse,
   resetCourse,
-  deleteTopic
+  deleteTopic,
+  userId,
+  userCourse
 }) => {
   const [showTopic, setShowTopic] = useState(false);
-
   const handleClick = () => {
     setShowTopic(true);
   };
-
-  //useEffect(effect) que haga una llamada para traerse por cada una de las cards el contenido del topic asociado a cada una de las cards (si lo tuviera). Esa card se va a pintar al lado del botón de delete.
+  // useEffect((section_id, topic_id)=>{
+  //   axios
+  //     .get(`http://localhost:3000/courses/topics/${course_id}/${section_id}/${topic_id}`)
+  //     .then((res)=>{
+  //       console.log(res);
+  //       setResetCourse(!resetCourse);
+  //       setTopics(res.data);
+  //     })
+  //     .catch((err)=>{
+  //       console.log(err);
+  //     })
+  // },[])
   return (
     <Card>
       <Card.Body>
         {elem.section_title}
-        <Button
+        {userId === userCourse &&<Button
           variant="outline-success"
           onClick={handleClick}
           disabled={showTopic ? true : false}
         >
           Añadir tema
-        </Button>
-        <Button
+        </Button>}
+        {userId === userCourse &&<Button
           variant="outline-success"
           onClick={() => deleteSection(elem.section_id)}
         >
           Eliminar
-        </Button>
+        </Button>}
         {showTopic && (
           <FormAddTopic
             setShowTopic={setShowTopic}
@@ -50,14 +61,17 @@ export const CardSection = ({
             resetCourse={resetCourse}
           />
         )}
-        {topics.map((elem) => {
+        {elem.section_topics.map((topic) => {
               return (
-          <CardTopic 
+          <CardTopic
           key={elem.topic_id}
-          topics={topics} 
-          setTopics={setTopics} 
-          elem={elem}
+          topics={topics}
+          setTopics={setTopics}
+          topic={topic}
           deleteTopic={deleteTopic}
+          section_id={elem.section_id}
+          setResetCourse={setResetCourse}
+          resetCourse={resetCourse}
           />
           );
         })}

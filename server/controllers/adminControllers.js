@@ -148,7 +148,7 @@ class adminControllers {
     let sql = `SELECT
     course.course_id, course.title, course.user_id, course.description, course.img AS course_img,
     course.date, course.price, course.is_disabled, user.name, user.lastname, user.nickname, user.email
-    FROM course LEFT JOIN user ON course.user_id = user.user_id`;
+    FROM course LEFT JOIN user ON course.user_id = user.user_id WHERE course.is_completed = 1`;
 
     connection.query(sql, (err, result) => {
       if (err) {
@@ -158,6 +158,39 @@ class adminControllers {
       }
     });
   };
+
+  enableOneCourse = (req, res) => {
+    const { course_id } = req.params
+    let sql = `UPDATE course SET is_disabled = 0 WHERE course_id = ${course_id}`
+    connection.query(sql, (err, result) => {
+      if(err) {
+        res.status(500).json(err)
+      } else {
+        res.status(200).json(result)
+      }
+    })
+  }
+
+  getAllDisabledCourses = (req, res) => {
+    let sql = `SELECT * FROM course WHERE is_disabled = 1`
+    connection.query(sql, (err, result) => {
+      if(err) {
+        res.status(500).json(err)
+      } else {
+        res.status(200).json(result)
+      }
+    })
+  }
+  getAllEnabledCourses = (req, res) => {
+    let sql = `SELECT * FROM course WHERE is_disabled = 0`
+    connection.query(sql, (err, result) => {
+      if(err) {
+        res.status(500).json(err)
+      } else {
+        res.status(200).json(result)
+      }
+    })
+  }
 
   disableCourse = (req, res) => {
     const { course_id } = req.params;
@@ -184,6 +217,21 @@ class adminControllers {
       }
     });
   };
+
+  disableOneCourse = (req, res) => {
+    const { course_id } = req.params
+    let sql = `UPDATE course SET is_disabled = 1 WHERE course_id = ${course_id}`
+
+    connection.query(sql, (err, result) => {
+      if (err) {
+        res.status(500).json(err)
+      } else {
+        res.status(200).json(result)
+        console.log(result)
+      }
+      
+    })
+  }
 }
 
 module.exports = new adminControllers();

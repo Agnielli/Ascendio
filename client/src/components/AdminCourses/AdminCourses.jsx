@@ -12,6 +12,7 @@ export const AdminCourses = () => {
         .then((res) => {
           console.log(res)
           setCourse(res.data)
+          console.log(res.data)
         })
         .catch((err) => {console.log(err)})
   }, [updateCourses])

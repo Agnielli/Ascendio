@@ -49,14 +49,15 @@ export const OneUserCourses = () => {
         setAllCoursesOneUser(
           allCoursesOneUser.filter((e) => e.course_id != course_id)
         );
+        setShowModalDelete(false);
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  const openModalDelete = () => {
-    setShowModalDelete(true);
+  const openModalDelete = (elem_id) => {
+    setShowModalDelete(elem_id);
   };
 
   return (
@@ -86,24 +87,24 @@ export const OneUserCourses = () => {
                   Más info
                 </Button>
                 <Button
-                  // onClick={() => deleteCourse(elem.course_id)}
-                  onClick={openModalDelete}
+                  onClick={() => openModalDelete(elem.course_id)}
                   variant="outline-danger"
                   className="me-3"
                 >
                   Eliminar curso
                 </Button>
-                {/* <ModalDelOneCourse
-                  showModalDelete={showModalDelete}
-                  setShowModalDelete={setShowModalDelete}
-                  deleteCourse={deleteCourse}
-                  course_id={course_id}
-                  elem = {elem}
-                /> */}
               </Card.Body>
             </Card>
           );
         })}
+        {showModalDelete && (
+          <ModalDelOneCourse
+            showModalDelete={showModalDelete}
+            setShowModalDelete={setShowModalDelete}
+            deleteCourse={deleteCourse}
+            course_id={showModalDelete}
+          />
+        )}
         {findCourse?.length === 0 && (
           <p>No se han encontrado cursos con estos valores</p>
         )}

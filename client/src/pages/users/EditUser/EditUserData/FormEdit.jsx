@@ -82,7 +82,7 @@ export const FormEdit = ({ user, setUser, setShowForm}) => {
                 alt="Avatar"
               />
             ) : (
-               <p>{user?.name.charAt(0).toUpperCase()}</p> 
+               <p>{user?.nickname.charAt(0).toUpperCase()}</p> 
             )}
           </label>
           <input

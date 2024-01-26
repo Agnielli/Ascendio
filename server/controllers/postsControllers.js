@@ -203,6 +203,18 @@ class postsControllers {
       }
     })
   }
+
+  getCategories = (req, res) => {
+    let sql = `SELECT * FROM category`
+    
+    connection.query(sql, (err, result) => {
+      if(err) {
+        res.status(500).json(err)
+      } else {
+        res.status(200).json(result)
+      }
+    })
+  }
 }
 
 module.exports = new postsControllers();

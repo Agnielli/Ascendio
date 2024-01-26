@@ -13,11 +13,11 @@ export const AdminOneCourse = ({elem, updateCourses, setUpdateCourses}) => {
       .put(url)
       .then((res) => {
         setUpdateCourses(!updateCourses) 
-        console.log(res)
+        console.log(res.data)
       })
       .catch((err) => {console.log(err)})
   }
-  console.log(elem)
+  
 
   return (
     <div>
