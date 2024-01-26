@@ -87,18 +87,21 @@ export const EditUser = () => {
     setShowForm(!showForm);
     setShowChangePassword(false);
     setShowDeleteUser(false);
+    setShowCategories(false);
   };
 
   const verChangePassword = () => {
     setShowChangePassword(!showChangePassword);
     setShowForm(false);
     setShowDeleteUser(false);
+    setShowCategories(false);
   };
 
   const verDeleteUser = () => {
     setShowDeleteUser(!showDeleteUser);
     setShowForm(false);
     setShowChangePassword(false);
+    setShowCategories(false);
   };
 
   const verCategoryUser = () => {
@@ -160,19 +163,23 @@ export const EditUser = () => {
             setUser={setUser}
           />
         )}
+      {showCategories && (
         <Form onSubmit={handleSubmit}>
-          <Form.Group controlId="formFile" className="mb-3">
-            <Form.Label>Elige tu categoría de usuario </Form.Label>
-            <Select
-              placeholder="Categoría.."
-              options={options}
-              value={selectedOption}
-              onChange={handleOption}
-              isMulti
-            />
-          </Form.Group>
-          <Button type="submit">Aceptar</Button>
-        </Form>
+        <Form.Group controlId="formFile" className="mb-3">
+          <Form.Label>Elige tu categoría de usuario </Form.Label>
+          <Select
+            placeholder="Categoría.."
+            options={options}
+            value={selectedOption}
+            onChange={handleOption}
+            isMulti
+          />
+        </Form.Group>
+        <Button type="submit">Aceptar</Button>
+      </Form>
+      )}
+        
+
       </Col>
     </Row>
   );
