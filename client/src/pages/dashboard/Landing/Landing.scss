@@ -1,10 +1,38 @@
 @use "../../../../public/stylesheets/variables.scss" as *;
 
 .ascendio-landing-containerPrincipal {
-  height: calc(100vh - 93px);
+  height: calc(100% - 48px);
+  .ascendio-landing-main {
+    height: calc(100vh - 78px);
+    width: 100%;
+    @include display-flex(row,center,center);
+    padding: 0 0 5px 0;
+  }
+
   .ascendio-landing-footer {
-    @include display-flex(row, space-between, center);
-    color: $accen3-color;
+    @include display-flex(row, none, center);
+    color: $accent3-color;
     background-color: $accent-color;
+    height: 30px;
+    width: 100%;
+    padding: 0 5vw !important;
+    h3{
+      font-size: 16px;
+    }
+    p{
+      font-size: 16px;
+      @include display-flex(row,center,center);
+    }
+    .ascendio-landing-footer-link {
+      font-size: 8px;
+      text-decoration: none;
+      color: $accent3-color;
+      @include display-flex(row,center,center);
+    }
+    .ascendio-landing-footer-link:hover {
+      text-decoration: none;
+      color: $accent2-color;
+      @include display-flex(row,center,center);
+    }
   }
 }

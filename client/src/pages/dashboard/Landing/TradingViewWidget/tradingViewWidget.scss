@@ -1,0 +1,10 @@
+@use "../../../../../public/stylesheets/variables.scss" as *;
+
+.ascendio-graphic-containerPrincipal {
+  width: 50%;
+  aspect-ratio: 2/1;
+  .tradingview-widget-container {
+    height: 100%;
+    @include display-flex(column, center, center);
+  }
+}
