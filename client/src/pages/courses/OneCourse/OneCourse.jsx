@@ -298,9 +298,9 @@ export const OneCourse = () => {
               Añadir Sección
             </Button>}
 
-            <Button onClick={handleWishes}>
+            {userId !== userCourse &&<Button onClick={handleWishes}>
               {isIntoWishes ? "Borrar de deseados" : "Añadir a deseados"}
-            </Button>
+            </Button>}
 
             {userId !== userCourse &&<Button
               onClick={handlePurchase}
