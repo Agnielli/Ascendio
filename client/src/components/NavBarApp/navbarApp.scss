@@ -1,3 +1,17 @@
+@use "../../../public/stylesheets/variables.scss" as var;
+
+// generales
+
+.user{
+    cursor: pointer;
+}
+
+.button {
+    color: white !important;
+    // border: 1px solid white;
+}
+
+
 .avatar{
     width: 50px;
     height: 50px;
@@ -16,6 +30,10 @@
     }
 }
 
-.user{
-    cursor: pointer;
+
+.navbar-principal {
+    background-color: var.$accent-color !important;
 }
+
+
+
