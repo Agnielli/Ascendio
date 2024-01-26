@@ -57,7 +57,7 @@ export const AllCourses = () => {
                 <Card.Title> {elem.title} </Card.Title>
                 <Card.Subtitle>{elem.tags}</Card.Subtitle>
                 <Card.Text>{elem.description}</Card.Text>
-                <Card.Text>{elem.price}€</Card.Text>
+                <Card.Text>{elem.price === 0 ?'GRATIS' : `${elem.price}€`}</Card.Text>
                 <Button
                   onClick={() => navigate(`/course/${elem.course_id}`)}
                   variant="outline-success"
