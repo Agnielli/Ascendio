@@ -181,6 +181,7 @@ class adminControllers {
       }
     })
   }
+  
   getAllEnabledCourses = (req, res) => {
     let sql = `SELECT * FROM course WHERE is_disabled = 0`
     connection.query(sql, (err, result) => {
