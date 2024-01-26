@@ -61,12 +61,13 @@ class coursesControllers {
   oneCourse = (req, res) => {
     const { course_id } = req.params; //añadir el usuario que está logueado
     // console.log(course_id);
-    let sql = `SELECT course.title, course.user_id, course.img, course.date, course.is_completed, course.description, course.price , section.section_id, section.section_title, topic.topic_id, topic.topic_title
+    let sql = `SELECT course.title, course.user_id, course.img, course.date, course.is_completed, course.description, course.price , section.section_id, section.section_title, topic.topic_id, topic.topic_title, resource.resource_id, resource.resource_type, resource.text
     FROM course
     left join section on course.course_id = section.course_id
     left join topic  on topic.course_id = section.course_id and topic.section_id = section.section_id
-    WHERE  course.course_id = ${course_id} AND is_deleted = 0 `;
-    
+    LEFT JOIN resource on resource.topic_id = topic.topic_id and resource.section_id = section.section_id and resource.course_id = course.course_id
+    WHERE  course.course_id = ${course_id} AND is_deleted = 0 ;`;
+
     connection.query(sql, (err, result) => {
       console.log("++++++++++++", result);
       if (err) {
@@ -77,11 +78,24 @@ class coursesControllers {
         result[0];
       let sections = [];
       let topics = [];
+      let resource = [];
       let last_section_id = null;
       let last_topic_id = null;
+      let last_resource_id = null;
       for (let row of result) {
         if (last_section_id != row.section_id && last_section_id != null) {
           topics = [];
+        }
+        if(last_resource_id != row.resource_id && last_resource_id != null){
+          resource = [];
+        }
+        if(last_resource_id != row.resource_id && row.resource_id != null){
+          last_resource_id = row.resource_id
+          resource.push({
+            resource_id: row.resource_id,
+            resource_type: row.resource_type,
+            resource_text: row.text
+          })
         }
         if (last_topic_id != row.topic_id && row.topic_id != null) {
           //console.log(row.topic_id);
@@ -89,6 +103,7 @@ class coursesControllers {
           topics.push({
             topic_id: row.topic_id,
             topic_title: row.topic_title,
+            topic_resource: resource
           });
         }
         if (last_section_id != row.section_id && row.section_id != null) {
@@ -201,7 +216,7 @@ class coursesControllers {
 
   addTopic = (req, res) => {
     const { course_id, newTopic, section_id } = req.body;
-    let sql_cont = `SELECT max(topic_id) as id FROM topic WHERE section_id = ${section_id}`;
+    let sql_cont = `SELECT max(topic_id) as id FROM topic WHERE section_id = ${section_id} AND course_id = ${course_id}`;
     connection.query(sql_cont, (err, result) => {
       if (err) {
         return res.status(500).json(err);
@@ -312,26 +327,27 @@ class coursesControllers {
   };
 
   addResourcePdf = (req, res) =>{
-    console.log("HOLAAAAAAA", req.body.crearContenido);
-    const { course_id, section_id, topic_id, newResource} = JSON.parse(req.body.crearContenido);
+    
+    const { course_id, section_id, topic_id, url} = JSON.parse(req.body.crearContenido);
 
-    let file = req.file.filename
+    let pdf = ''
 
-    let sql = `INSERT INTO resource (course_id, section_id, topic_id, resource_id, resource_type, file) VALUES (${course_id}, ${section_id}, ${topic_id}, ${resource_id}, '${newResource}', '${file}')`;
+    let sql = `INSERT INTO resource (course_id, section_id, topic_id, resource_type, text) VALUES (${course_id}, ${section_id}, ${topic_id}, 2 , '${url}')`;
 
-    connection.query(sql, (err, res) => {
+    if(req.file !== undefined){
+      pdf = req.file.filename
+      sql = `INSERT INTO resource (course_id, section_id, topic_id, resource_type, text) VALUES (${course_id}, ${section_id}, ${topic_id}, 1 , '${pdf}')`
+    }
+ 
+    connection.query(sql, (err, result) => {
       if (err) {
+        console.log('ERRRRR', err);
         return res.status(500).json(err);
       }
-      res.status(201).json(res)
+      res.status(201).json(result)
     })
   }
 
-
-  addResourceVideo = (req, res) => {
-    console.log("ppp");
-    //sin modal
-  }
   
     deleteResource = (req, res) =>{
     const { course_id, section_id, topic_id, resource_id } = req.params;

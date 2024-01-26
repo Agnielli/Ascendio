@@ -12,7 +12,7 @@ export const ModalResource = ({
   topic_id
 }) => {
   const [contenido, setContenido] = useState(null);
-  const [newResource, setNewResource] = useState("");
+  const [url, setUrl] = useState("");
   const [file, setFile] = useState();
 
   const course_id = useParams().course_id
@@ -26,13 +26,17 @@ export const ModalResource = ({
   const handleFile = (e) => {
     setFile(e.target.files[0]);
   };
+
+  const handleChange = (e) => {
+    setUrl(e.target.value)
+  }
   
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const newFormData = new FormData();
-    let data = { course_id, section_id, topic_id, newResource };
+    let data = { course_id, section_id, topic_id, url };
     
     newFormData.append("crearContenido", JSON.stringify(data));
     newFormData.append("file", file);
@@ -41,13 +45,14 @@ export const ModalResource = ({
       .post(`http://localhost:3000/courses/addresourcepdf`, newFormData)
       .then((res) => {
         console.log('PPPPPPPPP', res.data);
-        setResetCourse(!resetCourse)
-        setNewResource("");
+        /* setResetCourse(!resetCourse)
+        setUrl(""); */
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
 
   return (
     <Row className="d-flex justify-content-center p-5">
@@ -76,8 +81,8 @@ export const ModalResource = ({
               <Form.Group controlId="formFile" className="mb-3">
                 <Form.Control
                   type="file"
-                  value={newResource}
                   onChange={handleFile}
+                  accept="pdf"
                 />
               </Form.Group>
             ) : null}
@@ -86,7 +91,7 @@ export const ModalResource = ({
               <Form.Group controlId="formFile" className="mb-3">
                 <Form.Control
                   type="text"
-                  value={newResource}
+                  value={url}
                   onChange={handleChange}
                 />
               </Form.Group>
