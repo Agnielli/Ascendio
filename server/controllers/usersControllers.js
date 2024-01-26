@@ -279,18 +279,15 @@ class usersControllers {
 
     if (req.file) {
       img = req.file.filename;
-      sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}", email = "${email}", phonenumber = ${
-        phonenumber !== null ? `"${phonenumber}"` : null
-      }, img = "${img}" WHERE user_id = ${user_id}`;
+      sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}", email = "${email}", phonenumber = ${phonenumber}, img = "${img}" WHERE user_id = ${user_id}`;
     } else {
-      sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}", email = "${email}", phonenumber = ${
-        phonenumber !== null ? `"${phonenumber}"` : null
-      } WHERE user_id = ${user_id} AND (img IS NULL OR img = "")`;
+      sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}", email = "${email}", phonenumber = ${phonenumber} WHERE user_id = ${user_id} AND (img IS NULL OR img = "")`;
     }
-    connection.query(sql, (err, result) => {
-      if (err) {
-        res.status(400).json(err);
+    connection.query(sql, (error, result) => {
+      if (error) {
+        res.status(400).json({ message: "Error en la SQL" });
       } else {
+        console.log("TODO BIEN", result);
         res.status(200).json({ result, img });
       }
     });

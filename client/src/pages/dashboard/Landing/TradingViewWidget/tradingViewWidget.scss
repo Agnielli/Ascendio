@@ -12,4 +12,9 @@
     @include display-flex(column, center, center);
     flex-wrap: wrap;
   }
+
+  @media (max-width: 600px) {
+    width:50%;
+    height: auto; // Ajusta la altura automáticamente según el contenido
+  }
 }

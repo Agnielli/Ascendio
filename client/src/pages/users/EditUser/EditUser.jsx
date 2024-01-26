@@ -29,6 +29,7 @@ export const EditUser = () => {
           res.data.map((elem) => ({
             value: elem.category_id,
             label: elem.category_name,
+            key: elem.category_id,
           }))
         );
       })
@@ -36,7 +37,6 @@ export const EditUser = () => {
         console.log(err);
       });
   }, []);
-
 
   {
     user &&
@@ -56,7 +56,6 @@ export const EditUser = () => {
   if (userCategory) {
     console.log(userCategory);
   }
-
 
   const handleOption = (option) => {
     setSelectedOption(option);
@@ -130,7 +129,7 @@ export const EditUser = () => {
           Categorías:{" "}
           {userCategory?.map((elem) => {
             return (
-              <p>
+              <p key={elem.category_id}>
                 {elem.category_name === null
                   ? "Elige categoría's"
                   : elem.category_name}
@@ -163,23 +162,21 @@ export const EditUser = () => {
             setUser={setUser}
           />
         )}
-      {showCategories && (
-        <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="formFile" className="mb-3">
-          <Form.Label>Elige tu categoría de usuario </Form.Label>
-          <Select
-            placeholder="Categoría.."
-            options={options}
-            value={selectedOption}
-            onChange={handleOption}
-            isMulti
-          />
-        </Form.Group>
-        <Button type="submit">Aceptar</Button>
-      </Form>
-      )}
-        
-
+        {showCategories && (
+          <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="formFile" className="mb-3">
+              <Form.Label>Elige tu categoría de usuario </Form.Label>
+              <Select
+                placeholder="Categoría.."
+                options={options}
+                value={selectedOption}
+                onChange={handleOption}
+                isMulti
+              />
+            </Form.Group>
+            <Button type="submit">Aceptar</Button>
+          </Form>
+        )}
       </Col>
     </Row>
   );
