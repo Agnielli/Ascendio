@@ -1,21 +1,106 @@
-.avatar{
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: rgb(238, 165, 165);
-    color: white;
-    text-align: center;
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgb(238, 165, 165);
+  color: white;
+  text-align: center;
 
-    p{
-        font-size: 30px;
-    }
-    img{
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-    }
-}
+  p {
+    font-size: 30px;
+  }
+  img {
+@use "../../../public/stylesheets/variables.scss" as var;
+
+// generales
 
 .user{
     cursor: pointer;
 }
+
+
+
+
+.avatar{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+}
+
+.user {
+  cursor: pointer;
+}
+
+.logoNav {
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+}
+.logoNav:hover {
+    color: white;
+}
+
+
+@media (min-width: 992px) {
+  .BG-navbar {
+    background-color: #e15252;
+    padding: 0 5vw;
+  }
+}
+
+@media (max-width: 991px) {
+  .BG-navbar {
+    background-color: transparent;
+    
+  }
+}
+
+nav {
+  a.nav-link {
+    color: white;
+    font-weight: 500;
+    font-size: large;
+    padding: 0 12px !important;
+    display: flex;
+    align-items: center;
+
+  }
+  a.nav-link:hover {
+    color: #1d1d1b;
+  }
+  
+
+
+
+  .ButtonRegister {
+    margin-left: 12px !important;
+    color: white !important;
+    font-weight: 500 !important;
+    font-size: large !important;
+    border: none !important;
+    background-color: #1d1d1b;
+    transition: 0.3s;    
+  }
+  .ButtonRegister:hover {
+    color: #1d1d1b !important;
+    background-color: white !important;   
+  }
+
+  .ButtonLogin {
+    margin: 0 12px !important;
+    color: white !important;
+    font-weight: 500 !important;
+    font-size: large !important;
+    border: 2px solid white !important;   
+    transition: 0.3s;
+  }
+  .ButtonLogin:hover {
+    color: #1d1d1b !important;
+    background-color: transparent !important;  
+    border: 2px solid #1d1d1b !important;    
+  }
+
+
+}
+

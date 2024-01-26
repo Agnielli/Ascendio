@@ -1,25 +1,20 @@
 import React, { useEffect } from "react";
 import "./formAddSection.scss";
 import { Form, Col, Row, Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
-export const FormAddSection = ({sections, setSections, addSection, setAddSection,course_id, resetCourse, setResetCourse}) => {
+export const FormAddSection = ({setAddSection,course_id, resetCourse, setResetCourse}) => {
 
   const [newSection, setNewSection] = useState("");
   const [msgError, setMsgError] = useState("");
 
-  // useEffect(()=> {
-  //   if(sections){
-  //   setSections(sections)
-  //   }
-  // }, [sections])
-
   const handleChange = (e) =>{
     setNewSection(e.target.value)
   }
+
   let regexSection = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ.,:?¿!¡]{1,50}$/;
+  
   const handleSubmit = () =>{
     let data = {newSection, course_id}
       if (!regexSection.test(newSection)) {
@@ -29,7 +24,6 @@ export const FormAddSection = ({sections, setSections, addSection, setAddSection
       .post("http://localhost:3000/courses/addsection", data)
       .then((res)=>{
         console.log(res)
-        //setSections([ ... sections, {section_id: res.data.section_id, section_title:newSection}])
         setResetCourse(!resetCourse)
         setNewSection('')
         setAddSection(false)
@@ -39,6 +33,7 @@ export const FormAddSection = ({sections, setSections, addSection, setAddSection
       })
     }
   }
+
   return (
     <Row>
       <Col>

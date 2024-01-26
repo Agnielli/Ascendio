@@ -8,9 +8,6 @@ export const ModalDelOneCourse = ({
     setShowModalDelete(false);
   };
 
-  
-
-  
 
   return (
     <Row className="d-flex justify-content-center p-5">

@@ -37,6 +37,7 @@ export const AllCourses = () => {
     setFindCourse(tempArray);
   }, [allcourses, filter]);
 
+  
   return (
     <section>
       <div className="d-flex justify-content-center p-5">

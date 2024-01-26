@@ -316,7 +316,7 @@ class usersControllers {
   LEFT JOIN category c ON uc.category_id = c.category_id
   WHERE uc.user_id = '${user_id}';`;
 
-      connection.query(sql2, (error, result) => { 
+      connection.query(sql2, (error, result) => {
         if (error) {
           console.log(error);
           res.status(400).json({ message: "Error en la SQL" });
@@ -568,12 +568,8 @@ class usersControllers {
   };
   // ---------------------------------------------------------------
   deleteUser = (req, res) => {
-    const {id: user_id} = req.params; 
-    const {email, nickname} = req.body;
-    
-     
-    console.log("reeeeeeeeeeeeeeq parraaaaams: ",req.params); 
-    
+    const { id: user_id } = req.params;
+    const { email, nickname } = req.body;
     let sql = `UPDATE user SET is_deleted = 1, email = "${user_id}@deleteuser.com", nickname = "${user_id}deleteUser" WHERE user_id = ${user_id}`;
 
     connection.query(sql, (err, result) => {
