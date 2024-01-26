@@ -438,6 +438,18 @@ ORDER BY course.date DESC`;
     });
   }
 
+  getTypeResource =(req, res) =>{
+    const {course_id, section_id, topic_id} = req.params;
+
+    let sql = `SELECT * FROM resource 
+    WHERE course_id = ${course_id} and section_id = ${section_id} and topic_id = ${topic_id}`
+
+    connection.query(sql, (err, result) => {
+      err ? res.status(500).json(err) : res.status(200).json(result);
+    
+    });
+  }
+
 }
 
 module.exports = new coursesControllers();

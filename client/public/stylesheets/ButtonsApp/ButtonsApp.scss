@@ -1,0 +1,100 @@
+@use "../../../public/stylesheets/variables.scss" as *;
+
+//boton de rosa a blanco redondeado:
+.Button1 {
+  padding: 6px 20px !important;
+  background-color: $accent-color;
+  color: $accent2-color;
+  border: none;
+  border-radius: 25px;
+  font-weight: 500;
+  transition: 0.3s;
+
+  &:hover{
+    background-color: $accen3-color;
+    color:$accent-color;
+  }
+}
+
+//boton gris a rosa:
+.Button2 {
+  padding: 6px 20px !important;
+  background-color: $accent2-color;
+  color: $accent-color;
+  border: none;
+  border-radius: 25px;
+  font-weight: 500;
+  transition: 0.3s;
+
+  &:hover{
+    background-color: $accent-color;
+    color:$accent2-color;
+  }
+}
+
+//div Gris Para Botones
+.DivGrisParaBotones {
+  background-color: $accent2-color;
+  display: inline-flex;
+  margin: 0 auto;
+  border-radius: 25px;
+}
+
+//boton seguir: de blanco a rosa 
+.Button3 {
+  padding: 6px 20px !important;
+  background-color: $accen3-color;
+  color: $accent2-color;
+  border: none;
+  border-radius: 25px;
+  font-weight: 500;
+  transition: 0.3s;
+
+  &:hover{
+    background-color: $accent-color;
+    color:$accent2-color;
+  }
+}
+
+//boton siguiendo: de rosa a blanco 
+.Button4 {
+  padding: 6px 20px !important;
+  background-color: $accent-color;
+  color: $accen3-color;
+  border: none;
+  border-radius: 25px;
+  font-weight: 500;
+  transition: 0.3s;
+
+  &:hover{
+    background-color: $accen3-color ;
+    color:$accent2-color $accent2-color;
+  }
+}
+
+
+//boton menus para sitios como dentro de editar perfil: de gris-rosa a rosa-gris
+
+//*** HAY QUE CAMBIARLE EL PADDING SEGUN CONVENGA  A CADA VISTA. si vas a usar este boton, copialo en el scss donde estes trabajando, cambiale el nombre y usalo.
+.Button5 {
+  padding: 6px 200px 6px 20px !important;
+  background-color: $accent2-color;
+  color: $accent-color;
+  border: none;
+  border-radius: 25px;
+  font-weight: 500;
+  transition: 0.3s;
+
+  &:hover{
+    background-color: $accent-color ;
+    color:$accent2-color;
+  }
+}
+
+
+
+
+
+
+
+

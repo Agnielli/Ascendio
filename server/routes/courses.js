@@ -30,6 +30,7 @@ router.post('/addresourcepdf', multerSingle("resource"), coursesControllers.addR
 router.delete('/deleteresource/:course_id/:section_id/:topic_id/:resource_id', coursesControllers.deleteResource)
 router.get('/getallratesonecourse/:course_id', coursesControllers.getAllRatesOneCourse);
 router.get('/getoneresource/:course_id/:section_id/:topic_id', coursesControllers.getOneResource)
+router.get('/gettyperesource', coursesControllers.getTypeResource)
 
 //harta del git
 
