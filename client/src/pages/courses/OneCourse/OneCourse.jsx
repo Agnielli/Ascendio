@@ -19,13 +19,13 @@ export const OneCourse = () => {
   const [sections, setSections] = useState([]);
   const [topics, setTopics] = useState([]);
   const [resetCourse, setResetCourse] = useState(false);
-  const [course, setCourse] = useState();
   const [isIntoWishes, setIsIntoWishes] = useState(false);
   const [isIntoPurchase, setIsIntoPurchase] = useState(false)
   const [isIntoValidate, setIsIntoValidate] = useState(false)
   const [courseTags, setCourseTags] = useState([]);
   const [showModalDelete, setShowModalDelete] = useState(false)
   const [creator, setCreator] = useState()
+  const [orderedSections, setOrderedSections] = useState([]);
   const navigate = useNavigate();
 
   const openModal = () => {
@@ -111,6 +111,21 @@ export const OneCourse = () => {
       });
     }
   }, [user]);
+
+  useEffect(() => {
+    // Ordenar las secciones por algún criterio (puedes ajustar según tus necesidades)
+    const sortedSections = sections.slice().sort((a, b) => {
+      // Reemplaza esta lógica con tu criterio de ordenación
+      // Ejemplo: ordenar por fecha de creación
+      return new Date(a.created_at) - new Date(b.created_at);
+    });
+    
+    // Asignar índices a las secciones ordenadas
+    const sectionsWithIndex = sortedSections.map((section, index) => ({ ...section, index: index + 1 }));
+    
+    // Actualizar el estado
+    setOrderedSections(sectionsWithIndex);
+  }, [sections, resetCourse, addSection])
 
 
   const formatearFecha = (date) => {
@@ -212,7 +227,6 @@ export const OneCourse = () => {
       });
   };
 
-  //pte comprobar la ruta y hacer el axios.
   const deleteTopic = (section_id, topic_id) => {
     axios
       .delete(
@@ -302,7 +316,7 @@ export const OneCourse = () => {
               />
             )}
 
-            {sections.map((elem) => {
+            {orderedSections.map((elem, index) => {
               return (
                 <CardSection
                   userId={userId}
@@ -317,6 +331,7 @@ export const OneCourse = () => {
                   setResetCourse={setResetCourse}
                   resetCourse={resetCourse}
                   deleteTopic={deleteTopic}
+                  index={index + 1}
                 />
               );
             })}

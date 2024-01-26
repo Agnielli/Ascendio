@@ -71,6 +71,7 @@ export const OneUserCourses = () => {
           return (
             <Card style={{ width: "22rem" }} key={elem.course_id}>
               <Card.Img
+                style={{ height: "22rem", objectFit: "cover" }}
                 variant="top"
                 src={`http://localhost:3000/images/cursos/${elem.img}`}
               />
@@ -78,7 +79,7 @@ export const OneUserCourses = () => {
                 <Card.Title> {elem.title} </Card.Title>
                 <Card.Subtitle>{elem.tags}</Card.Subtitle>
                 <Card.Text>{elem.description}</Card.Text>
-                <Card.Text>{elem.price}€</Card.Text>
+                <Card.Text>{elem.price === 0 ?'GRATIS' : `${elem.price}€`}</Card.Text>
                 <Button
                   onClick={() => navigate(`/course/${elem.course_id}`)}
                   variant="outline-success"
