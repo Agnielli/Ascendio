@@ -7,7 +7,7 @@ export const RatingStars = ({numberstars}) => {
 
   stars.fill("☆")
   console.log(numberstars);
-  console.log(stars);  /* ⭐🤍❤️★☆ */
+  console.log(stars);  /* ⭐🤍★☆ */
   console.log(ratingUser);
   
     

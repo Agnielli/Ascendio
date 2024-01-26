@@ -10,6 +10,7 @@ router.get('/onecourse/:course_id', coursesControllers.oneCourse);
 router.put('/editcourse/:course_id', multerSingle('cursos'), coursesControllers.editOneCourse);
 router.get('/calltags', coursesControllers.callTags);
 router.get('/callcourses', coursesControllers.callCourses);
+router.get('/callcoursesdates', coursesControllers.callCoursesDates);
 router.get('/getpurchasedcourse/:course_id/:user_id', coursesControllers.getPurchaseCourse);
 router.put('/addtopurchasecourse/:course_id', coursesControllers.addToPurchaseCourse);
  /* router.get('/viewpurchasedcourse', coursesControllers.viewPurchasedCourse) */
