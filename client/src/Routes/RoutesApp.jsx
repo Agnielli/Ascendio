@@ -45,7 +45,6 @@ import { TradingViewWidget } from "../components/TradingViewWidget/TradingViewWi
 import { ResourceViewer } from "../components/ResourceViewer/ResourceViewer";
 
 
-
 export const RoutesApp = () => {
   const { token } = useContext(AscendioContext);
   const [type, setType] = useState();

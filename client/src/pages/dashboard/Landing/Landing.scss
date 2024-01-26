@@ -1,0 +1,10 @@
+@use "../../../../public/stylesheets/variables.scss" as *;
+
+.ascendio-landing-containerPrincipal {
+  height: calc(100vh - 93px);
+  .ascendio-landing-footer {
+    @include display-flex(row, space-between, center);
+    color: $accen3-color;
+    background-color: $accent-color;
+  }
+}
