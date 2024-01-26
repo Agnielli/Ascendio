@@ -29,7 +29,8 @@ router.get('/getcreatoruser/:course_id', coursesControllers.getCreatorUser);
 router.post('/addresourcepdf', multerSingle("resource"), coursesControllers.addResourcePdf)
 router.delete('/deleteResource', coursesControllers.deleteResource)
 router.get('/getallratesonecourse/:course_id', coursesControllers.getAllRatesOneCourse);
-
+router.get('/getoneresource/:course_id/:section_id/:topic_id', coursesControllers.getOneResource)
+router.get('/gettyperesource', coursesControllers.getTypeResource)
 
 //harta del git
 

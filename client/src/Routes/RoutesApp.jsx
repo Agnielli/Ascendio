@@ -41,8 +41,9 @@ import { OneGeneralPost } from "../pages/posts/PostGeneral/OneGeneralPost/OneGen
 import { ThermsNConditions } from "../pages/dashboard/Landing/ThermsNConditions/ThermsNConditions";
 import { Privacy } from "../pages/dashboard/Landing/Privacy/Privacy";
 import { CookiesPolicy } from "../pages/dashboard/Landing/CookiesPolicy/CookiesPolicy";
-import { TradingViewWidget } from "../components/TradingViewWidget/TradingViewWidget";
 
+import { ResourceViewer } from "../components/ResourceViewer/ResourceViewer";
+import { TradingViewWidget } from "../pages/dashboard/Landing/TradingViewWidget/TradingViewWidget";
 
 
 export const RoutesApp = () => {
@@ -114,6 +115,7 @@ export const RoutesApp = () => {
                 element={<OneUserCourses />}
               />
               <Route path="/traderprofile/:user_id" element={<TraderProfile />}/>
+              <Route path="/resource/:course_id/:link" element={<ResourceViewer />}/>
             </>
           )}
 

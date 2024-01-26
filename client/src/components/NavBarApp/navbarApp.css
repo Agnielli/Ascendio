@@ -1,0 +1,121 @@
+body {
+  background-color: #1d1d1b;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgb(238, 165, 165);
+  color: white;
+  text-align: center;
+}
+.avatar img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+p {
+  font-size: 30px;
+}
+
+.user {
+  cursor: pointer;
+}
+
+.logoNav {
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.logoNav:hover {
+  color: white;
+}
+
+.logoNav:focus {
+  color: white;
+}
+
+@media (min-width: 992px) {
+  .BG-navbar {
+    background-color: #e15252;
+    padding: 0 5vw;
+  }
+}
+@media (max-width: 991px) {
+  .BG-navbar {
+    background-color: transparent;
+  }
+  .navbarLinksBotones {
+    display: flex;
+    flex-direction: column-reverse !important;
+    align-items: flex-end !important;
+  }
+  .navbarLinksBotones a.nav-link {
+    padding: 0 0 12px 0 !important;
+  }
+  .navbarLinksBotones a.nav-link:hover {
+    color: #e15252;
+  }
+  .navbarLinksBotones .ButtonLogin {
+    margin: 0 0 12px 0 !important;
+    padding: 6px 24.545px;
+  }
+  .navbarLinksBotones .ButtonRegister {
+    margin: 0 0 12px 0 !important;
+  }
+  .navbarLinksBotones .ButtonLogin:hover {
+    color: #e15252 !important;
+    border: 2px solid #e15252 !important;
+  }
+}
+nav a.nav-link {
+  color: white;
+  font-weight: 500;
+  font-size: large;
+  padding: 0 12px !important;
+  display: flex;
+  align-items: center;
+}
+nav a.nav-link:hover {
+  color: #1d1d1b;
+}
+nav a.nav-link:focus {
+  color: #1d1d1b;
+}
+nav .ButtonRegister {
+  margin-left: 12px !important;
+  color: white !important;
+  font-weight: 500 !important;
+  font-size: large !important;
+  border: 2px solid #020301 !important;
+  background-color: #020301;
+  transition: 0.3s;
+}
+nav .ButtonRegister:hover {
+  color: #1d1d1b !important;
+  background-color: white !important;
+}
+nav .ButtonLogin {
+  margin: 0 12px !important;
+  color: white !important;
+  font-weight: 500 !important;
+  font-size: large !important;
+  border: 2px solid white !important;
+  transition: 0.3s;
+}
+nav .ButtonLogin:hover {
+  color: #1d1d1b !important;
+  background-color: transparent !important;
+  border: 2px solid #1d1d1b !important;
+}
+nav button.navbar-toggler.collapsed {
+  border: none;
+}
+nav button.navbar-toggler {
+  border: none;
+}/*# sourceMappingURL=navbarApp.css.map */

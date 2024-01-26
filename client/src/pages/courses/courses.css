@@ -1,0 +1,4 @@
+@charset "UTF-8";
+.nav-bar-button-courses {
+  z-index: 1; /* Asegura que esté por encima de otros elementos */
+}/*# sourceMappingURL=courses.css.map */
