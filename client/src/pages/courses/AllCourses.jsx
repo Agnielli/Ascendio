@@ -52,8 +52,10 @@ export const AllCourses = () => {
         <h2>All courses</h2>
         <input onChange={handleChange} placeholder="🔍..." value={filter} />
       </div>
+
       <div className="d-flex justify-content-center" style={{color: 'white'}}><h2>{order ? "Ver Últimos Cursos" : "Top Cursos"}</h2></div>
       <div className="d-flex justify-content-end">
+        
         <Button
             onClick={() => setOrder(!order)}
             variant="outline-success"
@@ -74,9 +76,12 @@ export const AllCourses = () => {
               />
               <Card.Body>
                 <Card.Title> {elem.title} </Card.Title>
-                {elem.average_rating&&<RatingStars 
-                  numberstars={elem.average_rating}
+                
+                {elem.average_rating&&
+                  <RatingStars 
+                    numberstars={elem.average_rating}
                 />}
+                
                 <Card.Subtitle>{elem.tags}</Card.Subtitle>
                 <Card.Text>{elem.description}</Card.Text>
                 <Card.Text>{elem.price === 0 ?'GRATIS' : `${elem.price}€`}</Card.Text>
