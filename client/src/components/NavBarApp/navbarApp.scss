@@ -1,3 +1,4 @@
+@use "../../../public/stylesheets/variables.scss" as var;
 .avatar {
   width: 50px;
   height: 50px;
@@ -5,12 +6,12 @@
   background-color: rgb(238, 165, 165);
   color: white;
   text-align: center;
+}
 
   p {
     font-size: 30px;
   }
   img {
-@use "../../../public/stylesheets/variables.scss" as var;
 
 // generales
 
