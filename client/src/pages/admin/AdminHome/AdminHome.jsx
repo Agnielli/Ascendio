@@ -149,8 +149,8 @@ export const AdminHome = () => {
 
   return (
     <Container fluid className="AdminRow">
-      <Col className="">
-        <h3>Administrador</h3>
+      <Col className="justify-content-center text-center align-items-center">
+        <h3 className="text-center mt-4">Administrador</h3>
         <div className="ButtonsRow1">
           <Button onClick={() => showButtons()}>Usuarios</Button>
           <Button onClick={() => showAllCourseButtons()}>Cursos</Button>
@@ -172,10 +172,10 @@ export const AdminHome = () => {
             <div className="">
               <div className="ButtonsRow2">
                 <Button className="ButtonNoBG" onClick={() => showAllUsers()}>
-                  Todos los usuarios
+                  Todos
                 </Button>
-                <Button className="ButtonNoBG" onClick={() => showAllActivatedUsers()}>Usuarios Activos</Button>
-                <Button className="ButtonNoBG" onClick={() => showAllDisabledUsers()}>Usuarios Bloqueados</Button>
+                <Button className="ButtonNoBG" onClick={() => showAllActivatedUsers()}>Activos</Button>
+                <Button className="ButtonNoBG" onClick={() => showAllDisabledUsers()}>Bloqueados</Button>
               </div>
               <div>
                 {showUsers === true && (
