@@ -28,6 +28,8 @@ router.get('/getcreatoruser/:course_id', coursesControllers.getCreatorUser);
 router.post('/addresourcepdf', multerSingle("resource"), coursesControllers.addResourcePdf)
 router.post('/addresourcevideo', coursesControllers.addResourceVideo)
 router.delete('/deleteResource', coursesControllers.deleteResource)
+router.get('/getallratesonecourse/:course_id', coursesControllers.getAllRatesOneCourse);
+
 
 //harta del git
 

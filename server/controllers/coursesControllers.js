@@ -65,13 +65,8 @@ class coursesControllers {
     FROM course
     left join section on course.course_id = section.course_id
     left join topic  on topic.course_id = section.course_id and topic.section_id = section.section_id
-    WHERE  course.course_id = ${course_id} AND is_deleted = 0 ;`;
-    /* let sql = `SELECT course.title, course.img, course.date, course.is_completed, course.description, course.price , section.section_id, section.section_title, tag.tag_id, tag.tag_name
-        LEFT JOIN tag ON course_tag.tag_id = tag.tag_id
-        LEFT JOIN topic ON course.course_id = topic.course_id
-          WHERE course.course_id = ${course_id} AND is_deleted = 0`;
-        LEFT JOIN tag ON course_tag.tag_id = tag.tag_id
-          WHERE course.course_id = ${course_id} AND is_deleted = 0`; */
+    WHERE  course.course_id = ${course_id} AND is_deleted = 0 `;
+    
     connection.query(sql, (err, result) => {
       console.log("++++++++++++", result);
       if (err) {
@@ -116,9 +111,7 @@ class coursesControllers {
         description,
         sections,
       };
-      console.log("---------------------------------");
-      console.log(data);
-      console.log("---------------------------------");
+   
       res.status(200).json(data);
     });
   };
@@ -369,6 +362,20 @@ class coursesControllers {
       err ? res.status(500).json(err) : res.status(200).json(result);
     });
   };
+
+  getAllRatesOneCourse = (req,res) =>{
+    const {course_id} = req.params;
+
+    let sql = `SELECT course.user_id AS course_creator_user_id, user_rates_course.course_rates, user_rates_course.commentary, user.user_id AS user_rater_user_id, user.nickname FROM course
+    LEFT JOIN user_rates_course ON course.course_id = user_rates_course.course_id
+    LEFT JOIN user ON user_rates_course.user_id = user.user_id
+    WHERE course.course_id = ${course_id}  AND course.is_deleted = 0`
+    connection.query(sql, (err, result) => {
+      err ? res.status(500).json(err) : res.status(200).json(result);
+    
+    });
+  }
+
 }
 
 module.exports = new coursesControllers();
