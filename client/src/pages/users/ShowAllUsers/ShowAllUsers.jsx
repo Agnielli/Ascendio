@@ -168,9 +168,10 @@ export const ShowAllUsers = () => {
                             : "Seguir"}
                         </Button>
                       ) : (
-                        <Button onClick={() => navigate(`/profile`)}>
-                          Ir a mi perfil
-                        </Button>
+                        // <Button onClick={() => navigate(`/profile`)}>
+                        //   Ir a mi perfil
+                        // </Button>
+                        null
                       )}
                       <Card.Body>
                         <ListGroup variant="flush">
