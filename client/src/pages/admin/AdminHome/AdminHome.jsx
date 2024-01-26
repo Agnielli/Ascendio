@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./adminHome.scss";
-import { Button, Col, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { AdminAllUsers } from "../../../components/AdminAllUsers/AdminAllUsers";
 import { Estadisticas } from "../AdminEstadisticas/Estadisticas";
 import { OneComment } from "../../../components/OneComment/OneComment";
@@ -148,29 +148,28 @@ export const AdminHome = () => {
   };
 
   return (
-    <Row>
-      <Col className="d-flex flex-column gap-2">
+    <Container fluid className="AdminRow">
+      <Col className="">
         <h3>Administrador</h3>
-        <Button onClick={() => showButtons()}>Usuarios</Button>
-        <Button onClick={() => showAllCourseButtons()}>Cursos</Button>
-        <Button onClick={() => showStatistics()}>Estadisticas</Button>
-        <Button onClick={() => showAllTrades()}>Trades</Button>
-        <div>
+        <Container className="d-flex flex-row justify-content-between">
+          <Button onClick={() => showButtons()}>Usuarios</Button>
+          <Button onClick={() => showAllCourseButtons()}>Cursos</Button>
+          <Button onClick={() => showStatistics()}>Estadisticas</Button>
+          <Button onClick={() => showAllTrades()}>Trades</Button>
+        </Container>
+        <Container>
           {showTrades && (
             <div>
-              <Button onClick={() => showAllPosts()}>Posts Trades</Button>
+              <Button className="Button1" onClick={() => showAllPosts()}>Posts Trades</Button>
               <Button onClick={() => showAllComments()}>Posts General</Button>
               {showComments && <OneComment />}
               {showPost && <TradesPostMap />}
             </div>
           )}
-        </div>
-      </Col>
-      <Col>
-        <h3>Aquí va toda la información</h3>
-        <div className="UsersViewAdmin">
+        </Container>
+        <Container className="">
           {showUserButtons === true && (
-            <div>
+            <div className="mt-5 mb-5 d-md-flex flex-md-row">
               <div>
                 <Button onClick={() => showAllUsers()}>
                   Todos los usuarios
@@ -178,23 +177,24 @@ export const AdminHome = () => {
                 <Button onClick={() => showAllActivatedUsers()}>Usuarios Activos</Button>
                 <Button onClick={() => showAllDisabledUsers()}>Usuarios Bloqueados</Button>
               </div>
-              {showUsers === true && (
-                <AdminAllUsers allUsers={allUsers} setAllUsers={setAllUsers} />
-              )}
-              {showDisabledUsers === true &&
-              <AdminDisabledUsers />
-              }
-              {showActivatedUsers === true &&
-              <AdminActivateUser />
-              }
-            </div>
+              <div>
+                {showUsers === true && (
+                  <AdminAllUsers allUsers={allUsers} setAllUsers={setAllUsers} />
+                )}
+                {showDisabledUsers === true &&
+                <AdminDisabledUsers />
+                }
+                {showActivatedUsers === true &&
+                <AdminActivateUser />
+                }
+                            </div>
+              </div>
           )}
-        </div>
+        </Container>
         
-        <div>{showStats === true && <Estadisticas />}</div>
-      </Col>
+        <Container>{showStats === true && <Estadisticas />}</Container>
         {showCourseButtons &&
-          <div>
+          <Container className="">
             <Button onClick={() => showAllCourses()}>Todos los cursos</Button>
             <Button onClick={() => showAllEnabledCourses()}>Cursos Activos</Button>
             <Button onClick={() => showAllDisabledCourses()}>Cursos Bloqueados</Button>
@@ -202,8 +202,9 @@ export const AdminHome = () => {
             {showCourses && <AdminCourses />}
             {showDisabledCourses && <DisabledCoursesMap />}
             {showEnabledCourses && <EnabledCoursesMap />}
-          </div>
+          </Container>
         }
-    </Row>
+      </Col>    
+    </Container>
   );
 };
