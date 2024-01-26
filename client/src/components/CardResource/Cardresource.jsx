@@ -2,15 +2,14 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-export const Cardresource = ({ resource, course_id }) => {
+export const Cardresource = ({ resource, course_id, deleteResource}) => {
+  const navigate = useNavigate();
 
-  const navigate = useNavigate()
-  console.log();
   const handleClick = () =>{
     let link = ""
     //comprobar el if - let data = resource[0] luego pintar data en todos lados
     if(resource[0].resource_type === 1){
-      link = `http://localhost:3000/images/resource/${resource[0].text}`
+      link = `${resource[0].text}`
     }
     else{
       link = resource[0].text
@@ -20,10 +19,16 @@ export const Cardresource = ({ resource, course_id }) => {
 
   return (
     <div>
-      {resource && (
+      {resource && (resource[0]?.resource_type === 1 || resource[0]?.resource_type === 2) && (
+        <>
         <Button onClick={handleClick}>
-          {resource[0]?.resource_type === 1 ? "PDF" : "ENLACE"}
+          {resource[0]?.resource_type === 1 ? "PDF" : null}
+          {resource[0]?.resource_type === 2 ? "ENLACE" : null}
         </Button>
+        <Button variant="outline-danger" >Eliminar</Button>
+        </>
+//onClick={deleteResource(resource.section_id, resource.topic_id, resource.resource_id)}
+        
       )}
     </div>
   );

@@ -11,41 +11,46 @@ export const CardTopic = ({
   setResetCourse,
   resetCourse,
   index,
-  course_id
+  course_id,
+  deleteResource
 }) => {
   //href atributo download para descargar
   //bradcrumbs para cuando entramos en cada topic
 
   const [showModalArchivo, setShowModalArchivo] = useState(false);
-  const [resource, setResource] = useState()
+  const [resource, setResource] = useState();
+
 
   const handleClick = () => {
     setShowModalArchivo(true);
   };
-  
-  useEffect(()=>{
 
+  useEffect(() => {
     axios
-      .get(`http://localhost:3000/courses/getoneresource/${course_id}/${section_id}/${topic.topic_id}`)
-      .then((res)=>{
-        setResource(res.data)
-      })
-      .catch((err)=>{
-        console.log(err);
-      })
-  }, [])
+      .get(
+        `http://localhost:3000/courses/getoneresource/${course_id}/${section_id}/${topic.topic_id}`
+      )
+      .then((res) => {
+        setResource(res.data);
+        setResetCourse(!resetCourse);
 
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [course_id, section_id, topic.topic_id]);
 
   return (
     <Card>
       <Card.Body>
         {`${index}. ${topic.topic_title}`}
-        <Button variant="outline-success" onClick={handleClick}>
-          Añadir contenido
-        </Button>
+        
+          <Button variant="outline-success" onClick={handleClick}>
+            Añadir contenido
+          </Button>
 
         <Button
-          variant="outline-success"
+          variant="outline-danger"
           onClick={() => deleteTopic(section_id, topic.topic_id)}
         >
           Eliminar
@@ -62,14 +67,11 @@ export const CardTopic = ({
           />
         )}
 
-        {
-          topic &&
-          <Cardresource
-          resource={resource}
-          course_id={course_id}
-         />
-        }
-        
+        {topic &&
+        <Cardresource
+        resource={resource}
+        course_id={course_id}
+        deleteResource={deleteResource} />}
       </Card.Body>
     </Card>
   );

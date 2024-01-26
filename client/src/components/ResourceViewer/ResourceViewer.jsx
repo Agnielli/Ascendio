@@ -1,16 +1,29 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Breadcrumb } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 
 export const ResourceViewer = () => {
+  const { course_id, link } = useParams();
 
-  const {course_id, link} = useParams();
-console.log("dffffffffff", course_id);
-console.log("dffffffffff", link);
+  console.log("aaa", course_id);
+  console.log("gggg", link);
 
   return (
-    <div>
-      <h1>Hiiiiii</h1>
-      <iframe src="http://localhost:3000/images/resource/fede.pdf" frameborder="0"></iframe>
-      </div>
-  )
-}
+    <Breadcrumb>
+      <Breadcrumb.Item href={`http://localhost:3000/course/${course_id}`}> {course_id} </Breadcrumb.Item>
+      <Breadcrumb.Item>
+        Library
+        <div>
+          <p>Necesito el curse_title, el seccion_title y que me devuelva a la vista general de un curso</p>
+
+          <iframe
+            src={`http://localhost:3000/images/resource/${link}`}
+            frameBorder="0"
+          ></iframe>
+        </div>
+      </Breadcrumb.Item>
+      <Breadcrumb.Item active>Data</Breadcrumb.Item>
+    </Breadcrumb>
+  );
+};

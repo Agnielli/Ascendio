@@ -27,7 +27,7 @@ router.post('/delfromwishes/:course_id', coursesControllers.delFromWishes);
 router.get('/getalltagsonecourse/:course_id', coursesControllers.getAllTagsOneCourse);
 router.get('/getcreatoruser/:course_id', coursesControllers.getCreatorUser);
 router.post('/addresourcepdf', multerSingle("resource"), coursesControllers.addResourcePdf)
-router.delete('/deleteResource', coursesControllers.deleteResource)
+router.delete('/deleteresource/:course_id/:section_id/:topic_id/:resource_id', coursesControllers.deleteResource)
 router.get('/getallratesonecourse/:course_id', coursesControllers.getAllRatesOneCourse);
 router.get('/getoneresource/:course_id/:section_id/:topic_id', coursesControllers.getOneResource)
 

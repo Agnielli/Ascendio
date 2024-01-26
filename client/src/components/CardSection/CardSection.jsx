@@ -19,7 +19,8 @@ export const CardSection = ({
   setAddSection,
   index,
   resource,
-  setResource 
+  setResource,
+  deleteResource
 }) => {
 
   const [showTopic, setShowTopic] = useState(false);
@@ -33,8 +34,6 @@ export const CardSection = ({
   const handleClick = () => {
     setShowTopic(true);
   };
-  
-  console.log("santiiiiiii", elem);
 
   return (
     <Accordion.Item eventKey={index}>
@@ -85,6 +84,7 @@ export const CardSection = ({
           setResource={setResource}
           resource={resource}
           course_id={course_id}
+          deleteResource={deleteResource}
           />
           );
         })}

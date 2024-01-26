@@ -46,7 +46,7 @@ export const OneCourse = () => {
     axios
       .get(`http://localhost:3000/courses/onecourse/${course_id}`)
       .then((res) => {
-        console.log("ppppppppppppp", res.data);
+        console.log("res.data.OneCourse", res.data);
         setOneCoursePpal(res.data);
         setCourseToEdit(res.data);
         setSections(res.data.sections);
@@ -258,6 +258,18 @@ export const OneCourse = () => {
       });
   };
 
+  const deleteResource = (section_id, topic_id, resource_id) => {
+    axios
+      .delete(`http://localhost:3000/courses/deleteresource/${course_id}/${section_id}/${topic_id}/${resource_id}`)
+      .then((res)=>{
+        console.log(res);
+        setResetCourse(!resetCourse);
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+  }
+
   return (
     <>
       <section className="d-flex flex-column align-items-center justify-content-center p-5">
@@ -351,6 +363,7 @@ export const OneCourse = () => {
                   index={index + 1}
                   setResource={setResource}
                   resource={resource}
+                  deleteResource={deleteResource}
                 />
               );
             })}
