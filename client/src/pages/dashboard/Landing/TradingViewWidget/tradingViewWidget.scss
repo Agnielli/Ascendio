@@ -1,0 +1,15 @@
+@use "../../../../../public/stylesheets/variables.scss" as *;
+
+.ascendio-graphic-containerPrincipal {
+  width: 80%;
+  height: 300px;
+  background-color: $secondary-color;
+  
+  .tradingview-widget-container {
+    background-color: $secondary-color;
+    height: 100%;
+    width: 100%;
+    @include display-flex(column, center, center);
+    flex-wrap: wrap;
+  }
+}

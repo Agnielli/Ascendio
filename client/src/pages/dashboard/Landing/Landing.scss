@@ -1,10 +1,95 @@
 @use "../../../../public/stylesheets/variables.scss" as *;
 
+
+// VISTA PC XL
 .ascendio-landing-containerPrincipal {
-  height: calc(100vh - 93px);
+  min-height: calc(100vh - 48px);
+  background-color: #0c0c0c;
+
+  .ascendio-landing-main {
+    min-height: calc(100vh - 78px);
+    // @include display-flex(row, center, end);
+    flex-wrap: wrap;
+    padding: 0 0 5px 0;
+
+    .ascendio-landing-main-hijo {
+      @include display-flex(row, center, center);
+      flex-wrap: wrap;
+    }
+    .ascendio-landing-main-hijo2 {
+      @include display-flex(row, center, flex-start);
+      flex-wrap: wrap;
+    }
+  }
+
   .ascendio-landing-footer {
-    @include display-flex(row, space-between, center);
-    color: $accen3-color;
+    @include display-flex(row, none, center);
+    flex-wrap: wrap;
+    color: $accent3-color;
     background-color: $accent-color;
+    height: 30px;
+    width: 100%;
+    padding: 0 5vw !important;
+
+    h3 {
+      font-size: 16px;
+    }
+
+    p {
+      font-size: 16px;
+      @include display-flex(row, center, center);
+      flex-wrap: wrap;
+    }
+
+    .ascendio-landing-footer-link {
+      font-size: 8px;
+      text-decoration: none;
+      color: $accent3-color;
+      @include display-flex(row, center, center);
+    }
+
+    .ascendio-landing-footer-link:hover {
+      text-decoration: none;
+      color: $accent2-color;
+      @include display-flex(row, center, center);
+    }
+  }
+}
+
+.ascendio-landing-fondo-principal2 {
+  height: 200px;
+}
+
+.ascendio-landing-fondo-principal1 {
+  height: 350px;
+}
+
+.ascendio-landing-textos-padre {
+  @include display-flex(row, center, center);
+  flex-wrap: wrap;
+  gap: 1px;
+  width: 100%;
+  height: 100%;
+
+  .ascendio-landing-textos-hijo {
+    @include display-flex(column, flex-start, flex-start);
+    height: 100px;
+    gap: 1px;
+
+    img {
+      width: 50px;
+      height: 50px;
+      background-color: transparent;
+      border-radius: 50%;
+    }
+
+    h6 {
+      font-size: 20px;
+    }
+
+    p {
+      font-size: 14px;
+      color: $accent3-color;
+    }
   }
 }

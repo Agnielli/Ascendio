@@ -44,11 +44,45 @@ class coursesControllers {
   };
 
   callCourses = (req, res) => {
-    let sql = `SELECT course.course_id, course.title, course.description, course.price, course.is_disabled, course.img, REPLACE(GROUP_CONCAT(tag.tag_name), ',', ' ') AS tags FROM course
+    let sql = `SELECT course.course_id, course.title, course.description, course.price, course.is_disabled, course.img, course.date, REPLACE(GROUP_CONCAT(tag.tag_name), ',', ' ') AS tags, AVG(user_rates_course.course_rates) AS average_rating FROM course
     LEFT JOIN course_tag ON course.course_id = course_tag.course_id
     LEFT JOIN tag ON course_tag.tag_id = tag.tag_id
-    WHERE course.is_disabled = 1 AND course.is_deleted = 0 GROUP BY course.course_id, course.title, course.description, course.price, course.is_disabled, course.img;`;
-    // TODO is disabled = 0
+    LEFT JOIN user_rates_course ON course.course_id = user_rates_course.course_id
+    WHERE course.is_disabled = 1 AND course.is_deleted = 0
+    GROUP BY course.course_id, course.title, course.description, course.price, course.is_disabled, course.img ORDER BY
+    average_rating DESC`;
+    
+    connection.query(sql, (err, result) => {
+      if (err) {
+        res.status(500).json(err);
+      } else {
+        res.status(200).json(result);
+      }
+    });
+  };
+
+  callCoursesDates = (req, res) => {
+    let sql = `SELECT
+    course.course_id,
+    course.title,
+    course.description,
+    course.price,
+    course.is_disabled,
+    course.img,
+    course.date,
+    REPLACE(GROUP_CONCAT(tag.tag_name), ',', ' ') AS tags,
+    AVG(user_rates_course.course_rates) AS average_rating
+FROM
+    course
+    LEFT JOIN course_tag ON course.course_id = course_tag.course_id
+    LEFT JOIN tag ON course_tag.tag_id = tag.tag_id
+    LEFT JOIN user_rates_course ON course.course_id = user_rates_course.course_id
+WHERE
+    course.is_disabled = 1 AND course.is_deleted = 0
+GROUP BY
+    course.course_id, course.title, course.description, course.price, course.is_disabled, course.img
+ORDER BY course.date DESC`;
+    
     connection.query(sql, (err, result) => {
       if (err) {
         res.status(500).json(err);
@@ -386,6 +420,30 @@ class coursesControllers {
     LEFT JOIN user_rates_course ON course.course_id = user_rates_course.course_id
     LEFT JOIN user ON user_rates_course.user_id = user.user_id
     WHERE course.course_id = ${course_id}  AND course.is_deleted = 0`
+    connection.query(sql, (err, result) => {
+      err ? res.status(500).json(err) : res.status(200).json(result);
+    
+    });
+  }
+
+  getOneResource =(req, res) =>{
+    const {course_id, section_id, topic_id} = req.params;
+
+    let sql = `SELECT * FROM resource 
+    WHERE course_id = ${course_id} and section_id = ${section_id} and topic_id = ${topic_id}`
+
+    connection.query(sql, (err, result) => {
+      err ? res.status(500).json(err) : res.status(200).json(result);
+    
+    });
+  }
+
+  getTypeResource =(req, res) =>{
+    const {course_id, section_id, topic_id} = req.params;
+
+    let sql = `SELECT * FROM resource 
+    WHERE course_id = ${course_id} and section_id = ${section_id} and topic_id = ${topic_id}`
+
     connection.query(sql, (err, result) => {
       err ? res.status(500).json(err) : res.status(200).json(result);
     

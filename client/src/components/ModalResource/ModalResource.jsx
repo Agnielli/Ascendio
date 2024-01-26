@@ -17,8 +17,6 @@ export const ModalResource = ({
 
   const course_id = useParams().course_id
 
-  
-
   const handleClose = () => {
     setShowModalArchivo(false);
   };

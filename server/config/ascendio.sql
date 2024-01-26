@@ -178,12 +178,12 @@ create table user_completes_topic(
 	REFERENCES topic (course_id, section_id, topic_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 CREATE TABLE resource (
-  resource_id BIGINT UNSIGNED NOT NULL PRIMARY KEY,
+  resource_id NT UNSIGNED NOT NULL auto_increment PRIMARY KEY,
   course_id INT UNSIGNED NOT NULL,
   section_id TINYINT UNSIGNED NOT NULL,
   topic_id TINYINT UNSIGNED NOT NULL,
   resource_type TINYINT NOT NULL, -- tipo 1 -> imagen, tipo 2 -> pdf , tipo 3 -> link,
-  text VARCHAR(250) NOT NULL,
+  text VARCHAR(250),
 		-- /server/resources/img.jpg   		-- 1
         -- /server/resources/algo.pfg   	-- 2category
         -- youtube.com/az45u_i7g  			-- 3
