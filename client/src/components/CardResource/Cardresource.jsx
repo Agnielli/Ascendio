@@ -10,7 +10,7 @@ export const Cardresource = ({ resource, course_id }) => {
     let link = ""
     //comprobar el if - let data = resource[0] luego pintar data en todos lados
     if(resource[0].resource_type === 1){
-      link = `http://localhost:3000/images/resource/${resource[0].text}`
+      link = resource[0].text
     }
     else{
       link = resource[0].text

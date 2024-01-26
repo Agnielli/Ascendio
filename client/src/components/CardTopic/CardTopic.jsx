@@ -17,7 +17,7 @@ export const CardTopic = ({
   //bradcrumbs para cuando entramos en cada topic
 
   const [showModalArchivo, setShowModalArchivo] = useState(false);
-  const [resource, setResource] = useState()
+  const [resoufrce, setResource] = useState()
 
   const handleClick = () => {
     setShowModalArchivo(true);
