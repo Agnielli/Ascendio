@@ -10,7 +10,7 @@ export const CardRatingsOneCourse = ({rates}) => {
     <Card.Body>
       <Card.Title>{rates?.nickname}</Card.Title>
       <RatingStars
-      numberstars={rates?.course_rates}
+        numberstars={rates?.course_rates}
       />
       <Card.Text>
         {rates?.commentary}
