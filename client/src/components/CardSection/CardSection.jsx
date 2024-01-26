@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card } from "react-bootstrap";
+import { Accordion, Button, Card } from "react-bootstrap";
 import { FormAddTopic } from "../FormAddTopic/FormAddTopic";
 import { CardTopic } from "../CardTopic/CardTopic";
 import axios from "axios";
@@ -45,8 +45,8 @@ export const CardSection = ({
   //     })
   // },[])
   return (
-    <Card>
-      <Card.Body>
+    <Accordion.Item eventKey={index}>
+      <Accordion.Header>
       {`${index}. ${elem.section_title}`}
         {userId === userCourse &&<Button
           variant="outline-success"
@@ -75,6 +75,9 @@ export const CardSection = ({
             setAddSection={setAddSection}
           />
         )}
+        </Accordion.Header>
+        <Accordion.Body>
+        <Accordion defaultActiveKey="1">
         {elem.section_topics.map((topic, index) => {
               return (
           <CardTopic
@@ -90,7 +93,8 @@ export const CardSection = ({
           />
           );
         })}
-      </Card.Body>
-    </Card>
+        </Accordion>
+      </Accordion.Body>
+    </Accordion.Item>
   );
 };

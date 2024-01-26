@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AscendioContext } from "../../../context/AscendioContext";
 import axios from "axios";
-import { Button, Card } from "react-bootstrap";
+import { Accordion, Button, Card } from "react-bootstrap";
 import { EditOneCourse } from "../../../components/ModalEditOneCourse/EditOneCourse";
 import { useNavigate, useParams } from "react-router-dom";
 import { FormAddSection } from "../../../components/FormAddSection/FormAddSection";
@@ -315,7 +315,7 @@ export const OneCourse = () => {
                 resetCourse={resetCourse}
               />
             )}
-
+            <Accordion defaultActiveKey="1">
             {orderedSections.map((elem, index) => {
               return (
                 <CardSection
@@ -335,6 +335,7 @@ export const OneCourse = () => {
                 />
               );
             })}
+            </Accordion>
 
             {userId === userCourse &&<Button
               variant="outline-warning" 
