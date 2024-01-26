@@ -30,6 +30,7 @@ export const OneCourse = () => {
   const [orderedSections, setOrderedSections] = useState([]);
   const [rates, setRates] = useState([])
   const [ratingAverage, setRatingAverage] = useState()
+  const [resource, setResource] = useState([])
   const navigate = useNavigate();
 
   const openModal = () => {
@@ -49,7 +50,8 @@ export const OneCourse = () => {
         setOneCoursePpal(res.data);
         setCourseToEdit(res.data);
         setSections(res.data.sections);
-        setTopics(res.data.topics);
+        // setTopics(res.data.topics);
+        setResource(res.data.resource);
         if(res.data.is_completed === 1){
           setIsIntoValidate(true)
         }
@@ -117,17 +119,12 @@ export const OneCourse = () => {
   }, [user]);
 
   useEffect(() => {
-    // Ordenar las secciones por algún criterio (puedes ajustar según tus necesidades)
     const sortedSections = sections.slice().sort((a, b) => {
-      // Reemplaza esta lógica con tu criterio de ordenación
-      // Ejemplo: ordenar por fecha de creación
       return new Date(a.created_at) - new Date(b.created_at);
     });
     
-    // Asignar índices a las secciones ordenadas
     const sectionsWithIndex = sortedSections.map((section, index) => ({ ...section, index: index + 1 }));
     
-    // Actualizar el estado
     setOrderedSections(sectionsWithIndex);
   }, [sections, resetCourse, addSection])
 
@@ -139,7 +136,6 @@ export const OneCourse = () => {
           setRates(res.data)
           ratesAverage(res.data)
           setRatingAverage(ratesAverage(res.data))
-          
         }
       })
       .catch((err) => {
@@ -353,6 +349,8 @@ export const OneCourse = () => {
                   resetCourse={resetCourse}
                   deleteTopic={deleteTopic}
                   index={index + 1}
+                  setResource={setResource}
+                  resource={resource}
                 />
               );
             })}

@@ -1,39 +1,48 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import { ModalResource } from "../ModalResource/ModalResource";
+import { Cardresource } from "../CardResource/Cardresource";
+import axios from "axios";
 
 export const CardTopic = ({
-  topics,
-  setTopics,
   topic,
   deleteTopic,
   section_id,
   setResetCourse,
   resetCourse,
-  index
+  index,
+  course_id
 }) => {
-
-  //añadir contenido abre un modal con dos opciones input tipo file y tiipo text
   //href atributo download para descargar
   //bradcrumbs para cuando entramos en cada topic
 
-  const [showModalArchivo, setShowModalArchivo] = useState(false)
+  const [showModalArchivo, setShowModalArchivo] = useState(false);
+  const [resource, setResource] = useState()
+
   const handleClick = () => {
-    setShowModalArchivo(true)
-  }
+    setShowModalArchivo(true);
+  };
+  
+  useEffect(()=>{
+
+    axios
+      .get(`http://localhost:3000/courses/getoneresource/${course_id}/${section_id}/${topic.topic_id}`)
+      .then((res)=>{
+        setResource(res.data)
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+  }, [])
+
 
   return (
     <Card>
       <Card.Body>
-      {`${index}. ${topic.topic_title}`}
-        <Button 
-        variant="outline-success"
-        onClick={handleClick}
-
-        >
+        {`${index}. ${topic.topic_title}`}
+        <Button variant="outline-success" onClick={handleClick}>
           Añadir contenido
         </Button>
-
 
         <Button
           variant="outline-success"
@@ -43,7 +52,7 @@ export const CardTopic = ({
         </Button>
 
         {showModalArchivo && (
-          <ModalResource 
+          <ModalResource
             showModalArchivo={showModalArchivo}
             setShowModalArchivo={setShowModalArchivo}
             setResetCourse={setResetCourse}
@@ -52,8 +61,16 @@ export const CardTopic = ({
             topic_id={topic.topic_id}
           />
         )}
+
+        {
+          topic &&
+          <Cardresource
+          resource={resource}
+          course_id={course_id}
+         />
+        }
+        
       </Card.Body>
     </Card>
   );
 };
-
