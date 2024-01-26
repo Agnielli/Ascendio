@@ -109,11 +109,10 @@ CREATE TABLE course (
   description VARCHAR(250) NOT NULL,
   img VARCHAR (150),
   date DATETIME not null default (CURRENT_DATE),
-  price DECIMAL(7, 2) UNSIGNED NOT NULL,  -- 99999.99
+  price INT UNSIGNED NOT NULL,  -- 99999
   is_deleted BOOLEAN NOT NULL DEFAULT false,
   is_disabled BOOLEAN NOT NULL DEFAULT false,
   is_completed BOOLEAN NOT NULL DEFAULT	false,
-  is_bought BOOLEAN NOT NULL DEFAULT false,
   CONSTRAINT fk_user_7 FOREIGN KEY (user_id)
   references user(user_id) ON DELETE CASCADE ON UPDATE CASCADE
 );

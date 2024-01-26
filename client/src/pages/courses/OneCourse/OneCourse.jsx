@@ -7,6 +7,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { FormAddSection } from "../../../components/FormAddSection/FormAddSection";
 import { CardSection } from "../../../components/CardSection/CardSection";
 import { ModalDelOneCourse } from "../../../components/ModalDelOneCourse/ModalDelOneCourse";
+import { CardRatingsOneCourse } from "../../../components/Courses/CardRatingsOneCourse/CardRatingsoneCourse";
+import { ratesAverage } from "../../../helpers/utils";
 
 export const OneCourse = () => {
   const [oneCoursePpal, setOneCoursePpal] = useState();
@@ -26,6 +28,8 @@ export const OneCourse = () => {
   const [showModalDelete, setShowModalDelete] = useState(false)
   const [creator, setCreator] = useState()
   const [orderedSections, setOrderedSections] = useState([]);
+  const [rates, setRates] = useState([])
+  const [ratingAverage, setRatingAverage] = useState()
   const navigate = useNavigate();
 
   const openModal = () => {
@@ -126,6 +130,23 @@ export const OneCourse = () => {
     // Actualizar el estado
     setOrderedSections(sectionsWithIndex);
   }, [sections, resetCourse, addSection])
+
+  useEffect(() => {
+      axios
+      .get(`http://localhost:3000/courses/getallratesonecourse/${course_id}`)
+      .then((res) => {
+        if(res.data.length){
+          setRates(res.data)
+          ratesAverage(res.data)
+          setRatingAverage(ratesAverage(res.data))
+          
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    
+  }, []);
 
 
   const formatearFecha = (date) => {
@@ -360,6 +381,20 @@ export const OneCourse = () => {
             deleteCourse={deleteCourse}
             course_id={course_id}
         />
+
+        <h5>¿Qué opina la gente?</h5>
+              
+          <div className="d-flex flex-column">
+            {rates?.map((elem)=>(
+            <CardRatingsOneCourse
+            key={elem.user_rater_user_id}
+            rates={elem}
+            />
+           ))}
+            
+          </div>           
+
+              <h1> MEDIA DE LAS VALORACIONES {ratingAverage}</h1>
       </section>
     </>
   );

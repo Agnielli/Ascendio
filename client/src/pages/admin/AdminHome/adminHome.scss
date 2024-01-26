@@ -1,4 +1,23 @@
-.UsersViewAdmin {
-  padding: 2rem;
+.AdminRow {
+  background-color: #1d1d1b;
+  width: 100vw;
+  min-height: calc(100vh - 77px);
+  color: white;
+
+  @media (min-width: 992px) {
+    .AdminRow {
+      padding: 0 5vw;
+    }
+  }
+}
+
+Button {
+  background-color: #e15252 !important;
+  border-color: #e15252 !important;
+}
+
+Button:hover {
+  background-color: #a33b3b !important;
+  border-color: #e15252 !important;
 }
 

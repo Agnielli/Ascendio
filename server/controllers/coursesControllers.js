@@ -126,9 +126,7 @@ class coursesControllers {
         description,
         sections,
       };
-      console.log("---------------------------------");
-      console.log(data);
-      console.log("---------------------------------");
+   
       res.status(200).json(data);
     });
   };
@@ -380,6 +378,20 @@ class coursesControllers {
       err ? res.status(500).json(err) : res.status(200).json(result);
     });
   };
+
+  getAllRatesOneCourse = (req,res) =>{
+    const {course_id} = req.params;
+
+    let sql = `SELECT course.user_id AS course_creator_user_id, user_rates_course.course_rates, user_rates_course.commentary, user.user_id AS user_rater_user_id, user.nickname FROM course
+    LEFT JOIN user_rates_course ON course.course_id = user_rates_course.course_id
+    LEFT JOIN user ON user_rates_course.user_id = user.user_id
+    WHERE course.course_id = ${course_id}  AND course.is_deleted = 0`
+    connection.query(sql, (err, result) => {
+      err ? res.status(500).json(err) : res.status(200).json(result);
+    
+    });
+  }
+
 }
 
 module.exports = new coursesControllers();

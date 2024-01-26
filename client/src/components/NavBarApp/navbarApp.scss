@@ -1,39 +1,134 @@
-@use "../../../public/stylesheets/variables.scss" as var;
-
-// generales
-
-.user{
-    cursor: pointer;
+@use "../../../public/stylesheets/variables.scss" as *;
+body {
+  background-color: $tertiary-color;
 }
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgb(238, 165, 165);
+  color: white;
+  text-align: center;
 
-.button {
-    color: white !important;
-    // border: 1px solid white;
-}
-
-
-.avatar{
+  img{
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: rgb(238, 165, 165);
+    object-fit: cover;
+
+  }
+}
+
+p {
+  font-size: 30px;
+}
+
+.user {
+  cursor: pointer;
+}
+
+.logoNav {
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+}
+.logoNav:hover {
+  color: white;
+}
+.logoNav:focus {
+  color: white;
+}
+
+@media (min-width: 992px) {
+  .BG-navbar {
+    background-color: $accent-color;
+    padding: 0 5vw;
+  }
+}
+
+@media (max-width: 991px) {
+  .BG-navbar {
+    background-color: transparent;
+  }
+  .navbarLinksBotones {
+    display: flex;
+    flex-direction: column-reverse !important;
+    align-items: flex-end !important;
+
+    a.nav-link {
+      padding: 0 0 12px 0 !important;
+    }
+
+    a.nav-link:hover {
+      color: $accent-color;
+    }
+
+    .ButtonLogin {
+        margin: 0 0 12px 0 !important;
+        padding: 6px 24.545px;
+    }
+
+    .ButtonRegister {
+        margin: 0 0 12px 0 !important;
+    }
+
+    .ButtonLogin:hover {
+      color: $accent-color !important;
+      border: 2px solid $accent-color !important;
+    }
+  }
+}
+
+nav {
+  a.nav-link {
     color: white;
-    text-align: center;
+    font-weight: 500;
+    font-size: large;
+    padding: 0 12px !important;
+    display: flex;
+    align-items: center;
+  }
+  a.nav-link:hover {
+    color: $tertiary-color;
+  }
 
-    p{
-        font-size: 30px;
-    }
-    img{
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-    }
+  a.nav-link:focus {
+    color: $tertiary-color;
+  }
+
+  .ButtonRegister {
+    margin-left: 12px !important;
+    color: white !important;
+    font-weight: 500 !important;
+    font-size: large !important;
+    border: 2px solid $secondary-color !important;
+    background-color: $secondary-color;
+    transition: 0.3s;
+  }
+  .ButtonRegister:hover {
+    color: $tertiary-color !important;
+    background-color: white !important;
+  }
+
+  .ButtonLogin {
+    margin: 0 12px !important;
+    color: white !important;
+    font-weight: 500 !important;
+    font-size: large !important;
+    border: 2px solid white !important;
+    transition: 0.3s;
+  }
+  .ButtonLogin:hover {
+    color: $tertiary-color !important;
+    background-color: transparent !important;
+    border: 2px solid $tertiary-color !important;
+  }
+
+  button.navbar-toggler.collapsed {
+    border: none;
+  }
+  button.navbar-toggler {
+    border: none;
+  }
+  
 }
-
-
-.navbar-principal {
-    background-color: var.$accent-color !important;
-}
-
-
-
