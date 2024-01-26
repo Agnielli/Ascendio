@@ -29,13 +29,17 @@ function NavBarApp() {
       <Container fluid >
         <Navbar.Brand className="logoNav p-0 m-0" as={Link} to={redirectTo}>
          ASCENDIO
+    <Navbar expand="lg" className="navbar-principal bg-body-tertiary">
+      <Container fluid>
+        <Navbar.Brand as={Link} to={redirectTo} className="fw-bold">
+          ASCENDIO
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav"  />
         <Navbar.Collapse id="basic-navbar-nav w-100">
           <Nav className="me-auto d-flex w-100 ">
             <div className="d-flex justify-content-end w-100">
               {!user && (
-                <div className="d-flex">
+                <div className="d-flex align-items-center">
                   <Nav.Link as={Link} to="/about">
                     ABOUT
                   </Nav.Link>
@@ -114,6 +118,19 @@ function NavBarApp() {
                 </>
               ) : (
                 <></>
+                <>
+                <div className="d-flex">
+                  <Nav.Link as={Link} to="/login">
+                    <Button className="button" variant="outline-success me-2 ms-2">Login</Button>
+                  </Nav.Link>
+                  <Nav.Link as={Link} to="/register">
+                    <Button className="button" variant="outline-success me-2 ms-2">
+                      Registro
+                    </Button>
+                  </Nav.Link>
+                </div>
+                </>
+
               )}
             </div>
           </Nav>

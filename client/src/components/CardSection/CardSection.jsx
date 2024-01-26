@@ -14,12 +14,24 @@ export const CardSection = ({
   resetCourse,
   deleteTopic,
   userId,
-  userCourse
+  userCourse,
+  setAddTopic,
+  setAddSection,
+  index  
 }) => {
   const [showTopic, setShowTopic] = useState(false);
+  const [orderedTopics, setOrderedTopics] = useState([]);
+
+  useEffect(() => {
+    // Ordenar los temas por fecha de creación
+    const sortedTopics = elem.section_topics.slice().sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+    setOrderedTopics(sortedTopics);
+  }, [elem.section_topics]);
+
   const handleClick = () => {
     setShowTopic(true);
   };
+  
   // useEffect((section_id, topic_id)=>{
   //   axios
   //     .get(`http://localhost:3000/courses/topics/${course_id}/${section_id}/${topic_id}`)
@@ -35,7 +47,7 @@ export const CardSection = ({
   return (
     <Card>
       <Card.Body>
-        {elem.section_title}
+      {`${index}. ${elem.section_title}`}
         {userId === userCourse &&<Button
           variant="outline-success"
           onClick={handleClick}
@@ -59,9 +71,11 @@ export const CardSection = ({
             setTopics={setTopics}
             setResetCourse={setResetCourse}
             resetCourse={resetCourse}
+            setAddTopic={setAddTopic}
+            setAddSection={setAddSection}
           />
         )}
-        {elem.section_topics.map((topic) => {
+        {elem.section_topics.map((topic, index) => {
               return (
           <CardTopic
           key={elem.topic_id}
@@ -72,6 +86,7 @@ export const CardSection = ({
           section_id={elem.section_id}
           setResetCourse={setResetCourse}
           resetCourse={resetCourse}
+          index={index + 1}
           />
           );
         })}

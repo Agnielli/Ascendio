@@ -10,7 +10,7 @@ export const FormAddTopic = ({
   topics,
   setTopics,
   setResetCourse,
-  resetCourse,
+  resetCourse
 }) => {
   const [newTopic, setNewTopic] = useState("");
   const [msgError, setMsgError] = useState("");
@@ -33,6 +33,7 @@ export const FormAddTopic = ({
           console.log(res.data);
           setResetCourse(!resetCourse);
           setNewTopic("");
+          setShowTopic(false)
         })
         .catch((err) => {
           console.log(err);
