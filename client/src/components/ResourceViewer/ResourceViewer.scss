@@ -1,0 +1,56 @@
+
+.resourceView{
+  width: 90vw;
+  height: 90vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  .linkes{
+    width: 90%;
+    font-size: large;
+    border-radius: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1rem;
+
+    a{
+      color: white;
+      text-decoration: none;
+      margin: 1rem;
+    }
+
+    .back{
+      width: 80vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(102, 102, 102, 0.212);
+      border-radius: 10px;
+    }
+    
+    hr{
+      opacity: 1;
+      width: 80vw;
+      color: white;
+      display: flex;
+      justify-content: center;
+      margin: auto;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .content{
+      width: 80vw;
+      height: 75vh;
+      border-radius: 20px;
+      margin-top: 1rem;
+    }
+  }
+}
+
+
+
+
