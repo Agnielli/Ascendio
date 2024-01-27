@@ -4,27 +4,37 @@ import { Card, Button, Form } from 'react-bootstrap'
 import { AscendioContext } from '../../context/AscendioContext';
 import { useParams } from 'react-router-dom';
 
+const initialValue = {
+  course_rates:"",
+  commentary:""
+}
 
+export const CardRates = ({resetCourse, setResetCourse}) => {
 
-export const CardRates = ({resetCourse, setResetCourse, newRate, setNewRate}) => {
-
-  // const [newRate, setNewRate] = useState(initialValue);
+  const [newRate, setNewRate] = useState(initialValue);
+  const [rateExist, setRateExist] = useState();
   const course_id = useParams().course_id;
   const {user} = useContext(AscendioContext)
   let usuario = user.user_id
 
   useEffect(()=>{
     
-  },[newRate])
+      // setRateExist(true)
+    
+  },[rateExist])
   
   const handleSubmit = () =>{
+    
     const {course_rates, commentary} = newRate
     let data = { course_rates, commentary, usuario };
     console.log("DATAAAA", data)
     axios
     .post(`http://localhost:3000/courses/userrateonecourse/${course_id}`, data)
     .then((res)=>{
-      setResetCourse(!resetCourse)
+      console.log("new rateeeeee", res.data)
+      if(res.data.course_rates){
+        setRateExist(!rateExist)
+      }
     })
       .catch((err)=>{
         console.log(err)
@@ -37,22 +47,23 @@ export const CardRates = ({resetCourse, setResetCourse, newRate, setNewRate}) =>
   
   
   return (
-    <Card style={{ width: '18rem' }}>
+    <>{!rateExist &&
+      <Card style={{ width: '18rem' }}>
       <Form>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Tu opinión no me importa</Form.Label>
+            <Form.Label>Tu opinión importa</Form.Label>
             <Form.Control
               type="text"
               placeholder="Puntúa de 1 a 5"
               name="course_rates"
-              value={newRate.course_rates}
+              value={newRate?.course_rates}
               onChange={handleChange}
             />
             <Form.Control
               type="text"
               placeholder="Da tu opinión"
               name='commentary'
-              value={newRate.commentary}
+              value={newRate?.commentary}
               onChange={handleChange}
             />
             <Button
@@ -64,6 +75,7 @@ export const CardRates = ({resetCourse, setResetCourse, newRate, setNewRate}) =>
             </Button>
           </Form.Group>
         </Form>
-    </Card>
+    </Card>}
+  </>
   )
 }
