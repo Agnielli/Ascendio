@@ -364,16 +364,21 @@ ORDER BY course.date DESC`;
   addResourcePdf = (req, res) =>{
     
     const { course_id, section_id, topic_id, url} = JSON.parse(req.body.crearContenido);
-
+    console.log('REEEEQ', req.file);
     let pdf = ''
 
-    let sql = `INSERT INTO resource (course_id, section_id, topic_id, resource_type, text) VALUES (${course_id}, ${section_id}, ${topic_id}, 2 , '${url}')`;
+    let sql
 
     if(req.file !== undefined){
       pdf = req.file.filename
       sql = `INSERT INTO resource (course_id, section_id, topic_id, resource_type, text) VALUES (${course_id}, ${section_id}, ${topic_id}, 1 , '${pdf}')`
+    }else{
+      let temp = url.split('watch?v=')[1]
+      console.log('AAAAA', temp);
+      //url = url.split('watch?v=')[1]
+      sql = `INSERT INTO resource (course_id, section_id, topic_id, resource_type, text) VALUES (${course_id}, ${section_id}, ${topic_id}, 2 , '${temp}')`;
     }
- 
+    console.log('EEEE', sql);
     connection.query(sql, (err, result) => {
       if (err) {
         console.log('ERRRRR', err);
@@ -451,6 +456,18 @@ ORDER BY course.date DESC`;
     });
   }
 
+
+  getOneBread = (req,res) => {
+    const {course_id, section_id} = req.params;
+    let sql = `SELECT course.title, section.section_title FROM course 
+    LEFT JOIN section ON course.course_id = section.course_id
+    WHERE section.section_id = ${section_id} AND course.course_id = ${course_id}`
+
+    connection.query(sql, (err, result) => {
+      err ? res.status(500).json(err) : res.status(200).json(result);
+      });
+  }
+
   updateFollowers = (req, res) =>{
     const {course_id} = req.params
 
@@ -467,6 +484,7 @@ ORDER BY course.date DESC`;
 
     connection.query(sql, (err, result) => {
       err ? res.status(500).json(err) : res.status(200).json(result);
+
     });
   }
 

@@ -4,23 +4,38 @@ import { Breadcrumb } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 
 export const ResourceViewer = () => {
-  const { course_id, link } = useParams();
+  const [titles, setTitles] = useState();
+  let { course_id, link, type, section_id } = useParams();
 
-  console.log("aaa", course_id);
-  console.log("gggg", link);
+  useEffect(() => {
+    axios
+      .get(
+        `http://localhost:3000/courses/getOneBread/${course_id}/${section_id}`
+      )
+      .then((res) => {
+        console.log(res.data);
+        setTitles(res.data[0]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  let urlbase = "https://www.youtube.com/embed/";
+  if (type === "1") {
+    urlbase = "http://localhost:3000/images/resource/";
+  }
 
   return (
     <Breadcrumb>
-      <Breadcrumb.Item href={`http://localhost:3000/course/${course_id}`}> {course_id} </Breadcrumb.Item>
+      <Breadcrumb.Item href={`http://localhost:3000/course/${course_id}`}>
+        {" "}
+        {titles?.title}{" "}
+      </Breadcrumb.Item>
       <Breadcrumb.Item>
-        Library
+        {titles?.section_title}
         <div>
-          <p>Necesito el curse_title, el seccion_title y que me devuelva a la vista general de un curso</p>
-
-          <iframe
-            src={`http://localhost:3000/images/resource/${link}`}
-            frameBorder="0"
-          ></iframe>
+          <iframe src={`${urlbase}${link}`} frameborder="0"></iframe>
         </div>
       </Breadcrumb.Item>
       <Breadcrumb.Item active>Data</Breadcrumb.Item>
