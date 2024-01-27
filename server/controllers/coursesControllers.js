@@ -44,7 +44,7 @@ class coursesControllers {
   };
 
   callCourses = (req, res) => {
-    let sql = `SELECT course.course_id, course.title, course.description, course.price, course.is_disabled, course.img, course.date, REPLACE(GROUP_CONCAT(tag.tag_name), ',', ' ') AS tags, AVG(user_rates_course.course_rates) AS average_rating FROM course
+    let sql = `SELECT course.course_id, course.followers, course.title, course.description, course.price, course.is_disabled, course.img, course.date, REPLACE(GROUP_CONCAT(tag.tag_name), ',', ' ') AS tags, AVG(user_rates_course.course_rates) AS average_rating FROM course
     LEFT JOIN course_tag ON course.course_id = course_tag.course_id
     LEFT JOIN tag ON course_tag.tag_id = tag.tag_id
     LEFT JOIN user_rates_course ON course.course_id = user_rates_course.course_id
@@ -95,7 +95,7 @@ ORDER BY course.date DESC`;
   oneCourse = (req, res) => {
     const { course_id } = req.params; //añadir el usuario que está logueado
     // console.log(course_id);
-    let sql = `SELECT course.title, course.user_id, course.img, course.date, course.is_completed, course.description, course.price , section.section_id, section.section_title, topic.topic_id, topic.topic_title, resource.resource_id, resource.resource_type, resource.text
+    let sql = `SELECT course.title, course.followers, course.user_id, course.img, course.date, course.is_completed, course.description, course.price , section.section_id, section.section_title, topic.topic_id, topic.topic_title, resource.resource_id, resource.resource_type, resource.text
     FROM course
     left join section on course.course_id = section.course_id
     left join topic  on topic.course_id = section.course_id and topic.section_id = section.section_id
@@ -108,7 +108,7 @@ ORDER BY course.date DESC`;
         res.status(500).json(err);
       }
 
-      const { title, user_id, description, img, date, price, is_completed } =
+      const { title, user_id, description, followers, img, date, price, is_completed } =
         result[0];
       let sections = [];
       let topics = [];
@@ -154,6 +154,7 @@ ORDER BY course.date DESC`;
         title,
         img,
         date,
+        followers,
         user_id,
         is_completed,
         price,
@@ -447,6 +448,25 @@ ORDER BY course.date DESC`;
     connection.query(sql, (err, result) => {
       err ? res.status(500).json(err) : res.status(200).json(result);
     
+    });
+  }
+
+  updateFollowers = (req, res) =>{
+    const {course_id} = req.params
+
+    let sql = `UPDATE course
+    SET followers = (
+    SELECT COUNT(DISTINCT user_id)
+    FROM (
+      SELECT user_id, course_id FROM user_enrolls_course
+      UNION ALL
+      SELECT user_id, course_id FROM user_wishes_course
+    ) as combined
+    WHERE combined.course_id = course.course_id
+    )`
+
+    connection.query(sql, (err, result) => {
+      err ? res.status(500).json(err) : res.status(200).json(result);
     });
   }
 

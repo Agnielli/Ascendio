@@ -31,6 +31,7 @@ export const OneCourse = () => {
   const [rates, setRates] = useState([])
   const [ratingAverage, setRatingAverage] = useState()
   const [resource, setResource] = useState([])
+  const [changeFollowers, setChangeFollowers] = useState()
   const navigate = useNavigate();
 
   const openModal = () => {
@@ -56,11 +57,12 @@ export const OneCourse = () => {
           setIsIntoValidate(true)
         }
         setUserCourse(res.data.user_id)
+        setResetCourse(!resetCourse)
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [showModal, resetCourse]);
+  }, [showModal, resetCourse, isIntoWishes, isIntoPurchase]);
 
   useEffect(() => {
     axios
@@ -144,45 +146,58 @@ export const OneCourse = () => {
     
   }, []);
 
-
+  
+  
   const formatearFecha = (date) => {
     return date.split("T")[0].split("-").reverse().join("-");
   };
-
+  
   const addToWishes = () => {
     console.log("aquí se añade wish");
     axios
-      .put(`http://localhost:3000/courses/addwishescourse/${course_id}`, {
-        usuario: user.user_id,
-      })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+    .put(`http://localhost:3000/courses/addwishescourse/${course_id}`, {
+      usuario: user.user_id,
+    })
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
   };
-
+  
   const delFromWishes = () => {
     axios
-      .post(`http://localhost:3000/courses/delfromwishes/${course_id}`, {
-        usuario: user.user_id,
-      })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+    .post(`http://localhost:3000/courses/delfromwishes/${course_id}`, {
+      usuario: user.user_id,
+    })
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
   };
-
+  
   const addToPurchase = () => {
     axios
-      .put(`http://localhost:3000/courses/addtopurchasecourse/${course_id}`, {
-        usuario: user.user_id,
-      })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+    .put(`http://localhost:3000/courses/addtopurchasecourse/${course_id}`, {
+      usuario: user.user_id,
+    })
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
   };
+  
+  useEffect(() => {
+    axios
+    .put(`http://localhost:3000/courses/updatefollowers/${course_id}`)
+    .then((res) => {
+      console.log("res del useEffect updateFollowers", res)
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  
+}, [isIntoWishes, isIntoPurchase]);
 
   const addToValidate = () => {
     axios
-      .put(`http://localhost:3000/courses/addtovalidatecourse/${course_id}`)
-      .then((res) => {
-        setIsIntoValidate(true)
-      })
+    .put(`http://localhost:3000/courses/addtovalidatecourse/${course_id}`)
+    .then((res) => {
+      setIsIntoValidate(true)
+    })
       .catch((err) => console.log(err));
   };
 
@@ -197,12 +212,8 @@ export const OneCourse = () => {
   };
 
   const handlePurchase = () => {
-    if (isIntoWishes) {
-      setIsIntoPurchase(false);
-    } else {
-      addToPurchase();
-      setIsIntoPurchase(true);
-    }
+    addToPurchase();
+    setIsIntoPurchase(true);
   };
   
   const handleValidate = () => {
@@ -286,6 +297,7 @@ export const OneCourse = () => {
             <Card.Subtitle>
               {oneCoursePpal && "Creado: " + formatearFecha(oneCoursePpal.date)}
             </Card.Subtitle>
+            <Card.Subtitle>Seguidores: {oneCoursePpal?.followers}</Card.Subtitle>
             <Card.Text>{oneCoursePpal?.description}</Card.Text>
             <Card.Text>{oneCoursePpal?.price === 0 ? 'GRATIS' : `${oneCoursePpal?.price}€`}</Card.Text>
             <Card.Text>
