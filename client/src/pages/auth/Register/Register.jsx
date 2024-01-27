@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./register.scss";
+import "../../../../public/stylesheets/ButtonsApp.scss";
 import { Form, Button, Col, Row } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
@@ -20,15 +21,29 @@ export const Register = () => {
   const [showModal, setShowModal] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
+  const [isPasswordFocused, setIsPasswordFocused] = useState(false);
+  const [isPasswordFocused2, setIsPasswordFocused2] = useState(false);
+
+  const handleFocus = () => {
+    setIsPasswordFocused(true);
+  };
+  const handleBlur = () => {
+    setIsPasswordFocused(false);
+  };
+
+  const handleFocus2 = () => {
+    setIsPasswordFocused2(true);
+  };
+  const handleBlur2 = () => {
+    setIsPasswordFocused2(false);
+  };
 
   const verPassword = () => {
     setShowPassword(!showPassword);
   };
   const verPassword2 = () => {
     setShowPassword2(!showPassword2);
-  };
-
-  
+  };  
 
   const navigate = useNavigate();
   const handleChange = (e) => {
@@ -83,73 +98,75 @@ export const Register = () => {
     }
   };
   return (
-    <Row className="d-flex justify-content-center p-5">
+    <Row className="FormulariosContainer">
       <Col md={4}>
         <Form>
           <h2>ASCENDIO</h2>
-          <h3>Registro</h3>
-          <Form.Group className="mb-3" controlId="formBasicNickName">
-            <Form.Label>Nombre de usuario</Form.Label>
+          <h5 className="d-none d-sm-block">Descubre trades, conecta con otros usuarios y eleva tu conocimiento cripto en un solo lugar.</h5>
+          <Form.Group controlId="formBasicNickName">
+            <Form.Label></Form.Label>
             <Form.Control
               name="nickname"
               onChange={handleChange}
-              placeholder="Introduce un nombre de usuario"
+              placeholder="Nombre de usuario"
               value={register.nickname}
               autoComplete="nickname"
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicName">
-            <Form.Label>Nombre</Form.Label>
+          <Form.Group controlId="formBasicName">
+            <Form.Label></Form.Label>
             <Form.Control
               name="name"
               onChange={handleChange}
-              placeholder="Introduce un nombre"
+              placeholder="Nombre"
               value={register.name}
               autoComplete="username"
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicLastName">
-            <Form.Label>Apellido</Form.Label>
+          <Form.Group  controlId="formBasicLastName">
+            <Form.Label></Form.Label>
             <Form.Control
               name="lastname"
               onChange={handleChange}
-              placeholder="Introduce un apellido"
+              placeholder="Apellido"
               value={register.lastname}
               autoComplete="lastname"
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Correo</Form.Label>
+          <Form.Group  controlId="formBasicEmail">
+            <Form.Label></Form.Label>
             <Form.Control
               name="email"
               onChange={handleChange}
               type="text"
-              placeholder="Introduce un correo"
+              placeholder="Email"
               value={register.email}
               autoComplete="email"
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicEmail2">
-            <Form.Label>Confirma el correo</Form.Label>
+          <Form.Group controlId="formBasicEmail2">
+            <Form.Label></Form.Label>
             <Form.Control
               name="email2"
               onChange={handleChange}
               type="text"
-              placeholder="Introduce un correo"
+              placeholder="Confirma el email"
               value={register.email2}
               autoComplete="off"
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Contraseña</Form.Label>
-            <div className="password-container">
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label></Form.Label>
+            <div className={`password-container ${isPasswordFocused ? 'eye-icon-focused' : ''}`}>
               <Form.Control
                 name="password"
                 onChange={handleChange}
                 type={showPassword2 ? "text" : "password"}
-                placeholder="Introduce una contraseña"
+                placeholder="Contraseña"
                 value={register.password}
                 autoComplete="new-password"
+                onFocus={handleFocus}
+                onBlur={handleBlur}
               />
               <span
                 className="eye-icon pisition-absolute pointer password-icon"
@@ -184,19 +201,21 @@ export const Register = () => {
               </span>
             </div>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicPassword2">
-            <Form.Label>Confirma la contraseña</Form.Label>
-            <div className="password-container">
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label></Form.Label>
+            <div className={`password-container ${isPasswordFocused2 ? 'eye-icon-focused' : ''}`}>
               <Form.Control
                 name="password2"
                 onChange={handleChange}
                 type={showPassword ? "text" : "password"}
-                placeholder="Introduce una contraseña"
+                placeholder="Confirma la contraseña"
                 value={register.password2}
                 autoComplete="new-password"
+                onFocus={handleFocus2}
+                onBlur={handleBlur2}
               />
               <span
-                className="pisition-absolute pointer password-icon"
+                className="eye-icon pisition-absolute pointer password-icon"
                 onClick={verPassword}
               >
                 {showPassword ? (
@@ -228,13 +247,15 @@ export const Register = () => {
               </span>
             </div>
           </Form.Group>
-          <p>{msgError}</p>
-          <Button className="me-3" onClick={handleSubmit}>
-            Aceptar
-          </Button>
-          <Button onClick={() => navigate("/")} variant="primary">
-            Cancelar
-          </Button>
+          <p style={{ marginBottom: '1rem' }}>{msgError || '\u00A0'}</p>
+          <div className="DivGrisParaBotones d-flex justify-content-between mt-3 mb-1">
+            <Button className="Button2" onClick={handleSubmit}>
+              Aceptar
+            </Button>
+            <Button  className="Button2" onClick={() => navigate("/")} variant="primary">
+              Cancelar
+            </Button>
+          </div>
           <p>
             Ya estás registrado? <Link to="/login">Loguéate</Link>
           </p>
