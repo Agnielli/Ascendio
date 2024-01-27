@@ -20,7 +20,8 @@ export const CardSection = ({
   index,
   resource,
   setResource,
-  deleteResource
+  deleteResource,
+  isIntoValidate
 }) => {
 
   const [showTopic, setShowTopic] = useState(false);
@@ -42,13 +43,14 @@ export const CardSection = ({
         {userId === userCourse &&<Button
           variant="outline-success"
           onClick={handleClick}
-          disabled={showTopic ? true : false}
+          disabled={showTopic ? true : false || isIntoValidate ? true : false}
         >
           Añadir tema
         </Button>}
         {userId === userCourse &&<Button
           variant="outline-success"
           onClick={() => deleteSection(elem.section_id)}
+          disabled={isIntoValidate ? true : false}
         >
           Eliminar
         </Button>}
@@ -87,6 +89,7 @@ export const CardSection = ({
           deleteResource={deleteResource}
           userId={userId}
           userCourse={userCourse}
+          isIntoValidate={isIntoValidate}
           />
           );
         })}

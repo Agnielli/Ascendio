@@ -14,7 +14,8 @@ export const CardTopic = ({
   course_id,
   deleteResource,
   userId,
-  userCourse
+  userCourse,
+  isIntoValidate
 }) => {
   const [showModalArchivo, setShowModalArchivo] = useState(false);
   const [resource, setResource] = useState();
@@ -44,13 +45,16 @@ export const CardTopic = ({
         {`${index}. ${topic.topic_title}`}
         
         {resource?.length === 0 && userId === userCourse &&
-        <Button variant="outline-success" onClick={handleClick}>
+        <Button variant="outline-success" onClick={handleClick}
+        disabled={isIntoValidate ? true : false}
+        >
         Añadir contenido
       </Button>}
 
           {userId === userCourse &&<Button
           variant="outline-danger"
           onClick={() => deleteTopic(section_id, topic.topic_id)}
+          disabled={isIntoValidate ? true : false}
         >
           Eliminar
         </Button>}
@@ -70,6 +74,10 @@ export const CardTopic = ({
         <Cardresource
         resource={resource}
         course_id={course_id}
+        deleteResource={deleteResource} 
+        isIntoValidate={isIntoValidate}
+        userId={userId}
+        userCourse={userCourse}
         deleteResource={deleteResource}
         section_id={section_id} 
         topic_id={topic.topic_id}

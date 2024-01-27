@@ -33,6 +33,7 @@ export const OneCourse = () => {
   const [ratingAverage, setRatingAverage] = useState()
   const [resource, setResource] = useState([])
   const [changeFollowers, setChangeFollowers] = useState()
+
   const navigate = useNavigate();
 
 
@@ -309,6 +310,7 @@ export const OneCourse = () => {
               variant="outline-success"
               className="me-3"
               onClick={openModal}
+              disabled={isIntoValidate ? true : false}
             >
               Editar curso
             </Button>}
@@ -316,12 +318,13 @@ export const OneCourse = () => {
               variant="outline-success"
               className="me-3"
               onClick={addNewSection}
-              disabled={addSection ? true : false}
+              disabled={addSection ? true : false ||isIntoValidate ? true : false}
             >
               Añadir Sección
             </Button>}
 
-            {userId !== userCourse &&<Button onClick={handleWishes}>
+            {userId !== userCourse &&<Button 
+            onClick={handleWishes}>
               {isIntoWishes ? "Borrar de deseados" : "Añadir a deseados"}
             </Button>}
 
@@ -334,6 +337,7 @@ export const OneCourse = () => {
             </Button>}
 
             {userId === userCourse &&<Button
+            disabled={isIntoValidate ? true : false}
               // onClick={() => deleteCourse(course_id)}
 
               onClick={openModalDelete}
@@ -375,6 +379,7 @@ export const OneCourse = () => {
                   setResource={setResource}
                   resource={resource}
                   deleteResource={deleteResource}
+                  isIntoValidate={isIntoValidate}
                 />
               );
             })}
@@ -406,8 +411,7 @@ export const OneCourse = () => {
           course_id={course_id}
         />
 
-        {userId !== userCourse && isIntoPurchase &&
-        <CardRates 
+        {userId !== userCourse && isIntoPurchase && <CardRates 
           resetCourse={resetCourse}
           setResetCourse={setResetCourse}
         />}

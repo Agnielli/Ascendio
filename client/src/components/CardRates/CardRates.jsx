@@ -17,6 +17,12 @@ export const CardRates = ({ resetCourse, setResetCourse }) => {
   let usuario = user.user_id;
 
   const regexNumber = /^[1-5]$/;
+  
+    useEffect(()=>{
+    
+      // setRateExist(true)
+    
+  },[rateExist])
 
   const handleSubmit = () => {
     if (!regexNumber.test(newRate.course_rates)) {
@@ -28,13 +34,14 @@ export const CardRates = ({ resetCourse, setResetCourse }) => {
     let data = { course_rates, commentary, usuario };
 
     axios
-      .post(
-        `http://localhost:3000/courses/userrateonecourse/${course_id}`,
-        data
-      )
-      .then((res) => {
-        setResetCourse(!resetCourse);
-      })
+    .post(`http://localhost:3000/courses/userrateonecourse/${course_id}`, data)
+    .then((res)=>{
+      console.log("new rateeeeee", res.data)
+      if(res.data.course_rates){
+        setRateExist(!rateExist)
+        //setResetCourse(!resetCourse);
+      }
+    })
       .catch((err) => {
         console.log(err);
       });
@@ -47,34 +54,37 @@ export const CardRates = ({ resetCourse, setResetCourse }) => {
 
 
   return (
-    <Card style={{ width: "18rem" }}>
+    <>{!rateExist &&
+      <Card style={{ width: '18rem' }}>
       <Form>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Tu opinión no me importa</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Puntúa de 1 a 5"
-            name="course_rates"
-            value={newRate?.course_rates}
-            onChange={handleChange}
-          />
-          <Form.Control
-            type="text"
-            placeholder="Da tu opinión"
-            name="commentary"
-            value={newRate?.commentary}
-            onChange={handleChange}
-          />
-            <p>{msgError}</p>
-          <Button
-            variant="outline-success"
-            className="me-3"
-            onClick={handleSubmit}
-          >
-            Aceptar
-          </Button>
-        </Form.Group>
-      </Form>
-    </Card>
-  );
-};
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Tu opinión importa</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Puntúa de 1 a 5"
+              name="course_rates"
+              value={newRate?.course_rates}
+              onChange={handleChange}
+            />
+            <Form.Control
+              type="text"
+              placeholder="Da tu opinión"
+              name='commentary'
+              value={newRate?.commentary}
+              onChange={handleChange}
+            />
+             <p>{msgError}</p>
+            <Button
+              variant="outline-success"
+              className="me-3"
+              onClick={handleSubmit}
+            >
+              Aceptar
+            </Button>
+          </Form.Group>
+        </Form>
+    </Card>}
+  </>
+  )
+}
+
