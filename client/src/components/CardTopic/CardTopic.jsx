@@ -14,7 +14,8 @@ export const CardTopic = ({
   course_id,
   deleteResource,
   userId,
-  userCourse
+  userCourse,
+  isIntoValidate
 }) => {
   //href atributo download para descargar
   //bradcrumbs para cuando entramos en cada topic
@@ -47,13 +48,18 @@ export const CardTopic = ({
       <Card.Body>
         {`${index}. ${topic.topic_title}`}
         
-        {userId === userCourse &&<Button variant="outline-success" onClick={handleClick}>
+        {userId === userCourse &&<Button
+          variant="outline-success" 
+          onClick={handleClick}
+          disabled={isIntoValidate ? true : false}
+        >
             Añadir contenido
           </Button>}
 
           {userId === userCourse &&<Button
           variant="outline-danger"
           onClick={() => deleteTopic(section_id, topic.topic_id)}
+          disabled={isIntoValidate ? true : false}
         >
           Eliminar
         </Button>}
@@ -73,7 +79,11 @@ export const CardTopic = ({
         <Cardresource
         resource={resource}
         course_id={course_id}
-        deleteResource={deleteResource} />}
+        deleteResource={deleteResource} 
+        isIntoValidate={isIntoValidate}
+        userId={userId}
+        userCourse={userCourse}
+        />}
       </Card.Body>
     </Card>
   );

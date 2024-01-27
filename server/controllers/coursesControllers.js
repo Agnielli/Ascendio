@@ -477,7 +477,7 @@ ORDER BY course.date DESC`;
     let sql = `INSERT INTO user_rates_course (user_id, course_id, course_rates, commentary) VALUES (${usuario}, ${course_id}, ${course_rates}, '${commentary}')`
     
     connection.query(sql, (err, result) => {
-      err ? res.status(500).json(err) : res.status(200).json(result);
+      err ? res.status(500).json(err) : res.status(200).json({result, course_rates});
     });
 
   
