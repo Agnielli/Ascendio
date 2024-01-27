@@ -12,7 +12,9 @@ export const CardTopic = ({
   resetCourse,
   index,
   course_id,
-  deleteResource
+  deleteResource,
+  userId,
+  userCourse
 }) => {
   const [showModalArchivo, setShowModalArchivo] = useState(false);
   const [resource, setResource] = useState();
@@ -41,16 +43,16 @@ export const CardTopic = ({
       <Card.Body>
         {`${index}. ${topic.topic_title}`}
         
-          <Button variant="outline-success" onClick={handleClick}>
+        {userId === userCourse &&<Button variant="outline-success" onClick={handleClick}>
             Añadir contenido
-          </Button>
+          </Button>}
 
-        <Button
+          {userId === userCourse &&<Button
           variant="outline-danger"
           onClick={() => deleteTopic(section_id, topic.topic_id)}
         >
           Eliminar
-        </Button>
+        </Button>}
 
         {showModalArchivo && (
           <ModalResource
