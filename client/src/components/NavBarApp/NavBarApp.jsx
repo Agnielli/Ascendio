@@ -83,19 +83,19 @@ function NavBarApp() {
                     Perfil
                   </Nav.Link> */}
                   <Nav.Link as={Link} to="/allcourses">
-                    Cursos
+                    CURSOS
                   </Nav.Link>
                   <Nav.Link as={Link} to="/allpoststrades">
-                    Trade Post
+                    TRADE POSTS
                   </Nav.Link>
                   <Nav.Link as={Link} to="/allpostsgenerals">
-                    General Post
+                    GENERAL POSTS
                   </Nav.Link>
                   <Nav.Link as={Link} to="/showAllUsers">
-                    Usuarios
+                    USERS
                   </Nav.Link>
                   <Nav.Link as={Link} to="/tradingview">
-                    TradingView
+                    TRADING VIEW
                   </Nav.Link>
                   <div
                     className="d-flex user"

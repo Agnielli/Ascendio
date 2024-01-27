@@ -1,3 +1,4 @@
+import "../../../../public/stylesheets//ButtonsApp.scss"
 import axios from "axios";
 import React, { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
@@ -13,6 +14,22 @@ export const RecoverPassword = () => {
   const [msgError, setMsgError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
+  const [isPasswordFocused, setIsPasswordFocused] = useState(false);
+  const [isPasswordFocused2, setIsPasswordFocused2] = useState(false);
+
+  const handleFocus = () => {
+    setIsPasswordFocused(true);
+  };
+  const handleBlur = () => {
+    setIsPasswordFocused(false);
+  };
+
+  const handleFocus2 = () => {
+    setIsPasswordFocused2(true);
+  };
+  const handleBlur2 = () => {
+    setIsPasswordFocused2(false);
+  };
 
   const verPassword = () => {
     setShowPassword(!showPassword);
@@ -47,15 +64,15 @@ export const RecoverPassword = () => {
     }
   };
   return (
-    <Row className="d-flex justify-content-center p-5">
+    <Row className="FormulariosContainer">
       <Col md={4}>
         <Form>
           <h2>ASCENDIO</h2>
-          <h3>Recupera tu contraseña</h3>
+          <h3 className="mb-3">Recupera tu contraseña</h3>
           <p>Introduce una nueva contraseña para tu cuenta</p>
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Introduce nueva contraseña</Form.Label>
-            <div className="password-container">
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label></Form.Label>
+            <div className={`password-container ${isPasswordFocused ? 'eye-icon-focused' : ''}`}>
             <Form.Control
               name="password"
               onChange={handleChange}
@@ -63,6 +80,8 @@ export const RecoverPassword = () => {
               placeholder="Introduce nueva contraseña"
               value={recover.password}
               autoComplete="new-password"
+              onFocus={handleFocus}
+                onBlur={handleBlur}
             />
             <span className=" eye-icon pisition-absolute pointer password-icon" onClick={verPassword}>
                 {showPassword ?<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" height={"1.5rem"}>
@@ -80,9 +99,9 @@ export const RecoverPassword = () => {
               </span>
               </div>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicPassword2">
-            <Form.Label>Confirma la nueva contraseña</Form.Label>
-            <div className="password-container">
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label></Form.Label>
+            <div className={`password-container ${isPasswordFocused2 ? 'eye-icon-focused' : ''}`}>
             <Form.Control
               name="password2"
               onChange={handleChange}
@@ -90,6 +109,8 @@ export const RecoverPassword = () => {
               placeholder="Confirma la nueva contraseña"
               value={recover.password2}
               autoComplete="new-password"
+              onFocus={handleFocus2}
+                onBlur={handleBlur2}
             />
               <span className=" eye-icon pisition-absolute pointer password-icon" onClick={verPassword2}>
                 {showPassword2 ?<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" height={"1.5rem"}>
@@ -107,8 +128,8 @@ export const RecoverPassword = () => {
               </span>
               </div>
           </Form.Group>
-          <p>{msgError}</p>
-          <Button className="me-3" onClick={handleSubmit}>
+          <p style={{ marginBottom: '1rem' }}>{msgError || '\u00A0'}</p>
+          <Button className="Button1 mt-3" onClick={handleSubmit}>
             Aceptar
           </Button>
         </Form>

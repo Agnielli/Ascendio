@@ -10,11 +10,13 @@
   font-weight: 500;
   transition: 0.3s;
 
-  &:hover{
-    background-color: $accen3-color;
+  &:hover,
+  &:active{
+    background-color: $accent3-color;
     color:$accent-color;
   }
 }
+
 
 //boton gris a rosa:
 .Button2 {
@@ -26,9 +28,10 @@
   font-weight: 500;
   transition: 0.3s;
 
-  &:hover{
-    background-color: $accent-color;
-    color:$accent2-color;
+  &:hover,
+  &:active{
+    background-color: $accent-color !important;
+    color:$accent2-color !important;
   }
 }
 
@@ -43,16 +46,16 @@
 //boton seguir: de blanco a rosa 
 .Button3 {
   padding: 6px 20px !important;
-  background-color: $accen3-color;
+  background-color: $accent3-color;
   color: $accent2-color;
   border: none;
   border-radius: 25px;
   font-weight: 500;
   transition: 0.3s;
-
+  &:active,
   &:hover{
     background-color: $accent-color;
-    color:$accent2-color;
+    color: $accent2-color;
   }
 }
 
@@ -60,14 +63,14 @@
 .Button4 {
   padding: 6px 20px !important;
   background-color: $accent-color;
-  color: $accen3-color;
+  color: $accent3-color;
   border: none;
   border-radius: 25px;
   font-weight: 500;
   transition: 0.3s;
-
+  &:active,
   &:hover{
-    background-color: $accen3-color ;
+    background-color: $accent3-color ;
     color:$accent2-color $accent2-color;
   }
 }
@@ -84,7 +87,7 @@
   border-radius: 25px;
   font-weight: 500;
   transition: 0.3s;
-
+  &:active,
   &:hover{
     background-color: $accent-color ;
     color:$accent2-color;
