@@ -33,7 +33,7 @@ router.get('/getoneresource/:course_id/:section_id/:topic_id', coursesController
 router.get('/gettyperesource', coursesControllers.getTypeResource)
 router.get('/getOneBread/:course_id/:section_id', coursesControllers.getOneBread)
 
-//harta del git
+//vuelvo a estar harta del git :)
 
 
 
