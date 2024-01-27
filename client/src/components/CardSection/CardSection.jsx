@@ -85,6 +85,8 @@ export const CardSection = ({
           resource={resource}
           course_id={course_id}
           deleteResource={deleteResource}
+          userId={userId}
+          userCourse={userCourse}
           />
           );
         })}

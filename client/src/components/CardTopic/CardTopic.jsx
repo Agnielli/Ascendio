@@ -12,7 +12,9 @@ export const CardTopic = ({
   resetCourse,
   index,
   course_id,
-  deleteResource
+  deleteResource,
+  userId,
+  userCourse
 }) => {
   //href atributo download para descargar
   //bradcrumbs para cuando entramos en cada topic
@@ -45,16 +47,16 @@ export const CardTopic = ({
       <Card.Body>
         {`${index}. ${topic.topic_title}`}
         
-          <Button variant="outline-success" onClick={handleClick}>
+        {userId === userCourse &&<Button variant="outline-success" onClick={handleClick}>
             Añadir contenido
-          </Button>
+          </Button>}
 
-        <Button
+          {userId === userCourse &&<Button
           variant="outline-danger"
           onClick={() => deleteTopic(section_id, topic.topic_id)}
         >
           Eliminar
-        </Button>
+        </Button>}
 
         {showModalArchivo && (
           <ModalResource
