@@ -76,6 +76,7 @@ export const AllCourses = () => {
               />
               <Card.Body>
                 <Card.Title> {elem.title} </Card.Title>
+                <Card.Subtitle>Seguidores: {elem.followers}</Card.Subtitle>
                 
                 {elem.average_rating&&
                   <RatingStars 
