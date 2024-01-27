@@ -497,8 +497,16 @@ ORDER BY course.date DESC`;
     connection.query(sql, (err, result) => {
       err ? res.status(500).json(err) : res.status(200).json({result, course_rates});
     });
+  }
 
-  
+  getOneRateOneCourseOneUser = (req, res) =>{
+    const {course_id, user_id} = req.params
+
+    let sql = `SELECT * FROM user_rates_course WHERE user_id = ${user_id} AND course_id = ${course_id}`
+    
+    connection.query(sql, (err, result) => {
+      err ? res.status(500).json(err) : res.status(200).json(result);
+    });
   }
 
 }

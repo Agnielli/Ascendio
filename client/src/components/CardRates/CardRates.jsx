@@ -9,7 +9,7 @@ const initialValue = {
   commentary: "",
 };
 
-export const CardRates = ({ resetCourse, setResetCourse }) => {
+export const CardRates = ({ resetCourse, setResetCourse, setShowCardRate }) => {
   const [newRate, setNewRate] = useState(initialValue);
   const [msgError, setMsgError] = useState("")
   const [rateExist, setRateExist] = useState(false)
@@ -18,12 +18,6 @@ export const CardRates = ({ resetCourse, setResetCourse }) => {
   let usuario = user.user_id;
 
   const regexNumber = /^[1-5]$/;
-  
-    useEffect(()=>{
-    
-      // setRateExist(true)
-    
-  },[rateExist])
 
   const handleSubmit = () => {
     if (!regexNumber.test(newRate.course_rates)) {
@@ -37,11 +31,7 @@ export const CardRates = ({ resetCourse, setResetCourse }) => {
     axios
     .post(`http://localhost:3000/courses/userrateonecourse/${course_id}`, data)
     .then((res)=>{
-      console.log("new rateeeeee", res.data)
-      if(res.data.course_rates){
-        setRateExist(!rateExist)
-        //setResetCourse(!resetCourse);
-      }
+      setShowCardRate(false)
     })
       .catch((err) => {
         console.log(err);
@@ -52,7 +42,6 @@ export const CardRates = ({ resetCourse, setResetCourse }) => {
     const { name, value } = e.target;
     setNewRate({ ...newRate, [name]: value });
   };
-
 
   return (
     <>{!rateExist &&
