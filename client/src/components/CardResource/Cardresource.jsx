@@ -36,6 +36,7 @@ export const Cardresource = ({ resource, course_id, deleteResource, section_id, 
           onClick={()=>deleteResource(section_id, topic_id, resource[0].resource_id)}
           disabled={isIntoValidate ? true : false}
         >Eliminar</Button>}
+
         </>
       )}   
     </div>
