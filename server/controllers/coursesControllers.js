@@ -470,6 +470,19 @@ ORDER BY course.date DESC`;
     });
   }
 
+  userRateOneCourse = (req, res) =>{
+    const {course_id} = req.params
+    const {usuario, course_rates, commentary} = req.body
+
+    let sql = `INSERT INTO user_rates_course (user_id, course_id, course_rates, commentary) VALUES (${usuario}, ${course_id}, ${course_rates}, '${commentary}')`
+    
+    connection.query(sql, (err, result) => {
+      err ? res.status(500).json(err) : res.status(200).json(result);
+    });
+
+  
+  }
+
 }
 
 module.exports = new coursesControllers();

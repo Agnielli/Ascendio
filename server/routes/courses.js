@@ -32,6 +32,7 @@ router.get('/getallratesonecourse/:course_id', coursesControllers.getAllRatesOne
 router.get('/getoneresource/:course_id/:section_id/:topic_id', coursesControllers.getOneResource)
 router.get('/gettyperesource', coursesControllers.getTypeResource)
 router.put('/updatefollowers/:course_id', coursesControllers.updateFollowers);
+router.post('/userrateonecourse/:course_id', coursesControllers.userRateOneCourse)
 
 //harta del git
 
