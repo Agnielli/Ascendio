@@ -1,10 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Breadcrumb } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const ResourceViewer = () => {
   const [titles, setTitles] = useState();
+  const navigate = useNavigate()
   let { course_id, link, type, section_id } = useParams();
 
   useEffect(() => {
@@ -28,11 +29,10 @@ export const ResourceViewer = () => {
 
   return (
     <Breadcrumb>
-      <Breadcrumb.Item href={`http://localhost:3000/course/${course_id}`}>
-        {" "}
-        {titles?.title}{" "}
+      <Breadcrumb.Item onClick={()=>navigate(-1)}>
+        {titles?.title}
       </Breadcrumb.Item>
-      <Breadcrumb.Item>
+      <Breadcrumb.Item onClick={()=>navigate(-1)}>
         {titles?.section_title}
         <div>
           <iframe src={`${urlbase}${link}`} frameborder="0"></iframe>

@@ -38,14 +38,17 @@ export const CardTopic = ({
       });
   }, [course_id, section_id, topic.topic_id]);
 
+  console.log("RRRR", resource);
+
   return (
     <Card>
       <Card.Body>
         {`${index}. ${topic.topic_title}`}
         
-        {userId === userCourse &&<Button variant="outline-success" onClick={handleClick}>
-            Añadir contenido
-          </Button>}
+        {resource?.length === 0 && userId === userCourse &&
+        <Button variant="outline-success" onClick={handleClick}>
+        Añadir contenido
+      </Button>}
 
           {userId === userCourse &&<Button
           variant="outline-danger"

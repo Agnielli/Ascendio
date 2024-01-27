@@ -57,7 +57,7 @@ export const OneCourse = () => {
           setIsIntoValidate(true)
         }
         setUserCourse(res.data.user_id)
-        setResetCourse(!resetCourse)
+        //setResetCourse(!resetCourse)
       })
       .catch((err) => {
         console.log(err);
