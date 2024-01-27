@@ -9,6 +9,12 @@ import { CardSection } from "../../../components/CardSection/CardSection";
 import { ModalDelOneCourse } from "../../../components/ModalDelOneCourse/ModalDelOneCourse";
 import { CardRatingsOneCourse } from "../../../components/Courses/CardRatingsOneCourse/CardRatingsoneCourse";
 import { ratesAverage } from "../../../helpers/utils";
+import { CardRates } from "../../../components/CardRates/CardRates";
+
+const initialValue = {
+  course_rates:"",
+  commentary:""
+}
 
 export const OneCourse = () => {
   const [oneCoursePpal, setOneCoursePpal] = useState();
@@ -32,7 +38,9 @@ export const OneCourse = () => {
   const [ratingAverage, setRatingAverage] = useState()
   const [resource, setResource] = useState([])
   const [changeFollowers, setChangeFollowers] = useState()
+  const [newRate, setNewRate] = useState(initialValue);
   const navigate = useNavigate();
+
 
   const openModal = () => {
     setShowModal(true);
@@ -57,7 +65,7 @@ export const OneCourse = () => {
           setIsIntoValidate(true)
         }
         setUserCourse(res.data.user_id)
-        setResetCourse(!resetCourse)
+        // setResetCourse(!resetCourse)
       })
       .catch((err) => {
         console.log(err);
@@ -110,6 +118,7 @@ export const OneCourse = () => {
         `http://localhost:3000/courses/getpurchasedcourse/${course_id}/${user.user_id}`
       )
       .then((res) => {
+        console.log("userrrr", res.data)
         if (res.data.length) {
           setIsIntoPurchase(true);
         }
@@ -334,7 +343,7 @@ export const OneCourse = () => {
 
             </Button>}
 
-            {user.user_id === userCourse &&<Button
+            {userId === userCourse &&<Button
               // onClick={() => deleteCourse(course_id)}
 
               onClick={openModalDelete}
@@ -396,14 +405,21 @@ export const OneCourse = () => {
           setShowModal={setShowModal}
           setOneCoursePpal={setOneCoursePpal}
           oneCoursePpal={oneCoursePpal}
+          userId={userId}
+          course_id
         />
 
         <ModalDelOneCourse
-            showModalDelete={showModalDelete}
-            setShowModalDelete={setShowModalDelete}
-            deleteCourse={deleteCourse}
-            course_id={course_id}
+          showModalDelete={showModalDelete}
+          setShowModalDelete={setShowModalDelete}
+          deleteCourse={deleteCourse}
+          course_id={course_id}
         />
+
+        {userId !== userCourse && isIntoPurchase &&<CardRates 
+          resetCourse={resetCourse}
+          setResetCourse={setResetCourse}
+        />}
 
         <h5>¿Qué opina la gente?</h5>
               
