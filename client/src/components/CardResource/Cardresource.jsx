@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 export const Cardresource = ({ resource, course_id, deleteResource, section_id, topic_id}) => {
   const navigate = useNavigate();
-  console.log('KKKKKKKKKK', resource);
+
   const handleClick = () =>{
     let link = ""
    
