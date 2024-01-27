@@ -105,6 +105,7 @@ CREATE TABLE graphic(
 CREATE TABLE course (
   course_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
   user_id INT UNSIGNED NOT NULL,  -- creador
+  followers INT UNSIGNED,
   title VARCHAR(50) NOT NULL,
   description VARCHAR(250) NOT NULL,
   img VARCHAR (150),
