@@ -65,7 +65,6 @@ export const OneCourse = () => {
           setIsIntoValidate(true)
         }
         setUserCourse(res.data.user_id)
-        // setResetCourse(!resetCourse)
       })
       .catch((err) => {
         console.log(err);

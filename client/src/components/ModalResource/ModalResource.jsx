@@ -29,7 +29,6 @@ export const ModalResource = ({
     setUrl(e.target.value)
   }
   
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -51,7 +50,6 @@ export const ModalResource = ({
         console.log(err);
       });
   };
-
 
   return (
     <Row className="d-flex justify-content-center p-5">

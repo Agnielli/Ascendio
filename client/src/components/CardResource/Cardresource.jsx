@@ -17,12 +17,6 @@ export const Cardresource = ({ resource, course_id, deleteResource, section_id, 
     navigate(`/resource/${course_id}/${section_id}/${link}/${resource[0].resource_type}`)
   }
 
-    /* let resource_id = resource[0].resource_id;
-
-    const handleDeleteClick = () => {
-      deleteResource(section_id, topic_id, resource_id)
-    } */
-
   return (
     <div>
       {resource && (resource[0]?.resource_type === 1 || resource[0]?.resource_type === 2) && (
@@ -31,13 +25,9 @@ export const Cardresource = ({ resource, course_id, deleteResource, section_id, 
           {resource[0]?.resource_type === 1 ? "PDF" : null}
           {resource[0]?.resource_type === 2 ? "ENLACE" : null}
         </Button>
-        {/* <Button variant="outline-danger" onClick={handleDeleteClick} >Eliminar</Button> */}
         <Button variant="outline-danger" onClick={deleteResource(section_id, topic_id, resource.resource_id)} >Eliminar</Button>
         </>
-      
-      )}
-      
-      
+      )}   
     </div>
   );
 };
