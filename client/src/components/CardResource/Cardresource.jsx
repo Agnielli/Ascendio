@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 
-export const Cardresource = ({ resource, course_id, deleteResource, isIntoValidate, userId, userCourse}) => {
+export const Cardresource = ({ resource, course_id, deleteResource, isIntoValidate, userId, userCourse, section_id}) => {
 
   const navigate = useNavigate();
 
@@ -36,7 +36,7 @@ export const Cardresource = ({ resource, course_id, deleteResource, isIntoValida
           disabled={isIntoValidate ? true : false}
         >Eliminar</Button>}
 
-        //<Button variant="outline-danger" onClick={deleteResource(section_id, topic_id, resource.resource_id)} >Eliminar</Button>
+      {/* <Button variant="outline-danger" onClick={deleteResource(section_id, topic_id, resource.resource_id)} >Eliminar</Button> */}
 
         </>
       )}   
