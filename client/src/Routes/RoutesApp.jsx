@@ -115,7 +115,7 @@ export const RoutesApp = () => {
                 element={<OneUserCourses />}
               />
               <Route path="/traderprofile/:user_id" element={<TraderProfile />}/>
-              <Route path="/resource/:course_id/:link" element={<ResourceViewer />}/>
+              <Route path="/resource/:course_id/:section_id/:link/:type" element={<ResourceViewer />}/>
             </>
           )}
 

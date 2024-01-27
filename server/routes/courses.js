@@ -31,10 +31,12 @@ router.delete('/deleteresource/:course_id/:section_id/:topic_id/:resource_id', c
 router.get('/getallratesonecourse/:course_id', coursesControllers.getAllRatesOneCourse);
 router.get('/getoneresource/:course_id/:section_id/:topic_id', coursesControllers.getOneResource)
 router.get('/gettyperesource', coursesControllers.getTypeResource)
+router.get('/getOneBread/:course_id/:section_id', coursesControllers.getOneBread)
 router.put('/updatefollowers/:course_id', coursesControllers.updateFollowers);
 router.post('/userrateonecourse/:course_id', coursesControllers.userRateOneCourse)
 
-//harta del git
+
+//vuelvo a estar harta del git :)
 
 
 

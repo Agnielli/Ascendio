@@ -17,17 +17,13 @@ export const CardTopic = ({
   userCourse,
   isIntoValidate
 }) => {
-  //href atributo download para descargar
-  //bradcrumbs para cuando entramos en cada topic
-
   const [showModalArchivo, setShowModalArchivo] = useState(false);
   const [resource, setResource] = useState();
-
 
   const handleClick = () => {
     setShowModalArchivo(true);
   };
-
+  
   useEffect(() => {
     axios
       .get(
@@ -43,18 +39,19 @@ export const CardTopic = ({
       });
   }, [course_id, section_id, topic.topic_id]);
 
+  console.log("RRRR", resource);
+
   return (
     <Card>
       <Card.Body>
         {`${index}. ${topic.topic_title}`}
         
-        {userId === userCourse &&<Button
-          variant="outline-success" 
-          onClick={handleClick}
-          disabled={isIntoValidate ? true : false}
+        {resource?.length === 0 && userId === userCourse &&
+        <Button variant="outline-success" onClick={handleClick}
+        disabled={isIntoValidate ? true : false}
         >
-            Añadir contenido
-          </Button>}
+        Añadir contenido
+      </Button>}
 
           {userId === userCourse &&<Button
           variant="outline-danger"
@@ -83,6 +80,9 @@ export const CardTopic = ({
         isIntoValidate={isIntoValidate}
         userId={userId}
         userCourse={userCourse}
+        deleteResource={deleteResource}
+        section_id={section_id} 
+        topic_id={topic.topic_id}
         />}
       </Card.Body>
     </Card>

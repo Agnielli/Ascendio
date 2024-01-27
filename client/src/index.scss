@@ -1,9 +1,13 @@
 @use "../public/stylesheets/variables.scss" as *;
 
+// * {
+//   color: $accent3-color;
+//   padding: 0 !important;
+//   margin: 0 !important;
+
+// }
+
+
 * {
-  color: $accent3-color;
-  padding: 0 !important;
-  margin: 0 !important;
   color: orange;
 }
-
