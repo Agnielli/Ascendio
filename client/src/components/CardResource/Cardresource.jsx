@@ -2,7 +2,6 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-
 export const Cardresource = ({ resource, course_id, deleteResource, isIntoValidate, userId, userCourse}) => {
 
   const navigate = useNavigate();
@@ -35,11 +34,10 @@ export const Cardresource = ({ resource, course_id, deleteResource, isIntoValida
           variant="outline-danger" 
           disabled={isIntoValidate ? true : false}
         >Eliminar</Button>}
-
-        //<Button variant="outline-danger" onClick={deleteResource(section_id, topic_id, resource.resource_id)} >Eliminar</Button>
-
         </>
       )}   
     </div>
   );
 };
+
+//onClick={deleteResource(section_id, topic_id, resource.resource_id)} /
