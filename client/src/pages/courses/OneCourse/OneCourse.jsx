@@ -112,7 +112,6 @@ export const OneCourse = () => {
         `http://localhost:3000/courses/getpurchasedcourse/${course_id}/${user.user_id}`
       )
       .then((res) => {
-        console.log("userrrr", res.data)
         if (res.data.length) {
           setIsIntoPurchase(true);
         }
@@ -150,7 +149,6 @@ export const OneCourse = () => {
   }, []);
 
   
-  
   const formatearFecha = (date) => {
     return date.split("T")[0].split("-").reverse().join("-");
   };
@@ -187,7 +185,6 @@ export const OneCourse = () => {
     axios
     .put(`http://localhost:3000/courses/updatefollowers/${course_id}`)
     .then((res) => {
-      console.log("res del useEffect updateFollowers", res)
     })
     .catch((err) => {
       console.log(err);
@@ -273,15 +270,15 @@ export const OneCourse = () => {
   };
 
   const deleteResource = (section_id, topic_id, resource_id) => {
-    axios
-      .delete(`http://localhost:3000/courses/deleteresource/${course_id}/${section_id}/${topic_id}/${resource_id}`)
-      .then((res)=>{
-        console.log(res);
-        setResetCourse(!resetCourse);
-      })
-      .catch((err)=>{
-        console.log(err);
-      })
+    // axios
+    //   .delete(`http://localhost:3000/courses/deleteresource/${course_id}/${section_id}/${topic_id}/${resource_id}`)
+    //   .then((res)=>{
+    //     console.log(res);
+    //     setResetCourse(!resetCourse);
+    //   })
+    //   .catch((err)=>{
+    //     console.log(err);
+    //   })
   }
 
   return (

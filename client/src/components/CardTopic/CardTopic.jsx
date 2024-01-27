@@ -39,8 +39,6 @@ export const CardTopic = ({
       });
   }, [course_id, section_id, topic.topic_id]);
 
-  console.log("RRRR", resource);
-
   return (
     <Card>
       <Card.Body>
