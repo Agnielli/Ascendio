@@ -78,7 +78,6 @@ export const CardTopic = ({
         isIntoValidate={isIntoValidate}
         userId={userId}
         userCourse={userCourse}
-        deleteResource={deleteResource}
         section_id={section_id} 
         topic_id={topic.topic_id}
         />}
