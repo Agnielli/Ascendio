@@ -14,17 +14,13 @@ export const CardTopic = ({
   course_id,
   deleteResource
 }) => {
-  //href atributo download para descargar
-  //bradcrumbs para cuando entramos en cada topic
-
   const [showModalArchivo, setShowModalArchivo] = useState(false);
   const [resource, setResource] = useState();
-
 
   const handleClick = () => {
     setShowModalArchivo(true);
   };
-
+  
   useEffect(() => {
     axios
       .get(
@@ -71,7 +67,10 @@ export const CardTopic = ({
         <Cardresource
         resource={resource}
         course_id={course_id}
-        deleteResource={deleteResource} />}
+        deleteResource={deleteResource}
+        section_id={section_id} 
+        topic_id={topic.topic_id}
+        />}
       </Card.Body>
     </Card>
   );
