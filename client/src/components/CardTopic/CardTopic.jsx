@@ -17,6 +17,7 @@ export const CardTopic = ({
   userCourse,
   isIntoValidate
 }) => {
+
   const [showModalArchivo, setShowModalArchivo] = useState(false);
   const [resource, setResource] = useState();
 
@@ -31,13 +32,11 @@ export const CardTopic = ({
       )
       .then((res) => {
         setResource(res.data);
-        setResetCourse(!resetCourse);
-
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [course_id, section_id, topic.topic_id]);
+  }, [course_id, section_id, topic.topic_id, resetCourse]);
 
   return (
     <Card>

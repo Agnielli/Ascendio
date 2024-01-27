@@ -29,13 +29,14 @@ export const OneCourse = () => {
   const [showModalDelete, setShowModalDelete] = useState(false)
   const [creator, setCreator] = useState()
   const [orderedSections, setOrderedSections] = useState([]);
-  const [rates, setRates] = useState([])
+  const [rates, setRates] = useState()
   const [ratingAverage, setRatingAverage] = useState()
   const [resource, setResource] = useState([])
   const [changeFollowers, setChangeFollowers] = useState()
+  const [showCardRate, setShowCardRate] = useState(false)
+  const [resetrate, setResetrate] = useState()
 
   const navigate = useNavigate();
-
 
   const openModal = () => {
     setShowModal(true);
@@ -136,7 +137,7 @@ export const OneCourse = () => {
       axios
       .get(`http://localhost:3000/courses/getallratesonecourse/${course_id}`)
       .then((res) => {
-        if(res.data.length){
+        if(res.data[0].course_rates){
           setRates(res.data)
           ratesAverage(res.data)
           setRatingAverage(ratesAverage(res.data))
@@ -145,9 +146,21 @@ export const OneCourse = () => {
       .catch((err) => {
         console.log(err);
       });
-    
-  }, []);
+  }, [showCardRate]);
 
+  useEffect(() => {
+    axios
+    .get(`http://localhost:3000/courses/getonerateonecourseoneuser/${course_id}/${user.user_id}`)
+    .then((res) => {
+      if(res.data.length){
+        setShowCardRate(false)
+        setIsIntoPurchase(true)
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}, []);
   
   const formatearFecha = (date) => {
     return date.split("T")[0].split("-").reverse().join("-");
@@ -213,9 +226,10 @@ export const OneCourse = () => {
 
   const handlePurchase = () => {
     addToPurchase();
-    setIsIntoPurchase(true);
+    setShowCardRate(true);
+    setIsIntoPurchase(true)
   };
-  
+
   const handleValidate = () => {
     if (isIntoValidate) {
       setIsIntoValidate(false);
@@ -270,16 +284,19 @@ export const OneCourse = () => {
   };
 
   const deleteResource = (section_id, topic_id, resource_id) => {
-    // axios
-    //   .delete(`http://localhost:3000/courses/deleteresource/${course_id}/${section_id}/${topic_id}/${resource_id}`)
-    //   .then((res)=>{
-    //     console.log(res);
-    //     setResetCourse(!resetCourse);
-    //   })
-    //   .catch((err)=>{
-    //     console.log(err);
-    //   })
+    axios
+      .delete(`http://localhost:3000/courses/deleteresource/${course_id}/${section_id}/${topic_id}/${resource_id}`)
+      .then((res)=>{
+        console.log(res);
+        setResetCourse(!resetCourse);
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+    console.log(section_id, topic_id, resource_id);
   }
+
+  console.log("uuuu", userId , userCourse ,isIntoPurchase );
 
   return (
     <>
@@ -411,19 +428,21 @@ export const OneCourse = () => {
           course_id={course_id}
         />
 
-        {userId !== userCourse && isIntoPurchase && <CardRates 
+        {showCardRate && 
+        <CardRates 
           resetCourse={resetCourse}
           setResetCourse={setResetCourse}
+          setShowCardRate={setShowCardRate}
         />}
 
         <h5>¿Qué opina la gente?</h5>
               
           <div className="d-flex flex-column">
             {rates?.map((elem)=>(
-            <CardRatingsOneCourse
-            key={elem.user_rater_user_id}
-            rates={elem}
-            />
+                <CardRatingsOneCourse
+                key={elem.user_rater_user_id}
+                rates={elem}
+                />
            ))}
             
           </div>           
