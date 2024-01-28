@@ -64,14 +64,14 @@ export const PurchaseCourseCard = () => {
               />
               <Card.Body className="d-flex flex-column gap-1">
                 <Card.Text> {elem.title} </Card.Text>
-                <Card.Subtitle className="descriptioncard">Seguidores: {elem.followers}</Card.Subtitle>
+                <Card.Subtitle className="followerscard">Seguidores: {elem.followers}</Card.Subtitle>
 
                 {elem.average_rating && (
                   <RatingStars numberstars={elem.average_rating} />
                 )}
 
                 <Card.Subtitle className="tagsCourse">{elem.tags}</Card.Subtitle>
-                <Card.Text>{elem.description}</Card.Text>
+                <Card.Title className="descriptioncard">{elem.description}</Card.Title>
 
                 <Card.Text>
                   {elem.price === 0 ? "GRATIS" : `${elem.price}€`}

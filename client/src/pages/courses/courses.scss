@@ -6,7 +6,7 @@
 }
 
 .mapeoAllCourse{
-  background-color: $accent5-color;
+  background-color: $accent2-color;
 }
 
 .button{
@@ -27,6 +27,16 @@
 .mainAllCourses, .headerAllCourses {
   width: 80vw;
   margin: 0 auto; 
+}
+
+.descriptioncard{
+  font-size: 1rem;
+  color: #9C9999 !important;
+}
+
+.followerscard{
+  color: white;
+  font-size: 1rem;
 }
 
 .tagsCourse{

@@ -76,14 +76,14 @@ export const OneUserCourses = () => {
           return (
             <Card style={{ width: "22rem" }} key={elem.course_id} className="mapeoAllCourseOneUser text-center">
               <Card.Img
-                style={{ height: "22rem", objectFit: "cover" }}
+                style={{ height: "16rem", objectFit: "cover" }}
                 variant="top"
                 src={`http://localhost:3000/images/cursos/${elem.img}`}
               />
-             <Card.Body className="d-flex flex-column">
-                <Card.Title> {elem.title} </Card.Title>
+             <Card.Body className="d-flex flex-column gap-1">
+                <Card.Text> {elem.title} </Card.Text>
                 <Card.Subtitle className="tagsCourse">{elem.tags}</Card.Subtitle>
-                <Card.Text>{elem.description}</Card.Text>
+                <Card.Title className="descriptioncard">{elem.description}</Card.Title>
                 <Card.Text>{elem.price === 0 ?'GRATIS' : `${elem.price}€`}</Card.Text>
                 <Card.Text className="d-flex justify-content-between mt-auto">
                 <Button
