@@ -2,26 +2,23 @@ import React, { useContext, useEffect, useState } from "react";
 import "./saveCourseCard.scss";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button, Card } from "react-bootstrap";
+import { Button, Card, Col } from "react-bootstrap";
 import { textSensitive } from "../../../helpers/utils";
 import { RatingStars } from "../RatingStars/RatingStars";
-import { AscendioContext } from '../../../context/AscendioContext'
+import { AscendioContext } from "../../../context/AscendioContext";
 
 export const SaveCourseCard = () => {
-  // const { user } = useContext(AscendioContext);
   const [allcourses, setAllcourses] = useState([]);
   const [findCourse, setFindCourse] = useState();
   const [filter, setFilter] = useState("");
-  const [order, setOrder] = useState(false)
-  const {user_id} = useContext(AscendioContext).user
+  const [order, setOrder] = useState(false);
+  const { user_id } = useContext(AscendioContext).user;
   const navigate = useNavigate();
-  
 
   useEffect(() => {
     axios
       .get(`http://localhost:3000/courses/getonewishedcourse/${user_id}`)
       .then((res) => {
-        console.log(res.data);
         setAllcourses(res.data);
         setFindCourse(res.data);
       })
@@ -41,47 +38,51 @@ export const SaveCourseCard = () => {
     setFindCourse(tempArray);
   }, [allcourses, filter]);
 
-  
   return (
-    <section>
-      <div className="d-flex justify-content-center p-5">
-        <h2>Búsqueda</h2>
-        <input onChange={handleChange} placeholder="🔍..." value={filter} />
-      </div>
-
-      <div className="d-flex justify-content-center" style={{color: 'white'}}><h2>Mis cursos guardados</h2></div>
-      <div className="d-flex justify-content-end">
-        
-      </div>
-      <article className="d-flex justify-content-center gap-2 flex-wrap">
-        
+    <Col>
+      <header>
+        <div
+          className="d-flex justify-content-center p-5"
+          style={{ color: "white" }}
+        >
+          <h2>Mis cursos guardados</h2>
+          <input onChange={handleChange} placeholder="🔍..." value={filter} />
+        </div>
+      </header>
+      <main className="mainCursosGuardados d-flex flex-wrap justify-content-center gap-3 pb-5">
         {findCourse?.map((elem) => {
           return (
-            <Card style={{ width: "22rem" }} key={elem.course_id}>
+            <Card
+              style={{ width: "22rem" }}
+              key={elem.course_id}
+              className="mapeoCursosGuardados"
+            >
               <Card.Img
                 style={{ height: "22rem", objectFit: "cover" }}
                 variant="top"
                 src={`http://localhost:3000/images/cursos/${elem.img}`}
               />
-              <Card.Body>
+              <Card.Body className="d-flex flex-column">
                 <Card.Title> {elem.title} </Card.Title>
                 <Card.Subtitle>Seguidores: {elem.followers}</Card.Subtitle>
-                
-                {elem.average_rating&&
-                  <RatingStars 
-                    numberstars={elem.average_rating}
-                />}
-                
+
+                {elem.average_rating && (
+                  <RatingStars numberstars={elem.average_rating} />
+                )}
+
                 <Card.Subtitle>{elem.tags}</Card.Subtitle>
                 <Card.Text>{elem.description}</Card.Text>
-                <Card.Text>{elem.price === 0 ?'GRATIS' : `${elem.price}€`}</Card.Text>
-                <Button
-                  onClick={() => navigate(`/course/${elem.course_id}`)}
-                  variant="outline-success"
-                  className="me-3"
-                >
-                  Más info
-                </Button>
+                <Card.Text>
+                  {elem.price === 0 ? "GRATIS" : `${elem.price}€`}
+                </Card.Text>
+                <Card.Text className="d-flex justify-content-center mt-auto">
+                  <Button
+                    onClick={() => navigate(`/course/${elem.course_id}`)}
+                    className="button"
+                  >
+                    Más info
+                  </Button>
+                </Card.Text>
               </Card.Body>
             </Card>
           );
@@ -89,7 +90,7 @@ export const SaveCourseCard = () => {
         {findCourse?.length === 0 && (
           <p>No se han encontrado cursos con este nombre</p>
         )}
-      </article>
-    </section>
+      </main>
+    </Col>
   );
 };
