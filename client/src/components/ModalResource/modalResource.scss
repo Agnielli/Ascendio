@@ -1,7 +1,7 @@
 @import "../../../public/stylesheets/variables.scss";
 
 
-.modalDel {
+.modalResource {
   &,
   &.modal-dialog,
   &.modal-content,
@@ -9,8 +9,7 @@
   &.modal-body,
   &.modal-footer {
     background-color: $accent2-color;
-    border-color: $accent2-color;
-       color:#9C9999; 
+    border-color: $accent2-color; 
+    color:#9C9999;
   }
 }
-
