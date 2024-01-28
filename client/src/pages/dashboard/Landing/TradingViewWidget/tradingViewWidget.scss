@@ -2,7 +2,7 @@
 
 .ascendio-graphic-containerPrincipal {
   width: 80%;
-  height: 300px;
+  height: 80%;
   background-color: $secondary-color;
   
   .tradingview-widget-container {
@@ -13,8 +13,8 @@
     flex-wrap: wrap;
   }
 
-  @media (max-width: 600px) {
-    width:50%;
-    height: auto; // Ajusta la altura automáticamente según el contenido
-  }
+  // @media (max-width: 600px) {
+  //   width:90%;
+  //   height: 50px; // Ajusta la altura automáticamente según el contenido
+  // }
 }
