@@ -40,9 +40,9 @@ export const PurchaseCourseCard = () => {
 
   return (
     <Col>
-      <header>
+      <header className="headerCursosComprados">
         <div
-          className="d-flex justify-content-center p-5"
+          className="d-flex justify-content-between p-5"
           style={{ color: "white" }}
         >
           <h2>Mis cursos comprados</h2>
@@ -70,8 +70,9 @@ export const PurchaseCourseCard = () => {
                   <RatingStars numberstars={elem.average_rating} />
                 )}
 
-                <Card.Subtitle className="tagscard">{elem.tags}</Card.Subtitle>
-                <Card.Title className="descriptioncard">{elem.description}</Card.Title>
+                <Card.Subtitle className="tagsCourse">{elem.tags}</Card.Subtitle>
+                <Card.Text>{elem.description}</Card.Text>
+
                 <Card.Text>
                   {elem.price === 0 ? "GRATIS" : `${elem.price}€`}
                 </Card.Text>

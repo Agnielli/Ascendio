@@ -25,16 +25,18 @@
   }
 }
 
-.mainCursosComprados {
+.mainCursosComprados, .headerCursosComprados {
   width: 80vw;
   margin: 0 auto; 
 }
 
-.descriptioncard{
+
+/*.descriptioncard{
   font-size: 1rem;
   color: #9C9999 !important;
-}
-.tagscard{
-  font-size: 1rem;
-  color: #E15252 !important;
+}*/
+
+.tagsCourse{
+  color: $accent-color;
+
 }

@@ -24,8 +24,14 @@
   }
 }
 
-.mainAllCourses {
+.mainAllCourses, .headerAllCourses {
   width: 80vw;
   margin: 0 auto; 
 }
 
+.tagsCourse{
+  color: $accent-color;
+}
+.busqueda{
+  color: white;
+}
