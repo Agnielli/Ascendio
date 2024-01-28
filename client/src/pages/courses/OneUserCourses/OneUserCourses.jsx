@@ -6,6 +6,7 @@ import { Button, Card, Col } from "react-bootstrap";
 import { textSensitive } from "../../../helpers/utils";
 import { ModalDelOneCourse } from "../../../components/ModalDelOneCourse/ModalDelOneCourse";
 import './OneUserCourses.scss'
+import "../../../../public/stylesheets/ButtonsApp.scss";
 
 export const OneUserCourses = () => {
   const [findCourse, setFindCourse] = useState();
@@ -88,13 +89,13 @@ export const OneUserCourses = () => {
                 <Card.Text className="d-flex justify-content-between mt-auto">
                 <Button
                   onClick={() => navigate(`/course/${elem.course_id}`)}
-                  className="button"
+                  className="Button3"
                 >
                   Más info
                 </Button>
                 <Button
                   onClick={() => openModalDelete(elem.course_id)}
-                  className="button"
+                  className="Button3"
                 >
                   Eliminar curso
                 </Button>

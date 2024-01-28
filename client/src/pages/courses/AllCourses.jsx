@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Button, Card, Col } from "react-bootstrap";
 import { textSensitive } from "../../helpers/utils";
 import { RatingStars } from "../../components/Courses/RatingStars/RatingStars";
+import "../../../public/stylesheets/ButtonsApp.scss";
 
 export const AllCourses = () => {
   const [allcourses, setAllcourses] = useState([]);
@@ -90,7 +91,7 @@ export const AllCourses = () => {
                 </Card.Text>
                 <Card.Text className="d-flex justify-content-center mt-auto">
                   <Button
-                    className="button"
+                    className="Button3"
                     onClick={() => navigate(`/course/${elem.course_id}`)}
                   >
                     Más info

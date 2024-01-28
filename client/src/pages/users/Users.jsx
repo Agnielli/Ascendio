@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./users.scss";
 import { Link, useNavigate } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { Button, Col } from "react-bootstrap";
 import { AscendioContext } from "../../context/AscendioContext";
 import axios from "axios";
 
@@ -14,13 +14,11 @@ export const Users = () => {
 
   const navigate = useNavigate();
 
-  //saca todas las estadísticas
   useEffect(() => {
     axios
       .get(`http://localhost:3000/users/statisticsuser/${user.user_id}`)
       .then((res) => {
         setStatisticsUser(res.data.datos);
-        console.log(res.data.datos);
       })
       .catch((err) => console.log(err));
   }, [user]);
@@ -34,6 +32,7 @@ export const Users = () => {
   }
 
   return (
+    <Col xs={12} md={6} className="user">
     <div className="d-flex flex-column w-25 gap-2">
       <div className="avatar">
         {user?.img ? (
@@ -78,7 +77,7 @@ export const Users = () => {
           </p>
         </>
       )}
-
+     
       <Button onClick={() => navigate("/edituser")}>Editar perfil</Button>
       <Button variant="primary" onClick={() => setShowContent(!showContent)}>
         Crear Contenido
@@ -120,9 +119,9 @@ export const Users = () => {
           <Button variant="success" onClick={() => navigate("/savecourse")}>
             Cursos Guardados
           </Button>
-          <Button variant="success">¿Cursos Creados?</Button>
         </>
       )}
     </div>
+    </Col>
   );
 };

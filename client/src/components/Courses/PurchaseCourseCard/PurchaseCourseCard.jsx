@@ -6,6 +6,7 @@ import { Button, Card, Col } from "react-bootstrap";
 import { textSensitive } from "../../../helpers/utils";
 import { RatingStars } from "../RatingStars/RatingStars";
 import { AscendioContext } from "../../../context/AscendioContext";
+import "../../../../public/stylesheets/ButtonsApp.scss";
 
 export const PurchaseCourseCard = () => {
   const [allcourses, setAllcourses] = useState([]);
@@ -77,7 +78,7 @@ export const PurchaseCourseCard = () => {
                 <Card.Text className="d-flex justify-content-center mt-auto">
                   <Button
                     onClick={() => navigate(`/course/${elem.course_id}`)}
-                    className="button"
+                    className="Button3"
                   >
                     Más info
                   </Button>

@@ -10,15 +10,13 @@ export const ModalDelOneCourse = ({
     setShowModalDelete(false);
   };
 
-
   return (
-    <Row className="d-flex justify-content-center p-5">
-      <Col md={4}>
+      <Col className="d-flex justify-content-center p-5" md={4}>
         <Modal show={showModalDelete} onHide={handleClose}>
-          <Modal.Header closeButton>
+          <Modal.Header closeButton className="modalDel">
             <Modal.Title>Eliminar curso</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body className="modalDel">
             <Form>
               <Form.Group controlId="formFile" className="mb-3">
                 <Form.Label>
@@ -27,7 +25,7 @@ export const ModalDelOneCourse = ({
               </Form.Group>
             </Form>
           </Modal.Body>
-          <Modal.Footer>
+          <Modal.Footer className="modalDel">
             <Button
                className="Button3"
               onClick={() => deleteCourse(course_id)}
@@ -43,6 +41,5 @@ export const ModalDelOneCourse = ({
           </Modal.Footer>
         </Modal>
       </Col>
-    </Row>
   );
 };

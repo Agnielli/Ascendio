@@ -1,23 +1,7 @@
-@import "../../../../public/stylesheets/ButtonsApp.scss";
 @import "../../../../public/stylesheets/variables.scss";
 
 .mapeoCursosComprados{
   background-color: $accent5-color;
-}
-
-.button{
-  padding: 6px 20px !important;
-  background-color: $accent3-color;
-  color: $accent2-color;
-  border: none;
-  border-radius: 25px;
-  font-weight: 500;
-  transition: 0.3s;
-  &:active,
-  &:hover{
-    background-color: $accent-color;
-    color: $accent2-color;
-  }
 }
 
 .mainCursosComprados, .headerCursosComprados {
