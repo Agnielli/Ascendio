@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
+import './modalDelOneCourse.scss'
+import "../../../public/stylesheets/ButtonsApp.scss";
 
 export const ModalDelOneCourse = ({
   showModalDelete,setShowModalDelete, deleteCourse,course_id}) => {
@@ -20,22 +22,20 @@ export const ModalDelOneCourse = ({
             <Form>
               <Form.Group controlId="formFile" className="mb-3">
                 <Form.Label>
-                  ¿Estás seguro que quieres eliminar el curso?{" "}
+                  ¿Seguro que quieres eliminar el curso?
                 </Form.Label>
               </Form.Group>
             </Form>
           </Modal.Body>
           <Modal.Footer>
             <Button
-              variant="outline-success"
-              className="me-3"
+               className="Button3"
               onClick={() => deleteCourse(course_id)}
             >
               Aceptar
             </Button>
             <Button
-              variant="outline-success"
-              className="me-3"
+                 className="Button3"
               onClick={handleClose}
             >
               Cancelar

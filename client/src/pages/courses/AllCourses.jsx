@@ -44,62 +44,68 @@ export const AllCourses = () => {
 
   return (
     <Col>
-        <header> 
+      <header className="headerAllCourses">
         <div
-          className="d-flex justify-content-center p-5"
+          className="d-flex justify-content-between align-items-center p-5"
           style={{ color: "white" }}
         >
-          <h2>{order ? "Ver últimos cursos" : "Top cursos"}</h2>
-          <input onChange={handleChange} placeholder="🔍..." value={filter} />
+          <div>
+            <h2>{order ? "Ver últimos cursos" : "Top cursos"}</h2>
+            <Button onClick={() => setOrder(!order)} className="button">
+              {order ? "Ver top cursos" : "Ver últimos cursos"}
+            </Button>
+          </div>
+          <div>
+            <input onChange={handleChange} placeholder="🔍" value={filter} />
+          </div>
         </div>
-        <div className="d-flex justify-content-end">
-          <Button
-            onClick={() => setOrder(!order)}
-            variant="outline-success"
-            className="me-5 mb-3"
-          >
-            {order ? "Ver top cursos" : "Ver últimos cursos"}
-          </Button>
-        </div>
-        </header>
-        <main className="mainAllCourses d-flex flex-wrap justify-content-center gap-3 pb-5">
-          {findCourse?.map((elem) => {
-            return (
-              <Card style={{ width: "22rem" }} key={elem.course_id}  className="mapeoAllCourse">
-                <Card.Img
-                  style={{ height: "22rem", objectFit: "cover" }}
-                  variant="top"
-                  src={`http://localhost:3000/images/cursos/${elem.img}`}
-                />
+      </header>
+      <main className="mainAllCourses d-flex flex-wrap justify-content-center gap-3 pb-5">
+        {findCourse?.map((elem) => {
+          return (
+            <Card
+              style={{ width: "22rem" }}
+              key={elem.course_id}
+              className="mapeoAllCourse text-center"
+            >
+              <Card.Img
+                style={{ height: "22rem", objectFit: "cover" }}
+                variant="top"
+                src={`http://localhost:3000/images/cursos/${elem.img}`}
+              />
               <Card.Body className="d-flex flex-column">
-                  <Card.Title> {elem.title} </Card.Title>
-                  <Card.Subtitle>Seguidores: {elem.followers}</Card.Subtitle>
+                <Card.Title> {elem.title} </Card.Title>
+                <Card.Subtitle>Seguidores: {elem.followers}</Card.Subtitle>
 
-                  {elem.average_rating && (
-                    <RatingStars numberstars={elem.average_rating} />
-                  )}
+                {elem.average_rating && (
+                  <RatingStars numberstars={elem.average_rating} />
+                )}
 
-                  <Card.Subtitle>{elem.tags}</Card.Subtitle>
-                  <Card.Text>{elem.description}</Card.Text>
-                  <Card.Text>
-                    {elem.price === 0 ? "GRATIS" : `${elem.price}€`}
-                  </Card.Text>
-                  <Card.Text className="d-flex justify-content-center mt-auto">
-                  <Button className="button"
+                <Card.Subtitle className="tagsCourse">
+                  {elem.tags}
+                </Card.Subtitle>
+                <Card.Text>{elem.description}</Card.Text>
+                <Card.Text>
+                  {elem.price === 0 ? "GRATIS" : `${elem.price}€`}
+                </Card.Text>
+                <Card.Text className="d-flex justify-content-center mt-auto">
+                  <Button
+                    className="button"
                     onClick={() => navigate(`/course/${elem.course_id}`)}
                   >
                     Más info
                   </Button>
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            );
-          })}
-          {findCourse?.length === 0 && (
-            <p>No se han encontrado cursos con este nombre</p>
-          )}
-        </main>
-     
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          );
+        })}
+        {findCourse?.length === 0 && (
+          <p className="busqueda">
+            No se han encontrado cursos con este nombre
+          </p>
+        )}
+      </main>
     </Col>
   );
 };
