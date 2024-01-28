@@ -14,78 +14,78 @@ import { TradesPostMap } from "../../../components/TradesPostMap/TradesPostMap";
 export const AdminHome = () => {
   const [showUserButtons, setShowUserButtons] = useState(false);
   const [showUsers, setShowUsers] = useState(false);
-  const [showDisabledUsers, setShowDisabledUsers] = useState(false)
-  const [showActivatedUsers, setShowActivatedUsers] = useState(false)
+  const [showDisabledUsers, setShowDisabledUsers] = useState(false);
+  const [showActivatedUsers, setShowActivatedUsers] = useState(false);
   const [showStats, setShowStats] = useState(false);
   const [showTrades, setShowTrades] = useState(false);
   const [showPost, setShowPost] = useState(false);
   const [showComments, setShowComments] = useState(false);
   const [showCourses, setShowCourses] = useState(false);
-  const [showCourseButtons, setShowCourseButtons] = useState(false)
-  const [showDisabledCourses, setShowDisabledCourses] = useState(false)
-  const [showEnabledCourses, setShowEnabledCourses] = useState(false)
+  const [showCourseButtons, setShowCourseButtons] = useState(false);
+  const [showDisabledCourses, setShowDisabledCourses] = useState(false);
+  const [showEnabledCourses, setShowEnabledCourses] = useState(false);
   const [allUsers, setAllUsers] = useState();
 
   const showButtons = () => {
     setShowUserButtons(!showUserButtons);
-    setShowCourseButtons(false)
+    setShowCourseButtons(false);
     setShowTrades(false);
   };
 
   const showAllCourseButtons = () => {
-    setShowCourseButtons(!showCourseButtons)
+    setShowCourseButtons(!showCourseButtons);
     setShowUserButtons(false);
     setShowTrades(false);
     setShowStats(false);
-  }
+  };
 
   const showAllUsers = () => {
     setShowUsers(!showUsers);
     setShowCourses(false);
     setShowStats(false);
     setShowTrades(false);
-    setShowDisabledUsers(false)
-    setShowActivatedUsers(false)
-    setShowEnabledCourses(false)
-    setShowDisabledCourses(false)
-    setShowCourseButtons(false)
+    setShowDisabledUsers(false);
+    setShowActivatedUsers(false);
+    setShowEnabledCourses(false);
+    setShowDisabledCourses(false);
+    setShowCourseButtons(false);
   };
 
   const showAllDisabledUsers = () => {
-    setShowDisabledUsers(!showDisabledUsers)
+    setShowDisabledUsers(!showDisabledUsers);
     setShowUsers(false);
     setShowCourses(false);
     setShowStats(false);
     setShowTrades(false);
-    setShowActivatedUsers(false)
-    setShowEnabledCourses(false)
-    setShowDisabledCourses(false)
-    setShowCourseButtons(false)
-  }
+    setShowActivatedUsers(false);
+    setShowEnabledCourses(false);
+    setShowDisabledCourses(false);
+    setShowCourseButtons(false);
+  };
 
   const showAllActivatedUsers = () => {
-    setShowActivatedUsers(!showActivatedUsers)
+    setShowActivatedUsers(!showActivatedUsers);
     setShowUsers(false);
     setShowCourses(false);
     setShowStats(false);
     setShowTrades(false);
-    setShowDisabledUsers(false)
-    setShowEnabledCourses(false)
-    setShowDisabledCourses(false)
-    setShowCourseButtons(false)
-  }
+    setShowDisabledUsers(false);
+    setShowEnabledCourses(false);
+    setShowDisabledCourses(false);
+    setShowCourseButtons(false);
+  };
 
   const showStatistics = () => {
     setShowStats(!showStats);
     setShowUsers(false);
     setShowTrades(false);
     setShowCourses(false);
-    setShowDisabledUsers(false)
-    setShowActivatedUsers(false)
+    setShowDisabledUsers(false);
+    setShowActivatedUsers(false);
     setShowUserButtons(false);
-    setShowEnabledCourses(false)
-    setShowDisabledCourses(false)
-    setShowCourseButtons(false)
+    setShowEnabledCourses(false);
+    setShowDisabledCourses(false);
+    setShowCourseButtons(false);
   };
 
   const showAllCourses = () => {
@@ -93,48 +93,48 @@ export const AdminHome = () => {
     setShowStats(false);
     setShowTrades(false);
     setShowUsers(false);
-    setShowDisabledUsers(false)
-    setShowActivatedUsers(false)
+    setShowDisabledUsers(false);
+    setShowActivatedUsers(false);
     setShowUserButtons(false);
-    setShowEnabledCourses(false)
-    setShowDisabledCourses(false)
+    setShowEnabledCourses(false);
+    setShowDisabledCourses(false);
   };
 
   const showAllDisabledCourses = () => {
-    setShowDisabledCourses(!showDisabledCourses)
+    setShowDisabledCourses(!showDisabledCourses);
     setShowCourses(false);
     setShowStats(false);
     setShowTrades(false);
     setShowUsers(false);
-    setShowDisabledUsers(false)
-    setShowActivatedUsers(false)
+    setShowDisabledUsers(false);
+    setShowActivatedUsers(false);
     setShowUserButtons(false);
-    setShowEnabledCourses(false)
-  }
+    setShowEnabledCourses(false);
+  };
 
   const showAllEnabledCourses = () => {
-    setShowEnabledCourses(!showEnabledCourses)
+    setShowEnabledCourses(!showEnabledCourses);
     setShowCourses(false);
     setShowStats(false);
     setShowTrades(false);
     setShowUsers(false);
-    setShowDisabledUsers(false)
-    setShowActivatedUsers(false)
+    setShowDisabledUsers(false);
+    setShowActivatedUsers(false);
     setShowUserButtons(false);
-    setShowDisabledCourses(false)
-  }
+    setShowDisabledCourses(false);
+  };
 
   const showAllTrades = () => {
     setShowTrades(!showTrades);
     setShowStats(false);
     setShowCourses(false);
     setShowUsers(false);
-    setShowDisabledUsers(false)
-    setShowActivatedUsers(false)
+    setShowDisabledUsers(false);
+    setShowActivatedUsers(false);
     setShowUserButtons(false);
-    setShowEnabledCourses(false)
-    setShowDisabledCourses(false)
-    setShowCourseButtons(false)
+    setShowEnabledCourses(false);
+    setShowDisabledCourses(false);
+    setShowCourseButtons(false);
   };
 
   const showAllComments = () => {
@@ -160,7 +160,9 @@ export const AdminHome = () => {
         <div>
           {showTrades && (
             <div>
-              <Button className="Button1" onClick={() => showAllPosts()}>Posts Trades</Button>
+              <Button className="Button1" onClick={() => showAllPosts()}>
+                Posts Trades
+              </Button>
               <Button onClick={() => showAllComments()}>Posts General</Button>
               {showComments && <OneComment />}
               {showPost && <TradesPostMap />}
@@ -169,42 +171,61 @@ export const AdminHome = () => {
         </div>
         <div className="">
           {showUserButtons === true && (
-            <div className="">
-              <div className="ButtonsRow2">
+            <Container fluid>
+              <Container fluid className="ButtonsRow2">
                 <Button className="ButtonNoBG" onClick={() => showAllUsers()}>
                   Todos
                 </Button>
-                <Button className="ButtonNoBG" onClick={() => showAllActivatedUsers()}>Activos</Button>
-                <Button className="ButtonNoBG" onClick={() => showAllDisabledUsers()}>Bloqueados</Button>
-              </div>
-              <div>
+                <Button
+                  className="ButtonNoBG"
+                  onClick={() => showAllActivatedUsers()}
+                >
+                  Activos
+                </Button>
+                <Button
+                  className="ButtonNoBG"
+                  onClick={() => showAllDisabledUsers()}
+                >
+                  Bloqueados
+                </Button>
+              </Container>
+              <Row>
                 {showUsers === true && (
-                  <AdminAllUsers allUsers={allUsers} setAllUsers={setAllUsers} />
+                  <Container>
+                    <Row>
+                      <Col>
+                        <AdminAllUsers
+                          allUsers={allUsers}
+                          setAllUsers={setAllUsers}
+                        />
+                      </Col>
+                    </Row>
+                  </Container>
                 )}
-                {showDisabledUsers === true &&
-                  <AdminDisabledUsers />
-                }
-                {showActivatedUsers === true &&
-                  <AdminActivateUser />
-                }
-                </div>
-              </div>
+                {showDisabledUsers === true && <AdminDisabledUsers />}
+                {showActivatedUsers === true && <AdminActivateUser />}
+              </Row>
+            </Container>
           )}
         </div>
-        
+
         <div>{showStats === true && <Estadisticas />}</div>
-        {showCourseButtons &&
+        {showCourseButtons && (
           <div className="">
             <Button onClick={() => showAllCourses()}>Todos los cursos</Button>
-            <Button onClick={() => showAllEnabledCourses()}>Cursos Activos</Button>
-            <Button onClick={() => showAllDisabledCourses()}>Cursos Bloqueados</Button>
+            <Button onClick={() => showAllEnabledCourses()}>
+              Cursos Activos
+            </Button>
+            <Button onClick={() => showAllDisabledCourses()}>
+              Cursos Bloqueados
+            </Button>
 
             {showCourses && <AdminCourses />}
             {showDisabledCourses && <DisabledCoursesMap />}
             {showEnabledCourses && <EnabledCoursesMap />}
           </div>
-        }
-      </Col>    
+        )}
+      </Col>
     </Container>
   );
 };
