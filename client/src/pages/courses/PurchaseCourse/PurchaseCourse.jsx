@@ -27,16 +27,7 @@ export const PurchaseCourse = () => {
       <Button onClick={() => navigate("/profile")}>Volver</Button>
       <h3>Mis cursos comprados</h3>
 
-      {cursosComprados?.map((elem) => (
-        <Card style={{ width: '18rem' }} key={elem.course_id}>
-          <Card.Img variant="top" src="holder.js/100px180" />
-          <Card.Body>
-            <Card.Title>{elem.title}</Card.Title>
-            <Card.Text>{elem.description}</Card.Text>
-            <Button variant="primary">??</Button>
-          </Card.Body>
-        </Card>
-      ))}
+      <PurchaseCourseCard />
     </div>
   );
 };

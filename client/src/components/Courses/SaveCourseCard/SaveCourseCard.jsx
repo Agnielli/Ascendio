@@ -1,29 +1,25 @@
 import React, { useContext, useEffect, useState } from "react";
-import "./courses.scss";
+import "./saveCourseCard.scss";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, Card } from "react-bootstrap";
-import { AscendioContext } from "../../context/AscendioContext";
-import { textSensitive } from "../../helpers/utils";
-import { RatingStars } from "../../components/Courses/RatingStars/RatingStars";
+import { textSensitive } from "../../../helpers/utils";
+import { RatingStars } from "../RatingStars/RatingStars";
+import { AscendioContext } from '../../../context/AscendioContext'
 
-export const AllCourses = () => {
+export const SaveCourseCard = () => {
   // const { user } = useContext(AscendioContext);
   const [allcourses, setAllcourses] = useState([]);
   const [findCourse, setFindCourse] = useState();
   const [filter, setFilter] = useState("");
   const [order, setOrder] = useState(false)
+  const {user_id} = useContext(AscendioContext).user
   const navigate = useNavigate();
+  
 
   useEffect(() => {
-    let url
-    if(order === false){
-      url = `http://localhost:3000/courses/callcourses`
-    }else{
-      url = `http://localhost:3000/courses/callcoursesdates`
-    }
     axios
-      .get(url)
+      .get(`http://localhost:3000/courses/getonewishedcourse/${user_id}`)
       .then((res) => {
         console.log(res.data);
         setAllcourses(res.data);
@@ -32,7 +28,7 @@ export const AllCourses = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, [order]);
+  }, [user_id]);
 
   const handleChange = (e) => {
     setFilter(e.target.value);
@@ -49,20 +45,13 @@ export const AllCourses = () => {
   return (
     <section>
       <div className="d-flex justify-content-center p-5">
-        <h2>All courses</h2>
+        <h2>Búsqueda</h2>
         <input onChange={handleChange} placeholder="🔍..." value={filter} />
       </div>
 
-      <div className="d-flex justify-content-center" style={{color: 'white'}}><h2>{order ? "Ver Últimos Cursos" : "Top Cursos"}</h2></div>
+      <div className="d-flex justify-content-center" style={{color: 'white'}}><h2>Mis cursos guardados</h2></div>
       <div className="d-flex justify-content-end">
         
-        <Button
-            onClick={() => setOrder(!order)}
-            variant="outline-success"
-            className="me-5 mb-3"
-          >
-          {order ? "Ver Top Cursos" : "Ver Últimos Cursos"}
-        </Button>
       </div>
       <article className="d-flex justify-content-center gap-2 flex-wrap">
         
