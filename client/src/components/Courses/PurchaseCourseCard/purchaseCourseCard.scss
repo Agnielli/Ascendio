@@ -1,8 +1,13 @@
 @import "../../../../public/stylesheets/ButtonsApp.scss";
 @import "../../../../public/stylesheets/variables.scss";
 
+*{
+  color: white;
+}
 .mapeoCursosComprados{
-  background-color: $accent5-color;
+  /* background-color: #2E2D2D; */
+  background-color: $accent2-color;
+  
 }
 
 .button{
@@ -25,6 +30,13 @@
   margin: 0 auto; 
 }
 
+
+/*.descriptioncard{
+  font-size: 1rem;
+  color: #9C9999 !important;
+}*/
+
 .tagsCourse{
   color: $accent-color;
+
 }
