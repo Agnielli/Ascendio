@@ -648,6 +648,7 @@ GROUP BY u.user_id;`;
       });
     }
   };
+
 }
 
 module.exports = new usersControllers();
