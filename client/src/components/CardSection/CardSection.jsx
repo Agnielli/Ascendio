@@ -74,7 +74,7 @@ export const CardSection = ({
         {elem.section_topics.map((topic, index) => {
               return (
           <CardTopic
-          key={elem.topic_id}
+          key={`${elem.topic_id}-${index}`}
           topics={topics}
           setTopics={setTopics}
           topic={topic}
