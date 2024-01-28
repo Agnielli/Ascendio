@@ -2,9 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { AscendioContext } from "../../../context/AscendioContext";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { Button, Card } from "react-bootstrap";
+import { Button, Card, Col } from "react-bootstrap";
 import { textSensitive } from "../../../helpers/utils";
 import { ModalDelOneCourse } from "../../../components/ModalDelOneCourse/ModalDelOneCourse";
+import './OneUserCourses.scss'
 
 export const OneUserCourses = () => {
   const [findCourse, setFindCourse] = useState();
@@ -23,7 +24,6 @@ export const OneUserCourses = () => {
       .then((res) => {
         setAllCoursesOneUser(res.data);
         setFindCourse(res.data);
-        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -61,39 +61,44 @@ export const OneUserCourses = () => {
   };
 
   return (
-    <section>
-      <div className="d-flex justify-content-center p-5">
-        <h2>TODOS LOS CURSOS DEL USUARIO: {user_id}</h2>
+    <Col>
+    <header> 
+    <div
+          className="d-flex justify-content-center p-5"
+          style={{ color: "white" }}
+        >
+        <h2>Mis cursos</h2>
         <input onChange={handleChange} placeholder="🔍..." value={filter} />
       </div>
-      <article className="d-flex justify-content-center gap-2 flex-wrap">
+      </header>
+      <main className="mainAllCoursesOneUser d-flex flex-wrap justify-content-center gap-3 pb-5">
         {findCourse?.map((elem) => {
           return (
-            <Card style={{ width: "22rem" }} key={elem.course_id}>
+            <Card style={{ width: "22rem" }} key={elem.course_id} className="mapeoAllCourseOneUser">
               <Card.Img
                 style={{ height: "22rem", objectFit: "cover" }}
                 variant="top"
                 src={`http://localhost:3000/images/cursos/${elem.img}`}
               />
-              <Card.Body>
+             <Card.Body className="d-flex flex-column">
                 <Card.Title> {elem.title} </Card.Title>
                 <Card.Subtitle>{elem.tags}</Card.Subtitle>
                 <Card.Text>{elem.description}</Card.Text>
                 <Card.Text>{elem.price === 0 ?'GRATIS' : `${elem.price}€`}</Card.Text>
+                <Card.Text className="d-flex justify-content-between mt-auto">
                 <Button
                   onClick={() => navigate(`/course/${elem.course_id}`)}
-                  variant="outline-success"
-                  className="me-3"
+                  className="button"
                 >
                   Más info
                 </Button>
                 <Button
                   onClick={() => openModalDelete(elem.course_id)}
-                  variant="outline-danger"
-                  className="me-3"
+                  className="button"
                 >
                   Eliminar curso
                 </Button>
+                </Card.Text>
               </Card.Body>
             </Card>
           );
@@ -109,7 +114,7 @@ export const OneUserCourses = () => {
         {findCourse?.length === 0 && (
           <p>No se han encontrado cursos con estos valores</p>
         )}
-      </article>
-    </section>
+      </main>
+    </Col>
   );
 };

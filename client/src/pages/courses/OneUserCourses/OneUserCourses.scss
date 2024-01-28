@@ -1,11 +1,7 @@
-@import "../../../public/stylesheets/ButtonsApp.scss";
-@import "../../../public/stylesheets/variables.scss";
+@import "../../../../public/stylesheets/ButtonsApp.scss";
+@import "../../../../public/stylesheets/variables.scss";
 
-.nav-bar-button-courses {
-  z-index: 1; /* Asegura que esté por encima de otros elementos */
-}
-
-.mapeoAllCourse{
+.mapeoAllCourseOneUser{
   background-color: $accent5-color;
 }
 
@@ -24,7 +20,7 @@
   }
 }
 
-.mainAllCourses {
+.mainAllCoursesOneUser {
   width: 80vw;
   margin: 0 auto; 
 }
