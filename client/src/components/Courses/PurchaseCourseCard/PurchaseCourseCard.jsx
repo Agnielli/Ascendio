@@ -7,6 +7,7 @@ import { textSensitive } from "../../../helpers/utils";
 import { RatingStars } from "../RatingStars/RatingStars";
 import { AscendioContext } from "../../../context/AscendioContext";
 
+
 export const PurchaseCourseCard = () => {
   const [allcourses, setAllcourses] = useState([]);
   const [findCourse, setFindCourse] = useState();
@@ -54,23 +55,23 @@ export const PurchaseCourseCard = () => {
             <Card
               style={{ width: "22rem" }}
               key={elem.course_id}
-              className="mapeoCursosComprados"
+              className="mapeoCursosComprados text-center"
             >
               <Card.Img
-                style={{ height: "22rem", objectFit: "cover" }}
+                style={{ height: "16rem", objectFit: "cover" }}
                 variant="top"
                 src={`http://localhost:3000/images/cursos/${elem.img}`}
               />
-              <Card.Body className="d-flex flex-column">
-                <Card.Title> {elem.title} </Card.Title>
-                <Card.Subtitle>Seguidores: {elem.followers}</Card.Subtitle>
+              <Card.Body className="d-flex flex-column gap-1">
+                <Card.Text> {elem.title} </Card.Text>
+                <Card.Subtitle className="descriptioncard">Seguidores: {elem.followers}</Card.Subtitle>
 
                 {elem.average_rating && (
                   <RatingStars numberstars={elem.average_rating} />
                 )}
 
-                <Card.Subtitle>{elem.tags}</Card.Subtitle>
-                <Card.Text>{elem.description}</Card.Text>
+                <Card.Subtitle className="tagscard">{elem.tags}</Card.Subtitle>
+                <Card.Title className="descriptioncard">{elem.description}</Card.Title>
                 <Card.Text>
                   {elem.price === 0 ? "GRATIS" : `${elem.price}€`}
                 </Card.Text>
