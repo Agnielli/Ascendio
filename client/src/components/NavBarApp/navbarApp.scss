@@ -6,8 +6,8 @@ body {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: rgb(238, 165, 165);
-    color: white; 
+    background-color: #1D1D1B;
+    color: #E15252; 
   
     img {
       width: 40px;
@@ -15,6 +15,9 @@ body {
       border-radius: 50%;
       object-fit: cover;
     }
+  }
+  .letteruser{
+    color:#E15252;
   }
 
 .user {

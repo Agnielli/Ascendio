@@ -101,14 +101,14 @@ function NavBarApp() {
                     className="d-flex user"
                     onClick={() => navigate("/profile")}
                   >
-                    <p className="mt-3 me-3">{user.nickname}</p>
+                    {/* <p className="mt-3 me-3">{user.nickname}</p> ESTO FUERA BY JUAN ME HA AMENAZADO FEDE */}
                     <div className="avatar">
                       {user?.img ? (
                         <img
                           src={`http://localhost:3000/images/users/${user.img}`}
                         />
                       ) : (
-                        <p>{user?.nickname.charAt(0).toUpperCase()}</p>
+                        <p className="letteruser">{user?.nickname.charAt(0).toUpperCase()}</p>
                       )}
                     </div>
                   </div>
