@@ -20,7 +20,11 @@
   }
 }
 
-.mainCursosComprados {
+.mainCursosComprados, .headerCursosComprados {
   width: 80vw;
   margin: 0 auto; 
+}
+
+.tagsCourse{
+  color: $accent-color;
 }

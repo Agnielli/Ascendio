@@ -39,9 +39,9 @@ export const PurchaseCourseCard = () => {
 
   return (
     <Col>
-      <header>
+      <header className="headerCursosComprados">
         <div
-          className="d-flex justify-content-center p-5"
+          className="d-flex justify-content-between p-5"
           style={{ color: "white" }}
         >
           <h2>Mis cursos comprados</h2>
@@ -54,7 +54,7 @@ export const PurchaseCourseCard = () => {
             <Card
               style={{ width: "22rem" }}
               key={elem.course_id}
-              className="mapeoCursosComprados"
+              className="mapeoCursosComprados text-center"
             >
               <Card.Img
                 style={{ height: "22rem", objectFit: "cover" }}
@@ -69,7 +69,7 @@ export const PurchaseCourseCard = () => {
                   <RatingStars numberstars={elem.average_rating} />
                 )}
 
-                <Card.Subtitle>{elem.tags}</Card.Subtitle>
+                <Card.Subtitle className="tagsCourse">{elem.tags}</Card.Subtitle>
                 <Card.Text>{elem.description}</Card.Text>
                 <Card.Text>
                   {elem.price === 0 ? "GRATIS" : `${elem.price}€`}
