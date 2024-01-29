@@ -74,7 +74,11 @@ export const SaveCourseCard = () => {
                 <Card.Subtitle className="tagsCourse">{elem.tags}</Card.Subtitle>
                 <Card.Title className="descriptioncard">{elem.description}</Card.Title>
                 <Card.Text>
-                  {elem.price === 0 ? "GRATIS" : `${elem.price}€`}
+                <Card.Text className="priceCourse px-3 my-2">
+                  {Number(elem?.price) === 0
+                  ? "GRATIS"
+                  : `${elem?.price}€`}
+              </Card.Text>
                 </Card.Text>
                 <Card.Text className="d-flex justify-content-center mt-auto">
                   <Button
