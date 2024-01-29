@@ -113,16 +113,15 @@ export const AllCourses = () => {
                 </Card.Text>
               </Card.Body>
             </Card>
-
           </Col>
           );
         })}
-        </Row>
         {findCourse?.length === 0 && (
           <p className="busqueda">
             No se han encontrado cursos con este nombre
           </p>
         )}
+        </Row>
       </main>
     </Col>
   );

@@ -2,10 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { AscendioContext } from "../../../context/AscendioContext";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { Button, Card, Col } from "react-bootstrap";
+import { Button, Card, Col, Row } from "react-bootstrap";
 import { textSensitive } from "../../../helpers/utils";
 import { ModalDelOneCourse } from "../../../components/ModalDelOneCourse/ModalDelOneCourse";
-import './OneUserCourses.scss'
+import "./OneUserCourses.scss";
 import "../../../../public/stylesheets/ButtonsApp.scss";
 
 export const OneUserCourses = () => {
@@ -63,56 +63,72 @@ export const OneUserCourses = () => {
 
   return (
     <Col>
-    <header className="headerAllCoursesOneUser">
-    <div
+      <header className="headerAllCoursesOneUser">
+        <div
           className="d-flex justify-content-between p-5"
           style={{ color: "white" }}
         >
-        <h2>Mis cursos</h2>
-        <input onChange={handleChange} placeholder="🔍..." value={filter}   className="buscador" />
-      </div>
+          <h2>Mis cursos</h2>
+          <input
+            onChange={handleChange}
+            placeholder="🔍..."
+            value={filter}
+            className="buscador"
+          />
+        </div>
       </header>
       <main className="mainAllCoursesOneUser d-flex flex-wrap justify-content-center gap-3 pb-5">
-        {findCourse?.map((elem) => {
-          return (
-            <Card style={{ width: "22rem" }} key={elem.course_id} className="mapeoAllCourseOneUser text-center">
-              <Card.Img
-                style={{ height: "16rem", objectFit: "cover" }}
-                variant="top"
-                src={`http://localhost:3000/images/cursos/${elem.img}`}
-              />
-             <Card.Body className="d-flex flex-column gap-1">
-                <Card.Text> {elem.title} </Card.Text>
-                <Card.Subtitle className="followerscard">
-                  {elem.followers !== undefined && elem.followers !== 0
-                    ? `${elem.followers} Seguidores`
-                    : "Sin seguidores"}
-                </Card.Subtitle>
-                <Card.Subtitle className="tagsCourse">{elem.tags}</Card.Subtitle>
-                <Card.Title className="descriptioncard">{elem.description}</Card.Title>
-                <Card.Text className="priceCourse px-3 my-2">
-                  {Number(elem?.price) === 0
-                  ? "GRATIS"
-                  : `${elem?.price}€`}
-                </Card.Text>
-                <Card.Text className="d-flex justify-content-between mt-auto">
-                <Button
-                  onClick={() => navigate(`/course/${elem.course_id}`)}
-                  className="Button3"
+        <Row>
+          {findCourse?.map((elem) => {
+            return (
+              <Col xs={12} md={6} lg={4} xxl={3}>
+                <Card
+                  // style={{ width: "22rem" }}
+                  key={elem.course_id}
+                  className="mb-4 mapeoAllCourseOneUser text-center"
                 >
-                  Más info
-                </Button>
-                <Button
-                  onClick={() => openModalDelete(elem.course_id)}
-                  className="Button3"
-                >
-                  Eliminar curso
-                </Button>
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          );
-        })}
+                  <Card.Img
+                    style={{ height: "16rem", objectFit: "cover" }}
+                    variant="top"
+                    src={`http://localhost:3000/images/cursos/${elem.img}`}
+                  />
+                  <Card.Body className="d-flex flex-column gap-1">
+                    <Card.Text>{elem.title}</Card.Text>
+                    <Card.Subtitle className="followerscard">
+                      {elem.followers !== undefined && elem.followers !== 0
+                        ? `${elem.followers} Seguidores`
+                        : "Sin seguidores"}
+                    </Card.Subtitle>
+                    <Card.Subtitle className="tagsCourse">
+                      {elem.tags}
+                    </Card.Subtitle>
+                    <Card.Title className="descriptioncard">
+                      {elem.description}
+                    </Card.Title>
+                    <Card.Text className="priceCourse px-3 my-2">
+                      {Number(elem?.price) === 0 ? "GRATIS" : `${elem?.price}€`}
+                    </Card.Text>
+                    <div className="d-flex justify-content-between mt-auto">
+                      <Button
+                        onClick={() => navigate(`/course/${elem.course_id}`)}
+                        className="Button3"
+                      >
+                        Más info
+                      </Button>
+                      <Button
+                        onClick={() => openModalDelete(elem.course_id)}
+                        className="Button3"
+                      >
+                        Eliminar curso
+                      </Button>
+                    </div>
+                  </Card.Body>
+                </Card>
+              </Col>
+            );
+          })}
+        </Row>
+
         {showModalDelete && (
           <ModalDelOneCourse
             showModalDelete={showModalDelete}
@@ -121,6 +137,7 @@ export const OneUserCourses = () => {
             course_id={showModalDelete}
           />
         )}
+
         {findCourse?.length === 0 && (
           <p>No se han encontrado cursos con estos valores</p>
         )}

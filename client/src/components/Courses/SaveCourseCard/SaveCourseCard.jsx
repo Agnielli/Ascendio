@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import "./saveCourseCard.scss";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button, Card, Col } from "react-bootstrap";
+import { Button, Card, Col, Row } from "react-bootstrap";
 import { textSensitive } from "../../../helpers/utils";
 import { RatingStars } from "../RatingStars/RatingStars";
 import { AscendioContext } from "../../../context/AscendioContext";
@@ -51,12 +51,14 @@ export const SaveCourseCard = () => {
         </div>
       </header>
       <main className="mainCursosGuardados d-flex flex-wrap justify-content-center gap-3 pb-5">
+        <Row>
         {findCourse?.map((elem) => {
           return (
+            <Col xs={12} md={6} lg={4} xxl={3}>
             <Card
-              style={{ width: "22rem" }}
+              // style={{ width: "22rem" }}
               key={elem.course_id}
-              className="mapeoCursosGuardados text-center"
+              className="mapeoCursosGuardados text-center mb-4"
             >
               <Card.Img
                 style={{ height: "16rem", objectFit: "cover" }}
@@ -94,8 +96,10 @@ export const SaveCourseCard = () => {
                 </Card.Text>
               </Card.Body>
             </Card>
+          </Col>
           );
         })}
+        </Row>
         {findCourse?.length === 0 && (
           <p>No se han encontrado cursos con este nombre</p>
         )}
