@@ -35,7 +35,7 @@ export const EditOneCourse = ({
     const { name, value } = e.target;
     let newValue = value;
     if (name === 'price') {
-    newValue = value.replace(/[^0-9]/g, '');
+      newValue = value.replace(/^(?:(\d{1,5}(?:\.\d{0,2})?)|\D+).*$/g, '$1');
     }
     setEditCourse({ ...editCourse, [name]: newValue });
   };
@@ -49,7 +49,7 @@ export const EditOneCourse = ({
     setMsgError("")
   };
 
-  let regexPrice = /^[a-zA-Z0-9\s.,:?¿!¡]{1,5}$/;
+  let regexPrice = /^(?:(\d{1,5}(?:\.\d{0,2})?)|\D+).*$/g;
   let regexTitle = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ.,:?¿!¡]{1,50}$/;
   let regexDescription = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ.,:?¿!¡]{1,250}$/;
   const handleSubmit = (e) => {

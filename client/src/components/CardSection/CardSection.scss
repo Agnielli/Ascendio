@@ -1,14 +1,30 @@
-//@use "../../../../public/stylesheets/variables.scss" as var;
-//@use "../../../../public/stylesheets/ButtonsApp.scss" as boton;
+@import '../../../public/stylesheets/variables.scss';
+
 
 
 
 .sectionCard{
-  background-color: #aeafae;
+  width: 100%;
+  background-color: transparent;
   border: none;
 
+  .accordion-item:first-of-type{
+    border-radius: 30px 30px 0 0;     
+  }
   .sectionHeader{
-    background-color: #1d1d1b;
+    
+    button, button:not(.collapsed){
+      background-color: $tertiary-color;
+      border-radius: 30px 30px 0 0; 
+      border:none;
+      
+    }
+    button::after, button:not(.collapsed)::after{
+      filter: invert(1);
+      border: none;
+    }
+
+    
   }
 
   .pplCardSection{
@@ -19,9 +35,10 @@
     .titleSection{
       width: 30%;
       font-size: 1.3rem;
+      color: $accent-color;
+      
     }
     
-
     .botonsppalCardSection{
       width: 30%;
       display: flex;
@@ -50,21 +67,11 @@
       }
     }
   }
-
   
+}
 
-  .accordion{
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #aeafae;
-    border-radius: 25px;
-    
-    :active{
-      background-color: #1d1d1b !important;
-    }
-  }
-  
+.accordion-body{
+  background-color: $accent5-color;
+  border-radius: 0 0 30px 30px;
 }
 

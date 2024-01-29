@@ -1,21 +1,29 @@
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Card, Button, Form } from "react-bootstrap";
 import { AscendioContext } from "../../context/AscendioContext";
 import { useParams } from "react-router-dom";
+import './cardRates.scss'
 
 const initialValue = {
   course_rates: "",
   commentary: "",
 };
 
-export const CardRates = ({ resetCourse, setResetCourse, setShowCardRate }) => {
+export const CardRates = ({ resetCourse, setResetCourse, setShowCardRate, rates}) => {
   const [newRate, setNewRate] = useState(initialValue);
   const [msgError, setMsgError] = useState("")
-  const [rateExist, setRateExist] = useState(false)
+  const [myRate, setMyRate] = useState([]);
   const course_id = useParams().course_id;
   const { user } = useContext(AscendioContext);
   let usuario = user.user_id;
+
+  useEffect(() => {
+    if(rates){
+    setMyRate(rates.filter((elem)=> elem.user_rater_user_id === usuario
+    ))}
+  }, [])
+  console.log(myRate)
 
   const regexNumber = /^[1-5]$/;
 
@@ -43,34 +51,41 @@ export const CardRates = ({ resetCourse, setResetCourse, setShowCardRate }) => {
     setNewRate({ ...newRate, [name]: value });
   };
 
+
   return (
-    <>{!rateExist &&
-      <Card style={{ width: '18rem' }}>
+
+    <>{myRate.length === 0 &&
+      <Card style={{ width: '18rem' }} className="cardRates p-3">
+
       <Form>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Tu opinión importa</Form.Label>
+            <Form.Label>Tu reseña</Form.Label>
             <Form.Control
               type="text"
               placeholder="Puntúa de 1 a 5"
               name="course_rates"
               value={newRate?.course_rates}
               onChange={handleChange}
+              className="cardRatesInput"
+              autoFocus
             />
             <Form.Control
               type="text"
-              placeholder="Da tu opinión"
+              placeholder="Comparte tu experiencia"
               name='commentary'
               value={newRate?.commentary}
               onChange={handleChange}
+              className="cardRatesInput"
             />
-             <p>{msgError}</p>
+             <h6>{msgError}</h6>
+             <div className="d-flex justify-content-center"> 
             <Button
-              variant="outline-success"
-              className="me-3"
+              className="Button3"
               onClick={handleSubmit}
             >
               Aceptar
             </Button>
+            </div>
           </Form.Group>
         </Form>
     </Card>}

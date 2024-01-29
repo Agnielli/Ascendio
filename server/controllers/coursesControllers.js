@@ -64,6 +64,7 @@ class coursesControllers {
   callCoursesDates = (req, res) => {
     let sql = `SELECT
     course.course_id,
+    course.followers,
     course.title,
     course.description,
     course.price,
@@ -275,7 +276,7 @@ ORDER BY course.date DESC`;
   oneUserCourses = (req, res) => {
     const { user_id } = req.params;
     
-    let sql = `SELECT course.course_id, course.title, course.description, course.price, course.is_disabled, course.img, REPLACE(GROUP_CONCAT(tag.tag_name), ',', ' ') AS tags FROM course
+    let sql = `SELECT course.course_id, course.followers, course.title, course.description, course.price, course.is_disabled, course.img, REPLACE(GROUP_CONCAT(tag.tag_name), ',', ' ') AS tags FROM course
     LEFT JOIN course_tag ON course.course_id = course_tag.course_id
     LEFT JOIN tag ON course_tag.tag_id = tag.tag_id
     WHERE course.user_id = ${user_id} AND course.is_deleted = 0 GROUP BY course.course_id, course.title, course.description, course.price, course.is_disabled, course.img;`

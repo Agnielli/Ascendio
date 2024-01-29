@@ -1,10 +1,20 @@
 @use "../public/stylesheets/variables.scss" as *;
 
+
 * {
-  color: $accent3-color;
+  // color: $accent3-color;
   // padding: 0 !important;
   // margin: 0 !important;
-
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
 }
 
 

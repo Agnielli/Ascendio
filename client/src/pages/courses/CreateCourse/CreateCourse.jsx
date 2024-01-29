@@ -38,37 +38,34 @@ export const CreateCourse = () => {
       });
   }, []);
 
-  const handleFile = (e) => {
-    setFile(e.target.files[0]);
-  };
+    
+    const handleFile = (e) => {
+      setFile(e.target.files[0]);
+    };
+    
+    const handleOption = (option) => {
+      setSelectedOption(option);
+    };
+    
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      let newValue = value;
+      if (name === 'price') {
+        newValue = value.replace(/^(?:(\d{1,5}(?:\.\d{0,2})?)|\D+).*$/g, '$1');
+      }
+      setCreateOneCourse({ ...createOneCourse, [name]: newValue });
+    };
+    
+    let regexPrice = /^(?:(\d{1,5}(?:\.\d{0,2})?)|\D+).*$/g;
+    let regexTitle = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ.,:?¿!¡]{1,50}$/;
+    let regexDescription = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ.,:?¿!¡]{1,250}$/;
 
-  const handleOption = (option) => {
-    setSelectedOption(option);
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    let newValue = value;
-    if (name === "price") {
-      newValue = value.replace(/[^0-9]/g, "");
-    }
-    setCreateOneCourse({ ...createOneCourse, [name]: newValue });
-  };
-
-  let regexPrice = /^[a-zA-Z0-9\s.,:?¿!¡]{1,5}$/;
-  let regexTitle = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ.,:?¿!¡]{1,50}$/;
-  let regexDescription = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ.,:?¿!¡]{1,250}$/;
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (
-      !createOneCourse.title ||
-      !createOneCourse.description ||
-      !createOneCourse.price
-    ) {
-      setMsgError("Por favor, completa todos los campos");
-    } else if (!regexTitle.test(createOneCourse.title)) {
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      
+      if(!createOneCourse.title || !createOneCourse.description || !createOneCourse.price){
+      setMsgError('Por favor, completa todos los campos');
+      }else if (!regexTitle.test(createOneCourse.title)) {
       setMsgError("No se permiten más de 50 caracteres");
     } else if (!regexDescription.test(createOneCourse.description)) {
       setMsgError("No se permiten más de 250 caracteres");

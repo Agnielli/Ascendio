@@ -69,7 +69,7 @@ export const OneUserCourses = () => {
           style={{ color: "white" }}
         >
         <h2>Mis cursos</h2>
-        <input onChange={handleChange} placeholder="🔍..." value={filter} />
+        <input onChange={handleChange} placeholder="🔍..." value={filter}   className="buscador" />
       </div>
       </header>
       <main className="mainAllCoursesOneUser d-flex flex-wrap justify-content-center gap-3 pb-5">
@@ -83,9 +83,18 @@ export const OneUserCourses = () => {
               />
              <Card.Body className="d-flex flex-column gap-1">
                 <Card.Text> {elem.title} </Card.Text>
+                <Card.Subtitle className="followerscard">
+                  {elem.followers !== undefined && elem.followers !== 0
+                    ? `${elem.followers} Seguidores`
+                    : "Sin seguidores"}
+                </Card.Subtitle>
                 <Card.Subtitle className="tagsCourse">{elem.tags}</Card.Subtitle>
                 <Card.Title className="descriptioncard">{elem.description}</Card.Title>
-                <Card.Text>{elem.price === 0 ?'GRATIS' : `${elem.price}€`}</Card.Text>
+                <Card.Text className="priceCourse px-3 my-2">
+                  {Number(elem?.price) === 0
+                  ? "GRATIS"
+                  : `${elem?.price}€`}
+                </Card.Text>
                 <Card.Text className="d-flex justify-content-between mt-auto">
                 <Button
                   onClick={() => navigate(`/course/${elem.course_id}`)}

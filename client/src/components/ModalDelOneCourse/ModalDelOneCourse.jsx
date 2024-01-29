@@ -19,7 +19,7 @@ export const ModalDelOneCourse = ({
           <Modal.Body className="modalDel">
             <Form>
               <Form.Group controlId="formFile" className="mb-3">
-                <Form.Label>
+                <Form.Label className="modalDel">
                   ¿Seguro que quieres eliminar el curso?
                 </Form.Label>
               </Form.Group>
