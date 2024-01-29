@@ -1,77 +1,219 @@
 @use "../../../../public/stylesheets/variables.scss" as *;
 
-// VISTA PC XL
-.ascendio-landing-containerPrincipal {
-  height: calc(100vh - 48px);
+// PC MUY GRANDE / breakpoints XXL / MI PANTALLA GRNADE
+.ascendio-landing-main-padre {
+  height: calc(100vh - 72px);
 
-  .ascendio-landing-main {
-    min-height: calc(100vh - 72px);
+  .ascendio-landing-main-hijo-1 {
+    max-height: calc(50vh - 36px);
 
-    .ascendio-landing-main-hijo {
+    .ascendio-landing-main-hijo1-nieto {
       @include display-flex(row, center, center);
+      padding: 0 !important;
+      max-height: 50vh;
 
       .ascendio-landing-fondo-principal1 {
-        height: 100%;
+        max-height: 50vh;
         max-width: 100%;
-        object-fit: cover;
+        object-fit: contain;
+        padding: 0 !important;
       }
 
       .ascendio-landing-fondo-principal2 {
+        max-height: 50vh;
         width: 100%;
-        object-fit: cover;
+        object-fit: contain;
+        padding: 0 !important;
       }
     }
+  }
 
-    .ascendio-landing-main-hijo2 {
-      @include display-flex(row, center, flex-start);
-      flex-wrap: wrap;
-      height: 100%;
+  .ascendio-landing-main-hijo-2 {
+    max-height: calc(50vh - 36px);
 
-      .ascendio-landing-textos-padre {
-        @include display-flex(row, center, center);
+    .ascendio-landing-main-hijo2-nieto {
+      height: calc(50vh - 36px);
+      @include display-flex(row, center, center);
+      padding: 0 !important;
+
+      .ascendio-landing-main-hijo2-nieto-bisnieto {
+        @include display-flex(row, center, flex-start);
         flex-wrap: wrap;
-        gap: 1rem;
-        width: 100%;
-        height: 100%;
+        max-height: 50vh;
+        padding: 2rem;
 
-        .ascendio-landing-textos-hijo {
+        .ascendio-landing-main-hijo2-nieto-bisnieto-tataranieto {
           @include display-flex(column, flex-start, flex-start);
-          height: 100%;
-          // gap: 1px;
+          max-height: 50vh;
+          padding: 0 !important;
+          margin-bottom: 2rem;
 
           img {
-            width: 75px;
-            height: 75px;
+            width: 50px;
+            height: 50px;
             background-color: transparent;
             border-radius: 50%;
           }
 
           h6 {
-            font-size: 1.5rem;
+            font-size: 16px;
             padding: 0 !important;
+            margin: 0 !important;
           }
 
           p {
-            font-size: 1rem;
+            font-size: 12px;
             color: $accent3-color;
             padding: 0 !important;
+            margin: 0 !important;
           }
         }
       }
     }
+  }
+}
 
-    .ascendio-landing-main-hijo3 {
-      @include display-flex(row, center, flex-start);
+.ascendio-landing-footer-padre {
+  @include display-flex(row, flex-start, center);
+  color: $accent3-color;
+  background-color: $accent-color;
+  padding: 0 5vw !important;
+
+  .ascendio-landing-footer-padre-hijo {
+    h3 {
+      font-size: 16px;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    p {
+      font-size: 16px;
+      @include display-flex(row, center, center);
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    .ascendio-landing-footer-link {
+      font-size: 12px;
+      text-decoration: none;
+      color: $accent3-color;
+      @include display-flex(row, center, center);
+      padding: 0 !important;
+    }
+    .ascendio-landing-footer-link:hover {
+      text-decoration: none;
+      color: $accent2-color;
+      @include display-flex(row, center, center);
+    }
+  }
+}
+
+// PC GRANDE / breakpoints XL / MI PORTATIL
+@media (min-width: 1200px) and (max-width: 1400px) {
+  .ascendio-landing-main-padre {
+    .ascendio-landing-main-hijo-2 {
+      .ascendio-landing-main-hijo2-nieto {
+        .ascendio-landing-main-hijo2-nieto-bisnieto {
+          @include display-flex(row, center, flex-start);
+          flex-wrap: wrap;
+          max-height: 50vh;
+          padding: 2rem 2rem 0 2rem;
+        }
+      }
     }
   }
 
-  .ascendio-landing-footer {
+  .ascendio-landing-footer-padre {
     @include display-flex(row, flex-start, center);
     color: $accent3-color;
     background-color: $accent-color;
     padding: 0 5vw !important;
 
-    .col-landin-footer-estyles {
+    .ascendio-landing-footer-padre-hijo {
+      padding: 0 !important;
+    }
+  }
+}
+
+// PC MEDIANO / breakpoints LG //TODO
+@media (min-width: 992px) And (max-width: 1200px) {
+  .ascendio-landing-main-padre {
+    height: calc(100vh - 72px);
+  
+    .ascendio-landing-main-hijo-1 {
+      max-height: calc(50vh - 36px);
+  
+      .ascendio-landing-main-hijo1-nieto {
+        @include display-flex(row, center, center);
+        padding: 0 !important;
+        max-height: 50vh;
+  
+        .ascendio-landing-fondo-principal1 {
+          max-height: 50vh;
+          max-width: 100%;
+          object-fit: contain;
+          padding: 0 !important;
+        }
+  
+        .ascendio-landing-fondo-principal2 {
+          max-height: 50vh;
+          width: 100%;
+          object-fit: contain;
+          padding: 0 !important;
+        }
+      }
+    }
+  
+    .ascendio-landing-main-hijo-2 {
+      max-height: calc(50vh - 36px);
+  
+      .ascendio-landing-main-hijo2-nieto {
+        height: calc(50vh - 36px);
+        @include display-flex(row, center, center);
+        padding: 0 !important;
+  
+        .ascendio-landing-main-hijo2-nieto-bisnieto {
+          @include display-flex(row, center, flex-start);
+          flex-wrap: wrap;
+          max-height: 50vh;
+          padding: 2rem;
+  
+          .ascendio-landing-main-hijo2-nieto-bisnieto-tataranieto {
+            @include display-flex(column, flex-start, flex-start);
+            max-height: 50vh;
+            padding: 0 !important;
+            margin-bottom: 2rem;
+  
+            img {
+              width: 50px;
+              height: 50px;
+              background-color: transparent;
+              border-radius: 50%;
+            }
+  
+            h6 {
+              font-size: 16px;
+              padding: 0 !important;
+              margin: 0 !important;
+            }
+  
+            p {
+              font-size: 12px;
+              color: $accent3-color;
+              padding: 0 !important;
+              margin: 0 !important;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  .ascendio-landing-footer-padre {
+    @include display-flex(row, flex-start, center);
+    color: $accent3-color;
+    background-color: $accent-color;
+    padding: 0 5vw !important;
+  
+    .ascendio-landing-footer-padre-hijo {
       h3 {
         font-size: 16px;
         margin: 0 !important;
@@ -99,143 +241,29 @@
   }
 }
 
-//RESPONSIVE PORTATIL / PC PEQUEÑO
-@media (min-width: 901px) and (max-width: 1200px) {
-  .ascendio-landing-containerPrincipal {
-    min-height: calc(100vh - 48px);
-
-    .ascendio-landing-main {
-      min-height: calc(100vh - 72px);
-
-      .ascendio-landing-main-hijo {
-        @include display-flex(row, center, center);
-
-        .ascendio-landing-fondo-principal1 {
-          height: 100%;
-          object-fit: cover;
-        }
-
-        .ascendio-landing-fondo-principal2 {
-          width: 100%;
-          object-fit: cover;
-        }
-      }
-
-      .ascendio-landing-main-hijo2 {
-        @include display-flex(row, center, center);
-        flex-wrap: wrap;
-        height: 100%;
-        width: 100%;
-
-        .ascendio-landing-textos-padre {
-          @include display-flex(row, center, flex-start);
-          flex-wrap: wrap;
-          gap: 1rem;
-          width: 100%;
-          height: 100%;
-
-          .ascendio-landing-textos-hijo {
-            @include display-flex(column, flex-start, flex-start);
-            height: 100%;
-            width: 30%;
-            // gap: 1px;
-
-            img {
-              width: 75px;
-              height: 75px;
-              background-color: transparent;
-              border-radius: 50%;
-            }
-
-            h6 {
-              font-size: 1.5rem;
-              padding: 0 !important;
-            }
-
-            p {
-              font-size: 1rem;
-              color: $accent3-color;
-              padding: 0 !important;
-            }
-          }
-        }
-      }
-
-      .ascendio-landing-main-hijo3 {
-        @include display-flex(row, center, flex-start);
-        height: 100%;
-      }
-    }
-
-    .ascendio-landing-footer {
-      .col-landin-footer-estyles {
-        padding: 0 !important;
-      }
-    }
-  }
-}
-
-//RESPONSIVE TABLET
-@media (min-width: 601px) And (max-width: 900px) {
+//RESPONSIVE TABLET PEQUEÑA //TODO
+@media (min-width: 576px) And (max-width: 768px) {
   .ascendio-landing-containerPrincipal {
     height: 100%;
-    width: 100%;
 
     .ascendio-landing-main {
+      height: 100%;
+
       .ascendio-landing-main-hijo2 {
-        @include display-flex(row, center, center);
-        flex-wrap: wrap;
-        height: 100%;
-        width: 100%;
-
-        .ascendio-landing-textos-padre {
-          @include display-flex(row, center, flex-start);
-          flex-wrap: wrap;
-          gap: 2rem;
-          width: 100%;
-          height: 100%;
-
-          .ascendio-landing-textos-hijo {
-            @include display-flex(column, flex-start, flex-start);
-            height: 100%;
-            width: 30%;
-            gap: 1px;
-
-            img {
-              width: 100px;
-              height: 100px;
-              background-color: transparent;
-              border-radius: 50%;
-            }
-
-            h6 {
-              font-size: 1.5rem;
-            }
-
-            p {
-              font-size: 1rem;
-              color: $accent3-color;
-            }
-          }
-        }
-      }
-
-      .ascendio-landing-main-hijo3 {
-        @include display-flex(row, center, flex-start);
-        height: 100%;
+        margin-bottom: 5rem;
       }
     }
 
     .ascendio-landing-footer {
+      height: 24px;
+
       .col-landin-footer-estyles {
         padding: 0 !important;
 
         p {
-          font-size: 8px;
+          font-size: 12px;
         }
-        .ascendio-landing-footer-link {
-          font-size: 8px;
-        }
+
         .ascendio-landing-footer-link:hover {
           text-decoration: none;
           color: $accent2-color;
@@ -246,85 +274,48 @@
   }
 }
 
-//RESPONSIVE MOVIL
-@media (max-width: 600px) {
-  // Estilos para dispositivos móviles aquí
-
+//RESPONSIVE MOVIL //TODO
+@media (max-width: 576px) {
   .ascendio-landing-containerPrincipal {
-    height: calc(100vh - 58px);
+    height: 100%;
 
     .ascendio-landing-main {
-      min-height: calc(100vh - 58px);
-
+      height: 100%;
       .ascendio-landing-main-hijo {
+        @include display-flex(row, center, center);
+        padding: 0 !important;
+        max-height: 50%;
+
         .ascendio-landing-fondo-principal1 {
+          height: 100%;
           max-width: 100%;
-          // height: 100%;
           object-fit: contain;
+          padding: 0 !important;
         }
 
         .ascendio-landing-fondo-principal2 {
           width: 100%;
           object-fit: contain;
+          padding: 0 !important;
         }
       }
 
       .ascendio-landing-main-hijo2 {
-        //margin-bottom: 1rem !important;
-        .ascendio-landing-textos-padre {
-          gap: 0;
-
-          .ascendio-landing-textos-hijo {
-            @include display-flex(column, center, flex-start);
-            width: 30%;
-            img {
-              width: 25px;
-              height: 25px;
-              background-color: transparent;
-              border-radius: 50%;
-            }
-
-            h6 {
-              font-size: 8px;
-            }
-
-            p {
-              font-size: 4px;
-              color: $accent3-color;
-            }
-          }
-        }
-      }
-
-      .ascendio-landing-main-hijo3 {
-        @include display-flex(row, center, flex-start);
+        height: 50%;
+        margin-bottom: 5rem;
       }
     }
 
     .ascendio-landing-footer {
-      @include display-flex(row, flex-start, center);
-      color: $accent3-color;
-      background-color: $accent-color;
-      // padding: 0 5vw !important;
-      height: 10px;
+      height: 24px;
+
       .col-landin-footer-estyles {
         padding: 0 !important;
-        h3 {
-          font-size: 8px;
-          padding: 0 !important;
-        }
+
         p {
-          font-size: 4px;
-          @include display-flex(row, center, center);
-          padding: 0 !important;
+          font-size: 12px;
         }
-        .ascendio-landing-footer-link {
-          font-size: 4px;
-          text-decoration: none;
-          color: $accent3-color;
-          @include display-flex(row, center, center);
-          padding: 0 !important;
-        }
+
         .ascendio-landing-footer-link:hover {
           text-decoration: none;
           color: $accent2-color;
