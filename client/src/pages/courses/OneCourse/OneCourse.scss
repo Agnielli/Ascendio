@@ -15,6 +15,7 @@
       justify-content: center;
       align-items: center;
       border-radius: 10px;
+      object-fit: cover;
     }
 
     .oneCourseBody {
@@ -77,6 +78,7 @@
   
         .priceCourse {
           font-size: 1rem;
+          color: var.$accent3-color;
           border: 1px solid white;
           border-radius: 10px;
           display: flex;
@@ -134,14 +136,9 @@
       align-items: center;
       background-color: transparent;
       border-radius: 30px;
-      border: none;
-
-      &:hover,
-      &:active{
-        //background-color: var.$tertiary-color !important;
-        border-radius: 30px;
-      }
-      
+      border: none;      
+      margin-bottom: 1rem;
+      gap: 1rem;
     }
   }
 

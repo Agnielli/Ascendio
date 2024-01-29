@@ -5,7 +5,7 @@
   width: 100%;
   background-color: transparent;
   border: none;
-  margin: 0;
+  
 
   .TopicCardBody{
     
@@ -15,7 +15,7 @@
       justify-content: space-between;
     
       .titleTopic{
-        width: 30%;
+        width: 70%;
         font-size: 1.2rem;
         color: $accent3-color;
         
@@ -29,22 +29,25 @@
         .addTopic{
           width: 50px;
           background-color: transparent;
-          border: 2px solid #e15252;
+          border: 2px solid $accent3-color;
           border-radius: 30%;
+          display: flex;
+        justify-content: center;
+        align-items: center;
     
           .addIcon{
-            color: #e15252;
+            color: $accent3-color;
           }
         }
     
         .deleteTopic{
           width: 50px;
           background-color: transparent;
-          border: 2px solid #e15252;
+          border: 2px solid $accent3-color;
           border-radius: 30%;
           
           .deleteIcon{
-            color: #e15252;
+            color: $accent3-color;
           }
         }
       }
