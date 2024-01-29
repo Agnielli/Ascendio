@@ -334,10 +334,12 @@ export const OneCourse = () => {
             </Card.Subtitle>
 
             <Card.Text className="tagCourse">
+
               {courseTags?.map((e, index) => {
                 return e.tag_name + " ";
               })}
             </Card.Text>
+
 
             <div className="dataCourse">
               <div>
@@ -391,6 +393,7 @@ export const OneCourse = () => {
 
             
 
+
             {addSection && (
               <FormAddSection
                 sections={sections}
@@ -430,6 +433,7 @@ export const OneCourse = () => {
 
             {userId === userCourse && (
               <Button
+
                 variant="outline-success"
                 className="Button1 d-flex m-3"
                 onClick={addNewSection}
@@ -464,6 +468,7 @@ export const OneCourse = () => {
                 </Button>
               )}
             </div>
+
           </Card.Body>
         </Card>
 
@@ -491,15 +496,22 @@ export const OneCourse = () => {
           />
         )}
 
-        <h5>¿Qué opina la gente?</h5>
 
-        <div className="d-flex flex-column">
-          {rates?.map((elem) => (
-            <CardRatingsOneCourse key={elem.user_rater_user_id} rates={elem} />
-          ))}
-        </div>
+        {ratingAverage && (
+          <>
+            <h5>¿Qué opina la gente?</h5>
+            <div className="d-flex flex-column">
+              {rates?.map((elem) => (
+                <CardRatingsOneCourse
+                  key={elem.user_rater_user_id}
+                  rates={elem}
+                />
+              ))}
+            </div>
+            <h3> MEDIA DE LAS VALORACIONES {ratingAverage}</h3>
+          </>
+        )}
 
-        <h1> MEDIA DE LAS VALORACIONES {ratingAverage}</h1>
       </section>
     </>
   );

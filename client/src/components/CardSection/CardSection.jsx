@@ -86,28 +86,29 @@ export const CardSection = ({
       </Accordion.Header>
       <Accordion.Body>
         <Accordion defaultActiveKey="1">
-          {elem.section_topics.map((topic, index) => {
-            return (
-              <CardTopic
-                key={elem.topic_id}
-                topics={topics}
-                setTopics={setTopics}
-                topic={topic}
-                deleteTopic={deleteTopic}
-                section_id={elem.section_id}
-                setResetCourse={setResetCourse}
-                resetCourse={resetCourse}
-                index={index + 1}
-                setResource={setResource}
-                resource={resource}
-                course_id={course_id}
-                deleteResource={deleteResource}
-                userId={userId}
-                userCourse={userCourse}
-                isIntoValidate={isIntoValidate}
-              />
-            );
-          })}
+        {elem.section_topics.map((topic, index) => {
+              return (
+          <CardTopic
+          key={`${elem.topic_id}-${index}`}
+          topics={topics}
+          setTopics={setTopics}
+          topic={topic}
+          deleteTopic={deleteTopic}
+          section_id={elem.section_id}
+          setResetCourse={setResetCourse}
+          resetCourse={resetCourse}
+          index={index + 1}
+          setResource={setResource}
+          resource={resource}
+          course_id={course_id}
+          deleteResource={deleteResource}
+          userId={userId}
+          userCourse={userCourse}
+          isIntoValidate={isIntoValidate}
+          />
+          );
+        })}
+
         </Accordion>
       </Accordion.Body>
     </Accordion.Item>
