@@ -4,12 +4,11 @@
 $primary-color: #aa474c;
 $secondary-color: #020301;
 $tertiary-color: #1d1d1b;
-$accent-color: #e15252; //color tags y boton siguiendo trader : #E15252
-$accent2-color: #2e2d2d; //background cards : #2E2D2D
-$accent3-color: #ffffff; //titulo cursos : #FFFFFF
-$accent4-color: #5de152; //color aciertos: #5DE152
-$accent5-color: #aeafae; 
-/* color de la descripcion de un curso: #9C9999 */
+$accent-color:#E15252;
+$accent2-color: #2E2D2D;
+$accent3-color: #FFFFFF;
+$accent4-color: #5DE152;
+$accent5-color: #9C9999;
 
 // Flex
 @mixin display-flex($direction: row, $justify: center, $align: center) {

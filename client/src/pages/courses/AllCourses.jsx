@@ -51,8 +51,8 @@ export const AllCourses = () => {
           style={{ color: "white" }}
         >
           <div>
-            <h2>{order ? "Ver últimos cursos" : "Top cursos"}</h2>
-            <Button onClick={() => setOrder(!order)} className="button">
+            <h2>{order ? "Últimos cursos" : "Top cursos"}</h2>
+            <Button onClick={() => setOrder(!order)} className="Button3">
               {order ? "Ver top cursos" : "Ver últimos cursos"}
             </Button>
           </div>

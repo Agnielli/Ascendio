@@ -70,7 +70,8 @@
   transition: 0.3s;
   &:active,
   &:hover{
-    background-color: $accent3-color ;
+    // background-color: $accent3-color ; este era el original
+    background-color: $accent2-color ;
     color:$accent2-color $accent2-color;
   }
 }

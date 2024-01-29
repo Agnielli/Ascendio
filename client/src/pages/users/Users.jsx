@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./users.scss";
 import { Link, useNavigate } from "react-router-dom";
-import { Button, Col } from "react-bootstrap";
+import { Button, Card, Col, Row, Table } from "react-bootstrap";
 import { AscendioContext } from "../../context/AscendioContext";
 import axios from "axios";
+import "../../../public/stylesheets/ButtonsApp.scss";
 
 export const Users = () => {
   const { user } = useContext(AscendioContext);
@@ -32,96 +33,154 @@ export const Users = () => {
   }
 
   return (
-    <Col xs={12} md={6} className="user">
-    <div className="d-flex flex-column w-25 gap-2">
-      <div className="avatar">
-        {user?.img ? (
-          <img src={`http://localhost:3000/images/users/${user.img}`} />
-        ) : (
-          <p>{user?.nickname.charAt(0).toUpperCase()}</p>
-        )}
-      </div>
-      <h2>{user?.nickname}</h2>
-      <p>Categoria/s: {statisticsUser?.user_categories}</p>
-      <p>
-        {user?.name} {user?.lastname}
-      </p>
-      {statisticsUser && (
-        <>
-          <p>
-            Seguidores:
-            <Link to={`/userfollowers/${user.user_id}`}>
-              {statisticsUser.num_followers}
-            </Link>
-          </p>
-          <p>
-            Siguiendo:
-            <Link to={`/userfollowing/${user.user_id}`}>
-              {statisticsUser.num_following_users}
-            </Link>
-          </p>
-          <p>
-            Posts publicados:
-            <Link to={`/userposts/${user.user_id}`}>
-              {statisticsUser.num_posts}
-            </Link>
-          </p>
-          <p>Ratio de Pronósticos: {ratioTotal} %</p>
-          <p>Aciertos: {statisticsUser.num_correct_posts}</p>
-          <p>Errores: {statisticsUser.num_incorrect_posts}</p>
-          <p>
-            Cursos publicados:{" "}
-            <Link to={`/oneusercourses/${user.user_id}`}>
-              {statisticsUser.num_courses}
-            </Link>{" "}
-          </p>
-        </>
-      )}
-     
-      <Button onClick={() => navigate("/edituser")}>Editar perfil</Button>
-      <Button variant="primary" onClick={() => setShowContent(!showContent)}>
-        Crear Contenido
-      </Button>
-      {showContent && (
-        <>
-          <Button variant="danger" onClick={() => setShowPost(!showPost)}>
-            Crear Post
-          </Button>
-          {showPost && (
-            <>
-              <Button
-                variant="warning"
-                onClick={() => navigate("/createtrade")}
-              >
-                Crear TradePost
+    <>
+      <Row className="userRow">
+        <Col
+          xs={12}
+          xl={6}
+          className="d-flex flex-column w-50 gap-2 text-center p-5"
+        >
+          <div>
+            <div className="avatar">
+              {user?.img ? (
+                <img src={`http://localhost:3000/images/users/${user.img}`} />
+              ) : (
+                <p>{user?.nickname.charAt(0).toUpperCase()}</p>
+              )}
+            </div>
+            <h2>{user?.nickname}</h2>
+            <p>Categoria/s: {statisticsUser?.user_categories}</p>
+          </div>
+        </Col>
+        <Col
+          xs={12}
+          xl={6}
+          className="d-flex flex-column w-50 gap-2 text-center p-5"
+        >
+          <div>
+            <p>
+              {user?.name} {user?.lastname}
+            </p>
+            <div className="d-flex flex-column gap-2">
+              <Button onClick={() => navigate("/edituser")} className="Button4">
+                Editar perfil
               </Button>
               <Button
-                variant="warning"
-                onClick={() => navigate("/creategeneralpost")}
+                className="Button4"
+                onClick={() => setShowContent(!showContent)}
               >
-                Crear GeneralPost
+                Crear Contenido
               </Button>
-            </>
+              {showContent && (
+                <>
+                  <Button
+                    className="Button4"
+                    onClick={() => setShowPost(!showPost)}
+                  >
+                    Crear Post
+                  </Button>
+                  {showPost && (
+                    <>
+                      <Button
+                        className="Button4"
+                        onClick={() => navigate("/createtrade")}
+                      >
+                        Crear TradePost
+                      </Button>
+                      <Button
+                        className="Button4"
+                        onClick={() => navigate("/creategeneralpost")}
+                      >
+                        Crear GeneralPost
+                      </Button>
+                    </>
+                  )}
+                  <Button
+                    className="Button4"
+                    onClick={() => navigate("/createcourse")}
+                  >
+                    Crear Curso
+                  </Button>
+                </>
+              )}
+              <Button
+                className="Button4"
+                onClick={() => setShowCourse(!swhowCourse)}
+              >
+                Cursos
+              </Button>
+              {swhowCourse && (
+                <>
+                  <Button
+                    className="Button4"
+                    onClick={() => navigate("/purchasecourse")}
+                  >
+                    Cursos Adquiridos
+                  </Button>
+                  <Button
+                    className="Button4"
+                    onClick={() => navigate("/savecourse")}
+                  >
+                    Cursos Guardados
+                  </Button>
+                </>
+              )}
+            </div>
+          </div>
+        </Col>
+      </Row>
+      <Row className="userRow">
+        <Col xs={12} className="d-flex flex-column w-100 gap-2 text-center p-5">
+          {statisticsUser && (
+            <Table style={{ backgroundColor: 'red' }} striped bordered hover className="estadisticas">
+              <thead>
+                <tr>
+                  {[
+                    "Seguidores",
+                    "Seguidos",
+                    "Post Publicados",
+                    "Ratio Pronóstico",
+                    "Aciertos",
+                    "Errores",
+                    "Cursos publicados",
+                  ].map((label) => (
+                    <th key={label} className="texto-blanco">{label}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td key="1">
+                    {" "}
+                    <Link to={`/userfollowers/${user.user_id}`} className="enlace-rojo">
+                      {statisticsUser.num_followers}
+                    </Link>
+                  </td>
+                  <td key="2">
+                    <Link to={`/userfollowing/${user.user_id}`} className="enlace-rojo">
+                      {statisticsUser.num_following_users}
+                    </Link>
+                  </td>
+                  <td key="3">
+                    <Link to={`/userposts/${user.user_id}`} className="enlace-rojo">
+                      {statisticsUser.num_posts}
+                    </Link>
+                  </td>
+                  <td key="4">{ratioTotal} %</td>
+                  <td key="5">{statisticsUser.num_correct_posts}</td>
+                  <td key="6">{statisticsUser.num_incorrect_posts}</td>
+                  <td key="7">
+                    {" "}
+                    <Link to={`/oneusercourses/${user.user_id}`} className="enlace-rojo">
+                      {statisticsUser.num_courses}
+                    </Link>
+                  </td>
+                </tr>
+              </tbody>
+            </Table>
           )}
-          <Button variant="danger" onClick={() => navigate("/createcourse")}>
-            Crear Curso
-          </Button>
-        </>
-      )}
-      <Button className="mb-2" onClick={() => setShowCourse(!swhowCourse)}>
-        Cursos
-      </Button>
-      {swhowCourse && (
-        <>
-          <Button variant="success" onClick={() => navigate("/purchasecourse")}>
-            Cursos Adquiridos
-          </Button>
-          <Button variant="success" onClick={() => navigate("/savecourse")}>
-            Cursos Guardados
-          </Button>
-        </>
-      )}
-    </div>
-    </Col>
+        </Col>
+      </Row>
+    </>
   );
 };
