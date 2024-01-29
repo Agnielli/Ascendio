@@ -37,9 +37,6 @@ export const OneCourse = () => {
   const [showCardRate, setShowCardRate] = useState(true);
   const [resetrate, setResetrate] = useState();
 
-  console.log(isIntoPurchase)
-  console.log(showCardRate)
-
   const navigate = useNavigate();
 
   const openModal = () => {
