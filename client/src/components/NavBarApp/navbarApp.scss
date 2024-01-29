@@ -3,11 +3,16 @@ body {
   background-color: $tertiary-color;
 }
 .avatar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
     width: 40px;
     height: 40px;
     border-radius: 50%;
     background-color: #1D1D1B;
-    color: #E15252; 
+    color: #E15252;
+    border: 2px solid $accent-color;
+
   
     img {
       width: 40px;
@@ -15,9 +20,10 @@ body {
       border-radius: 50%;
       object-fit: cover;
     }
-  }
-  .letteruser{
-    color:#E15252;
+    p{
+      color:#E15252;
+      margin: 0 !important;
+    }
   }
 
 .user {
@@ -32,25 +38,7 @@ body {
   }
 }
 
-p {
-  font-size: 30px;
-}
 
-.user {
-  cursor: pointer;
-}
-
-.logoNav {
-  color: white;
-  font-size: 2rem;
-  font-weight: bold;
-}
-.logoNav:hover {
-  color: white;
-}
-.logoNav:focus {
-  color: white;
-}
 
 @media (min-width: 992px) {
   .BG-navbar {
@@ -59,7 +47,26 @@ p {
 }
 
 nav {
-  padding: 0 5vw !important;
+  p {
+    font-size: 30px;
+  }
+  
+  .user {
+    cursor: pointer;
+  }
+  
+  .logoNav {
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  .logoNav:hover {
+    color: white;
+  }
+  .logoNav:focus {
+    color: white;
+  }
+  padding: 0 10vw !important;
   a.nav-link {
     color: white;
     font-weight: 500;
