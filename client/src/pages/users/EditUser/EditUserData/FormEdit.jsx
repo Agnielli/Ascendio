@@ -67,7 +67,9 @@ export const FormEdit = ({ user, setUser, setShowForm }) => {
 
   return (
     <>
-      <div className="avatar">
+    
+      <h2>Editar usuario:</h2>
+      <div className="avatar d-flex align-items-center justify-content-center">
         <label htmlFor="fileInput">
           {user?.img ? (
             <img
@@ -85,9 +87,7 @@ export const FormEdit = ({ user, setUser, setShowForm }) => {
           onChange={handleFile}
         />
       </div>
-
       <Form>
-        <h2>Editar usuario:</h2>
         <Form.Group className="mb-3" controlId="formBasicNickName">
           <Form.Label>Nombre de usuario*</Form.Label>
           <Form.Control

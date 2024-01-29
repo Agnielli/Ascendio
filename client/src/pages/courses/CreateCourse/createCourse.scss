@@ -7,11 +7,13 @@
 
 .imagencurso {
   border-radius: 50%;
-  height: 75px;
+  height: 70px;
   width: 75px;
   background-color: #2e2d2d;
   display: flex;
+  justify-content: center;
   align-items: center;
+  border: 1px solid #E15252;
 }
 
 .react-select {

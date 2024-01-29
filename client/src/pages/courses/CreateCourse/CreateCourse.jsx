@@ -98,14 +98,14 @@ export const CreateCourse = () => {
       <Col md={4}>
         <Form onSubmit={handleSubmit}>
           <h2>Crea tu curso</h2>
-          <Form.Group controlId="formFile" className="mb-3">
-            
+          <Form.Group controlId="formFile" className="mb-3 d-flex justify-content-center">
+              <div className="imagencurso  "> 
               <Form.Label className="d-flex justify-content-center">
                 <span className="material-symbols-outlined addIcon">
                   photo_camera
                 </span>
               </Form.Label>
-            
+              </div>
             <Form.Control type="file" onChange={handleFile} hidden />
           </Form.Group>
           <Form.Group className="mb-3">
