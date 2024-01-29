@@ -121,6 +121,7 @@ export const Login = () => {
             <p>
               ¿Has olvidado tu contraseña? <Link to="/mailrecoverpassword">Click aquí</Link>
             </p>
+            <></>
         </div>
         </Form>
       </Col>
