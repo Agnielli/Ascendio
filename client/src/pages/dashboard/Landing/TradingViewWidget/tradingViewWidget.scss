@@ -4,7 +4,7 @@
   width: 80%;
   height: 80%;
   background-color: $secondary-color;
-  
+
   .tradingview-widget-container {
     background-color: $secondary-color;
     height: 100%;
@@ -12,13 +12,25 @@
     @include display-flex(column, center, center);
     flex-wrap: wrap;
   }
-
-  // @media (max-width: 600px) {
-  //   width:90%;
-  //   height: 50px; // Ajusta la altura automáticamente según el contenido
-  // }
 }
+
 div.tradingview-widget-copyright {
   display: none;
 }
 
+@media (min-width: 601px) And (max-width: 1200px) {
+  .ascendio-graphic-containerPrincipal {
+    width: 80%;
+    height: 100%;
+    background-color: $secondary-color;
+
+    .tradingview-widget-container {
+      background-color: $secondary-color;
+      height: 300px;
+      width: 100%;
+      @include display-flex(column, center, center);
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+  }
+}
