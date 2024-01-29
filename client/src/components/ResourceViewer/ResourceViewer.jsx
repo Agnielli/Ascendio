@@ -50,7 +50,6 @@ export const ResourceViewer = () => {
         </div>
         </Col>
       
-      <Breadcrumb.Item active></Breadcrumb.Item>
     </Breadcrumb>
 
     </Container>
