@@ -34,8 +34,11 @@ export const OneCourse = () => {
   const [ratingAverage, setRatingAverage] = useState();
   const [resource, setResource] = useState([]);
   const [changeFollowers, setChangeFollowers] = useState();
-  const [showCardRate, setShowCardRate] = useState(false);
+  const [showCardRate, setShowCardRate] = useState(true);
   const [resetrate, setResetrate] = useState();
+
+  console.log(isIntoPurchase)
+  console.log(showCardRate)
 
   const navigate = useNavigate();
 
@@ -136,6 +139,9 @@ export const OneCourse = () => {
     setOrderedSections(sectionsWithIndex);
   }, [sections, resetCourse, addSection]);
 
+  let userId = user.user_id;
+  console.log(userId)
+
   useEffect(() => {
     axios
       .get(`http://localhost:3000/courses/getallratesonecourse/${course_id}`)
@@ -144,12 +150,16 @@ export const OneCourse = () => {
           setRates(res.data);
           ratesAverage(res.data);
           setRatingAverage(ratesAverage(res.data));
+          
         }
       })
       .catch((err) => {
         console.log(err);
       });
   }, [showCardRate]);
+  
+ 
+  
 
   useEffect(() => {
     axios
@@ -255,7 +265,7 @@ export const OneCourse = () => {
         console.log(err);
       });
   };
-  let userId = user.user_id;
+ 
 
   const deleteSection = (section_id) => {
     axios
@@ -488,11 +498,12 @@ export const OneCourse = () => {
           course_id={course_id}
         />
 
-        {showCardRate && (
+        {isIntoPurchase && showCardRate &&(
           <CardRates
             resetCourse={resetCourse}
             setResetCourse={setResetCourse}
             setShowCardRate={setShowCardRate}
+            rates={rates}
           />
         )}
 
