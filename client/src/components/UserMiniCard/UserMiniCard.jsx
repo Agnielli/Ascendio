@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./UserMiniCard.scss";
-import { Button } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import axios from "axios";
 
 export const UserMiniCard = ({ elem, updateUsers, setUpdateUsers }) => {
@@ -22,32 +22,39 @@ export const UserMiniCard = ({ elem, updateUsers, setUpdateUsers }) => {
   };
 
   return (
-    <div className="userMiniCardAdminView">
+    <Container className="userMiniCardAdminView">
       <div>
         <img
           className="userImg"
-          src={`http://localhost:3000/images/users/${elem.img}`}
+          src={
+            elem.img != null
+              ? `http://localhost:3000/images/users/${elem.img}`
+              : `http://localhost:3000/images/users/descarga.png`
+          }
           alt=""
         />
       </div>
-      <div className="d-flex flex-row gap-5">
-        <div className="divP">
-          <p className="datosCard">{elem.nickname}</p>
-          <p className="datosCard">Seguidores: {elem.total_followers}</p>
-        </div>
-        <div className="divP">
-          <p className="datosCard">Numero aciertos: {elem.correct_posts}</p>
-          <p className="datosCard">Numero errores: {elem.incorrect_posts}</p>
+      <div className="d-flex justify-content-center align-items-center text-center">
+        <div className="Carddivs mb-3">
+          <div className="divP">
+            <p className="datosCard">{elem.nickname}</p>
+            <p className="datosCard">{elem.total_followers} Seguidores</p>
+          </div>
+          <div className="divP">
+            <p className="datosCard">{elem.correct_posts} Trade Acertados</p>
+            <p className="datosCard">{elem.incorrect_posts} Trade Errados</p>
+          </div>
         </div>
         <div className="button1">
           <Button
-            className=""
+            variant="danger"
+            className="text-dark"
             onClick={() => activateUser(elem?.user_id, elem?.is_disabled)}
           >
             {elem.is_disabled ? "Activar" : "Desactivar"}
           </Button>
         </div>
       </div>
-    </div>
+    </Container>
   );
 };

@@ -26,7 +26,18 @@ class adminControllers {
   };
 
   adminGetDisabledUsers = (req, res) => {
-    let sql = `SELECT * FROM user WHERE type = 2 AND is_disabled = 1`;
+    let sql = `SELECT 
+    user.*,
+    COUNT(post.post_id) AS total_posts,
+    SUM(CASE WHEN post.correct = true THEN 1 ELSE 0 END) AS correct_posts,
+    SUM(CASE WHEN post.correct = false THEN 1 ELSE 0 END) AS incorrect_posts,
+    COUNT(user_follows_user.followed_user_id) AS total_followers
+    FROM user
+    LEFT JOIN post ON user.user_id = post.user_id
+    LEFT JOIN user_follows_user ON user.user_id = user_follows_user.user_id
+    WHERE user.type = 2
+    AND user.is_disabled = 1
+    GROUP BY user.user_id`;
 
     connection.query(sql, (err, result) => {
       if (err) {
@@ -38,7 +49,18 @@ class adminControllers {
   };
 
   adminGetActivatedUsers = (req, res) => {
-    let sql = `SELECT * FROM user WHERE type = 2 AND is_disabled = 0`;
+    let sql = `SELECT 
+    user.*,
+    COUNT(post.post_id) AS total_posts,
+    SUM(CASE WHEN post.correct = true THEN 1 ELSE 0 END) AS correct_posts,
+    SUM(CASE WHEN post.correct = false THEN 1 ELSE 0 END) AS incorrect_posts,
+    COUNT(user_follows_user.followed_user_id) AS total_followers
+    FROM user
+    LEFT JOIN post ON user.user_id = post.user_id
+    LEFT JOIN user_follows_user ON user.user_id = user_follows_user.user_id
+    WHERE user.type = 2
+    AND user.is_disabled = 0
+    GROUP BY user.user_id`;
 
     connection.query(sql, (err, result) => {
       if (err) {
