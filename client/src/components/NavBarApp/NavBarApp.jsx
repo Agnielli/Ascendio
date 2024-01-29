@@ -108,7 +108,7 @@ function NavBarApp() {
                           src={`http://localhost:3000/images/users/${user.img}`}
                         />
                       ) : (
-                        <p className="letteruser">{user?.nickname.charAt(0).toUpperCase()}</p>
+                        <p>{user?.nickname.charAt(0).toUpperCase()}</p>
                       )}
                     </div>
                   </div>

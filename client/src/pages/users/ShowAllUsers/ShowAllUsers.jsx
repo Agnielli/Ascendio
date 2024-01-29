@@ -19,7 +19,7 @@ export const ShowAllUsers = () => {
       axios
         .get(`http://localhost:3000/users/showallusers`)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           setAllUsers(res.data.filter((elem) => elem.type === 2));
           setAllUsersFilter(res.data.filter((elem) => elem.type === 2));
         })
@@ -103,7 +103,7 @@ export const ShowAllUsers = () => {
     }
   };
 
-  console.log(options);
+  // console.log(options);
 
   return (
     <div>
