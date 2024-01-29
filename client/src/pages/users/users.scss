@@ -1,3 +1,23 @@
+@import '../../../public/stylesheets/variables.scss';
+
 .user{
   color: white;
+}
+
+.userRow {
+  width: 80vw;
+  margin: 0 auto; 
+}
+
+.estadisticas.table {
+  background-color: green !important;
+}
+
+.texto-blanco {
+  color: $accent-color !important;
+}
+
+.enlace-rojo {
+  color: $accent-color; 
+  text-decoration: underline;
 }
