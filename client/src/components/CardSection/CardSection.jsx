@@ -85,7 +85,7 @@ export const CardSection = ({
         )}
       </Accordion.Header>
       <Accordion.Body>
-        <Accordion defaultActiveKey="1">
+        <Accordion defaultActiveKey="1" className="w-100">
         {elem.section_topics.map((topic, index) => {
               return (
           <CardTopic

@@ -3,7 +3,7 @@ import { Button, Card } from "react-bootstrap";
 import { ModalResource } from "../ModalResource/ModalResource";
 import { Cardresource } from "../CardResource/Cardresource";
 import axios from "axios";
-import './CardTopic.scss'
+import "./CardTopic.scss";
 
 export const CardTopic = ({
   topic,
@@ -16,16 +16,15 @@ export const CardTopic = ({
   deleteResource,
   userId,
   userCourse,
-  isIntoValidate
+  isIntoValidate,
 }) => {
-
   const [showModalArchivo, setShowModalArchivo] = useState(false);
   const [resource, setResource] = useState();
 
   const handleClick = () => {
     setShowModalArchivo(true);
   };
-  
+
   useEffect(() => {
     axios
       .get(
@@ -40,24 +39,36 @@ export const CardTopic = ({
   }, [course_id, section_id, topic.topic_id, resetCourse]);
 
   return (
-    <Card>
-      <Card.Body>
-        {`${index}. ${topic.topic_title}`}
-        
-        {resource?.length === 0 && userId === userCourse &&
-        <Button variant="outline-success" onClick={handleClick}
-        disabled={isIntoValidate ? true : false}
-        >
-        Añadir contenido
-      </Button>}
+    <Card className="pplTopic">
+      <Card.Body className="TopicCardBody">
+        <div className="pplCardTopic">
+          <div className="titleTopic my-2">{`${index}. ${topic.topic_title}`}</div>
 
-          {userId === userCourse &&<Button
-          variant="outline-danger"
-          onClick={() => deleteTopic(section_id, topic.topic_id)}
-          disabled={isIntoValidate ? true : false}
-        >
-          Eliminar
-        </Button>}
+          <div className="botonsppalCardTopic d-flex gap-3">
+            {resource?.length === 0 && userId === userCourse && (
+              <Button
+                className="addTopic"
+                variant="outline-success"
+                onClick={handleClick}
+                disabled={isIntoValidate ? true : false}
+              >
+                <span class="material-symbols-outlined addIcon">upload</span>
+              </Button>
+            )}
+            {userId === userCourse && (
+              <Button
+                className="deleteTopic"
+                variant="outline-danger"
+                onClick={() => deleteTopic(section_id, topic.topic_id)}
+                disabled={isIntoValidate ? true : false}
+              >
+                <span class="material-symbols-outlined deleteIcon">
+                  delete
+                </span>
+              </Button>
+            )}
+          </div>
+        </div>
 
         {showModalArchivo && (
           <ModalResource
@@ -70,17 +81,20 @@ export const CardTopic = ({
           />
         )}
 
-        {topic &&
-        <Cardresource
-        resource={resource}
-        course_id={course_id}
-        deleteResource={deleteResource} 
-        isIntoValidate={isIntoValidate}
-        userId={userId}
-        userCourse={userCourse}
-        section_id={section_id} 
-        topic_id={topic.topic_id}
-        />}
+       
+          {topic && (
+            <Cardresource
+              resource={resource}
+              course_id={course_id}
+              deleteResource={deleteResource}
+              isIntoValidate={isIntoValidate}
+              userId={userId}
+              userCourse={userCourse}
+              section_id={section_id}
+              topic_id={topic.topic_id}
+            />
+          )}
+       
       </Card.Body>
     </Card>
   );
