@@ -1,0 +1,53 @@
+.userMiniCardAdminView {
+  width: 600px;
+  height: 200px;
+  background-color: rgb(43, 42, 41);
+  color: white;
+  border-radius: 6rem;
+  display: flex;
+  flex-direction: row;
+  padding: 2rem !important;
+  gap: 2rem;
+  margin: 1rem !important;
+  
+  
+  .userImg {
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    border-radius: 50%;
+  }
+
+  img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+  }
+
+  .datosCard {
+    font-size: small;
+  }
+
+  .divP {
+    width: 5rem !important;
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+
+    p {
+      width: 7rem;
+      color: #e15252;
+    }
+  }
+
+  .Carddivs {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem !important;
+  }
+
+  .button1 {
+    width: 6rem;
+    margin: auto !important;
+  }
+}

@@ -1,0 +1,31 @@
+@use "../../../../public/stylesheets/variables.scss" as *;
+
+p {
+  font-size: 16px;
+  margin: 0.5rem !important;
+}
+
+.Psub {
+  color: rgb(197, 195, 195);
+}
+
+.Ptitle {
+  color: white;
+  margin-bottom: 2rem;
+}
+
+.Pstat {
+  color: #e15252;
+  font-size: 28px;
+}
+
+.Statsdiv {
+  background-color: $accent2-color;
+  height: 35rem;
+  border-radius: 3rem;
+  width: 20rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
