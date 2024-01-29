@@ -91,14 +91,19 @@ export const EditOneCourse = ({
           <Modal.Body className="modalDel">
             <Form>
               <Form.Group controlId="formFile"  className=" d-flex justify-content-center mb-3">
-                <Form.Label><span className="material-symbols-outlined addIcon">
+                <div className="d-flex flex-column" > 
+                <Form.Label>Cambiar</Form.Label>
+                <Form.Label> {editCourse?.img && editCourse?.img !== "default.jpg"  ? <img className="imgcourse" src={`http://localhost:3000/images/cursos/${editCourse.img}`} alt="" /> : <span className="imagencurso material-symbols-outlined addIcon">
                   photo_camera
-                </span></Form.Label>
+                </span>}</Form.Label>
+                
+                </div>
                 <Form.Control type="file" onChange={handleFile} hidden />
               </Form.Group>
               <Form.Group  className="mb-3">
                 <Form.Label>Título </Form.Label>
                 <Form.Control
+                  autoFocus
                   type="text"
                   placeholder="Titulo"
                   name="title"

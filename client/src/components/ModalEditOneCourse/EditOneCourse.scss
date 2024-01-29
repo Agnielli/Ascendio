@@ -25,3 +25,27 @@
   color: $accent3-color!important;
  
 }
+
+.imagencurso {
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  background-color: #2e2d2d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #E15252;
+  cursor: pointer;
+}
+
+
+.imgcourse{
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #E15252;
+  cursor: pointer;
+}
