@@ -39,7 +39,7 @@ export const CardTopic = ({
   }, [course_id, section_id, topic.topic_id, resetCourse]);
 
   return (
-    <Card className="pplTopic">
+    <Card className="pplTopic px-4">
       <Card.Body className="TopicCardBody">
         <div className="pplCardTopic">
           <div className="titleTopic my-2">{`${index}. ${topic.topic_title}`}</div>

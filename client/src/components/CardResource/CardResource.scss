@@ -6,13 +6,14 @@
 
   .botonResource{
     background-color: transparent;
-    border: 1px solid black;
+    border: 1px solid $accent3-color;
     border-radius: 30%;
+    margin-left: 5%;
     
 
     .resourceIcon{
-      color: black;
-      font-size: 20px;
+      color: $accent3-color;
+      font-size: 30px;
     }
   }
 

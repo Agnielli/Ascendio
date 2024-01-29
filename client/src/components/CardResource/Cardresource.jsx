@@ -35,7 +35,7 @@ export const Cardresource = ({
           resource[0]?.resource_type === 2) && (
           <>
             <Button
-              className="botonResource d-flex justify-content-center align-items-center m-0 p-1"
+              className="botonResource d-flex justify-content-center align-items-center"
               onClick={handleClick}
               disabled={isIntoValidate ? true : false}
             >
@@ -47,7 +47,7 @@ export const Cardresource = ({
               ) : null}
             </Button>
 
-            {userId === userCourse && (
+            {/* {userId === userCourse && (
               <button
                 className="delResource d-flex justify-content-center align-items-center m-0 p-1"
                 variant="outline-danger"
@@ -58,7 +58,7 @@ export const Cardresource = ({
               >
                 <span class="material-symbols-outlined delIcon">delete</span>
               </button>
-            )}
+            )} */}
           </>
         )}
     </div>
