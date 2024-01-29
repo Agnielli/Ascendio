@@ -12,11 +12,6 @@ export const Landing = () => {
         <Row className="ascendio-landing-main-hijo-1">
           <Col
             xs={12}
-            sm={12}
-            lg={6}
-            md={12}
-            xl={6}
-            xxl={6}
             className="ascendio-landing-main-hijo1-nieto"
           >
             <img
@@ -27,11 +22,6 @@ export const Landing = () => {
           </Col>
           <Col
             xs={12}
-            sm={12}
-            lg={6}
-            md={12}
-            xl={6}
-            xxl={6}
             className="ascendio-landing-main-hijo1-nieto"
           >
             <img
@@ -44,21 +34,11 @@ export const Landing = () => {
         <Row className="ascendio-landing-main-hijo-2">
           <Col
             xs={12}
-            sm={12}
-            lg={6}
-            md={12}
-            xl={6}
-            xxl={6}
             className="ascendio-landing-main-hijo2-nieto "
           >
             <Row className="ascendio-landing-main-hijo2-nieto-bisnieto ">
               <Col
                 xs={4}
-                sm={6}
-                xl={4}
-                lg={4}
-                md={4}
-                xxl={4}
                 className="ascendio-landing-main-hijo2-nieto-bisnieto-tataranieto"
               >
                 <img
@@ -69,11 +49,6 @@ export const Landing = () => {
                 <p>Sigue a tus trades favoritos desde cualquier dispositivo.</p>
               </Col>
               <Col
-                xl={4}
-                sm={6}
-                xxl={4}
-                lg={4}
-                md={4}
                 xs={4}
                 className="ascendio-landing-main-hijo2-nieto-bisnieto-tataranieto"
               >
@@ -85,11 +60,6 @@ export const Landing = () => {
                 <p>Canales grauitos y de pago, todos a un solo click.</p>
               </Col>
               <Col
-                xl={4}
-                sm={4}
-                xxl={4}
-                lg={4}
-                md={4}
                 xs={4}
                 className="ascendio-landing-main-hijo2-nieto-bisnieto-tataranieto"
               >
@@ -101,11 +71,6 @@ export const Landing = () => {
                 <p>Estadísticas verificadas por nuestro equipo.</p>
               </Col>
               <Col
-                xl={4}
-                sm={4}
-                xxl={4}
-                lg={4}
-                md={4}
                 xs={4}
                 className="ascendio-landing-main-hijo2-nieto-bisnieto-tataranieto"
               >
@@ -117,11 +82,6 @@ export const Landing = () => {
                 <p>De todas las operaciones realizadas por nuestros trades.</p>
               </Col>
               <Col
-                xl={4}
-                sm={4}
-                xxl={4}
-                lg={4}
-                md={4}
                 xs={4}
                 className="ascendio-landing-main-hijo2-nieto-bisnieto-tataranieto"
               >
@@ -133,11 +93,6 @@ export const Landing = () => {
                 <p>Notificaciones completamente personalizables.</p>
               </Col>
               <Col
-                xl={4}
-                sm={4}
-                xxl={4}
-                lg={4}
-                md={4}
                 xs={4}
                 className="ascendio-landing-main-hijo2-nieto-bisnieto-tataranieto"
               >
@@ -152,12 +107,7 @@ export const Landing = () => {
           </Col>
           <Col
             xs={12}
-            sm={12}
-            lg={6}
-            md={12}
-            xl={6}
-            xxl={6}
-            className="ascendio-landing-main-hijo2-nieto col-xl-6 col-12"
+            className="ascendio-landing-main-hijo2-nieto"
           >
             <TradingViewWidget />
           </Col>
@@ -165,13 +115,19 @@ export const Landing = () => {
       </main>
       <footer>
         <Row className="ascendio-landing-footer-padre">
-          <Col xs={5} xl={5} className="ascendio-landing-footer-padre-hijo">
+          <Col
+            xs={5}
+            className="ascendio-landing-footer-padre-hijo"
+          >
             <h3>ASCENDIO</h3>
           </Col>
-          <Col xs={2} xl={2} className="ascendio-landing-footer-padre-hijo">
+          <Col
+            xs={2}
+            className="ascendio-landing-footer-padre-hijo"
+          >
             <p>&copy;2024 Ascendio, inc</p>
           </Col>
-          <Col xs={2} xl={2} className="ascendio-landing-footer-padre-hijo">
+          <Col xs={2}className="ascendio-landing-footer-padre-hijo">
             <Link
               className="ascendio-landing-footer-link "
               to="/termsandconditions"
@@ -179,12 +135,12 @@ export const Landing = () => {
               Therms & Conditions
             </Link>
           </Col>
-          <Col xs={1} xl={1} className="ascendio-landing-footer-padre-hijo">
+          <Col xs={1} className="ascendio-landing-footer-padre-hijo">
             <Link className="ascendio-landing-footer-link" to="/privacy">
               Privacy
             </Link>
           </Col>
-          <Col xs={2} xl={2} className="ascendio-landing-footer-padre-hijo">
+          <Col xs={2} className="ascendio-landing-footer-padre-hijo">
             <Link className="ascendio-landing-footer-link" to="/cookiespolicy">
               Cookies Policy
             </Link>
