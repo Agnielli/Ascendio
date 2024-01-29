@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./courses.scss";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button, Card, Col } from "react-bootstrap";
+import { Button, Card, Col, Row } from "react-bootstrap";
 import { textSensitive } from "../../helpers/utils";
 import { RatingStars } from "../../components/Courses/RatingStars/RatingStars";
 import "../../../public/stylesheets/ButtonsApp.scss";
@@ -57,15 +57,21 @@ export const AllCourses = () => {
             </Button>
           </div>
           <div>
-            <input onChange={handleChange} placeholder="🔍" value={filter} />
+            <input
+            onChange={handleChange} placeholder="🔍"
+            value={filter}
+            className="buscador"
+            />
           </div>
         </div>
       </header>
-      <main className="mainAllCourses d-flex flex-wrap justify-content-center gap-3 pb-5">
+      <main className="mainAllCourses pb-5">
+        <Row> 
+        
         {findCourse?.map((elem) => {
           return (
+            <Col xs={12} sm={6} lg={5} > 
             <Card
-              style={{ width: "22rem" }}
               key={elem.course_id}
               className="mapeoAllCourse text-center"
             >
@@ -99,8 +105,10 @@ export const AllCourses = () => {
                 </Card.Text>
               </Card.Body>
             </Card>
+            </Col>
           );
         })}
+        </Row>
         {findCourse?.length === 0 && (
           <p className="busqueda">
             No se han encontrado cursos con este nombre

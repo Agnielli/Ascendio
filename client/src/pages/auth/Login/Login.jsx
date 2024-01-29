@@ -78,6 +78,7 @@ export const Login = () => {
                 placeholder="Email"
                 name="email"
                 onChange={handleChange}
+                autoFocus
               />
             </Form.Group>
             <Form.Group  controlId="formBasicPassword">
