@@ -3,6 +3,8 @@ import { Form, Button, Row, Col, Modal } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { AscendioContext } from "../../context/AscendioContext";
 import axios from "axios";
+import "./EditOneCourse.scss";
+import "../../../public/stylesheets/FormulariosEInputs.scss"
 
 const initialValue = {
   title: "",
@@ -80,13 +82,13 @@ export const EditOneCourse = ({
   };
 
   return (
-    <Row className="d-flex justify-content-center p-5">
+    <Row className="d-flex justify-content-center p-5 ">
       <Col md={4}>
-        <Modal show={showModal} onHide={handleClose}>
-          <Modal.Header closeButton>
+        <Modal show={showModal} onHide={handleClose} >
+          <Modal.Header closeButton className="modalDel">
             <Modal.Title>Editar curso</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body className="modalDel">
             <Form>
               <Form.Group controlId="formFile" className="mb-3">
                 <Form.Label>.jpg/.pdf</Form.Label>
@@ -127,17 +129,17 @@ export const EditOneCourse = ({
           
           <p>{msgError}</p>
  
-          <Modal.Footer>
+          <Modal.Footer className="modalDel">
             <Button
               variant="outline-success"
-              className="me-3"
+              className="me-3 Button3"
               onClick={handleSubmit}
             >
               Aceptar
             </Button>
             <Button
               variant="outline-success"
-              className="me-3"
+              className="me-3 Button3"
               onClick={handleClose}
             >
               Cancelar
