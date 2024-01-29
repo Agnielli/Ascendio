@@ -137,7 +137,6 @@ export const OneCourse = () => {
   }, [sections, resetCourse, addSection]);
 
   let userId = user.user_id;
-  console.log(userId);
 
   useEffect(() => {
     axios
@@ -494,6 +493,7 @@ export const OneCourse = () => {
 
         {ratingAverage && (
           <>
+            <h5> MEDIA DE LAS VALORACIONES: {ratingAverage}</h5>
             <h5 className="py-3">¿Qué opina la gente?</h5>
             <div className="d-flex flex-wrap gap-2 pb-3">
               {rates?.map((elem) => (
@@ -503,7 +503,6 @@ export const OneCourse = () => {
                 />
               ))}
             </div>
-            <h5> MEDIA DE LAS VALORACIONES: {ratingAverage}</h5>
           </>
         )}
       </section>
