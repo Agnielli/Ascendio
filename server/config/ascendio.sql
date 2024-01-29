@@ -110,7 +110,7 @@ CREATE TABLE course (
   description VARCHAR(250) NOT NULL,
   img VARCHAR (150),
   date DATETIME not null default (CURRENT_DATE),
-  price INT UNSIGNED NOT NULL,  -- 99999
+  price DECIMAL(7,2) UNSIGNED NOT NULL,  -- 99999,99
   is_deleted BOOLEAN NOT NULL DEFAULT false,
   is_disabled BOOLEAN NOT NULL DEFAULT false,
   is_completed BOOLEAN NOT NULL DEFAULT	false,
