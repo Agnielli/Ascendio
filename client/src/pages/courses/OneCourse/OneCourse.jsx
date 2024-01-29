@@ -370,7 +370,7 @@ export const OneCourse = () => {
                 </button>
               )}
               <Card.Text className="priceCourse px-3 my-2">
-                {oneCoursePpal?.price === 0
+                  {Number(oneCoursePpal?.price) === 0
                   ? "GRATIS"
                   : `${oneCoursePpal?.price}€`}
               </Card.Text>
