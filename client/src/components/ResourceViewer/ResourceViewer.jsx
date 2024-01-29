@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Breadcrumb } from "react-bootstrap";
+import { Breadcrumb, Col, Container, Row } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
+import "./ResourceViewer.scss";
 
 export const ResourceViewer = () => {
   const [titles, setTitles] = useState();
@@ -28,17 +29,29 @@ export const ResourceViewer = () => {
   }
 
   return (
-    <Breadcrumb>
-      <Breadcrumb.Item onClick={()=>navigate(-1)}>
-        {titles?.title}
-      </Breadcrumb.Item>
-      <Breadcrumb.Item onClick={()=>navigate(-1)}>
-        {titles?.section_title}
-        <div>
-          <iframe src={`${urlbase}${link}`} frameborder="0"></iframe>
+    <Container fluid className="resourceView">
+  
+    <Breadcrumb className="linkes">
+      
+      <div className="back">
+        <Breadcrumb.Item onClick={()=>navigate(-1)} >
+          {titles?.title}
+        </Breadcrumb.Item>
+        <Breadcrumb.Item onClick={()=>navigate(-1)}>
+          {titles?.section_title}
+        </Breadcrumb.Item>
+      </div>
+
+      <hr />
+
+        <Col className="justify-content-center text-center align-items-center">
+        <div >
+          <iframe className="content" src={`${urlbase}${link}`} frameborder="0"></iframe>
         </div>
-      </Breadcrumb.Item>
-      <Breadcrumb.Item active>Data</Breadcrumb.Item>
+        </Col>
+
     </Breadcrumb>
+
+    </Container>
   );
 };

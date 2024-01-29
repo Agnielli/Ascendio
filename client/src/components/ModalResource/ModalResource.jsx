@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import './modalResource.scss'
+import "../../../public/stylesheets/ButtonsApp.scss";
 
 export const ModalResource = ({
   showModalArchivo,
@@ -55,24 +57,28 @@ export const ModalResource = ({
     <Row className="d-flex justify-content-center p-5">
       <Col md={4}>
         <Modal show={showModalArchivo} onHide={handleClose}>
-          <Modal.Header closeButton>
+          <Modal.Header closeButton className="modalResource">
             <Modal.Title>Añadir contenido</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body className="modalResource">
+          <div className="d-flex ">
             <Button
               onClick={() => {
                 setContenido("1");
               }}
+              className="Button4"
             >
-              PDF/JPG
+              PDF
             </Button>
             <Button
               onClick={() => {
                 setContenido("2");
               }}
+              className="Button4"
             >
               Video
             </Button>
+            </div>
 
             {contenido === "1" ? (
               <Form.Group controlId="formFile" className="mb-3">
@@ -94,18 +100,16 @@ export const ModalResource = ({
               </Form.Group>
             ) : null}
           </Modal.Body>
-          <Modal.Footer>
+          <Modal.Footer className="modalResource">
             <Button
-              variant="outline-success"
-              className="me-3"
+              className="Button3"
               onClick={handleSubmit}
             >
               Aceptar
             </Button>
 
             <Button
-              variant="outline-success"
-              className="me-3"
+              className="Button3"
               onClick={handleClose}
             >
               Cancelar

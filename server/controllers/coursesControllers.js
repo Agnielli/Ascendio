@@ -497,10 +497,106 @@ ORDER BY course.date DESC`;
     connection.query(sql, (err, result) => {
       err ? res.status(500).json(err) : res.status(200).json({result, course_rates});
     });
-
-  
   }
 
+  getOneRateOneCourseOneUser = (req, res) =>{
+    const {course_id, user_id} = req.params
+
+    let sql = `SELECT * FROM user_rates_course WHERE user_id = ${user_id} AND course_id = ${course_id}`
+    
+    connection.query(sql, (err, result) => {
+      err ? res.status(500).json(err) : res.status(200).json(result);
+    });
+  }
+
+  getOneWishedCourse = (req, res) =>{
+    const { user_id } = req.params
+    
+    let sql = `SELECT
+    course.course_id,
+    course.followers,
+    course.title,
+    course.description,
+    course.price,
+    course.is_disabled,
+    course.img,
+    course.date,
+    REPLACE(GROUP_CONCAT(tag.tag_name), ',', ' ') AS tags,
+    AVG(user_rates_course.course_rates) AS average_rating
+FROM
+    course
+LEFT JOIN
+    course_tag ON course.course_id = course_tag.course_id
+LEFT JOIN
+    tag ON course_tag.tag_id = tag.tag_id
+LEFT JOIN
+    user_rates_course ON course.course_id = user_rates_course.course_id
+LEFT JOIN
+    user_wishes_course ON course.course_id = user_wishes_course.course_id
+WHERE
+    course.is_disabled = 1
+    AND course.is_deleted = 0
+    AND user_wishes_course.user_id = ${user_id}
+GROUP BY
+    course.course_id,
+    course.title,
+    course.description,
+    course.price,
+    course.is_disabled,
+    course.img
+ORDER BY
+    average_rating DESC`
+
+    connection.query(sql, (err, result) => {
+      err ? res.status(500).json(err) : res.status(200).json(result);
+    });
+    
+  }
+
+  getOnePurchasedCourse = (req, res) =>{
+    const { user_id } = req.params
+    console.log("paramsssss", req.params)
+    
+    let sql = `SELECT
+    course.course_id,
+    course.followers,
+    course.title,
+    course.description,
+    course.price,
+    course.is_disabled,
+    course.img,
+    course.date,
+    REPLACE(GROUP_CONCAT(tag.tag_name), ',', ' ') AS tags,
+    AVG(user_rates_course.course_rates) AS average_rating
+FROM
+    course
+LEFT JOIN
+    course_tag ON course.course_id = course_tag.course_id
+LEFT JOIN
+    tag ON course_tag.tag_id = tag.tag_id
+LEFT JOIN
+    user_rates_course ON course.course_id = user_rates_course.course_id
+LEFT JOIN
+    user_enrolls_course ON course.course_id = user_enrolls_course.course_id
+WHERE
+    course.is_disabled = 1
+    AND course.is_deleted = 0
+    AND user_enrolls_course.user_id = ${user_id}
+GROUP BY
+    course.course_id,
+    course.title,
+    course.description,
+    course.price,
+    course.is_disabled,
+    course.img
+ORDER BY
+    average_rating DESC`
+
+    connection.query(sql, (err, result) => {
+      err ? res.status(500).json(err) : res.status(200).json(result);
+    });
+
+  }
 }
 
 module.exports = new coursesControllers();
