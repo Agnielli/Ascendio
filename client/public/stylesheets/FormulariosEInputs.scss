@@ -1,27 +1,6 @@
-@use "../../../../public/stylesheets/variables.scss" as *;
+@use "./variables.scss" as *;
 
 .FormulariosContainer {
-
-  height: calc(100vh - 48px);
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  
-  text-align: center;
-  padding: 5vh 5vw 0 5vw !important;
-
-  p {
-    font-size: 1rem;
-  }
-
-  h2 {
-    margin-bottom: 3rem !important;
-  }
-
-  h5 {
-    margin-bottom: 1rem !important;
-  }
-
   //inputs:
   .form-control:focus {
     box-shadow: 0 0 0 0.25rem $accent-color !important;
@@ -32,8 +11,9 @@
     padding: 0 10px !important;
     background-color: $accent5-color;
   }
+
   input#formBasicPassword.form-control {
-    border-radius: 25px 0 0 25px;
+    border-radius: 25px 0 0 25px;    
   }
   .eye-icon {
     cursor: pointer;
@@ -58,4 +38,6 @@
   .eye-icon-focused {
     box-shadow: 0 0 0 0.25rem $accent-color !important;
   }
+
+  
 }
