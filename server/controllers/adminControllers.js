@@ -3,11 +3,17 @@ const connection = require("../config/db");
 class adminControllers {
   adminGetAllUsers = (req, res) => {
     let sql = `SELECT * FROM user WHERE type = 2`;
-    let sql2 = `SELECT user.*, COUNT(post.post_id) AS total_posts,
+    let sql2 = `SELECT 
+    user.*,
+    COUNT(post.post_id) AS total_posts,
     SUM(CASE WHEN post.correct = true THEN 1 ELSE 0 END) AS correct_posts,
-    SUM(CASE WHEN post.correct = false THEN 1 ELSE 0 END) AS incorrect_posts
-    FROM user LEFT JOIN post ON user.user_id = post.user_id WHERE user.type = 2 GROUP BY
-    user.user_id`;
+    SUM(CASE WHEN post.correct = false THEN 1 ELSE 0 END) AS incorrect_posts,
+    COUNT(user_follows_user.followed_user_id) AS total_followers
+    FROM user
+    LEFT JOIN post ON user.user_id = post.user_id
+    LEFT JOIN user_follows_user ON user.user_id = user_follows_user.user_id
+    WHERE user.type = 2
+    GROUP BY user.user_id`
 
     connection.query(sql2, (err, result) => {
       if (err) {

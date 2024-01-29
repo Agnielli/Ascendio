@@ -1,0 +1,23 @@
+@import "../../../../public/stylesheets/variables.scss";
+
+.mapeoCursosGuardados{
+  background-color:  $accent2-color;
+}
+
+.mainCursosGuardados, .headerCursosGuardados {
+  width: 80vw;
+  margin: 0 auto; 
+}
+
+.descriptioncard{
+  font-size: 1rem;
+  color: #9C9999 !important;
+}
+.followerscard{
+  color: white;
+  font-size: 1rem;
+}
+
+.tagsCourse{
+  color: $accent-color;
+}

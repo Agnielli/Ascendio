@@ -2,22 +2,14 @@
 
 // VISTA PC XL
 .ascendio-landing-containerPrincipal {
-  min-height: calc(100vh - 48px);
+  height: calc(100vh - 48px);
   background-color: #0c0c0c;
-  @include display-flex(column, center, center);
-  flex-wrap: wrap;
-  //width: 100vw;
 
   .ascendio-landing-main {
-    min-height: calc(100vh - 78px);
-    // @include display-flex(row, center, end);
-    flex-wrap: wrap;
-    padding: 0 0 5px 0;
-    width: 100%;
+    min-height: calc(100vh - 72px);
 
     .ascendio-landing-main-hijo {
       @include display-flex(row, center, center);
-      flex-wrap: wrap;
 
       .ascendio-landing-fondo-principal1 {
         height: 100%;
@@ -33,87 +25,93 @@
     .ascendio-landing-main-hijo2 {
       @include display-flex(row, center, flex-start);
       flex-wrap: wrap;
+      height: 100%;
+
       .ascendio-landing-textos-padre {
         @include display-flex(row, center, center);
         flex-wrap: wrap;
-        gap: 1px;
+        gap: 2rem;
         width: 100%;
         height: 100%;
 
         .ascendio-landing-textos-hijo {
           @include display-flex(column, flex-start, flex-start);
-          height: 100px;
+          height: 100%;
           gap: 1px;
 
           img {
-            width: 50px;
-            height: 50px;
+            width: 100px;
+            height: 100px;
             background-color: transparent;
             border-radius: 50%;
           }
 
           h6 {
-            font-size: 20px;
+            font-size: 1.5rem;
           }
 
           p {
-            font-size: 14px;
+            font-size: 1rem;
             color: $accent3-color;
           }
         }
       }
     }
+
+    .ascendio-landing-main-hijo3 {
+      @include display-flex(row, center, flex-start);
+
+      .ascendio-landing-fondo-principal1 {
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .ascendio-landing-fondo-principal2 {
+        width: 100%;
+        object-fit: cover;
+      }
+    }
   }
 
   .ascendio-landing-footer {
-    @include display-flex(row, none, center);
-    flex-wrap: wrap;
+    @include display-flex(row, flex-start, center);
     color: $accent3-color;
     background-color: $accent-color;
-    height: 30px;
-    width: 100%;
     padding: 0 5vw !important;
-
-    h3 {
-      font-size: 16px;
-    }
-
-    p {
-      font-size: 16px;
-      @include display-flex(row, center, center);
-      flex-wrap: wrap;
-    }
-
-    .ascendio-landing-footer-link {
-      font-size: 8px;
-      text-decoration: none;
-      color: $accent3-color;
-      @include display-flex(row, center, center);
-    }
-
-    .ascendio-landing-footer-link:hover {
-      text-decoration: none;
-      color: $accent2-color;
-      @include display-flex(row, center, center);
+    .col-landin-footer-estyles {
+      h3 {
+        font-size: 16px;
+      }
+      p {
+        font-size: 16px;
+        @include display-flex(row, center, center);
+      }
+      .ascendio-landing-footer-link {
+        font-size: 12px;
+        text-decoration: none;
+        color: $accent3-color;
+        @include display-flex(row, center, center);
+      }
+      .ascendio-landing-footer-link:hover {
+        text-decoration: none;
+        color: $accent2-color;
+        @include display-flex(row, center, center);
+      }
     }
   }
 }
 
-
 //RESPONSIVE MOVIL
 @media (max-width: 600px) {
   // Estilos para dispositivos móviles aquí
+
   .ascendio-landing-containerPrincipal {
-    background-color: #0c0c0c;
+    height: calc(100vh - 58px);
 
     .ascendio-landing-main {
-      padding: 0 0 5px 0;
+      min-height: calc(100vh - 58px);
 
       .ascendio-landing-main-hijo {
-        @include display-flex(row, center, center);
-        flex-wrap: wrap;
-        overflow: hidden;
-
         .ascendio-landing-fondo-principal1 {
           max-width: 100%;
           height: 100%;
@@ -127,73 +125,176 @@
       }
 
       .ascendio-landing-main-hijo2 {
-        //@include display-flex(row, center, flex-start);
-        height: 300px;
-        //flex-wrap: wrap;
-
+        //margin-bottom: 1rem !important;
         .ascendio-landing-textos-padre {
-          @include display-flex(row, space-evenly, flex-start);
-          flex-wrap: wrap;
-          gap: 10px;
-          width: 100%;
-          height: 200px;
+          gap: 0;
 
           .ascendio-landing-textos-hijo {
-            @include display-flex(column, flex-start, flex-start);
-            height: 150px;
-            width: 25%;
-            
-
+            @include display-flex(column, center, flex-start);
+            width: 30%;
             img {
-              width: 50px;
-              height: 50px;
+              width: 25px;
+              height: 25px;
               background-color: transparent;
               border-radius: 50%;
             }
 
             h6 {
-              font-size: 15px;
+              font-size: 8px;
             }
 
             p {
-              font-size: 9px;
+              font-size: 4px;
               color: $accent3-color;
             }
           }
         }
       }
+
+      .ascendio-landing-main-hijo3 {
+        @include display-flex(row, center, flex-start);
+
+        .ascendio-landing-fondo-principal1 {
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .ascendio-landing-fondo-principal2 {
+          width: 100%;
+          object-fit: cover;
+        }
+      }
     }
 
     .ascendio-landing-footer {
-      //@include display-flex(row, space-evenly, baseline);
-      flex-wrap: wrap;
+      @include display-flex(row, flex-start, center);
       color: $accent3-color;
       background-color: $accent-color;
-      height: 30px;
-      width: 100%;
       padding: 0 5vw !important;
+      height: 10px;
+      .col-landin-footer-estyles {
+        h3 {
+          font-size: 8px;
+        }
+        p {
+          font-size: 4px;
+          @include display-flex(row, center, center);
+        }
+        .ascendio-landing-footer-link {
+          font-size: 4px;
+          text-decoration: none;
+          color: $accent3-color;
+          @include display-flex(row, center, center);
+        }
+        .ascendio-landing-footer-link:hover {
+          text-decoration: none;
+          color: $accent2-color;
+          @include display-flex(row, center, center);
+        }
+      }
+    }
+  }
+}
 
-      h3 {
-        font-size: 5px;
+//RESPONSIVE TABLET
+@media (min-width: 601px) And (max-width: 900px) {
+  .ascendio-landing-containerPrincipal {
+    min-height: calc(100vh - 48px);
+    background-color: #0c0c0c;
+
+    .ascendio-landing-main {
+      min-height: calc(100vh - 72px);
+
+      .ascendio-landing-main-hijo {
+        @include display-flex(row, center, center);
+
+        .ascendio-landing-fondo-principal1 {
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .ascendio-landing-fondo-principal2 {
+          width: 100%;
+          object-fit: cover;
+        }
       }
 
-      p {
-        font-size: 5px;
-        @include display-flex(row, center, center);
+      .ascendio-landing-main-hijo2 {
+        @include display-flex(row, flex-start, flex-start);
         flex-wrap: wrap;
+        height: 100%;
+        width: 100%;
+
+        .ascendio-landing-textos-padre {
+          @include display-flex(row, flex-start, flex-start);
+          flex-wrap: wrap;
+          gap: 2rem;
+          width: 50%;
+          height: 100%;
+
+          .ascendio-landing-textos-hijo {
+            @include display-flex(column, flex-start, flex-start);
+            height: 100%;
+            gap: 1px;
+
+            img {
+              width: 100px;
+              height: 100px;
+              background-color: transparent;
+              border-radius: 50%;
+            }
+
+            h6 {
+              font-size: 1.5rem;
+            }
+
+            p {
+              font-size: 1rem;
+              color: $accent3-color;
+            }
+          }
+        }
       }
 
-      .ascendio-landing-footer-link {
-        font-size: 5px;
-        text-decoration: none;
-        color: $accent3-color;
-        @include display-flex(row, center, center);
-      }
+      .ascendio-landing-main-hijo3 {
+        @include display-flex(row, center, flex-start);
 
-      .ascendio-landing-footer-link:hover {
-        text-decoration: none;
-        color: $accent2-color;
-        @include display-flex(row, center, center);
+        .ascendio-landing-fondo-principal1 {
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .ascendio-landing-fondo-principal2 {
+          width: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+
+    .ascendio-landing-footer {
+      @include display-flex(row, flex-start, center);
+      color: $accent3-color;
+      background-color: $accent-color;
+      padding: 0 5vw !important;
+      .col-landin-footer-estyles {
+        h3 {
+          font-size: 16px;
+        }
+        p {
+          font-size: 16px;
+          @include display-flex(row, center, center);
+        }
+        .ascendio-landing-footer-link {
+          font-size: 12px;
+          text-decoration: none;
+          color: $accent3-color;
+          @include display-flex(row, center, center);
+        }
+        .ascendio-landing-footer-link:hover {
+          text-decoration: none;
+          color: $accent2-color;
+          @include display-flex(row, center, center);
+        }
       }
     }
   }

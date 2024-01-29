@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Accordion, Button, Card } from "react-bootstrap";
 import { FormAddTopic } from "../FormAddTopic/FormAddTopic";
 import { CardTopic } from "../CardTopic/CardTopic";
-import axios from "axios";
+import "./CardSection.scss";
 export const CardSection = ({
   elem,
   deleteSection,
@@ -21,14 +21,15 @@ export const CardSection = ({
   resource,
   setResource,
   deleteResource,
-  isIntoValidate
+  isIntoValidate,
 }) => {
-
   const [showTopic, setShowTopic] = useState(false);
   const [orderedTopics, setOrderedTopics] = useState([]);
 
   useEffect(() => {
-    const sortedTopics = elem.section_topics.slice().sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+    const sortedTopics = elem.section_topics
+      .slice()
+      .sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
     setOrderedTopics(sortedTopics);
   }, [elem.section_topics]);
 
@@ -37,23 +38,37 @@ export const CardSection = ({
   };
 
   return (
-    <Accordion.Item eventKey={index}>
-      <Accordion.Header>
-      {`${index}. ${elem.section_title}`}
-        {userId === userCourse &&<Button
-          variant="outline-success"
-          onClick={handleClick}
-          disabled={showTopic ? true : false || isIntoValidate ? true : false}
-        >
-          Añadir tema
-        </Button>}
-        {userId === userCourse &&<Button
-          variant="outline-success"
-          onClick={() => deleteSection(elem.section_id)}
-          disabled={isIntoValidate ? true : false}
-        >
-          Eliminar
-        </Button>}
+    <Accordion.Item eventKey={index} className="sectionCard">
+      <Accordion.Header className="sectionHeader">
+        <div className="pplCardSection">
+          <div className="titleSection my-2">{`${index}. ${elem.section_title}`}</div>
+          <div className="botonsppalCardSection d-flex gap-3">
+            {userId === userCourse && (
+              <Button
+                className="addSection"
+                variant="outline-success"
+                onClick={handleClick}
+                disabled={
+                  showTopic ? true : false || isIntoValidate ? true : false
+                }
+              >
+                <span class="material-symbols-outlined addIcon">upload</span>
+              </Button>
+            )}
+            {userId === userCourse && (
+              <button
+                className="deleteSection"
+                variant="outline-success"
+                onClick={() => deleteSection(elem.section_id)}
+                disabled={isIntoValidate ? true : false}
+              >
+                <span class="material-symbols-outlined deleteIcon">
+                  delete
+                </span>
+              </button>
+            )}
+          </div>
+        </div>
         {showTopic && (
           <FormAddTopic
             setShowTopic={setShowTopic}
@@ -68,13 +83,13 @@ export const CardSection = ({
             setAddSection={setAddSection}
           />
         )}
-        </Accordion.Header>
-        <Accordion.Body>
+      </Accordion.Header>
+      <Accordion.Body>
         <Accordion defaultActiveKey="1">
         {elem.section_topics.map((topic, index) => {
               return (
           <CardTopic
-          key={elem.topic_id}
+          key={`${elem.topic_id}-${index}`}
           topics={topics}
           setTopics={setTopics}
           topic={topic}
@@ -93,6 +108,7 @@ export const CardSection = ({
           />
           );
         })}
+
         </Accordion>
       </Accordion.Body>
     </Accordion.Item>

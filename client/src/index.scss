@@ -1,4 +1,4 @@
-@use "../public/stylesheets/variables.scss" as *;
+@use "../public/stylesheets/variables.scss" as var;
 
 * {
   color: $accent3-color;
@@ -7,4 +7,9 @@
 
 }
 
+
+
+input {
+  outline: none;
+}
 

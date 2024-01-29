@@ -34,7 +34,9 @@ router.get('/gettyperesource', coursesControllers.getTypeResource)
 router.get('/getOneBread/:course_id/:section_id', coursesControllers.getOneBread)
 router.put('/updatefollowers/:course_id', coursesControllers.updateFollowers);
 router.post('/userrateonecourse/:course_id', coursesControllers.userRateOneCourse)
-
+router.get('/getonerateonecourseoneuser/:course_id/:user_id', coursesControllers.getOneRateOneCourseOneUser)
+router.get('/getonewishedcourse/:user_id', coursesControllers.getOneWishedCourse)
+router.get('/getonepurchasedcourse/:user_id', coursesControllers.getOnePurchasedCourse)
 
 //vuelvo a estar harta del git :)
 

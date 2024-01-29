@@ -6,7 +6,6 @@ export const CardRatingsOneCourse = ({rates}) => {
 
   return (
     <Card style={{ width: '18rem' }}>
-    
     <Card.Body>
       <Card.Title>{rates?.nickname}</Card.Title>
       <RatingStars
