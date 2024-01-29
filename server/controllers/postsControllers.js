@@ -91,7 +91,23 @@ class postsControllers {
   };
 
   showLastTrades = (req, res) => {
-    let sql = `SELECT post.*, user.nickname, user.user_id, post_resource.text AS image_name FROM user INNER JOIN post ON user.user_id = post.user_id LEFT JOIN post_resource ON post.post_id = post_resource.post_id ORDER BY post.date DESC;`;
+
+    let sql = `
+    SELECT 
+      post.*,
+      user.nickname,
+      user.user_id,
+      post_resource.text AS image_name,
+      (SELECT COUNT(*) FROM user_follows_user WHERE followed_user_id = user.user_id) AS num_followers
+    FROM 
+      user
+    INNER JOIN 
+      post ON user.user_id = post.user_id
+    LEFT JOIN 
+      post_resource ON post.post_id = post_resource.post_id
+    ORDER BY 
+      post.date DESC;
+  `;
 
     connection.query(sql, (err, result) => {
       if (err) {

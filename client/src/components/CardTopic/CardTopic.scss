@@ -1,2 +1,65 @@
+@import '../../../public/stylesheets/variables.scss';
+
+
+.pplTopic{
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  
+
+  .TopicCardBody{
+    
+    .pplCardTopic{
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    
+      .titleTopic{
+        width: 70%;
+        font-size: 1.2rem;
+        color: $accent3-color;
+        
+      }
+      
+      .botonsppalCardTopic{
+        width: 20%;
+        display: flex;
+        justify-content: center;
+    
+        .addTopic{
+          width: 50px;
+          background-color: transparent;
+          border: 2px solid $accent3-color;
+          border-radius: 30%;
+          display: flex;
+        justify-content: center;
+        align-items: center;
+    
+          .addIcon{
+            color: $accent3-color;
+          }
+        }
+    
+        .deleteTopic{
+          width: 50px;
+          background-color: transparent;
+          border: 2px solid $accent3-color;
+          border-radius: 30%;
+          
+          .deleteIcon{
+            color: $accent3-color;
+          }
+        }
+      }
+    
+    }
+  }
+
+}
+
+
+
+
+
 
 

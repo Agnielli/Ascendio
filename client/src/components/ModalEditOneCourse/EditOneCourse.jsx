@@ -3,6 +3,8 @@ import { Form, Button, Row, Col, Modal } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { AscendioContext } from "../../context/AscendioContext";
 import axios from "axios";
+import "./EditOneCourse.scss";
+import "../../../public/stylesheets/FormulariosEInputs.scss"
 
 const initialValue = {
   title: "",
@@ -33,7 +35,7 @@ export const EditOneCourse = ({
     const { name, value } = e.target;
     let newValue = value;
     if (name === 'price') {
-    newValue = value.replace(/[^0-9]/g, '');
+      newValue = value.replace(/^(?:(\d{1,5}(?:\.\d{0,2})?)|\D+).*$/g, '$1');
     }
     setEditCourse({ ...editCourse, [name]: newValue });
   };
@@ -47,7 +49,7 @@ export const EditOneCourse = ({
     setMsgError("")
   };
 
-  let regexPrice = /^[a-zA-Z0-9\s.,:?¿!¡]{1,5}$/;
+  let regexPrice = /^(?:(\d{1,5}(?:\.\d{0,2})?)|\D+).*$/g;
   let regexTitle = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ.,:?¿!¡]{1,50}$/;
   let regexDescription = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ.,:?¿!¡]{1,250}$/;
   const handleSubmit = (e) => {
@@ -80,19 +82,21 @@ export const EditOneCourse = ({
   };
 
   return (
-    <Row className="d-flex justify-content-center p-5">
+    <Row className="d-flex justify-content-center p-5 ">
       <Col md={4}>
-        <Modal show={showModal} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Editar curso</Modal.Title>
+        <Modal show={showModal} onHide={handleClose} className="FormulariosContainer" >
+          <Modal.Header closeButton className="modalDel">
+            <Modal.Title className="edittitle">Editar curso</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body className="modalDel">
             <Form>
-              <Form.Group controlId="formFile" className="mb-3">
-                <Form.Label>.jpg/.pdf</Form.Label>
+              <Form.Group controlId="formFile"  className=" d-flex justify-content-center mb-3">
+                <Form.Label><span className="material-symbols-outlined addIcon">
+                  photo_camera
+                </span></Form.Label>
                 <Form.Control type="file" onChange={handleFile} hidden />
               </Form.Group>
-              <Form.Group controlId="formFile" className="mb-3">
+              <Form.Group  className="mb-3">
                 <Form.Label>Título </Form.Label>
                 <Form.Control
                   type="text"
@@ -102,7 +106,7 @@ export const EditOneCourse = ({
                   onChange={handleChange}
                 />
               </Form.Group>
-              <Form.Group controlId="formFile" className="mb-3">
+              <Form.Group  className="mb-3">
                 <Form.Label>Descripción </Form.Label>
                 <Form.Control
                   type="text"
@@ -112,7 +116,7 @@ export const EditOneCourse = ({
                   onChange={handleChange}
                 />
               </Form.Group>
-              <Form.Group controlId="formFile" className="mb-3">
+              <Form.Group  className="mb-3">
                 <Form.Label>Precio </Form.Label>
                 <Form.Control
                   type="text"
@@ -125,19 +129,19 @@ export const EditOneCourse = ({
             </Form>
           </Modal.Body>
           
-          <p>{msgError}</p>
+          {msgError &&<h5 className="msgerror">{msgError}</h5>}
  
-          <Modal.Footer>
+          <Modal.Footer className="modalDel">
             <Button
               variant="outline-success"
-              className="me-3"
+              className="me-3 Button3"
               onClick={handleSubmit}
             >
               Aceptar
             </Button>
             <Button
               variant="outline-success"
-              className="me-3"
+              className="me-3 Button3"
               onClick={handleClose}
             >
               Cancelar

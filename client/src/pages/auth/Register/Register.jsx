@@ -111,6 +111,7 @@ export const Register = () => {
               placeholder="Nombre de usuario"
               value={register.nickname}
               autoComplete="nickname"
+              autoFocus
             />
           </Form.Group>
           <Form.Group controlId="formBasicName">

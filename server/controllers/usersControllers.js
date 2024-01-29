@@ -308,9 +308,9 @@ class usersControllers {
       (SELECT COUNT(*) FROM post WHERE user_id = '${user_id}' AND correct = false) AS num_incorrect_posts,
       (SELECT COUNT(DISTINCT followed_user_id) FROM user_follows_user WHERE user_id = '${user_id}') AS num_following_users,
       GROUP_CONCAT(c.category_name) AS user_categories
-  FROM user_category uc
-  LEFT JOIN category c ON uc.category_id = c.category_id
-  WHERE uc.user_id = '${user_id}';`;
+      FROM user_category uc
+      LEFT JOIN category c ON uc.category_id = c.category_id
+      WHERE uc.user_id = '${user_id}';`;
 
       connection.query(sql2, (error, result) => {
         if (error) {

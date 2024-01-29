@@ -6,6 +6,7 @@
 
 .mapeoAllCourse{
   background-color: $accent2-color;
+ /*  height: 39rem;  pendiente revisar*/
 }
 
 .mainAllCourses, .headerAllCourses {
@@ -28,4 +29,8 @@
 }
 .busqueda{
   color: white;
+}
+
+.cardtitle{
+  color:white !important;
 }
