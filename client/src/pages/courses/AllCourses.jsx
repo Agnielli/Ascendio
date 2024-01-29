@@ -26,6 +26,7 @@ export const AllCourses = () => {
       .then((res) => {
         setAllcourses(res.data);
         setFindCourse(res.data);
+        console.log(res.data)
       })
       .catch((err) => {
         console.log(err);
@@ -65,15 +66,16 @@ export const AllCourses = () => {
           </div>
         </div>
       </header>
-      <main className="mainAllCourses pb-5">
-        <Row> 
-        
+
+      <main className="mainAllCourses d-flex flex-wrap justify-content-center gap-3 pb-5">
+      <Row>
         {findCourse?.map((elem) => {
           return (
-            <Col xs={12} sm={6} lg={5} > 
-            <Card
+            <Col xs={12} md={6} lg={4} xxl={3}>
+            <Card 
+              // style={{ width: "22rem" }}
               key={elem.course_id}
-              className="mapeoAllCourse text-center"
+              className="mapeoAllCourse text-center mb-4"
             >
               <Card.Img
                 style={{ height: "16rem", objectFit: "cover" }}
@@ -82,7 +84,11 @@ export const AllCourses = () => {
               />
               <Card.Body className="d-flex flex-column gap-1">
                 <Card.Text> {elem.title} </Card.Text>
-                <Card.Subtitle className="followerscard">Seguidores: {elem.followers}</Card.Subtitle>
+                <Card.Subtitle className="followerscard">
+                  {elem.followers !== undefined && elem.followers !== 0
+                    ? `${elem.followers} Seguidores`
+                    : "Sin seguidores"}
+                </Card.Subtitle>
 
                 {elem.average_rating && (
                   <RatingStars numberstars={elem.average_rating} />
@@ -92,9 +98,11 @@ export const AllCourses = () => {
                   {elem.tags}
                 </Card.Subtitle>
                 <Card.Title className="descriptioncard">{elem.description}</Card.Title>
-                <Card.Text>
-                  {elem.price === 0 ? "GRATIS" : `${elem.price}€`}
-                </Card.Text>
+                <Card.Text className="priceCourse px-3 my-2">
+                  {Number(elem?.price) === 0
+                  ? "GRATIS"
+                  : `${elem?.price}€`}
+              </Card.Text>
                 <Card.Text className="d-flex justify-content-center mt-auto">
                   <Button
                     className="Button3"
@@ -105,7 +113,8 @@ export const AllCourses = () => {
                 </Card.Text>
               </Card.Body>
             </Card>
-            </Col>
+
+          </Col>
           );
         })}
         </Row>

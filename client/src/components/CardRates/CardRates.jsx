@@ -10,13 +10,20 @@ const initialValue = {
   commentary: "",
 };
 
-export const CardRates = ({ resetCourse, setResetCourse, setShowCardRate }) => {
+export const CardRates = ({ resetCourse, setResetCourse, setShowCardRate, rates}) => {
   const [newRate, setNewRate] = useState(initialValue);
   const [msgError, setMsgError] = useState("")
-  const [rateExist, setRateExist] = useState(false)
+  const [myRate, setMyRate] = useState([]);
   const course_id = useParams().course_id;
   const { user } = useContext(AscendioContext);
   let usuario = user.user_id;
+
+  useEffect(() => {
+    if(rates){
+    setMyRate(rates.filter((elem)=> elem.user_rater_user_id === usuario
+    ))}
+  }, [])
+  console.log(myRate)
 
   const regexNumber = /^[1-5]$/;
 
@@ -44,9 +51,12 @@ export const CardRates = ({ resetCourse, setResetCourse, setShowCardRate }) => {
     setNewRate({ ...newRate, [name]: value });
   };
 
+
   return (
-    <>{!rateExist &&
+
+    <>{myRate.length === 0 &&
       <Card style={{ width: '18rem' }} className="cardRates p-3">
+
       <Form>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Tu reseña</Form.Label>

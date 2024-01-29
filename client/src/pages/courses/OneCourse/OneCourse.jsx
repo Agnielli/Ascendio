@@ -34,7 +34,7 @@ export const OneCourse = () => {
   const [ratingAverage, setRatingAverage] = useState();
   const [resource, setResource] = useState([]);
   const [changeFollowers, setChangeFollowers] = useState();
-  const [showCardRate, setShowCardRate] = useState(false);
+  const [showCardRate, setShowCardRate] = useState(true);
   const [resetrate, setResetrate] = useState();
 
   const navigate = useNavigate();
@@ -135,6 +135,9 @@ export const OneCourse = () => {
 
     setOrderedSections(sectionsWithIndex);
   }, [sections, resetCourse, addSection]);
+
+  let userId = user.user_id;
+  console.log(userId);
 
   useEffect(() => {
     axios
@@ -255,7 +258,6 @@ export const OneCourse = () => {
         console.log(err);
       });
   };
-  let userId = user.user_id;
 
   const deleteSection = (section_id) => {
     axios
@@ -330,16 +332,16 @@ export const OneCourse = () => {
             </div>
 
             <Card.Subtitle className="followsCourse">
-              {oneCoursePpal?.followers} Seguidores
+              {oneCoursePpal?.followers !== 0
+                ? `${oneCoursePpal?.followers} Seguidores`
+                : "Sin seguidores"}
             </Card.Subtitle>
 
             <Card.Text className="tagCourse">
-
               {courseTags?.map((e, index) => {
                 return e.tag_name + " ";
               })}
             </Card.Text>
-
 
             <div className="dataCourse">
               <div>
@@ -363,7 +365,7 @@ export const OneCourse = () => {
                 </button>
               )}
               <Card.Text className="priceCourse px-3 my-2">
-                {oneCoursePpal?.price === 0
+                {Number(oneCoursePpal?.price) === 0
                   ? "GRATIS"
                   : `${oneCoursePpal?.price}€`}
               </Card.Text>
@@ -390,9 +392,6 @@ export const OneCourse = () => {
             <Card.Text className="descriptionCourse m-4">
               {oneCoursePpal?.description}
             </Card.Text>
-
-            
-
 
             {addSection && (
               <FormAddSection
@@ -433,7 +432,6 @@ export const OneCourse = () => {
 
             {userId === userCourse && (
               <Button
-
                 variant="outline-success"
                 className="Button1 d-flex m-3"
                 onClick={addNewSection}
@@ -468,7 +466,6 @@ export const OneCourse = () => {
                 </Button>
               )}
             </div>
-
           </Card.Body>
         </Card>
 
@@ -488,14 +485,14 @@ export const OneCourse = () => {
           course_id={course_id}
         />
 
-        {showCardRate && (
+        {isIntoPurchase && showCardRate && (
           <CardRates
             resetCourse={resetCourse}
             setResetCourse={setResetCourse}
             setShowCardRate={setShowCardRate}
+            rates={rates}
           />
         )}
-
 
         {ratingAverage && (
           <>
@@ -511,7 +508,6 @@ export const OneCourse = () => {
             <h5> MEDIA DE LAS VALORACIONES: {ratingAverage}</h5>
           </>
         )}
-
       </section>
     </>
   );
