@@ -3,6 +3,7 @@ import { Button, Card } from "react-bootstrap";
 import { ModalResource } from "../ModalResource/ModalResource";
 import { Cardresource } from "../CardResource/Cardresource";
 import axios from "axios";
+import './CardTopic.scss'
 
 export const CardTopic = ({
   topic,

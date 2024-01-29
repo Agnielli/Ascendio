@@ -49,6 +49,7 @@ export const ResourceViewer = () => {
           <iframe className="content" src={`${urlbase}${link}`} frameborder="0"></iframe>
         </div>
         </Col>
+
     </Breadcrumb>
 
     </Container>
