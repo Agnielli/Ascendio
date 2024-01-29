@@ -40,31 +40,33 @@ export const Users = () => {
           xl={6}
           className="d-flex flex-column w-50 gap-2 text-center p-5"
         >
-          <div>
-            <div className="avatar">
+         <div> 
+            <div className="avatarProfilo">
               {user?.img ? (
                 <img src={`http://localhost:3000/images/users/${user.img}`} />
               ) : (
                 <p>{user?.nickname.charAt(0).toUpperCase()}</p>
               )}
             </div>
-            <h2>{user?.nickname}</h2>
-            <p>Categoria/s: {statisticsUser?.user_categories}</p>
-          </div>
+            <div className="pt-3">
+            <h5>{user?.nickname}</h5>
+            <h5>Categoria/s: {statisticsUser?.user_categories}</h5>
+            </div>
+            </div>
         </Col>
         <Col
           xs={12}
           xl={6}
-          className="d-flex flex-column w-50 gap-2 text-center p-5"
+          className="d-flex flex-column w-50 gap-2 text-center align-content-center justify-content-center p-5"
         >
           <div>
-            <p>
+            <h3>
               {user?.name} {user?.lastname}
-            </p>
+            </h3>
             <div className="d-flex flex-column gap-2">
-              <Button onClick={() => navigate("/edituser")} className="Button4">
+              {/* <Button onClick={() => navigate("/edituser")} className="Button4">
                 Editar perfil
-              </Button>
+              </Button> */}
               <Button
                 className="Button4"
                 onClick={() => setShowContent(!showContent)}
@@ -132,7 +134,7 @@ export const Users = () => {
       <Row className="userRow">
         <Col xs={12} className="d-flex flex-column w-100 gap-2 text-center p-5">
           {statisticsUser && (
-            <Table style={{ backgroundColor: 'red' }} striped bordered hover className="estadisticas">
+            <Table style={{ backgroundColor: 'red' }} striped bordered className="estadisticas">
               <thead>
                 <tr>
                   {[
