@@ -302,8 +302,6 @@ export const OneCourse = () => {
     console.log(section_id, topic_id, resource_id);
   };
 
-  console.log("uuuu", userId, userCourse, isIntoPurchase);
-
   return (
     <>
       <section className="oneCourse d-flex flex-column align-items-center justify-content-center p-5">

@@ -11,6 +11,7 @@
   border: 1px solid white;
   outline: none;
   color: white;
+  
   &::placeholder {
     color: white;
   }
@@ -18,8 +19,8 @@
   &:focus-visible {
     background-color: $accent2-color;
     color: white;
-    border-color: #dc3545;
+    border-color: white;
     outline: 0;
-    box-shadow: 0 0 0 0.25rem #dc35466e;
+    box-shadow: 0 0 0 0.1rem white;
   }
 }

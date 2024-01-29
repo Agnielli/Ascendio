@@ -113,7 +113,7 @@ export const CreateCourse = () => {
             <Form.Control
               autoFocus
               type="text"
-              placeholder="Titulo"
+              placeholder="Título"
               name="title"
               value={createOneCourse.title}
               onChange={handleChange}
@@ -142,6 +142,7 @@ export const CreateCourse = () => {
           <Form.Group className="mb-3 ">
             <Form.Label>Tags </Form.Label>
             <Select
+              classNames="inputCreación"
               placeholder="Añade tags"
               options={options}
               value={selectedOption}
@@ -156,7 +157,7 @@ export const CreateCourse = () => {
             />
           </Form.Group>
 
-          <p>{msgError}</p>
+          <h5>{msgError}</h5>
 
           <Button
             variant="outline-success"

@@ -66,7 +66,7 @@ export const Users = () => {
           className="d-flex flex-column w-50 gap-2 text-center align-content-center justify-content-center p-5"
         >
              <div className="d-flex flex-column gap-2 align-items-center">
-            <h3>
+            <h3 className="nombreUser">
               {user?.name} {user?.lastname}
             </h3>
             <div className="d-flex flex-column gap-2">
@@ -188,9 +188,9 @@ export const Users = () => {
                       {statisticsUser.num_posts}
                     </Link>
                   </td>
-                  <td key="4" >{ratioTotal} %</td>
-                  <td key="5">{statisticsUser.num_correct_posts}</td>
-                  <td key="6">{statisticsUser.num_incorrect_posts}</td>
+                  <td key="4" className="redTable" >{ratioTotal} %</td>
+                  <td key="5" className="redTable">{statisticsUser.num_correct_posts}</td>
+                  <td key="6" className="redTable">{statisticsUser.num_incorrect_posts}</td>
                   <td key="7">
                     <Link
                       to={`/oneusercourses/${user.user_id}`}
