@@ -83,7 +83,7 @@ export const AllCourses = () => {
                 src={`http://localhost:3000/images/cursos/${elem.img}`}
               />
               <Card.Body className="d-flex flex-column gap-1">
-                <Card.Text> {elem.title} </Card.Text>
+                <Card.Text  className="cardtitle"> {elem.title} </Card.Text>
                 <Card.Subtitle className="followerscard">
                   {elem.followers !== undefined && elem.followers !== 0
                     ? `${elem.followers} Seguidores`
@@ -98,12 +98,12 @@ export const AllCourses = () => {
                   {elem.tags}
                 </Card.Subtitle>
                 <Card.Title className="descriptioncard">{elem.description}</Card.Title>
-                <Card.Text className="priceCourse px-3 my-2">
+                <Card.Text className="priceCourse cardtitle  px-3 my-1">
                   {Number(elem?.price) === 0
                   ? "GRATIS"
                   : `${elem?.price}€`}
               </Card.Text>
-                <Card.Text className="d-flex justify-content-center mt-auto">
+                <Card.Text className="d-flex justify-content-center  mt-auto">
                   <Button
                     className="Button3"
                     onClick={() => navigate(`/course/${elem.course_id}`)}

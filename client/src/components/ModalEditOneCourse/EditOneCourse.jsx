@@ -84,17 +84,19 @@ export const EditOneCourse = ({
   return (
     <Row className="d-flex justify-content-center p-5 ">
       <Col md={4}>
-        <Modal show={showModal} onHide={handleClose} >
+        <Modal show={showModal} onHide={handleClose} className="FormulariosContainer" >
           <Modal.Header closeButton className="modalDel">
-            <Modal.Title>Editar curso</Modal.Title>
+            <Modal.Title className="edittitle">Editar curso</Modal.Title>
           </Modal.Header>
           <Modal.Body className="modalDel">
             <Form>
-              <Form.Group controlId="formFile" className="mb-3">
-                <Form.Label>.jpg/.pdf</Form.Label>
+              <Form.Group controlId="formFile"  className=" d-flex justify-content-center mb-3">
+                <Form.Label><span className="material-symbols-outlined addIcon">
+                  photo_camera
+                </span></Form.Label>
                 <Form.Control type="file" onChange={handleFile} hidden />
               </Form.Group>
-              <Form.Group controlId="formFile" className="mb-3">
+              <Form.Group  className="mb-3">
                 <Form.Label>Título </Form.Label>
                 <Form.Control
                   type="text"
@@ -104,7 +106,7 @@ export const EditOneCourse = ({
                   onChange={handleChange}
                 />
               </Form.Group>
-              <Form.Group controlId="formFile" className="mb-3">
+              <Form.Group  className="mb-3">
                 <Form.Label>Descripción </Form.Label>
                 <Form.Control
                   type="text"
@@ -114,7 +116,7 @@ export const EditOneCourse = ({
                   onChange={handleChange}
                 />
               </Form.Group>
-              <Form.Group controlId="formFile" className="mb-3">
+              <Form.Group  className="mb-3">
                 <Form.Label>Precio </Form.Label>
                 <Form.Control
                   type="text"
@@ -127,7 +129,7 @@ export const EditOneCourse = ({
             </Form>
           </Modal.Body>
           
-          <p>{msgError}</p>
+          {msgError &&<h5 className="msgerror">{msgError}</h5>}
  
           <Modal.Footer className="modalDel">
             <Button
