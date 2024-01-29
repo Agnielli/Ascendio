@@ -1,0 +1,50 @@
+.addIcon {
+  color: #e15252;
+  font-size: 33px;
+}
+
+.imagencurso {
+  border-radius: 50%;
+  height: 75px;
+  width: 75px;
+  background-color: #2e2d2d;
+  display: flex;
+  align-items: center;
+}
+
+.react-select {
+  &__control {
+    background: #2e2d2d !important; // Color de fondo
+    
+  }
+
+  &__control--is-focused {
+    /* background: #e15252 !important; */ // Color de fondo al estar enfocado
+    border-color: #e15252 !important;
+    
+  }
+  &__multi-value__label {
+    color: #e15252 !important;
+  }
+
+  &__multi-value__remove {
+    svg {
+      fill: #e15252 !important;
+    }
+  }
+
+  
+
+  &__option {
+    background-color: #2e2d2d !important;
+    &--is-selected {
+      background: #2e2d2d; // Color de fondo de las opciones seleccionadas
+      color: #e15252; // Color del texto de las opciones seleccionadas
+    }
+
+    &:hover {
+      background: #2e2d2d; // Color de fondo al pasar el ratón
+      color: #e15252; // Color del texto al pasar el ratón
+    }
+  }
+}
