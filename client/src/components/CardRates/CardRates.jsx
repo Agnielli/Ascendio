@@ -1,8 +1,9 @@
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Card, Button, Form } from "react-bootstrap";
 import { AscendioContext } from "../../context/AscendioContext";
 import { useParams } from "react-router-dom";
+import './cardRates.scss'
 
 const initialValue = {
   course_rates: "",
@@ -52,33 +53,39 @@ export const CardRates = ({ resetCourse, setResetCourse, setShowCardRate, rates}
 
 
   return (
+
     <>{myRate.length === 0 &&
-      <Card style={{ width: '18rem' }}>
+      <Card style={{ width: '18rem' }} className="cardRates p-3">
+
       <Form>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Tu opinión importa</Form.Label>
+            <Form.Label>Tu reseña</Form.Label>
             <Form.Control
               type="text"
               placeholder="Puntúa de 1 a 5"
               name="course_rates"
               value={newRate?.course_rates}
               onChange={handleChange}
+              className="cardRatesInput"
+              autoFocus
             />
             <Form.Control
               type="text"
-              placeholder="Da tu opinión"
+              placeholder="Comparte tu experiencia"
               name='commentary'
               value={newRate?.commentary}
               onChange={handleChange}
+              className="cardRatesInput"
             />
-             <p>{msgError}</p>
+             <h6>{msgError}</h6>
+             <div className="d-flex justify-content-center"> 
             <Button
-              variant="outline-success"
-              className="me-3"
+              className="Button3"
               onClick={handleSubmit}
             >
               Aceptar
             </Button>
+            </div>
           </Form.Group>
         </Form>
     </Card>}

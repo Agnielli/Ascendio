@@ -58,10 +58,15 @@ export const AllCourses = () => {
             </Button>
           </div>
           <div>
-            <input onChange={handleChange} placeholder="🔍" value={filter} />
+            <input
+            onChange={handleChange} placeholder="🔍"
+            value={filter}
+            className="buscador"
+            />
           </div>
         </div>
       </header>
+
       <main className="mainAllCourses d-flex flex-wrap justify-content-center gap-3 pb-5">
       <Row>
         {findCourse?.map((elem) => {
@@ -108,6 +113,7 @@ export const AllCourses = () => {
                 </Card.Text>
               </Card.Body>
             </Card>
+
           </Col>
           );
         })}

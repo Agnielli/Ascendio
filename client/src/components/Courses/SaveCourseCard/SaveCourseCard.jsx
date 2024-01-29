@@ -47,7 +47,7 @@ export const SaveCourseCard = () => {
           style={{ color: "white" }}
         >
           <h2>Mis cursos guardados</h2>
-          <input onChange={handleChange} placeholder="🔍..." value={filter} />
+          <input onChange={handleChange} placeholder="🔍..." value={filter} className="buscador" />
         </div>
       </header>
       <main className="mainCursosGuardados d-flex flex-wrap justify-content-center gap-3 pb-5">

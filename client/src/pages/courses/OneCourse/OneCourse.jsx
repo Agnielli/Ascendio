@@ -496,8 +496,8 @@ export const OneCourse = () => {
 
         {ratingAverage && (
           <>
-            <h5>¿Qué opina la gente?</h5>
-            <div className="d-flex flex-column">
+            <h5 className="py-3">¿Qué opina la gente?</h5>
+            <div className="d-flex flex-wrap gap-2 pb-3">
               {rates?.map((elem) => (
                 <CardRatingsOneCourse
                   key={elem.user_rater_user_id}
@@ -505,7 +505,7 @@ export const OneCourse = () => {
                 />
               ))}
             </div>
-            <h3> MEDIA DE LAS VALORACIONES {ratingAverage}</h3>
+            <h5> MEDIA DE LAS VALORACIONES: {ratingAverage}</h5>
           </>
         )}
       </section>
