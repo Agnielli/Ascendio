@@ -178,8 +178,9 @@ create table user_completes_topic(
     CONSTRAINT fk_topic_1 FOREIGN KEY(course_id, section_id, topic_id)
 	REFERENCES topic (course_id, section_id, topic_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
 CREATE TABLE resource (
-  resource_id NT UNSIGNED NOT NULL auto_increment PRIMARY KEY,
+  resource_id INT UNSIGNED NOT NULL auto_increment PRIMARY KEY,
   course_id INT UNSIGNED NOT NULL,
   section_id TINYINT UNSIGNED NOT NULL,
   topic_id TINYINT UNSIGNED NOT NULL,
@@ -207,7 +208,7 @@ CREATE TABLE course_tag (
 );
 
 select * from category;
-
+select * from course; 
 
 select * from user; 
 select * from post order by date desc;
