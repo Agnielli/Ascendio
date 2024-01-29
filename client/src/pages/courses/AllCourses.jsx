@@ -26,6 +26,7 @@ export const AllCourses = () => {
       .then((res) => {
         setAllcourses(res.data);
         setFindCourse(res.data);
+        console.log(res.data)
       })
       .catch((err) => {
         console.log(err);
@@ -76,7 +77,11 @@ export const AllCourses = () => {
               />
               <Card.Body className="d-flex flex-column gap-1">
                 <Card.Text> {elem.title} </Card.Text>
-                <Card.Subtitle className="followerscard">Seguidores: {elem.followers}</Card.Subtitle>
+                <Card.Subtitle className="followerscard">
+                  {elem.followers !== undefined && elem.followers !== 0
+                    ? `${elem.followers} Seguidores`
+                    : "Sin seguidores"}
+                </Card.Subtitle>
 
                 {elem.average_rating && (
                   <RatingStars numberstars={elem.average_rating} />
