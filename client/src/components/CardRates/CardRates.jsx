@@ -23,7 +23,6 @@ export const CardRates = ({ resetCourse, setResetCourse, setShowCardRate, rates}
     setMyRate(rates.filter((elem)=> elem.user_rater_user_id === usuario
     ))}
   }, [])
-  console.log(myRate)
 
   const regexNumber = /^[1-5]$/;
 
@@ -66,7 +65,7 @@ export const CardRates = ({ resetCourse, setResetCourse, setShowCardRate, rates}
               name="course_rates"
               value={newRate?.course_rates}
               onChange={handleChange}
-              className="cardRatesInput"
+              className="cardRatesInput my-1"
               autoFocus
             />
             <Form.Control
