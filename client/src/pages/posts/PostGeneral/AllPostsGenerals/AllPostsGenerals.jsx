@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { Button, Card, ListGroup } from "react-bootstrap";
+import { Button, Card, Col, ListGroup, Row } from "react-bootstrap";
 import { AscendioContext } from "../../../../context/AscendioContext";
 import { Link, useNavigate } from "react-router-dom";
+import './allPostGenerals.scss';
 
 export const AllPostsGenerals = () => {
   const [lastTrades, setLastTrades] = useState([]); // para enseñar: ULTIMOS TRADES o TOP SEGUIDORES o TOP ACERTADOS
@@ -95,62 +96,84 @@ export const AllPostsGenerals = () => {
   return (
     <div>
       <>
-        <h2>General Posts</h2>
-        <div className="d-flex gap-5 mb-1">
-          <input onChange={handleChange} placeholder="🔍..." value={search} />
-        </div>
-        <div className="d-flex flex-wrap gap-2">
+      <Row className="general title-input">
+        <Col lg={3} className="d-flex justify-content-center align-items-center">
+          <h2>General Posts</h2>
+        </Col>
+        <Col lg={9} className="d-flex justify-content-center align-items-center">
+            <input onChange={handleChange} placeholder="🔍 Buscar Trades" value={search} />
+        </Col>
+      </Row>
+        <div className="d-flex flex-wrap justify-content-center gap-4">
           {lastTradesFilter.map((elem, index) => {
             return (
               <Card
+                className="generalpost"
                 style={{ width: "18rem", marginBottom: "1rem" }}
                 key={elem.post_id}
               >
-                <Card.Body>
-                  <div>
-                    <Card.Title className="d-flex">
-                      <h3>Trader: {elem.nickname}</h3>
-                    </Card.Title>
-                    {user.user_id !== elem.user_id ? (
-                      <Button
-                        variant="primary"
-                        onClick={() => pulsarSeguirONo(elem.user_id)}
-                      >
-                        {followingUsers.includes(elem.user_id)
-                          ? "Siguiendo"
-                          : "Seguir"}
-                      </Button>
-                    ) : (
-                      <Button
-                        onClick={() => navigate(`/userposts/${user.user_id}`)}
-                      >
-                        Ir a posts
-                      </Button>
-                    )}
-                    <Card.Body>
-                      <ListGroup variant="flush">
-                        <ListGroup.Item></ListGroup.Item>
-                        <ListGroup.Item>{elem.description}</ListGroup.Item>
-                        <ListGroup.Item></ListGroup.Item>
-                      </ListGroup>
-                      {elem.image_name !== null && (
-                        <Card.Img
-                          variant="top"
-                          src={`http://localhost:3000/images/generalPost/${elem.image_name}`}
-                        />
-                      )}
-                      <div className="d-flex gap-1 mt-2">
-                        <Button
-                          onClick={() => {
-                            navigate(`/onegeneralpost/${elem.post_id}`);
-                          }}
-                        >
-                          Ver más
-                        </Button>
-                      </div>
-                    </Card.Body>
-                  </div>
-                </Card.Body>
+               <Row>
+                    <Col lg={3} md={12} className="col1 d-flex flex-column align-items-center justify-content-center gap-2 mb-1">
+                        <div className="avatar">
+                              {elem?.img_name ? ( // modificar el elem.im_name
+                                <img
+                                  src={`http://localhost:3000/images/users/${user.img}`}
+                                />
+                                ) : (
+                                  <p>{elem?.nickname.charAt(0).toUpperCase()}</p>
+                              )}
+                        </div>
+                        <Card.Title className="d-flex">
+                          <h3>{elem.nickname}</h3>
+                        </Card.Title>
+                        <p>{elem.num_followers} seguidores</p>
+                        <div className="d-flex gap-2">
+                            {user.user_id !== elem.user_id ? (
+                              <Button
+                                variant="primary"
+                                onClick={() => pulsarSeguirONo(elem.user_id)}
+                              >
+                                {followingUsers.includes(elem.user_id)
+                                  ? "Siguiendo"
+                                  : "Seguir"}
+                              </Button>
+                            ) : (
+                              <Button
+                                onClick={() => navigate(`/userposts/${user.user_id}`)}
+                              >
+                                Ir a posts
+                              </Button>
+                            )}
+                            <Button
+                              onClick={() => {
+                                navigate(`/onegeneralpost/${elem.post_id}`);
+                              }}
+                            >
+                              Ver más
+                            </Button>
+                        </div>
+                    </Col>
+                      {elem.image_name && 
+                      <>
+                        <Col lg={5} md={12} className="col2 d-flex flex-column align-items-center justify-content-center gap-2 mb-1">
+                        {elem.image_name !== null && (
+                            <Card.Img
+                              variant="top"
+                              src={`http://localhost:3000/images/generalPost/${elem.image_name}`}
+                            />
+                        )}
+                        </Col>
+                        <Col lg={4} md={12} className="col3 d-flex flex-column align-items-center justify-content-center gap-2 mb-1">
+                        <p>{elem.description}</p>
+                        </Col>
+                      </>
+                      } 
+                      {elem.image_name == null && 
+                        <Col lg={9} md={12} className="col3 d-flex flex-column align-items-center justify-content-center gap-2 mb-1">
+                          <p>{elem.description}</p>
+                        </Col>
+                      }
+                </Row> 
               </Card>
             );
           })}

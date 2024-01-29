@@ -157,9 +157,7 @@ export const AllTrades = () => {
                       </div>
                   </Col>
                   <Col lg={5} md={12} className="col2 d-flex flex-column align-items-center justify-content-center gap-2 mb-1">
-                      <ListGroup.Item>
-                        {elem.currency}
-                      </ListGroup.Item>
+                      <ListGroup.Item>{elem.currency}</ListGroup.Item>
                       {elem.image_name !== null && (
                         <Card.Img
                           className="tradeimagen"
