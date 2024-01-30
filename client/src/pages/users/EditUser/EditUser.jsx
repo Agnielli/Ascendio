@@ -123,8 +123,8 @@ export const EditUser = () => {
     <main>
       <Row className="EditUserApp w-30 s-xs-90">
         <Col xs={12} className="p-0 UserNameApp">
-          <h2>{user?.nickname.toUpperCase()}</h2>
-          <p>
+          <h3>{user?.nickname.toUpperCase()}</h3>
+          <p >
             {" "}
             {user?.name.charAt(0).toUpperCase() + user.name.slice(1)} {user.lastname.charAt(0).toUpperCase() + user.lastname.slice(1)}
           </p>
@@ -143,7 +143,7 @@ export const EditUser = () => {
           </Col>
           
             <Col xs={12} sm={6} className="p-0">
-              <Button className="Button5 ButtonEditUser1 mb-4" onClick={verSection}>EDIRAR DATOS DEL USUARIO</Button>
+              <Button className="Button5 ButtonEditUser1 mb-4 mt-4" onClick={verSection}>EDIRAR DATOS DEL USUARIO</Button>
               <Button className="Button5 ButtonEditUser1 mb-4" onClick={verCategoryUser}> EDITAR CATEGORÍA </Button>
               <Button className="Button5 ButtonEditUser1 mb-4" onClick={verChangePassword}>EDITAR DATOS DE LOGIN </Button>
               <Button className="Button5 ButtonEditUser1 mb-4" onClick={verDeleteUser}>ELIMINAR CUENTA </Button>
@@ -170,7 +170,7 @@ export const EditUser = () => {
               {showCategories && (
                 <Form onSubmit={handleSubmit} className=" FormularioDatosUsuario ">
                   <Form.Group controlId="formFile" className="mb-3">
-                    <Form.Label><h3>ELIGE TU CATEGORÍA:</h3> </Form.Label>
+                    <Form.Label><h4>ELIGE TU CATEGORÍA:</h4> </Form.Label>
                     <Select
                       placeholder="Categoría.."
                       options={options}
@@ -179,7 +179,7 @@ export const EditUser = () => {
                       isMulti
                     />
                   </Form.Group>
-                  <div className="DivGrisParaBotones d-flex justify-content-between mt-3 mb-1">
+                  <div className="DivGrisParaBotones mt-3">
                     <Button className="Button3" type="submit">AEPTAR</Button>
                     <Button className="Button1" onClick={() => setShowCategories(false)}>CANCELAR</Button>
                   </div>
