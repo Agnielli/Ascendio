@@ -193,7 +193,7 @@ create table user_completes_topic(
 );
 
 CREATE TABLE resource (
-  resource_id INT UNSIGNED NOT NULL auto_increment, -- ¿PRIMARY KEY?
+  resource_id INT UNSIGNED NOT NULL PRIMARY KEY auto_increment,
   course_id INT UNSIGNED NOT NULL,
   section_id TINYINT UNSIGNED NOT NULL,
   topic_id TINYINT UNSIGNED NOT NULL,
