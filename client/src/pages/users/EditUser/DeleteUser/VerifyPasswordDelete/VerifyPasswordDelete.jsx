@@ -45,6 +45,7 @@ export const VerifyPasswordDelete = ({ setShowDeleteUser, setShowConfirmDeleteUs
     <>
     <Form className="FormularioDatosUsuario FormulariosContainer">
     <h4>VERIFICAR CONTRASEÑA:</h4>
+    <p>Para eliminar tu cuenta, tenemos que verificar tu contraseña.</p>
         <Form.Group controlId="formBasicPassword">
           <Form.Label></Form.Label>
           <div className={`password-container ${isPasswordFocused ? 'eye-icon-focused' : ''}`}>

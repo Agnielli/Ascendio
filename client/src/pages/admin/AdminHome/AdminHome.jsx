@@ -269,10 +269,11 @@ export const AdminHome = () => {
       </Col>
     </Row>
 
-    <Row>
+    <Row className="adminAllCourses justify-content-center pb-5">
       {showCourses && <AdminCourses />}
-      {showDisabledCourses && <DisabledCoursesMap />}
       {showEnabledCourses && <EnabledCoursesMap />}
+      {showDisabledCourses && <DisabledCoursesMap />}
+   
     </Row>
   </>
 )}
