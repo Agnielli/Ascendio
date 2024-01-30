@@ -74,6 +74,7 @@ export const EditOneCourse = ({
   return (
     <Row className="d-flex justify-content-center p-5  ">
       <Col md={4}>
+
         <Modal
           show={showModal}
           onHide={handleClose}
