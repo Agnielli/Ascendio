@@ -237,42 +237,41 @@ export const AdminHome = () => {
       </div>
 
       <div>{showStats === true && <Estadisticas />}</div>
-      
-      <div className="">
-        {showCourseButtons && (
+
+      {showCourseButtons && (
+        <Container fluid>
           <Container fluid>
-            <Container fluid>
-              <Row className="ButtonsRow2 d-flex justify-content-center align-items-center text-center m-5">
-                <Col lg={2} md={3} xs={12}>
-                  <Button
-                    className="ButtonNoBG"
-                    onClick={() => showAllCourses()}
-                  >
-                    Todos los cursos
-                  </Button>
-                  <Button
-                    className="ButtonNoBG"
-                    onClick={() => showAllEnabledCourses()}
-                  >
-                    Cursos Activos
-                  </Button>
-                  <Button
-                    className="ButtonNoBG"
-                    onClick={() => showAllDisabledCourses()}
-                  >
-                    Cursos Bloqueados
-                  </Button>
-                </Col>
-              </Row>
-            </Container>
-            <Row>
-              {showCourses && <AdminCourses />}
-              {showDisabledCourses && <DisabledCoursesMap />}
-              {showEnabledCourses && <EnabledCoursesMap />}
+            <Row className="ButtonsRow2 justify-content-center align-items-center text-center m-5">
+              <Col lg={2} md={3} xs={12}>
+                <Button className="ButtonNoBG" onClick={() => showAllCourses()}>
+                  Todos los cursos
+                </Button>
+              </Col>
+              <Col lg={2} md={3} xs={12}>
+                <Button
+                  className="ButtonNoBG"
+                  onClick={() => showAllEnabledCourses()}
+                >
+                  Cursos Activos
+                </Button>
+              </Col>
+              <Col lg={2} md={3} xs={12}>
+                <Button
+                  className="ButtonNoBG"
+                  onClick={() => showAllDisabledCourses()}
+                >
+                  Cursos Bloqueados
+                </Button>
+              </Col>
             </Row>
           </Container>
-        )}
-      </div>
+          <Row>
+            {showCourses && <AdminCourses />}
+            {showDisabledCourses && <DisabledCoursesMap />}
+            {showEnabledCourses && <EnabledCoursesMap />}
+          </Row>
+        </Container>
+      )}
     </Container>
   );
 };

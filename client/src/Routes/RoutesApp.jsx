@@ -15,7 +15,7 @@ import { OneCourse } from "../pages/courses/OneCourse/OneCourse";
 import { Landing } from "../pages/dashboard/Landing/Landing";
 import { Contact } from "../pages/dashboard/Contact/Contact";
 import { RecoverPassword } from "../pages/auth/RecoverPassword/RecoverPassword";
-import { Usuarios } from "../pages/admin/AdminUsuarios/Usuarios";
+//import { Usuarios } from "../pages/admin/AdminUsuarios/Usuarios";
 import { Estadisticas } from "../pages/admin/AdminEstadisticas/Estadisticas";
 import { useContext } from "react";
 import { AscendioContext } from "../context/AscendioContext";
@@ -122,8 +122,8 @@ export const RoutesApp = () => {
           {token && type === 1 && (
             <>
               <Route path="/admin" element={<AdminHome />}>
-                <Route index element={<Usuarios />} />
-                <Route path="allusers" element={<Usuarios />} />
+                {/* <Route index element={<Usuarios />} />
+                <Route path="allusers" element={<Usuarios />} /> */}
                 <Route path="alldata" element={<Estadisticas />} />
               </Route>
             </>

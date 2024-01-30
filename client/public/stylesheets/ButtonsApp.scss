@@ -113,22 +113,22 @@
   }
 }
 
-::-webkit-scrollbar {
-  width: 0.75rem;
-}
+// ::-webkit-scrollbar {
+//   width: 0.75rem;
+// }
 
-::-webkit-scrollbar-track {
-  background-color: black;
-}
+// ::-webkit-scrollbar-track {
+//   background-color: black;
+// }
 
-::-webkit-scrollbar-thumb {
-  background-color: $accent-color;
-  border-radius: 1rem;
-  border: 2px solid black;
-}
+// ::-webkit-scrollbar-thumb {
+//   background-color: $accent-color;
+//   border-radius: 1rem;
+//   border: 2px solid black;
+// }
 
-::-webkit-scrollbar-thumb:hover {
-  background-color: $primary-color;
-}
+// ::-webkit-scrollbar-thumb:hover {
+//   background-color: $primary-color;
+// }
 
 

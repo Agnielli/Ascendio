@@ -23,7 +23,7 @@ export const AdminOneCourse = ({ elem, updateCourses, setUpdateCourses }) => {
   return (
     <Col xs={12} md={6} lg={4} xxl={3}>
     <Card
-      style={{ width: "18rem" }}
+      // style={{ width: "18rem" }}
       className="mapeoAllCourse text-center mb-4"
     >
       <Card.Img
