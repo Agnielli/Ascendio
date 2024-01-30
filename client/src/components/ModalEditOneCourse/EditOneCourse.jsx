@@ -89,7 +89,7 @@ export const EditOneCourse = ({
           onHide={handleClose}
           className="FormulariosContainer text-center"
         >
-          <Modal.Header closeButton className="modalDel modaleditarusuario ">
+          <Modal.Header closeButton className="modalDel  ">
 
             <Modal.Title className="edittitle">Editar curso</Modal.Title>
           </Modal.Header>
