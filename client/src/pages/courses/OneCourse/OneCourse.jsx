@@ -509,3 +509,5 @@ export const OneCourse = () => {
     </>
   );
 };
+
+/* Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique ad facilis ipsum excepturi natus possimus. */
