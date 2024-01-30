@@ -9,6 +9,10 @@ body {
   }
 }
 
+header {
+  padding: 0 !important; // CRISTIAN
+}
+
 nav {
   .avatar {
     display: flex;
@@ -139,7 +143,9 @@ nav {
 @media (max-width: 991px) {
   .BG-navbar {
     background-color: transparent;
+    padding: 0 !important; // CRISTIAN
   }
+
   .navbarLinksBotones {
     display: flex;
     flex-direction: column-reverse !important;
