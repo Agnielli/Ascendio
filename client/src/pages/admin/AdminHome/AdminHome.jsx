@@ -30,6 +30,7 @@ export const AdminHome = () => {
     setShowUserButtons(!showUserButtons);
     setShowCourseButtons(false);
     setShowTrades(false);
+    setShowStats(false);
   };
 
   const showAllCourseButtons = () => {
@@ -149,83 +150,129 @@ export const AdminHome = () => {
 
   return (
     <Container fluid className="AdminRow">
-      <Col className="justify-content-center text-center align-items-center">
-        <h3 className="text-center mt-4">Administrador</h3>
-        <div className="ButtonsRow1">
-          <Button onClick={() => showButtons()}>Usuarios</Button>
-          <Button onClick={() => showAllCourseButtons()}>Cursos</Button>
-          <Button onClick={() => showStatistics()}>Estadisticas</Button>
-          <Button onClick={() => showAllTrades()}>Trades</Button>
-        </div>
-        <div>
-          {showTrades && (
-            <div>
-              <Button className="Button1" onClick={() => showAllPosts()}>
-                Posts Trades
-              </Button>
-              <Button onClick={() => showAllComments()}>Posts General</Button>
-              {showComments && <OneComment />}
-              {showPost && <TradesPostMap />}
-            </div>
-          )}
-        </div>
-        <div className="">
-          {showUserButtons === true && (
-            <Container fluid>
-              <Container fluid className="ButtonsRow2">
-                <Button className="ButtonNoBG" onClick={() => showAllUsers()}>
-                  Todos
-                </Button>
-                <Button
-                  className="ButtonNoBG"
-                  onClick={() => showAllActivatedUsers()}
-                >
-                  Activos
-                </Button>
-                <Button
-                  className="ButtonNoBG"
-                  onClick={() => showAllDisabledUsers()}
-                >
-                  Bloqueados
-                </Button>
-              </Container>
-              <Row>
-                {showUsers === true && (
-                  <Container>
-                    <Row>
-                      <Col>
-                        <AdminAllUsers
-                          allUsers={allUsers}
-                          setAllUsers={setAllUsers}
-                        />
-                      </Col>
-                    </Row>
-                  </Container>
-                )}
-                {showDisabledUsers === true && <AdminDisabledUsers />}
-                {showActivatedUsers === true && <AdminActivateUser />}
-              </Row>
-            </Container>
-          )}
-        </div>
-
-        <div>{showStats === true && <Estadisticas />}</div>
-        {showCourseButtons && (
-          <div className="">
-            <Button onClick={() => showAllCourses()}>Todos los cursos</Button>
-            <Button onClick={() => showAllEnabledCourses()}>
-              Cursos Activos
+      <h3 className="text-center mt-4 text-danger">Administrador</h3>
+      <Row className="d-flex flex-row justify-content-center align-items-center text-center mt-5 p-5">
+        <Col className="ButtonsRow" lg={3} md={6} xs={6}>
+          <Button className="Button4" onClick={() => showButtons()}>
+            Usuarios
+          </Button>
+        </Col>
+        <Col className="ButtonsRow" lg={3} md={6} xs={6}>
+          <Button
+            variant="danger"
+            className="text-dark"
+            onClick={() => showAllCourseButtons()}
+          >
+            Cursos
+          </Button>
+        </Col>
+        <Col className="ButtonsRow" lg={3} md={6} xs={6}>
+          <Button
+            variant="danger"
+            className="text-dark"
+            onClick={() => showStatistics()}
+          >
+            Estadisticas
+          </Button>
+        </Col>
+        <Col className="ButtonsRow" lg={3} md={6} xs={6}>
+          <Button
+            variant="danger"
+            className="text-dark"
+            onClick={() => showAllTrades()}
+          >
+            Trades
+          </Button>
+        </Col>
+      </Row>
+      <div>
+        {showTrades && (
+          <div>
+            <Button className="Button1" onClick={() => showAllPosts()}>
+              Posts Trades
             </Button>
-            <Button onClick={() => showAllDisabledCourses()}>
-              Cursos Bloqueados
-            </Button>
-
-            {showCourses && <AdminCourses />}
-            {showDisabledCourses && <DisabledCoursesMap />}
-            {showEnabledCourses && <EnabledCoursesMap />}
+            <Button onClick={() => showAllComments()}>Posts General</Button>
+            {showComments && <OneComment />}
+            {showPost && <TradesPostMap />}
           </div>
         )}
-      </Col>
+      </div>
+      <div className="">
+        {showUserButtons === true && (
+          <Container fluid>
+            <Container fluid>
+              <Row className="ButtonsRow2 d-flex justify-content-center align-items-center text-center m-5">
+                <Col lg={2} md={3} xs={12}>
+                  <Button className="ButtonNoBG" onClick={() => showAllUsers()}>
+                    Todos
+                  </Button>
+                </Col>
+                <Col lg={2} md={3} xs={12}>
+                  <Button
+                    className="ButtonNoBG"
+                    onClick={() => showAllActivatedUsers()}
+                  >
+                    Activos
+                  </Button>
+                </Col>
+                <Col lg={2} md={3} xs={12}>
+                  <Button
+                    className="ButtonNoBG"
+                    onClick={() => showAllDisabledUsers()}
+                  >
+                    Bloqueados
+                  </Button>
+                </Col>
+              </Row>
+            </Container>
+            <Row>
+              {showUsers === true && (
+                <AdminAllUsers allUsers={allUsers} setAllUsers={setAllUsers} />
+              )}
+              {showDisabledUsers === true && <AdminDisabledUsers />}
+              {showActivatedUsers === true && <AdminActivateUser />}
+            </Row>
+          </Container>
+        )}
+      </div>
+
+      <div>{showStats === true && <Estadisticas />}</div>
+      
+      <div className="">
+        {showCourseButtons && (
+          <Container fluid>
+            <Container fluid>
+              <Row className="ButtonsRow2 d-flex justify-content-center align-items-center text-center m-5">
+                <Col lg={2} md={3} xs={12}>
+                  <Button
+                    className="ButtonNoBG"
+                    onClick={() => showAllCourses()}
+                  >
+                    Todos los cursos
+                  </Button>
+                  <Button
+                    className="ButtonNoBG"
+                    onClick={() => showAllEnabledCourses()}
+                  >
+                    Cursos Activos
+                  </Button>
+                  <Button
+                    className="ButtonNoBG"
+                    onClick={() => showAllDisabledCourses()}
+                  >
+                    Cursos Bloqueados
+                  </Button>
+                </Col>
+              </Row>
+            </Container>
+            <Row>
+              {showCourses && <AdminCourses />}
+              {showDisabledCourses && <DisabledCoursesMap />}
+              {showEnabledCourses && <EnabledCoursesMap />}
+            </Row>
+          </Container>
+        )}
+      </div>
     </Container>
   );
 };

@@ -7,8 +7,8 @@
  }
   //inputs:
   .form-control:focus {
-    box-shadow: 0 0 0 0.25rem $accent-color !important;
-   //box-shadow: 0 0 0 0.1rem $accent-color !important; //fede
+    //box-shadow: 0 0 0 0.25rem $accent-color !important;
+   box-shadow: 0 0 0 0.1rem $accent-color !important; //fede
   }
   
   .form-control {
@@ -16,7 +16,7 @@
     border: none;
     border-radius: 25px;
     padding: 0 15px !important;
-    background-color: $accent5-color;
+    background-color: $accent3-color;
     height: 2.5rem; //fede
   }
 

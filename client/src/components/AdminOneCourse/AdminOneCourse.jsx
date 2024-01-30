@@ -1,42 +1,55 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import { Button, Card } from 'react-bootstrap'
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Button, Card, Col } from "react-bootstrap";
+import './adminOneCourse.scss'
 
-export const AdminOneCourse = ({elem, updateCourses, setUpdateCourses}) => {
-
+export const AdminOneCourse = ({ elem, updateCourses, setUpdateCourses }) => {
   const disableEnableCourse = (course_id, is_disabled) => {
-    let url = `http://localhost:3000/admin/adminenableonecourse/${course_id}`
+    let url = `http://localhost:3000/admin/adminenableonecourse/${course_id}`;
     if (is_disabled === 0) {
-      url = `http://localhost:3000/admin/admindisableonecourse/${course_id}`
+      url = `http://localhost:3000/admin/admindisableonecourse/${course_id}`;
     }
     axios
       .put(url)
       .then((res) => {
-        setUpdateCourses(!updateCourses) 
-        console.log(res.data)
+        setUpdateCourses(!updateCourses);
+        console.log(res.data);
       })
-      .catch((err) => {console.log(err)})
-  }
-  
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
-    <div>
-    <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={`http://localhost:3000/images/cursos/${elem.course_img}`} />
+    <Col xs={12} md={6} lg={4} xxl={3}>
+    <Card
+      style={{ width: "18rem" }}
+      className="mapeoAllCourse text-center mb-4"
+    >
+      <Card.Img
+        variant="top"
+        src={`http://localhost:3000/images/cursos/${elem.course_img}`}
+      />
       <Card.Body>
-        <Card.Title><p>{elem.title}</p></Card.Title>
-        <Card.Text>
-         {elem.description}
+        <Card.Title className="cardtitle">
+          {elem.title}
+        </Card.Title>
+        <Card.Text className="d-flex justify-content-start descriptioncard">
+          {elem.description}
         </Card.Text>
-        <Card.Text>
-          {elem.nickname}
+        <Card.Text className="cardtitle">Autor: {elem.nickname}</Card.Text>
+        <Card.Text className="d-flex justify-content-center mt-auto">
+          <Button
+          className="Button3"
+            onClick={() =>
+              disableEnableCourse(elem?.course_id, elem?.is_disabled)
+            }
+          >
+            {elem.is_disabled ? "Activar" : "Desactivar"}
+          </Button>
         </Card.Text>
-        <Button onClick={() => disableEnableCourse(elem?.course_id, elem?.is_disabled)}>
-                {elem.is_disabled ? "Activar" :
-                "Desactivar"}
-              </Button>
       </Card.Body>
     </Card>
-    </div>
-  )
-}
+    </Col>
+  );
+};

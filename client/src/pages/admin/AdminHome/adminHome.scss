@@ -10,86 +10,22 @@
     }
   }
 
+  @media screen and (max-width: 992px) {
+    .ButtonsRow {
+      margin-bottom: 3rem !important;
+    }
 
-// Button {
-//   background-color: #e15252 !important;
-//   border-color: #e15252 !important;
-// }
-
-// Button:hover {
-//   background-color: #a33b3b !important;
-//   border-color: #e15252 !important;
-// }
-
-  .ButtonsRow1 {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 10rem;
-    margin-top: 3rem !important;
+    button {
+      font-size: larger;
+    }
+    
   }
 
-
-  @media screen and (min-width: 600px) and (max-width: 1024px) {
-    .ButtonsRow1 {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      gap: 2rem;
-      margin-top: 3rem !important;
-
-      Button {
-        font-size: large !important;
-      }
+  .ButtonsRow {
+    button {
+      width: 8rem;
     }
   }
-
-  @media screen and (max-width: 600px) {
-    .ButtonsRow1 {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      gap: 2rem;
-      margin-top: 3rem !important;
-    }
-  }  
-
-  .ButtonsRow2 {
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: center !important;
-    gap: 10rem;
-    margin-top: 3rem !important;
-    margin-bottom: 2rem !important;
-  }
-
-  @media screen and (min-width: 600px) and (max-width: 1024px) {
-    .ButtonsRow2 {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      gap: 3rem;
-      margin-top: 3rem !important;
-      margin-bottom: 2rem !important;
-
-      Button {
-        font-size: large !important;
-      }
-    }
-  }
-
-  @media screen and (max-width: 600px) {
-    .ButtonsRow2 {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      gap: 3rem;
-      margin-top: 3rem !important;
-      margin-bottom: 2rem !important;
-    }
-  }
-
-  
 
   .ButtonNoBG {
     background-color: transparent !important;
@@ -99,6 +35,10 @@
   }
   
   .ButtonNoBG:active {
+    color: #a33b3b;
+  }
+
+  .ButtonNoBG:hover {
     color: #a33b3b;
   }
 }
