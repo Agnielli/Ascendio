@@ -66,6 +66,8 @@ export const FormEdit = ({ user, setUser, setShowForm }) => {
   console.log(editUser);
 
   return (
+    <div className="FormularioDatosUsuario">
+      <div className="avatar">
     <>
     
       <h2>Editar usuario:</h2>
@@ -87,9 +89,9 @@ export const FormEdit = ({ user, setUser, setShowForm }) => {
           onChange={handleFile}
         />
       </div>
-      <Form>
+      <Form className="FormulariosContainer d-flex flex-column">
         <Form.Group className="mb-3" controlId="formBasicNickName">
-          <Form.Label>Nombre de usuario*</Form.Label>
+          <Form.Label></Form.Label>
           <Form.Control
             name="nickname"
             onChange={handleChange}
@@ -99,7 +101,7 @@ export const FormEdit = ({ user, setUser, setShowForm }) => {
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicName">
-          <Form.Label>Nombre*</Form.Label>
+          <Form.Label></Form.Label>
           <Form.Control
             name="name"
             onChange={handleChange}
@@ -109,7 +111,7 @@ export const FormEdit = ({ user, setUser, setShowForm }) => {
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicLastName">
-          <Form.Label>Apellido*</Form.Label>
+          <Form.Label></Form.Label>
           <Form.Control
             name="lastname"
             onChange={handleChange}
@@ -119,24 +121,25 @@ export const FormEdit = ({ user, setUser, setShowForm }) => {
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPhonenumber">
-          <Form.Label>Número de teléfono</Form.Label>
+          <Form.Label></Form.Label>
           <Form.Control
             name="phonenumber"
             onChange={handleChange}
             type="text"
-            placeholder="Introduce un número"
+            placeholder="Introduce un número de teléfono"
             value={editUser?.phonenumber === null ? "" : editUser?.phonenumber}
           />
         </Form.Group>
 
-        <p>{msgError}</p>
+        <p style={{ marginBottom: '1rem' }}>{msgError || '\u00A0'}</p>
 
-        <Button variant="primary me-2" onClick={handleSubmit}>
-          aceptar
-        </Button>
-
-        <Button onClick={() => setShowForm(false)}>cancelar</Button>
+        <div className="DivGrisParaBotones d-flex justify-content-between mt-3 mb-1">
+          <Button className="Button3" variant="primary me-2" onClick={handleSubmit}>
+            ACEPTAR
+          </Button>
+          <Button  className="Button1"onClick={() => setShowForm(false)}>CANELAR</Button>
+        </div>
       </Form>
-    </>
+    </div>
   );
 };
