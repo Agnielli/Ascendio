@@ -91,7 +91,6 @@ class postsControllers {
   };
 
   showLastTrades = (req, res) => {
-
     let sql = `
     SELECT 
       post.*,
@@ -167,17 +166,14 @@ class postsControllers {
   OneTradePost = (req, res) => {
     try {
       const post_id = req.params.id;
-      
-      // let sql2 = `SELECT post.*, user.nickname AS post_user_nickname 
-      //             FROM post 
-      //             LEFT JOIN user ON post.user_id = user.user_id 
+
+      // let sql2 = `SELECT post.*, user.nickname AS post_user_nickname, post_resource.text AS resource_text
+      //             FROM post
+      //             LEFT JOIN user ON post.user_id = user.user_id
+      //             LEFT JOIN post_resource ON post.post_id = post_resource.post_id
       //             WHERE post.post_id = ${post_id};`;
 
-      let sql2 = `SELECT post.*, user.nickname AS post_user_nickname, post_resource.text AS resource_text
-                  FROM post
-                  LEFT JOIN user ON post.user_id = user.user_id
-                  LEFT JOIN post_resource ON post.post_id = post_resource.post_id
-                  WHERE post.post_id = ${post_id};`;                  
+      let sql2 = `SELECT post.*, user.nickname AS post_user_nickname,post_resource.text AS resource_text, category.category_name AS category_name FROM post LEFT JOIN user ON post.user_id = user.user_id LEFT JOIN post_resource ON post.post_id = post_resource.post_id LEFT JOIN category ON post.category_id = category.category_id WHERE post.post_id = ${post_id};`;
 
       connection.query(sql2, (error, result) => {
         if (error) {
@@ -195,42 +191,42 @@ class postsControllers {
   };
 
   getAllPostGeneral = (req, res) => {
-    console.log(req.body)
-    let sql = `SELECT *, user.nickname FROM post, user WHERE post.type = 1 AND post.user_id = user.user_id`
-    
+    console.log(req.body);
+    let sql = `SELECT *, user.nickname FROM post, user WHERE post.type = 1 AND post.user_id = user.user_id`;
+
     connection.query(sql, (err, result) => {
-      if(err) {
-        res.status(500).json({err})
+      if (err) {
+        res.status(500).json({ err });
       } else {
-        res.status(200).json(result)
+        res.status(200).json(result);
       }
-    })
-  }
+    });
+  };
 
   getAllPostTrades = (req, res) => {
-    console.log(req.body)
-    let sql = `SELECT *, user.nickname FROM post, user WHERE post.type = 2 AND post.user_id = user.user_id`
-    
+    console.log(req.body);
+    let sql = `SELECT *, user.nickname FROM post, user WHERE post.type = 2 AND post.user_id = user.user_id`;
+
     connection.query(sql, (err, result) => {
-      if(err) {
-        res.status(500).json({err})
+      if (err) {
+        res.status(500).json({ err });
       } else {
-        res.status(200).json(result)
+        res.status(200).json(result);
       }
-    })
-  }
+    });
+  };
 
   getCategories = (req, res) => {
-    let sql = `SELECT * FROM category`
-    
+    let sql = `SELECT * FROM category`;
+
     connection.query(sql, (err, result) => {
-      if(err) {
-        res.status(500).json(err)
+      if (err) {
+        res.status(500).json(err);
       } else {
-        res.status(200).json(result)
+        res.status(200).json(result);
       }
-    })
-  }
+    });
+  };
 }
 
 module.exports = new postsControllers();
