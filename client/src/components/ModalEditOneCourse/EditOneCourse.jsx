@@ -82,10 +82,10 @@ export const EditOneCourse = ({
   };
 
   return (
-    <Row className="d-flex justify-content-center p-5 ">
+    <Row className="d-flex justify-content-center p-5  ">
       <Col md={4}>
         <Modal show={showModal} onHide={handleClose} className="FormulariosContainer" >
-          <Modal.Header closeButton className="modalDel">
+          <Modal.Header closeButton className="modalDel modaleditarusuario ">
             <Modal.Title className="edittitle">Editar curso</Modal.Title>
           </Modal.Header>
           <Modal.Body className="modalDel">
