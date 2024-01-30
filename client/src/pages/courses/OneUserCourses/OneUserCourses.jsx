@@ -65,10 +65,10 @@ export const OneUserCourses = () => {
     <Col>
       <header className="headerAllCoursesOneUser">
         <div
-          className="d-flex justify-content-between p-5"
+          className="d-flex justify-content-between p-5 divHeader"
           style={{ color: "white" }}
         >
-          <h2>Mis cursos</h2>
+          <h2 className="text-center">Mis cursos</h2>
           <input
             onChange={handleChange}
             placeholder="🔍..."

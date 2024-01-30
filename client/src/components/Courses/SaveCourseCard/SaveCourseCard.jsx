@@ -43,10 +43,10 @@ export const SaveCourseCard = () => {
     <Col>
       <header className="headerCursosGuardados">
         <div
-          className="d-flex justify-content-between p-5"
+          className="d-flex justify-content-between p-5 divHeader"
           style={{ color: "white" }}
         >
-          <h2>Mis cursos guardados</h2>
+          <h2 className="text-center" >Mis cursos guardados</h2>
           <input onChange={handleChange} placeholder="🔍..." value={filter} className="buscador" />
         </div>
       </header>
