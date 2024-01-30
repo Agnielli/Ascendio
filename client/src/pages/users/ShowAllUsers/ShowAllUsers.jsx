@@ -33,7 +33,6 @@ export const ShowAllUsers = () => {
         .then((res) => {
           setAllUsers(res.data.filter((elem) => elem.type === 2));
           setAllUsersFilter(res.data.filter((elem) => elem.type === 2));
-          console.log(res.data);
         })
         .catch((err) => {
           console.log(err);
