@@ -38,9 +38,10 @@ export const FormAddSection = ({setAddSection,course_id, resetCourse, setResetCo
     <Row className="formSection">
       <Col>
         <Form className="">
-          <Form.Group controlId="formBasicEmail">
+          <Form.Group controlId="">
             <Form.Label>Título de la sección </Form.Label>
             <Form.Control
+
               type="text"
               placeholder="Título de la sección"
               value={newSection}
