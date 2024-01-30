@@ -4,33 +4,60 @@
   z-index: 1; /* Asegura que esté por encima de otros elementos */
 }
 
-.mapeoAllCourse{
+.mapeoAllCourse {
   background-color: $accent2-color;
- /*  height: 39rem;  pendiente revisar*/
+  /*  height: 39rem;  pendiente revisar*/
 }
 
-.mainAllCourses, .headerAllCourses {
+.mainAllCourses,
+.headerAllCourses {
   width: 80vw;
-  margin: 0 auto; 
+  margin: 0 auto;
 }
 
-.descriptioncard{
+.descriptioncard {
   font-size: 1rem;
-  color: #9C9999 !important;
+  color: #9c9999 !important;
 }
 
-.followerscard{
+.followerscard {
   color: white;
   font-size: 1rem;
 }
 
-.tagsCourse{
+.tagsCourse {
   color: $accent-color;
 }
-.busqueda{
+.busqueda {
   color: white;
 }
 
-.cardtitle{
-  color:white !important;
+.cardtitle {
+  color: white !important;
+}
+
+@media (max-width: 945px) {
+  .headerAllCourses {
+    .divHeader {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .div {
+        margin-bottom: 1rem; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .Button3 {
+          margin-top: 1rem;
+        }
+      }
+
+      .buscador {
+        width: 100%;
+        margin-top: 1rem;
+      }
+    }
+  }
 }
