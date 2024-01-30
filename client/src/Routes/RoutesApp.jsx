@@ -52,7 +52,7 @@ export const RoutesApp = () => {
   }, [token]);
   return (
     <BrowserRouter>
-      <Row>
+      <Row className="p-0 m-0">
         <NavBarApp />
         <Routes>
           {!token && (
