@@ -53,9 +53,10 @@ export const AllCourses = () => {
           </div>
           <div>
             <input
-            onChange={handleChange} placeholder="🔍"
+            onChange={handleChange}
+            placeholder="🔍 Buscar"
             value={filter}
-            className="buscador"
+            className="buscador with-icon"
             />
           </div>
         </div>
