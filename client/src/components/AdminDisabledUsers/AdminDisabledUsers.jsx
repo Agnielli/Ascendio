@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { DisabledUserCard } from "../DisabledUserMiniCard/DisabledUserCard";
 import { Col, Container, Row } from "react-bootstrap";
-import './AdminDisabledUsers.scss'
+import "./AdminDisabledUsers.scss";
 
 export const AdminDisabledUsers = () => {
   const [disabledUsers, setDisabledUsers] = useState();
@@ -20,18 +20,17 @@ export const AdminDisabledUsers = () => {
   }, [update]);
 
   return (
-    <Container fluid>
-      <Row>
-        {disabledUsers?.map((elem) => (
-          <Col className="MiniCardMap" key={elem.user_id} xxl={6} xl={6} lg={12} md={12} xs={12} >
-            <DisabledUserCard
-              elem={elem}
-              update={update}
-              setUpdate={setUpdate}
-            />
-          </Col>
-        ))}
-      </Row>
-    </Container>
+    <>
+      {disabledUsers?.map((elem) => (
+        <Col
+          className="d-flex justify-content-center"
+          key={elem.user_id}
+          xl={6}
+          xs={12}
+        >
+          <DisabledUserCard elem={elem} update={update} setUpdate={setUpdate} />
+        </Col>
+      ))}
+    </>
   );
 };
