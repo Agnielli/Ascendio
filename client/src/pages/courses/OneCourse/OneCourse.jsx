@@ -37,6 +37,7 @@ export const OneCourse = () => {
   const [showCardRate, setShowCardRate] = useState(true);
   const [resetrate, setResetrate] = useState();
   const [peopleVotesCourse, setPeopleVotesCourse] = useState(0);
+  
 
   const navigate = useNavigate();
 
@@ -236,8 +237,10 @@ export const OneCourse = () => {
     addToPurchase();
     setShowCardRate(true);
     setIsIntoPurchase(true);
-    setPeopleVotesCourse(peopleVotesCourse + 1)
+    setPeopleVotesCourse(peopleVotesCourse + 1);
   };
+
+  
 
   const handleValidate = () => {
     if (isIntoValidate) {
