@@ -41,32 +41,38 @@ export const Users = () => {
           className="d-flex flex-column w-50 gap-2 text-center p-5"
         >
           <div>
-            <div className="avatar">
+     <div className="avatarProfilo">
               {user?.img ? (
                 <img src={`http://localhost:3000/images/users/${user.img}`} />
               ) : (
-                <p>{user?.nickname.charAt(0).toUpperCase()}</p>
+                <img src={`http://localhost:3000/images/users/descarga.png`} />
               )}
+              </div>
+            <div className="d-flex align-items-center justify-content-center pt-3">
+              <button
+                className="editIcon"
+                onClick={() => navigate("/edituser")}
+              >
+                <span class="material-symbols-outlined">stylus</span>
+              </button>
+              <h5>{user?.nickname}</h5>
             </div>
-            <h2>{user?.nickname}</h2>
-            <p>Categoria/s: {statisticsUser?.user_categories}</p>
+            <h5>Categoria/s: {statisticsUser?.user_categories}</h5>
           </div>
         </Col>
         <Col
           xs={12}
           xl={6}
-          className="d-flex flex-column w-50 gap-2 text-center p-5"
+          className="d-flex flex-column w-50 gap-2 text-center align-content-center justify-content-center p-5"
         >
-          <div>
-            <p>
+             <div className="d-flex flex-column gap-2 align-items-center">
+            <h3 className="nombreUser">
               {user?.name} {user?.lastname}
-            </p>
+            </h3>
             <div className="d-flex flex-column gap-2">
-              <Button onClick={() => navigate("/edituser")} className="Button4">
-                Editar perfil
-              </Button>
               <Button
                 className="Button4"
+           
                 onClick={() => setShowContent(!showContent)}
               >
                 Crear Contenido
@@ -132,7 +138,12 @@ export const Users = () => {
       <Row className="userRow">
         <Col xs={12} className="d-flex flex-column w-100 gap-2 text-center p-5">
           {statisticsUser && (
-            <Table style={{ backgroundColor: 'red' }} striped bordered hover className="estadisticas">
+            <Table
+              style={{ backgroundColor: "red" }}
+              striped
+              bordered
+              className="custom-table"
+            >
               <thead>
                 <tr>
                   {[
@@ -144,7 +155,9 @@ export const Users = () => {
                     "Errores",
                     "Cursos publicados",
                   ].map((label) => (
-                    <th key={label} className="texto-blanco">{label}</th>
+                    <th key={label} className="texto-rojo">
+                      {label}
+                    </th>
                   ))}
                 </tr>
               </thead>
@@ -152,26 +165,37 @@ export const Users = () => {
                 <tr>
                   <td key="1">
                     {" "}
-                    <Link to={`/userfollowers/${user.user_id}`} className="enlace-rojo">
+                    <Link
+                      to={`/userfollowers/${user.user_id}`}
+                      className="enlace-rojo"
+                    >
                       {statisticsUser.num_followers}
                     </Link>
                   </td>
                   <td key="2">
-                    <Link to={`/userfollowing/${user.user_id}`} className="enlace-rojo">
+                    <Link
+                      to={`/userfollowing/${user.user_id}`}
+                      className="enlace-rojo"
+                    >
                       {statisticsUser.num_following_users}
                     </Link>
                   </td>
                   <td key="3">
-                    <Link to={`/userposts/${user.user_id}`} className="enlace-rojo">
+                    <Link
+                      to={`/userposts/${user.user_id}`}
+                      className="enlace-rojo"
+                    >
                       {statisticsUser.num_posts}
                     </Link>
                   </td>
-                  <td key="4">{ratioTotal} %</td>
-                  <td key="5">{statisticsUser.num_correct_posts}</td>
-                  <td key="6">{statisticsUser.num_incorrect_posts}</td>
+                  <td key="4" className="redTable" >{ratioTotal} %</td>
+                  <td key="5" className="redTable">{statisticsUser.num_correct_posts}</td>
+                  <td key="6" className="redTable">{statisticsUser.num_incorrect_posts}</td>
                   <td key="7">
-                    {" "}
-                    <Link to={`/oneusercourses/${user.user_id}`} className="enlace-rojo">
+                    <Link
+                      to={`/oneusercourses/${user.user_id}`}
+                      className="enlace-rojo"
+                    >
                       {statisticsUser.num_courses}
                     </Link>
                   </td>

@@ -20,24 +20,24 @@ body {
       border-radius: 50%;
       object-fit: cover;
     }
-    p{
-      color:#E15252;
-      margin: 0 !important;
-    }
-  }
-
-.user {
-    display: flex;
-  align-items: center;
-  justify-content: center;
-  p {
-    margin: 0 12px !important;
-    display: flex;
-  
-  justify-content: center;
-  }
 }
 
+.user {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+  
+  p {
+    margin: 0;
+    height: 40px;
+    color:#E15252;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+  }
+}
 
 
 @media (min-width: 992px) {

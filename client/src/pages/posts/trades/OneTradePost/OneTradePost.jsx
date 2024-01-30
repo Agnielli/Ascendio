@@ -4,6 +4,7 @@ import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { ModalCreateComment } from "./ModalCreateComment/ModalCreateComment";
 import { ShowAllCommentsPost } from "./ShowAllCommentsPost/ShowAllCommentsPost";
+import './oneTradePost.scss';
 
 export const OneTradePost = () => {
   const [oneTrade, setOneTrade] = useState();
@@ -51,20 +52,20 @@ export const OneTradePost = () => {
                       src={`http://localhost:3000/images/trades/${oneTrade.resource_text}`}
                     />
                   </div>
-                  <div className="col-4">
+                  <div className="col-4 category">
                     <h4>Precio de entrada: {oneTrade.entry_price}€</h4>
                     <h4>Detener perdida en: {oneTrade.stop_loss}€</h4>
                     <h4>Coger Ganancias en: {oneTrade.take_profit}€</h4>
                   </div>
-                  <div className="col-4">
+                  <div className="col-4 description">
                     <h4>{oneTrade.description}</h4>
                   </div>
                   <h4>
                     {oneTrade.correct === null
-                      ? "Trade Pediente"
+                      ? "Trade Pediente ❓"
                       : oneTrade.correct === 1
-                      ? "Trade Acertado"
-                      : "Trade Errado"}
+                      ? "Trade Acertado ✅"
+                      : "Trade Errado ❌"}
                   </h4>
                   <div className="d-flex gap-1 justify-content-center">
                     <Button

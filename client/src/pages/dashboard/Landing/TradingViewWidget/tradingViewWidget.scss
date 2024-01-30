@@ -3,22 +3,71 @@
 .ascendio-graphic-containerPrincipal {
   width: 80%;
   height: 80%;
-  background-color: $secondary-color;
-  
+
+
   .tradingview-widget-container {
-    background-color: $secondary-color;
+
     height: 100%;
     width: 100%;
     @include display-flex(column, center, center);
     flex-wrap: wrap;
   }
-
-  // @media (max-width: 600px) {
-  //   width:90%;
-  //   height: 50px; // Ajusta la altura automáticamente según el contenido
-  // }
 }
+
 div.tradingview-widget-copyright {
   display: none;
 }
 
+//RESPONSIVE PORTATIL / PC PEQUEÑO
+@media (min-width: 992px) And (max-width: 1200px) {
+  .ascendio-graphic-containerPrincipal {
+    width: 80%;
+
+
+    .tradingview-widget-container {
+
+      width: 100%;
+      @include display-flex(column, center, center);
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+//RESPONSIVE TABLET
+@media (min-width: 768px) And (max-width: 992px) {
+  .ascendio-graphic-containerPrincipal {
+    width: 100%;
+    height: 100%;
+
+    @include display-flex(column, center, center);
+
+    .tradingview-widget-container {
+
+      width: 80%;
+      height: 340px;
+      @include display-flex(column, center, center);
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+//RESPONSIVE MOVIL
+@media (max-width: 576px) {
+  .ascendio-graphic-containerPrincipal {
+    width: 100%;
+
+    height: 100%;
+    @include display-flex(column, center, center);
+
+    .tradingview-widget-container {
+
+      width: 80%;
+      height: 100%;
+      @include display-flex(column, center, center);
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+  }
+}

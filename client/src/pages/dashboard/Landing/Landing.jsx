@@ -7,103 +7,190 @@ import { TradingViewWidget } from "./TradingViewWidget/TradingViewWidget";
 
 export const Landing = () => {
   return (
-    <Container fluid className="ascendio-landing-containerPrincipal">
-      <Row className="ascendio-landing-main">
-        {" "}
-        <Col xl={6} xs={12} sm={12} className="ascendio-landing-main-hijo">
-          <img
-            className="ascendio-landing-fondo-principal1"
-            src="/images/landing/fondo.png"
-            alt=""
-          />
-        </Col>
-        <Col xl={6} xs={12} sm={12} className="ascendio-landing-main-hijo">
-          <img
-            src="/images/landing/fondo2.PNG"
-            alt=""
-            className="ascendio-landing-fondo-principal2"
-          />
-        </Col>
-        <Col xl={6} sm={12} xs={12} className="ascendio-landing-main-hijo2 ">
-          <Row className="ascendio-landing-textos-padre">
-            <Col xl={3} sm={6} className="ascendio-landing-textos-hijo">
-              <img
-                src="/images/landing/icono-movil.PNG"
-                alt="Imagen de un movil"
-              />
-              <h6>Multiplataforma</h6>
-              <p>Sigue a tus trades favoritos desde cualquier dispositivo.</p>
-            </Col>
-            <Col xl={3} sm={6} className="ascendio-landing-textos-hijo">
-              <img
-                src="/images/landing/iconoChat.PNG"
-                alt="Imagen de un movil"
-              />
-              <h6>Canales públicos</h6>
-              <p>Canales grauitos y de pago, todos a un solo click.</p>
-            </Col>
-            <Col xl={3} sm={4} className="ascendio-landing-textos-hijo">
-              <img
-                src="/images/landing/iconoEstadisticas.PNG"
-                alt="Imagen de un movil"
-              />
-              <h6>Estadísticas</h6>
-              <p>Estadísticas verificadas por nuestro equipo.</p>
-            </Col>
-            <Col xl={3} sm={4} className="ascendio-landing-textos-hijo">
-              <img
-                src="/images/landing/historial.PNG"
-                alt="Imagen de un movil"
-              />
-              <h6>Historial</h6>
-              <p>De todas las operaciones realizadas por nuestros trades.</p>
-            </Col>
-            <Col xl={3} sm={4} className="ascendio-landing-textos-hijo">
-              <img src="/images/landing/timbre.png" alt="Imagen de un movil" />
-              <h6>Notificaciones</h6>
-              <p>Notificaciones completamente personalizables.</p>
-            </Col>
-            <Col xl={3} sm={4} className="ascendio-landing-textos-hijo">
-              <img src="/images/landing/ranking.PNG" alt="Imagen de un movil" />
-              <h6>Rankings</h6>
-              <p>Rankings ajustados y actualizados al minuto.</p>
-            </Col>
-          </Row>
-        </Col>
-        <Col
-          xl={6}
-          sm={12}
-          className="ascendio-landing-main-hijo3 col-xl-6 col-12"
-        >
-          <TradingViewWidget />
-        </Col>
-      </Row>
-      <Row className="ascendio-landing-footer">
-        <Col xs={5} xl={5} className="col-landin-footer-estyles">
-          <h3>ASCENDIO</h3>
-        </Col>
-        <Col xs={2} xl={2} className="col-landin-footer-estyles">
-          <p>&copy;2024 Ascendio, inc</p>
-        </Col>
-        <Col xs={2} xl={2} className="col-landin-footer-estyles">
-          <Link
-            className="ascendio-landing-footer-link "
-            to="/termsandconditions"
+    <Container fluid>
+      <main className="ascendio-landing-main-padre">
+        <Row className="ascendio-landing-main-hijo-1">
+          <Col
+            xs={12}
+            sm={12}
+            lg={6}
+            md={12}
+            xl={6}
+            xxl={6}
+            className="ascendio-landing-main-hijo1-nieto"
           >
-            Therms & Conditions
-          </Link>
-        </Col>
-        <Col xs={1} xl={1} className="col-landin-footer-estyles">
-          <Link className="ascendio-landing-footer-link" to="/privacy">
-            Privacy
-          </Link>
-        </Col>
-        <Col xs={2} xl={2} className="col-landin-footer-estyles">
-          <Link className="ascendio-landing-footer-link" to="/cookiespolicy">
-            Cookies Policy
-          </Link>
-        </Col>
-      </Row>
+            <img
+              className="ascendio-landing-fondo-principal1"
+              src="/images/landing/fondo.png"
+              alt=""
+            />
+          </Col>
+          <Col
+            xs={12}
+            sm={12}
+            lg={6}
+            md={12}
+            xl={6}
+            xxl={6}
+            className="ascendio-landing-main-hijo1-nieto"
+          >
+            <img
+              src="/images/landing/fondo2.png"
+              alt=""
+              className="ascendio-landing-fondo-principal2"
+            />
+          </Col>
+        </Row>
+        <Row className="ascendio-landing-main-hijo-2">
+          <Col
+            xs={12}
+            sm={12}
+            lg={6}
+            md={12}
+            xl={6}
+            xxl={6}
+            className="ascendio-landing-main-hijo2-nieto "
+          >
+            <Row className="ascendio-landing-main-hijo2-nieto-bisnieto ">
+              <Col
+                xs={4}
+                sm={6}
+                xl={4}
+                lg={4}
+                md={4}
+                xxl={4}
+                className="ascendio-landing-main-hijo2-nieto-bisnieto-tataranieto"
+              >
+                <img
+                  src="/images/landing/icono-movil.png"
+                  alt="Imagen de un movil"
+                />
+                <h6>Multiplataforma</h6>
+                <p>Sigue a tus trades favoritos desde cualquier dispositivo.</p>
+              </Col>
+              <Col
+                xl={4}
+                sm={6}
+                xxl={4}
+                lg={4}
+                md={4}
+                xs={4}
+                className="ascendio-landing-main-hijo2-nieto-bisnieto-tataranieto"
+              >
+                <img
+                  src="/images/landing/iconoChat.png"
+                  alt="Imagen de un movil"
+                />
+                <h6>Canales públicos</h6>
+                <p>Canales grauitos y de pago, todos a un solo click.</p>
+              </Col>
+              <Col
+                xl={4}
+                sm={4}
+                xxl={4}
+                lg={4}
+                md={4}
+                xs={4}
+                className="ascendio-landing-main-hijo2-nieto-bisnieto-tataranieto"
+              >
+                <img
+                  src="/images/landing/iconoEstadisticas.png"
+                  alt="Imagen de un movil"
+                />
+                <h6>Estadísticas</h6>
+                <p>Estadísticas verificadas por nuestro equipo.</p>
+              </Col>
+              <Col
+                xl={4}
+                sm={4}
+                xxl={4}
+                lg={4}
+                md={4}
+                xs={4}
+                className="ascendio-landing-main-hijo2-nieto-bisnieto-tataranieto"
+              >
+                <img
+                  src="/images/landing/historial.png"
+                  alt="Imagen de un movil"
+                />
+                <h6>Historial</h6>
+                <p>De todas las operaciones realizadas por nuestros trades.</p>
+              </Col>
+              <Col
+                xl={4}
+                sm={4}
+                xxl={4}
+                lg={4}
+                md={4}
+                xs={4}
+                className="ascendio-landing-main-hijo2-nieto-bisnieto-tataranieto"
+              >
+                <img
+                  src="/images/landing/timbre.png"
+                  alt="Imagen de un movil"
+                />
+                <h6>Notificaciones</h6>
+                <p>Notificaciones completamente personalizables.</p>
+              </Col>
+              <Col
+                xl={4}
+                sm={4}
+                xxl={4}
+                lg={4}
+                md={4}
+                xs={4}
+                className="ascendio-landing-main-hijo2-nieto-bisnieto-tataranieto"
+              >
+                <img
+                  src="/images/landing/ranking.png"
+                  alt="Imagen de un movil"
+                />
+                <h6>Rankings</h6>
+                <p>Rankings ajustados y actualizados al minuto.</p>
+              </Col>
+            </Row>
+          </Col>
+          <Col
+            xs={12}
+            sm={12}
+            lg={6}
+            md={12}
+            xl={6}
+            xxl={6}
+            className="ascendio-landing-main-hijo2-nieto col-xl-6 col-12"
+          >
+            <TradingViewWidget />
+          </Col>
+        </Row>
+      </main>
+      <footer>
+        <Row className="ascendio-landing-footer-padre">
+          <Col xs={5} xl={5} className="ascendio-landing-footer-padre-hijo">
+            <h3>ASCENDIO</h3>
+          </Col>
+          <Col xs={2} xl={2} className="ascendio-landing-footer-padre-hijo">
+            <p>&copy;2024 Ascendio, inc</p>
+          </Col>
+          <Col xs={2} xl={2} className="ascendio-landing-footer-padre-hijo">
+            <Link
+              className="ascendio-landing-footer-link "
+              to="/termsandconditions"
+            >
+              Therms & Conditions
+            </Link>
+          </Col>
+          <Col xs={1} xl={1} className="ascendio-landing-footer-padre-hijo">
+            <Link className="ascendio-landing-footer-link" to="/privacy">
+              Privacy
+            </Link>
+          </Col>
+          <Col xs={2} xl={2} className="ascendio-landing-footer-padre-hijo">
+            <Link className="ascendio-landing-footer-link" to="/cookiespolicy">
+              Cookies Policy
+            </Link>
+          </Col>
+        </Row>
+      </footer>
     </Container>
   );
 };

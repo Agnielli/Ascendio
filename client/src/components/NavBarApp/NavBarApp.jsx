@@ -108,6 +108,43 @@ function NavBarApp() {
                     <Button className="ButtonLogin" variant="outline-success me-2 ms-2" onClick={logOut}>
                       LogOut
                     </Button>
+                </div>              
+                
+                
+              )}
+              {user?.type === 2 && (
+                <div className=" navbarLinksBotones d-flex align-items-center">
+                  {/* <Nav.Link as={Link} to="/profile">
+                    Perfil
+                  </Nav.Link> */}
+                  <Nav.Link as={Link} to="/allcourses">
+                    CURSOS
+                  </Nav.Link>
+                  <Nav.Link as={Link} to="/allpoststrades">
+                    TRADE POSTS
+                  </Nav.Link>
+                  <Nav.Link as={Link} to="/allpostsgenerals">
+                    GENERAL POSTS
+                  </Nav.Link>
+                  <Nav.Link as={Link} to="/showAllUsers">
+                    USERS
+                  </Nav.Link>
+                  <Nav.Link as={Link} to="/tradingview">
+                    TRADING VIEW
+                  </Nav.Link>
+                  <div
+                    className="d-flex user"
+                    onClick={() => navigate("/profile")}
+                  >
+                    {/* <p className="mt-3 me-3">{user.nickname}</p> ESTO FUERA BY JUAN ME HA AMENAZADO FEDE */}
+                    <div className="avatar">
+                      {user?.img ? (
+                        <img
+                          src={`http://localhost:3000/images/users/${user.img}`}
+                        />
+                      ) : (
+                        <p>{user?.nickname.charAt(0).toUpperCase()}</p>
+                      )}
                     </div>
                 )}
       

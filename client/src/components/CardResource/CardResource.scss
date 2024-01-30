@@ -1,0 +1,32 @@
+@import '../../../public/stylesheets/variables.scss';
+
+
+.pplCardResource{
+  width: 100%;
+
+  .botonResource{
+    background-color: transparent;
+    border: 1px solid $accent3-color;
+    border-radius: 30%;
+    margin-left: 5%;
+    
+
+    .resourceIcon{
+      color: $accent3-color;
+      font-size: 30px;
+    }
+  }
+
+  .delResource{
+    background-color: transparent;
+    border: 1px solid #e15252;
+    border-radius: 30%;
+    
+    .delIcon{
+      color: #e15252;
+      font-size: 20px;
+    }
+  }
+}
+
+

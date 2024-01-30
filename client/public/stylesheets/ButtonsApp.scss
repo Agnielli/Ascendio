@@ -75,6 +75,11 @@
     background-color: $accent2-color ;
     color:$accent2-color $accent2-color;
   }
+  // &:focus-visible {
+  //   border-color: #dc3545;
+  //   outline: 0;
+  //   box-shadow: 0 0 0 0.25rem #dc35466e;
+  // }
 }
 
 
@@ -105,9 +110,17 @@
 
 }
 
-
-
-
+.buscador {
+  outline: none;
+  background-color: $accent2-color;
+  color: $accent5-color;
+  border: none;
+  border-radius: 25px;
+  padding: 0.8rem;
+  &:focus{
+    border: 1px solid $accent-color ;
+  }
+}
 
 
 
