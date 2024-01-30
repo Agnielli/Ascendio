@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Container, Row } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import NavBarApp from "../components/NavBarApp/NavBarApp";
 import { Home } from "../pages/dashboard/Home/Home";
 import { Register } from "../pages/auth/Register/Register";
@@ -33,7 +33,6 @@ import { OneUserCourses } from "../pages/courses/OneUserCourses/OneUserCourses";
 import { AllPostsGenerals } from "../pages/posts/PostGeneral/AllPostsGenerals/AllPostsGenerals";
 import { ShowAllUsers } from "../pages/users/ShowAllUsers/ShowAllUsers";
 import { CreateGeneralPost } from "../pages/posts/PostGeneral/CreateGeneralPost/CreateGeneralPost";
-
 import { CreateTrade } from "../pages/posts/Trades/CreateTrade/CreateTrade";
 import { TraderProfile } from "../pages/users/TraderProfile/TraderProfile";
 import { OneTradePost } from "../pages/posts/trades/OneTradePost/OneTradePost";
@@ -41,23 +40,19 @@ import { OneGeneralPost } from "../pages/posts/PostGeneral/OneGeneralPost/OneGen
 import { ThermsNConditions } from "../pages/dashboard/Landing/ThermsNConditions/ThermsNConditions";
 import { Privacy } from "../pages/dashboard/Landing/Privacy/Privacy";
 import { CookiesPolicy } from "../pages/dashboard/Landing/CookiesPolicy/CookiesPolicy";
-
 import { ResourceViewer } from "../components/ResourceViewer/ResourceViewer";
 import { TradingViewWidget } from "../pages/dashboard/Landing/TradingViewWidget/TradingViewWidget";
-
-
 export const RoutesApp = () => {
   const { token } = useContext(AscendioContext);
   const [type, setType] = useState();
-
   useEffect(() => {
     if (token) {
       setType(jwtDecode(token).user.type);
     }
   }, [token]);
-
   return (
-    <BrowserRouter>      
+    <BrowserRouter>
+      <Row>
         <NavBarApp />
         <Routes>
           {!token && (
@@ -117,7 +112,6 @@ export const RoutesApp = () => {
               <Route path="/resource/:course_id/:section_id/:link/:type" element={<ResourceViewer />}/>
             </>
           )}
-
           {token && type === 1 && (
             <>
               <Route path="/admin" element={<AdminHome />}>
@@ -127,10 +121,18 @@ export const RoutesApp = () => {
               </Route>
             </>
           )}
-
           <Route path="*" element={<ErrorPageApp />} />
         </Routes>
       </Row>
     </BrowserRouter>
   );
 };
+
+
+
+
+
+
+
+
+
