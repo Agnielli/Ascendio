@@ -61,7 +61,7 @@ export const AllCourses = () => {
         </div>
       </header>
       <main className="mainAllCourses d-flex flex-wrap justify-content-center gap-3 pb-5">
-      <Row className="d-flex align-items-stretch">
+      <Row>
         {findCourse?.map((elem) => {
           return (
             <Col xs={12} md={6} lg={4} xxl={3} className="d-flex">
