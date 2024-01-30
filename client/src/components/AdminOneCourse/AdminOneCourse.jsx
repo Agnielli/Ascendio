@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Button, Card, Col } from "react-bootstrap";
-import './adminOneCourse.scss'
+import { Button, Card, Col, Row } from "react-bootstrap";
+import './adminOneCourse.scss';
 
 export const AdminOneCourse = ({ elem, updateCourses, setUpdateCourses }) => {
   const disableEnableCourse = (course_id, is_disabled) => {
@@ -21,35 +21,22 @@ export const AdminOneCourse = ({ elem, updateCourses, setUpdateCourses }) => {
   };
 
   return (
-    <Col xs={12} md={6} lg={4} xxl={3}>
-    <Card
-      style={{ width: "18rem" }}
-      className="mapeoAllCourse text-center mb-4"
-    >
-      <Card.Img
-        variant="top"
-        src={`http://localhost:3000/images/cursos/${elem.course_img}`}
-      />
-      <Card.Body>
-        <Card.Title className="cardtitle">
-          {elem.title}
-        </Card.Title>
-        <Card.Text className="d-flex justify-content-start descriptioncard">
-          {elem.description}
-        </Card.Text>
-        <Card.Text className="cardtitle">Autor: {elem.nickname}</Card.Text>
-        <Card.Text className="d-flex justify-content-center mt-auto">
-          <Button
-          className="Button3"
-            onClick={() =>
-              disableEnableCourse(elem?.course_id, elem?.is_disabled)
-            }
-          >
-            {elem.is_disabled ? "Activar" : "Desactivar"}
-          </Button>
-        </Card.Text>
-      </Card.Body>
-    </Card>
+    <Col xs={12} md={6} lg={4} xxl={3} className="d-flex">
+      <Card style={{ width: "100%" }} className="mapeoAllCourse text-center mb-4">
+        <Card.Img variant="top" src={`http://localhost:3000/images/cursos/${elem.course_img}`} />
+        <Card.Body className="d-flex flex-column">
+          <div>
+            <Card.Title className="cardtitle">{elem.title}</Card.Title>
+            <Card.Text className="descriptioncard">{elem.description}</Card.Text>
+            <Card.Text className="cardtitle">Autor: {elem.nickname}</Card.Text>
+          </div>
+          <div className="mt-auto">
+            <Button className="Button3" onClick={() => disableEnableCourse(elem?.course_id, elem?.is_disabled)}>
+              {elem.is_disabled ? "Activar" : "Desactivar"}
+            </Button>
+          </div>
+        </Card.Body>
+      </Card>
     </Col>
   );
 };

@@ -69,20 +69,7 @@ export const CardSection = ({
             )}
           </div>
         </div>
-        {showTopic && (
-          <FormAddTopic
-            setShowTopic={setShowTopic}
-            course_id={course_id}
-            sections={sections}
-            section_id={elem.section_id}
-            topics={topics}
-            setTopics={setTopics}
-            setResetCourse={setResetCourse}
-            resetCourse={resetCourse}
-            setAddTopic={setAddTopic}
-            setAddSection={setAddSection}
-          />
-        )}
+        
       </Accordion.Header>
       <Accordion.Body>
         <Accordion defaultActiveKey="1" className="w-100">
@@ -108,6 +95,20 @@ export const CardSection = ({
           />
           );
         })}
+        {showTopic && (
+          <FormAddTopic
+            setShowTopic={setShowTopic}
+            course_id={course_id}
+            sections={sections}
+            section_id={elem.section_id}
+            topics={topics}
+            setTopics={setTopics}
+            setResetCourse={setResetCourse}
+            resetCourse={resetCourse}
+            setAddTopic={setAddTopic}
+            setAddSection={setAddSection}
+          />
+        )}
 
         </Accordion>
       </Accordion.Body>

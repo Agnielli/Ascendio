@@ -15,7 +15,7 @@ import { OneCourse } from "../pages/courses/OneCourse/OneCourse";
 import { Landing } from "../pages/dashboard/Landing/Landing";
 import { Contact } from "../pages/dashboard/Contact/Contact";
 import { RecoverPassword } from "../pages/auth/RecoverPassword/RecoverPassword";
-import { Usuarios } from "../pages/admin/AdminUsuarios/Usuarios";
+//import { Usuarios } from "../pages/admin/AdminUsuarios/Usuarios";
 import { Estadisticas } from "../pages/admin/AdminEstadisticas/Estadisticas";
 import { useContext } from "react";
 import { AscendioContext } from "../context/AscendioContext";
@@ -33,7 +33,6 @@ import { OneUserCourses } from "../pages/courses/OneUserCourses/OneUserCourses";
 import { AllPostsGenerals } from "../pages/posts/PostGeneral/AllPostsGenerals/AllPostsGenerals";
 import { ShowAllUsers } from "../pages/users/ShowAllUsers/ShowAllUsers";
 import { CreateGeneralPost } from "../pages/posts/PostGeneral/CreateGeneralPost/CreateGeneralPost";
-
 import { CreateTrade } from "../pages/posts/Trades/CreateTrade/CreateTrade";
 import { TraderProfile } from "../pages/users/TraderProfile/TraderProfile";
 import { OneTradePost } from "../pages/posts/trades/OneTradePost/OneTradePost";
@@ -41,24 +40,19 @@ import { OneGeneralPost } from "../pages/posts/PostGeneral/OneGeneralPost/OneGen
 import { ThermsNConditions } from "../pages/dashboard/Landing/ThermsNConditions/ThermsNConditions";
 import { Privacy } from "../pages/dashboard/Landing/Privacy/Privacy";
 import { CookiesPolicy } from "../pages/dashboard/Landing/CookiesPolicy/CookiesPolicy";
-
 import { ResourceViewer } from "../components/ResourceViewer/ResourceViewer";
 import { TradingViewWidget } from "../pages/dashboard/Landing/TradingViewWidget/TradingViewWidget";
-
-
 export const RoutesApp = () => {
   const { token } = useContext(AscendioContext);
   const [type, setType] = useState();
-
   useEffect(() => {
     if (token) {
       setType(jwtDecode(token).user.type);
     }
   }, [token]);
-
   return (
     <BrowserRouter>
-      <Row>
+      <Row className="p-0 m-0">
         <NavBarApp />
         <Routes>
           {!token && (
@@ -118,20 +112,27 @@ export const RoutesApp = () => {
               <Route path="/resource/:course_id/:section_id/:link/:type" element={<ResourceViewer />}/>
             </>
           )}
-
           {token && type === 1 && (
             <>
               <Route path="/admin" element={<AdminHome />}>
-                <Route index element={<Usuarios />} />
-                <Route path="allusers" element={<Usuarios />} />
+                {/* <Route index element={<Usuarios />} />
+                <Route path="allusers" element={<Usuarios />} /> */}
                 <Route path="alldata" element={<Estadisticas />} />
               </Route>
             </>
           )}
-
           <Route path="*" element={<ErrorPageApp />} />
         </Routes>
       </Row>
     </BrowserRouter>
   );
 };
+
+
+
+
+
+
+
+
+

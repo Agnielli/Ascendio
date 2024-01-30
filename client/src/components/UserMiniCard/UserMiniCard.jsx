@@ -22,39 +22,37 @@ export const UserMiniCard = ({ elem, updateUsers, setUpdateUsers }) => {
   };
 
   return (
-    <Container className="userMiniCardAdminView">
+    <div className="userMiniCardAdminView d-flex align-items-center justify-content-between gap-1 gap-xl-4">
       <div>
         <img
-          className="userImg"
           src={
             elem.img != null
               ? `http://localhost:3000/images/users/${elem.img}`
               : `http://localhost:3000/images/users/descarga.png`
           }
-          alt=""
+          alt="Imagen de perfil del usuario"
         />
       </div>
-      <div className="d-flex justify-content-center align-items-center text-center">
-        <div className="Carddivs mb-3">
-          <div className="divP">
-            <p className="datosCard">{elem.nickname}</p>
-            <p className="datosCard">{elem.total_followers} Seguidores</p>
+      <div className="d-flex flex-column flex-xl-row align-items-center text-center gap-4">
+        <div className="d-flex gap-2 gap-xl-3">
+          <div className="">
+            <p className="fw-bold">{elem.nickname}</p>
+            <p>{elem.total_followers} Seguidores</p>
           </div>
-          <div className="divP">
-            <p className="datosCard">{elem.correct_posts} Trade Acertados</p>
-            <p className="datosCard">{elem.incorrect_posts} Trade Errados</p>
+          <div className="">
+            <p>{elem.correct_posts} Acertados</p>
+            <p>{elem.incorrect_posts} Errados</p>
           </div>
         </div>
-        <div className="button1">
+        <div className="">
           <Button
             variant="danger"
-            className="text-dark"
             onClick={() => activateUser(elem?.user_id, elem?.is_disabled)}
           >
             {elem.is_disabled ? "Activar" : "Desactivar"}
           </Button>
         </div>
       </div>
-    </Container>
+    </div>
   );
 };

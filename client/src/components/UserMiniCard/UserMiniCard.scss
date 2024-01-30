@@ -1,108 +1,34 @@
 .userMiniCardAdminView {
-  width: 700px !important;
-  height: 200px !important;
   background-color: rgb(43, 42, 41);
   color: white;
   border-radius: 6rem;
-  display: flex;
-  flex-direction: row;
-  padding: 2rem !important;
-  gap: 2rem;
-  margin: 1rem !important;
+  padding: 2rem;
 
   img {
     border-radius: 50%;
     width: 100px;
-    height: 100px;
-    margin-left: 1rem;
-    margin-top: 1rem;
+    aspect-ratio: 1/1;
   }
 
-  .datosCard {
-    font-size: small;
+  button {
+    width: 12ch;
   }
 
-  div.Carddivs {
-    align-items: center !important;
-  }
-
-  .divP {
-    width: 5rem !important;
-    display: flex;
-    flex-direction: column;
-    margin-top: 1rem;
-
-    p {
-      width: 7rem;
-      color: #e15252;
-    }
-  }
-
-  .Carddivs {
-    display: flex;
-    flex-direction: row;
-    gap: 4rem;
-  }
-
-  .button1 {
-    width: 6rem;
-    margin: auto !important;
-    button {
-      margin-left: 8rem;
-    }
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .userMiniCardAdminView {
-    width: 400px !important;
-    height: 200px !important;
-    background-color: rgb(43, 42, 41);
+  p {
     color: white;
-    border-radius: 6rem;
-    padding: 2rem !important;
-
-    p {
-      margin: 0 !important;
-      padding: 0 !important;
-      width: 250px !important;
-    }
-
-    .Carddivs {
-      gap: 1rem !important;
-      text-align: left !important;
-    }
-
-    .button1 {
-      margin-left: 1.5rem !important;
-    }
-  }
-
-  @media screen and (max-width: 500px) {
-    .userMiniCardAdminView {
-      width: 400px !important;
-      height: 400px !important;
-      background-color: rgb(43, 42, 41);
-      color: white;
-      border-radius: 6rem;
-      display: flex !important;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap !important;
-
-      .Carddivs {
-        display: flex;
-        flex-direction: column !important;
-      }
-
-      .button1 {
-        button {
-          margin-left: 0;
-        }
-      }
-
-    
-      
-    }
+    text-align: left;
   }
 }
+
+
+
+@media screen and (max-width: 500px) {
+  .userMiniCardAdminView {
+    padding: 1rem;
+    border-radius: 3rem;
+
+    img {
+      width: 75px;
+    }
+  }
+} 

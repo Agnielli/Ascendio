@@ -4,6 +4,7 @@ import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { ModalCreateComment } from "../../trades/OneTradePost/ModalCreateComment/ModalCreateComment";
 import { ShowAllCommentsPost } from "../../trades/OneTradePost/ShowAllCommentsPost/ShowAllCommentsPost";
+import './OneGeneralPost.scss';
 
 export const OneGeneralPost = () => {
   const [oneTrade, setOneTrade] = useState();
@@ -12,7 +13,7 @@ export const OneGeneralPost = () => {
 
   const post = useParams();
 
-  console.log(post);
+  // console.log(post);
 
   const navigate = useNavigate();
 
@@ -30,10 +31,10 @@ export const OneGeneralPost = () => {
         });
     }, [post]);
   }
-  console.log(oneTrade);
+  // console.log(oneTrade);
 
   return (
-    <>
+    <div className="onegeneralpost">
       {oneTrade && (
         <>
           <div className="p-5">
@@ -41,25 +42,23 @@ export const OneGeneralPost = () => {
               <Card.Header>
                 <h2>Trader: {oneTrade.post_user_nickname}</h2>
               </Card.Header>
-              <Card.Header className="row d-flex">
-                <div className="col-6">
-                  <h3>Imagen</h3>
-                </div>
-                <div className="col-6">
-                  <h3>Descripción</h3>
-                </div>
+              <Card.Header className="row titles">
+                <h3 className="col-6">Imagen</h3>
+                <h3 className="col-6">Descripción</h3>
               </Card.Header>
               <Card.Body>
-                <Card.Title className="row">
-                  <div className="col-6">
+                <Row>
+                  <Col lg={6} md={12} className="mb-2">
                     <Card.Img
-                      src={`http://localhost:3000/images/generalPost/${oneTrade.resource_text}`}
-                    />
-                  </div>
-                  <div className="col-6">
+                        className="generalpostimagen"
+                        src={`http://localhost:3000/images/generalPost/${oneTrade.resource_text}`}
+                      />
+                  </Col>
+                  <Col lg={6} md={12} className="col d-flex align-items-center mb-2">
                     <h4>{oneTrade.description}</h4>
-                  </div>
-                </Card.Title>
+                  </Col>
+                </Row>
+
                 <Card.Title className="row">
                   <div className="d-flex gap-1 justify-content-center">
                     <Button
@@ -99,6 +98,6 @@ export const OneGeneralPost = () => {
           )}
         </>
       )}
-    </>
+    </div>
   );
 };

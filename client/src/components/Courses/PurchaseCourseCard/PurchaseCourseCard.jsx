@@ -43,10 +43,10 @@ export const PurchaseCourseCard = () => {
     <Col>
       <header className="headerCursosComprados">
         <div
-          className="d-flex justify-content-between p-5"
+          className="d-flex justify-content-between divHeader p-5"
           style={{ color: "white" }}
         >
-          <h2>Mis cursos comprados</h2>
+          <h2 className="text-center">Mis cursos comprados</h2>
           <input onChange={handleChange} placeholder="🔍..." value={filter} className="buscador"/>
         </div>
       </header>

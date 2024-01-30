@@ -17,3 +17,26 @@
 .tagsCourse{
   color: $accent-color;
 }
+
+@media (max-width: 945px) {
+  .headerAllCoursesOneUser {
+    .divHeader {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .div {
+        margin-bottom: 1rem; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .buscador {
+        width: 100%;
+        max-width: 30vw;
+        margin-top: 1rem;
+      }
+    }
+  }
+}

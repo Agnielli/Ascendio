@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { ActivatedUserMiniCard } from "../ActivatedUserMiniCard/ActivatedUserMiniCard";
 import { Col, Container, Row } from "react-bootstrap";
-import './AdminActivateUser.scss'
+import "./AdminActivateUser.scss";
 
 export const AdminActivateUser = () => {
   const [activatedUsers, setActivatedUsers] = useState();
@@ -20,19 +20,22 @@ export const AdminActivateUser = () => {
   }, [update]);
 
   return (
-    <Container fluid>
-      <Row>
-        {activatedUsers?.map((elem) => (
-          <Col className="MiniCardMap" key={elem.user_id} xxl={6} xl={6} lg={12} md={12} xs={12} >
-            <ActivatedUserMiniCard
-              key={elem.user_id}
-              elem={elem}
-              update={update}
-              setUpdate={setUpdate}
-            />
-          </Col>
-        ))}
-      </Row>
-    </Container>
+    <>
+      {activatedUsers?.map((elem) => (
+        <Col
+          className="d-flex justify-content-center"
+          key={elem.user_id}
+          xl={6}
+          xs={12}
+        >
+          <ActivatedUserMiniCard
+            key={elem.user_id}
+            elem={elem}
+            update={update}
+            setUpdate={setUpdate}
+          />
+        </Col>
+      ))}
+    </>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Button, Form } from 'react-bootstrap'
+import './NewPAssword.scss'
 
 
 const initialValue = {
@@ -17,6 +18,25 @@ export const NewPassword = ({user, setUser, setShowChangePassword}) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
   const [file, setFile] = useState();
+
+  const [isPasswordFocused, setIsPasswordFocused] = useState(false);
+  const [isPasswordFocused2, setIsPasswordFocused2] = useState(false);
+
+  const handleFocus = () => {
+    setIsPasswordFocused(true);
+  };
+  const handleBlur = () => {
+    setIsPasswordFocused(false);
+  };
+
+  const handleFocus2 = () => {
+    setIsPasswordFocused2(true);
+  };
+  const handleBlur2 = () => {
+    setIsPasswordFocused2(false);
+  };
+
+  
 
   useEffect(() => {
     if (user) {
@@ -96,12 +116,11 @@ export const NewPassword = ({user, setUser, setShowChangePassword}) => {
     
   }
   return (
-    <>
-    <h2>Editar datos de Login:</h2>
-    <Form>    
-        <h3>Cambiar email:</h3>        
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Correo</Form.Label>
+    <div className="FormularioDatosUsuario FormulariosContainer FormularioNewPAssword">
+    <Form >    
+        <h2>EDITAR EMAIL:</h2>        
+        <Form.Group  controlId="formBasicEmail">
+          <Form.Label></Form.Label>
           <Form.Control
             name="email"
             onChange={handleChangeEmail}
@@ -112,19 +131,19 @@ export const NewPassword = ({user, setUser, setShowChangePassword}) => {
           />
         </Form.Group>
         
-        <p>{msgErrorEmail}</p>
+        <p style={{ marginBottom: '1rem' }}>{msgError || '\u00A0'}</p>
      
 
-    <Button variant="primary me-2" onClick={handleSubmitEmail}>
-      Cambiar Email
+    <Button className="Button3" variant="primary me-2" onClick={handleSubmitEmail}>
+      CAMBIAR EMAIL
     </Button>
   </Form>
    
         <Form>
-          <h3>Cambiar contraseña:</h3>          
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Introduce nueva contraseña</Form.Label>
-            <div className="password-container">
+          <h2 >EDITAR CONTRASEÑA:</h2>          
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label></Form.Label>
+            <div className={`password-container ${isPasswordFocused ? 'eye-icon-focused' : ''}`}>
             <Form.Control
               name="password"
               onChange={handleChange}
@@ -132,6 +151,8 @@ export const NewPassword = ({user, setUser, setShowChangePassword}) => {
               placeholder="Introduce nueva contraseña"
               value={NewPassword.password}
               autoComplete="new-password"
+              onFocus={handleFocus}
+                onBlur={handleBlur}
             />
             <span className=" eye-icon pisition-absolute pointer password-icon" onClick={verPassword}>
                 {showPassword ?<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" height={"1.5rem"}>
@@ -149,9 +170,9 @@ export const NewPassword = ({user, setUser, setShowChangePassword}) => {
               </span>
               </div>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicPassword2">
-            <Form.Label>Confirma la nueva contraseña</Form.Label>
-            <div className="password-container">
+          <Form.Group  controlId="formBasicPassword">
+            <Form.Label></Form.Label>
+            <div className={`password-container ${isPasswordFocused2 ? 'eye-icon-focused' : ''}`}>
             <Form.Control
               name="password2"
               onChange={handleChange}
@@ -159,6 +180,8 @@ export const NewPassword = ({user, setUser, setShowChangePassword}) => {
               placeholder="Confirma la nueva contraseña"
               value={NewPassword.password2}
               autoComplete="new-password"
+              onFocus={handleFocus2}
+                onBlur={handleBlur2}
             />
             <span className=" eye-icon pisition-absolute pointer password-icon" onClick={verPassword2}>
                 {showPassword2 ?<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" height={"1.5rem"}>
@@ -177,19 +200,21 @@ export const NewPassword = ({user, setUser, setShowChangePassword}) => {
               </div>
           </Form.Group>
           
-          <p>{msgError}</p>
-          <Button className="me-3" onClick={handleSubmit}>
-            Cambiar contraseña
+          <p style={{ marginBottom: '1rem' }}>{msgError || '\u00A0'}</p>
+          <Button className="Button3" onClick={handleSubmit}>
+            CAMBIAR CONTRASEÑA
           </Button>
           
         </Form>
 
-        <Button className="me-3" onClick={()=> setShowChangePassword(false)}>
-            Cancelar
-          </Button>
+        <div className="botonCancelarEditarLogin">
+          <Button className="Button1" onClick={()=> setShowChangePassword(false)}>
+              CANCELAR
+            </Button>
+        </div>
         
 
-        </>
+        </div>
       
   )
 }

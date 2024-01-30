@@ -427,24 +427,34 @@ export const OneCourse = () => {
               })}
             </Accordion>
 
-            {userId === userCourse && (
-              <Button
-                variant="outline-success"
+            {addSection && (
+              <FormAddSection
+                sections={sections}
+                setSections={setSections}
+                addSection={addSection}
+                setAddSection={setAddSection}
+                course_id={course_id}
+                setResetCourse={setResetCourse}
+                resetCourse={resetCourse}
+              />
+            )}
+
+            {userId === userCourse && !addSection && !isIntoValidate && (
+              <button
                 className="Button1 d-flex m-3"
                 onClick={addNewSection}
-                disabled={
+                /* disabled={
                   addSection ? true : false || isIntoValidate ? true : false
-                }
+                } */
               >
                 Añadir Sección
-              </Button>
+              </button>
             )}
 
             <div className="courseCardEnd gap-3 mt-5">
               {userId === userCourse && (
                 <button
                   className="validarButton"
-                  variant="outline-warning"
                   onClick={handleValidate}
                   disabled={isIntoValidate ? true : false}
                 >
@@ -495,6 +505,7 @@ export const OneCourse = () => {
           <div className="mt-3">
             <h5 className="pt-3 text-center"> Valoración: {ratingAverage} <span style={{ color: '#FFD800' }}>★</span> · {peopleVotesCourse} {peopleVotesCourse === 1 ? "voto" : "votos"}</h5>
             <h5 className="py-3 text-center">¿Qué opina la gente?</h5>
+
             <div className="d-flex flex-wrap gap-2 pb-3">
               {rates?.map((elem) => (
                 <CardRatingsOneCourse

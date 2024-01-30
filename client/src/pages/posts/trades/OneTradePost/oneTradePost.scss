@@ -1,12 +1,26 @@
 
-.category {
-  h4 {
-    color: black;
+.onetradepost {
+  .category {
+    h4 {
+      color: black;
+    }
+  }
+  
+  .description {
+    h4 {
+      color: black;
+    }
+  }
+  
+  .tradeimagen {
+    max-width: 400px;
+    min-width: 280px;
+  }
+  
+  @media (max-width: 1200px) {
+    .hide-on-small-screen {
+      display: none;
+    }
   }
 }
 
-.description {
-  h4 {
-    color: black;
-  }
-}
