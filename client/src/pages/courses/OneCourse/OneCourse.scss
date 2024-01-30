@@ -111,6 +111,13 @@
         color: #9c9999;
       }
   
+      .Button1{
+        &:hover,
+        &:active{
+          background-color: transparent;
+        }
+      }
+
       .courseCardEnd{
         width: 30%;
         display: flex;
@@ -147,7 +154,7 @@
 
 .material-symbols-outlined {
   color: white;
-  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  font-variation-settings: "FILL" ,0 "wght" 400, "GRAD" 0, "opsz" 24;
 }
 
 

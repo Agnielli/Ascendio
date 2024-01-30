@@ -390,17 +390,7 @@ export const OneCourse = () => {
               {oneCoursePpal?.description}
             </Card.Text>
 
-            {addSection && (
-              <FormAddSection
-                sections={sections}
-                setSections={setSections}
-                addSection={addSection}
-                setAddSection={setAddSection}
-                course_id={course_id}
-                setResetCourse={setResetCourse}
-                resetCourse={resetCourse}
-              />
-            )}
+            
             <Accordion defaultActiveKey="1">
               {orderedSections.map((elem, index) => {
                 return (
@@ -427,24 +417,34 @@ export const OneCourse = () => {
               })}
             </Accordion>
 
-            {userId === userCourse && (
-              <Button
-                variant="outline-success"
+            {addSection && (
+              <FormAddSection
+                sections={sections}
+                setSections={setSections}
+                addSection={addSection}
+                setAddSection={setAddSection}
+                course_id={course_id}
+                setResetCourse={setResetCourse}
+                resetCourse={resetCourse}
+              />
+            )}
+
+            {userId === userCourse && !addSection && !isIntoValidate && (
+              <button
                 className="Button1 d-flex m-3"
                 onClick={addNewSection}
-                disabled={
+                /* disabled={
                   addSection ? true : false || isIntoValidate ? true : false
-                }
+                } */
               >
                 Añadir Sección
-              </Button>
+              </button>
             )}
 
             <div className="courseCardEnd gap-3 mt-5">
               {userId === userCourse && (
                 <button
                   className="validarButton"
-                  variant="outline-warning"
                   onClick={handleValidate}
                   disabled={isIntoValidate ? true : false}
                 >

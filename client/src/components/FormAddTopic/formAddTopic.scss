@@ -1,12 +1,11 @@
 @import '../../../public/stylesheets/variables.scss';
 
+.formTopic{
+  width: 80%;
 
-.formSection{
-  width: 70%;
+  .botonFormTopic{
 
-  .botonFormSection{
-
-    .botonesSection{
+    .botonesTopic{
       padding: 6px 20px !important;
       background-color: $accent-color;
       color: $accent3-color;
