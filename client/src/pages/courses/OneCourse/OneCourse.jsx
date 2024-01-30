@@ -506,8 +506,35 @@ export const OneCourse = () => {
           </>
         )}
       </section>
+
+      
     </>
   );
 };
 
-/* Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique ad facilis ipsum excepturi natus possimus. */
+
+{/* <Accordion defaultActiveKey="1">
+              {orderedSections.map((elem, index) => {
+                return (
+                  <CardSection
+                    userId={userId}
+                    userCourse={userCourse}
+                    elem={elem}
+                    key={elem.section_id}
+                    deleteSection={deleteSection}
+                    course_id={course_id}
+                    sections={sections}
+                    topics={topics}
+                    setTopics={setTopics}
+                    setResetCourse={setResetCourse}
+                    resetCourse={resetCourse}
+                    deleteTopic={deleteTopic}
+                    index={index + 1}
+                    setResource={setResource}
+                    resource={resource}
+                    deleteResource={deleteResource}
+                    isIntoValidate={isIntoValidate}
+                  />
+                );
+              })}
+            </Accordion> */}
