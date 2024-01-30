@@ -22,6 +22,7 @@ export const OneTradePost = () => {
       axios
         .get(`http://localhost:3000/posts/onetradepost/${post.post_id}`)
         .then((res) => {
+          console.log(res)
           setOneTrade(res.data[0]);
         })
         .catch((error) => {
@@ -41,7 +42,7 @@ export const OneTradePost = () => {
                 <h2>Trader: {oneTrade.post_user_nickname}</h2>
               </Card.Header>
               <Card.Header className="row">
-                <h3 className="col-xl-4 hide-on-small-screen">Imagen {oneTrade.category_name}</h3>
+                <h3 className="col-xl-4 hide-on-small-screen"></h3>
                 <h3 className="col-xl-4 col-lg-12">Categoría: {oneTrade.category_name}</h3>
                 <h3 className="col-xl-4 col-lg-12">Divisa: {oneTrade.currency}</h3>
               </Card.Header>
