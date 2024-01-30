@@ -23,7 +23,7 @@ function NavBarApp() {
   return (
     <Navbar expand="lg" className="BG-navbar">
       <Container fluid >
-        <Navbar.Brand className="logoNav p-0 m-0" as={Link} to={redirectTo}>
+        <Navbar.Brand className="logoNav p-0 m-0 " as={Link} to={redirectTo}>
          ASCENDIO
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav"/>

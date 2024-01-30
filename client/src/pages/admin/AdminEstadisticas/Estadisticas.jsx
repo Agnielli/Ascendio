@@ -22,7 +22,7 @@ export const Estadisticas = () => {
     <>
       {stats?.map((elem, index) => {
         return (
-          <Container key={index} className="mt-4">
+          <Container key={index} className="mt-4 pb-5">
             <Row className="d-flex flex-row">
               <Col
                 key={elem.user_id}

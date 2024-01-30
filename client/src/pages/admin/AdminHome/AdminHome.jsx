@@ -153,11 +153,7 @@ export const AdminHome = () => {
       <h3 className="text-center mt-4 text-danger">Administrador</h3>
       <Row className="d-flex flex-row justify-content-center align-items-center text-center mt-5 p-5">
         <Col className="ButtonsRow" lg={3} md={6} xs={6}>
-          <Button
-            variant="danger"
-            className="text-dark"
-            onClick={() => showButtons()}
-          >
+          <Button className="Button4" onClick={() => showButtons()}>
             Usuarios
           </Button>
         </Col>
@@ -241,21 +237,42 @@ export const AdminHome = () => {
       </div>
 
       <div>{showStats === true && <Estadisticas />}</div>
-      {showCourseButtons && (
-        <div className="">
-          <Button onClick={() => showAllCourses()}>Todos los cursos</Button>
-          <Button onClick={() => showAllEnabledCourses()}>
-            Cursos Activos
-          </Button>
-          <Button onClick={() => showAllDisabledCourses()}>
-            Cursos Bloqueados
-          </Button>
-
-          {showCourses && <AdminCourses />}
-          {showDisabledCourses && <DisabledCoursesMap />}
-          {showEnabledCourses && <EnabledCoursesMap />}
-        </div>
-      )}
+      
+      <div className="">
+        {showCourseButtons && (
+          <Container fluid>
+            <Container fluid>
+              <Row className="ButtonsRow2 d-flex justify-content-center align-items-center text-center m-5">
+                <Col lg={2} md={3} xs={12}>
+                  <Button
+                    className="ButtonNoBG"
+                    onClick={() => showAllCourses()}
+                  >
+                    Todos los cursos
+                  </Button>
+                  <Button
+                    className="ButtonNoBG"
+                    onClick={() => showAllEnabledCourses()}
+                  >
+                    Cursos Activos
+                  </Button>
+                  <Button
+                    className="ButtonNoBG"
+                    onClick={() => showAllDisabledCourses()}
+                  >
+                    Cursos Bloqueados
+                  </Button>
+                </Col>
+              </Row>
+            </Container>
+            <Row>
+              {showCourses && <AdminCourses />}
+              {showDisabledCourses && <DisabledCoursesMap />}
+              {showEnabledCourses && <EnabledCoursesMap />}
+            </Row>
+          </Container>
+        )}
+      </div>
     </Container>
   );
 };

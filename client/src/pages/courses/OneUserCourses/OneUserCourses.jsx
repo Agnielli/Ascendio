@@ -93,7 +93,7 @@ export const OneUserCourses = () => {
                     src={`http://localhost:3000/images/cursos/${elem.img}`}
                   />
                   <Card.Body className="d-flex flex-column gap-1">
-                    <Card.Text>{elem.title}</Card.Text>
+                    <Card.Text className="cardtitle">{elem.title}</Card.Text>
                     <Card.Subtitle className="followerscard">
                       {elem.followers !== undefined && elem.followers !== 0
                         ? `${elem.followers} Seguidores`
@@ -102,10 +102,10 @@ export const OneUserCourses = () => {
                     <Card.Subtitle className="tagsCourse">
                       {elem.tags}
                     </Card.Subtitle>
-                    <Card.Title className="descriptioncard">
+                    <Card.Title className="descriptioncard d-flex justify-content-start">
                       {elem.description}
                     </Card.Title>
-                    <Card.Text className="priceCourse px-3 my-2">
+                    <Card.Text className="priceCourse cardtitle px-3 my-2">
                       {Number(elem?.price) === 0 ? "GRATIS" : `${elem?.price}€`}
                     </Card.Text>
                     <div className="d-flex justify-content-between mt-auto">
