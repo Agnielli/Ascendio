@@ -101,12 +101,7 @@ export const Users = () => {
                       </Button>
                     </>
                   )}
-                  <Button
-                    className="Button4"
-                    onClick={() => navigate("/createcourse")}
-                  >
-                    Crear Curso
-                  </Button>
+                  
                 </>
               )}
               <Button
@@ -128,6 +123,12 @@ export const Users = () => {
                     onClick={() => navigate("/savecourse")}
                   >
                     Cursos Guardados
+                  </Button>
+                  <Button
+                    className="Button4"
+                    onClick={() => navigate("/createcourse")}
+                  >
+                    Crear Curso
                   </Button>
                 </>
               )}
