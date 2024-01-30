@@ -10,3 +10,14 @@
     color: black;
   }
 }
+
+.tradeimagen {
+  max-width: 400px;
+  min-width: 280px;
+}
+
+@media (max-width: 1200px) {
+  .hide-on-small-screen {
+    display: none;
+  }
+}
