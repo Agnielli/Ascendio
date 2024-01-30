@@ -1,11 +1,11 @@
 @use "../../../../../public/stylesheets/variables.scss" as *;
 
 .ascendio-graphic-containerPrincipal {
-  @include display-flex(column,center,center);
-  min-width: 80%;
+  @include display-flex(column, center, center);
+  min-width: 50%;
 
   .tradingview-widget-container {
-    width: 50%;
+    width: 80%;
     aspect-ratio: 2/1;
     @include display-flex(column, center, center);
     flex-wrap: wrap;
@@ -17,13 +17,15 @@ div.tradingview-widget-copyright {
   display: none;
 }
 
-//RESPONSIVE PORTATIL / PC PEQUEÑO
+//RESPONSIVE PORTATIL / PC PEQUEÑO // HECHO
 @media (min-width: 992px) And (max-width: 1200px) {
   .ascendio-graphic-containerPrincipal {
-    width: 80%;
+    @include display-flex(column, center, center);
+    min-width: 80%;
 
     .tradingview-widget-container {
-      width: 100%;
+      width: 80%;
+      aspect-ratio: 2/1;
       @include display-flex(column, center, center);
       flex-wrap: wrap;
       margin-bottom: 1rem;
@@ -31,37 +33,43 @@ div.tradingview-widget-copyright {
   }
 }
 
-//RESPONSIVE TABLET
+// PC PEQUEÑO TABLET GRANDE / breackproints MD //HECHO
 @media (min-width: 768px) And (max-width: 992px) {
   .ascendio-graphic-containerPrincipal {
-    width: 100%;
-    height: 100%;
-
     @include display-flex(column, center, center);
+    min-width: 80%;
 
     .tradingview-widget-container {
       width: 80%;
-      height: 340px;
+      aspect-ratio: 2/1;
       @include display-flex(column, center, center);
       flex-wrap: wrap;
       margin-bottom: 1rem;
     }
+  }
+
+  div.tradingview-widget-copyright {
+    display: none;
   }
 }
 
 //RESPONSIVE MOVIL
 @media (max-width: 576px) {
   .ascendio-graphic-containerPrincipal {
-    width: 100%;
-    height: 100%;
     @include display-flex(column, center, center);
+    min-width: 80%;
 
     .tradingview-widget-container {
       width: 80%;
-      height: 100%;
+      aspect-ratio: 2/1;
       @include display-flex(column, center, center);
       flex-wrap: wrap;
       margin-bottom: 1rem;
     }
   }
+
+  div.tradingview-widget-copyright {
+    display: none;
+  }
 }
+

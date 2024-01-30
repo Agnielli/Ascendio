@@ -9,6 +9,15 @@ export const VerifyPasswordDelete = ({ setShowDeleteUser, setShowConfirmDeleteUs
   const [currentPassword , setCurrentPassword] = useState('');
   const [msgError, setMsgError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [isPasswordFocused, setIsPasswordFocused] = useState(false);
+
+  const handleFocus = () => {
+    setIsPasswordFocused(true);
+  };
+  const handleBlur = () => {
+    setIsPasswordFocused(false);
+  };
+
   const verPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -34,18 +43,21 @@ export const VerifyPasswordDelete = ({ setShowDeleteUser, setShowConfirmDeleteUs
   };
   return (
     <>
-    <Form>
-    <h2>Verificar contraseña:</h2>
-        <Form.Group className="mb-3" controlId="formCurrentPassword">
-          <Form.Label>Contraseña:</Form.Label>
-          <div className="password-container">
+    <Form className="FormularioDatosUsuario FormulariosContainer">
+    <h4>VERIFICAR CONTRASEÑA:</h4>
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label></Form.Label>
+          <div className={`password-container ${isPasswordFocused ? 'eye-icon-focused' : ''}`}>
           <Form.Control
             type={showPassword ? "text" : "password"}
             name="currentPassword"
             onChange={handleChange}
             placeholder="Introduce la contraseña actual"
             autoComplete="current-password"
-            value={currentPassword}            
+            value={currentPassword}  
+            onFocus={handleFocus}
+           onBlur={handleBlur}
+                 
           />
           <span className=" eye-icon pisition-absolute pointer password-icon" onClick={verPassword}>
                 {showPassword ?<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" height={"1.5rem"}>
@@ -64,19 +76,23 @@ export const VerifyPasswordDelete = ({ setShowDeleteUser, setShowConfirmDeleteUs
               </div>
           
         </Form.Group>
-        <p>{msgError}</p>
-        <Button
-          variant="primary me-2"
-          onClick={handleSubmit}
-        >
-          Siguiente
-        </Button>
-        <Button
-          variant="primary me-2"
-          onClick={()=>setShowDeleteUser(false)}
-        >
-         cancelar
-        </Button>
+        <p style={{ marginBottom: '1rem' }}>{msgError || '\u00A0'}</p>
+        <div className="DivGrisParaBotones mt-3">
+          <Button
+          className="Button3"
+            variant="primary me-2"
+            onClick={handleSubmit}
+          >
+            SIGUIENTE
+          </Button>
+          <Button
+          className="Button1"
+            variant="primary me-2"
+            onClick={()=>setShowDeleteUser(false)}
+          >
+           CANCELAR
+          </Button>
+        </div>
 
     </Form>
      

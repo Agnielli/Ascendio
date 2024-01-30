@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
-import { Button, Card } from "react-bootstrap";
+import { Button, Card, Col } from "react-bootstrap";
+import './disabledCourse.scss';
 
 export const DisabledCourses = ({ elem, setUpdateCourses }) => {
   const enableOneCourse = (id) => {
@@ -16,18 +17,21 @@ export const DisabledCourses = ({ elem, setUpdateCourses }) => {
   };
 
   return (
-    <Card style={{ width: "18rem" }}>
-      <Card.Body>
-        <Card.Img
-          variant="top"
-          src={`http://localhost:3000/images/cursos/${elem.img}`}
-        />
-        <Card.Title>Nombre: {elem.title}</Card.Title>
-        <Card.Text>Descripción: {elem.description}</Card.Text>
-        <Button onClick={() => enableOneCourse(elem.course_id)}>
-          Activar Curso
-        </Button>
-      </Card.Body>
-    </Card>
+    <Col xs={12} md={6} lg={4} xxl={3} className="d-flex">
+      <Card style={{ width: "100%" }} className="mapeoAllCourse text-center mb-4">
+        <Card.Img variant="top" src={`http://localhost:3000/images/cursos/${elem.img}`} />
+        <Card.Body className="d-flex flex-column">
+          <div>
+            <Card.Title className="cardtitle">Nombre: {elem.title}</Card.Title>
+            <Card.Text className="descriptioncard">Descripción: {elem.description}</Card.Text>
+          </div>
+          <div className="mt-auto">
+            <Button className="Button3" onClick={() => enableOneCourse(elem.course_id)}>
+              Activar Curso
+            </Button>
+          </div>
+        </Card.Body>
+      </Card>
+    </Col>
   );
 };

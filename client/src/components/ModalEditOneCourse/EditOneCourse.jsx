@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { AscendioContext } from "../../context/AscendioContext";
 import axios from "axios";
 import "./EditOneCourse.scss";
-import "../../../public/stylesheets/FormulariosEInputs.scss"
+import "../../../public/stylesheets/FormulariosEInputs.scss";
 
 const initialValue = {
   title: "",
@@ -34,8 +34,8 @@ export const EditOneCourse = ({
   const handleChange = (e) => {
     const { name, value } = e.target;
     let newValue = value;
-    if (name === 'price') {
-      newValue = value.replace(/^(?:(\d{1,5}(?:\.\d{0,2})?)|\D+).*$/g, '$1');
+    if (name === "price") {
+      newValue = value.replace(/^(?:(\d{1,5}(?:\.\d{0,2})?)|\D+).*$/g, "$1");
     }
     setEditCourse({ ...editCourse, [name]: newValue });
   };
@@ -46,61 +46,79 @@ export const EditOneCourse = ({
 
   const handleClose = () => {
     setShowModal(false);
-    setMsgError("")
+    setMsgError("");
   };
 
   let regexPrice = /^(?:(\d{1,5}(?:\.\d{0,2})?)|\D+).*$/g;
   let regexTitle = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ.,:?¿!¡]{1,50}$/;
   let regexDescription = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ.,:?¿!¡]{1,250}$/;
   const handleSubmit = (e) => {
-      if (!regexTitle.test(editCourse.title)) {
-      setMsgError('No se permiten más de 50 caracteres');
-      }else if (!regexDescription.test(editCourse.description)) {
-        setMsgError('No se permiten más de 250 caracteres');
-      }else if (!regexPrice.test(editCourse.price)) {
-      setMsgError('No se permiten más de 99999 euros');
-      }else{
-
-    const formData = new FormData();
-    formData.append(
-      "editarCurso",
-      JSON.stringify({ ...editCourse, user_id: user.user_id })
-    );
-    formData.append("file", file);
-    axios
-      .put(`http://localhost:3000/courses/editcourse/${course_id}`, formData)
-      .then((res) => {
-        console.log(res);
-        setShowModal(false);
-        setOneCoursePpal(editCourse);
-        setMsgError("")
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (!regexTitle.test(editCourse.title)) {
+      setMsgError("No se permiten más de 50 caracteres");
+    } else if (!regexDescription.test(editCourse.description)) {
+      setMsgError("No se permiten más de 250 caracteres");
+    } else if (!regexPrice.test(editCourse.price)) {
+      setMsgError("No se permiten más de 99999 euros");
+    } else {
+      const formData = new FormData();
+      formData.append(
+        "editarCurso",
+        JSON.stringify({ ...editCourse, user_id: user.user_id })
+      );
+      formData.append("file", file);
+      axios
+        .put(`http://localhost:3000/courses/editcourse/${course_id}`, formData)
+        .then((res) => {
+          console.log(res);
+          setShowModal(false);
+          setOneCoursePpal(editCourse);
+          setMsgError("");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   };
 
   return (
     <Row className="d-flex justify-content-center p-5  ">
       <Col md={4}>
-        <Modal show={showModal} onHide={handleClose} className="FormulariosContainer" >
-          <Modal.Header closeButton className="modalDel  ">
+
+        <Modal
+          show={showModal}
+          onHide={handleClose}
+          className="FormulariosContainer text-center"
+        >
+          <Modal.Header closeButton className="modalDel modaleditarusuario ">
+
             <Modal.Title className="edittitle">Editar curso</Modal.Title>
           </Modal.Header>
           <Modal.Body className="modalDel">
             <Form>
-              <Form.Group controlId="formFile"  className=" d-flex justify-content-center mb-3">
-                <div className="d-flex flex-column" > 
-                <Form.Label>Cambiar</Form.Label>
-                <Form.Label> {editCourse?.img && editCourse?.img !== "default.jpg"  ? <img className="imgcourse" src={`http://localhost:3000/images/cursos/${editCourse.img}`} alt="" /> : <span className="imagencurso material-symbols-outlined addIcon">
-                  photo_camera
-                </span>}</Form.Label>
-                
+              <Form.Group
+                controlId="formFile"
+                className=" d-flex justify-content-center mb-3"
+              >
+                <div className="d-flex flex-column">
+                  <Form.Label>Cambiar</Form.Label>
+                  <Form.Label>
+                    {" "}
+                    {editCourse?.img && editCourse?.img !== "default.jpg" ? (
+                      <img
+                        className="imgcourseedicion"
+                        src={`http://localhost:3000/images/cursos/${editCourse.img}`}
+                        alt=""
+                      />
+                    ) : (
+                      <span className="imagencursodefecto material-symbols-outlined addIcon">
+                        photo_camera
+                      </span>
+                    )}
+                  </Form.Label>
                 </div>
                 <Form.Control type="file" onChange={handleFile} hidden />
               </Form.Group>
-              <Form.Group  className="mb-3">
+              <Form.Group className="mb-3">
                 <Form.Label>Título </Form.Label>
                 <Form.Control
                   autoFocus
@@ -111,7 +129,7 @@ export const EditOneCourse = ({
                   onChange={handleChange}
                 />
               </Form.Group>
-              <Form.Group  className="mb-3">
+              <Form.Group className="mb-3">
                 <Form.Label>Descripción </Form.Label>
                 <Form.Control
                   type="text"
@@ -121,7 +139,7 @@ export const EditOneCourse = ({
                   onChange={handleChange}
                 />
               </Form.Group>
-              <Form.Group  className="mb-3">
+              <Form.Group className="mb-3">
                 <Form.Label>Precio </Form.Label>
                 <Form.Control
                   type="text"
@@ -133,9 +151,9 @@ export const EditOneCourse = ({
               </Form.Group>
             </Form>
           </Modal.Body>
-          
-          {msgError &&<h5 className="msgerror">{msgError}</h5>}
- 
+
+          {msgError && <h5 className="msgerror">{msgError}</h5>}
+
           <Modal.Footer className="modalDel">
             <Button
               variant="outline-success"

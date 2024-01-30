@@ -3,7 +3,7 @@ import axios from "axios";
 import { Button, Card, Col, ListGroup, Row } from "react-bootstrap";
 import { AscendioContext } from "../../../../context/AscendioContext";
 import { Link, useNavigate } from "react-router-dom";
-import './allTrades.scss';
+import "./allTrades.scss";
 // import '../../../../../public/stylesheets/FormulariosEInputs.scss';
 
 export const AllTrades = () => {
@@ -29,7 +29,6 @@ export const AllTrades = () => {
       });
   }, []);
 
- 
   // para poner los botones en seguir o siguiendo si user existe
   user &&
     useEffect(() => {
@@ -97,14 +96,24 @@ export const AllTrades = () => {
   };
 
   return (
-    <div>
+    <div className="alltrades">
       <>
         <Row className="general title-input">
-          <Col lg={3} className="d-flex justify-content-center align-items-center">
+          <Col
+            lg={3}
+            className="d-flex justify-content-center align-items-center"
+          >
             <h2>Trade Posts</h2>
           </Col>
-          <Col lg={9} className="d-flex justify-content-center align-items-center">
-            <input onChange={handleChange} placeholder="🔍 Buscar Trades" value={search} />
+          <Col
+            lg={9}
+            className="d-flex justify-content-center align-items-center"
+          >
+            <input
+              onChange={handleChange}
+              placeholder="🔍 Buscar Trades"
+              value={search}
+            />
           </Col>
         </Row>
         <div className="d-flex flex-wrap justify-content-center gap-4">
@@ -116,69 +125,103 @@ export const AllTrades = () => {
                 key={elem.post_id}
               >
                 <Row>
-                  <Col lg={3} md={12} className="col1 d-flex flex-column align-items-center justify-content-center gap-2 mb-1">
-                      <div className="avatar">
-                        {elem?.img_name ? ( // modificar el elem.im_name
-                          <img
-                            src={`http://localhost:3000/images/users/${user.img}`}
+                  <Col
+                    lg={3}
+                    md={12}
+                    className="col1 d-flex flex-column align-items-center justify-content-center gap-2 mb-1"
+                  >
+                    <div className="avatar">
+                      {elem?.img_name ? ( // modificar el elem.im_name
+                        <img
+                          src={`http://localhost:3000/images/users/${user.img}`}
+                        />
+                      ) : (
+                        <p>{elem?.nickname.charAt(0).toUpperCase()}</p>
+                      )}
+                    </div>
+                    <Card.Title>
+                      <h3>{elem.nickname}</h3>
+                    </Card.Title>
+                    <p>{elem.num_followers} seguidores</p>
+                    <div className="d-flex gap-2">
+                      {user.user_id !== elem.user_id ? (
+                        <Button
+                          variant="primary"
+                          onClick={() => pulsarSeguirONo(elem.user_id)}
+                        >
+                          {followingUsers.includes(elem.user_id)
+                            ? "Siguiendo"
+                            : "Seguir"}
+                        </Button>
+                      ) : (
+                        <Button
+                          onClick={() => navigate(`/userposts/${user.user_id}`)}
+                        >
+                          Ir a posts
+                        </Button>
+                      )}
+                      <Button
+                        onClick={() => {
+                          navigate(`/OneTradePost/${elem.post_id}`);
+                        }}
+                      >
+                        Ver más
+                      </Button>
+                    </div>
+                  </Col>
+
+                  {elem.image_name && (
+                    <>
+                      <Col
+                        lg={5}
+                        md={12}
+                        className="col2 d-flex flex-column align-items-center justify-content-center gap-2 mb-1"
+                      >
+                        <ListGroup.Item>{elem.currency}</ListGroup.Item>
+                        {elem.image_name !== null && (
+                          <Card.Img
+                            className="tradeimagen"
+                            variant="top"
+                            src={`http://localhost:3000/images/trades/${elem.image_name}`}
                           />
-                          ) : (
-                            <p>{elem?.nickname.charAt(0).toUpperCase()}</p>
                         )}
-                      </div>
-                      <Card.Title>
-                        <h3>{elem.nickname}</h3>
-                      </Card.Title>
-                      <p>{elem.num_followers} seguidores</p>
-                      <div className="d-flex gap-2">
-                          {user.user_id !== elem.user_id ? (
-                            <Button
-                              variant="primary"
-                              onClick={() => pulsarSeguirONo(elem.user_id)}
-                            >
-                              {followingUsers.includes(elem.user_id)
-                                ? "Siguiendo"
-                                : "Seguir"}
-                            </Button>
-                            ) : (
-                            <Button
-                              onClick={() => navigate(`/userposts/${user.user_id}`)}
-                            >
-                              Ir a posts
-                            </Button>
-                            )}
-                            <Button
-                              onClick={() => {
-                                navigate(`/OneTradePost/${elem.post_id}`);
-                              }}
-                            >
-                              Ver más
-                            </Button>
-                      </div>
-                  </Col>
-                  <Col lg={5} md={12} className="col2 d-flex flex-column align-items-center justify-content-center gap-2 mb-1">
-                      <ListGroup.Item>{elem.currency}</ListGroup.Item>
-                      {elem.image_name !== null && (
-                        <Card.Img
-                          className="tradeimagen"
-                          variant="top"
-                          src={`http://localhost:3000/images/trades/${elem.image_name}`}
-                        />
-                      )}
-                      {elem.image_name == null && (
-                        <Card.Img
-                          className="tradeimagen"
-                          variant="top"
-                          src="/images/trade/trades.png"
-                        />
-                      )}
-                  </Col>
-                  <Col lg={4} md={12} className="col3 d-flex flex-column align-items-center justify-content-center gap-2 mb-1">
+                        {elem.image_name == null && (
+                          <Card.Img
+                            className="tradeimagen"
+                            variant="top"
+                            src="/images/trade/trades.png"
+                          />
+                        )}
+                      </Col>
+                      <Col
+                        lg={4}
+                        md={12}
+                        className="col3 d-flex flex-column align-items-center justify-content-center gap-2 mb-1"
+                      >
+                        <p>{elem.description}</p>
+                        <p>
+                          Estado:{" "}
+                          {elem.correct === null && "Trade Pendiente ❓"}
+                          {elem.correct === 0 && "Trade Errado ❌"}
+                          {elem.correct === 1 && "Trade Acertado ✅"}
+                        </p>
+                      </Col>
+                    </>
+                  )}
+                  {elem.image_name == null && (
+                    <Col
+                      lg={9}
+                      md={12}
+                      className="col3 d-flex flex-column align-items-center justify-content-center gap-2 mb-1"
+                    >
                       <p>{elem.description}</p>
-                      <p>Estado: {elem.correct === null && "Trade Pendiente ❓"}
-                      {elem.correct === 0 && "Trade Errado ❌"}
-                      {elem.correct === 1 && "Trade Acertado ✅"}</p>
-                  </Col>
+                      <p>
+                        Estado: {elem.correct === null && "Trade Pendiente ❓"}
+                        {elem.correct === 0 && "Trade Errado ❌"}
+                        {elem.correct === 1 && "Trade Acertado ✅"}
+                      </p>
+                    </Col>
+                  )}
                 </Row>
               </Card>
             );

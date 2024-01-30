@@ -6,12 +6,10 @@ import { AscendioProvider } from './context/AscendioContext';
 function App() {
 
   return (
-    <>
-      <Container fluid>
+    <>    
         <AscendioProvider>
           <RoutesApp /> {/* children */}
-        </AscendioProvider>
-      </Container>
+        </AscendioProvider>      
     </>
   )
 }

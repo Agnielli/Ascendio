@@ -87,6 +87,7 @@
 
 //*** HAY QUE CAMBIARLE EL PADDING SEGUN CONVENGA  A CADA VISTA. si vas a usar este boton, copialo en el scss donde estes trabajando, cambiale el nombre y usalo.
 .Button5 {
+  display: flex;
   padding: 6px 200px 6px 20px !important;
   background-color: $accent2-color;
   color: $accent-color;
@@ -94,11 +95,19 @@
   border-radius: 25px;
   font-weight: 500;
   transition: 0.3s;
-  &:active,
+
   &:hover{
     background-color: $accent-color ;
     color:$accent2-color;
   }
+  
+  &.active{
+    background-color: $accent-color !important ;
+    color:$accent2-color !important;
+
+  }
+
+
 }
 
 .buscador {

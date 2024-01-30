@@ -35,10 +35,10 @@ export const FormAddSection = ({setAddSection,course_id, resetCourse, setResetCo
   }
 
   return (
-    <Row>
+    <Row className="formSection">
       <Col>
-        <Form>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form className="">
+          <Form.Group controlId="formBasicEmail">
             <Form.Label>Título de la sección </Form.Label>
             <Form.Control
               type="text"
@@ -47,10 +47,12 @@ export const FormAddSection = ({setAddSection,course_id, resetCourse, setResetCo
               onChange={handleChange}
             />
             <p>{msgError}</p>
-            <Button variant="outline-success"
-              className="me-3"  onClick={handleSubmit} >Aceptar</Button>
-            <Button variant="outline-success"
-              className="me-3" onClick={()=>setAddSection(false)}>Cancelar</Button>
+            <div className="botonFormSection d-flex justify-content-center mt-3">
+              <Button 
+                className="me-3 botonesSection"  onClick={handleSubmit} >Aceptar</Button>
+              <Button 
+                className="me-3 botonesSection" onClick={()=>setAddSection(false)}>Cancelar</Button>
+            </div>
           </Form.Group>
         </Form>
       </Col>
