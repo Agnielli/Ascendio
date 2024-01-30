@@ -26,24 +26,26 @@ nav {
       height: 100%;
       border-radius: 50%;
     }
-  }
 
-  .user {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    align-items: center;
-
-    p {
-      margin: 0 !important;
-      height: 40px;
-      color: #e15252;
+    .user {
       display: flex;
+      align-items: center;
       justify-content: center;
       align-items: center;
-      font-size: 30px;
+  
+      p {
+        margin: 0 !important;
+        height: 40px;
+        color: #e15252;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px;
+      }
     }
   }
+
+  
 
   p {
     font-size: 30px;

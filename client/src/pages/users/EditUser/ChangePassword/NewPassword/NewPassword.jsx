@@ -118,7 +118,7 @@ export const NewPassword = ({user, setUser, setShowChangePassword}) => {
   return (
     <div className="FormularioDatosUsuario FormulariosContainer FormularioNewPAssword">
     <Form >    
-        <h2>EDITAR EMAIL:</h2>        
+        <h4>EDITAR EMAIL:</h4>        
         <Form.Group  controlId="formBasicEmail">
           <Form.Label></Form.Label>
           <Form.Control
@@ -140,7 +140,7 @@ export const NewPassword = ({user, setUser, setShowChangePassword}) => {
   </Form>
    
         <Form>
-          <h2 >EDITAR CONTRASEÑA:</h2>          
+          <h4>EDITAR CONTRASEÑA:</h4>          
           <Form.Group controlId="formBasicPassword">
             <Form.Label></Form.Label>
             <div className={`password-container ${isPasswordFocused ? 'eye-icon-focused' : ''}`}>
