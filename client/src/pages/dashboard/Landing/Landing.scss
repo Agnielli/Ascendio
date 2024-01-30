@@ -3,6 +3,7 @@
 // PC MUY GRANDE / breakpoints XXL / MI PANTALLA GRNADE
 .ascendio-landing-main-padre {
   height: calc(200vh - 62px);
+
   .ascendio-landing-main-hijo-1 {
     height: calc(100vh - 48px);
     @include display-flex(column, center, center);
@@ -14,6 +15,8 @@
       .ascendio-landing-fondo-principal1 {
         object-fit: contain;
         padding: 0 !important;
+        overflow: hidden;
+        max-width: 100%;
       }
 
       .ascendio-landing-fondo-principal2 {
@@ -206,10 +209,10 @@
   }
 }
 
-// PC MEDIANO / breakpoints LG
+// PC MEDIANO / breakpoints LG // HECHO
 @media (min-width: 992px) And (max-width: 1200px) {
   .ascendio-landing-main-padre {
-    height: calc(100vh - 62px);
+    height: calc(200vh - 62px);
     .ascendio-landing-main-hijo-1 {
       height: 50%;
       @include display-flex(column, center, center);
@@ -242,7 +245,7 @@
         .ascendio-landing-main-hijo2-nieto-bisnieto {
           @include display-flex(row, center, flex-start);
           flex-wrap: wrap;
-          padding: 0;
+          padding: 0 2rem 0 2rem;
           margin: 0 !important;
 
           .ascendio-landing-main-hijo2-nieto-bisnieto-tataranieto {
@@ -251,23 +254,24 @@
             margin-bottom: 2rem;
 
             img {
-              width: 25px;
-              height: 25px;
+              width: 50px;
+              height: 50px;
               background-color: transparent;
               border-radius: 50%;
             }
 
             h6 {
-              font-size: 0.5rem;
+              font-size: 1rem;
               padding: 0 !important;
               margin: 0 !important;
             }
 
             p {
-              font-size: 0.4rem;
+              font-size: 0.7rem;
               color: $accent3-color;
               padding: 0 !important;
               margin: 0 !important;
+              text-align: center;
             }
           }
         }
@@ -311,10 +315,10 @@
   }
 }
 
-// PC PEQUEÑO TABLET GRANDE / breackproints MD
+// PC PEQUEÑO TABLET GRANDE / breackproints MD // HECHO
 @media (min-width: 768px) and (max-width: 992px) {
   .ascendio-landing-main-padre {
-    height: calc(100vh - 62px);
+    height: calc(200vh - 62px);
     .ascendio-landing-main-hijo-1 {
       height: 50%;
       @include display-flex(column, center, center);
@@ -347,7 +351,7 @@
         .ascendio-landing-main-hijo2-nieto-bisnieto {
           @include display-flex(row, center, flex-start);
           flex-wrap: wrap;
-          padding: 0;
+          padding: 0 2rem 0 2rem;
           margin: 0 !important;
 
           .ascendio-landing-main-hijo2-nieto-bisnieto-tataranieto {
@@ -356,23 +360,24 @@
             margin-bottom: 2rem;
 
             img {
-              width: 25px;
-              height: 25px;
+              width: 50px;
+              height: 50px;
               background-color: transparent;
               border-radius: 50%;
             }
 
             h6 {
-              font-size: 0.5rem;
+              font-size: 0.8rem;
               padding: 0 !important;
               margin: 0 !important;
             }
 
             p {
-              font-size: 0.4rem;
+              font-size: 0.5rem;
               color: $accent3-color;
               padding: 0 !important;
               margin: 0 !important;
+              text-align: center;
             }
           }
         }
@@ -478,6 +483,7 @@
               color: $accent3-color;
               padding: 0 !important;
               margin: 0 !important;
+              text-align: center;
             }
           }
         }
@@ -583,6 +589,7 @@
               color: $accent3-color;
               padding: 0 !important;
               margin: 0 !important;
+              text-align: center;
             }
           }
         }
