@@ -146,23 +146,24 @@ export const AllTrades = () => {
                       </Card.Title>
                       <p>{elem.num_followers} seguidores</p>
                       <div className="d-flex gap-2">
-                        {user.user_id !== elem.user_id ? (
-                          <Button
-                            variant="primary"
-                            onClick={() => pulsarSeguirONo(elem.user_id)}
-                          >
-                            {followingUsers.includes(elem.user_id)
-                              ? "Siguiendo"
-                              : "Seguir"}
-                          </Button>
-                        ) : null
-                        // <Button
-                        //   onClick={() =>
-                        //     navigate(`/userposts/${user.user_id}`)
-                        //   }
-                        // >
-                        //   Ir a posts
-                        // </Button>
+                        {
+                          user.user_id !== elem.user_id ? (
+                            <Button
+                              variant="primary"
+                              onClick={() => pulsarSeguirONo(elem.user_id)}
+                            >
+                              {followingUsers.includes(elem.user_id)
+                                ? "Siguiendo"
+                                : "Seguir"}
+                            </Button>
+                          ) : null
+                          // <Button
+                          //   onClick={() =>
+                          //     navigate(`/userposts/${user.user_id}`)
+                          //   }
+                          // >
+                          //   Ir a posts
+                          // </Button>
                         }
                         <Button
                           onClick={() => {
@@ -177,11 +178,24 @@ export const AllTrades = () => {
                     {elem.image_name && (
                       <>
                         <Col
+                          lg={4}
+                          md={12}
+                          className="col3 d-flex flex-column align-items-center justify-content-center gap-2 mb-1"
+                        >
+                          <p>{elem.currency}</p>
+                          <p>{elem.description}</p>
+                          <p>
+                            Estado:{" "}
+                            {elem.correct === null && "Trade Pendiente ❓"}
+                            {elem.correct === 0 && "Trade Errado ❌"}
+                            {elem.correct === 1 && "Trade Acertado ✅"}
+                          </p>
+                        </Col>
+                        <Col
                           lg={5}
                           md={12}
                           className="col2 d-flex flex-column align-items-center justify-content-center gap-2 mb-1"
                         >
-                          <ListGroup.Item>{elem.currency}</ListGroup.Item>
                           {elem.image_name !== null && (
                             <Card.Img
                               className="tradeimagen"
@@ -197,19 +211,6 @@ export const AllTrades = () => {
                             />
                           )}
                         </Col>
-                        <Col
-                          lg={4}
-                          md={12}
-                          className="col3 d-flex flex-column align-items-center justify-content-center gap-2 mb-1"
-                        >
-                          <p>{elem.description}</p>
-                          <p>
-                            Estado:{" "}
-                            {elem.correct === null && "Trade Pendiente ❓"}
-                            {elem.correct === 0 && "Trade Errado ❌"}
-                            {elem.correct === 1 && "Trade Acertado ✅"}
-                          </p>
-                        </Col>
                       </>
                     )}
                     {elem.image_name == null && (
@@ -218,6 +219,7 @@ export const AllTrades = () => {
                         md={12}
                         className="col3 d-flex flex-column align-items-center justify-content-center gap-2 mb-1"
                       >
+                        <p>{elem.currency}</p>
                         <p>{elem.description}</p>
                         <p>
                           Estado:{" "}

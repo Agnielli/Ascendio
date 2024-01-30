@@ -4,7 +4,7 @@ import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { ModalCreateComment } from "../../trades/OneTradePost/ModalCreateComment/ModalCreateComment";
 import { ShowAllCommentsPost } from "../../trades/OneTradePost/ShowAllCommentsPost/ShowAllCommentsPost";
-import './OneGeneralPost.scss';
+import "./OneGeneralPost.scss";
 
 export const OneGeneralPost = () => {
   const [oneTrade, setOneTrade] = useState();
@@ -43,20 +43,48 @@ export const OneGeneralPost = () => {
                 <h2>Trader: {oneTrade.post_user_nickname}</h2>
               </Card.Header>
               <Card.Header className="row titles">
-                <h3 className="col-6">Imagen</h3>
-                <h3 className="col-6">Descripción</h3>
+                {oneTrade.resource_text && (
+                  <>
+                    <h3 className="col-6">Imagen</h3>
+                    <h3 className="col-6">Descripción</h3>
+                  </>
+                )}
+                {oneTrade.resource_text === null && (
+                  <>
+                    <h3 className="col-12">Descripción</h3>
+                  </>
+                )}
               </Card.Header>
               <Card.Body>
                 <Row>
-                  <Col lg={6} md={12} className="mb-2">
-                    <Card.Img
-                        className="generalpostimagen"
-                        src={`http://localhost:3000/images/generalPost/${oneTrade.resource_text}`}
-                      />
-                  </Col>
-                  <Col lg={6} md={12} className="col d-flex align-items-center mb-2">
-                    <h4>{oneTrade.description}</h4>
-                  </Col>
+                  {oneTrade.resource_text && (
+                    <>
+                      <Col lg={6} md={12} className="mb-2">
+                        <Card.Img
+                          className="generalpostimagen"
+                          src={`http://localhost:3000/images/generalPost/${oneTrade.resource_text}`}
+                        />
+                      </Col>
+                      <Col
+                        lg={6}
+                        md={12}
+                        className="col d-flex align-items-center mb-2"
+                      >
+                        <h4>{oneTrade.description}</h4>
+                      </Col>
+                    </>
+                  )}
+                  {oneTrade.resource_text === null && (
+                    <>
+                      <Col
+                        lg={12}
+                        md={12}
+                        className="col d-flex align-items-center mb-2"
+                      >
+                        <h4>{oneTrade.description}</h4>
+                      </Col>
+                    </>
+                  )}
                 </Row>
 
                 <Card.Title className="row">

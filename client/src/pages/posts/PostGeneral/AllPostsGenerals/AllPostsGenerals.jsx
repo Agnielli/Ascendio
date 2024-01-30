@@ -130,7 +130,7 @@ export const AllPostsGenerals = () => {
                       className="col1 d-flex flex-column align-items-center justify-content-center gap-2 mb-1"
                     >
                       <div className="avatar">
-                        {elem?.img_name ? ( // modificar el elem.im_name
+                        {elem?.img_name ? (
                           <img
                             src={`http://localhost:3000/images/users/${user.img}`}
                           />
@@ -173,6 +173,13 @@ export const AllPostsGenerals = () => {
                     {elem.image_name && (
                       <>
                         <Col
+                          lg={4}
+                          md={12}
+                          className="col3 d-flex flex-column align-items-center justify-content-center gap-2 mb-1"
+                        >
+                          <p>{elem.description}</p>
+                        </Col>
+                        <Col
                           lg={5}
                           md={12}
                           className="col2 d-flex flex-column align-items-center justify-content-center gap-2 mb-1"
@@ -183,13 +190,6 @@ export const AllPostsGenerals = () => {
                               src={`http://localhost:3000/images/generalPost/${elem.image_name}`}
                             />
                           )}
-                        </Col>
-                        <Col
-                          lg={4}
-                          md={12}
-                          className="col3 d-flex flex-column align-items-center justify-content-center gap-2 mb-1"
-                        >
-                          <p>{elem.description}</p>
                         </Col>
                       </>
                     )}
