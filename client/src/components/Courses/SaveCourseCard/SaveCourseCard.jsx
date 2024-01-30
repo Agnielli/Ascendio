@@ -66,11 +66,6 @@ export const SaveCourseCard = () => {
               />
               <Card.Body className="d-flex flex-column gap-1 flex-fill">
                 <Card.Text className="cardtitle"> {elem.title} </Card.Text>
-                <Card.Subtitle className="followerscard">
-                  {elem?.followers !== 0
-                  ? `${elem?.followers} Seguidores`
-                  : "Sin seguidores"}
-                </Card.Subtitle>
 
                 {elem.average_rating && (
                   <RatingStars numberstars={elem.average_rating} />

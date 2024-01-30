@@ -94,11 +94,6 @@ export const OneUserCourses = () => {
                   />
                   <Card.Body className="d-flex flex-column gap-1">
                     <Card.Text className="cardtitle">{elem.title}</Card.Text>
-                    <Card.Subtitle className="followerscard">
-                      {elem.followers !== undefined && elem.followers !== 0
-                        ? `${elem.followers} Seguidores`
-                        : "Sin seguidores"}
-                    </Card.Subtitle>
                     <Card.Subtitle className="tagsCourse">
                       {elem.tags}
                     </Card.Subtitle>

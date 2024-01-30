@@ -78,11 +78,7 @@ export const AllCourses = () => {
               />
               <Card.Body className="d-flex flex-column gap-1">
                 <Card.Text className="cardtitle"> {elem.title} </Card.Text>
-                <Card.Subtitle className="followerscard">
-                  {elem.followers !== undefined && elem.followers !== 0
-                    ? `${elem.followers} Seguidores`
-                    : "Sin seguidores"}
-                </Card.Subtitle>
+                
                 {elem.average_rating && (
                   <RatingStars numberstars={elem.average_rating} />
                 )}

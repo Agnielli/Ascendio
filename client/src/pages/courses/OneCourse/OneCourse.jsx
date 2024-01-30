@@ -373,11 +373,11 @@ export const OneCourse = () => {
               {userId !== userCourse && (
                 <button className="likeBoton" onClick={handleWishes}>
                   {isIntoWishes ? (
-                    <span class="material-symbols-outlined deleteLike">
-                      heart_minus
+                    <span class="material-symbols-outlined 1 deleteLike">
+                    favorite
                     </span>
                   ) : (
-                    <span class="material-symbols-outlined addLike">
+                    <span class="material-symbols-outlined 0 addLike">
                       heart_plus
                     </span>
                   )}
