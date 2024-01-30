@@ -78,14 +78,14 @@ export const OneUserCourses = () => {
         </div>
       </header>
       <main className="mainAllCoursesOneUser d-flex flex-wrap justify-content-center gap-3 pb-5">
-        <Row>
+        <Row className="d-flex align-items-stretch"> 
           {findCourse?.map((elem) => {
             return (
-              <Col xs={12} md={6} lg={4} xxl={3}>
+              <Col xs={12} md={6} lg={4} xxl={3}className="d-flex">
                 <Card
                   // style={{ width: "22rem" }}
                   key={elem.course_id}
-                  className="mb-4 mapeoAllCourseOneUser text-center"
+                  className="mb-4 mapeoAllCourseOneUser text-center" style={{ width: "100%" }}
                 >
                   <Card.Img
                     style={{ height: "16rem", objectFit: "cover" }}
