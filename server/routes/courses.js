@@ -32,7 +32,7 @@ router.get('/getallratesonecourse/:course_id', coursesControllers.getAllRatesOne
 router.get('/getoneresource/:course_id/:section_id/:topic_id', coursesControllers.getOneResource)
 router.get('/gettyperesource', coursesControllers.getTypeResource)
 router.get('/getOneBread/:course_id/:section_id', coursesControllers.getOneBread)
-router.put('/updatefollowers/:course_id', coursesControllers.updateFollowers);
+router.put('/getpeoplevotescourses/:course_id', coursesControllers.getPeopleVotesCourses);
 router.post('/userrateonecourse/:course_id', coursesControllers.userRateOneCourse)
 router.get('/getonerateonecourseoneuser/:course_id/:user_id', coursesControllers.getOneRateOneCourseOneUser)
 router.get('/getonewishedcourse/:user_id', coursesControllers.getOneWishedCourse)
