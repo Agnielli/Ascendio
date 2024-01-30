@@ -2,43 +2,6 @@
 body {
   background-color: $tertiary-color;
 }
-.avatar {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: #1D1D1B;
-    color: #E15252;
-    border: 2px solid $accent-color;
-
-  
-    img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-}
-
-.user {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  align-items: center;
-  
-  p {
-    margin: 0;
-    height: 40px;
-    color:#E15252;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px;
-  }
-}
-
 
 @media (min-width: 992px) {
   .BG-navbar {
@@ -47,14 +10,49 @@ body {
 }
 
 nav {
+  .avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #1d1d1b;
+    color: #e15252;
+    border: 2px solid $accent-color;
+
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+  }
+
+  .user {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+
+    p {
+      margin: 0 !important;
+      height: 40px;
+      color: #e15252;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;
+    }
+  }
+
   p {
     font-size: 30px;
   }
-  
+
   .user {
     cursor: pointer;
   }
-  
+
   .logoNav {
     color: white;
     font-size: 2rem;
@@ -137,7 +135,6 @@ nav {
     }
   }
 }
-
 
 @media (max-width: 991px) {
   .BG-navbar {

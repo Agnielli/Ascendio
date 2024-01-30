@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Button, Card, Col } from "react-bootstrap";
+import { Button, Card, Col, Row } from "react-bootstrap";
 import './adminOneCourse.scss'
 
 export const AdminOneCourse = ({ elem, updateCourses, setUpdateCourses }) => {
@@ -21,9 +21,9 @@ export const AdminOneCourse = ({ elem, updateCourses, setUpdateCourses }) => {
   };
 
   return (
-    <Col xs={12} md={6} lg={4} xxl={3}>
+    <Col xs={12} md={6} lg={4} xxl={3} className="d-flex">
     <Card
-      style={{ width: "18rem" }}
+     style={{ width: "100%" }}
       className="mapeoAllCourse text-center mb-4"
     >
       <Card.Img

@@ -239,20 +239,26 @@ export const AdminHome = () => {
 
       <div>{showStats === true && <Estadisticas />}</div>
 
+
       <div className="">
         {showCourseButtons && (
           <>
             <Row className="ButtonsRow2 d-flex justify-content-center align-items-center text-center m-5">
+
               <Col lg={2} md={3} xs={12}>
                 <Button className="ButtonNoBG" onClick={() => showAllCourses()}>
                   Todos los cursos
                 </Button>
+
+
                 <Button
                   className="ButtonNoBG"
                   onClick={() => showAllEnabledCourses()}
                 >
                   Cursos Activos
                 </Button>
+
+
                 <Button
                   className="ButtonNoBG"
                   onClick={() => showAllDisabledCourses()}
@@ -260,6 +266,7 @@ export const AdminHome = () => {
                   Cursos Bloqueados
                 </Button>
               </Col>
+
             </Row>
 
             <Row>
@@ -271,5 +278,6 @@ export const AdminHome = () => {
         )}
       </div> 
     </main>
+
   );
 };

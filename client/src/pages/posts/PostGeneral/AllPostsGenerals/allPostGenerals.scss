@@ -2,83 +2,87 @@
 
 // Generales 
 
-h2 {
-  min-width: 170px !important;
-  display: flex;
-  justify-content: center;
-}
+.allpostgenerals {
 
-h3, p {
-  color: black;
-}
-
-.general {
-  padding: 3rem 10rem;
-}
-
-
-.generalpost {
-  background-color: #2E2D2D;
-  max-width: 1002px !important;
-  width: 80% !important;
-  min-width: 300px;
-  border-radius: 20px;
-  padding: 1rem !important;
-  margin: 0 !important;
+  h2 {
+    min-width: 170px !important;
+    display: flex;
+    justify-content: center;
+  }
   
-  p {
-    margin: 0;
+  h3, p {
+    color: black;
   }
-
-  p, h3 {
-    color: white;
+  
+  .general {
+    padding: 3rem 10rem;
   }
-
-  .tradeimagen {
-    max-width: 400px;
-    min-width: 280px;
+  
+  
+  .generalpost {
+    background-color: #2E2D2D;
+    max-width: 1002px !important;
+    width: 80% !important;
+    min-width: 300px;
+    border-radius: 20px;
+    padding: 1rem !important;
+    margin: 0 !important;
+    
+    p {
+      margin: 0;
+    }
+  
+    p, h3 {
+      color: white;
+    }
+  
+    .tradeimagen {
+      max-width: 400px;
+      min-width: 280px;
+    }
   }
-}
-
-.avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: #1D1D1B;
-  color: #E15252; 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  img {
+  
+  .avatar {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    object-fit: cover;
+    background-color: #1D1D1B;
+    color: #E15252; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
+  
+  
+  .title-input {
+  
+    input {
+      border: none;
+      border-radius: 25px;
+      background-color: #9C9999;
+      width: 100%;
+      min-width: 300px;
+      height: 50px;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--bs-body-color);
+      background-clip: padding-box;
+      padding-left: 30px !important;
+    }
+  }
+  
+  @media (width < 1100px) {
+    .col1, .col2, .col3 {
+      width: 100%;
+    }
   }
 }
 
-
-.title-input {
-
-  input {
-    border: none;
-    border-radius: 25px;
-    background-color: #9C9999;
-    width: 100%;
-    min-width: 300px;
-    height: 50px;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: var(--bs-body-color);
-    background-clip: padding-box;
-    padding-left: 30px !important;
-  }
-}
-
-@media (width < 1100px) {
-  .col1, .col2, .col3 {
-    width: 100%;
-  }
-}

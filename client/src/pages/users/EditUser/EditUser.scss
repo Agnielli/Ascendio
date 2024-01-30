@@ -1,12 +1,28 @@
 @use "../../../../public/stylesheets/variables.scss" as *;
 
 .EditUserApp{
+  padding:0 10vw;
+  h3{
+    color: $accent-color;
+    font-size: 2rem;
+    margin: 0 !important;
+  }
+  p{
+    color: rgb(255, 255, 255);
+    margin: 0 !important;
+   }
+
   .avatar {
     cursor: pointer;
     display: flex;
       justify-content: center;
       align-items: center;
       background-color: $accent2-color;
+      border: 2px solid $accent-color;
+
+      p{
+        color: $accent-color;
+      }
 
   }
   .UserNameApp {
@@ -16,7 +32,6 @@
     }    
   }
   
-  padding:0 10vw;
 
   .ButtonEditUser1{
     display: flex;
@@ -29,6 +44,22 @@
     padding: 12px;
     border-radius: 25px;
     
+  }
+  .DivGrisParaBotones{
+    width: 100%;
+    justify-content: end;    
+    .Button3 {
+      margin-right: 12px !important;
+    }
+  }
+
+  .botonCancelarEditarLogin{
+    width: 100%;
+    display: flex;
+    justify-content: end ;
+    button{
+      margin: 0 !important;
+    }
   }
 
 }

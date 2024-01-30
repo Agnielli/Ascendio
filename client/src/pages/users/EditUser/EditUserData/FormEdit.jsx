@@ -131,7 +131,7 @@ export const FormEdit = ({ user, setUser, setShowForm }) => {
 
         <p style={{ marginBottom: '1rem' }}>{msgError || '\u00A0'}</p>
 
-        <div className="DivGrisParaBotones d-flex justify-content-between mt-3 mb-1">
+        <div className="DivGrisParaBotones mt-3">
           <Button className="Button3" variant="primary me-2" onClick={handleSubmit}>
             ACEPTAR
           </Button>

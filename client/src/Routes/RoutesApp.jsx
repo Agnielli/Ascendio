@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Container, Row } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import NavBarApp from "../components/NavBarApp/NavBarApp";
 import { Home } from "../pages/dashboard/Home/Home";
 import { Register } from "../pages/auth/Register/Register";
@@ -15,7 +15,7 @@ import { OneCourse } from "../pages/courses/OneCourse/OneCourse";
 import { Landing } from "../pages/dashboard/Landing/Landing";
 import { Contact } from "../pages/dashboard/Contact/Contact";
 import { RecoverPassword } from "../pages/auth/RecoverPassword/RecoverPassword";
-import { Usuarios } from "../pages/admin/AdminUsuarios/Usuarios";
+//import { Usuarios } from "../pages/admin/AdminUsuarios/Usuarios";
 import { Estadisticas } from "../pages/admin/AdminEstadisticas/Estadisticas";
 import { useContext } from "react";
 import { AscendioContext } from "../context/AscendioContext";
@@ -33,7 +33,6 @@ import { OneUserCourses } from "../pages/courses/OneUserCourses/OneUserCourses";
 import { AllPostsGenerals } from "../pages/posts/PostGeneral/AllPostsGenerals/AllPostsGenerals";
 import { ShowAllUsers } from "../pages/users/ShowAllUsers/ShowAllUsers";
 import { CreateGeneralPost } from "../pages/posts/PostGeneral/CreateGeneralPost/CreateGeneralPost";
-
 import { CreateTrade } from "../pages/posts/Trades/CreateTrade/CreateTrade";
 import { TraderProfile } from "../pages/users/TraderProfile/TraderProfile";
 import { OneTradePost } from "../pages/posts/trades/OneTradePost/OneTradePost";
@@ -41,95 +40,99 @@ import { OneGeneralPost } from "../pages/posts/PostGeneral/OneGeneralPost/OneGen
 import { ThermsNConditions } from "../pages/dashboard/Landing/ThermsNConditions/ThermsNConditions";
 import { Privacy } from "../pages/dashboard/Landing/Privacy/Privacy";
 import { CookiesPolicy } from "../pages/dashboard/Landing/CookiesPolicy/CookiesPolicy";
-
 import { ResourceViewer } from "../components/ResourceViewer/ResourceViewer";
 import { TradingViewWidget } from "../pages/dashboard/Landing/TradingViewWidget/TradingViewWidget";
-
-
 export const RoutesApp = () => {
   const { token } = useContext(AscendioContext);
   const [type, setType] = useState();
-
   useEffect(() => {
     if (token) {
       setType(jwtDecode(token).user.type);
     }
   }, [token]);
-
   return (
-    <BrowserRouter>      
+    <BrowserRouter>
+      <Row>
         <NavBarApp />
-        <Container fluid>
-          <Routes>
-            {!token && (
-              <>
-                <Route path="/" element={<Landing />} />
-                <Route path="/about" element={<AboutApp />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/termsandconditions" element={<ThermsNConditions />} />
-                <Route path="/privacy" element={<Privacy />} />
-                <Route path="/cookiespolicy" element={<CookiesPolicy />} />
-                <Route
-                  path="/confirmationuser/:token"
-                  element={<ConfirmationUser />}
-                />
-                <Route path="/login" element={<Login />} />
-                <Route
-                  path="/recoverpassword/:token"
-                  element={<RecoverPassword />}
-                />
-                <Route
-                  path="/mailrecoverpassword"
-                  element={<MailRecoverPassword />}
-                />
-              </>
-            )}
-            {token && type === 2 && (
-              <>
-                <Route path="/home" element={<Home />} />
-                <Route path="/profile" element={<Users />} />
-                <Route path="/edituser" element={<EditUser />} />
-                <Route path="/course/:course_id" element={<OneCourse />} />
-                <Route path="/course" element={<OneCourse />} />
-                <Route path="/allcourses" element={<AllCourses />} />
-                <Route path="/createtrade" element={<CreateTrade />} />
-                <Route
-                  path="/creategeneralpost"
-                  element={<CreateGeneralPost />}
-                />
-                <Route path="/allpoststrades" element={<AllTrades />} />
-                <Route path="/onetradepost/:post_id" element={<OneTradePost />} />
-                <Route path="/onegeneralpost/:post_id" element={<OneGeneralPost />} />
-                <Route path="/allpostsgenerals" element={<AllPostsGenerals />} />
-                <Route path="/showallusers" element={<ShowAllUsers />} />
-                <Route path="/tradingview" element={<TradingViewWidget />} />
-                <Route path="/createcourse" element={<CreateCourse />} />
-                <Route path="/purchasecourse" element={<PurchaseCourse />} />
-                <Route path="/savecourse" element={<SaveCourse />} />
-                <Route path="/userfollowers/:id" element={<UserFollowers />} />
-                <Route path="/userfollowing/:id" element={<UserFollowing />} />
-                <Route path="/userposts/:id" element={<UserPosts />} />
-                <Route
-                  path="/oneusercourses/:user_id"
-                  element={<OneUserCourses />}
-                />
-                <Route path="/traderprofile/:user_id" element={<TraderProfile />}/>
-                <Route path="/resource/:course_id/:section_id/:link/:type" element={<ResourceViewer />}/>
-              </>
-            )}
-            {token && type === 1 && (
-              <>
-                <Route path="/admin" element={<AdminHome />}>
-                  <Route index element={<Usuarios />} />
-                  <Route path="allusers" element={<Usuarios />} />
-                  <Route path="alldata" element={<Estadisticas />} />
-                </Route>
-              </>
-            )}
-            <Route path="*" element={<ErrorPageApp />} />
-          </Routes>
-        </Container>
+        <Routes>
+          {!token && (
+            <>
+              <Route path="/" element={<Landing />} />
+              <Route path="/about" element={<AboutApp />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/termsandconditions" element={<ThermsNConditions />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/cookiespolicy" element={<CookiesPolicy />} />
+              <Route
+                path="/confirmationuser/:token"
+                element={<ConfirmationUser />}
+              />
+              <Route path="/login" element={<Login />} />
+              <Route
+                path="/recoverpassword/:token"
+                element={<RecoverPassword />}
+              />
+              <Route
+                path="/mailrecoverpassword"
+                element={<MailRecoverPassword />}
+              />
+            </>
+          )}
+          {token && type === 2 && (
+            <>
+              <Route path="/home" element={<Home />} />
+              <Route path="/profile" element={<Users />} />
+              <Route path="/edituser" element={<EditUser />} />
+              <Route path="/course/:course_id" element={<OneCourse />} />
+              <Route path="/course" element={<OneCourse />} />
+              <Route path="/allcourses" element={<AllCourses />} />
+              <Route path="/createtrade" element={<CreateTrade />} />
+              <Route
+                path="/creategeneralpost"
+                element={<CreateGeneralPost />}
+              />
+              <Route path="/allpoststrades" element={<AllTrades />} />
+              <Route path="/onetradepost/:post_id" element={<OneTradePost />} />
+              <Route path="/onegeneralpost/:post_id" element={<OneGeneralPost />} />
+              <Route path="/allpostsgenerals" element={<AllPostsGenerals />} />
+              <Route path="/showallusers" element={<ShowAllUsers />} />
+              <Route path="/tradingview" element={<TradingViewWidget />} />
+              <Route path="/createcourse" element={<CreateCourse />} />
+              <Route path="/purchasecourse" element={<PurchaseCourse />} />
+              <Route path="/savecourse" element={<SaveCourse />} />
+              <Route path="/userfollowers/:id" element={<UserFollowers />} />
+              <Route path="/userfollowing/:id" element={<UserFollowing />} />
+              <Route path="/userposts/:id" element={<UserPosts />} />
+              <Route
+                path="/oneusercourses/:user_id"
+                element={<OneUserCourses />}
+              />
+              <Route path="/traderprofile/:user_id" element={<TraderProfile />}/>
+              <Route path="/resource/:course_id/:section_id/:link/:type" element={<ResourceViewer />}/>
+            </>
+          )}
+          {token && type === 1 && (
+            <>
+              <Route path="/admin" element={<AdminHome />}>
+                {/* <Route index element={<Usuarios />} />
+                <Route path="allusers" element={<Usuarios />} /> */}
+                <Route path="alldata" element={<Estadisticas />} />
+              </Route>
+            </>
+          )}
+          <Route path="*" element={<ErrorPageApp />} />
+        </Routes>
+      </Row>
     </BrowserRouter>
   );
 };
+
+
+
+
+
+
+
+
+

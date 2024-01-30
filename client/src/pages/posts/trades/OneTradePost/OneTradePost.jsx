@@ -32,7 +32,7 @@ export const OneTradePost = () => {
   console.log(oneTrade);
 
   return (
-    <>
+    <div className="onetradepost">
       {oneTrade && (
         <>
           <div className="p-5">
@@ -40,33 +40,36 @@ export const OneTradePost = () => {
               <Card.Header>
                 <h2>Trader: {oneTrade.post_user_nickname}</h2>
               </Card.Header>
-              <Card.Header className="row d-flex">
-                <h3 className="col-4">Imagen {oneTrade.category_name}</h3>
-                <h3 className="col-4">Categoría: {oneTrade.category_name}</h3>
-                <h3 className="col-4">Divisa: {oneTrade.currency}</h3>
+              <Card.Header className="row">
+                <h3 className="col-xl-4 hide-on-small-screen">Imagen {oneTrade.category_name}</h3>
+                <h3 className="col-xl-4 col-lg-12">Categoría: {oneTrade.category_name}</h3>
+                <h3 className="col-xl-4 col-lg-12">Divisa: {oneTrade.currency}</h3>
               </Card.Header>
               <Card.Body>
-                <Card.Title className="row">
-                  <div className="col-4">
+                <Row>
+                  <Col lg={4} md={12} className="col1 d-flex justify-content-center mb-2">
                     <Card.Img
+                      className="tradeimagen"
                       src={`http://localhost:3000/images/trades/${oneTrade.resource_text}`}
                     />
-                  </div>
-                  <div className="col-4 category">
-                    <h4>Precio de entrada: {oneTrade.entry_price}€</h4>
-                    <h4>Detener perdida en: {oneTrade.stop_loss}€</h4>
-                    <h4>Coger Ganancias en: {oneTrade.take_profit}€</h4>
-                  </div>
-                  <div className="col-4 description">
-                    <h4>{oneTrade.description}</h4>
-                  </div>
-                  <h4>
+                  </Col>
+                  <Col lg={4} md={12} className="col2 category d-flex flex-column gap-3 mb-2">
+                    <div>
+                      <h4>Precio de entrada: {oneTrade.entry_price}€</h4>
+                      <h4>Detener perdida en: {oneTrade.stop_loss}€</h4>
+                      <h4>Coger Ganancias en: {oneTrade.take_profit}€</h4>
+                    </div>
+                    <h4>
                     {oneTrade.correct === null
                       ? "Trade Pediente ❓"
                       : oneTrade.correct === 1
                       ? "Trade Acertado ✅"
                       : "Trade Errado ❌"}
-                  </h4>
+                    </h4>
+                  </Col>
+                  <Col lg={4} md={12} className="col3 description mb-2">
+                    <h4>{oneTrade.description}</h4>
+                  </Col>
                   <div className="d-flex gap-1 justify-content-center">
                     <Button
                       onClick={() => {
@@ -83,7 +86,7 @@ export const OneTradePost = () => {
                       Volver
                     </Button>
                   </div>
-                </Card.Title>
+                </Row>
               </Card.Body>
               <Card.Footer className="text-muted">
                 {!showModal && (
@@ -105,6 +108,6 @@ export const OneTradePost = () => {
           )}
         </>
       )}
-    </>
+    </div>
   );
 };

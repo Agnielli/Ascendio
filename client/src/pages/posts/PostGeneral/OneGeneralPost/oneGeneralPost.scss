@@ -1,0 +1,19 @@
+
+
+.onegeneralpost {
+
+  h4 {
+    color: black;
+  }
+
+  .generalpostimagen {
+    max-width: 400px;
+    min-width: 280px;
+  }
+  
+  @media (max-width: 991px) {
+    .titles {
+      display: none;
+    }
+  }
+}

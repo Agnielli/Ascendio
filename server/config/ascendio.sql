@@ -1,5 +1,7 @@
 CREATE DATABASE ascendio;
+
 USE ascendio;
+
 -- drop database ascendio;
 
 CREATE TABLE user (
@@ -18,8 +20,9 @@ CREATE TABLE user (
 );
 
 CREATE TABLE category (
-  category_id TINYINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT, -- tipo 1 -> Crypto, tipo 2->  Bolsa, tipo 3 ->Forex, tipo 4 -> General ( necesiario para post general )
-  category_name VARCHAR(50) NOT NULL UNIQUE -- Crypto, Bolsa, Forex
+  category_id TINYINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT, -- tipo 1 -> bolsa, tipo 2->  crypto, tipo 3 ->Forex, tipo 4 -> General ( necesiario para post general )
+  category_name VARCHAR(50) NOT NULL UNIQUE -- Crypto, Bolsa, Forex, General
+  -- IMPORTANTE HAY QUE CREAR LAS CATEGORIAS TAL CUAL: 1 CRYPTO, 2 BOLSA, 3 FOREX Y 4 GENERAL.
 );
     
 CREATE TABLE post (
@@ -31,9 +34,9 @@ CREATE TABLE post (
   entry_price DECIMAL(7,2) UNSIGNED NULL,
   stop_loss DECIMAL(7,2) UNSIGNED NULL,
   take_profit DECIMAL(7,2) UNSIGNED NULL,
-  correct BOOLEAN,
-  date DATETIME not null default (CURRENT_DATE),
-  type TINYINT NOT NULL, -- tipo 1: regular, tipo 2: trade
+  correct BOOLEAN, -- POR DEFECTO ES NULL, QUE QUIERE DECIR PENDIENTE, 1 ES ACERTADO Y 2 ES ERRADO.
+  date DATETIME not null default CURRENT_TIMESTAMP,
+  type TINYINT NOT NULL, -- tipo 1: trade, tipo 2: regular post
   is_deleted BOOLEAN NOT NULL DEFAULT false, -- el usuario "borra" el post
   is_disabled BOOLEAN NOT NULL DEFAULT false,  -- el admin deshabilita el post
   CONSTRAINT fk_user_1 FOREIGN KEY (user_id)
@@ -41,18 +44,20 @@ CREATE TABLE post (
   CONSTRAINT fk_category_1 FOREIGN KEY (category_id)
   REFERENCES category(category_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
 CREATE TABLE comments (
   post_id BIGINT UNSIGNED NOT NULL,
   comment_id SMALLINT UNSIGNED NOT NULL,
   primary key(post_id, comment_id),
   user_id INT UNSIGNED NOT NULL, -- autor del comentario
-  date DATETIME not null default (CURRENT_DATE),
+  date DATETIME not null default CURRENT_TIMESTAMP,
   message VARCHAR(250) NOT NULL,
   CONSTRAINT fk_post_1 FOREIGN KEY (post_id)
   REFERENCES post(post_id) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT fk_user_2 FOREIGN KEY (user_id)
   REFERENCES user(user_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
 CREATE TABLE user_category (  -- un user va a poder hablar de varias categorias
   user_id INT UNSIGNED NOT NULL ,
   category_id TINYINT UNSIGNED NOT NULL,
@@ -62,6 +67,7 @@ CREATE TABLE user_category (  -- un user va a poder hablar de varias categorias
   CONSTRAINT fk_category_2 FOREIGN KEY (category_id)
   REFERENCES category(category_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
 CREATE TABLE user_follows_user (
   user_id INT UNSIGNED NOT NULL,
   followed_user_id INT UNSIGNED NOT NULL,
@@ -71,6 +77,7 @@ CREATE TABLE user_follows_user (
   CONSTRAINT fk_user_5 FOREIGN KEY (followed_user_id)
   REFERENCES user(user_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
 CREATE TABLE user_likes_post (
   user_id INT UNSIGNED NOT NULL ,
   post_id BIGINT UNSIGNED NOT NULL,
@@ -80,6 +87,7 @@ CREATE TABLE user_likes_post (
   CONSTRAINT fk_post_2 FOREIGN KEY (post_id)
   REFERENCES post(post_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
 CREATE TABLE post_resource(
   resource_id BIGINT UNSIGNED PRIMARY KEY NOT NULL auto_increment,
   post_id BIGINT UNSIGNED NOT NULL,
@@ -90,6 +98,7 @@ CREATE TABLE post_resource(
   CONSTRAINT fk_post_3 FOREIGN KEY (post_id)
   REFERENCES post(post_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
 /*
 CREATE TABLE graphic(
   graphic_id SMALLINT UNSIGNED PRIMARY KEY NOT NULL,
@@ -105,11 +114,11 @@ CREATE TABLE graphic(
 CREATE TABLE course (
   course_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
   user_id INT UNSIGNED NOT NULL,  -- creador
-  followers INT UNSIGNED,
+  followers INT,
   title VARCHAR(50) NOT NULL,
   description VARCHAR(250) NOT NULL,
   img VARCHAR (150),
-  date DATETIME not null default (CURRENT_DATE),
+  date DATETIME not null default CURRENT_TIMESTAMP,
   price DECIMAL(7,2) UNSIGNED NOT NULL,  -- 99999,99
   is_deleted BOOLEAN NOT NULL DEFAULT false,
   is_disabled BOOLEAN NOT NULL DEFAULT false,
@@ -138,6 +147,7 @@ CREATE TABLE user_wishes_course(
   REFERENCES course(course_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- Borrado total!
+
 CREATE TABLE user_rates_course(
   user_id INT UNSIGNED NOT NULL,
   course_id INT UNSIGNEd NOT NULL,
@@ -149,6 +159,7 @@ CREATE TABLE user_rates_course(
   CONSTRAINT fk_course_3 FOREIGN KEY (course_id)
   REFERENCES course(course_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
 CREATE TABLE section (
   course_id INT UNSIGNED NOT NULL,
   section_id TINYINT UNSIGNED NOT NULL,
@@ -157,6 +168,7 @@ CREATE TABLE section (
   CONSTRAINT fk_course_4 FOREIGN KEY(course_id)
   REFERENCES course (course_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
 CREATE TABLE topic (
   course_id INT UNSIGNED NOT NULL,
   section_id TINYINT UNSIGNED NOT NULL,
@@ -167,20 +179,21 @@ CREATE TABLE topic (
   CONSTRAINT fk_section_1 FOREIGN KEY(course_id, section_id)
   REFERENCES section (course_id, section_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
 create table user_completes_topic(
 	user_id INT UNSIGNED NOT NULL,
-    course_id INT UNSIGNED NOT NULL,
+  course_id INT UNSIGNED NOT NULL,
 	section_id TINYINT UNSIGNED NOT NULL,
 	topic_id TINYINT UNSIGNED NOT NULL,
-    PRIMARY KEY (user_id, course_id, section_id, topic_id),
-    CONSTRAINT fk_user_11 FOREIGN KEY (user_id)
+  PRIMARY KEY (user_id, course_id, section_id, topic_id),
+  CONSTRAINT fk_user_11 FOREIGN KEY (user_id)
 	REFERENCES user(user_id) ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT fk_topic_1 FOREIGN KEY(course_id, section_id, topic_id)
+  CONSTRAINT fk_topic_1 FOREIGN KEY(course_id, section_id, topic_id)
 	REFERENCES topic (course_id, section_id, topic_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE resource (
-  resource_id INT UNSIGNED NOT NULL auto_increment PRIMARY KEY,
+  resource_id INT UNSIGNED NOT NULL auto_increment, -- ¿PRIMARY KEY?
   course_id INT UNSIGNED NOT NULL,
   section_id TINYINT UNSIGNED NOT NULL,
   topic_id TINYINT UNSIGNED NOT NULL,
@@ -208,7 +221,31 @@ CREATE TABLE course_tag (
 );
 
 select * from category;
+
 select * from course; 
 
 select * from user; 
-select * from post order by date desc;
+
+select * from post;
+
+-- TAGS NECESARIOS PARA LA CREACIÓN DE CURSOS
+
+INSERT INTO `ascendio`.`tag` (`tag_id`, `tag_name`) VALUES ('1', '#Crypto');
+INSERT INTO `ascendio`.`tag` (`tag_id`, `tag_name`) VALUES ('2', '#Forex');
+INSERT INTO `ascendio`.`tag` (`tag_id`, `tag_name`) VALUES ('3', '#Acciones');
+INSERT INTO `ascendio`.`tag` (`tag_id`, `tag_name`) VALUES ('4', '#Metales');
+INSERT INTO `ascendio`.`tag` (`tag_id`, `tag_name`) VALUES ('5', '#RSI');
+INSERT INTO `ascendio`.`tag` (`tag_id`, `tag_name`) VALUES ('6', '#Fibonacci');
+INSERT INTO `ascendio`.`tag` (`tag_id`, `tag_name`) VALUES ('7', '#SmartMoney');
+INSERT INTO `ascendio`.`tag` (`tag_id`, `tag_name`) VALUES ('8', '#EMA');
+INSERT INTO `ascendio`.`tag` (`tag_id`, `tag_name`) VALUES ('9', '#SwingTrading');
+INSERT INTO `ascendio`.`tag` (`tag_id`, `tag_name`) VALUES ('10', '#Scalping');
+INSERT INTO `ascendio`.`tag` (`tag_id`, `tag_name`) VALUES ('11', '#AccionPrecio');
+
+-- CATEGORIAS NECESARIAS PARA LA CREACIÓN DE POSTS
+
+INSERT INTO category (category_name) VALUES
+  ('Bolsa'),
+  ('Crypto'),
+  ('Forex'),
+  ('General');

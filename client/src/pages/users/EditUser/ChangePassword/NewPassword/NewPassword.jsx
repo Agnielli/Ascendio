@@ -207,9 +207,11 @@ export const NewPassword = ({user, setUser, setShowChangePassword}) => {
           
         </Form>
 
-        <Button className="Button1" onClick={()=> setShowChangePassword(false)}>
-            CANCELAR
-          </Button>
+        <div className="botonCancelarEditarLogin">
+          <Button className="Button1" onClick={()=> setShowChangePassword(false)}>
+              CANCELAR
+            </Button>
+        </div>
         
 
         </div>
