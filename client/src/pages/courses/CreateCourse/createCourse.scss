@@ -3,6 +3,8 @@
 .addIcon {
   color: #e15252;
   font-size: 33px;
+  cursor: pointer;
+  margin-top: 9px;
 }
 
 .imagencurso {
@@ -14,6 +16,7 @@
   justify-content: center;
   align-items: center;
   border: 1px solid #E15252;
+  cursor: pointer;
 }
 
 .react-select {
