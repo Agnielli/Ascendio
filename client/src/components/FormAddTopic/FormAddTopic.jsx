@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
+import './formAddTopic.scss'
 
 export const FormAddTopic = ({
   setShowTopic,
@@ -42,7 +43,7 @@ export const FormAddTopic = ({
 
   };
   return (
-    <Row>
+    <Row className="formTopic">
       <Col>
         <Form>
           <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -53,20 +54,20 @@ export const FormAddTopic = ({
               value={newTopic}
               onChange={handleChange}
             />
-            <Button
-              variant="outline-success"
-              className="me-3"
-              onClick={handleSubmit}
-            >
-              Aceptar
-            </Button>
-            <Button
-              variant="outline-success"
-              className="me-3"
-              onClick={() => setShowTopic(false)}
-            >
-              Cancelar
-            </Button>
+            <div className="botonFormTopic  d-flex justify-content-center mt-3">
+              <Button
+                className="botonesTopic me-3"
+                onClick={handleSubmit}
+              >
+                Aceptar
+              </Button>
+              <Button
+                className="botonesTopic me-3"
+                onClick={() => setShowTopic(false)}
+              >
+                Cancelar
+              </Button>
+            </div>
           </Form.Group>
         </Form>
       </Col>
