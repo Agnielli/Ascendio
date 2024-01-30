@@ -3,6 +3,7 @@ import axios from "axios";
 import { AscendioContext } from "../../../context/AscendioContext";
 import { Button, Card, InputGroup, ListGroup } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import "./showallusers.scss";
 
 export const ShowAllUsers = () => {
   const [show, setShow] = useState(1);
@@ -32,6 +33,7 @@ export const ShowAllUsers = () => {
         .then((res) => {
           setAllUsers(res.data.filter((elem) => elem.type === 2));
           setAllUsersFilter(res.data.filter((elem) => elem.type === 2));
+          console.log(res.data);
         })
         .catch((err) => {
           console.log(err);
@@ -135,29 +137,35 @@ export const ShowAllUsers = () => {
               </select>
             </InputGroup>
           </div>
-          <h2>Top Usuarios con más Seguidores</h2>
-          <div className="d-flex flex-wrap gap-2">
+
+          <h2 className="text-center mb-4">Top Usuarios con más Seguidores</h2>
+          <div className="d-flex flex-column align-items-center flex-wrap gap-2">
             {allUsersFilter?.map((elem) => {
               return (
-                <Card
-                  style={{ width: "18rem", marginBottom: "1rem" }}
-                  key={elem.user_id}
-                >
-                  <Card.Body>
-                    <div>                     
-                        <div className="avatar">
-                          {elem.img !== null ? (
-                            <Card.Img
-                              variant="top"
-                              src={`http://localhost:3000/images/users/${elem.img}`}
-                            />
-                          ) : (
-                            <p>{elem?.nickname.charAt(0).toUpperCase()}</p>
-                          )}
-                        </div>                    
-                      <Card.Title className="d-flex">                      
-                          <h3> {elem.nickname}</h3>                        
-                      </Card.Title>
+                <div key={elem.user_id} className="cards-showuser d-flex align-items-center justify-content-between gap-1 gap-xl-4 mb-2">
+                  <div>
+                    <img
+                      className="userImg"
+                      src={
+                        elem.img != null
+                          ? `http://localhost:3000/images/users/${elem.img}`
+                          : `http://localhost:3000/images/users/descarga.png`
+                      }
+                      alt="Imagen de perfil del usuario"
+                    />
+                  </div>
+                  <div className="d-flex flex-column flex-xl-row align-items-center text-center gap-4">
+                    <div className="d-flex gap-2 gap-xl-3">
+                      <div className="">
+                        <p className="fw-bold">{elem.nickname}</p>
+                        <p>{elem.followers_count} Seguidores</p>
+                      </div>
+                    </div>
+                    <div className="">
+                      <p>{elem.correct_posts} Acertados</p>
+                      <p>{elem.incorrect_posts} Errados</p>
+                    </div>
+                    <div className="d-flex flex-column gap-2">
                       {user.user_id !== elem.user_id ? (
                         <Button
                           variant="primary"
@@ -167,48 +175,23 @@ export const ShowAllUsers = () => {
                             ? "Siguiendo"
                             : "Seguir"}
                         </Button>
-                      ) : (
-                        // <Button onClick={() => navigate(`/profile`)}>
-                        //   Ir a mi perfil
-                        // </Button>
-                        null
-                      )}
-                      <Card.Body>
-                        <ListGroup variant="flush">
-                          <ListGroup.Item></ListGroup.Item>
-                          <ListGroup.Item>
-                            Seguidores: {elem.followers_count}
-                          </ListGroup.Item>
-                          <ListGroup.Item>
-                            Siguiendo: {elem.following_count}
-                          </ListGroup.Item>
-                          <ListGroup.Item>
-                            Cursos publicados: {elem.total_courses}
-                          </ListGroup.Item>
-                          <ListGroup.Item>
-                            Post publicados: {elem.total_posts}
-                          </ListGroup.Item>
-                          <ListGroup.Item>
-                            Trades Acertados: {elem.correct_posts}
-                          </ListGroup.Item>
-                          <ListGroup.Item>
-                            Trades Errados: {elem.incorrect_posts}
-                          </ListGroup.Item>
-                          <ListGroup.Item></ListGroup.Item>
-                        </ListGroup>
-                      </Card.Body>
-                      <div className="d-flex gap-1">
-                        <Button
-                          onClick={() =>
-                            navigate(`/traderprofile/${elem.user_id}`)
-                          }
-                        >
-                          Ver más
-                        </Button>
-                      </div>
+                      ) : null}
+                      <Button
+                        onClick={() =>
+                          navigate(`/traderprofile/${elem.user_id}`)
+                        }
+                      >
+                        Ver más
+                      </Button>
                     </div>
-                  </Card.Body>
-                </Card>
+                  </div>
+                  {/* Seguidores: {elem.followers_count}
+                    Siguiendo: {elem.following_count}
+                    Cursos publicados: {elem.total_courses}
+                    Post publicados: {elem.total_posts}
+                    Trades Acertados: {elem.correct_posts}
+                    Trades Errados: {elem.incorrect_posts} */}
+                </div>
               );
             })}
           </div>
@@ -228,19 +211,35 @@ export const ShowAllUsers = () => {
               />
             </div>
           </div>
-          <h2>Top Usuarios con más Aciertos</h2>
-          <div className="d-flex flex-wrap gap-2">
+
+          <h2 className="text-center mb-4">Top Usuarios con más Aciertos</h2>
+          <div className="d-flex flex-column align-items-center flex-wrap gap-2">
             {allUsersFilter?.map((elem) => {
               return (
-                <Card
-                  style={{ width: "18rem", marginBottom: "1rem" }}
-                  key={elem.user_id}
-                >
-                  <Card.Body>
-                    <div>
-                      <Card.Title className="d-flex">
-                        <h3>Usuario: {elem.nickname}</h3>
-                      </Card.Title>
+                <div key={elem.user_id} className="cards-showuser d-flex align-items-center justify-content-between gap-1 gap-xl-4 mb-2">
+                  <div>
+                    <img
+                      className="userImg"
+                      src={
+                        elem.img != null
+                          ? `http://localhost:3000/images/users/${elem.img}`
+                          : `http://localhost:3000/images/users/descarga.png`
+                      }
+                      alt="Imagen de perfil del usuario"
+                    />
+                  </div>
+                  <div className="d-flex flex-column flex-xl-row align-items-center text-center gap-4">
+                    <div className="d-flex gap-2 gap-xl-3">
+                      <div className="">
+                        <p className="fw-bold">{elem.nickname}</p>
+                        <p>{elem.followers_count} Seguidores</p>
+                      </div>
+                    </div>
+                    <div className="">
+                      <p>{elem.correct_posts} Acertados</p>
+                      <p>{elem.incorrect_posts} Errados</p>
+                    </div>
+                    <div className="d-flex flex-column gap-2">
                       {user.user_id !== elem.user_id ? (
                         <Button
                           variant="primary"
@@ -250,53 +249,23 @@ export const ShowAllUsers = () => {
                             ? "Siguiendo"
                             : "Seguir"}
                         </Button>
-                      ) : (
-                        <Button onClick={() => navigate(`/profile`)}>
-                          Ir a mi perfil
-                        </Button>
-                      )}
-                      <Card.Body>
-                        <ListGroup variant="flush">
-                          <ListGroup.Item></ListGroup.Item>
-                          <ListGroup.Item>
-                            Seguidores: {elem.followers_count}
-                          </ListGroup.Item>
-                          <ListGroup.Item>
-                            Siguiendo: {elem.following_count}
-                          </ListGroup.Item>
-                          <ListGroup.Item>
-                            Cursos publicados: {elem.total_courses}
-                          </ListGroup.Item>
-                          <ListGroup.Item>
-                            Post publicados: {elem.total_posts}
-                          </ListGroup.Item>
-                          <ListGroup.Item>
-                            Trades Acertados: {elem.correct_posts}
-                          </ListGroup.Item>
-                          <ListGroup.Item>
-                            Trades Errados: {elem.incorrect_posts}
-                          </ListGroup.Item>
-                          <ListGroup.Item></ListGroup.Item>
-                        </ListGroup>
-                        {elem.image_name !== null && (
-                          <Card.Img
-                            variant="top"
-                            src={`http://localhost:3000/images/users/${elem.img}`}
-                          />
-                        )}
-                      </Card.Body>
-                      <div className="d-flex gap-1">
-                        <Button
-                          onClick={() =>
-                            navigate(`/traderprofile/${elem.user_id}`)
-                          }
-                        >
-                          Ver más
-                        </Button>
-                      </div>
+                      ) : null}
+                      <Button
+                        onClick={() =>
+                          navigate(`/traderprofile/${elem.user_id}`)
+                        }
+                      >
+                        Ver más
+                      </Button>
                     </div>
-                  </Card.Body>
-                </Card>
+                  </div>
+                  {/* Seguidores: {elem.followers_count}
+                    Siguiendo: {elem.following_count}
+                    Cursos publicados: {elem.total_courses}
+                    Post publicados: {elem.total_posts}
+                    Trades Acertados: {elem.correct_posts}
+                    Trades Errados: {elem.incorrect_posts} */}
+                </div>
               );
             })}
           </div>

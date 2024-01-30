@@ -52,3 +52,6 @@ export const ActivatedUserMiniCard = ({ elem, update, setUpdate }) => {
     </div>
   );
 };
+
+
+
