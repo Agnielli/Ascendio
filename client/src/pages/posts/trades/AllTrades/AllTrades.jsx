@@ -96,7 +96,7 @@ export const AllTrades = () => {
   };
 
   return (
-    <div>
+    <div className="alltrades">
       <>
         <Row className="general title-input">
           <Col
