@@ -10,20 +10,14 @@ export const Landing = () => {
     <Container fluid>
       <main className="ascendio-landing-main-padre">
         <Row className="ascendio-landing-main-hijo-1">
-          <Col
-            xs={12}
-            className="ascendio-landing-main-hijo1-nieto"
-          >
+          <Col xs={12} className="ascendio-landing-main-hijo1-nieto">
             <img
               className="ascendio-landing-fondo-principal1"
               src="/images/landing/fondo.png"
               alt=""
             />
           </Col>
-          <Col
-            xs={12}
-            className="ascendio-landing-main-hijo1-nieto"
-          >
+          <Col xs={12} className="ascendio-landing-main-hijo1-nieto">
             <img
               src="/images/landing/fondo2.png"
               alt=""
@@ -32,10 +26,7 @@ export const Landing = () => {
           </Col>
         </Row>
         <Row className="ascendio-landing-main-hijo-2">
-          <Col
-            xs={12}
-            className="ascendio-landing-main-hijo2-nieto "
-          >
+          <Col xs={12} className="ascendio-landing-main-hijo2-nieto ">
             <Row className="ascendio-landing-main-hijo2-nieto-bisnieto ">
               <Col
                 xs={4}
@@ -105,29 +96,20 @@ export const Landing = () => {
               </Col>
             </Row>
           </Col>
-          <Col
-            xs={12}
-            className="ascendio-landing-main-hijo2-nieto"
-          >
+          <Col xs={12} className="ascendio-landing-main-hijo2-nieto">
             <TradingViewWidget />
           </Col>
         </Row>
       </main>
       <footer>
         <Row className="ascendio-landing-footer-padre">
-          <Col
-            xs={5}
-            className="ascendio-landing-footer-padre-hijo"
-          >
+          <Col xs={5} className="ascendio-landing-footer-padre-hijo">
             <h3>ASCENDIO</h3>
           </Col>
-          <Col
-            xs={2}
-            className="ascendio-landing-footer-padre-hijo"
-          >
+          <Col xs={2} className="ascendio-landing-footer-padre-hijo">
             <p>&copy;2024 Ascendio, inc</p>
           </Col>
-          <Col xs={2}className="ascendio-landing-footer-padre-hijo">
+          <Col xs={2} className="ascendio-landing-footer-padre-hijo">
             <Link
               className="ascendio-landing-footer-link "
               to="/termsandconditions"
