@@ -7,17 +7,14 @@
  }
   //inputs:
   .form-control:focus {
-    //box-shadow: 0 0 0 0.25rem $accent-color !important;
-   box-shadow: 0 0 0 0.1rem $accent-color !important; //fede
+    box-shadow: 0 0 0 0.25rem $accent-color !important;
   }
-  
   .form-control {
     height: 35.98px;
     border: none;
     border-radius: 25px;
-    padding: 0 15px !important;
-    background-color: $accent3-color;
-    height: 2.5rem; //fede
+    padding: 0 10px !important;
+    background-color: $accent5-color;
   }
 
   input#formBasicPassword.form-control {
