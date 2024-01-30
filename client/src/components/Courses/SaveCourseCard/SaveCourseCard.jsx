@@ -51,21 +51,20 @@ export const SaveCourseCard = () => {
         </div>
       </header>
       <main className="mainCursosGuardados d-flex flex-wrap justify-content-center gap-3 pb-5">
-        <Row>
+        <Row className="d-flex align-items-stretch"> {/* Añade la clase 'd-flex align-items-stretch' */}
         {findCourse?.map((elem) => {
           return (
-            <Col xs={12} md={6} lg={4} xxl={3}>
+            <Col xs={12} md={6} lg={4} xxl={3} className="d-flex"> {/* Añade la clase 'd-flex' */}
             <Card
-              // style={{ width: "22rem" }}
               key={elem.course_id}
-              className="mapeoCursosGuardados text-center mb-4"
-            >
+              className="mapeoCursosGuardados text-center mb-4" 
+              style={{ width: "100%" }}> {/* Añade la el ancho para que se adapte bien */}
               <Card.Img
                 style={{ height: "16rem", objectFit: "cover" }}
                 variant="top"
                 src={`http://localhost:3000/images/cursos/${elem.img}`}
               />
-              <Card.Body className="d-flex flex-column gap-1">
+              <Card.Body className="d-flex flex-column gap-1 flex-fill">
                 <Card.Text className="cardtitle"> {elem.title} </Card.Text>
                 <Card.Subtitle className="followerscard">
                   {elem?.followers !== 0
@@ -78,7 +77,7 @@ export const SaveCourseCard = () => {
                 )}
 
                 <Card.Subtitle className="tagsCourse">{elem.tags}</Card.Subtitle>
-                <Card.Title className="descriptioncard d-flex justify-content-start">{elem.description}</Card.Title>
+                <Card.Title className="descriptioncard d-flex justify-content-start mt-auto">{elem.description}</Card.Title>
                 <Card.Text>
                 <Card.Text className="priceCourse cardtitle px-3 my-2">
                   {Number(elem?.price) === 0
