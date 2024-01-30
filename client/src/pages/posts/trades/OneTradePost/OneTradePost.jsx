@@ -32,7 +32,7 @@ export const OneTradePost = () => {
   console.log(oneTrade);
 
   return (
-    <>
+    <div className="onetradepost">
       {oneTrade && (
         <>
           <div className="p-5">
@@ -108,6 +108,6 @@ export const OneTradePost = () => {
           )}
         </>
       )}
-    </>
+    </div>
   );
 };
