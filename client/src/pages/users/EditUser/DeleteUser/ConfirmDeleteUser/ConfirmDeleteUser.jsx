@@ -40,12 +40,12 @@ export const ConfirmDeleteUser = ({ setShowDeleteUser}) => {
   
   return (
     <div className="FormularioDatosUsuario">
-      <h2>Eliminar cuenta:</h2>
+      <h4>Eliminar cuenta:</h4>
       <p>
         Estás a punto de eliminar tu cuenta y todos tus datos de Ascendio. Esta
         acción es irreversible. ¿Estás seguro de que deseas continuar?
       </p>
-      <div className="DivGrisParaBotones d-flex justify-content-between mt-3 mb-1">
+      <div className="DivGrisParaBotones mt-3">
         <Button className="Button3" onClick={handleSubmit}>aceptar</Button>
         <Button className="Button1" variant="primary me-2" onClick={() => setShowDeleteUser(false)}>
           cancelar

@@ -517,6 +517,35 @@ export const OneCourse = () => {
           </div>
         )}
       </section>
+
+      
     </>
   );
 };
+
+
+{/* <Accordion defaultActiveKey="1">
+              {orderedSections.map((elem, index) => {
+                return (
+                  <CardSection
+                    userId={userId}
+                    userCourse={userCourse}
+                    elem={elem}
+                    key={elem.section_id}
+                    deleteSection={deleteSection}
+                    course_id={course_id}
+                    sections={sections}
+                    topics={topics}
+                    setTopics={setTopics}
+                    setResetCourse={setResetCourse}
+                    resetCourse={resetCourse}
+                    deleteTopic={deleteTopic}
+                    index={index + 1}
+                    setResource={setResource}
+                    resource={resource}
+                    deleteResource={deleteResource}
+                    isIntoValidate={isIntoValidate}
+                  />
+                );
+              })}
+            </Accordion> */}

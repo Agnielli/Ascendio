@@ -81,6 +81,7 @@ export const EditOneCourse = ({
           className="FormulariosContainer text-center"
         >
           <Modal.Header closeButton className="modalDel  ">
+
             <Modal.Title className="edittitle">Editar curso</Modal.Title>
           </Modal.Header>
           <Modal.Body className="modalDel">

@@ -100,8 +100,9 @@ export const SaveCourseCard = () => {
         })}
         </Row>
         {findCourse?.length === 0 && (
-          <p>No se han encontrado cursos con este nombre</p>
+          <p>No existen cursos</p>
         )}
+        
       </main>
     </Col>
   );

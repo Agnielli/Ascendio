@@ -46,6 +46,7 @@ export const VeryFyPassword = ({setShowNewPassword, setShowVerifyPassword, setSh
 
     <Form className="FormularioDatosUsuario FormulariosContainer">
     <h4>VERIFICAR CONTRASEÑA:</h4>
+    <p>Para modificar tus datos de login, tenemos que verificar tu contraseña.</p>
         <Form.Group controlId="formBasicPassword">
           <Form.Label></Form.Label>
           <div className={`password-container ${isPasswordFocused ? 'eye-icon-focused' : ''}`}>

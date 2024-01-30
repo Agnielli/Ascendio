@@ -1,6 +1,6 @@
 @use "../../../../../public/stylesheets/variables.scss" as *;
 
-// Generales 
+// Generales
 
 .alltrades {
   h2 {
@@ -8,48 +8,50 @@
     display: flex;
     justify-content: center;
   }
-  
-  h3, p {
+
+  h3,
+  p {
     color: black;
   }
-  
+
   .general {
     padding: 3rem 10rem;
   }
 
   .tradepost {
-    background-color: #2E2D2D;
+    background-color: #2e2d2d;
     max-width: 1002px !important;
     width: 80% !important;
     min-width: 300px;
     border-radius: 20px;
     padding: 1rem !important;
     margin: 0 !important;
-    
+
     p {
       margin: 0;
     }
-  
-    p, h3 {
+
+    p,
+    h3 {
       color: white;
     }
-  
+
     .tradeimagen {
       max-width: 400px;
       min-width: 280px;
     }
   }
-  
+
   .avatar {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: #1D1D1B;
-    color: #E15252; 
+    background-color: #1d1d1b;
+    color: #e15252;
     display: flex;
     justify-content: center;
     align-items: center;
-  
+
     img {
       width: 40px;
       height: 40px;
@@ -57,14 +59,12 @@
       object-fit: cover;
     }
   }
-  
-  
+
   .title-input {
-  
     input {
       border: none;
       border-radius: 25px;
-      background-color: #9C9999;
+      background-color: #9c9999;
       width: 100%;
       min-width: 300px;
       height: 50px;
@@ -76,15 +76,18 @@
       padding-left: 30px !important;
     }
   }
-  
+
   @media (width < 1100px) {
-    .col1, .col2, .col3 {
+    .col1,
+    .col2,
+    .col3 {
       width: 100%;
     }
   }
-
-
 }
 
-
-
+.alltrades-error-nohaypostsnitrades {
+  .alltrades-error-nohaypostsnitrades-hijo {
+    color: #e15252;
+  }
+}

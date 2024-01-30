@@ -517,13 +517,13 @@ class usersControllers {
   // muestra los usuarios ordenados de mayor a menor nº aciertos
   showAllUsersSuccesses = (req, res) => {
     try {
-      let sql = `SELECT user.*, 
-      (SELECT COUNT(*) FROM post WHERE user.user_id = post.user_idtotal_posts, 
+      let sql = `SELECT user.*,
+      (SELECT COUNT(*) FROM post WHERE user.user_id = post.user_id) AS total_posts,
       (SELECT COUNT(*) FROM post WHERE user.user_id = post.user_id AND correct = true) AS correct_posts,
-      (SELECT COUNT(*) FROM post WHERE user.user_id = post.user_id AND correct = false) AS incorrect_posts, 
-      (SELECT COUNT(*) FROM user_follows_user WHERE user.user_user_follows_user.user_id) AS following_count, 
-      (SELECT COUNT(*) FROM user_follows_user WHERE user.user_user_follows_user.followed_user_id) AS followers_count, 
-      (SELECT COUNT(*) FROM course WHERE user.user_id = course.user_id total_courses 
+      (SELECT COUNT(*) FROM post WHERE user.user_id = post.user_id AND correct = false) AS incorrect_posts,
+      (SELECT COUNT(*) FROM user_follows_user WHERE user.user_id = user_follows_user.user_id) AS following_count,
+      (SELECT COUNT(*) FROM user_follows_user WHERE user.user_id = user_follows_user.followed_user_id) AS followers_count,
+      (SELECT COUNT(*) FROM course WHERE user.user_id = course.user_id) AS total_courses
       FROM user
       ORDER BY correct_posts DESC;`;
       connection.query(sql, (err, result) => {
@@ -648,7 +648,6 @@ GROUP BY u.user_id;`;
       });
     }
   };
-
 }
 
 module.exports = new usersControllers();
