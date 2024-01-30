@@ -18,16 +18,16 @@ export const EnabledCourses = ({ elem, setUpdateCourses }) => {
   return (
     <Col xs={12} md={6} lg={4} xxl={3} className="d-flex">
       <Card
-            style={{ width: "100%" }}
-        className="mapeoAllCourse text-center mb-4"
+        style={{ width: "100%" }}
+        className="mapeoAllCourse text-center mb-4 d-flex flex-column"
       >
-        <Card.Body>
-          <Card.Img
-            variant="top"
-            src={`http://localhost:3000/images/cursos/${elem.img}`}
-          />
+        <Card.Img
+          variant="top"
+          src={`http://localhost:3000/images/cursos/${elem.img}`}
+        />
+        <Card.Body className="d-flex flex-column">
           <Card.Title className="cardtitle">Nombre: {elem.title}</Card.Title>
-          <Card.Text className="d-flex justify-content-start descriptioncard">
+          <Card.Text className="d-flex justify-content-start descriptioncard flex-grow-1">
             Descripción: {elem.description}
           </Card.Text>
           <Card.Text className="d-flex justify-content-center mt-auto">

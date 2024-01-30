@@ -77,15 +77,15 @@ export const OneUserCourses = () => {
           />
         </div>
       </header>
-      <main className="mainAllCoursesOneUser d-flex flex-wrap justify-content-center gap-3 pb-5">
-        <Row className="d-flex align-items-stretch"> 
+      <main className="mainAllCoursesOneUser gap-3 pb-5">
+        <Row className="justify-content-center"> 
           {findCourse?.map((elem) => {
             return (
               <Col xs={12} md={6} lg={4} xxl={3}className="d-flex">
                 <Card
                   // style={{ width: "22rem" }}
                   key={elem.course_id}
-                  className="mb-4 mapeoAllCourseOneUser text-center" style={{ width: "100%" }}
+                  className="mapeoAllCourseOneUser text-center mb-4 d-flex flex-column" style={{ width: "100%" }}
                 >
                   <Card.Img
                     style={{ height: "16rem", objectFit: "cover" }}
@@ -102,7 +102,7 @@ export const OneUserCourses = () => {
                     <Card.Subtitle className="tagsCourse">
                       {elem.tags}
                     </Card.Subtitle>
-                    <Card.Title className="descriptioncard d-flex justify-content-start">
+                    <Card.Title className="d-flex justify-content-start descriptioncard flex-grow-1">
                       {elem.description}
                     </Card.Title>
                     <Card.Text className="priceCourse cardtitle px-3 my-2">
