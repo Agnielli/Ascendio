@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { AdminOneCourse } from "../AdminOneCourse/AdminOneCourse";
+import { Row } from "react-bootstrap";
 
 export const AdminCourses = () => {
   const [course, setCourse] = useState();
@@ -18,6 +19,7 @@ export const AdminCourses = () => {
   }, [updateCourses]);
 
   return (
+    <Row className="d-flex align-items-stretch">
     <main className="adminAllCourses d-flex flex-wrap justify-content-center gap-3 pb-5">
       {course?.map((elem) => {
         return (
@@ -30,5 +32,6 @@ export const AdminCourses = () => {
         );
       })}
     </main>
+    </Row>
   );
 };

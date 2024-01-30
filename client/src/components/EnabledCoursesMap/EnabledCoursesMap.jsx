@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { EnabledCourses } from "../EnabledCourses/EnabledCourses";
+import { Row } from "react-bootstrap";
 
 export const EnabledCoursesMap = () => {
   const [enabledCourses, setEnabledCourses] = useState();
@@ -17,16 +18,18 @@ export const EnabledCoursesMap = () => {
   }, [updateCourses]);
 
   return (
-    <main className="adminAllCourses d-flex flex-wrap justify-content-center gap-3 pb-5">
-      {enabledCourses?.map((elem, index) => {
-        return (
-          <EnabledCourses
-            elem={elem}
-            key={index}
-            setUpdateCourses={setUpdateCourses}
-          />
-        );
-      })}
-    </main>
+    <Row className="d-flex align-items-stretch">
+      <main className="adminAllCourses d-flex flex-wrap justify-content-center gap-3 pb-5">
+        {enabledCourses?.map((elem, index) => {
+          return (
+            <EnabledCourses
+              elem={elem}
+              key={index}
+              setUpdateCourses={setUpdateCourses}
+            />
+          );
+        })}
+      </main>
+    </Row>
   );
 };

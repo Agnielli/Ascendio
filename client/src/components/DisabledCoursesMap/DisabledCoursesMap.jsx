@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { DisabledCourses } from "../DisabledCourses/DisabledCourses";
+import { Row } from "react-bootstrap";
 
 export const DisabledCoursesMap = () => {
   const [disabledCourses, setDisabledCourses] = useState();
@@ -19,8 +20,8 @@ export const DisabledCoursesMap = () => {
   }, [updateCourses]);
 
   return (
-    <>
-      <div className="adminAllCourses d-flex flex-wrap justify-content-center gap-3 pb-5">
+    <Row className="d-flex align-items-stretch">
+      <main className="adminAllCourses d-flex flex-wrap justify-content-center gap-3 pb-5">
         {disabledCourses?.map((elem, index) => {
           return (
             <DisabledCourses
@@ -30,7 +31,7 @@ export const DisabledCoursesMap = () => {
             />
           );
         })}
-      </div>
-    </>
+      </main>
+    </Row>
   );
 };
