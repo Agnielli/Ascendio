@@ -47,7 +47,17 @@ export const CardRates = ({ resetCourse, setResetCourse, setShowCardRate, rates}
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setNewRate({ ...newRate, [name]: value });
+    const regex = /^[1-5]$/;
+  
+    if (name === 'course_rates') {
+      if (regex.test(value)) {
+        setNewRate({ ...newRate, [name]: value });
+      } else {
+        setMsgError("Inserta un valor entre 1 y 5");
+      }
+    } else {
+      setNewRate({ ...newRate, [name]: value });
+    }
   };
 
 
@@ -65,7 +75,7 @@ export const CardRates = ({ resetCourse, setResetCourse, setShowCardRate, rates}
               name="course_rates"
               value={newRate?.course_rates}
               onChange={handleChange}
-              className="cardRatesInput my-1"
+              className="cardRatesInput mb-3"
               autoFocus
             />
             <Form.Control
@@ -74,9 +84,9 @@ export const CardRates = ({ resetCourse, setResetCourse, setShowCardRate, rates}
               name='commentary'
               value={newRate?.commentary}
               onChange={handleChange}
-              className="cardRatesInput"
+              className="cardRatesInput mb-3"
             />
-             <h6>{msgError}</h6>
+             <h6 className="text-center mb-2"  style={{ color: '#E25252' }}>{msgError}</h6>
              <div className="d-flex justify-content-center"> 
             <Button
               className="Button3"

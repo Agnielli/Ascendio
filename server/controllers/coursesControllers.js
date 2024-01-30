@@ -469,19 +469,11 @@ ORDER BY course.date DESC`;
       });
   }
 
-  updateFollowers = (req, res) =>{
+  // este se usa pero no se pinta, se podrá borrar en futuro
+  getPeopleVotesCourses = (req, res) =>{
     const {course_id} = req.params
 
-    let sql = `UPDATE course
-    SET followers = (
-    SELECT COUNT(DISTINCT user_id)
-    FROM (
-      SELECT user_id, course_id FROM user_enrolls_course
-      UNION ALL
-      SELECT user_id, course_id FROM user_wishes_course
-    ) as combined
-    WHERE combined.course_id = course.course_id
-    )`
+    let sql = `SELECT COUNT(*) as numero FROM user_rates_course WHERE course_id = ${course_id}`
 
     connection.query(sql, (err, result) => {
       err ? res.status(500).json(err) : res.status(200).json(result);
