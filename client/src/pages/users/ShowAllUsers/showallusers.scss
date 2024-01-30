@@ -1,8 +1,10 @@
-.userMiniCardAdminView3 {
+
+.cards-showuser {
   background-color: rgb(43, 42, 41);
   color: white;
   border-radius: 6rem;
   padding: 2rem;
+  max-width: 550px;
 
   img {
     border-radius: 50%;
@@ -21,9 +23,8 @@
 }
 
 
-
 @media screen and (max-width: 500px) {
-  .userMiniCardAdminView3 {
+  .showallusers {
     padding: 1rem;
     border-radius: 3rem;
 

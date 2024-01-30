@@ -241,41 +241,42 @@ export const AdminHome = () => {
 
 
       <div className="">
-        {showCourseButtons && (
-          <>
-            <Row className="ButtonsRow2 d-flex justify-content-center align-items-center text-center m-5">
+      {showCourseButtons && (
+  <>
+    <Row className="ButtonsRow2 d-flex justify-content-center align-items-center text-center m-5">
+      <Col lg={2} md={3} xs={12}>
+        <Button className="ButtonNoBG" onClick={() => showAllCourses()}>
+          Todos los cursos
+        </Button>
+      </Col>
 
-              <Col lg={2} md={3} xs={12}>
-                <Button className="ButtonNoBG" onClick={() => showAllCourses()}>
-                  Todos los cursos
-                </Button>
+      <Col lg={2} md={3} xs={12}>
+        <Button
+          className="ButtonNoBG"
+          onClick={() => showAllEnabledCourses()}
+        >
+          Cursos Activos
+        </Button>
+      </Col>
 
+      <Col lg={2} md={3} xs={12}>
+        <Button
+          className="ButtonNoBG"
+          onClick={() => showAllDisabledCourses()}
+        >
+          Cursos Bloqueados
+        </Button>
+      </Col>
+    </Row>
 
-                <Button
-                  className="ButtonNoBG"
-                  onClick={() => showAllEnabledCourses()}
-                >
-                  Cursos Activos
-                </Button>
-
-
-                <Button
-                  className="ButtonNoBG"
-                  onClick={() => showAllDisabledCourses()}
-                >
-                  Cursos Bloqueados
-                </Button>
-              </Col>
-
-            </Row>
-
-            <Row>
-              {showCourses && <AdminCourses />}
-              {showDisabledCourses && <DisabledCoursesMap />}
-              {showEnabledCourses && <EnabledCoursesMap />}
-            </Row>
-          </>
-        )}
+    <Row className="adminAllCourses justify-content-center pb-5">
+      {showCourses && <AdminCourses />}
+      {showEnabledCourses && <EnabledCoursesMap />}
+      {showDisabledCourses && <DisabledCoursesMap />}
+   
+    </Row>
+  </>
+)}
       </div> 
     </main>
 

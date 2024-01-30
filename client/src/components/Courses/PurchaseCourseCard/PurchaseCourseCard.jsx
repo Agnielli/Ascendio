@@ -43,20 +43,19 @@ export const PurchaseCourseCard = () => {
     <Col>
       <header className="headerCursosComprados">
         <div
-          className="d-flex justify-content-between p-5"
+          className="d-flex justify-content-between divHeader p-5"
           style={{ color: "white" }}
         >
-          <h2>Mis cursos comprados</h2>
+          <h2 className="text-center">Mis cursos comprados</h2>
           <input onChange={handleChange} placeholder="🔍..." value={filter} className="buscador"/>
         </div>
       </header>
-      <main className="mainCursosComprados d-flex flex-wrap justify-content-center gap-3 pb-5">
-        <Row className="d-flex align-items-stretch">
+      <main className="mainCursosComprados gap-3 pb-5">
+      <Row className="justify-content-center">
         {findCourse?.map((elem) => {
           return (
             <Col xs={12} md={6} lg={4} xxl={3} className="d-flex">
             <Card
-              // style={{ width: "22rem" }}
               key={elem.course_id}
               className="mapeoCursosComprados text-center mb-4"
               style={{ width: "100%" }}>
