@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Row } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import NavBarApp from "../components/NavBarApp/NavBarApp";
 import { Home } from "../pages/dashboard/Home/Home";
 import { Register } from "../pages/auth/Register/Register";
@@ -57,8 +57,7 @@ export const RoutesApp = () => {
   }, [token]);
 
   return (
-    <BrowserRouter>
-      <Row>
+    <BrowserRouter>      
         <NavBarApp />
         <Routes>
           {!token && (

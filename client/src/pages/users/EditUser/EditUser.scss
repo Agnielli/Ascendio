@@ -1,4 +1,51 @@
+@use "../../../../public/stylesheets/variables.scss" as *;
+
+.EditUserApp{
+  .avatar {
+    cursor: pointer;
+    display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: $accent2-color;
+
+  }
+  .UserNameApp {
+    h2{
+      color: $accent-color;
+      margin: 0;
+    }    
+  }
+  
+  padding:0 10vw;
+
+  .ButtonEditUser1{
+    display: flex;
+    width: 35vw; 
+    padding: 6px 0px 6px 20px !important;       
+  }
+
+  .FormularioDatosUsuario{
+    background-color: $accent2-color;
+    padding: 12px;
+    border-radius: 25px;
+    
+  }
+
+}
+
+@media (max-width: 412px) {
+  .ButtonEditUser1{
+    display: flex;
+    width: 100% !important; 
+    padding: 6px 0px 6px 20px !important; 
+      
+  }
+
+  
+   
+ }
 .avatar img {
   cursor: pointer;
  
 }
+
