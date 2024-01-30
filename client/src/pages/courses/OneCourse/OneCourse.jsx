@@ -366,9 +366,9 @@ export const OneCourse = () => {
                   : `${oneCoursePpal?.price}€`}
               </Card.Text>
 
-              <span class="material-symbols-outlined bubbleCourse">
+              <a href="#rate"> <span  class="material-symbols-outlined bubbleCourse">
                 chat_bubble
-              </span>
+              </span></a>
 
               {userId !== userCourse && (
                 <button className="likeBoton" onClick={handleWishes}>
@@ -388,18 +388,6 @@ export const OneCourse = () => {
             <Card.Text className="descriptionCourse m-4">
               {oneCoursePpal?.description}
             </Card.Text>
-
-            {addSection && (
-              <FormAddSection
-                sections={sections}
-                setSections={setSections}
-                addSection={addSection}
-                setAddSection={setAddSection}
-                course_id={course_id}
-                setResetCourse={setResetCourse}
-                resetCourse={resetCourse}
-              />
-            )}
             
             <Accordion defaultActiveKey="1">
               {orderedSections.map((elem, index) => {
@@ -502,11 +490,11 @@ export const OneCourse = () => {
         )}
 
         {ratingAverage && (
-          <div className="mt-3">
+          <div id="rate" className="mt-3">
             <h5 className="pt-3 text-center"> Valoración: {ratingAverage} <span style={{ color: '#FFD800' }}>★</span> · {peopleVotesCourse} {peopleVotesCourse === 1 ? "voto" : "votos"}</h5>
             <h5 className="py-3 text-center">¿Qué opina la gente?</h5>
 
-            <div className="d-flex flex-wrap gap-2 pb-3">
+            <div className="d-flex flex-wrap justify-content-center gap-2 pb-3">
               {rates?.map((elem) => (
                 <CardRatingsOneCourse
                   key={elem.user_rater_user_id}
@@ -517,35 +505,6 @@ export const OneCourse = () => {
           </div>
         )}
       </section>
-
-      
     </>
   );
 };
-
-
-{/* <Accordion defaultActiveKey="1">
-              {orderedSections.map((elem, index) => {
-                return (
-                  <CardSection
-                    userId={userId}
-                    userCourse={userCourse}
-                    elem={elem}
-                    key={elem.section_id}
-                    deleteSection={deleteSection}
-                    course_id={course_id}
-                    sections={sections}
-                    topics={topics}
-                    setTopics={setTopics}
-                    setResetCourse={setResetCourse}
-                    resetCourse={resetCourse}
-                    deleteTopic={deleteTopic}
-                    index={index + 1}
-                    setResource={setResource}
-                    resource={resource}
-                    deleteResource={deleteResource}
-                    isIntoValidate={isIntoValidate}
-                  />
-                );
-              })}
-            </Accordion> */}
