@@ -13,12 +13,14 @@ export const FormAddSection = ({setAddSection,course_id, resetCourse, setResetCo
     setNewSection(e.target.value)
   }
 
-  let regexSection = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ.,:?¿!¡]{1,50}$/;
+  let regexSection = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ.,:?¿!¡]{0,50}$/;
   
   const handleSubmit = () =>{
     let data = {newSection, course_id}
       if (!regexSection.test(newSection)) {
-      setMsgError("No se permiten más de 50 caracteres");
+        setMsgError("No se permiten más de 50 caracteres");
+      }else if(newSection === ''){
+        setMsgError("Escribe el título de la sección");
       }else if(newSection !== ''){
     axios
       .post("http://localhost:3000/courses/addsection", data)

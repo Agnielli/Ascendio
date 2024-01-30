@@ -388,18 +388,6 @@ export const OneCourse = () => {
             <Card.Text className="descriptionCourse m-4">
               {oneCoursePpal?.description}
             </Card.Text>
-
-            {addSection && (
-              <FormAddSection
-                sections={sections}
-                setSections={setSections}
-                addSection={addSection}
-                setAddSection={setAddSection}
-                course_id={course_id}
-                setResetCourse={setResetCourse}
-                resetCourse={resetCourse}
-              />
-            )}
             
             <Accordion defaultActiveKey="1">
               {orderedSections.map((elem, index) => {
