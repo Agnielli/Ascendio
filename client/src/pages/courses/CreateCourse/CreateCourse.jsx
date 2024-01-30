@@ -94,7 +94,7 @@ export const CreateCourse = () => {
   };
 
   return (
-    <Row className="d-flex justify-content-center p-5 FormulariosContainer createcourseformulario ">
+    <Row className="d-flex justify-content-center text-center p-5 FormulariosContainer createcourseformulario ">
       <Col md={4}>
         <Form onSubmit={handleSubmit}>
           <h2>Crea tu curso</h2>
