@@ -108,7 +108,7 @@ export const OneUserCourses = () => {
                     <Card.Text className="priceCourse cardtitle px-3 my-2">
                       {Number(elem?.price) === 0 ? "GRATIS" : `${elem?.price}€`}
                     </Card.Text>
-                    <div className="d-flex justify-content-between mt-auto">
+                    <div className="d-flex justify-content-evenly">
                       <Button
                         onClick={() => navigate(`/course/${elem.course_id}`)}
                         className="Button3"
@@ -119,7 +119,7 @@ export const OneUserCourses = () => {
                         onClick={() => openModalDelete(elem.course_id)}
                         className="Button3"
                       >
-                        Eliminar curso
+                        Eliminar
                       </Button>
                     </div>
                   </Card.Body>
