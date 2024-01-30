@@ -3,7 +3,6 @@ import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import './modalResource.scss'
-import "../../../public/stylesheets/ButtonsApp.scss";
 
 export const ModalResource = ({
   showModalArchivo,
@@ -43,7 +42,6 @@ export const ModalResource = ({
     axios
       .post(`http://localhost:3000/courses/addresourcepdf`, newFormData)
       .then((res) => {
-        console.log('PPPPPPPPP', res.data);
         setResetCourse(!resetCourse)
         setUrl(""); 
         handleClose()
@@ -54,7 +52,7 @@ export const ModalResource = ({
   };
 
   return (
-    <Row className="d-flex justify-content-center p-5">
+    <Row className="d-flex justify-content-center p-5 modalResource">
       <Col md={4}>
         <Modal show={showModalArchivo} onHide={handleClose}>
           <Modal.Header closeButton className="modalResource">
@@ -96,6 +94,7 @@ export const ModalResource = ({
                   type="text"
                   value={url}
                   onChange={handleChange}
+             
                 />
               </Form.Group>
             ) : null}
