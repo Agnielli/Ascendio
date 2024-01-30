@@ -45,7 +45,7 @@ export const VeryFyPassword = ({setShowNewPassword, setShowVerifyPassword, setSh
     <>
 
     <Form className="FormularioDatosUsuario FormulariosContainer">
-    <h2>VERIFICAR CONTRASEÑA:</h2>
+    <h4>VERIFICAR CONTRASEÑA:</h4>
         <Form.Group controlId="formBasicPassword">
           <Form.Label></Form.Label>
           <div className={`password-container ${isPasswordFocused ? 'eye-icon-focused' : ''}`}>
@@ -77,20 +77,20 @@ export const VeryFyPassword = ({setShowNewPassword, setShowVerifyPassword, setSh
           
         </Form.Group>
         <p style={{ marginBottom: '1rem' }}>{msgError || '\u00A0'}</p>
-        <div className="DivGrisParaBotones d-flex justify-content-between mt-3 mb-1">
+        <div className="DivGrisParaBotones mt-3">
           <Button
           className="Button3"
             variant="primary me-2"
             onClick={handleSubmit}
           >
-            Siguiente
+            SIGUIENTE
           </Button>
           <Button
           className="Button1"
             variant="primary me-2"
             onClick={()=>setShowChangePassword(false)}
           >
-           cancelar
+           CANCELAR
           </Button>
         </div>
 
