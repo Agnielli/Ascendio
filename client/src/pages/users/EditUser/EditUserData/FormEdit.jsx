@@ -68,10 +68,6 @@ export const FormEdit = ({ user, setUser, setShowForm }) => {
   return (
     <div className="FormularioDatosUsuario">
       <div className="avatar">
-    <>
-    
-      <h2>Editar usuario:</h2>
-      <div className="avatar d-flex align-items-center justify-content-center">
         <label htmlFor="fileInput">
           {user?.img ? (
             <img
@@ -89,7 +85,9 @@ export const FormEdit = ({ user, setUser, setShowForm }) => {
           onChange={handleFile}
         />
       </div>
+
       <Form className="FormulariosContainer d-flex flex-column">
+        
         <Form.Group className="mb-3" controlId="formBasicNickName">
           <Form.Label></Form.Label>
           <Form.Control
