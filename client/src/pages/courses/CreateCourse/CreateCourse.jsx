@@ -99,7 +99,7 @@ export const CreateCourse = () => {
         <Form onSubmit={handleSubmit}>
           <h2>Crea tu curso</h2>
           <Form.Group controlId="formFile" className="mb-3 d-flex justify-content-center">
-              <div className="imagencurso  "> 
+              <div className="imagencurso" > 
               <Form.Label className="d-flex justify-content-center">
                 <span className="material-symbols-outlined addIcon">
                   photo_camera
@@ -152,7 +152,7 @@ export const CreateCourse = () => {
                 selectedOption.length >= 4 && !selectedOption.includes(option)
               }
               
-              className="react-select-container"
+              className="react-select-container mb-4"
               classNamePrefix="react-select"
             />
           </Form.Group>
@@ -163,6 +163,7 @@ export const CreateCourse = () => {
             variant="outline-success"
             className="me-3 Button2"
             type="submit"
+            
           >
             Siguiente
           </Button>
