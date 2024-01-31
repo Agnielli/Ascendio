@@ -168,7 +168,7 @@ export const AdminHome = () => {
 
   return (
     <main className="AdminRow">
-      <Row>
+      <Row className="adminhome-row-principal-padre">
         <Col
           xl={3} lg={6} xs={6}
           className="ColBotonesAdminUsuarios flex-column row-gap-4 my-5 ms-5"
