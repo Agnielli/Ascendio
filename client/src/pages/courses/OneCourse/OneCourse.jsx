@@ -354,8 +354,8 @@ export const OneCourse = () => {
               </div>
             </div>
 
-            <Row className="optionsCourse">
-              <Col lg={8}  className="optionBotones pb-3">
+            <div className="optionsCourse">
+
                 {userId !== userCourse && (
                   <button
                     className="Button1"
@@ -370,27 +370,29 @@ export const OneCourse = () => {
                     ? "GRATIS"
                     : `${oneCoursePpal?.price}€`}
                 </Card.Text>
-                </Col>
-                <Col lg={4} className="optionBotones">
-                <a href="#rate" className="botonBubble"> <span  class="material-symbols-outlined bubbleCourse">
-                  chat_bubble
-                </span></a>
-                {userId !== userCourse && (
-                  <button className="likeBoton" onClick={handleWishes}>
-                    {isIntoWishes ? (
-                      <span class="material-symbols-outlined 1 deleteLike">
-                      favorite
-                      </span>
-                    ) : (
-                      <span class="material-symbols-outlined 0 addLike">
-                        heart_plus
-                      </span>
-                    )}
-                  </button>
-                )}
-                </Col>
+
+
+                <div className="icons">
+                  <a href="#rate"> <span  class="material-symbols-outlined bubbleCourse">
+                    chat_bubble
+                  </span></a>
+                  {userId !== userCourse && (
+                    <button className="likeBoton" onClick={handleWishes}>
+                      {isIntoWishes ? (
+                        <span class="material-symbols-outlined 1 deleteLike">
+                        favorite
+                        </span>
+                      ) : (
+                        <span class="material-symbols-outlined 0 addLike">
+                          heart_plus
+                        </span>
+                      )}
+                    </button>
+                  )}
+                </div>
+
               
-            </Row>
+            </div>
 
             <Card.Text className="descriptionCourse m-4">
               {oneCoursePpal?.description}
