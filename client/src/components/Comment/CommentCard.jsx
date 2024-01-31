@@ -1,15 +1,12 @@
-import React from 'react'
-import { Button, Card } from 'react-bootstrap'
+import React from "react";
+import './CommentCard.scss'
 
-export const CommentCard = ({elem}) => {
+export const CommentCard = ({ elem }) => {
   return (
-    <Card style={{ width: '18rem' }}>
-      <Card.Body>
-        <Card.Title>{elem.nickname}</Card.Title>
-        <Card.Text>
-            {elem.description}
-        </Card.Text>
-      </Card.Body>
-    </Card>
-  )
-}
+    <div className="CommentDiv">
+      <h6 className="mb-3">{elem.nickname}</h6>
+      <p>{elem.description}</p>
+      <p></p>
+    </div>
+  );
+};

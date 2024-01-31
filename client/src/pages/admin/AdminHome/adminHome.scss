@@ -9,33 +9,42 @@
     }
   }
 
-  @media screen and (max-width: 992px) {
-    button {
-      font-size: larger;
-    }
-    
-  }
-
   .ButtonsRow {
     button {
-      width: 8rem;
+      width: 14ch;
     }
+  }
+
+  .TradeButtonsRow {
+    button {
+      text-align: center;
+      width: 10ch;
+    }
+  }
+
+  .ColBotonesAdminUsuarios {
+    @media screen and (max-width: 1200px) {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+  }
+
+  .AscendioColorBG {
+    background-color: #e15252;
+  }
+  
+  .AscendioColor {
+    color: #e15252;
   }
 
   .ButtonNoBG {
-    background-color: transparent !important;
-    border: none !important;
-    text-decoration: underline;
+    background-color: transparent;
     color: #e15252;
+    border: none;
+    text-decoration: underline;
   }
   
-  .ButtonNoBG:active {
-    color: #a33b3b;
-  }
-
-  .ButtonNoBG:hover {
-    color: #a33b3b;
-  }
 }
 
 

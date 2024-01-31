@@ -25,7 +25,7 @@ export const AdminActivateUser = () => {
         <Col
           className="d-flex justify-content-center"
           key={elem.user_id}
-          xl={6}
+          xl={12}
           xs={12}
         >
           <ActivatedUserMiniCard

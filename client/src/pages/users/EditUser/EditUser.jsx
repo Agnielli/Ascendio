@@ -143,7 +143,7 @@ export const EditUser = () => {
           </Col>
           
             <Col xs={12} sm={6} className="p-0">
-              <Button className="Button5 ButtonEditUser1 mb-4 mt-4" onClick={verSection}>EDIRAR DATOS DEL USUARIO</Button>
+              <Button className="Button5 ButtonEditUser1 mb-4 mt-4" onClick={verSection}>EDITAR DATOS DEL USUARIO</Button>
               <Button className="Button5 ButtonEditUser1 mb-4" onClick={verCategoryUser}> EDITAR CATEGORÍA </Button>
               <Button className="Button5 ButtonEditUser1 mb-4" onClick={verChangePassword}>EDITAR DATOS DE LOGIN </Button>
               <Button className="Button5 ButtonEditUser1 mb-4" onClick={verDeleteUser}>ELIMINAR CUENTA </Button>
@@ -180,7 +180,7 @@ export const EditUser = () => {
                     />
                   </Form.Group>
                   <div className="DivGrisParaBotones mt-3">
-                    <Button className="Button3" type="submit">AEPTAR</Button>
+                    <Button className="Button3" type="submit">ACEPTAR</Button>
                     <Button className="Button1" onClick={() => setShowCategories(false)}>CANCELAR</Button>
                   </div>
                 </Form>

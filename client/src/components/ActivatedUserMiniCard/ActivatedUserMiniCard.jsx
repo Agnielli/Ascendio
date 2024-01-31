@@ -30,19 +30,19 @@ export const ActivatedUserMiniCard = ({ elem, update, setUpdate }) => {
       </div>
       <div className="d-flex flex-column flex-xl-row align-items-center text-center gap-4">
         <div className="d-flex gap-2 gap-xl-3">
-          <div className="">
+          <div>
             <p className="fw-bold">{elem.nickname}</p>
             <p>{elem.total_followers} Seguidores</p>
           </div>
-          <div className="">
+          <div>
             <p>{elem.correct_posts} Acertados</p>
             <p>{elem.incorrect_posts} Errados</p>
           </div>
         </div>
-        <div className="">
+        <div>
           <Button
             variant="danger"
-            className="text-dark"
+            className="Button4"
             onClick={() => disableUser(elem.user_id)}
           >
             Desactivar

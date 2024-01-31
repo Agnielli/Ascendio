@@ -1,20 +1,27 @@
 import React from "react";
-import { Card } from "react-bootstrap";
+import "./TradeCard.scss";
 
 export const TradeCard = ({ elem }) => {
   return (
-    <Card style={{ width: "18rem" }}>
-      <Card.Body>
-        
-        <Card.Title>{elem.nickname}</Card.Title>
-        <Card.Text>Divisa: {elem.currency}</Card.Text>
-        <Card.Text>Precio de entrada: {elem.entry_price}</Card.Text>
-        <Card.Text>Parar pérdida: {elem.stop_loss}</Card.Text>
-        <Card.Text>Beneficio: {elem.take_profit}</Card.Text>
-        {elem.correct === null && <Card.Text>Estado: Pendiente de aprobación</Card.Text>}
-        {elem.correct === 1 && <Card.Text>Estado: Acertado</Card.Text>}
-        {elem.correct === 0 && <Card.Text>Estado: Errado</Card.Text>}
-      </Card.Body>
-    </Card>
+    <div className="TradeDiv align-items-center text-center">
+      <img
+        src={
+          elem.img != null
+            ? `http://localhost:3000/images/users/${elem.img}`
+            : `http://localhost:3000/images/users/descarga.png`
+        }
+        alt="Imagen de perfil del usuario"
+      />
+      <div className="text-start mt-4">
+        <h5 className="text-center mb-4">{elem.nickname}</h5>
+        <p>Divisa: {elem.currency}</p>
+        <p>Precio de entrada: {elem.entry_price}</p>
+        <p>Parar pérdida: {elem.stop_loss}</p>
+        <p>Beneficio: {elem.take_profit}</p>
+        {elem.correct === null && <p>Estado: Pendiente</p>}
+        {elem.correct === 1 && <p>Estado: Acertado</p>}
+        {elem.correct === 0 && <p>Estado: Errado</p>}
+      </div>
+    </div>
   );
 };
