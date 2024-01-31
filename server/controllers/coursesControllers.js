@@ -48,7 +48,7 @@ class coursesControllers {
     LEFT JOIN course_tag ON course.course_id = course_tag.course_id
     LEFT JOIN tag ON course_tag.tag_id = tag.tag_id
     LEFT JOIN user_rates_course ON course.course_id = user_rates_course.course_id
-    WHERE course.is_disabled = 1 AND course.is_deleted = 0
+    WHERE course.is_disabled = 0 AND course.is_deleted = 0
     GROUP BY course.course_id, course.title, course.description, course.price, course.is_disabled, course.img ORDER BY
     average_rating DESC`;
     
@@ -79,7 +79,7 @@ FROM
     LEFT JOIN tag ON course_tag.tag_id = tag.tag_id
     LEFT JOIN user_rates_course ON course.course_id = user_rates_course.course_id
 WHERE
-    course.is_disabled = 1 AND course.is_deleted = 0
+    course.is_disabled = 0 AND course.is_deleted = 0
 GROUP BY
     course.course_id, course.title, course.description, course.price, course.is_disabled, course.img
 ORDER BY course.date DESC`;
@@ -236,7 +236,7 @@ ORDER BY course.date DESC`;
 
   viewPurchasedCourse = (req, res) => {
     let sql = `SELECT * FROM course WHERE is_completed = 1 AND is_deleted = 0`;
-    //TODO: cambiare is_completed con is_bought`
+    
     connection.query(sql, (err, result) => {
       err ? res.status(500).json(err) : res.status(200).json(result);
     });
@@ -527,7 +527,7 @@ LEFT JOIN
 LEFT JOIN
     user_wishes_course ON course.course_id = user_wishes_course.course_id
 WHERE
-    course.is_disabled = 1
+    course.is_disabled = 0
     AND course.is_deleted = 0
     AND user_wishes_course.user_id = ${user_id}
 GROUP BY
@@ -572,7 +572,7 @@ LEFT JOIN
 LEFT JOIN
     user_enrolls_course ON course.course_id = user_enrolls_course.course_id
 WHERE
-    course.is_disabled = 1
+    course.is_disabled = 0
     AND course.is_deleted = 0
     AND user_enrolls_course.user_id = ${user_id}
 GROUP BY
