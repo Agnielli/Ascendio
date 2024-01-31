@@ -37,6 +37,7 @@ export const OneCourse = () => {
   const [showCardRate, setShowCardRate] = useState(true);
   const [resetrate, setResetrate] = useState();
   const [peopleVotesCourse, setPeopleVotesCourse] = useState(0);
+  const [isConfirmed, setIsConfirmed] = useState(false)
   
 
   const navigate = useNavigate();
@@ -62,6 +63,9 @@ export const OneCourse = () => {
         setResource(res.data.resource);
         if (res.data.is_completed === 1) {
           setIsIntoValidate(true);
+        }
+        if(res.data.is_disabled === 0){
+          setIsConfirmed(true)
         }
         setUserCourse(res.data.user_id);
       })
@@ -326,7 +330,8 @@ export const OneCourse = () => {
                   variant="outline-success"
                   className="editIcon"
                   onClick={openModal}
-                  disabled={isIntoValidate ? true : false}
+                  disabled={isIntoValidate && !isConfirmed ? true : false}
+                  
                 >
                   <span class="material-symbols-outlined">stylus</span>
                 </button>

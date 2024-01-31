@@ -95,9 +95,9 @@ export const CreateCourse = () => {
   };
 
   return (
-    <Row className="d-flex justify-content-center text-center p-5 EdicionCursosContainerFormulario createcourseformulario ">
+    <Row className="d-flex justify-content-center text-center p-5  EdicionCursosContainerFormulario createcourseformulario ">
       <Col md={4}>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} >
           <h2>Crea tu curso</h2>
           <Form.Group controlId="formFile" className="mb-3 d-flex justify-content-center">
               <div className="imagencurso" > 
@@ -162,7 +162,7 @@ export const CreateCourse = () => {
 
           <Button
             variant="outline-success"
-            className="me-3 Button2"
+            className="me-3  Button2"
             type="submit"
             
           >
@@ -170,7 +170,7 @@ export const CreateCourse = () => {
           </Button>
           <Button
             variant="outline-success"
-            className="me-3 Button2"
+            className="me-3  Button2"
             onClick={() => navigate("/profile")}
           >
             Cancelar
