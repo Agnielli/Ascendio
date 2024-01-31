@@ -67,24 +67,29 @@ export const FormEdit = ({ user, setUser, setShowForm }) => {
 
   return (
     <div className="FormularioDatosUsuario">
-      <div className="avatar">
-        <label htmlFor="fileInput">
-          {user?.img ? (
-            <img
-              src={`http://localhost:3000/images/users/${user?.img}`}
-              alt="Avatar"
-            />
-          ) : (
-            <p>{user?.nickname.charAt(0).toUpperCase()}</p>
-          )}
-        </label>
-        <input
-          id="fileInput"
-          type="file"
-          style={{ display: "none" }}
-          onChange={handleFile}
-        />
+      <div className="containerAvatar d-flex">
+        <div className="avatar">
+          <label htmlFor="fileInput">
+            {user?.img ? (
+              <img
+                src={`http://localhost:3000/images/users/${user?.img}`}
+                alt="Avatar"
+              />
+            ) : (
+              <p>{user?.nickname.charAt(0).toUpperCase()}</p>
+            )}
+          </label>
+          <input
+            id="fileInput"
+            type="file"
+            style={{ display: "none" }}
+            onChange={handleFile}
+          />
+        </div>
+        <div className="ciculoLapizEditar">
+          <img className="EditarFotoLapiz" src="../../../public/images/iconos/lapiznegro.png" alt="" /></div>
       </div>
+      
 
       <Form className="FormulariosContainer d-flex flex-column">
         
@@ -135,7 +140,7 @@ export const FormEdit = ({ user, setUser, setShowForm }) => {
           <Button className="Button3" variant="primary me-2" onClick={handleSubmit}>
             ACEPTAR
           </Button>
-          <Button  className="Button1"onClick={() => setShowForm(false)}>CANELAR</Button>
+          <Button  className="Button1"onClick={() => setShowForm(false)}>CANCELAR</Button>
         </div>
       </Form>
     </div>

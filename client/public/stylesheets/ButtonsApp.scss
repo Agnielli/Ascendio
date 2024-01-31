@@ -11,7 +11,10 @@
   font-weight: 500;
   transition: 0.3s;
 
-  &:hover,
+  &:hover{
+    background-color: $accent3-color;
+    color:$accent-color;
+  }
   &:active{
     background-color: $accent3-color;
     color:$accent-color;
@@ -28,7 +31,10 @@
   font-weight: 500;
   transition: 0.3s;
 
-  &:hover,
+  &:hover{
+    background-color: $accent-color !important;
+    color:$accent2-color !important;
+  }
   &:active{
     background-color: $accent-color !important;
     color:$accent2-color !important;
@@ -52,7 +58,10 @@
   border-radius: 25px;
   font-weight: 500;
   transition: 0.3s;
-  &:active,
+  &:active{
+    background-color: $accent-color;
+    color: $accent2-color;
+  }
   &:hover{
     background-color: $accent-color;
     color: $accent2-color;
@@ -68,7 +77,10 @@
   border-radius: 25px;
   font-weight: 500;
   transition: 0.3s;
-  &:active,
+  &:active{
+    background-color: $accent2-color ;
+    color:$accent2-color $accent2-color;
+  }
   &:hover{
     // background-color: $accent3-color ; este era el original
     background-color: $accent2-color ;
@@ -99,7 +111,7 @@
     color:$accent2-color;
   }
 
-  &.active{
+  &:active{
     background-color: $accent-color !important ;
     color:$accent2-color !important;
   }
