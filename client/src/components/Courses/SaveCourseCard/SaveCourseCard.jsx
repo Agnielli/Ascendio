@@ -96,11 +96,11 @@ export const SaveCourseCard = () => {
         </Row>
         {findCourse?.length === 0 && (
           <h4 className="alltrades-error-nohaypostsnitrades text-center">
-          No hay{" "}
+          No tienes{" "}
           <span className="alltrades-error-nohaypostsnitrades-hijo">
             Cursos
           </span>{" "}
-          disponibles en este momento.
+          guardados en este momento.
         </h4>
         )}
         

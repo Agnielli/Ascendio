@@ -98,7 +98,7 @@ export const PurchaseCourseCard = () => {
           <span className="alltrades-error-nohaypostsnitrades-hijo">
             Cursos
           </span>{" "}
-          disponibles en este momento.
+          comprados en este momento.
         </h4>
         )}
         </Row>
