@@ -4,6 +4,7 @@ import { AscendioContext } from "../../../context/AscendioContext";
 import { Button, Card, InputGroup, ListGroup } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import "./showallusers.scss";
+import "../../../../public/stylesheets/ButtonsApp.scss";
 
 export const ShowAllUsers = () => {
   const [show, setShow] = useState(1);
@@ -111,17 +112,28 @@ export const ShowAllUsers = () => {
       {show === 1 && (
         <>
           <div className="d-flex gap-1 m-4">
-            <Button className="mb-2" onClick={() => setShow(2)}>
+            <Button className="mb-2 Button1" onClick={() => setShow(2)}>
               Top Usuarios con más Aciertos
             </Button>
-            <div className="d-flex gap-5 mb-1">
+            <div className="input-container">
+              <span className="material-symbols-outlined search-icon">
+                search
+              </span>
+              <input
+                onChange={handleChange}
+                placeholder="Buscar"
+                value={search}
+                className="buscador"
+              />
+            </div>
+            {/* <div className="d-flex gap-5 mb-1">
               <input
                 onChange={handleChange}
                 placeholder="🔍..."
                 value={search}
               />
-            </div>
-            <InputGroup className="d-flex justify-content-center flex-column align-items-start">
+            </div> */}
+            {/* <InputGroup className="d-flex justify-content-center flex-column align-items-start">
               <label htmlFor="filter">Filtrar por:</label>
               <select
                 id="filter"
@@ -134,14 +146,17 @@ export const ShowAllUsers = () => {
                 <option value="name">Name</option>
                 <option value="lastname">Lastname</option>
               </select>
-            </InputGroup>
+            </InputGroup> */}
           </div>
 
           <h2 className="text-center mb-4">Top Usuarios con más Seguidores</h2>
           <div className="d-flex flex-column align-items-center flex-wrap gap-2">
             {allUsersFilter?.map((elem) => {
               return (
-                <div key={elem.user_id} className="cards-showuser d-flex align-items-center justify-content-between gap-1 gap-xl-4 mb-2">
+                <div
+                  key={elem.user_id}
+                  className="cards-showuser d-flex align-items-center justify-content-between gap-1 gap-xl-4 mb-2"
+                >
                   <div>
                     <img
                       className="userImg"
@@ -167,7 +182,7 @@ export const ShowAllUsers = () => {
                     <div className="d-flex flex-column gap-2">
                       {user.user_id !== elem.user_id ? (
                         <Button
-                          variant="primary"
+                          className="Button1"
                           onClick={() => pulsarSeguirONo(elem.user_id)}
                         >
                           {followingUsers.includes(elem.user_id)
@@ -176,6 +191,7 @@ export const ShowAllUsers = () => {
                         </Button>
                       ) : null}
                       <Button
+                        className="Button1"
                         onClick={() =>
                           navigate(`/traderprofile/${elem.user_id}`)
                         }
@@ -199,14 +215,18 @@ export const ShowAllUsers = () => {
       {show === 2 && (
         <>
           <div className="d-flex gap-1 m-4">
-            <Button className="mb-2" onClick={() => setShow(1)}>
+            <Button className="mb-2 Button1 " onClick={() => setShow(1)}>
               Top Usuarios con más Seguidores
             </Button>
-            <div className="d-flex gap-5 mb-1">
+            <div className="input-container">
+              <span className="material-symbols-outlined search-icon">
+                search
+              </span>
               <input
                 onChange={handleChange}
-                placeholder="🔍..."
+                placeholder="Buscar"
                 value={search}
+                className="buscador"
               />
             </div>
           </div>
@@ -215,7 +235,10 @@ export const ShowAllUsers = () => {
           <div className="d-flex flex-column align-items-center flex-wrap gap-2">
             {allUsersFilter?.map((elem) => {
               return (
-                <div key={elem.user_id} className="cards-showuser d-flex align-items-center justify-content-between gap-1 gap-xl-4 mb-2">
+                <div
+                  key={elem.user_id}
+                  className="cards-showuser d-flex align-items-center justify-content-between gap-1 gap-xl-4 mb-2"
+                >
                   <div>
                     <img
                       className="userImg"

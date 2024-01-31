@@ -35,7 +35,7 @@ export const OneUserAllCourses = ({
   return (
     <Row>
       <Col>
-        {userCourses?.map((elem) => {
+        {userCourses ? userCourses.map((elem) => {
           return (
             <Card
               style={{ width: "18rem", marginBottom: "1rem" }}
@@ -57,7 +57,13 @@ export const OneUserAllCourses = ({
               </Card.Body>
             </Card>
           );
-        })}
+        }):<h4 className="alltrades-error-nohaypostsnitrades">
+        Este usuario no tiene{" "}
+        <span className="alltrades-error-nohaypostsnitrades-hijo">
+          Cursos
+        </span>{" "}
+        creados.
+      </h4>}
       </Col>
     </Row>
   );

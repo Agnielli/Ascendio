@@ -1,17 +1,15 @@
 @use "../../../../public/stylesheets/variables.scss" as *;
 
-
 .ascendio-home-row-padre {
   max-width: 100vw;
   height: auto;
   padding: 2vh 10vw;
 
-
   .ascendio-home-row-hijo {
     margin-bottom: 1rem;
     width: 100%;
     padding: 0 !important;
-    button{
+    button {
       width: 50%;
     }
   }
@@ -21,22 +19,25 @@
   height: auto;
   max-width: 100vw;
 
-
   .ascendio-home-col-cards {
+    width: 100%;
     color: white;
     @include display-flex(row, flex-start, center);
+    flex-wrap: wrap;
     gap: 0.5rem;
     padding: 0 !important;
 
     .ascendio-home-card-padre {
       background-color: $accent2-color;
       height: 400px;
+      min-width: 200px;
+      width: calc(25% - 0.5rem);
       color: white;
-      
+
       .ascendio-home-card-hijo {
         height: 100%;
         background-color: $accent2-color;
-        @include display-flex(column, space-between, flex-start);
+        @include display-flex(column, space-between, center);
 
         .ascendio-home-card-titulo {
           width: 100%;
@@ -53,10 +54,16 @@
           height: 40%;
           margin: 0 !important;
           padding: 1rem;
+
+          // overflow: hidden;
+          // display: -webkit-box;
+          // -webkit-line-clamp: 2; /* Ajusta el número de líneas que deseas mostrar */
+          // -webkit-box-orient: vertical;
+          // text-overflow: ellipsis;
         }
 
         .ascendio-home-card-imagen {
-          width: 100%;
+          width: 50%;
           height: 35%;
           border: 1px solid $accent-color;
         }

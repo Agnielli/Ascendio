@@ -119,14 +119,13 @@ export const Home = () => {
                 tradesHoy.map((elem) => {
                   return (
                     <Card
-                      style={{ width: "18rem", marginBottom: "1rem" }}
                       key={elem.post_id}
                       className="ascendio-home-card-padre"
                     >
                       {elem.type === 1 && ( // TIPO POST GENERAL
                         <Card.Body className="ascendio-home-card-hijo">
                           <Card.Title className="ascendio-home-card-titulo">
-                            <h3>Trader: {elem.nickname}</h3>
+                            <h3>{elem.nickname}</h3>
                           </Card.Title>
                           <Card.Text className="ascendio-home-card-texto">
                             {elem.description}
@@ -175,9 +174,9 @@ export const Home = () => {
                       {elem.type === 2 && (
                         <Card.Body className="ascendio-home-card-hijo">
                           <Card.Title className="ascendio-home-card-titulo">
-                            <h3>Trader: {elem.nickname}</h3>
+                            <h3>{elem.nickname}</h3>
                           </Card.Title>
-                          <Card.Text className="ascendio-home-card-texto ">
+                          <Card.Text className="ascendio-home-card-texto">
                             <p>Currency: {elem.currency}</p>
                             <p>
                               Estado:{" "}
@@ -202,7 +201,7 @@ export const Home = () => {
                           <div className="ascendio-home-card-botonera">
                             {user.user_id !== elem.user_id ? (
                               <Button
-                                className="Button2"
+                                className="Button2 button-with-ellipsis"
                                 variant="primary"
                                 onClick={() => pulsarSeguirONo(elem.user_id)}
                               >
@@ -212,7 +211,7 @@ export const Home = () => {
                               </Button>
                             ) : null}
                             <Button
-                              className="Button2"
+                              className="Button2 button-with-ellipsis"
                               onClick={() => {
                                 navigate(`/OneTradePost/${elem.post_id}`);
                               }}
