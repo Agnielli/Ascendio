@@ -29,14 +29,14 @@ export const ShowAllCommentsPost = ({ showModal, setShowModal, oneTrade }) => {
     axios
       .put(`http://localhost:3000/comments/deletecomments/${comment_id}`)
       .then((res) => {
-        console.log(res);
         setUpade(true);
       })
       .catch((error) => {
         console.log(error);
       });
   };
-  console.log(showComments);
+
+  console.log(new Date())
 
   return (
     <div className="comments">
