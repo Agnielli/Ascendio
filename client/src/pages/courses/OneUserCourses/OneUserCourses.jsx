@@ -65,7 +65,7 @@ export const OneUserCourses = () => {
     <Col>
       <header className="headerAllCoursesOneUser">
         <div
-          className="d-flex justify-content-between p-5 divHeader"
+          className="d-flex justify-content-between py-5 divHeader"
           style={{ color: "white" }}
         >
           <h2 className="text-center">Mis cursos</h2>
