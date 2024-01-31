@@ -390,10 +390,7 @@ export const OneCourse = () => {
                     </button>
                   )}
                 </div>
-
-              
             </div>
-
             <Card.Text className="descriptionCourse m-4">
               {oneCoursePpal?.description}
             </Card.Text>
