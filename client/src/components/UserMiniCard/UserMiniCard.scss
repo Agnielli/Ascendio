@@ -1,5 +1,7 @@
 .userMiniCardAdminView {
   background-color: rgb(43, 42, 41);
+  width: 100%;
+  max-width: 42rem;
   color: white;
   border-radius: 6rem;
   padding: 2rem;
@@ -20,7 +22,19 @@
   }
 }
 
-
+@media screen and (max-width: 640px) {
+  .AdminUserImg {
+    width: 30%;
+  }
+  .AdminUserStats {
+    width: 70%;
+  }
+  .AdminUserButton {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
 
 @media screen and (max-width: 500px) {
   .userMiniCardAdminView {
