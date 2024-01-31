@@ -143,7 +143,7 @@ export const TraderProfile = () => {
             <div className="d-flex flex-column">
             <Button 
               variant="primary" 
-              // onClick={handleShowPost}
+              onClick={() => navigate('/allcourses')}
               className="Button2"
             >
               MOSTRAR CURSOS

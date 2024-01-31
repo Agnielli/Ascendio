@@ -47,7 +47,7 @@ export const Users = () => {
               )}
             </div>
             <div className="d-flex flex-column align-items-center justify-content-center">
-              <p className="PorcentajeAciertos">Fiabilidad: {ratioTotal} %</p>
+              <p className="PorcentajeAciertos">Fiabilidad: {parseFloat(ratioTotal.toFixed(2))} %</p>
               <h2 className="m-0">
                 {user.nickname.charAt(0).toUpperCase() + user.nickname.slice(1)}
               </h2>
