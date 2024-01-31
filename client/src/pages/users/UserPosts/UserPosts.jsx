@@ -8,17 +8,20 @@ import { AllGeneralPosts } from "./AllGeneralPosts/AllGeneralPosts";
 import { AllTradePosts } from "./AllTradePosts/AllTradePosts";
 
 export const UserPosts = () => {
-  const [posts, setPosts] = useState();
+  const [posts, setPosts] = useState([]);
   const { user } = useContext(AscendioContext);
   const navigate = useNavigate();
   const [markTrade, setMarkTrade] = useState(false);
   const [showFilter, setShowFilter] = useState(0);
+
+  console.log(user);
 
   useEffect(() => {
     if (user) {
       axios
         .get(`http://localhost:3000/users/postsuser/${user.user_id}`)
         .then((res) => {
+          console.log(res.data);
           setPosts(res.data.datos);
           if (markTrade) {
             setMarkTrade(false);
@@ -30,9 +33,7 @@ export const UserPosts = () => {
     }
   }, [user, markTrade]);
 
-  if (posts) {
     console.log(posts);
-  }
 
   const markACorrect = (post_id, correct) => {
     if (posts) {

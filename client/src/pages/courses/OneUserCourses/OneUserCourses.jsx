@@ -65,7 +65,7 @@ export const OneUserCourses = () => {
     <Col>
       <header className="headerAllCoursesOneUser">
         <div
-          className="d-flex justify-content-between p-5 divHeader"
+          className="d-flex justify-content-between py-5 divHeader"
           style={{ color: "white" }}
         >
           <h2 className="text-center">Mis cursos</h2>
@@ -94,7 +94,8 @@ export const OneUserCourses = () => {
                   style={{ width: "100%" }}
                 >
                   <Card.Img
-                    style={{ height: "16rem", objectFit: "cover" }}
+                    style={{ height: "16rem"}}
+                    className={elem?.img === 'default.png' ? 'imgScale' : 'imgOneCourses'}
                     variant="top"
                     src={`http://localhost:3000/images/cursos/${elem.img}`}
                   />
@@ -140,7 +141,13 @@ export const OneUserCourses = () => {
         )}
 
         {findCourse?.length === 0 && (
-          <p>No se han encontrado cursos con estos valores</p>
+          <h4 className="alltrades-error-nohaypostsnitrades text-center">
+          No hay{" "}
+          <span className="alltrades-error-nohaypostsnitrades-hijo">
+            Cursos
+          </span>{" "}
+          creados en este momento.
+        </h4>
         )}
       </main>
     </Col>

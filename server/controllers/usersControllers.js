@@ -476,10 +476,54 @@ class usersControllers {
     }
   };
 
-  getPostsUser = (req, res) => {
+  getTradesPostsUser = (req, res) => {
     try {
       const { id } = req.params;
-      let sql = `SELECT post.*, post_resource.resource_type, post_resource.text as resource_text, category.category_name FROM post LEFT JOIN post_resource ON post.post_id = post_resource.post_id LEFT JOIN category ON post.category_id = category.category_id WHERE post.user_id = ${id};`;
+      let sql = `
+        SELECT 
+          post.*, 
+          post_resource.resource_type, 
+          post_resource.text as resource_text, 
+          category.category_name 
+        FROM 
+          post 
+          LEFT JOIN post_resource ON post.post_id = post_resource.post_id 
+          LEFT JOIN category ON post.category_id = category.category_id 
+        WHERE 
+          post.user_id = ${id} AND
+          post.type = 1;
+      `;
+      connection.query(sql, (error, result) => {
+        if (error) {
+          console.log("Error en sql", error);
+          res.status(400).json({ message: "Error en la SQL" });
+        } else {
+          res.status(200).json({ datos: result });
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).JSON({ message: "Error inesperado (CATCH)" });
+    }
+  };
+
+  getGeneralPostsUser = (req, res) => {
+    try {
+      const { id } = req.params;
+      let sql = `
+        SELECT 
+          post.*, 
+          post_resource.resource_type, 
+          post_resource.text as resource_text, 
+          category.category_name 
+        FROM 
+          post 
+          LEFT JOIN post_resource ON post.post_id = post_resource.post_id 
+          LEFT JOIN category ON post.category_id = category.category_id 
+        WHERE 
+          post.user_id = ${id} AND
+          post.type = 2;
+      `;
       connection.query(sql, (error, result) => {
         if (error) {
           console.log("Error en sql", error);
