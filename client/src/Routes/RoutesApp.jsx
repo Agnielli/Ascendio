@@ -42,22 +42,29 @@ import { Privacy } from "../pages/dashboard/Landing/Privacy/Privacy";
 import { CookiesPolicy } from "../pages/dashboard/Landing/CookiesPolicy/CookiesPolicy";
 import { ResourceViewer } from "../components/ResourceViewer/ResourceViewer";
 import { TradingViewWidget } from "../pages/dashboard/Landing/TradingViewWidget/TradingViewWidget";
+
 export const RoutesApp = () => {
+
   const { token } = useContext(AscendioContext);
+
   const [type, setType] = useState();
+
   useEffect(() => {
     if (token) {
       setType(jwtDecode(token).user.type);
     }
   }, [token]);
+
   return (
     <BrowserRouter>
       <NavBarApp />
       <Container fluid>
         <Routes>
+          
+          <Route path="/" element={token ? <Home /> : <Landing />} />
+          
           {!token && (
             <>
-              <Route path="/" element={<Landing />} />
               <Route path="/about" element={<AboutApp />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/register" element={<Register />} />
@@ -82,6 +89,7 @@ export const RoutesApp = () => {
               />
             </>
           )}
+ 
           {token && type === 2 && (
             <>
               <Route path="/home" element={<Home />} />
@@ -124,6 +132,7 @@ export const RoutesApp = () => {
               />
             </>
           )}
+          
           {token && type === 1 && (
             <>
               <Route path="/admin" element={<AdminHome />}>

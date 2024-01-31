@@ -19,7 +19,9 @@ function NavBarApp() {
     setIsLogged(false);
     navigate("/");
   };
+  console.log(user)
   const redirectTo = user ? "/home" : "/";
+  
   return (
     <header>
       <Navbar expand="lg" className="BG-navbar ">

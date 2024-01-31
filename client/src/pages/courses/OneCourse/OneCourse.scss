@@ -17,6 +17,10 @@
       border-radius: 10px;
       object-fit: cover;
     }
+    
+    .imgScale {
+      object-fit: scale-down;
+    }
 
     .oneCourseBody {
       width: 100%;
