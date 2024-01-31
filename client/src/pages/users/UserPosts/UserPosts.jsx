@@ -81,16 +81,16 @@ export const UserPosts = () => {
 
   return (
     <div className="userPosts">
-      <div className="d-flex p-5 gap-5">
-        <h2>Mis Posts</h2>
-        <Button 
-          className="Button2"
+      <div>
+      <Button 
+          className="Button1"
           onClick={() => navigate("/profile")}
         >
-          Volver
+          VOLVER
         </Button>
+        <h2>MIS POSTS</h2>
       </div>
-      <div className="d-flex justify-content-between stylesbuttons">
+      <div className="d-flex DivGrisParaBotones">
         <Button
           className="Button2"
           variant={showFilter === 0 ? "danger" : "primary"}
@@ -98,21 +98,21 @@ export const UserPosts = () => {
             setShowFilter(0);
           }}
         >
-          Todos
+          TODOS
         </Button>
         <Button
           className="Button2"
           variant={showFilter === 2 ? "danger" : "primary"}
           onClick={() => setShowFilter(2)}
         >
-          Trades
+          TRADE POSTS
         </Button>
         <Button
           className="Button2"
           variant={showFilter === 1 ? "danger" : "primary"}
           onClick={() => setShowFilter(1)}
         >
-          Generales
+          GENERAL POSTS
         </Button>
       </div>
       {showFilter === 0 && (
