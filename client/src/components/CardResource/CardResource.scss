@@ -9,8 +9,8 @@
     border: 1px solid $accent3-color;
     border-radius: 20px;
     margin-left: 5%;
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: 7%;
+    padding-right: 7%;
     
 
     .resourceIcon{
@@ -31,7 +31,22 @@
   }
 }
 
-
+@media (max-width: 1060px) {
+  .pplCardResource{
+    .botonResource{
+      padding-left: 8%;
+      padding-right: 8%;
+    }
+  }
+}
+@media (max-width: 972px) {
+  .pplCardResource{
+    .botonResource{
+      padding-left: 10%;
+      padding-right: 10%;
+    }
+  }
+}
 @media (max-width: 740px) {
   .pplCardResource{
     .botonResource{
