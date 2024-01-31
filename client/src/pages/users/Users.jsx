@@ -33,178 +33,194 @@ export const Users = () => {
   }
 
   return (
-    <>
-      <Row className="userRow">
-        <Col
-          xs={12}
-          xl={6}
-          className="d-flex flex-column w-50 gap-2 text-center p-5"
-        >
+    <main>
+      <Row className="UserProfileScss">
+        <Col xs={4} lg={4} className="d-flex justify-content-center p-0 ">
           <div>
-     <div className="avatarProfilo">
+            <div className="avatarProfilo">
               {user?.img ? (
                 <img src={`http://localhost:3000/images/users/${user.img}`} />
               ) : (
-                <img src={`http://localhost:3000/images/users/descarga.png`} />
+                <p className="letteruser">
+                  {user?.nickname.charAt(0).toUpperCase()}
+                </p>
               )}
-              </div>
-            <div className="d-flex align-items-center justify-content-center pt-3">
-              <button
-                className="editIcon"
-                onClick={() => navigate("/edituser")}
-              >
-                <span class="material-symbols-outlined">stylus</span>
-              </button>
-              <h5>{user?.nickname}</h5>
             </div>
-            <h5>Categoria/s: {statisticsUser?.user_categories}</h5>
-          </div>
-        </Col>
-        <Col
-          xs={12}
-          xl={6}
-          className="d-flex flex-column w-50 gap-2 text-center align-content-center justify-content-center p-5"
-        >
-             <div className="d-flex flex-column gap-2 align-items-center">
-            <h3 className="nombreUser">
-              {user?.name} {user?.lastname}
-            </h3>
-            <div className="d-flex flex-column gap-2">
-              <Button
-                className="Button4"
-           
-                onClick={() => setShowContent(!showContent)}
-              >
-                Crear Contenido
+            <div className="d-flex flex-column align-items-center justify-content-center">
+            <p className="PorcentajeAciertos">Fiabilidad: {ratioTotal} %</p>
+              <h2 className="m-0">
+                {user.nickname.charAt(0).toUpperCase() + user.nickname.slice(1)}
+              </h2>
+              <p className="m-0 mb-2">
+                {user?.name.charAt(0).toUpperCase() + user.name.slice(1)}{" "}
+                {user?.lastname.charAt(0).toUpperCase() +
+                  user.lastname.slice(1)}
+              </p>
+              <Button className="Button3" onClick={() => navigate("/edituser")}>
+                EDITAR USUARIO
               </Button>
-              {showContent && (
-                <>
-                  <Button
-                    className="Button4"
-                    onClick={() => setShowPost(!showPost)}
-                  >
-                    Crear Post
-                  </Button>
-                  {showPost && (
-                    <>
-                      <Button
-                        className="Button4"
-                        onClick={() => navigate("/createtrade")}
-                      >
-                        Crear TradePost
-                      </Button>
-                      <Button
-                        className="Button4"
-                        onClick={() => navigate("/creategeneralpost")}
-                      >
-                        Crear GeneralPost
-                      </Button>
-                    </>
-                  )}
-                  <Button
-                    className="Button4"
-                    onClick={() => navigate("/createcourse")}
-                  >
-                    Crear Curso
-                  </Button>
-                </>
-              )}
-              <Button
-                className="Button4"
-                onClick={() => setShowCourse(!swhowCourse)}
-              >
-                Cursos
-              </Button>
-              {swhowCourse && (
-                <>
-                  <Button
-                    className="Button4"
-                    onClick={() => navigate("/purchasecourse")}
-                  >
-                    Cursos Adquiridos
-                  </Button>
-                  <Button
-                    className="Button4"
-                    onClick={() => navigate("/savecourse")}
-                  >
-                    Cursos Guardados
-                  </Button>
-                </>
-              )}
             </div>
           </div>
         </Col>
-      </Row>
-      <Row className="userRow">
-        <Col xs={12} className="d-flex flex-column w-100 gap-2 text-center p-5">
+
+        <Col xs={8} lg={8} className=" text-center p-0">
           {statisticsUser && (
-            <Table
-              style={{ backgroundColor: "red" }}
-              striped
-              bordered
-              className="custom-table"
-            >
-              <thead>
-                <tr>
-                  {[
-                    "Seguidores",
-                    "Seguidos",
-                    "Post Publicados",
-                    "Ratio Pronóstico",
-                    "Aciertos",
-                    "Errores",
-                    "Cursos publicados",
-                  ].map((label) => (
-                    <th key={label} className="texto-rojo">
-                      {label}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td key="1">
-                    {" "}
-                    <Link
-                      to={`/userfollowers/${user.user_id}`}
-                      className="enlace-rojo"
-                    >
-                      {statisticsUser.num_followers}
-                    </Link>
-                  </td>
-                  <td key="2">
-                    <Link
-                      to={`/userfollowing/${user.user_id}`}
-                      className="enlace-rojo"
-                    >
-                      {statisticsUser.num_following_users}
-                    </Link>
-                  </td>
-                  <td key="3">
+            <div>
+              
+
+              <Row>
+                <Col
+                  xs={6}
+                  lg={6}
+                  className="d-flex justify-content-center p-0"
+                >
+                  <div>
+                    <p className="PDatosPerfil">Trades acertados</p>
+                    <p className="TradesGreen">{statisticsUser.num_correct_posts}</p>
+                  </div>
+                </Col>
+                <Col
+                  xs={6}
+                  lg={6}
+                  className="d-flex justify-content-center p-0"
+                >
+                  <div>
+                    <p className="PDatosPerfil">Trades Fallidos</p>
+                    <p className="TradesRed">{statisticsUser.num_incorrect_posts}</p>
+                  </div>
+                </Col>
+              </Row>
+
+              <Row>
+                <Col xs={6}
+                  lg={6}
+                  className="d-flex justify-content-center p-0">
+                  <div>
+                    <p className="PDatosPerfil">Post Publicados</p>
                     <Link
                       to={`/userposts/${user.user_id}`}
-                      className="enlace-rojo"
+                      className="linksPerfil"
+                
                     >
                       {statisticsUser.num_posts}
                     </Link>
-                  </td>
-                  <td key="4" className="redTable" >{ratioTotal} %</td>
-                  <td key="5" className="redTable">{statisticsUser.num_correct_posts}</td>
-                  <td key="6" className="redTable">{statisticsUser.num_incorrect_posts}</td>
-                  <td key="7">
+                  </div>
+                </Col>
+
+                <Col xs={6}
+                  lg={6}
+                  className="d-flex justify-content-center p-0">
+                  <div>
+                    <p className="PDatosPerfil">Cursos publicados</p>
                     <Link
                       to={`/oneusercourses/${user.user_id}`}
-                      className="enlace-rojo"
+                      className="linksPerfil"
+          
                     >
                       {statisticsUser.num_courses}
                     </Link>
-                  </td>
-                </tr>
-              </tbody>
-            </Table>
+                  </div>
+                </Col>
+              </Row>
+
+              <Row>
+                <Col xs={6}
+                  lg={6}
+                  className="d-flex justify-content-center p-0">
+                  <div>
+                    <p className="PDatosPerfil">Seguidores</p>
+                    <Link
+                      to={`/userfollowers/${user.user_id}`} className="linksPerfil">
+                      {statisticsUser.num_followers}
+                    </Link>
+                  </div>
+                </Col>
+                <Col xs={6} lg={6} className="d-flex justify-content-center p-0">
+                  <div>
+                    <p className="PDatosPerfil">Seguidos</p>
+                    <Link to={`/userfollowing/${user.user_id}`} className="linksPerfil">
+                      {statisticsUser.num_following_users}
+                    </Link>
+                  </div>
+                </Col>
+              </Row>
+            </div>
+          )}
+        </Col>
+        <Col className="p-0" xs={12} lg={12}>
+          <div className="d-flex justify-content-between DivGrisParaBotones w-100 mt-3 mb-3">
+            <div className="d-flex flex-column">
+              <Button
+                className="Button2 "
+                onClick={() => setShowContent(!showContent)}
+              >
+                CREAR CONTENIDO
+              </Button>
+            </div>
+
+           
+
+            <div className="d-flex flex-column">
+              <Button
+                className="Button2 "
+                onClick={() => setShowCourse(!swhowCourse)}
+              >
+                MIS CURSOS
+              </Button>
+            </div>
+          </div>
+        </Col>
+        <Col xs={12} lg={12} className="p-0">
+          {swhowCourse && (
+            <div className="d-flex flex-column">
+              <Button
+                className="Button5"
+                onClick={() => navigate("/purchasecourse")}
+              >
+                Cursos Adquiridos
+              </Button>
+              <Button
+                className="Button5"
+                onClick={() => navigate("/savecourse")}
+              >
+                Cursos Guardados
+              </Button>
+            </div>
+          )}
+          {showContent && (
+            <div className="d-flex flex-column">
+              <Button
+                className="Button5"
+                onClick={() => navigate("/createtrade")}
+              >
+                <img src="../../../public/images/iconos/tradepost.png" alt="" />
+                Crear TradePost
+              </Button>
+              <Button
+                className="Button5"
+                onClick={() => navigate("/creategeneralpost")}
+              >
+                <img
+                  src="../../../public/images/iconos/generalpost.png"
+                  alt=""
+                />
+                Crear GeneralPost
+              </Button>
+
+              <Button
+                className="Button5"
+                onClick={() => navigate("/createcourse")}
+              >
+                <img
+                  src="../../../public/images/iconos/subircurso.png"
+                  alt=""
+                />
+                Crear Curso
+              </Button>
+            </div>
           )}
         </Col>
       </Row>
-    </>
+    </main>
   );
 };

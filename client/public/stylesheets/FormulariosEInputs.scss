@@ -1,10 +1,10 @@
 @use "./variables.scss" as *;
 
 .FormulariosContainer {
-//   * {
-//     padding: 0 !important;
-//     margin: 0 !important;
-//  }
+  * {
+    padding: 0 !important;
+    margin: 0 !important;
+ }
   //inputs:
   .form-control:focus {
     box-shadow: 0 0 0 0.25rem $accent-color !important;

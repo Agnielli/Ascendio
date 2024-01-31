@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import "./RecoverPassword.scss"
 const initialValue = {
   password: "",
   password2: "",
@@ -64,7 +65,7 @@ export const RecoverPassword = () => {
     }
   };
   return (
-    <Row className="FormulariosContainer">
+    <Row className="FormulariosContainer RecoverPasswordScss d-flex flex-column align-items-center pt-5">
       <Col md={4}>
         <Form>
           <h2>ASCENDIO</h2>
