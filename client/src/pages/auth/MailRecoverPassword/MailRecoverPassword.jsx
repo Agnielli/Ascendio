@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { ModalMailRevoverPassword } from "./ModalMailRecoverPassword/ModalMailRevoverPassword";
+import "./MailRecoverPassword.scss"
 
 import axios from "axios";
 const initialValue = {
@@ -49,7 +50,7 @@ export const MailRecoverPassword = () => {
   const navigate = useNavigate();
 
   return (
-    <Row className="FormulariosContainer">
+    <Row className="FormulariosContainer MailRecoverPasswordScss d-flex flex-column align-items-center pt-5">
       <Col md={4}>
         <Form>
           <h2>Ascendio</h2>
@@ -65,7 +66,7 @@ export const MailRecoverPassword = () => {
               //login.email
             />
           </Form.Group>
-          <p>{msgError}</p>
+          <p style={{ marginBottom: '1rem' }}>{msgError || '\u00A0'}</p>
           <div className="DivGrisParaBotones d-flex justify-content-between mt-3 mb-1">
             <Button
               className="Button2"
