@@ -20,19 +20,7 @@ function NavBarApp() {
     navigate("/");
   };
 
-
-  let redirectTo;
-
-  if (user && user.type === 1) {
-     redirectTo = "/admin";
-  } else if (user && user.type === 2) {
-     redirectTo = "/home";
-  } else {
-     redirectTo = "/";
-  }
-
-  //const redirectTo = user && user.type === 1 ? "/admin" : (user && user.type === 2 ? "/home" : "/");
-
+  const redirectTo = user && user.type === 1 ? "/admin" : (user && user.type === 2 ? "/home" : "/");
 
   return (
     <header>

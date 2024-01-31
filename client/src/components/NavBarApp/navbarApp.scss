@@ -4,6 +4,7 @@ body {
 }
 
 @media (min-width: 992px) {
+ 
   .BG-navbar {
     background-color: $accent-color;
   }
@@ -31,21 +32,23 @@ nav {
       border-radius: 50%;
     }
 
+    p {
+      margin: 0 !important;
+      height: 40px;
+      color: #e15252 !important;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;
+    }
+
     .user {
       display: flex;
       align-items: center;
       justify-content: center;
       align-items: center;
   
-      p {
-        margin: 0 !important;
-        height: 40px;
-        color: #e15252;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 30px;
-      }
+      
     }
   }
 
@@ -142,7 +145,7 @@ nav {
   }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 992px) {
   
   
   .BG-navbar {
@@ -188,3 +191,5 @@ nav {
     }
   }
 }
+
+//navbar-collapse collapse

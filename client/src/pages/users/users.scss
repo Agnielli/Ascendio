@@ -17,6 +17,12 @@
     align-items: center;
     justify-content: center;
 
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+
     p{
       margin: 0 !important;
         height: 100%;
@@ -62,9 +68,7 @@
 
   .Button3{
     font-size: 10px;
-    padding: 4px 10px !important;
-   
-    
+    padding: 4px 10px !important;    
   }
 
 
@@ -80,5 +84,14 @@
     margin-bottom: 16px;
     padding: 1.5rem 200px 1.5rem 20px  !important;
     border-radius: 50px;
+  }
+
+  .BobotnesCREARYCURSOS{
+    width: 50% !important;
+  }
+
+
+  .Button2{
+    width: 100% !important;
   }
 }

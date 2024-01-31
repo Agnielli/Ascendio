@@ -164,7 +164,7 @@ export const Users = () => {
         </Col>
         <Col className="p-0" xs={12} lg={12}>
           <div className="d-flex justify-content-between DivGrisParaBotones w-100 mt-3 mb-3">
-            <div className="d-flex flex-column">
+            <div className="BobotnesCREARYCURSOS d-flex flex-column">
               <Button
                 className="Button2 "
                 onClick={() => {
@@ -176,7 +176,7 @@ export const Users = () => {
               </Button>
             </div>
 
-            <div className="d-flex flex-column">
+            <div className="BobotnesCREARYCURSOS d-flex flex-column">
               <Button
                 className="Button2 "
                 onClick={() => {
@@ -196,12 +196,14 @@ export const Users = () => {
                 className="Button5"
                 onClick={() => navigate("/purchasecourse")}
               >
+                <img src="../../../public/images/iconos/cursosadquiridos.png" alt="" />
                 Cursos Adquiridos
               </Button>
               <Button
                 className="Button5"
                 onClick={() => navigate("/savecourse")}
               >
+                <img src="../../../public/images/iconos/cursosguardados.png" alt="" />
                 Cursos Guardados
               </Button>
             </div>
