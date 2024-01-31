@@ -337,7 +337,7 @@ export const OneCourse = () => {
               </Card.Title>
             </div>
 
-            <Card.Text className="tagCourse">
+            <Card.Text className="tagCourse mb-4">
               {courseTags?.map((e, index) => {
                 return e.tag_name + " ";
               })}
