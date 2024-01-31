@@ -1,6 +1,7 @@
 @use "../../../../public/stylesheets/variables.scss" as *;
 
 .EditUserApp{
+  width: 100vw;
   padding:0 10vw;
 
   .containerAvatar{

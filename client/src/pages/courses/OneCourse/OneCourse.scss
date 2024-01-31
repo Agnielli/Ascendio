@@ -17,6 +17,10 @@
       border-radius: 10px;
       object-fit: cover;
     }
+    
+    .imgScale {
+      object-fit: scale-down;
+    }
 
     .oneCourseBody {
       width: 100%;
@@ -27,7 +31,6 @@
         border: none;
         display: flex;
         justify-content: center;
-        align-items: self-end;
         padding-top: 5%;
       }
 
@@ -42,7 +45,7 @@
         font-size: small;
         color: #9c9999;
       }
-  
+
       .tagCourse {
         width: 100%;
         font-size: small;
@@ -50,14 +53,14 @@
         display: flex;
         justify-content: space-around;
       }
-  
+
       .dataCourse {
         width: 100%;
         display: flex;
         justify-content: space-around;
         text-align: right;
         text-align: left;
-  
+
         .dataCourseText {
           font-size: small;
           margin-bottom: 10px;
@@ -65,17 +68,32 @@
           justify-content: center;
         }
       }
-  
+
       .optionsCourse {
-        width: 100%;
+        width: 90%;
         display: flex;
-        justify-content: space-evenly;
+        flex-wrap: wrap;
+        justify-content: center;
         align-items: center;
-  
+        gap: 100px;
+
+        .icons{
+          display: flex;
+          gap: 100px;
+          a, button{
+            display: flex;
+            align-items: center;
+          }
+
+          a{
+            text-decoration: none;
+          }
+        }
+
         .Button1 {
           width: 12rem;
         }
-  
+
         .priceCourse {
           font-size: 1rem;
           color: var.$accent3-color;
@@ -84,47 +102,47 @@
           display: flex;
           justify-content: center;
         }
-  
-        .bubbleCourse{
+
+        .bubbleCourse {
           font-size: 30px;
         }
-  
+
         .likeBoton {
           background-color: transparent;
           border: none;
-  
+
           .addLike {
             color: var.$primary-color;
             font-size: 30px;
           }
-  
+
           .deleteLike {
             color: var.$accent-color;
             font-size: 30px;
           }
         }
       }
-  
+
       .descriptionCourse {
         width: 90%;
         font-size: 1rem;
         color: #9c9999;
       }
-  
-      .Button1{
+
+      .Button1 {
         &:hover,
-        &:active{
+        &:active {
           background-color: transparent;
         }
       }
 
-      .courseCardEnd{
+      .courseCardEnd {
         width: 30%;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-  
-        .validarButton{
+
+        .validarButton {
           font-weight: bolder;
           background-color: transparent;
           border: 3px solid var.$accent-color;
@@ -133,9 +151,9 @@
           border-color: var.$accent-color;
         }
       }
-    }   
+    }
 
-    .accordion{
+    .accordion {
       width: 90%;
       display: flex;
       flex-direction: column;
@@ -143,17 +161,56 @@
       align-items: center;
       background-color: transparent;
       border-radius: 30px;
-      border: none;      
+      border: none;
       margin-bottom: 1rem;
       gap: 1rem;
     }
   }
-
-  
 }
 
 .material-symbols-outlined {
   color: white;
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
-  
+}
+
+@media (width < 750px) {
+  .oneCourse .CardCourse .oneCourseBody .courseTitle {
+    font-size: 2.5rem;
+  }
+
+  .oneCourse .CardCourse .oneCourseBody .editIcon {
+    font-size: 2.5rem;
+    padding-top: 2%;
+  }
+}
+
+@media (width < 386px) {
+  .oneCourse .CardCourse .oneCourseBody .courseTitle {
+    font-size: 2.2rem;
+    text-align: center;
+    width: 50%;
+  }
+  .oneCourse .CardCourse .oneCourseBody .editIcon {
+    margin-right: 0;
+  }
+}
+
+
+@media (width < 992px) {
+  .oneCourse .CardCourse .oneCourseBody .optionCourse {
+    gap: 50px;
+  }
+
+  .oneCourse .CardCourse .oneCourseBody .optionsCourse .icons{
+    gap: 50px;
+  }
+}
+@media (width < 902px) {
+  .oneCourse .CardCourse .oneCourseBody .optionCourse {
+    gap: 30px;
+  }
+
+  .oneCourse .CardCourse .oneCourseBody .optionsCourse .icons{
+    gap: 30px;
+  }
 }

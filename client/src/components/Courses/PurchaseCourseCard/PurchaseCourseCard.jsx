@@ -43,11 +43,21 @@ export const PurchaseCourseCard = () => {
     <Col>
       <header className="headerCursosComprados">
         <div
-          className="d-flex justify-content-between divHeader p-5"
+          className="d-flex justify-content-between divHeader py-5"
           style={{ color: "white" }}
         >
           <h2 className="text-center">Mis cursos comprados</h2>
-          <input onChange={handleChange} placeholder="🔍..." value={filter} className="buscador"/>
+          <div className="input-container">
+            <span className="material-symbols-outlined search-icon">
+              search
+            </span>
+            <input
+              onChange={handleChange}
+              placeholder="Buscar"
+              value={filter}
+              className="buscador"
+            />
+          </div>
         </div>
       </header>
       <main className="mainCursosComprados gap-3 pb-5">
@@ -93,7 +103,13 @@ export const PurchaseCourseCard = () => {
           );
         })}
         {findCourse?.length === 0 && (
-          <p>No se han encontrado cursos con este nombre</p>
+          <h4 className="alltrades-error-nohaypostsnitrades text-center">
+          No hay{" "}
+          <span className="alltrades-error-nohaypostsnitrades-hijo">
+            Cursos
+          </span>{" "}
+          comprados en este momento.
+        </h4>
         )}
         </Row>
       </main>

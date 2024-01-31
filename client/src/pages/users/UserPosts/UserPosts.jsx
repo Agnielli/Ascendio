@@ -6,19 +6,23 @@ import { Button, Card, ListGroup } from "react-bootstrap";
 import { AllPosts } from "./AllPosts/AllPosts";
 import { AllGeneralPosts } from "./AllGeneralPosts/AllGeneralPosts";
 import { AllTradePosts } from "./AllTradePosts/AllTradePosts";
+import './userPosts.scss';
 
 export const UserPosts = () => {
-  const [posts, setPosts] = useState();
+  const [posts, setPosts] = useState([]);
   const { user } = useContext(AscendioContext);
   const navigate = useNavigate();
   const [markTrade, setMarkTrade] = useState(false);
   const [showFilter, setShowFilter] = useState(0);
+
+  console.log(user);
 
   useEffect(() => {
     if (user) {
       axios
         .get(`http://localhost:3000/users/postsuser/${user.user_id}`)
         .then((res) => {
+          console.log(res.data);
           setPosts(res.data.datos);
           if (markTrade) {
             setMarkTrade(false);
@@ -30,9 +34,7 @@ export const UserPosts = () => {
     }
   }, [user, markTrade]);
 
-  if (posts) {
     console.log(posts);
-  }
 
   const markACorrect = (post_id, correct) => {
     if (posts) {
@@ -78,13 +80,19 @@ export const UserPosts = () => {
   };
 
   return (
-    <>
+    <div className="userPosts">
       <div className="d-flex p-5 gap-5">
         <h2>Mis Posts</h2>
-        <Button onClick={() => navigate("/profile")}>Volver</Button>
+        <Button 
+          className="Button2"
+          onClick={() => navigate("/profile")}
+        >
+          Volver
+        </Button>
       </div>
-      <div className="d-flex gap-5 ps-5 pe-5 mb-1">
+      <div className="d-flex justify-content-between stylesbuttons">
         <Button
+          className="Button2"
           variant={showFilter === 0 ? "danger" : "primary"}
           onClick={() => {
             setShowFilter(0);
@@ -93,12 +101,14 @@ export const UserPosts = () => {
           Todos
         </Button>
         <Button
+          className="Button2"
           variant={showFilter === 2 ? "danger" : "primary"}
           onClick={() => setShowFilter(2)}
         >
           Trades
         </Button>
         <Button
+          className="Button2"
           variant={showFilter === 1 ? "danger" : "primary"}
           onClick={() => setShowFilter(1)}
         >
@@ -129,6 +139,6 @@ export const UserPosts = () => {
           markAPending={markAPending}
         />
       )}
-    </>
+    </div>
   );
 };

@@ -43,11 +43,21 @@ export const SaveCourseCard = () => {
     <Col>
       <header className="headerCursosGuardados">
         <div
-          className="d-flex justify-content-between p-5 divHeader"
+          className="d-flex justify-content-between py-5 divHeader"
           style={{ color: "white" }}
         >
           <h2 className="text-center" >Mis cursos guardados</h2>
-          <input onChange={handleChange} placeholder="🔍..." value={filter} className="buscador" />
+          <div className="input-container">
+            <span className="material-symbols-outlined search-icon">
+              search
+            </span>
+            <input
+              onChange={handleChange}
+              placeholder="Buscar"
+              value={filter}
+              className="buscador"
+            />
+          </div>
         </div>
       </header>
       <main className="mainCursosGuardados gap-3 pb-5">
@@ -95,7 +105,13 @@ export const SaveCourseCard = () => {
         })}
         </Row>
         {findCourse?.length === 0 && (
-          <p>No existen cursos</p>
+          <h4 className="alltrades-error-nohaypostsnitrades text-center">
+          No tienes{" "}
+          <span className="alltrades-error-nohaypostsnitrades-hijo">
+            Cursos
+          </span>{" "}
+          guardados en este momento.
+        </h4>
         )}
         
       </main>

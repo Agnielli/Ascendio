@@ -65,30 +65,37 @@ export const OneUserCourses = () => {
     <Col>
       <header className="headerAllCoursesOneUser">
         <div
-          className="d-flex justify-content-between p-5 divHeader"
+          className="d-flex justify-content-between py-5 divHeader"
           style={{ color: "white" }}
         >
           <h2 className="text-center">Mis cursos</h2>
-          <input
-            onChange={handleChange}
-            placeholder="🔍..."
-            value={filter}
-            className="buscador"
-          />
+          <div className="input-container">
+            <span className="material-symbols-outlined search-icon">
+              search
+            </span>
+            <input
+              onChange={handleChange}
+              placeholder="Buscar"
+              value={filter}
+              className="buscador"
+            />
+          </div>
         </div>
       </header>
       <main className="mainAllCoursesOneUser gap-3 pb-5">
-        <Row className="justify-content-center"> 
+        <Row className="justify-content-center">
           {findCourse?.map((elem) => {
             return (
-              <Col xs={12} md={6} lg={4} xxl={3}className="d-flex">
+              <Col xs={12} md={6} lg={4} xxl={3} className="d-flex">
                 <Card
                   // style={{ width: "22rem" }}
                   key={elem.course_id}
-                  className="mapeoAllCourseOneUser text-center mb-4 d-flex flex-column" style={{ width: "100%" }}
+                  className="mapeoAllCourseOneUser text-center mb-4 d-flex flex-column"
+                  style={{ width: "100%" }}
                 >
                   <Card.Img
-                    style={{ height: "16rem", objectFit: "cover" }}
+                    style={{ height: "16rem"}}
+                    className={elem?.img === 'default.png' ? 'imgScale' : 'imgOneCourses'}
                     variant="top"
                     src={`http://localhost:3000/images/cursos/${elem.img}`}
                   />
@@ -134,7 +141,13 @@ export const OneUserCourses = () => {
         )}
 
         {findCourse?.length === 0 && (
-          <p>No se han encontrado cursos con estos valores</p>
+          <h4 className="alltrades-error-nohaypostsnitrades text-center">
+          No hay{" "}
+          <span className="alltrades-error-nohaypostsnitrades-hijo">
+            Cursos
+          </span>{" "}
+          creados en este momento.
+        </h4>
         )}
       </main>
     </Col>

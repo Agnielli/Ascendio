@@ -7,13 +7,12 @@ import './traderProfile.scss';
 
 export const TraderProfile = () => {
   const [traderprofile, setTraderprofile] = useState();
-  const [tarderPosts, setTraderPosts] = useState();
+  const [traderPosts, setTraderPosts] = useState();
   const [showPosts, setShowPosts] = useState(false);
   const { user_id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(user_id);
     axios
       .get(`http://localhost:3000/users/traderprofile/${user_id}`)
       .then((res) => {
@@ -29,6 +28,7 @@ export const TraderProfile = () => {
   const handleShowPost = () => {
     setShowPosts(!showPosts);
   };
+
 
   return (
     <>
@@ -143,7 +143,7 @@ export const TraderProfile = () => {
             <div className="d-flex flex-column">
             <Button 
               variant="primary" 
-              // onClick={handleShowPost}
+              onClick={() => navigate('/allcourses')}
               className="Button2"
             >
               MOSTRAR CURSOS
@@ -168,6 +168,7 @@ export const TraderProfile = () => {
               user_id={user_id}
               showPost={showPosts}
               setShowPost={setShowPosts}
+              traderprofile = {traderprofile}
             />
           )}
         </div>

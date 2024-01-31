@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AscendioContext } from "../../../context/AscendioContext";
 import axios from "axios";
 import "./OneCourse.scss";
-import { Accordion, Button, Card } from "react-bootstrap";
+import { Accordion, Button, Card, Col, Row } from "react-bootstrap";
 import { EditOneCourse } from "../../../components/ModalEditOneCourse/EditOneCourse";
 import { useNavigate, useParams } from "react-router-dom";
 import { FormAddSection } from "../../../components/FormAddSection/FormAddSection";
@@ -315,7 +315,7 @@ export const OneCourse = () => {
       <section className="oneCourse d-flex flex-column align-items-center justify-content-center p-5">
         <Card className="CardCourse d-flex flex-column align-items-center justify-content-center mb-4">
           <Card.Img
-            className="imgOneCourse"
+            className={oneCoursePpal?.img === 'default.png' ? 'imgOneCourse imgScale' : 'imgOneCourse'}
             variant="top"
             src={`http://localhost:3000/images/cursos/${oneCoursePpal?.img}`}
           />
@@ -355,38 +355,43 @@ export const OneCourse = () => {
             </div>
 
             <div className="optionsCourse">
-              {userId !== userCourse && (
-                <button
-                  className="Button1"
-                  onClick={handlePurchase}
-                  disabled={isIntoPurchase ? true : false}
-                >
-                  {isIntoPurchase ? "Comprado" : "Comprar"}
-                </button>
-              )}
-              <Card.Text className="priceCourse px-3 my-2">
-                {Number(oneCoursePpal?.price) === 0
-                  ? "GRATIS"
-                  : `${oneCoursePpal?.price}€`}
-              </Card.Text>
 
-              <a href="#rate"> <span  class="material-symbols-outlined bubbleCourse">
-                chat_bubble
-              </span></a>
+                {userId !== userCourse && (
+                  <button
+                    className="Button1"
+                    onClick={handlePurchase}
+                    disabled={isIntoPurchase ? true : false}
+                  >
+                    {isIntoPurchase ? "Comprado" : "Comprar"}
+                  </button>
+                )}
+                <Card.Text className="priceCourse px-3 my-2">
+                  {Number(oneCoursePpal?.price) === 0
+                    ? "GRATIS"
+                    : `${oneCoursePpal?.price}€`}
+                </Card.Text>
 
-              {userId !== userCourse && (
-                <button className="likeBoton" onClick={handleWishes}>
-                  {isIntoWishes ? (
-                    <span class="material-symbols-outlined 1 deleteLike">
-                    favorite
-                    </span>
-                  ) : (
-                    <span class="material-symbols-outlined 0 addLike">
-                      heart_plus
-                    </span>
+
+                <div className="icons">
+                  <a href="#rate"> <span  class="material-symbols-outlined bubbleCourse">
+                    chat_bubble
+                  </span></a>
+                  {userId !== userCourse && (
+                    <button className="likeBoton" onClick={handleWishes}>
+                      {isIntoWishes ? (
+                        <span class="material-symbols-outlined 1 deleteLike">
+                        favorite
+                        </span>
+                      ) : (
+                        <span class="material-symbols-outlined 0 addLike">
+                          heart_plus
+                        </span>
+                      )}
+                    </button>
                   )}
-                </button>
-              )}
+                </div>
+
+              
             </div>
 
             <Card.Text className="descriptionCourse m-4">
