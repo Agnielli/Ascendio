@@ -56,7 +56,7 @@ export const ModalResource = ({
       <Col md={4}>
         <Modal show={showModalArchivo} onHide={handleClose}>
           <Modal.Header closeButton className="modalResource">
-            <Modal.Title>Añadir contenido</Modal.Title>
+            <Modal.Title className="cardtitle">Añadir contenido</Modal.Title>
           </Modal.Header>
           <Modal.Body className="modalResource">
           <div className="d-flex ">
