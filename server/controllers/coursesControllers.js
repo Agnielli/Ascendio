@@ -96,7 +96,7 @@ ORDER BY course.date DESC`;
   oneCourse = (req, res) => {
     const { course_id } = req.params; //añadir el usuario que está logueado
     // console.log(course_id);
-    let sql = `SELECT course.title, course.followers, course.user_id, course.img, course.date, course.is_completed, course.description, course.price , section.section_id, section.section_title, topic.topic_id, topic.topic_title, resource.resource_id, resource.resource_type, resource.text
+    let sql = `SELECT course.title, course.followers, course.user_id, course.img, course.date, course.is_completed,course.is_disabled, course.description, course.price , section.section_id, section.section_title, topic.topic_id, topic.topic_title, resource.resource_id, resource.resource_type, resource.text
     FROM course
     left join section on course.course_id = section.course_id
     left join topic  on topic.course_id = section.course_id and topic.section_id = section.section_id
@@ -109,7 +109,7 @@ ORDER BY course.date DESC`;
         res.status(500).json(err);
       }
 
-      const { title, user_id, description, followers, img, date, price, is_completed } =
+      const { title, user_id, description, followers, img, date, price, is_completed, is_disabled } =
         result[0];
       let sections = [];
       let topics = [];
@@ -158,6 +158,7 @@ ORDER BY course.date DESC`;
         followers,
         user_id,
         is_completed,
+        is_disabled,
         price,
         description,
         sections,
