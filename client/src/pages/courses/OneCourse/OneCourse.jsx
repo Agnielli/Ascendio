@@ -38,9 +38,13 @@ export const OneCourse = () => {
   const [resetrate, setResetrate] = useState();
   const [peopleVotesCourse, setPeopleVotesCourse] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [isConfirmed, setIsConfirmed] = useState(false)
 
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
+
+
+
   
 
   const navigate = useNavigate();
@@ -66,6 +70,9 @@ export const OneCourse = () => {
         setResource(res.data.resource);
         if (res.data.is_completed === 1) {
           setIsIntoValidate(true);
+        }
+        if(res.data.is_disabled === 0){
+          setIsConfirmed(true)
         }
         setUserCourse(res.data.user_id);
       })
@@ -330,7 +337,8 @@ export const OneCourse = () => {
                   variant="outline-success"
                   className="editIcon"
                   onClick={openModal}
-                  disabled={isIntoValidate ? true : false}
+                  disabled={isIntoValidate && !isConfirmed ? true : false}
+                  
                 >
                   <span class="material-symbols-outlined">stylus</span>
                 </button>
@@ -341,7 +349,7 @@ export const OneCourse = () => {
               </Card.Title>
             </div>
 
-            <Card.Text className="tagCourse">
+            <Card.Text className="tagCourse mb-4">
               {courseTags?.map((e, index) => {
                 return e.tag_name + " ";
               })}
@@ -397,10 +405,7 @@ export const OneCourse = () => {
                     </button>
                   )}
                 </div>
-
-              
             </div>
-
             <Card.Text className="descriptionCourse m-4">
               {oneCoursePpal?.description}
             </Card.Text>

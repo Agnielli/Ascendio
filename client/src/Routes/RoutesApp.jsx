@@ -44,7 +44,6 @@ import { ResourceViewer } from "../components/ResourceViewer/ResourceViewer";
 import { TradingViewWidget } from "../pages/dashboard/Landing/TradingViewWidget/TradingViewWidget";
 
 export const RoutesApp = () => {
-
   const { token } = useContext(AscendioContext);
 
   const [type, setType] = useState();
@@ -58,11 +57,9 @@ export const RoutesApp = () => {
   return (
     <BrowserRouter>
       <NavBarApp />
-      <Container fluid className="p-0 m-0">
+      <Container fluid>
         <Routes>
-          
           <Route path="/" element={token ? <Home /> : <Landing />} />
-          
           {!token && (
             <>
               <Route path="/about" element={<AboutApp />} />
@@ -89,7 +86,7 @@ export const RoutesApp = () => {
               />
             </>
           )}
- 
+
           {token && type === 2 && (
             <>
               <Route path="/home" element={<Home />} />
@@ -132,7 +129,7 @@ export const RoutesApp = () => {
               />
             </>
           )}
-          
+
           {token && type === 1 && (
             <>
               <Route path="/admin" element={<AdminHome />}>

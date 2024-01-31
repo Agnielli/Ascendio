@@ -17,7 +17,7 @@
       border-radius: 10px;
       object-fit: cover;
     }
-    
+
     .imgScale {
       object-fit: scale-down;
     }
@@ -77,20 +77,23 @@
         align-items: center;
         gap: 100px;
 
-        .icons{
+        .icons {
           display: flex;
           gap: 100px;
-          a, button{
+          a,
+          button {
             display: flex;
             align-items: center;
           }
 
-          a{
+          a {
             text-decoration: none;
           }
         }
 
-        .Button1 {
+        .Button1,
+        .validarButton,
+        .Button2{
           width: 12rem;
         }
 
@@ -123,6 +126,7 @@
         }
       }
 
+
       .descriptionCourse {
         width: 90%;
         font-size: 1rem;
@@ -137,10 +141,10 @@
       }
 
       .courseCardEnd {
-        width: 30%;
+        width: 12rem;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: center; 
 
         .validarButton {
           font-weight: bolder;
@@ -149,6 +153,9 @@
           border-radius: 25px;
           color: var.$accent-color;
           border-color: var.$accent-color;
+          .Button2 {
+            width: auto;
+          }
         }
       }
     }
@@ -175,44 +182,131 @@ button{
   }
 }
 
-@media (width < 750px) {
-  .oneCourse .CardCourse .oneCourseBody .courseTitle {
-    font-size: 2.5rem;
+@media (width < 1060px) {
+  .oneCourse {
+    .CardCourse {
+      .oneCourseBody {
+        .optionsCourse {
+          gap: 50px;
+          .icons{
+            gap: 50px;
+          }
+        }
+      }
+    }
   }
+}
 
-  .oneCourse .CardCourse .oneCourseBody .editIcon {
-    font-size: 2.5rem;
-    padding-top: 2%;
+@media (width < 830px) {
+  .oneCourse {
+    .CardCourse {
+      .oneCourseBody {
+        .optionsCourse {
+          gap: 40px;
+          .icons{
+            gap: 40px;
+          }
+        }
+        .courseTitle{
+          font-size: 2.5rem;
+        }
+        .editIcon{
+          font-size: 2.5rem;
+          padding-top: 2%;
+        }
+      }
+    }
+  }
+}
+
+@media (width < 785px) {
+  .oneCourse {
+    .CardCourse {
+      .oneCourseBody {
+        .optionsCourse {
+          gap: 30px;
+          .icons{
+            gap: 30px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (width < 740px) {
+  .oneCourse {
+    .CardCourse {
+      .oneCourseBody {
+        .optionsCourse {
+          gap: 20px;
+          .icons{
+            gap: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (width < 694px) {
+  .oneCourse {
+    .CardCourse {
+      .oneCourseBody {
+        .optionsCourse {
+          .icons{
+           margin-left: 1.4rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (width < 530px) {
+  .oneCourse {
+    .CardCourse {
+      .oneCourseBody {
+        .optionsCourse {
+          .icons{
+           margin-left: 0rem;
+          }
+        }
+      }
+    }
   }
 }
 
 @media (width < 386px) {
-  .oneCourse .CardCourse .oneCourseBody .courseTitle {
-    font-size: 2.2rem;
+  .oneCourse{
+    .CardCourse{
+      .oneCourseBody{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .optionsCourse{
+          gap: 10px;
+          .icons{
+            gap: 10px;
+          }
+        }
+        .courseTitle{
+          font-size: 2.2rem;
+          text-align: center;
+          width: 50%;
+        }
+        .editIcon{
+          display: flex;
+          justify-content: end;
+          width: 30%;
+        }
+      }
+    }
+  }
+}
+
+@media (width < 380px) {
+  .oneCourse .CardCourse .oneCourseBody .tagCourse{
     text-align: center;
-    width: 50%;
-  }
-  .oneCourse .CardCourse .oneCourseBody .editIcon {
-    margin-right: 0;
-  }
-}
-
-
-@media (width < 992px) {
-  .oneCourse .CardCourse .oneCourseBody .optionCourse {
-    gap: 50px;
-  }
-
-  .oneCourse .CardCourse .oneCourseBody .optionsCourse .icons{
-    gap: 50px;
-  }
-}
-@media (width < 902px) {
-  .oneCourse .CardCourse .oneCourseBody .optionCourse {
-    gap: 30px;
-  }
-
-  .oneCourse .CardCourse .oneCourseBody .optionsCourse .icons{
-    gap: 30px;
   }
 }

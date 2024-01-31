@@ -6,6 +6,7 @@ import { Button, Card, ListGroup } from "react-bootstrap";
 import { AllPosts } from "./AllPosts/AllPosts";
 import { AllGeneralPosts } from "./AllGeneralPosts/AllGeneralPosts";
 import { AllTradePosts } from "./AllTradePosts/AllTradePosts";
+import './userPosts.scss';
 
 export const UserPosts = () => {
   const [posts, setPosts] = useState([]);
@@ -79,31 +80,39 @@ export const UserPosts = () => {
   };
 
   return (
-    <>
-      <div className="d-flex p-5 gap-5">
-        <h2>Mis Posts</h2>
-        <Button onClick={() => navigate("/profile")}>Volver</Button>
+    <div className="userPosts">
+      <div>
+      <Button 
+          className="Button1"
+          onClick={() => navigate("/profile")}
+        >
+          VOLVER
+        </Button>
+        <h2>MIS POSTS</h2>
       </div>
-      <div className="d-flex gap-5 ps-5 pe-5 mb-1">
+      <div className="d-flex DivGrisParaBotones">
         <Button
+          className="Button2"
           variant={showFilter === 0 ? "danger" : "primary"}
           onClick={() => {
             setShowFilter(0);
           }}
         >
-          Todos
+          TODOS
         </Button>
         <Button
+          className="Button2"
           variant={showFilter === 2 ? "danger" : "primary"}
           onClick={() => setShowFilter(2)}
         >
-          Trades
+          TRADE POSTS
         </Button>
         <Button
+          className="Button2"
           variant={showFilter === 1 ? "danger" : "primary"}
           onClick={() => setShowFilter(1)}
         >
-          Generales
+          GENERAL POSTS
         </Button>
       </div>
       {showFilter === 0 && (
@@ -130,6 +139,6 @@ export const UserPosts = () => {
           markAPending={markAPending}
         />
       )}
-    </>
+    </div>
   );
 };

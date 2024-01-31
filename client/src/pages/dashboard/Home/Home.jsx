@@ -5,6 +5,7 @@ import { AscendioContext } from "../../../context/AscendioContext";
 import { useNavigate } from "react-router-dom";
 import { TradingViewWidget } from "../Landing/TradingViewWidget/TradingViewWidget";
 import "./Home.scss";
+import "../../../../public/stylesheets/ButtonsApp.scss";
 
 export const Home = () => {
   const [lastTrades, setLastTrades] = useState([]);
@@ -12,7 +13,6 @@ export const Home = () => {
   const { user } = useContext(AscendioContext);
   const [followingUsers, setFollowingUsers] = useState([]); // Nuevo estado para almacenar usuarios seguidos
   const [showViews, setShowViews] = useState(true);
-
   const navigate = useNavigate();
 
   // para obtener los posts (generales y trades) ordenados por fecha de subida (últimos trades)
@@ -36,10 +36,9 @@ export const Home = () => {
       });
   }, [showViews]);
 
-
-    // para poner los botones en seguir o siguiendo si user existe
-    useEffect(() => {
-      if(user){
+  // para poner los botones en seguir o siguiendo si user existe
+  useEffect(() => {
+    if (user) {
       const user_id = user.user_id;
       axios
         .get(`http://localhost:3000/users/getfollowuser/${user_id}`)
@@ -51,9 +50,8 @@ export const Home = () => {
         .catch((err) => {
           console.log(err);
         });
-      }
-    }, []);
-
+    }
+  }, []);
 
   // Función para seguir o dejar de seguir a un usuario
   const pulsarSeguirONo = (id_followed) => {
@@ -96,9 +94,16 @@ export const Home = () => {
       <Col xs={12} className="ascendio-home-row-hijo">
         <h2>Novedades de hoy</h2>
       </Col>
-      <Col xs={2} className="ascendio-home-row-hijo d-flex gap-1">
-        <Button onClick={() => setShowViews(false)}>POSTS</Button>
-        <Button onClick={() => setShowViews(true)}>GRÁFICA</Button>
+      <Col
+        xs={2}
+        className="ascendio-home-row-hijo d-flex gap-1 DivGrisParaBotones"
+      >
+        <Button className="Button2" onClick={() => setShowViews(false)}>
+          POSTS
+        </Button>
+        <Button className="Button2" onClick={() => setShowViews(true)}>
+          GRÁFICA
+        </Button>
       </Col>
       <Col xs={12}>
         {showViews ? (
@@ -109,7 +114,7 @@ export const Home = () => {
           </Row>
         ) : (
           <Row className="ascendio-home-post-padre">
-            <Col className="ascendio-home-col-cards">
+            <Col className="ascendio-home-col-cards col-12">
               {tradesHoy[0] !== undefined ? (
                 tradesHoy.map((elem) => {
                   return (
@@ -118,15 +123,35 @@ export const Home = () => {
                       key={elem.post_id}
                       className="ascendio-home-card-padre"
                     >
-                      {/* Posts */}
-                      {elem.type === 1 && (
-                        <Card.Body>
-                          <div>
-                            <Card.Title className="d-flex">
-                              <h3>Trader: {elem.nickname}</h3>
-                            </Card.Title>
+                      {elem.type === 1 && ( // TIPO POST GENERAL
+                        <Card.Body className="ascendio-home-card-hijo">
+                          <Card.Title className="ascendio-home-card-titulo">
+                            <h3>Trader: {elem.nickname}</h3>
+                          </Card.Title>
+                          <Card.Text className="ascendio-home-card-texto">
+                            {elem.description}
+                          </Card.Text>
+                          {elem.image_name !== null ? (
+                            <Card.Img
+                              variant="top"
+                              src={
+                                elem.type === 1
+                                  ? `http://localhost:3000/images/generalPost/${elem.image_name}`
+                                  : `http://localhost:3000/images/trades/${elem.image_name}`
+                              }
+                              className="ascendio-home-card-imagen"
+                            />
+                          ) : (
+                            <Card.Img
+                              className="ascendio-home-card-imagen"
+                              variant="top"
+                              src={`http://localhost:3000/images/generalPost/postPorDefecto.png`}
+                            />
+                          )}
+                          <div className="ascendio-home-card-botonera DivGrisParaBotones">
                             {user.user_id !== elem.user_id ? (
                               <Button
+                                className="Button2"
                                 variant="primary"
                                 onClick={() => pulsarSeguirONo(elem.user_id)}
                               >
@@ -134,51 +159,50 @@ export const Home = () => {
                                   ? "Siguiendo"
                                   : "Seguir"}
                               </Button>
-                            ) : null
-                            // <Button
-                            //   onClick={() =>
-                            //     navigate(`/userposts/${user.user_id}`)
-                            //   }
-                            // >
-                            //   Ir a posts
-                            // </Button>
-                            }
-                            <Card.Body>
-                              <ListGroup variant="flush">
-                                <ListGroup.Item></ListGroup.Item>
-                                <ListGroup.Item>
-                                  {elem.description}
-                                </ListGroup.Item>
-                                <ListGroup.Item></ListGroup.Item>
-                              </ListGroup>
-                              {elem.image_name !== null && (
-                                <Card.Img
-                                  variant="top"
-                                  src={`http://localhost:3000/images/generalPost/${elem.image_name}`}
-                                />
-                              )}
-                            </Card.Body>
-                            <div className="d-flex gap-1">
-                              <Button
-                                onClick={() => {
-                                  navigate(`/OneTradePost/${elem.post_id}`);
-                                }}
-                              >
-                                Ver más
-                              </Button>
-                            </div>
+                            ) : null}
+                            <Button
+                              className="Button2"
+                              onClick={() => {
+                                navigate(`/OneTradePost/${elem.post_id}`);
+                              }}
+                            >
+                              Ver Post
+                            </Button>
                           </div>
                         </Card.Body>
                       )}
                       {/* Trades */}
                       {elem.type === 2 && (
-                        <Card.Body>
-                          <div>
-                            <Card.Title className="d-flex">
-                              <h3>Trader: {elem.nickname}</h3>
-                            </Card.Title>
+                        <Card.Body className="ascendio-home-card-hijo">
+                          <Card.Title className="ascendio-home-card-titulo">
+                            <h3>Trader: {elem.nickname}</h3>
+                          </Card.Title>
+                          <Card.Text className="ascendio-home-card-texto ">
+                            <p>Currency: {elem.currency}</p>
+                            <p>
+                              Estado:{" "}
+                              {elem.correct === null && "Trade Pendiente"}
+                              {elem.correct === 0 && "Trade Errado"}
+                              {elem.correct === 1 && "Trade Acertado"}
+                            </p>
+                          </Card.Text>
+                          {elem.image_name !== null ? (
+                            <Card.Img
+                              className="ascendio-home-card-imagen"
+                              variant="top"
+                              src={`http://localhost:3000/images/trades/${elem.image_name}`}
+                            />
+                          ) : (
+                            <Card.Img
+                              className="ascendio-home-card-imagen"
+                              variant="top"
+                              src={`http://localhost:3000/images/trades/postPorDefecto.png`}
+                            />
+                          )}
+                          <div className="ascendio-home-card-botonera">
                             {user.user_id !== elem.user_id ? (
                               <Button
+                                className="Button2"
                                 variant="primary"
                                 onClick={() => pulsarSeguirONo(elem.user_id)}
                               >
@@ -186,45 +210,15 @@ export const Home = () => {
                                   ? "Siguiendo"
                                   : "Seguir"}
                               </Button>
-                            ) : null
-                            // <Button
-                            //   onClick={() =>
-                            //     navigate(`/userposts/${user.user_id}`)
-                            //   }
-                            // >
-                            //   Ir a posts
-                            // </Button>
-                            }
-                            <Card.Body>
-                              <ListGroup variant="flush">
-                                <ListGroup.Item></ListGroup.Item>
-                                <ListGroup.Item>
-                                  Currency: {elem.currency}
-                                </ListGroup.Item>
-                                <ListGroup.Item className="mb-1">
-                                  Estado:{" "}
-                                  {elem.correct === null && "Trade Pendiente"}
-                                  {elem.correct === 0 && "Trade Errado"}
-                                  {elem.correct === 1 && "Trade Acertado"}
-                                </ListGroup.Item>{" "}
-                                <ListGroup.Item></ListGroup.Item>
-                              </ListGroup>
-                              {elem.image_name !== null && (
-                                <Card.Img
-                                  variant="top"
-                                  src={`http://localhost:3000/images/trades/${elem.image_name}`}
-                                />
-                              )}
-                            </Card.Body>
-                            <div className="d-flex gap-1">
-                              <Button
-                                onClick={() => {
-                                  navigate(`/OneTradePost/${elem.post_id}`);
-                                }}
-                              >
-                                Ver más
-                              </Button>
-                            </div>
+                            ) : null}
+                            <Button
+                              className="Button2"
+                              onClick={() => {
+                                navigate(`/OneTradePost/${elem.post_id}`);
+                              }}
+                            >
+                              Ver Post
+                            </Button>
                           </div>
                         </Card.Body>
                       )}

@@ -168,39 +168,42 @@ export const AdminHome = () => {
 
   return (
     <main className="AdminRow">
-      <Row className="adminhome-row-principal-padre">
+      <Row>
         <Col
-          xl={3} lg={6} xs={6}
-          className="ColBotonesAdminUsuarios flex-column row-gap-4 my-5 ms-5"
+          xxl={3}
+          xs={12}
+          className="my-5"
         >
-          <Col xs={12}>
-            <h3 className="text-start ms-3 AscendioColor">Administrador</h3>
-          </Col>
-          <Col className="ButtonsRow mt-4 mb-4" lg={3} md={6} xs={6}>
-            <Button className="Button5" onClick={() => showButtons()}>
-              Usuarios
-            </Button>
-          </Col>
-          <Col className="ButtonsRow" lg={3} md={6} xs={6}>
-            <Button
-              className="Button5 mb-4"
-              onClick={() => showAllCourseButtons()}
-            >
-              Cursos
-            </Button>
-          </Col>
-          <Col className="ButtonsRow mb-4" lg={3} md={6} xs={6}>
-            <Button className="Button5" onClick={() => showStatistics()}>
-              Estadisticas
-            </Button>
-          </Col>
-          <Col className="ButtonsRow mb-4" lg={3} md={6} xs={6}>
-            <Button className="Button5" onClick={() => showAllTrades()}>
-              Trades
-            </Button>
-          </Col>
+          <Row>
+            <Col className="d-flex justify-content-center justify-content-xl-start" xs={12}>
+              <h3 className="text-start mb-4 AscendioColor">Administrador</h3>
+            </Col>
+            <Col className="d-flex justify-content-center justify-content-xl-start ButtonsRow mb-4" xxl={12} lg={3} sm={6} xs={12}>
+              <Button className="Button5" onClick={() => showButtons()}>
+                Usuarios
+              </Button>
+            </Col>
+            <Col className="d-flex justify-content-center justify-content-xl-start ButtonsRow" xxl={12} lg={3} sm={6} xs={12}>
+              <Button
+                className="Button5 mb-4"
+                onClick={() => showAllCourseButtons()}
+              >
+                Cursos
+              </Button>
+            </Col>
+            <Col className="d-flex justify-content-center justify-content-xl-start ButtonsRow mb-4" xxl={12} lg={3} sm={6} xs={12}>
+              <Button className="Button5" onClick={() => showStatistics()}>
+                Estadisticas
+              </Button>
+            </Col>
+            <Col className="d-flex justify-content-center justify-content-xl-start ButtonsRow mb-4" xxl={12} lg={3} sm={6} xs={12}>
+              <Button className="Button5" onClick={() => showAllTrades()}>
+                Trades
+              </Button>
+            </Col>
+          </Row>
         </Col>
-        <Col xl={8}>
+        <Col xxl={9} xs={12}>
           <>
             {showTrades && (
               <Row className="TradeButtonsRow text-center justify-content-center row-gap-4">
@@ -222,23 +225,21 @@ export const AdminHome = () => {
             )}
           </>
 
-          <Row className="">
+          <>
             {showPost && <TradesPostMap />}
             {showComments && <OneComment />}
-          </Row>
-          <div className="">
-            {showUserButtons === true && (
-              <>
-                <Row className="ButtonsRow2 d-flex justify-content-center align-items-center text-center mb-5 mt-5">
-                  <Col lg={2} md={3} xs={12}>
-                    <Button
-                      className="ButtonNoBG"
-                      onClick={() => showAllUsers()}
-                    >
+          </>
+
+          {showUserButtons === true && (
+            <>
+              <Row className="ButtonsRow2 d-flex justify-content-center align-items-center text-center mb-5 mt-5">
+                <Col>
+                  <Col>
+                    <Button className="ButtonNoBG" onClick={() => showAllUsers()}>
                       Todos
                     </Button>
                   </Col>
-                  <Col lg={2} md={3} xs={12}>
+                  <Col>
                     <Button
                       className="ButtonNoBG"
                       onClick={() => showAllActivatedUsers()}
@@ -246,7 +247,7 @@ export const AdminHome = () => {
                       Activos
                     </Button>
                   </Col>
-                  <Col lg={2} md={3} xs={12}>
+                  <Col>
                     <Button
                       className="ButtonNoBG"
                       onClick={() => showAllDisabledUsers()}
@@ -254,61 +255,60 @@ export const AdminHome = () => {
                       Bloqueados
                     </Button>
                   </Col>
-                </Row>
-                <Row className="row-gap-4">
-                  {showUsers === true && (
-                    <AdminAllUsers
-                      allUsers={allUsers}
-                      setAllUsers={setAllUsers}
-                    />
-                  )}
-                  {showDisabledUsers === true && <AdminDisabledUsers />}
-                  {showActivatedUsers === true && <AdminActivateUser />}
-                </Row>
-              </>
-            )}
-          </div>
+                </Col>
+              </Row>
+              <Row className="row-gap-4">
+                {showUsers === true && (
+                  <AdminAllUsers
+                    allUsers={allUsers}
+                    setAllUsers={setAllUsers}
+                  />
+                )}
+                {showDisabledUsers === true && <AdminDisabledUsers />}
+                {showActivatedUsers === true && <AdminActivateUser />}
+              </Row>
+            </>
+          )}
+
           <>{showStats === true && <Estadisticas />}</>
-          <div className="">
-            {showCourseButtons && (
-              <>
-                <Row className="ButtonsRow2 d-flex justify-content-center align-items-center text-center m-5">
-                  <Col lg={2} md={3} xs={12}>
-                    <Button
-                      className="ButtonNoBG"
-                      onClick={() => showAllCourses()}
-                    >
-                      Todos los cursos
-                    </Button>
-                  </Col>
-                  <Col lg={2} md={3} xs={12}>
-                    <Button
-                      className="ButtonNoBG"
-                      onClick={() => showAllEnabledCourses()}
-                    >
-                      Cursos Activos
-                    </Button>
-                  </Col>
-                  <Col lg={2} md={3} xs={12}>
-                    <Button
-                      className="ButtonNoBG"
-                      onClick={() => showAllDisabledCourses()}
-                    >
-                      Cursos Bloqueados
-                    </Button>
-                  </Col>
-                </Row>
-                <Row>
-                  {showCourses && <AdminCourses />}
-                  {showDisabledCourses && <DisabledCoursesMap />}
-                  {showEnabledCourses && <EnabledCoursesMap />}
-                </Row>
-              </>
-            )}
-          </div>
+
+          {showCourseButtons && (
+            <>
+              <Row className="ButtonsRow2 d-flex justify-content-center align-items-center text-center m-5">
+                <Col lg={2} md={3} xs={12}>
+                  <Button
+                    className="ButtonNoBG"
+                    onClick={() => showAllCourses()}
+                  >
+                    Todos los cursos
+                  </Button>
+                </Col>
+                <Col lg={2} md={3} xs={12}>
+                  <Button
+                    className="ButtonNoBG"
+                    onClick={() => showAllEnabledCourses()}
+                  >
+                    Cursos Activos
+                  </Button>
+                </Col>
+                <Col lg={2} md={3} xs={12}>
+                  <Button
+                    className="ButtonNoBG"
+                    onClick={() => showAllDisabledCourses()}
+                  >
+                    Cursos Bloqueados
+                  </Button>
+                </Col>
+              </Row>
+              <Row>
+                {showCourses && <AdminCourses />}
+                {showDisabledCourses && <DisabledCoursesMap />}
+                {showEnabledCourses && <EnabledCoursesMap />}
+              </Row>
+            </>
+          )}
         </Col>
       </Row>
-
     </main>
   );
 };

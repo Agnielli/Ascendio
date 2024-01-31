@@ -2,7 +2,6 @@
 
 //boton de rosa a blanco redondeado:
 .Button1 {
-  
   padding: 6px 20px !important;
   background-color: $accent-color;
   color: $accent2-color;
@@ -11,10 +10,14 @@
   font-weight: 500;
   transition: 0.3s;
 
-  &:hover,
-  &:active{
+
+  &:hover{
     background-color: $accent3-color;
     color:$accent-color;
+  }
+  &:active{
+    background-color: $accent3-color;
+    color: $accent-color;
   }
 }
 
@@ -27,11 +30,13 @@
   border-radius: 25px;
   font-weight: 500;
   transition: 0.3s;
-
-  &:hover,
-  &:active{
+  &:hover{
     background-color: $accent-color !important;
     color:$accent2-color !important;
+  }
+  &:active{
+    background-color: $accent-color !important;
+    color: $accent2-color !important;
   }
 }
 
@@ -43,7 +48,7 @@
   border-radius: 25px;
 }
 
-//boton seguir: de blanco a rosa 
+//boton seguir: de blanco a rosa
 .Button3 {
   padding: 6px 20px !important;
   background-color: $accent3-color;
@@ -52,14 +57,17 @@
   border-radius: 25px;
   font-weight: 500;
   transition: 0.3s;
-  &:active,
+  &:active{
+    background-color: $accent-color;
+    color: $accent2-color;
+  }
   &:hover{
     background-color: $accent-color;
     color: $accent2-color;
   }
 }
 
-//boton siguiendo: de rosa a blanco 
+//boton siguiendo: de rosa a blanco
 .Button4 {
   padding: 6px 20px !important;
   background-color: $accent-color;
@@ -68,11 +76,14 @@
   border-radius: 25px;
   font-weight: 500;
   transition: 0.3s;
-  &:active,
-  &:hover{
-    // background-color: $accent3-color ; este era el original
+  &:active{
     background-color: $accent2-color ;
     color:$accent2-color $accent2-color;
+  }
+  &:hover{
+    // background-color: $accent3-color ; este era el original
+    background-color: $accent2-color;
+    color: $accent2-color $accent2-color;
   }
   // &:focus-visible {
   //   border-color: #dc3545;
@@ -94,14 +105,13 @@
   font-weight: 500;
   transition: 0.3s;
 
-  &:hover{
-    background-color: $accent-color ;
-    color:$accent2-color;
+  &:hover {
+    background-color: $accent-color;
+    color: $accent2-color;
   }
-
-  &.active{
+  &:active{
     background-color: $accent-color !important ;
-    color:$accent2-color !important;
+    color: $accent2-color !important;
   }
 }
 
@@ -166,5 +176,3 @@
 ::-webkit-scrollbar-thumb:hover {
   background-color: $primary-color;
 }
-
-

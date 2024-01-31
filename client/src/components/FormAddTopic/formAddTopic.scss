@@ -26,6 +26,8 @@
       border-radius: 25px;
       font-weight: 500;
       transition: 0.3s;
+      display: flex;
+      justify-content: center;
       &:active,
       &:hover{
         // background-color: $accent3-color ; este era el original
@@ -34,3 +36,16 @@
       }
   }
 }}
+
+@media (width < 610px) {
+  .formTopic .botonFormTopic {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+
+    .botonesTopic{
+      font-size: 0.9rem;
+    }
+  }
+}

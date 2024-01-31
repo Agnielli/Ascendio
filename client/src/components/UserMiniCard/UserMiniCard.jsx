@@ -22,8 +22,8 @@ export const UserMiniCard = ({ elem, updateUsers, setUpdateUsers }) => {
   };
 
   return (
-    <div className="userMiniCardAdminView d-flex align-items-center justify-content-between gap-1 gap-xl-4">
-      <div>
+    <div className="userMiniCardAdminView flex-wrap d-flex align-items-center justify-content-between gap-xl-4">
+      <div className="AdminUserImg">
         <img
           src={
             elem.img != null
@@ -33,26 +33,25 @@ export const UserMiniCard = ({ elem, updateUsers, setUpdateUsers }) => {
           alt="Imagen de perfil del usuario"
         />
       </div>
-      <div className="d-flex flex-column flex-xl-row align-items-center text-center gap-4">
-        <div className="d-flex gap-2 gap-xl-3">
-          <div>
-            <p className="fw-bold">{elem.nickname}</p>
-            <p>{elem.total_followers} Seguidores</p>
-          </div>
-          <div>
-            <p>{elem.correct_posts} Acertados</p>
-            <p>{elem.incorrect_posts} Errados</p>
-          </div>
+
+      <div className="AdminUserStats d-flex justify-content-center justify-content-xl-start gap-2 gap-xl-3">
+        <div>
+          <p className="fw-bold">{elem.nickname}</p>
+          <p>{elem.total_followers} Seguidores</p>
         </div>
         <div>
-          <Button
-            className="Button4"
-            variant="danger"
-            onClick={() => activateUser(elem?.user_id, elem?.is_disabled)}
-          >
-            {elem.is_disabled ? "Activar" : "Desactivar"}
-          </Button>
+          <p>{elem.correct_posts} Acertados</p>
+          <p>{elem.incorrect_posts} Errados</p>
         </div>
+      </div>
+      <div className="AdminUserButton ">
+        <Button
+          className="Button4"
+          variant="danger"
+          onClick={() => activateUser(elem?.user_id, elem?.is_disabled)}
+        >
+          {elem.is_disabled ? "Activar" : "Desactivar"}
+        </Button>
       </div>
     </div>
   );
