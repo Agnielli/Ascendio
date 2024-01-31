@@ -4,7 +4,9 @@ import { useParams } from "react-router-dom";
 import { AscendioContext } from "../../context/AscendioContext";
 import axios from "axios";
 import "./EditOneCourse.scss";
-import "../../../public/stylesheets/FormulariosEInputs.scss";
+import "./estilocreacion.scss";
+
+// import "../../../public/stylesheets/FormulariosEInputs.scss";
 const initialValue = {
   title: "",
   description: "",
@@ -82,7 +84,7 @@ export const EditOneCourse = ({
         <Modal
           show={showModal}
           onHide={handleClose}
-          className="FormulariosContainer text-center"
+          className="EdicionCursosContainerFormulario text-center"
         >
           <Modal.Header closeButton className="modalDel  ">
 

@@ -233,6 +233,7 @@ export const OneCourse = () => {
     }
   };
 
+ 
   const handlePurchase = () => {
     addToPurchase();
     setShowCardRate(true);
