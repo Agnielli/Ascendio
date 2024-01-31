@@ -5,9 +5,11 @@
   height: 90vh;
   justify-content: center;
   align-items: center;
+  gap: 1.5rem;
 
   .column1{
     height: 10%;
+    
   }
 
   .column2{
@@ -15,14 +17,14 @@
   }
 
   .linkes{
+    width: 100%;
     font-size: large;
     border-radius: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
     margin-top: 1rem;
+    padding: 0;
 
     a{
+      width: 100%;
       color: white;
       text-decoration: none;
       margin: 1rem;
@@ -32,21 +34,14 @@
       width: 100%;
       display: flex;
       justify-content: center;
-      align-items: center;
+      text-align: center;
       background-color: rgba(102, 102, 102, 0.212);
       border-radius: 10px;
     }
-    
-    hr{
-      opacity: 1;
-      color: white;
-      display: flex;
-      justify-content: center;
-      margin: auto;
-      margin-top: 1rem;
-      margin-bottom: 0.5rem;
-    }
 
+    .breadcrumb-item+.breadcrumb-item::before {
+      color: white;
+    }
     
   }
   .video{
@@ -62,11 +57,34 @@
   }
 }
 
-@media (width < 576px){
+@media (width < 915px){
+  .resourceView{
+    gap: 4rem;
+  }
+} 
+
+/* @media (width < 800px){
+  .resourceView{
+    gap: 4rem;
+  }
+} */
+
+@media (width < 600px){
   .resourceView{
     width: 100%;
+    gap: 3rem
     
   }
+
+  a{
+    font-size: smaller;
+  }
 }
+
+@media (width < 412px){
+  .resourceView{
+    gap: 5rem;
+  }
+} 
 
 
