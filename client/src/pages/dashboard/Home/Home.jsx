@@ -26,8 +26,8 @@ export const Home = () => {
   }, []);
 
     // para poner los botones en seguir o siguiendo si user existe
-    user &&
     useEffect(() => {
+      if(user){
       const user_id = user.user_id;
       axios
         .get(`http://localhost:3000/users/getfollowuser/${user_id}`)
@@ -39,6 +39,7 @@ export const Home = () => {
         .catch((err) => {
           console.log(err);
         });
+      }
     }, []);
 
   // Función para seguir o dejar de seguir a un usuario

@@ -94,7 +94,8 @@ export const OneUserCourses = () => {
                   style={{ width: "100%" }}
                 >
                   <Card.Img
-                    style={{ height: "16rem", objectFit: "cover" }}
+                    style={{ height: "16rem"}}
+                    className={elem?.img === 'default.png' ? 'imgScale' : 'imgOneCourses'}
                     variant="top"
                     src={`http://localhost:3000/images/cursos/${elem.img}`}
                   />

@@ -315,7 +315,7 @@ export const OneCourse = () => {
       <section className="oneCourse d-flex flex-column align-items-center justify-content-center p-5">
         <Card className="CardCourse d-flex flex-column align-items-center justify-content-center mb-4">
           <Card.Img
-            className="imgOneCourse"
+            className={oneCoursePpal?.img === 'default.png' ? 'imgOneCourse imgScale' : 'imgOneCourse'}
             variant="top"
             src={`http://localhost:3000/images/cursos/${oneCoursePpal?.img}`}
           />
