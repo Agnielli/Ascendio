@@ -25,7 +25,6 @@ export const AdminDisabledUsers = () => {
         <Col
           className="d-flex justify-content-center"
           key={elem.user_id}
-          xl={12}
           xs={12}
         >
           <DisabledUserCard elem={elem} update={update} setUpdate={setUpdate} />

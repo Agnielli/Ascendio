@@ -17,8 +17,8 @@ export const ActivatedUserMiniCard = ({ elem, update, setUpdate }) => {
   };
 
   return (
-    <div className="userMiniCardAdminView2 d-flex align-items-center justify-content-between gap-1 gap-xl-4">
-      <div>
+    <div className="userMiniCardAdminView flex-wrap d-flex align-items-center justify-content-between gap-xl-4">
+      <div className="AdminUserImg">
         <img
           src={
             elem.img != null
@@ -28,30 +28,26 @@ export const ActivatedUserMiniCard = ({ elem, update, setUpdate }) => {
           alt="Imagen de perfil del usuario"
         />
       </div>
-      <div className="d-flex flex-column flex-xl-row align-items-center text-center gap-4">
-        <div className="d-flex gap-2 gap-xl-3">
-          <div>
-            <p className="fw-bold">{elem.nickname}</p>
-            <p>{elem.total_followers} Seguidores</p>
-          </div>
-          <div>
-            <p>{elem.correct_posts} Acertados</p>
-            <p>{elem.incorrect_posts} Errados</p>
-          </div>
+
+      <div className="AdminUserStats d-flex justify-content-center justify-content-xl-start gap-2 gap-xl-3">
+        <div>
+          <p className="fw-bold">{elem.nickname}</p>
+          <p>{elem.total_followers} Seguidores</p>
         </div>
         <div>
-          <Button
-            variant="danger"
-            className="Button4"
-            onClick={() => disableUser(elem.user_id)}
-          >
-            Desactivar
-          </Button>
+          <p>{elem.correct_posts} Acertados</p>
+          <p>{elem.incorrect_posts} Errados</p>
         </div>
+      </div>
+      <div className="AdminUserButton">
+        <Button
+          variant="danger"
+          className="Button4"
+          onClick={() => disableUser(elem.user_id)}
+        >
+          Desactivar
+        </Button>
       </div>
     </div>
   );
 };
-
-
-

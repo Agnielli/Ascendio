@@ -172,11 +172,11 @@ export const AdminHome = () => {
         <Col
           xxl={3}
           xs={12}
-          className="my-5"
+          className="mt-5"
         >
           <Row>
             <Col className="d-flex justify-content-center justify-content-xl-start" xs={12}>
-              <h3 className="text-start mb-4 AscendioColor">Administrador</h3>
+              <h3 className="text-start mb-5 AscendioColor">Administrador</h3>
             </Col>
             <Col className="d-flex justify-content-center justify-content-xl-start ButtonsRow mb-4" xxl={12} lg={3} sm={6} xs={12}>
               <Button className="Button5" onClick={() => showButtons()}>
@@ -206,11 +206,9 @@ export const AdminHome = () => {
         <Col xxl={9} xs={12}>
           <>
             {showTrades && (
-              <Row className="TradeButtonsRow text-center justify-content-center row-gap-4">
+              <Row className="TradeButtonsRow text-center justify-content-center row-gap-4 mt-5">
                 <Col
                   xl={6}
-                  md={6}
-                  sm={6}
                   xs={12}
                   className="d-flex justify-content-center gap-5"
                 >
@@ -225,36 +223,32 @@ export const AdminHome = () => {
             )}
           </>
 
-          <>
+          <Row className="">
             {showPost && <TradesPostMap />}
             {showComments && <OneComment />}
-          </>
+          </Row>
 
           {showUserButtons === true && (
             <>
-              <Row className="ButtonsRow2 d-flex justify-content-center align-items-center text-center mb-5 mt-5">
-                <Col>
-                  <Col>
-                    <Button className="ButtonNoBG" onClick={() => showAllUsers()}>
-                      Todos
-                    </Button>
-                  </Col>
-                  <Col>
-                    <Button
-                      className="ButtonNoBG"
-                      onClick={() => showAllActivatedUsers()}
-                    >
-                      Activos
-                    </Button>
-                  </Col>
-                  <Col>
-                    <Button
-                      className="ButtonNoBG"
-                      onClick={() => showAllDisabledUsers()}
-                    >
-                      Bloqueados
-                    </Button>
-                  </Col>
+              <Row className="ButtonsRow2 d-flex justify-content-center align-items-center text-center mb-5">
+                <Col xl={12} xs={4} className="d-flex flex-column flex-sm-row justify-content-center mt-5">
+                  <Button className="ButtonNoBG" onClick={() => showAllUsers()}>
+                    Todos
+                  </Button>
+               
+                  <Button
+                    className="ButtonNoBG"
+                    onClick={() => showAllActivatedUsers()}
+                  >
+                    Activos
+                  </Button>
+               
+                  <Button
+                    className="ButtonNoBG"
+                    onClick={() => showAllDisabledUsers()}
+                  >
+                    Bloqueados
+                  </Button>
                 </Col>
               </Row>
               <Row className="row-gap-4">
