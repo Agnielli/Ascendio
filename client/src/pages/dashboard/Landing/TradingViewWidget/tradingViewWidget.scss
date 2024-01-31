@@ -53,7 +53,28 @@ div.tradingview-widget-copyright {
   }
 }
 
-//RESPONSIVE MOVIL
+//RESPONSIVE tablet pequeña // HECHO 
+@media (min-width: 576px) and (max-width:768px) {
+  .ascendio-graphic-containerPrincipal {
+    @include display-flex(column, center, center);
+    min-width: 80%;
+
+    .tradingview-widget-container {
+      width: 80%;
+      aspect-ratio: 2/1;
+      @include display-flex(column, center, center);
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+  }
+
+  div.tradingview-widget-copyright {
+    display: none;
+  }
+}
+
+
+//RESPONSIVE MOVIL // HECHO
 @media (max-width: 576px) {
   .ascendio-graphic-containerPrincipal {
     @include display-flex(column, center, center);
