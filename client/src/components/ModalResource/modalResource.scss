@@ -12,6 +12,18 @@
     border-color: $accent2-color;
     color: #9c9999;
   }
+
+  .form-control:focus {
+    box-shadow: 0 0 0 0.25rem $accent-color !important;
+  }
+  .form-control {
+    height: 35.98px;
+    border: none;
+    border-radius: 25px;
+    padding: 0 10px !important;
+    background-color: $accent5-color;
+  }
+  
 }
 
 .Button4 {

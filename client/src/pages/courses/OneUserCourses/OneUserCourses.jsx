@@ -69,23 +69,29 @@ export const OneUserCourses = () => {
           style={{ color: "white" }}
         >
           <h2 className="text-center">Mis cursos</h2>
-          <input
-            onChange={handleChange}
-            placeholder="🔍..."
-            value={filter}
-            className="buscador"
-          />
+          <div className="input-container">
+            <span className="material-symbols-outlined search-icon">
+              search
+            </span>
+            <input
+              onChange={handleChange}
+              placeholder="Buscar"
+              value={filter}
+              className="buscador"
+            />
+          </div>
         </div>
       </header>
       <main className="mainAllCoursesOneUser gap-3 pb-5">
-        <Row className="justify-content-center"> 
+        <Row className="justify-content-center">
           {findCourse?.map((elem) => {
             return (
-              <Col xs={12} md={6} lg={4} xxl={3}className="d-flex">
+              <Col xs={12} md={6} lg={4} xxl={3} className="d-flex">
                 <Card
                   // style={{ width: "22rem" }}
                   key={elem.course_id}
-                  className="mapeoAllCourseOneUser text-center mb-4 d-flex flex-column" style={{ width: "100%" }}
+                  className="mapeoAllCourseOneUser text-center mb-4 d-flex flex-column"
+                  style={{ width: "100%" }}
                 >
                   <Card.Img
                     style={{ height: "16rem", objectFit: "cover" }}
