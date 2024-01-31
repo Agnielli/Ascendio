@@ -157,3 +157,9 @@
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
   
 }
+
+@media (width < 576px){
+  .oneCourse .CardCourse .oneCourseBody .courseTitle{
+    font-size: 0.5rem;
+  }
+}
