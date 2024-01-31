@@ -7,7 +7,7 @@ import { TradingViewWidget } from "./TradingViewWidget/TradingViewWidget";
 
 export const Landing = () => {
   return (
-    <Container fluid>
+    <>
       <main className="ascendio-landing-main-padre">
         <Row className="ascendio-landing-main-hijo-1">
           <Col xs={12} className="ascendio-landing-main-hijo1-nieto">
@@ -129,6 +129,6 @@ export const Landing = () => {
           </Col>
         </Row>
       </footer>
-    </Container>
+    </>
   );
 };
