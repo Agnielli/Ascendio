@@ -9,13 +9,14 @@
     aspect-ratio: 1/1;
   }
   button {
-    width: 12ch;
+    width: 14ch;
   }
   p {
     color: white;
     text-align: left;
   }
 }
+
 @media screen and (max-width: 500px) {
   .userMiniCardAdminView2 {
     padding: 1rem;

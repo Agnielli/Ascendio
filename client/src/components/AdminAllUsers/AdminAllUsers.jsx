@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { UserMiniCard } from "../UserMiniCard/UserMiniCard";
-import { Col, Container, Row } from "react-bootstrap";
-import "./AdminAllUsers.scss";
+import { Col } from "react-bootstrap";
+
 
 export const AdminAllUsers = ({ allUsers, setAllUsers }) => {
   const [updateUsers, setUpdateUsers] = useState(false);
@@ -25,7 +25,7 @@ export const AdminAllUsers = ({ allUsers, setAllUsers }) => {
         <Col
           className="d-flex justify-content-center"
           key={elem.user_id}
-          xl={6}
+          xl={12}
           xs={12}
         >
           <UserMiniCard
