@@ -29,20 +29,18 @@ export const ResourceViewer = () => {
   }
 console.log(type);
   return (
-    <Row className="resourceView py-3 gap-4">
+    <Row className="resourceView py-1">
       <Col xs={12} className="column1">
     <Breadcrumb className="linkes">
       
       <div className="back">
-        <Breadcrumb.Item onClick={()=>navigate(-1)} >
+        <Breadcrumb.Item onClick={()=>navigate(-1)} className="d-flex justify-content-center align-items-center" >
           {titles?.title}
         </Breadcrumb.Item>
-        <Breadcrumb.Item onClick={()=>navigate(-1)}>
+        <Breadcrumb.Item onClick={()=>navigate(-1)} className="d-flex justify-content-center align-items-center" >
           {titles?.section_title}
         </Breadcrumb.Item>
       </div>
-
-      <hr />
 
         
 
