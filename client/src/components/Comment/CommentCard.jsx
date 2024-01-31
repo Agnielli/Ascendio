@@ -1,12 +1,14 @@
 import React from "react";
 import './CommentCard.scss'
+import { Col, Row } from "react-bootstrap";
 
 export const CommentCard = ({ elem }) => {
   return (
-    <div className="CommentDiv">
-      <h6 className="mb-3">{elem.nickname}</h6>
-      <p>{elem.description}</p>
-      <p></p>
-    </div>
+    <Row className="CommentDiv mt-4">
+      <Col className="d-flex flex-column">
+        <h6>{elem.nickname}</h6>
+        <p>{elem.description}</p>
+      </Col>
+    </Row>
   );
 };
