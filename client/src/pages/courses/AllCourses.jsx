@@ -42,7 +42,7 @@ export const AllCourses = () => {
     <Col>
       <header className="headerAllCourses">
         <div
-          className="d-flex justify-content-between align-items-center p-5 divHeader"
+          className="d-flex justify-content-between align-items-center py-5 divHeader"
           style={{ color: "white" }}
         >
           <div>
@@ -51,12 +51,15 @@ export const AllCourses = () => {
               {order ? "Ver top cursos" : "Ver últimos cursos"}
             </Button>
           </div>
-          <div>
+          <div className="input-container">
+            <span className="material-symbols-outlined search-icon">
+              search
+            </span>
             <input
-            onChange={handleChange}
-            placeholder="🔍 Buscar"
-            value={filter}
-            className="buscador with-icon"
+              onChange={handleChange}
+              placeholder="Buscar"
+              value={filter}
+              className="buscador"
             />
           </div>
         </div>

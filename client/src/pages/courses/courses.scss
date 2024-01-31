@@ -1,12 +1,11 @@
 @import "../../../public/stylesheets/variables.scss";
 
 .nav-bar-button-courses {
-  z-index: 1; /* Asegura que esté por encima de otros elementos */
+  z-index: 1;
 }
 
 .mapeoAllCourse {
   background-color: $accent2-color;
-  /*  height: 39rem;  pendiente revisar*/
 }
 
 .mainAllCourses,
