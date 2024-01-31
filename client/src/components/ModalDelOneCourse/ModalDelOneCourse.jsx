@@ -14,7 +14,7 @@ export const ModalDelOneCourse = ({
       <Col className="d-flex justify-content-center p-5" md={4}>
         <Modal show={showModalDelete} onHide={handleClose}>
           <Modal.Header closeButton className="modalDel">
-            <Modal.Title>Eliminar curso</Modal.Title>
+            <Modal.Title className="cardtitle">Eliminar curso</Modal.Title>
           </Modal.Header>
           <Modal.Body className="modalDel">
             <Form>
