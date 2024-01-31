@@ -319,7 +319,7 @@ export const OneCourse = () => {
             variant="top"
             src={`http://localhost:3000/images/cursos/${oneCoursePpal?.img}`}
           />
-          <Card.Body className="oneCourseBody d-flex flex-column align-items-center justify-content-center">
+          <Card.Body    className="oneCourseBody d-flex flex-column align-items-center justify-content-center">
             <div className="oneCourseP1 d-flex  align-items-center gap-2">
               {userId === userCourse && (
                 <button
