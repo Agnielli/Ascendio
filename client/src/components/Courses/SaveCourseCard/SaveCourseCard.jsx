@@ -50,8 +50,8 @@ export const SaveCourseCard = () => {
           <input onChange={handleChange} placeholder="🔍..." value={filter} className="buscador" />
         </div>
       </header>
-      <main className="mainCursosGuardados d-flex flex-wrap justify-content-center gap-3 pb-5">
-        <Row className="d-flex align-items-stretch"> {/* Añade la clase 'd-flex align-items-stretch' */}
+      <main className="mainCursosGuardados gap-3 pb-5">
+      <Row className="justify-content-center"> 
         {findCourse?.map((elem) => {
           return (
             <Col xs={12} md={6} lg={4} xxl={3} className="d-flex"> {/* Añade la clase 'd-flex' */}
@@ -66,11 +66,6 @@ export const SaveCourseCard = () => {
               />
               <Card.Body className="d-flex flex-column gap-1 flex-fill">
                 <Card.Text className="cardtitle"> {elem.title} </Card.Text>
-                <Card.Subtitle className="followerscard">
-                  {elem?.followers !== 0
-                  ? `${elem?.followers} Seguidores`
-                  : "Sin seguidores"}
-                </Card.Subtitle>
 
                 {elem.average_rating && (
                   <RatingStars numberstars={elem.average_rating} />

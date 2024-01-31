@@ -50,13 +50,12 @@ export const PurchaseCourseCard = () => {
           <input onChange={handleChange} placeholder="🔍..." value={filter} className="buscador"/>
         </div>
       </header>
-      <main className="mainCursosComprados d-flex flex-wrap justify-content-center gap-3 pb-5">
-        <Row className="d-flex align-items-stretch">
+      <main className="mainCursosComprados gap-3 pb-5">
+      <Row className="justify-content-center">
         {findCourse?.map((elem) => {
           return (
             <Col xs={12} md={6} lg={4} xxl={3} className="d-flex">
             <Card
-              // style={{ width: "22rem" }}
               key={elem.course_id}
               className="mapeoCursosComprados text-center mb-4"
               style={{ width: "100%" }}>
@@ -67,11 +66,6 @@ export const PurchaseCourseCard = () => {
               />
               <Card.Body className="d-flex flex-column gap-1">
                 <Card.Text className="cardtitle"> {elem.title} </Card.Text>
-                <Card.Subtitle className="followerscard">
-                  {elem?.followers !== 0
-                  ? `${elem?.followers} Seguidores`
-                  : "Sin seguidores"}
-                </Card.Subtitle>
 
                 {elem.average_rating && (
                   <RatingStars numberstars={elem.average_rating} />

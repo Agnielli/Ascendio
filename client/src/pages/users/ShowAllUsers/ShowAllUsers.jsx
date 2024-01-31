@@ -33,7 +33,6 @@ export const ShowAllUsers = () => {
         .then((res) => {
           setAllUsers(res.data.filter((elem) => elem.type === 2));
           setAllUsersFilter(res.data.filter((elem) => elem.type === 2));
-          console.log(res.data);
         })
         .catch((err) => {
           console.log(err);
@@ -111,7 +110,7 @@ export const ShowAllUsers = () => {
     <div>
       {show === 1 && (
         <>
-          <div className="d-flex gap-1">
+          <div className="d-flex gap-1 m-4">
             <Button className="mb-2" onClick={() => setShow(2)}>
               Top Usuarios con más Aciertos
             </Button>
@@ -199,7 +198,7 @@ export const ShowAllUsers = () => {
       )}
       {show === 2 && (
         <>
-          <div className="d-flex gap-1">
+          <div className="d-flex gap-1 m-4">
             <Button className="mb-2" onClick={() => setShow(1)}>
               Top Usuarios con más Seguidores
             </Button>

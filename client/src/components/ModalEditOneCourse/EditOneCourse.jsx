@@ -42,13 +42,17 @@ export const EditOneCourse = ({
     setMsgError("");
   };
   let regexPrice = /^(?:(\d{1,5}(?:\.\d{0,2})?)|\D+).*$/g;
-  let regexTitle = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ.,:?¿!¡]{1,50}$/;
-  let regexDescription = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ.,:?¿!¡]{1,250}$/;
+  let regexTitle = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ.,:?¿!¡]{0,50}$/;
+  let regexDescription = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ.,:?¿!¡]{0,250}$/;
   const handleSubmit = (e) => {
     if (!regexTitle.test(editCourse.title)) {
       setMsgError("No se permiten más de 50 caracteres");
+    } else if(editCourse.title === ''){
+      setMsgError("Escribe el título");
     } else if (!regexDescription.test(editCourse.description)) {
       setMsgError("No se permiten más de 250 caracteres");
+    } else if(editCourse.description === ''){
+      setMsgError("Escribe la descripción");
     } else if (!regexPrice.test(editCourse.price)) {
       setMsgError("No se permiten más de 99999 euros");
     } else {

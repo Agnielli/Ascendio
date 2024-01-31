@@ -20,8 +20,7 @@ export const DisabledCoursesMap = () => {
   }, [updateCourses]);
 
   return (
-    <Row className="d-flex align-items-stretch">
-      <main className="adminAllCourses d-flex flex-wrap justify-content-center gap-3 pb-5">
+      <>
         {disabledCourses?.map((elem, index) => {
           return (
             <DisabledCourses
@@ -31,7 +30,6 @@ export const DisabledCoursesMap = () => {
             />
           );
         })}
-      </main>
-    </Row>
+      </>
   );
 };

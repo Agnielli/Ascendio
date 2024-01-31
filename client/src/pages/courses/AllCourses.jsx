@@ -53,15 +53,16 @@ export const AllCourses = () => {
           </div>
           <div>
             <input
-            onChange={handleChange} placeholder="🔍"
+            onChange={handleChange}
+            placeholder="🔍 Buscar"
             value={filter}
-            className="buscador"
+            className="buscador with-icon"
             />
           </div>
         </div>
       </header>
-      <main className="mainAllCourses d-flex flex-wrap justify-content-center gap-3 pb-5">
-      <Row className="d-flex align-items-stretch">
+      <main className="mainAllCourses gap-3 pb-5">
+      <Row className="justify-content-center">
         {findCourse?.map((elem) => {
           return (
             <Col xs={12} md={6} lg={4} xxl={3} className="d-flex">
@@ -78,18 +79,14 @@ export const AllCourses = () => {
               />
               <Card.Body className="d-flex flex-column gap-1">
                 <Card.Text className="cardtitle"> {elem.title} </Card.Text>
-                <Card.Subtitle className="followerscard">
-                  {elem.followers !== undefined && elem.followers !== 0
-                    ? `${elem.followers} Seguidores`
-                    : "Sin seguidores"}
-                </Card.Subtitle>
+                
                 {elem.average_rating && (
                   <RatingStars numberstars={elem.average_rating} />
                 )}
                 <Card.Subtitle className="tagsCourse">
                   {elem.tags}
                 </Card.Subtitle>
-                <Card.Title className="descriptioncard d-flex justify-content-start">{elem.description}</Card.Title>
+                <Card.Title className="descriptioncard d-flex justify-content-start flex-grow-1">{elem.description}</Card.Title>
                 <Card.Text className="priceCourse cardtitle px-3 my-1">
                   {Number(elem?.price) === 0
                   ? "GRATIS"

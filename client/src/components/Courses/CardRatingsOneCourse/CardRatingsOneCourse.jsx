@@ -6,7 +6,7 @@ import './cardRatingOneCourse.scss';
 export const CardRatingsOneCourse = ({rates}) => {
 
   return (
-    <Card style={{ width: '25rem' }} className='cardRateOneCourse'>
+    <Card className='cardRateOneCourse'>
     <Card.Body>
       <Card.Title>{rates?.nickname}</Card.Title>
       <RatingStars

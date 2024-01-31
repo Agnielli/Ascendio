@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Breadcrumb, Col, Container, Row } from "react-bootstrap";
+import { Breadcrumb, Col,  Row } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import "./ResourceViewer.scss";
 
@@ -27,10 +27,10 @@ export const ResourceViewer = () => {
   if (type === "1") {
     urlbase = "http://localhost:3000/images/resource/";
   }
-
+console.log(type);
   return (
-    <Container fluid className="resourceView">
-  
+    <Row className="resourceView py-3 gap-4">
+      <Col xs={12} className="column1">
     <Breadcrumb className="linkes">
       
       <div className="back">
@@ -44,14 +44,15 @@ export const ResourceViewer = () => {
 
       <hr />
 
-        <Col className="justify-content-center text-center align-items-center">
-        <div >
-          <iframe className="content" src={`${urlbase}${link}`} frameborder="0"></iframe>
-        </div>
-        </Col>
+        
 
     </Breadcrumb>
+    </Col>
+    <Col  xs={12} className="column2 justify-content-center text-center align-items-center">
+        
+          <iframe className={type === '1' ? 'pdf' : 'video'} src={`${urlbase}${link}`} frameBorder="0"></iframe>
 
-    </Container>
+        </Col>
+    </Row>
   );
 };
