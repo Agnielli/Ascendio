@@ -2,6 +2,9 @@
   background-color: #1d1d1b;
   min-height: calc(100vh - 77px);
   color: white;
+  max-width: 1320px;
+  width: 95%;
+  margin: 0 auto; 
 
   @media (min-width: 992px) {
     .AdminRow {
@@ -22,14 +25,6 @@
     }
   }
 
-  .ColBotonesAdminUsuarios {
-    @media screen and (max-width: 1200px) {
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-  }
-
   .AscendioColorBG {
     background-color: #e15252;
   }
@@ -47,6 +42,3 @@
   
 }
 
-.adminhome-row-principal-padre{
-  max-width: 100vw;
-}
