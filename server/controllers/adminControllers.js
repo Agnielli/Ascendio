@@ -211,7 +211,7 @@ class adminControllers {
   }
   
   getAllEnabledCourses = (req, res) => {
-    let sql = `SELECT * FROM course WHERE is_disabled = 0`
+    let sql = `SELECT * FROM course WHERE is_disabled = 0 AND is_completed = 1`
     connection.query(sql, (err, result) => {
       if(err) {
         res.status(500).json(err)

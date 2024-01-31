@@ -5,7 +5,10 @@ import './adminOneCourse.scss';
 
 export const AdminOneCourse = ({ elem, updateCourses, setUpdateCourses }) => {
   const disableEnableCourse = (course_id, is_disabled) => {
-    let url = `http://localhost:3000/admin/adminenableonecourse/${course_id}`;
+    let url
+    if (is_disabled === 1) {
+      url = `http://localhost:3000/admin/adminenableonecourse/${course_id}`;
+    }
     if (is_disabled === 0) {
       url = `http://localhost:3000/admin/admindisableonecourse/${course_id}`;
     }
