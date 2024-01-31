@@ -5,7 +5,6 @@
   height: 90vh;
   justify-content: center;
   align-items: center;
-  gap: 1.5rem;
 
   .column1{
     height: 10%;
@@ -59,29 +58,59 @@
 
 @media (width < 915px){
   .resourceView{
-    gap: 4rem;
+    gap: 0.5rem;
   }
 } 
 
-/* @media (width < 800px){
+@media (width < 883px){
   .resourceView{
-    gap: 4rem;
+    gap: 2rem;
   }
-} */
-
-@media (width < 600px){
+}
+@media (width < 870px){
   .resourceView{
-    width: 100%;
-    gap: 3rem
-    
-  }
-
-  a{
-    font-size: smaller;
+    width: 87%;
+    gap: 0;
   }
 }
 
+@media (width < 791px){
+  .resourceView{
+    width: 90%;
+    gap: 0;
+  }
+}
+
+@media (width < 758px){
+  .resourceView{
+    width: 100%;
+    gap: 0;
+  }
+}
+
+@media (width < 662px){
+  .resourceView{
+    width: 100%;
+    gap: 2rem;
+    a{
+      font-size: smaller;
+    }
+  }
+}
+
+
 @media (width < 412px){
+  .resourceView{
+    gap: 2rem;
+  }
+} 
+
+@media (width < 360px){
+  .resourceView{
+    gap: 3rem;
+  }
+} 
+@media (width < 336px){
   .resourceView{
     gap: 5rem;
   }

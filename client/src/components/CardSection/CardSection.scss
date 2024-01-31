@@ -1,5 +1,6 @@
 @use '../../../public/stylesheets/variables.scss' as var;
 @use '../../../public/stylesheets/ButtonsApp.scss' as boton;
+
 .accordion-item:first-of-type .accordion-button {
       border-top-left-radius: 30px;
       border-top-right-radius: 30px ;
