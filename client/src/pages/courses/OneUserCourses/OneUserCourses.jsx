@@ -134,7 +134,13 @@ export const OneUserCourses = () => {
         )}
 
         {findCourse?.length === 0 && (
-          <p>No se han encontrado cursos con estos valores</p>
+          <h4 className="alltrades-error-nohaypostsnitrades text-center">
+          No hay{" "}
+          <span className="alltrades-error-nohaypostsnitrades-hijo">
+            Cursos
+          </span>{" "}
+          disponibles en este momento.
+        </h4>
         )}
       </main>
     </Col>

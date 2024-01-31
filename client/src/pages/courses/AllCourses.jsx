@@ -106,9 +106,13 @@ export const AllCourses = () => {
           );
         })}
         {findCourse?.length === 0 && (
-          <p className="busqueda">
-            No se han encontrado cursos con este nombre
-          </p>
+          <h4 className="alltrades-error-nohaypostsnitrades text-center">
+          No hay{" "}
+          <span className="alltrades-error-nohaypostsnitrades-hijo">
+            Cursos
+          </span>{" "}
+          disponibles en este momento.
+        </h4>
         )}
         </Row>
       </main>

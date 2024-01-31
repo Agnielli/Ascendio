@@ -177,7 +177,7 @@ export const Users = () => {
                 className="Button5"
                 onClick={() => navigate("/purchasecourse")}
               >
-                Cursos Adquiridos
+                Cursos Comprados
               </Button>
               <Button
                 className="Button5"

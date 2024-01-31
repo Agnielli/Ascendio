@@ -95,7 +95,13 @@ export const SaveCourseCard = () => {
         })}
         </Row>
         {findCourse?.length === 0 && (
-          <p>No existen cursos</p>
+          <h4 className="alltrades-error-nohaypostsnitrades text-center">
+          No hay{" "}
+          <span className="alltrades-error-nohaypostsnitrades-hijo">
+            Cursos
+          </span>{" "}
+          disponibles en este momento.
+        </h4>
         )}
         
       </main>
