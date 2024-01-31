@@ -9,13 +9,15 @@
   border-radius: 25px;
   font-weight: 500;
   transition: 0.3s;
+  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+  overflow: hidden; /* Oculta el texto que desborda el contenedor */
+  text-overflow: ellipsis; /* Muestra puntos suspensivos (...) cuando el texto desborda */
 
-
-  &:hover{
+  &:hover {
     background-color: $accent3-color;
-    color:$accent-color;
+    color: $accent-color;
   }
-  &:active{
+  &:active {
     background-color: $accent3-color;
     color: $accent-color;
   }
@@ -30,11 +32,15 @@
   border-radius: 25px;
   font-weight: 500;
   transition: 0.3s;
-  &:hover{
+  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+  overflow: hidden; /* Oculta el texto que desborda el contenedor */
+  text-overflow: ellipsis; /* Muestra puntos suspensivos (...) cuando el texto desborda */
+
+  &:hover {
     background-color: $accent-color !important;
-    color:$accent2-color !important;
+    color: $accent2-color !important;
   }
-  &:active{
+  &:active {
     background-color: $accent-color !important;
     color: $accent2-color !important;
   }
@@ -57,11 +63,15 @@
   border-radius: 25px;
   font-weight: 500;
   transition: 0.3s;
-  &:active{
+  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+  overflow: hidden; /* Oculta el texto que desborda el contenedor */
+  text-overflow: ellipsis; /* Muestra puntos suspensivos (...) cuando el texto desborda */
+
+  &:active {
     background-color: $accent-color;
     color: $accent2-color;
   }
-  &:hover{
+  &:hover {
     background-color: $accent-color;
     color: $accent2-color;
   }
@@ -76,11 +86,15 @@
   border-radius: 25px;
   font-weight: 500;
   transition: 0.3s;
-  &:active{
-    background-color: $accent2-color ;
-    color:$accent2-color $accent2-color;
+  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+  overflow: hidden; /* Oculta el texto que desborda el contenedor */
+  text-overflow: ellipsis; /* Muestra puntos suspensivos (...) cuando el texto desborda */
+
+  &:active {
+    background-color: $accent2-color;
+    color: $accent2-color $accent2-color;
   }
-  &:hover{
+  &:hover {
     // background-color: $accent3-color ; este era el original
     background-color: $accent2-color;
     color: $accent2-color $accent2-color;
@@ -104,12 +118,15 @@
   border-radius: 25px;
   font-weight: 500;
   transition: 0.3s;
+  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+  overflow: hidden; /* Oculta el texto que desborda el contenedor */
+  text-overflow: ellipsis; /* Muestra puntos suspensivos (...) cuando el texto desborda */
 
   &:hover {
     background-color: $accent-color;
     color: $accent2-color;
   }
-  &:active{
+  &:active {
     background-color: $accent-color !important ;
     color: $accent2-color !important;
   }
