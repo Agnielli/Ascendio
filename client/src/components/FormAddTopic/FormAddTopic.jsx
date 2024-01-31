@@ -62,13 +62,13 @@ export const FormAddTopic = ({
             
             <div className="botonFormTopic  d-flex justify-content-center mt-3">
               <Button
-                className="botonesTopic me-3"
+                className="botonesTopic mx-2"
                 onClick={handleSubmit}
               >
                 Aceptar
               </Button>
               <Button
-                className="botonesTopic me-3"
+                className="botonesTopic mx-2"
                 onClick={() => setShowTopic(false)}
               >
                 Cancelar

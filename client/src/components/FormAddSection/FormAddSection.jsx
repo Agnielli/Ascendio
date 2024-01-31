@@ -52,9 +52,9 @@ export const FormAddSection = ({setAddSection,course_id, resetCourse, setResetCo
             <p>{msgError}</p>
             <div className="botonFormSection d-flex justify-content-center mt-3">
               <Button 
-                className="me-3 botonesSection"  onClick={handleSubmit} >Aceptar</Button>
+                className="botonesSection mx-2"  onClick={handleSubmit} >Aceptar</Button>
               <Button 
-                className="me-3 botonesSection" onClick={()=>setAddSection(false)}>Cancelar</Button>
+                className="botonesSection mx-2" onClick={()=>setAddSection(false)}>Cancelar</Button>
             </div>
           </Form.Group>
         </Form>
