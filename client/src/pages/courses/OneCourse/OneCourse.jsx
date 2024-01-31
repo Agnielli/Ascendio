@@ -37,6 +37,10 @@ export const OneCourse = () => {
   const [showCardRate, setShowCardRate] = useState(true);
   const [resetrate, setResetrate] = useState();
   const [peopleVotesCourse, setPeopleVotesCourse] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseLeave = () => setIsHovered(false);
   
 
   const navigate = useNavigate();
@@ -379,8 +383,11 @@ export const OneCourse = () => {
                   {userId !== userCourse && (
                     <button className="likeBoton" onClick={handleWishes}>
                       {isIntoWishes ? (
-                        <span class="material-symbols-outlined 1 deleteLike">
-                        favorite
+                        <span class="material-symbols-outlined 1 deleteLike"
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                        >
+                        {isHovered ? 'heart_minus' : 'favorite'}
                         </span>
                       ) : (
                         <span class="material-symbols-outlined 0 addLike">
