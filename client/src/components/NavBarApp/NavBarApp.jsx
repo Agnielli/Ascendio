@@ -27,7 +27,7 @@ function NavBarApp() {
           <Navbar.Brand className="logoNav p-0 m-0" as={Link} to={redirectTo}>
            ASCENDIO
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav w-100" >
             <Nav className="me-auto d-flex w-100 ">
               <div className="d-flex justify-content-end w-100">

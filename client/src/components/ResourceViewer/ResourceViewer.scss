@@ -1,56 +1,90 @@
 
 .resourceView{
-  width: 90vw;
+  width: 80%;
+  margin: 0 auto;
   height: 90vh;
-  display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  gap: 1.5rem;
+
+  .column1{
+    height: 10%;
+    
+  }
+
+  .column2{
+    height: 90%;
+  }
 
   .linkes{
-    width: 90%;
+    width: 100%;
     font-size: large;
     border-radius: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
     margin-top: 1rem;
+    padding: 0;
 
     a{
+      width: 100%;
       color: white;
       text-decoration: none;
       margin: 1rem;
     }
 
     .back{
-      width: 80vw;
+      width: 100%;
       display: flex;
       justify-content: center;
-      align-items: center;
+      text-align: center;
       background-color: rgba(102, 102, 102, 0.212);
       border-radius: 10px;
     }
-    
-    hr{
-      opacity: 1;
-      width: 80vw;
-      color: white;
-      display: flex;
-      justify-content: center;
-      margin: auto;
-      margin-top: 1rem;
-      margin-bottom: 0.5rem;
-    }
 
-    .content{
-      width: 80vw;
-      height: 75vh;
-      border-radius: 20px;
-      margin-top: 1rem;
+    .breadcrumb-item+.breadcrumb-item::before {
+      color: white;
     }
+    
+  }
+  .video{
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 20px;
+  }
+
+  .pdf{
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
   }
 }
 
+@media (width < 915px){
+  .resourceView{
+    gap: 4rem;
+  }
+} 
 
+/* @media (width < 800px){
+  .resourceView{
+    gap: 4rem;
+  }
+} */
+
+@media (width < 600px){
+  .resourceView{
+    width: 100%;
+    gap: 3rem
+    
+  }
+
+  a{
+    font-size: smaller;
+  }
+}
+
+@media (width < 412px){
+  .resourceView{
+    gap: 5rem;
+  }
+} 
 
 

@@ -221,6 +221,7 @@ export const AdminHome = () => {
               </Row>
             )}
           </>
+
           <Row className="">
             {showPost && <TradesPostMap />}
             {showComments && <OneComment />}
@@ -307,6 +308,7 @@ export const AdminHome = () => {
           </div>
         </Col>
       </Row>
+
     </main>
   );
 };

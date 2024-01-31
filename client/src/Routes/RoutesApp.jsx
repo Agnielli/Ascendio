@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Row } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import NavBarApp from "../components/NavBarApp/NavBarApp";
 import { Home } from "../pages/dashboard/Home/Home";
 import { Register } from "../pages/auth/Register/Register";
@@ -52,8 +52,8 @@ export const RoutesApp = () => {
   }, [token]);
   return (
     <BrowserRouter>
-      <Row className="p-0 m-0">
-        <NavBarApp />
+      <NavBarApp />
+      <Container fluid>
         <Routes>
           {!token && (
             <>
@@ -61,7 +61,10 @@ export const RoutesApp = () => {
               <Route path="/about" element={<AboutApp />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/register" element={<Register />} />
-              <Route path="/termsandconditions" element={<ThermsNConditions />} />
+              <Route
+                path="/termsandconditions"
+                element={<ThermsNConditions />}
+              />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/cookiespolicy" element={<CookiesPolicy />} />
               <Route
@@ -94,7 +97,10 @@ export const RoutesApp = () => {
               />
               <Route path="/allpoststrades" element={<AllTrades />} />
               <Route path="/onetradepost/:post_id" element={<OneTradePost />} />
-              <Route path="/onegeneralpost/:post_id" element={<OneGeneralPost />} />
+              <Route
+                path="/onegeneralpost/:post_id"
+                element={<OneGeneralPost />}
+              />
               <Route path="/allpostsgenerals" element={<AllPostsGenerals />} />
               <Route path="/showallusers" element={<ShowAllUsers />} />
               <Route path="/tradingview" element={<TradingViewWidget />} />
@@ -108,8 +114,14 @@ export const RoutesApp = () => {
                 path="/oneusercourses/:user_id"
                 element={<OneUserCourses />}
               />
-              <Route path="/traderprofile/:user_id" element={<TraderProfile />}/>
-              <Route path="/resource/:course_id/:section_id/:link/:type" element={<ResourceViewer />}/>
+              <Route
+                path="/traderprofile/:user_id"
+                element={<TraderProfile />}
+              />
+              <Route
+                path="/resource/:course_id/:section_id/:link/:type"
+                element={<ResourceViewer />}
+              />
             </>
           )}
           {token && type === 1 && (
@@ -123,16 +135,7 @@ export const RoutesApp = () => {
           )}
           <Route path="*" element={<ErrorPageApp />} />
         </Routes>
-      </Row>
+      </Container>
     </BrowserRouter>
   );
 };
-
-
-
-
-
-
-
-
-

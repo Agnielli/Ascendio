@@ -20,13 +20,15 @@ export const FormAddTopic = ({
     setNewTopic(e.target.value);
   };
 
+  let regexTopic = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ.,:?¿!¡]{0,50}$/;
 
-  let regexTopic = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ.,:?¿!¡]{1,50}$/;
   const handleSubmit = () => {
     let data = { course_id, section_id, newTopic };
     console.log("data", data);
     if (!regexTopic.test(newTopic)) {
       setMsgError("No se permiten más de 50 caracteres");
+    }else if(newTopic === ''){
+      setMsgError("Escribe el título del tema");
     } else if (newTopic !== "") {
       axios
         .post("http://localhost:3000/courses/addtopic", data)
@@ -54,6 +56,10 @@ export const FormAddTopic = ({
               value={newTopic}
               onChange={handleChange}
             />
+            <span>
+              <p style={{ color: '#E25252'}}>{msgError}</p>
+            </span>
+            
             <div className="botonFormTopic  d-flex justify-content-center mt-3">
               <Button
                 className="botonesTopic me-3"

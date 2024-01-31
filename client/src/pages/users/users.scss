@@ -1,65 +1,80 @@
 @import '../../../public/stylesheets/variables.scss';
 
+.UserProfileScss{
+  padding: 5vh 10vw;
+  .avatarProfilo {
+    width: 15vw;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    border: 0.25rem solid $accent-color;
+    margin: 0 auto; 
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-.user{
-  color: white;
-}
-
-.userRow {
-  width: 80vw;
-  margin: 0 auto; 
-}
-
-.custom-table {
-  border: 1px solid $accent-color;
-  td, th {
-    background-color:$tertiary-color !important;
+    p{
+      margin: 0 !important;
+        height: 100%;
+        width: 100%;
+        color: #e15252;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 10vw;
+    }
   }
-}
+  .PorcentajeAciertos{
+    margin: 8px 0 0 0 !important;
+  }
 
-.nombreUser{
-  color: white;
-}
+  .PDatosPerfil{
+    margin: 0 !important;
+    font-size: 12px;
+    color: $accent5-color;
+  }
 
-.texto-rojo {
-  color: $accent-color !important;
-}
+  .TradesGreen{   
+    margin: 0 !important;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #5de152 !important;
+  }
 
-.enlace-rojo {
-  color: $accent-color; 
-  text-decoration: underline;
-}
+  .TradesRed {
+    margin: 0 !important;
+    font-size: 2rem;
+    font-weight: bold;
+    color: $accent-color !important; 
 
-.avatarProfilo {
-  width: 15vw;
-  aspect-ratio: 1/1;
-  border-radius: 50%;
-  border: 2px solid $accent-color;
-  margin: 0 auto; 
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  }
 
-.avatarProfilo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+  .linksPerfil{
+    color: white;
+    text-decoration: none;
+    font-size: 2rem;
+    font-weight: bold;
+  }
 
-.editIcon {
-  font-size: 100px;
-  background-color: transparent;
-  border: none;
-  display: flex;
-  padding-bottom: 8px;
-}
+  .Button3{
+    font-size: 10px;
+    padding: 4px 10px !important;
+   
+    
+  }
 
-.Button4 {
-  width: 15vw;
-}
 
-.redTable{
-  color: $accent-color !important;
+  .Button5{
+    display: flex;
+    align-items: center;
+    img{
+      margin: 0 16px 0 20px;
+      width: 50px;
+      height: 50px;
+    }
+    color: white !important;
+    margin-bottom: 16px;
+    padding: 1.5rem 200px 1.5rem 20px  !important;
+    border-radius: 50px;
+  }
 }

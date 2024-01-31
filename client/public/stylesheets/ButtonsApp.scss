@@ -18,7 +18,6 @@
   }
 }
 
-
 //boton gris a rosa:
 .Button2 {
   padding: 6px 20px !important;
@@ -82,7 +81,6 @@
   // }
 }
 
-
 //boton menus para sitios como dentro de editar perfil: de gris-rosa a rosa-gris
 
 //*** HAY QUE CAMBIARLE EL PADDING SEGUN CONVENGA  A CADA VISTA. si vas a usar este boton, copialo en el scss donde estes trabajando, cambiale el nombre y usalo.
@@ -100,14 +98,11 @@
     background-color: $accent-color ;
     color:$accent2-color;
   }
-  
+
   &.active{
     background-color: $accent-color !important ;
     color:$accent2-color !important;
-
   }
-
-
 }
 
 .buscador {
@@ -121,6 +116,7 @@
     border: 1px solid $accent-color ;
   }
 }
+
 
 ::-webkit-scrollbar {
   width: 0.75rem;

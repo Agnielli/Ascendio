@@ -6,14 +6,12 @@ import { Button, Card, Col, Row } from "react-bootstrap";
 import { textSensitive } from "../../helpers/utils";
 import { RatingStars } from "../../components/Courses/RatingStars/RatingStars";
 import "../../../public/stylesheets/ButtonsApp.scss";
-
 export const AllCourses = () => {
   const [allcourses, setAllcourses] = useState([]);
   const [findCourse, setFindCourse] = useState();
   const [filter, setFilter] = useState("");
   const [order, setOrder] = useState(false);
   const navigate = useNavigate();
-
   useEffect(() => {
     let url;
     if (order === false) {
@@ -31,23 +29,20 @@ export const AllCourses = () => {
         console.log(err);
       });
   }, [order]);
-
   const handleChange = (e) => {
     setFilter(e.target.value);
   };
-
   useEffect(() => {
     const tempArray = allcourses.filter((e) => {
       return textSensitive(e.title, filter);
     });
     setFindCourse(tempArray);
   }, [allcourses, filter]);
-
   return (
     <Col>
       <header className="headerAllCourses">
         <div
-          className="d-flex justify-content-between align-items-center p-5"
+          className="d-flex justify-content-between align-items-center p-5 divHeader"
           style={{ color: "white" }}
         >
           <div>
@@ -58,20 +53,20 @@ export const AllCourses = () => {
           </div>
           <div>
             <input
-            onChange={handleChange} placeholder="🔍"
+            onChange={handleChange}
+            placeholder="🔍 Buscar"
             value={filter}
-            className="buscador"
+            className="buscador with-icon"
             />
           </div>
         </div>
       </header>
-
-      <main className="mainAllCourses d-flex flex-wrap justify-content-center gap-3 pb-5">
-      <Row className="d-flex align-items-stretch">
+      <main className="mainAllCourses gap-3 pb-5">
+      <Row className="justify-content-center">
         {findCourse?.map((elem) => {
           return (
             <Col xs={12} md={6} lg={4} xxl={3} className="d-flex">
-            <Card 
+            <Card
               // style={{ width: "22rem" }}
               key={elem.course_id}
               className="mapeoAllCourse text-center mb-4"
@@ -84,20 +79,14 @@ export const AllCourses = () => {
               />
               <Card.Body className="d-flex flex-column gap-1">
                 <Card.Text className="cardtitle"> {elem.title} </Card.Text>
-                <Card.Subtitle className="followerscard">
-                  {elem.followers !== undefined && elem.followers !== 0
-                    ? `${elem.followers} Seguidores`
-                    : "Sin seguidores"}
-                </Card.Subtitle>
-
+                
                 {elem.average_rating && (
                   <RatingStars numberstars={elem.average_rating} />
                 )}
-
                 <Card.Subtitle className="tagsCourse">
                   {elem.tags}
                 </Card.Subtitle>
-                <Card.Title className="descriptioncard d-flex justify-content-start">{elem.description}</Card.Title>
+                <Card.Title className="descriptioncard d-flex justify-content-start flex-grow-1">{elem.description}</Card.Title>
                 <Card.Text className="priceCourse cardtitle px-3 my-1">
                   {Number(elem?.price) === 0
                   ? "GRATIS"

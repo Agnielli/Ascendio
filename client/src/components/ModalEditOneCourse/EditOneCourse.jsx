@@ -5,13 +5,11 @@ import { AscendioContext } from "../../context/AscendioContext";
 import axios from "axios";
 import "./EditOneCourse.scss";
 import "../../../public/stylesheets/FormulariosEInputs.scss";
-
 const initialValue = {
   title: "",
   description: "",
   price: "",
 };
-
 export const EditOneCourse = ({
   showModal,
   setShowModal,
@@ -22,15 +20,12 @@ export const EditOneCourse = ({
   const course_id = useParams().course_id;
   const [file, setFile] = useState();
   const [editCourse, setEditCourse] = useState(initialValue);
-
   const [msgError, setMsgError] = useState("");
-
   useEffect(() => {
     if (oneCoursePpal) {
       setEditCourse(oneCoursePpal);
     }
   }, [oneCoursePpal]);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     let newValue = value;
@@ -39,24 +34,25 @@ export const EditOneCourse = ({
     }
     setEditCourse({ ...editCourse, [name]: newValue });
   };
-
   const handleFile = (e) => {
     setFile(e.target.files[0]);
   };
-
   const handleClose = () => {
     setShowModal(false);
     setMsgError("");
   };
-
   let regexPrice = /^(?:(\d{1,5}(?:\.\d{0,2})?)|\D+).*$/g;
-  let regexTitle = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ.,:?¿!¡]{1,50}$/;
-  let regexDescription = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ.,:?¿!¡]{1,250}$/;
+  let regexTitle = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ.,:?¿!¡]{0,50}$/;
+  let regexDescription = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ.,:?¿!¡]{0,250}$/;
   const handleSubmit = (e) => {
     if (!regexTitle.test(editCourse.title)) {
       setMsgError("No se permiten más de 50 caracteres");
+    } else if(editCourse.title === ''){
+      setMsgError("Escribe el título");
     } else if (!regexDescription.test(editCourse.description)) {
       setMsgError("No se permiten más de 250 caracteres");
+    } else if(editCourse.description === ''){
+      setMsgError("Escribe la descripción");
     } else if (!regexPrice.test(editCourse.price)) {
       setMsgError("No se permiten más de 99999 euros");
     } else {
@@ -79,16 +75,17 @@ export const EditOneCourse = ({
         });
     }
   };
-
   return (
     <Row className="d-flex justify-content-center p-5  ">
       <Col md={4}>
+
         <Modal
           show={showModal}
           onHide={handleClose}
           className="FormulariosContainer text-center"
         >
-          <Modal.Header closeButton className="modalDel modaleditarusuario ">
+          <Modal.Header closeButton className="modalDel  ">
+
             <Modal.Title className="edittitle">Editar curso</Modal.Title>
           </Modal.Header>
           <Modal.Body className="modalDel">
@@ -149,9 +146,7 @@ export const EditOneCourse = ({
               </Form.Group>
             </Form>
           </Modal.Body>
-
           {msgError && <h5 className="msgerror">{msgError}</h5>}
-
           <Modal.Footer className="modalDel">
             <Button
               variant="outline-success"

@@ -36,6 +36,8 @@ export const OneCourse = () => {
   const [changeFollowers, setChangeFollowers] = useState();
   const [showCardRate, setShowCardRate] = useState(true);
   const [resetrate, setResetrate] = useState();
+  const [peopleVotesCourse, setPeopleVotesCourse] = useState(0);
+  
 
   const navigate = useNavigate();
 
@@ -52,6 +54,7 @@ export const OneCourse = () => {
     axios
       .get(`http://localhost:3000/courses/onecourse/${course_id}`)
       .then((res) => {
+        console.log(res.data)
         setOneCoursePpal(res.data);
         setCourseToEdit(res.data);
         setSections(res.data.sections);
@@ -202,12 +205,14 @@ export const OneCourse = () => {
 
   useEffect(() => {
     axios
-      .put(`http://localhost:3000/courses/updatefollowers/${course_id}`)
-      .then((res) => {})
+      .put(`http://localhost:3000/courses/getpeoplevotescourses/${course_id}`)
+      .then((res) => {
+        setPeopleVotesCourse(res.data[0].numero)
+      })
       .catch((err) => {
         console.log(err);
       });
-  }, [isIntoWishes, isIntoPurchase]);
+  }, []);
 
   const addToValidate = () => {
     axios
@@ -232,7 +237,10 @@ export const OneCourse = () => {
     addToPurchase();
     setShowCardRate(true);
     setIsIntoPurchase(true);
+    setPeopleVotesCourse(peopleVotesCourse + 1);
   };
+
+  
 
   const handleValidate = () => {
     if (isIntoValidate) {
@@ -304,7 +312,7 @@ export const OneCourse = () => {
   return (
     <>
       <section className="oneCourse d-flex flex-column align-items-center justify-content-center p-5">
-        <Card className="CardCourse d-flex flex-column align-items-center justify-content-center">
+        <Card className="CardCourse d-flex flex-column align-items-center justify-content-center mb-4">
           <Card.Img
             className="imgOneCourse"
             variant="top"
@@ -327,12 +335,6 @@ export const OneCourse = () => {
                 {oneCoursePpal?.title}{" "}
               </Card.Title>
             </div>
-
-            <Card.Subtitle className="followsCourse">
-              {oneCoursePpal?.followers !== 0
-                ? `${oneCoursePpal?.followers} Seguidores`
-                : "Sin seguidores"}
-            </Card.Subtitle>
 
             <Card.Text className="tagCourse">
               {courseTags?.map((e, index) => {
@@ -367,18 +369,18 @@ export const OneCourse = () => {
                   : `${oneCoursePpal?.price}€`}
               </Card.Text>
 
-              <span class="material-symbols-outlined bubbleCourse">
+              <a href="#rate"> <span  class="material-symbols-outlined bubbleCourse">
                 chat_bubble
-              </span>
+              </span></a>
 
               {userId !== userCourse && (
                 <button className="likeBoton" onClick={handleWishes}>
                   {isIntoWishes ? (
-                    <span class="material-symbols-outlined deleteLike">
-                      heart_minus
+                    <span class="material-symbols-outlined 1 deleteLike">
+                    favorite
                     </span>
                   ) : (
-                    <span class="material-symbols-outlined addLike">
+                    <span class="material-symbols-outlined 0 addLike">
                       heart_plus
                     </span>
                   )}
@@ -389,7 +391,6 @@ export const OneCourse = () => {
             <Card.Text className="descriptionCourse m-4">
               {oneCoursePpal?.description}
             </Card.Text>
-
             
             <Accordion defaultActiveKey="1">
               {orderedSections.map((elem, index) => {
@@ -466,21 +467,21 @@ export const OneCourse = () => {
           </Card.Body>
         </Card>
 
-        <EditOneCourse
+        {showModal &&<EditOneCourse
           showModal={showModal}
           setShowModal={setShowModal}
           setOneCoursePpal={setOneCoursePpal}
           oneCoursePpal={oneCoursePpal}
           userId={userId}
           course_id
-        />
+        />}
 
-        <ModalDelOneCourse
+        {showModalDelete &&<ModalDelOneCourse
           showModalDelete={showModalDelete}
           setShowModalDelete={setShowModalDelete}
           deleteCourse={deleteCourse}
           course_id={course_id}
-        />
+        />}
 
         {isIntoPurchase && showCardRate && (
           <CardRates
@@ -492,10 +493,11 @@ export const OneCourse = () => {
         )}
 
         {ratingAverage && (
-          <>
-            <h5> MEDIA DE LAS VALORACIONES: {ratingAverage} "★"</h5>
-            <h5 className="py-3">¿Qué opina la gente?</h5>
-            <div className="d-flex flex-wrap gap-2 pb-3">
+          <div id="rate" className="mt-3">
+            <h5 className="pt-3 text-center"> Valoración: {ratingAverage} <span style={{ color: '#FFD800' }}>★</span> · {peopleVotesCourse} {peopleVotesCourse === 1 ? "voto" : "votos"}</h5>
+            <h5 className="py-3 text-center">¿Qué opina la gente?</h5>
+
+            <div className="d-flex flex-wrap justify-content-center gap-2 pb-3">
               {rates?.map((elem) => (
                 <CardRatingsOneCourse
                   key={elem.user_rater_user_id}
@@ -503,7 +505,7 @@ export const OneCourse = () => {
                 />
               ))}
             </div>
-          </>
+          </div>
         )}
       </section>
     </>
