@@ -19,7 +19,17 @@ function NavBarApp() {
     setIsLogged(false);
     navigate("/");
   };
-  const redirectTo = user ? "/home" : "/";
+
+  let redirectTo;
+
+  if (user && user.type === 1) {
+     redirectTo = "/admin";
+  } else if (user && user.type === 2) {
+     redirectTo = "/home";
+  } else {
+     redirectTo = "/";
+  }
+
   return (
     <header>
       <Navbar expand="lg" className="BG-navbar ">

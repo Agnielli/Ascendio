@@ -99,7 +99,7 @@ export const AllTrades = () => {
   return (
     <div className="alltrades">
       <>
-        <Row className="general title-input">
+        <Row className="general-altradeposts title-input">
           <Col
             lg={3}
             className="d-flex justify-content-center align-items-center"

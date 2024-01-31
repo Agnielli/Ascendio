@@ -96,7 +96,7 @@ export const AllPostsGenerals = () => {
   return (
     <div className="allpostgenerals">
       <>
-        <Row className="general title-input">
+        <Row className="generalallpostsReal title-input">
           <Col
             lg={3}
             className="d-flex justify-content-center align-items-center"
