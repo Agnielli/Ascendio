@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AscendioContext } from "../../../context/AscendioContext";
 import axios from "axios";
 import "./OneCourse.scss";
-import { Accordion, Button, Card } from "react-bootstrap";
+import { Accordion, Button, Card, Col, Row } from "react-bootstrap";
 import { EditOneCourse } from "../../../components/ModalEditOneCourse/EditOneCourse";
 import { useNavigate, useParams } from "react-router-dom";
 import { FormAddSection } from "../../../components/FormAddSection/FormAddSection";
@@ -354,40 +354,43 @@ export const OneCourse = () => {
               </div>
             </div>
 
-            <div className="optionsCourse">
-              {userId !== userCourse && (
-                <button
-                  className="Button1"
-                  onClick={handlePurchase}
-                  disabled={isIntoPurchase ? true : false}
-                >
-                  {isIntoPurchase ? "Comprado" : "Comprar"}
-                </button>
-              )}
-              <Card.Text className="priceCourse px-3 my-2">
-                {Number(oneCoursePpal?.price) === 0
-                  ? "GRATIS"
-                  : `${oneCoursePpal?.price}€`}
-              </Card.Text>
-
-              <a href="#rate"> <span  class="material-symbols-outlined bubbleCourse">
-                chat_bubble
-              </span></a>
-
-              {userId !== userCourse && (
-                <button className="likeBoton" onClick={handleWishes}>
-                  {isIntoWishes ? (
-                    <span class="material-symbols-outlined 1 deleteLike">
-                    favorite
-                    </span>
-                  ) : (
-                    <span class="material-symbols-outlined 0 addLike">
-                      heart_plus
-                    </span>
-                  )}
-                </button>
-              )}
-            </div>
+            <Row className="optionsCourse">
+              <Col lg={8}  className="optionBotones pb-3">
+                {userId !== userCourse && (
+                  <button
+                    className="Button1"
+                    onClick={handlePurchase}
+                    disabled={isIntoPurchase ? true : false}
+                  >
+                    {isIntoPurchase ? "Comprado" : "Comprar"}
+                  </button>
+                )}
+                <Card.Text className="priceCourse px-3 my-2">
+                  {Number(oneCoursePpal?.price) === 0
+                    ? "GRATIS"
+                    : `${oneCoursePpal?.price}€`}
+                </Card.Text>
+                </Col>
+                <Col lg={4} className="optionBotones">
+                <a href="#rate" className="botonBubble"> <span  class="material-symbols-outlined bubbleCourse">
+                  chat_bubble
+                </span></a>
+                {userId !== userCourse && (
+                  <button className="likeBoton" onClick={handleWishes}>
+                    {isIntoWishes ? (
+                      <span class="material-symbols-outlined 1 deleteLike">
+                      favorite
+                      </span>
+                    ) : (
+                      <span class="material-symbols-outlined 0 addLike">
+                        heart_plus
+                      </span>
+                    )}
+                  </button>
+                )}
+                </Col>
+              
+            </Row>
 
             <Card.Text className="descriptionCourse m-4">
               {oneCoursePpal?.description}
