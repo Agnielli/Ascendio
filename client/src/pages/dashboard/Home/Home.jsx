@@ -134,7 +134,11 @@ export const Home = () => {
                           {elem.image_name !== null ? (
                             <Card.Img
                               variant="top"
-                              src={`http://localhost:3000/images/generalPost/${elem.image_name}`}
+                              src={
+                                elem.type === 1
+                                  ? `http://localhost:3000/images/generalPost/${elem.image_name}`
+                                  : `http://localhost:3000/images/trades/${elem.image_name}`
+                              }
                               className="ascendio-home-card-imagen"
                             />
                           ) : (
