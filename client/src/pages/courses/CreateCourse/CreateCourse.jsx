@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import "./createCourse.scss";
+import "./estilocreacion.scss";
 import { useNavigate } from "react-router-dom";
 import { AscendioContext } from "../../../context/AscendioContext";
 import axios from "axios";
 import Select from "react-select";
-import "../../../../public/stylesheets/FormulariosEInputs.scss";
+/* import "../../../../public/stylesheets/FormulariosEInputs.scss"; */
 
 const initialValue = {
   title: "",
@@ -94,7 +95,7 @@ export const CreateCourse = () => {
   };
 
   return (
-    <Row className="d-flex justify-content-center text-center p-5 FormulariosContainer createcourseformulario ">
+    <Row className="d-flex justify-content-center text-center p-5 EdicionCursosContainerFormulario createcourseformulario ">
       <Col md={4}>
         <Form onSubmit={handleSubmit}>
           <h2>Crea tu curso</h2>

@@ -58,7 +58,7 @@ export const RoutesApp = () => {
   return (
     <BrowserRouter>
       <NavBarApp />
-      <Container fluid>
+      <Container fluid className="p-0 m-0">
         <Routes>
           
           <Route path="/" element={token ? <Home /> : <Landing />} />

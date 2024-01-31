@@ -47,7 +47,7 @@ export const Users = () => {
               )}
             </div>
             <div className="d-flex flex-column align-items-center justify-content-center">
-            <p className="PorcentajeAciertos">Fiabilidad: {ratioTotal} %</p>
+              <p className="PorcentajeAciertos">Fiabilidad: {ratioTotal} %</p>
               <h2 className="m-0">
                 {user.nickname.charAt(0).toUpperCase() + user.nickname.slice(1)}
               </h2>
@@ -66,8 +66,6 @@ export const Users = () => {
         <Col xs={8} lg={8} className=" text-center p-0">
           {statisticsUser && (
             <div>
-              
-
               <Row>
                 <Col
                   xs={6}
@@ -76,7 +74,9 @@ export const Users = () => {
                 >
                   <div>
                     <p className="PDatosPerfil">Trades acertados</p>
-                    <p className="TradesGreen">{statisticsUser.num_correct_posts}</p>
+                    <p className="TradesGreen">
+                      {statisticsUser.num_correct_posts}
+                    </p>
                   </div>
                 </Col>
                 <Col
@@ -86,36 +86,40 @@ export const Users = () => {
                 >
                   <div>
                     <p className="PDatosPerfil">Trades Fallidos</p>
-                    <p className="TradesRed">{statisticsUser.num_incorrect_posts}</p>
+                    <p className="TradesRed">
+                      {statisticsUser.num_incorrect_posts}
+                    </p>
                   </div>
                 </Col>
               </Row>
 
               <Row>
-                <Col xs={6}
+                <Col
+                  xs={6}
                   lg={6}
-                  className="d-flex justify-content-center p-0">
+                  className="d-flex justify-content-center p-0"
+                >
                   <div>
                     <p className="PDatosPerfil">Post Publicados</p>
                     <Link
                       to={`/userposts/${user.user_id}`}
                       className="linksPerfil"
-                
                     >
                       {statisticsUser.num_posts}
                     </Link>
                   </div>
                 </Col>
 
-                <Col xs={6}
+                <Col
+                  xs={6}
                   lg={6}
-                  className="d-flex justify-content-center p-0">
+                  className="d-flex justify-content-center p-0"
+                >
                   <div>
                     <p className="PDatosPerfil">Cursos publicados</p>
                     <Link
                       to={`/oneusercourses/${user.user_id}`}
                       className="linksPerfil"
-          
                     >
                       {statisticsUser.num_courses}
                     </Link>
@@ -124,21 +128,32 @@ export const Users = () => {
               </Row>
 
               <Row>
-                <Col xs={6}
+                <Col
+                  xs={6}
                   lg={6}
-                  className="d-flex justify-content-center p-0">
+                  className="d-flex justify-content-center p-0"
+                >
                   <div>
                     <p className="PDatosPerfil">Seguidores</p>
                     <Link
-                      to={`/userfollowers/${user.user_id}`} className="linksPerfil">
+                      to={`/userfollowers/${user.user_id}`}
+                      className="linksPerfil"
+                    >
                       {statisticsUser.num_followers}
                     </Link>
                   </div>
                 </Col>
-                <Col xs={6} lg={6} className="d-flex justify-content-center p-0">
+                <Col
+                  xs={6}
+                  lg={6}
+                  className="d-flex justify-content-center p-0"
+                >
                   <div>
                     <p className="PDatosPerfil">Seguidos</p>
-                    <Link to={`/userfollowing/${user.user_id}`} className="linksPerfil">
+                    <Link
+                      to={`/userfollowing/${user.user_id}`}
+                      className="linksPerfil"
+                    >
                       {statisticsUser.num_following_users}
                     </Link>
                   </div>
@@ -152,18 +167,22 @@ export const Users = () => {
             <div className="d-flex flex-column">
               <Button
                 className="Button2 "
-                onClick={() => setShowContent(!showContent)}
+                onClick={() => {
+                  setShowContent(!showContent);
+                  setShowCourse(false);
+                }}
               >
                 CREAR CONTENIDO
               </Button>
             </div>
 
-           
-
             <div className="d-flex flex-column">
               <Button
                 className="Button2 "
-                onClick={() => setShowCourse(!swhowCourse)}
+                onClick={() => {
+                  setShowCourse(!swhowCourse);
+                  setShowContent(false);
+                }}
               >
                 MIS CURSOS
               </Button>
@@ -177,7 +196,7 @@ export const Users = () => {
                 className="Button5"
                 onClick={() => navigate("/purchasecourse")}
               >
-                Cursos Adquiridos
+                Cursos Comprados
               </Button>
               <Button
                 className="Button5"

@@ -20,7 +20,7 @@
       }
 
       .ascendio-landing-fondo-principal2 {
-        width: 40%;
+        width: 50%;
         object-fit: contain;
         padding: 0 !important;
       }
@@ -45,8 +45,8 @@
           margin-bottom: 2rem;
 
           img {
-            width: 75px;
-            height: 75px;
+            width: 100px;
+            height: 100px;
             background-color: transparent;
             border-radius: 50%;
           }
@@ -124,7 +124,7 @@
         }
 
         .ascendio-landing-fondo-principal2 {
-          width: 40%;
+          width: 70%;
           object-fit: contain;
           padding: 0 !important;
         }
@@ -149,20 +149,21 @@
             margin-bottom: 2rem;
 
             img {
-              width: 50px;
-              height: 50px;
+              width: 100px;
+              height: 100px;
               background-color: transparent;
               border-radius: 50%;
             }
 
             h6 {
-              font-size: 1rem;
+              font-size: 1.5rem;
               padding: 0 !important;
               margin: 0 !important;
             }
 
             p {
-              font-size: 1rem;
+              text-align: center;
+              font-size: 1.2rem;
               color: $accent3-color;
               padding: 0 !important;
               margin: 0 !important;
@@ -212,15 +213,20 @@
 // PC MEDIANO / breakpoints LG // HECHO
 @media (min-width: 992px) And (max-width: 1200px) {
   .ascendio-landing-main-padre {
-    height: calc(200vh - 62px);
+    height: auto;
+    max-height: calc(200vh - 62px);
+    min-height: calc(100vh - 62px);
+
     .ascendio-landing-main-hijo-1 {
-      height: 50%;
+      max-height: 50%;
       @include display-flex(column, center, center);
 
       .ascendio-landing-main-hijo1-nieto {
-        height: 50%;
+        height: auto;
+        max-height: 50%;
         @include display-flex(column, center, center);
         padding: 0 !important;
+
 
         .ascendio-landing-fondo-principal1 {
           object-fit: contain;
@@ -229,7 +235,7 @@
         }
 
         .ascendio-landing-fondo-principal2 {
-          width: 40%;
+          width: 80%;
           object-fit: contain;
           padding: 0 !important;
         }
@@ -237,7 +243,7 @@
     }
 
     .ascendio-landing-main-hijo-2 {
-      height: 50%;
+      height: calc(100vh - 24px);
       .ascendio-landing-main-hijo2-nieto {
         @include display-flex(row, center, center);
         padding: 0 !important;
@@ -261,13 +267,13 @@
             }
 
             h6 {
-              font-size: 1rem;
+              font-size: 1.7rem;
               padding: 0 !important;
               margin: 0 !important;
             }
 
             p {
-              font-size: 0.7rem;
+              font-size: 1.2rem;
               color: $accent3-color;
               padding: 0 !important;
               margin: 0 !important;
@@ -318,13 +324,17 @@
 // PC PEQUEÑO TABLET GRANDE / breackproints MD // HECHO
 @media (min-width: 768px) and (max-width: 992px) {
   .ascendio-landing-main-padre {
-    height: calc(200vh - 62px);
+    height: auto;
+    max-height: calc(200vh - 62px);
+    min-height: calc(100vh - 62px);
     .ascendio-landing-main-hijo-1 {
-      height: 50%;
+      height: auto;
+      max-height: 50%;
       @include display-flex(column, center, center);
 
       .ascendio-landing-main-hijo1-nieto {
-        height: 50%;
+        height: auto;
+        max-height: 50%;
         @include display-flex(column, center, center);
         padding: 0 !important;
 
@@ -335,7 +345,7 @@
         }
 
         .ascendio-landing-fondo-principal2 {
-          width: 40%;
+          width: 80%;
           object-fit: contain;
           padding: 0 !important;
         }
@@ -360,6 +370,117 @@
             margin-bottom: 2rem;
 
             img {
+              width: 75px;
+              height: 75px;
+              background-color: transparent;
+              border-radius: 50%;
+            }
+
+            h6 {
+              font-size: 1.5rem;
+              padding: 0 !important;
+              margin: 0 !important;
+            }
+
+            p {
+              font-size: 1rem;
+              color: $accent3-color;
+              padding: 0 !important;
+              margin: 0 !important;
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .ascendio-landing-footer-padre {
+    @include display-flex(row, flex-start, center);
+    color: $accent3-color;
+    background-color: $accent-color;
+    padding: 0 5vw !important;
+
+    .ascendio-landing-footer-padre-hijo {
+      padding: 0 !important;
+
+      h3 {
+        font-size: 0.5rem;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      p {
+        font-size: 0.5rem;
+        @include display-flex(row, center, center);
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .ascendio-landing-footer-link {
+        font-size: 0.5rem;
+        text-decoration: none;
+        color: $accent3-color;
+        @include display-flex(row, center, center);
+        padding: 0 !important;
+      }
+      .ascendio-landing-footer-link:hover {
+        text-decoration: none;
+        color: $accent2-color;
+        @include display-flex(row, center, center);
+      }
+    }
+  }
+}
+
+//RESPONSIVE TABLET PEQUEÑA / breackproints SM  //HECHo
+@media (min-width: 576px) and (max-width: 768px) {
+  .ascendio-landing-main-padre {
+    height: auto;
+    max-height: calc(200vh - 62px);
+    min-height: calc(100vh - 62px);
+
+    .ascendio-landing-main-hijo-1 {
+      height: auto;
+      max-height: 50%;
+      @include display-flex(column, center, center);
+
+      .ascendio-landing-main-hijo1-nieto {
+        height: auto;
+        max-height: 50%;
+        @include display-flex(column, center, center);
+        padding: 0 !important;
+
+        .ascendio-landing-fondo-principal1 {
+          object-fit: contain;
+          padding: 0 !important;
+          overflow: hidden;
+        }
+
+        .ascendio-landing-fondo-principal2 {
+          width: 100%;
+          object-fit: contain;
+          padding: 0 !important;
+        }
+      }
+    }
+
+    .ascendio-landing-main-hijo-2 {
+      height: 50%;
+      .ascendio-landing-main-hijo2-nieto {
+        @include display-flex(row, center, center);
+        padding: 0 !important;
+
+        .ascendio-landing-main-hijo2-nieto-bisnieto {
+          @include display-flex(row, center, flex-start);
+          flex-wrap: wrap;
+          padding: 0;
+          margin: 0 !important;
+
+          .ascendio-landing-main-hijo2-nieto-bisnieto-tataranieto {
+            @include display-flex(column, center, center);
+            padding: 0 !important;
+            margin-bottom: 2rem;
+
+            img {
               width: 50px;
               height: 50px;
               background-color: transparent;
@@ -367,13 +488,13 @@
             }
 
             h6 {
-              font-size: 0.8rem;
+              font-size: 1.5rem;
               padding: 0 !important;
               margin: 0 !important;
             }
 
             p {
-              font-size: 0.5rem;
+              font-size: 1rem;
               color: $accent3-color;
               padding: 0 !important;
               margin: 0 !important;
@@ -421,122 +542,20 @@
   }
 }
 
-//RESPONSIVE TABLET PEQUEÑA / breackproints SM  //revisar
-@media (min-width: 576px) and (max-width: 768px) {
-  .ascendio-landing-main-padre {
-    height: calc(100vh - 62px);
-    .ascendio-landing-main-hijo-1 {
-      height: 50%;
-      @include display-flex(column, center, center);
-
-      .ascendio-landing-main-hijo1-nieto {
-        height: 50%;
-        @include display-flex(column, center, center);
-        padding: 0 !important;
-
-        .ascendio-landing-fondo-principal1 {
-          object-fit: contain;
-          padding: 0 !important;
-          overflow: hidden;
-        }
-
-        .ascendio-landing-fondo-principal2 {
-          width: 40%;
-          object-fit: contain;
-          padding: 0 !important;
-        }
-      }
-    }
-
-    .ascendio-landing-main-hijo-2 {
-      height: 50%;
-      .ascendio-landing-main-hijo2-nieto {
-        @include display-flex(row, center, center);
-        padding: 0 !important;
-
-        .ascendio-landing-main-hijo2-nieto-bisnieto {
-          @include display-flex(row, center, flex-start);
-          flex-wrap: wrap;
-          padding: 0;
-          margin: 0 !important;
-
-          .ascendio-landing-main-hijo2-nieto-bisnieto-tataranieto {
-            @include display-flex(column, center, center);
-            padding: 0 !important;
-            margin-bottom: 2rem;
-
-            img {
-              width: 25px;
-              height: 25px;
-              background-color: transparent;
-              border-radius: 50%;
-            }
-
-            h6 {
-              font-size: 0.5rem;
-              padding: 0 !important;
-              margin: 0 !important;
-            }
-
-            p {
-              font-size: 0.4rem;
-              color: $accent3-color;
-              padding: 0 !important;
-              margin: 0 !important;
-              text-align: center;
-            }
-          }
-        }
-      }
-    }
-  }
-
-  .ascendio-landing-footer-padre {
-    @include display-flex(row, flex-start, center);
-    color: $accent3-color;
-    background-color: $accent-color;
-    padding: 0 5vw !important;
-
-    .ascendio-landing-footer-padre-hijo {
-      padding: 0 !important;
-
-      h3 {
-        font-size: 0.5rem;
-        margin: 0 !important;
-        padding: 0 !important;
-      }
-      p {
-        font-size: 0.5rem;
-        @include display-flex(row, center, center);
-        margin: 0 !important;
-        padding: 0 !important;
-      }
-      .ascendio-landing-footer-link {
-        font-size: 0.5rem;
-        text-decoration: none;
-        color: $accent3-color;
-        @include display-flex(row, center, center);
-        padding: 0 !important;
-      }
-      .ascendio-landing-footer-link:hover {
-        text-decoration: none;
-        color: $accent2-color;
-        @include display-flex(row, center, center);
-      }
-    }
-  }
-}
-
-//RESPOSINVE MOVIL / breakpoints xs //REVISAR
+//RESPOSINVE MOVIL / breakpoints xs //HECHO
 @media (max-width: 576px) {
   .ascendio-landing-main-padre {
-    height: calc(100vh - 62px);
+    height: auto;
+    max-height: calc(200vh - 62px);
+    min-height: calc(100vh - 62px);
     .ascendio-landing-main-hijo-1 {
-      height: 50%;
+      height: auto;
+      max-height: 50%;
       @include display-flex(column, center, center);
 
       .ascendio-landing-main-hijo1-nieto {
-        height: 50%;
+        height: auto;
+        max-height: 50%;
         @include display-flex(column, center, center);
         padding: 0 !important;
 
@@ -547,7 +566,7 @@
         }
 
         .ascendio-landing-fondo-principal2 {
-          width: 40%;
+          width: 100%;
           object-fit: contain;
           padding: 0 !important;
         }
@@ -555,7 +574,8 @@
     }
 
     .ascendio-landing-main-hijo-2 {
-      height: 50%;
+      height: auto;
+      max-height: 50%;
       .ascendio-landing-main-hijo2-nieto {
         @include display-flex(row, center, center);
         padding: 0 !important;
@@ -572,20 +592,20 @@
             margin-bottom: 2rem;
 
             img {
-              width: 25px;
-              height: 25px;
+              width: 50px;
+              height: 50px;
               background-color: transparent;
               border-radius: 50%;
             }
 
             h6 {
-              font-size: 0.5rem;
+              font-size: 01.5rem;
               padding: 0 !important;
               margin: 0 !important;
             }
 
             p {
-              font-size: 0.4rem;
+              font-size: 1rem;
               color: $accent3-color;
               padding: 0 !important;
               margin: 0 !important;

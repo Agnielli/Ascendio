@@ -14,6 +14,7 @@ export const CardRates = ({ resetCourse, setResetCourse, setShowCardRate, rates}
   const [newRate, setNewRate] = useState(initialValue);
   const [msgError, setMsgError] = useState("")
   const [myRate, setMyRate] = useState([]);
+  const [sumar, setSumar] = useState(0) // COSAS NUEVAS
   const course_id = useParams().course_id;
   const { user } = useContext(AscendioContext);
   let usuario = user.user_id;
