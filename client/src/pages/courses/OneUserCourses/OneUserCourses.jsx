@@ -145,7 +145,7 @@ export const OneUserCourses = () => {
           <span className="alltrades-error-nohaypostsnitrades-hijo">
             Cursos
           </span>{" "}
-          disponibles en este momento.
+          creados en este momento.
         </h4>
         )}
       </main>
