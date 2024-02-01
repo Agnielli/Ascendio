@@ -58,7 +58,7 @@
 
 @media (width < 915px){
   .resourceView{
-    gap: 0.5rem;
+    gap: 1rem;
   }
 } 
 
@@ -73,11 +73,23 @@
     gap: 0;
   }
 }
+@media (width < 821px){
+  .resourceView{
+    width: 89%;
+    gap: 0;
+  }
+}
 
-@media (width < 791px){
+@media (width < 799px){
   .resourceView{
     width: 90%;
-    gap: 0;
+    gap: 1;
+  }
+}
+@media (width < 788px){
+  .resourceView{
+    width: 95%;
+    gap: 1;
   }
 }
 
@@ -87,11 +99,29 @@
     gap: 0;
   }
 }
+@media (width < 694px){
+  .resourceView{
+    width: 100%;
+    gap: 0;
+    a{
+      font-size: smaller;
+    }
+  }
+}
 
 @media (width < 662px){
   .resourceView{
     width: 100%;
-    gap: 2rem;
+    gap: 0;
+    a{
+      font-size: smaller;
+    }
+  }
+}
+@media (width < 606px){
+  .resourceView{
+    width: 100%;
+    gap: 1rem;
     a{
       font-size: smaller;
     }
@@ -105,7 +135,7 @@
   }
 } 
 
-@media (width < 360px){
+@media (width < 367px){
   .resourceView{
     gap: 3rem;
   }
