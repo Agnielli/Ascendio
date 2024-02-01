@@ -119,102 +119,76 @@ export const AllPostsGenerals = () => {
                 className="buscador"
               />
             </div>
-            {/* <input
-              onChange={handleChange}
-              placeholder="🔍 Buscar Trades"
-              value={search}
-            /> */}
           </Col>
         </Row>
         <div className="d-flex flex-wrap justify-content-center gap-4">
           {lastTradesFilter[0] !== undefined ? (
             lastTradesFilter.map((elem) => {
               return (
-                <Card
-                  className="generalpost"
-                  style={{ width: "18rem", marginBottom: "1rem" }}
-                  key={elem.post_id}
-                >
-                  <Row>
-                    <Col
-                      lg={3}
-                      md={12}
-                      className="col1 d-flex flex-column align-items-center justify-content-center gap-2 mb-1"
-                    >
-                      <div className="avatar">
-                        {elem?.img_name ? (
-                          <img
-                            src={`http://localhost:3000/images/users/${user.img}`}
-                          />
-                        ) : (
-                          <p>{elem?.nickname.charAt(0).toUpperCase()}</p>
-                        )}
-                      </div>
-                      <Card.Title className="d-flex">
-                        <h3>{elem.nickname}</h3>
-                      </Card.Title>
-                      <p>{elem.num_followers} seguidores</p>
-                      <div className="d-flex gap-2">
-                        {user.user_id !== elem.user_id ? (
-                          <Button
-                            variant="primary"
-                            onClick={() => pulsarSeguirONo(elem.user_id)}
-                          >
-                            {followingUsers.includes(elem.user_id)
-                              ? "Siguiendo"
-                              : "Seguir"}
-                          </Button>
-                        ) : (
-                          <Button
-                            onClick={() =>
-                              navigate(`/userposts/${user.user_id}`)
-                            }
-                          >
-                            Ir a posts
-                          </Button>
-                        )}
+                <Card className="ESTILOCARDGENERAL" key={elem.post_id}>
+                  <Card.Text className="UserCARD">
+                    <div className="avatarCard">
+                      {elem?.img ? (
+                        <img
+                          src={`http://localhost:3000/images/users/${elem.img}`}
+                        />
+                      ) : (
+                        <p className="letteruser">
+                          {elem?.nickname.charAt(0).toUpperCase()}
+                        </p>
+                      )}
+                    </div>
+                    <p>{elem.nickname}</p>
+                  </Card.Text>
+                  <div className="DivImagenCard">
+                    {elem.image_name !== null ? (
+                      <Card.Img
+                        variant="top"
+                        src={
+                          elem.type === 1
+                            ? `http://localhost:3000/images/generalPost/${elem.image_name}`
+                            : `http://localhost:3000/images/trades/${elem.image_name}`
+                        }
+                        className="ascendio-home-card-imagen"
+                      />
+                    ) : (
+                      <Card.Img
+                        className="CardSinFoto"
+                        variant="top"
+                        src={
+                          "../../../../public/images/iconos/logoascendio.png"
+                        }
+                      />
+                    )}
+                  </div>
+                  <Card.Body>
+                    <Card.Title>
+                      <h3>{elem.nickname}</h3>
+                    </Card.Title>
+                    <Card.Text>{elem.description}</Card.Text>
+
+                    <div className="d-flex gap-2">
+                      {user.user_id !== elem.user_id ? (
                         <Button
-                          onClick={() => {
-                            navigate(`/onegeneralpost/${elem.post_id}`);
-                          }}
+                          className="ButtonSEGUIR"
+                          variant="primary"
+                          onClick={() => pulsarSeguirONo(elem.user_id)}
                         >
-                          Ver más
+                          {followingUsers.includes(elem.user_id)
+                            ? "Siguiendo"
+                            : "Seguir"}
                         </Button>
-                      </div>
-                    </Col>
-                    {elem.image_name && (
-                      <>
-                        <Col
-                          lg={4}
-                          md={12}
-                          className="col3 d-flex flex-column align-items-center justify-content-center gap-2 mb-1"
-                        >
-                          <p>{elem.description}</p>
-                        </Col>
-                        <Col
-                          lg={5}
-                          md={12}
-                          className="col2 d-flex flex-column align-items-center justify-content-center gap-2 mb-1"
-                        >
-                          {elem.image_name !== null && (
-                            <Card.Img
-                              variant="top"
-                              src={`http://localhost:3000/images/generalPost/${elem.image_name}`}
-                            />
-                          )}
-                        </Col>
-                      </>
-                    )}
-                    {elem.image_name == null && (
-                      <Col
-                        lg={9}
-                        md={12}
-                        className="col3 d-flex flex-column align-items-center justify-content-center gap-2 mb-1"
+                      ) : null}
+                      <button
+                        className="Button3 button-with-ellipsis"
+                        onClick={() => {
+                          navigate(`/onegeneralpost/${elem.post_id}`);
+                        }}
                       >
-                        <p>{elem.description}</p>
-                      </Col>
-                    )}
-                  </Row>
+                        COMENTARIOS
+                      </button>
+                    </div>
+                  </Card.Body>
                 </Card>
               );
             })

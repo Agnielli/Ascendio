@@ -4,6 +4,8 @@ import { Button, Card, Col, ListGroup, Row } from "react-bootstrap";
 import { AscendioContext } from "../../../../context/AscendioContext";
 import { Link, useNavigate } from "react-router-dom";
 import "./allTrades.scss";
+import "../../../../../public/stylesheets/ButtonsApp.scss";
+import "../../../../../public/stylesheets/ESTILOCARDGENERAL.scss";
 // import '../../../../../public/stylesheets/FormulariosEInputs.scss';
 
 export const AllTrades = () => {
@@ -132,115 +134,107 @@ export const AllTrades = () => {
           {lastTradesFilter[0] !== undefined ? (
             lastTradesFilter.map((elem) => {
               return (
-                <Card
-                  className="tradepost"
-                  style={{ width: "18rem", marginBottom: "1rem" }}
-                  key={elem.post_id}
-                >
-                  <Row>
-                    <Col
-                      lg={3}
-                      md={12}
-                      className="col1 d-flex flex-column align-items-center justify-content-center gap-2 mb-1"
-                    >
-                      <div className="avatar">
-                        {elem?.img_name ? ( // modificar el elem.im_name
-                          <img
-                            src={`http://localhost:3000/images/users/${user.img}`}
-                          />
-                        ) : (
-                          <p>{elem?.nickname.charAt(0).toUpperCase()}</p>
-                        )}
-                      </div>
-                      <Card.Title>
-                        <h3>{elem.nickname}</h3>
-                      </Card.Title>
-                      <p>{elem.num_followers} seguidores</p>
-                      <div className="d-flex gap-2">
-                        {
-                          user.user_id !== elem.user_id ? (
-                            <Button
-                              variant="primary"
-                              onClick={() => pulsarSeguirONo(elem.user_id)}
-                            >
-                              {followingUsers.includes(elem.user_id)
-                                ? "Siguiendo"
-                                : "Seguir"}
-                            </Button>
-                          ) : null
-                          // <Button
-                          //   onClick={() =>
-                          //     navigate(`/userposts/${user.user_id}`)
-                          //   }
-                          // >
-                          //   Ir a posts
-                          // </Button>
-                        }
-                        <Button
-                          onClick={() => {
-                            navigate(`/OneTradePost/${elem.post_id}`);
-                          }}
-                        >
-                          Ver más
-                        </Button>
-                      </div>
-                    </Col>
-
-                    {elem.image_name && (
-                      <>
-                        <Col
-                          lg={4}
-                          md={12}
-                          className="col3 d-flex flex-column align-items-center justify-content-center gap-2 mb-1"
-                        >
-                          <p>{elem.currency}</p>
-                          <p>{elem.description}</p>
-                          <p>
-                            Estado:{" "}
-                            {elem.correct === null && "Trade Pendiente ❓"}
-                            {elem.correct === 0 && "Trade Errado ❌"}
-                            {elem.correct === 1 && "Trade Acertado ✅"}
-                          </p>
-                        </Col>
-                        <Col
-                          lg={5}
-                          md={12}
-                          className="col2 d-flex flex-column align-items-center justify-content-center gap-2 mb-1"
-                        >
-                          {elem.image_name !== null && (
-                            <Card.Img
-                              className="tradeimagen"
-                              variant="top"
-                              src={`http://localhost:3000/images/trades/${elem.image_name}`}
-                            />
-                          )}
-                          {elem.image_name == null && (
-                            <Card.Img
-                              className="tradeimagen"
-                              variant="top"
-                              src="/images/trade/trades.png"
-                            />
-                          )}
-                        </Col>
-                      </>
-                    )}
-                    {elem.image_name == null && (
-                      <Col
-                        lg={9}
-                        md={12}
-                        className="col3 d-flex flex-column align-items-center justify-content-center gap-2 mb-1"
-                      >
-                        <p>{elem.currency}</p>
-                        <p>{elem.description}</p>
-                        <p>
-                          Estado:{" "}
-                          {elem.correct === null && "Trade Pendiente ❓"}
-                          {elem.correct === 0 && "Trade Errado ❌"}
-                          {elem.correct === 1 && "Trade Acertado ✅"}
+                <Card className="ESTILOCARDGENERAL" key={elem.post_id}>
+                  <Card.Text className="UserCARD">
+                    <div className="avatarCard">
+                      {elem?.img ? (
+                        <img
+                          src={`http://localhost:3000/images/users/${elem.img}`}
+                        />
+                      ) : (
+                        <p className="letteruser">
+                          {elem?.nickname.charAt(0).toUpperCase()}
                         </p>
-                      </Col>
+                      )}
+                    </div>
+                    <p>{elem.nickname}</p>
+                  </Card.Text>
+
+                  <div className="DivImagenCard">
+                    {elem.image_name !== null ? (
+                      <Card.Img
+                        variant="top"
+                        src={
+                          elem.type === 1
+                            ? `http://localhost:3000/images/generalPost/${elem.image_name}`
+                            : `http://localhost:3000/images/trades/${elem.image_name}`
+                        }
+                        className="ascendio-home-card-imagen"
+                      />
+                    ) : (
+                      <Card.Img
+                        className="CardSinFoto"
+                        variant="top"
+                        src={
+                          "../../../../public/images/iconos/logoascendio.png"
+                        }
+                      />
                     )}
-                  </Row>
+                  </div>
+                  <Card.Body>
+                    <Card.Title>
+                      <h3>Trade de {elem.category_name}</h3>
+                    </Card.Title>
+
+                    <div className="d-flex gap-2">
+                      {
+                        user.user_id !== elem.user_id ? (
+                          <Button
+                            className="ButtonSEGUIR"
+                            variant="primary"
+                            onClick={() => pulsarSeguirONo(elem.user_id)}
+                          >
+                            {followingUsers.includes(elem.user_id)
+                              ? "Siguiendo"
+                              : "Seguir"}
+                          </Button>
+                        ) : null
+                        // <Button
+                        //   onClick={() =>
+                        //     navigate(`/userposts/${user.user_id}`)
+                        //   }
+                        // >
+                        //   Ir a posts
+                        // </Button>
+                      }
+                      <button
+                        className="Button3 button-with-ellipsis"
+                        onClick={() => {
+                          navigate(`/OneTradePost/${elem.post_id}`);
+                        }}
+                      >
+                        COMENTARIOS
+                      </button>
+                    </div>
+
+                    <Card.Text>
+                      {elem.currency !== null ? (
+                        <p>
+                          Currency: <span>{elem.currency}</span>
+                        </p>
+                      ) : null}
+                      <p>
+                        Descripción: <span>{elem.description}</span>
+                      </p>
+                      <p>
+                        Precio de entrada: <span>{elem.entry_price}</span>
+                      </p>
+                      <p>
+                        Precio de stop: <span>{elem.stop_loss}</span>
+                      </p>
+                      <p>
+                        Precio Profit: <span>{elem.take_profit}</span>
+                      </p>
+                      <p>
+                        Estado:{" "}
+                        <span>
+                          {elem.correct === null && "Trade Pendiente"}
+                          {elem.correct === 0 && "Trade Errado"}
+                          {elem.correct === 1 && "Trade Acertado"}
+                        </span>
+                      </p>
+                    </Card.Text>
+                  </Card.Body>
                 </Card>
               );
             })
