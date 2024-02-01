@@ -140,6 +140,12 @@
         }
       }
 
+      .comprado {
+        background-color: transparent;
+        color: var.$primary-color;
+        font-size: larger;
+      }
+
       .courseCardEnd {
         width: 12rem;
         display: flex;
