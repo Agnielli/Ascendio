@@ -169,21 +169,32 @@ export const AdminHome = () => {
   return (
     <main className="AdminRow">
       <Row>
-        <Col
-          xxl={3}
-          xs={12}
-          className="mt-5"
-        >
+        <Col xxl={3} xs={12} className="mt-5">
           <Row>
-            <Col className="d-flex justify-content-center justify-content-xl-start" xs={12}>
+            <Col
+              className="d-flex justify-content-center justify-content-xl-start"
+              xs={12}
+            >
               <h3 className="text-start mb-5 AscendioColor">Administrador</h3>
             </Col>
-            <Col className="d-flex justify-content-center justify-content-xl-start ButtonsRow mb-4" xxl={12} lg={3} sm={6} xs={12}>
+            <Col
+              className="d-flex justify-content-center justify-content-xl-start ButtonsRow mb-4"
+              xxl={12}
+              lg={3}
+              sm={6}
+              xs={12}
+            >
               <Button className="Button5" onClick={() => showButtons()}>
                 Usuarios
               </Button>
             </Col>
-            <Col className="d-flex justify-content-center justify-content-xl-start ButtonsRow" xxl={12} lg={3} sm={6} xs={12}>
+            <Col
+              className="d-flex justify-content-center justify-content-xl-start ButtonsRow"
+              xxl={12}
+              lg={3}
+              sm={6}
+              xs={12}
+            >
               <Button
                 className="Button5 mb-4"
                 onClick={() => showAllCourseButtons()}
@@ -191,12 +202,24 @@ export const AdminHome = () => {
                 Cursos
               </Button>
             </Col>
-            <Col className="d-flex justify-content-center justify-content-xl-start ButtonsRow mb-4" xxl={12} lg={3} sm={6} xs={12}>
+            <Col
+              className="d-flex justify-content-center justify-content-xl-start ButtonsRow mb-4"
+              xxl={12}
+              lg={3}
+              sm={6}
+              xs={12}
+            >
               <Button className="Button5" onClick={() => showStatistics()}>
                 Estadisticas
               </Button>
             </Col>
-            <Col className="d-flex justify-content-center justify-content-xl-start ButtonsRow mb-4" xxl={12} lg={3} sm={6} xs={12}>
+            <Col
+              className="d-flex justify-content-center justify-content-xl-start ButtonsRow mb-4"
+              xxl={12}
+              lg={3}
+              sm={6}
+              xs={12}
+            >
               <Button className="Button5" onClick={() => showAllTrades()}>
                 Trades
               </Button>
@@ -210,7 +233,7 @@ export const AdminHome = () => {
                 <Col
                   xl={6}
                   xs={12}
-                  className="d-flex justify-content-center gap-5"
+                  className="d-flex justify-content-center mb-4 gap-5"
                 >
                   <Button className="Button4" onClick={() => showAllPosts()}>
                     Trades
@@ -223,26 +246,30 @@ export const AdminHome = () => {
             )}
           </>
 
-          <Row className="">
-            {showPost && <TradesPostMap />}
+          <Row className="gap-xxl-4 justify-content-center">{showPost && <TradesPostMap />}</Row>
+          <Row className="justify-content-center">
             {showComments && <OneComment />}
           </Row>
 
           {showUserButtons === true && (
             <>
               <Row className="ButtonsRow2 d-flex justify-content-center align-items-center text-center mb-5">
-                <Col xl={12} xs={4} className="d-flex flex-column flex-sm-row justify-content-center mt-5">
+                <Col
+                  xl={12}
+                  xs={4}
+                  className="d-flex flex-column flex-sm-row justify-content-center mt-5"
+                >
                   <Button className="ButtonNoBG" onClick={() => showAllUsers()}>
                     Todos
                   </Button>
-               
+
                   <Button
                     className="ButtonNoBG"
                     onClick={() => showAllActivatedUsers()}
                   >
                     Activos
                   </Button>
-               
+
                   <Button
                     className="ButtonNoBG"
                     onClick={() => showAllDisabledUsers()}

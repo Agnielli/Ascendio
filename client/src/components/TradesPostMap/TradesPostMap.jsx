@@ -21,7 +21,7 @@ export const TradesPostMap = () => {
     <>
       {trades?.map((elem, index) => {
         return (
-          <Col className="d-flex justify-content-center" key={elem.post_id} xl={3} lg={4} sm={6} xs={12}>
+          <Col className="d-flex justify-content-center" key={elem.post_id} xxl={3} xl={3} lg={4} md={6} sm={12} xs={9}>
             <TradeCard elem={elem} />
           </Col>
         );
