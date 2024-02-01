@@ -7,18 +7,36 @@
   min-width: 300px;
   height: 500px;
   border-radius: 40px;
+   
+  .DivImagenCard{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 200px;
+  }
   img{
-    border-radius: 40px 40px 0 0;
     width: 100%;
     height: 200px; 
     object-fit: cover;     
   }
+
+  .CardSinFoto{
+     height: 100px; 
+     width: 100px;
+      
+      
+    }
+
+
+
 
   div.card-body{
     padding: 0 16px 16px 16px;
 
     div.card-title{
       h3{
+        font-size: 1rem;
         margin: 0 !important;
         color: $accent-color;
       }
@@ -41,13 +59,78 @@
       right: 16px; 
 
   }
+  .ButtonSEGUIR {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    padding: 0 20px !important;
+    border-radius: 25px;
+    color: $accent2-color;
+    font-weight: 500;
+    background-color: $accent3-color;
+    border: none;
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+  overflow: hidden; /* Oculta el texto que desborda el contenedor */
+  text-overflow: ellipsis; /* Muestra puntos suspensivos (...) cuando el texto desborda */
+
+  &:active {
+    background-color: $accent-color;
+    color: $accent2-color;
+  }
+  &:hover {
+    background-color: $accent-color;
+    color: $accent2-color;
+  }
+
+    
+
+  }
   .BotoneraTrades{    
     position: absolute;
     bottom: 16px;
     background-color: white;
     border-radius: 25px;
     
+    
   }
+
+  .UserCARD{
+    margin: 0 !important;
+    padding: 8px 16px 0 16px;
+    display: flex;
+    align-items: center;
+    .avatarCard{
+      width: 28px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    border: 2px solid $accent-color;
+    margin: 0; 
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+
+    p{
+      margin: 0 !important;
+        height: 100%;
+        width: 100%;
+        color: #e15252;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1rem;
+    }
+
+    }
+
+  }
+
   
 }
 

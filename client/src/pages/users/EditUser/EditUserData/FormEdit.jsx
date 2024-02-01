@@ -147,7 +147,7 @@ export const FormEdit = ({ user, setUser, setShowForm }) => {
           <Button className="Button3" variant="primary me-2" onClick={handleSubmit}>
             ACEPTAR
           </Button>
-          <Button  className="Button1"onClick={() => setShowForm(false)}>CANCELAR</Button>
+          <Button  className="Button1" onClick={() => setShowForm(false)}>CANCELAR</Button>
         </div>
       </Form>
     </div>

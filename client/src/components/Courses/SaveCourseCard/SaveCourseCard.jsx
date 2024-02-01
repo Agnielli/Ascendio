@@ -94,12 +94,12 @@ export const SaveCourseCard = () => {
               </Card.Text>
                 </Card.Text>
                 <Card.Text className="d-flex justify-content-center mt-auto">
-                  <Button
+                  <button
                     onClick={() => navigate(`/course/${elem.course_id}`)}
                     className="Button3"
                   >
                     Más info
-                  </Button>
+                  </button>
                 </Card.Text>
               </Card.Body>
             </Card> */}

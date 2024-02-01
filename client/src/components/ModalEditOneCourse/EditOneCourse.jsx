@@ -150,20 +150,20 @@ export const EditOneCourse = ({
           </Modal.Body>
           {msgError && <h5 className="msgerror">{msgError}</h5>}
           <Modal.Footer className="modalDel">
-            <Button
+            <button
               variant="outline-success"
               className="me-3 Button3"
               onClick={handleSubmit}
             >
               Aceptar
-            </Button>
-            <Button
+            </button>
+            <button
               variant="outline-success"
               className="me-3 Button3"
               onClick={handleClose}
             >
               Cancelar
-            </Button>
+            </button>
           </Modal.Footer>
         </Modal>
       </Col>

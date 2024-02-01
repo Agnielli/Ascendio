@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AscendioContext } from "../../../context/AscendioContext";
 import axios from "axios";
 import "./OneCourse.scss";
-import { Accordion, Button, Card, Col, Row } from "react-bootstrap";
+import { Accordion, Card} from "react-bootstrap";
 import { EditOneCourse } from "../../../components/ModalEditOneCourse/EditOneCourse";
 import { useNavigate, useParams } from "react-router-dom";
 import { FormAddSection } from "../../../components/FormAddSection/FormAddSection";
@@ -241,23 +241,31 @@ export const OneCourse = () => {
     }
   };
 
-  const newVote = peopleVotesCourse + 1
-
   const handlePurchase = () => {
     const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
     addToPurchase();
     setShowCardRate(true);
     setIsIntoPurchase(true);
-    //setPeopleVotesCourse(newVote);
+    localStorage.setItem('isFirstVisit', 'true');
 
     setTimeout(() => {
       window.scrollTo(0, scrollPosition);
     }, 0);
   };
 
-  if(showCardRate){
-    window.scrollTo(0, 0);
-  }
+  useEffect(() => {
+    const isFirstVisit = localStorage.getItem('isFirstVisit');
+
+    if (isFirstVisit === 'false' && showCardRate && isIntoPurchase) {
+      window.scrollTo(0, 0);
+    }
+
+    if (isFirstVisit === null) {
+      localStorage.setItem('isFirstVisit', 'true');
+    } else {
+      localStorage.setItem('isFirstVisit', 'false');
+    }
+  }, [showCardRate, isIntoPurchase]);
 
   const handleValidate = () => {
     if (isIntoValidate) {
@@ -477,7 +485,7 @@ export const OneCourse = () => {
                 </button>
               )}
               {userId === userCourse && (
-                <Button
+                <button
 
                 disabled={isIntoValidate && !isConfirmed ? true : false}
                   // onClick={() => deleteCourse(course_id)}
@@ -486,7 +494,7 @@ export const OneCourse = () => {
                   className="Button2"
                 >
                   Eliminar curso
-                </Button>
+                </button>
               )}
             </div>
           </Card.Body>

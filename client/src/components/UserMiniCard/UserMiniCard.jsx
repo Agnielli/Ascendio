@@ -45,13 +45,13 @@ export const UserMiniCard = ({ elem, updateUsers, setUpdateUsers }) => {
         </div>
       </div>
       <div className="AdminUserButton">
-        <Button
+        <button
           className="Button4"
           variant="danger"
           onClick={() => activateUser(elem?.user_id, elem?.is_disabled)}
         >
           {elem.is_disabled ? "Activar" : "Desactivar"}
-        </Button>
+        </button>
       </div>
     </div>
   );

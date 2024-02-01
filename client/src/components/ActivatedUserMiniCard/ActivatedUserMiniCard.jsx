@@ -40,13 +40,13 @@ export const ActivatedUserMiniCard = ({ elem, update, setUpdate }) => {
         </div>
       </div>
       <div className="AdminUserButton">
-        <Button
+        <button
           variant="danger"
           className="Button4"
           onClick={() => disableUser(elem.user_id)}
         >
           Desactivar
-        </Button>
+        </button>
       </div>
     </div>
   );

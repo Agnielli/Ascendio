@@ -1,6 +1,14 @@
 @import '../../../../public/stylesheets/variables.scss';
 
 .traderProfileScss{
+  .DivGrisParaBotones {    
+    width: 100%;
+    margin-bottom: 16px;
+    .BotonUser{
+      width: 50% ;
+    }
+  }
+  
   max-width: 100vw;
   padding: 5vh 10vw;
   .avatarProfilo {

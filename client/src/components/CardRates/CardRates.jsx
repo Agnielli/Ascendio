@@ -92,12 +92,12 @@ export const CardRates = ({ resetCourse, setResetCourse, setShowCardRate, rates,
             />
              <h6 className="text-center mb-2"  style={{ color: '#E25252' }}>{msgError}</h6>
              <div className="d-flex justify-content-center"> 
-            <Button
+            <button
               className="Button3"
               onClick={handleSubmit}
             >
               Aceptar
-            </Button>
+            </button>
             </div>
           </Form.Group>
         </Form>

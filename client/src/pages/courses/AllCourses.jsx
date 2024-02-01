@@ -53,9 +53,9 @@ export const AllCourses = () => {
         >
           <div>
             <h2>{order ? "Últimos cursos" : "Top cursos"}</h2>
-            <Button onClick={() => setOrder(!order)} className="Button3">
+            <button onClick={() => setOrder(!order)} className="Button3">
               {order ? "Ver top cursos" : "Ver últimos cursos"}
-            </Button>
+            </button>
           </div>
           <div className="input-container">
             <span className="material-symbols-outlined search-icon">

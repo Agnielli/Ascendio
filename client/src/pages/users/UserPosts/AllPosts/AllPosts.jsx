@@ -22,21 +22,35 @@ export const AllPosts = ({
       {posts?.map((elem) => {
         return (
           <Card className="ESTILOCARDGENERAL" key={elem.post_id}>
-            {elem.resource_text === null ? (
-              <Card.Img
-                variant="top"
-                src={`http://localhost:3000/images/trades/LOQUESEA`}
-              />
-            ) : (
-              <Card.Img
-                variant="top"
-                src={
-                  elem.type === 2
-                    ? `http://localhost:3000/images/trades/${elem.resource_text}`
-                    : `http://localhost:3000/images/generalpost/${elem.resource_text}`
-                }
-              />
-            )}
+            <Card.Text className="UserCARD">
+            <div className="avatarCard">
+              {user?.img ? (
+                <img src={`http://localhost:3000/images/users/${user.img}`} />
+              ) : (
+                <p className="letteruser">
+                  {user?.nickname.charAt(0).toUpperCase()}
+                </p>
+              )}
+            </div>
+              <p>{user.nickname}</p></Card.Text>
+            <div className="DivImagenCard">
+              {elem.resource_text === null ? (
+                <Card.Img
+                  className="CardSinFoto"
+                  variant="top"
+                  src={"../../../../public/images/iconos/logoascendio.png"}
+                />
+              ) : (
+                <Card.Img
+                  variant="top"
+                  src={
+                    elem.type === 2
+                      ? `http://localhost:3000/images/trades/${elem.resource_text}`
+                      : `http://localhost:3000/images/generalpost/${elem.resource_text}`
+                  }
+                />
+              )}
+            </div>
             {elem.type === 2 ? (
               <Card.Body>
                 <Card.Title>
@@ -44,7 +58,6 @@ export const AllPosts = ({
                   <h3>Trade de {elem.category_name}</h3>{" "}
                 </Card.Title>
                 <Card.Text>
-                  <p>Nickname: {user?.nickname}</p>
                   {elem.currency !== null ? (
                     <p>
                       Currency: <span>{elem.currency}</span>
@@ -177,7 +190,6 @@ export const AllPosts = ({
                   <h3>{elem.category_name} Post</h3>{" "}
                 </Card.Title>
                 <Card.Text>
-                <p>Nickname: {user?.nickname}</p>
                   {elem.currency !== null ? (
                     <p>Currency: {elem.currency}</p>
                   ) : null}

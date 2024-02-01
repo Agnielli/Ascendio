@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Button, Form, InputGroup } from "react-bootstrap";
+import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { AscendioContext } from "../../../../context/AscendioContext";
 import axios from "axios";
+import './CreateGeneralPost.scss'
 
 const initialValue = {
   description: "",
@@ -43,26 +44,32 @@ export const CreateGeneralPost = () => {
   };
 
   return (
-    <div>
-      <Form.Group controlId="formFile" className="mb-3">
-        <br />
-        <h2>Crear Post General</h2>
-        <br />
-        <Form.Label>Subir imagen</Form.Label>
-        <Form.Control type="file" onChange={handleFile} hidden />
-      </Form.Group>
-      <Form.Control
-        type="text"
-        placeholder="Exprésate"
-        name="description"
-        value={generalPost.description}
-        onChange={handleChange}
-        required
-      />
-      <p>{msgError}</p>
-      <br />
-      <Button onClick={handleSubmit}>Aceptar</Button>
-      <Button onClick={() => navigate("/profile")}>Cancelar</Button>
-    </div>
+    <Row className="CreateGeneralPostUser justify-content-center">
+      <Col xl={6}>
+        <Form className="FormulariosContainer">
+          <Form.Group controlId="formFile" className="mb-3">
+            <br />
+            <h2 className="CreateGeneralPostH2AscendioColor">CREAR POST GENERAL</h2>
+            <br />
+            <Button className="Button3 ButtonImgCreateTradeInput">
+                  IMAGEN
+                </Button>
+            <Form.Control type="file" onChange={handleFile} hidden />
+          </Form.Group>
+          <Form.Control
+            type="text"
+            placeholder="Exprésate"
+            name="description"
+            value={generalPost.description}
+            onChange={handleChange}
+            required
+          />
+          <p>{msgError}</p>
+          <br />
+          <Button className="Button3 ButtonsCreateTradeSpacing ButtonAcceptCancelCreateTrade" onClick={handleSubmit}>ACEPTAR</Button>
+          <Button className="Button1 ButtonAcceptCancelCreateTrade" onClick={() => navigate("/profile")}>CANCELAR</Button>
+        </Form>
+      </Col>
+    </Row>
   );
 };
