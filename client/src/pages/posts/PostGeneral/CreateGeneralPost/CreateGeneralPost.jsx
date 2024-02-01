@@ -52,7 +52,7 @@ export const CreateGeneralPost = () => {
             <h2 className="CreateGeneralPostH2AscendioColor">CREAR POST GENERAL</h2>
             <br />
             <Button className="Button3 ButtonImgCreateTradeInput">
-                  IMAGEN
+            <Form.Label><img className="BotonFoto" src="../../../../../public/images/iconos/camara.png" alt="" /></Form.Label>
                 </Button>
             <Form.Control type="file" onChange={handleFile} hidden />
           </Form.Group>
@@ -66,8 +66,8 @@ export const CreateGeneralPost = () => {
           />
           <p>{msgError}</p>
           <br />
-          <Button className="Button3 ButtonsCreateTradeSpacing ButtonAcceptCancelCreateTrade" onClick={handleSubmit}>ACEPTAR</Button>
-          <Button className="Button1 ButtonAcceptCancelCreateTrade" onClick={() => navigate("/profile")}>CANCELAR</Button>
+          <button className="Button3 ButtonsCreateTradeSpacing ButtonAcceptCancelCreateTrade" onClick={handleSubmit}>ACEPTAR</button>
+          <button className="Button1 ButtonAcceptCancelCreateTrade" onClick={() => navigate("/profile")}>CANCELAR</button>
         </Form>
       </Col>
     </Row>
