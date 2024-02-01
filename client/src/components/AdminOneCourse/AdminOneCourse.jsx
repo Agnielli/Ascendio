@@ -24,7 +24,6 @@ export const AdminOneCourse = ({ elem, updateCourses, setUpdateCourses }) => {
   };
 
   return (
-
       <Card
         style={{ width: "100%" }}
         className="mapeoAllCourse text-center mb-4"

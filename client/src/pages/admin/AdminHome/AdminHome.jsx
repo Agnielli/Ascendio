@@ -318,12 +318,10 @@ export const AdminHome = () => {
                   </button>
                 </Col>
               </Row>
-              <Row>
-                <Col className="d-flex justify-content-center gap-3 pb-5">
+              <Row className="justify-content-center">
                   {showCourses && <AdminCourses />}
                   {showDisabledCourses && <DisabledCoursesMap />}
                   {showEnabledCourses && <EnabledCoursesMap />}
-                </Col>
               </Row>
             </>
           )}
