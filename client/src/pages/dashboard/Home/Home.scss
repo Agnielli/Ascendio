@@ -27,53 +27,6 @@
     gap: 0.5rem;
     padding: 0 !important;
 
-    .ascendio-home-card-padre {
-      background-color: $accent2-color;
-      height: 400px;
-      min-width: 200px;
-      width: calc(25% - 0.5rem);
-      color: white;
-
-      .ascendio-home-card-hijo {
-        height: 100%;
-        background-color: $accent2-color;
-        @include display-flex(column, space-between, center);
-
-        .ascendio-home-card-titulo {
-          width: 100%;
-          height: 10%;
-          margin: 0 !important;
-
-          h3 {
-            margin: 0 !important;
-          }
-        }
-
-        .ascendio-home-card-texto {
-          width: 100%;
-          height: 40%;
-          margin: 0 !important;
-          padding: 1rem;
-
-          // overflow: hidden;
-          // display: -webkit-box;
-          // -webkit-line-clamp: 2; /* Ajusta el número de líneas que deseas mostrar */
-          // -webkit-box-orient: vertical;
-          // text-overflow: ellipsis;
-        }
-
-        .ascendio-home-card-imagen {
-          width: 50%;
-          height: 35%;
-          border: 1px solid $accent-color;
-        }
-
-        .ascendio-home-card-botonera {
-          width: 100%;
-          @include display-flex(row, space-evenly, flex-end);
-          height: 15%;
-        }
-      }
-    }
+    
   }
 }

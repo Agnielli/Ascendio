@@ -107,7 +107,15 @@ class usersControllers {
     connection.query(sql, (error, result) => {
       if (error) return res.status(500).json(error);
       console.log(result);
-      if (!result || result.length === 0 || result[0].is_deleted == 1) {
+      //TODO: hay que poner el if COMENTANDO y eliminar el otro
+      //if (!result || result.length === 0 || result[0].is_deleted == 1 || result[0].is_confirmed == 0 || result[0].is_disabled == 1) {
+      if (
+        !result ||
+        result.length === 0 ||
+        result[0].is_deleted == 1 ||
+        result[0].is_confirmed == 1 ||
+        result[0].is_disabled == 1
+      ) {
         res.status(401).json("Usuario no autorizado");
       } else {
         const user = result[0];
@@ -272,9 +280,8 @@ class usersControllers {
   //4-editar info de un usuario:
 
   editUser = (req, res) => {
-    const { nickname, name, lastname, phonenumber, user_id } = JSON.parse(
-      req.body.editUser
-    );
+    const { nickname, name, lastname, phonenumber, user_id, email } =
+      JSON.parse(req.body.editUser);
     let sql;
     let img;
     console.log("REQBODY!", req.body);
@@ -285,20 +292,20 @@ class usersControllers {
       req.file
     ) {
       img = req.file.filename;
-      sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}",phonenumber = null, img = "${img}" WHERE user_id = ${user_id}`;
+      sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}", email = "${email}",phonenumber = null, img = "${img}" WHERE user_id = ${user_id}`;
       console.log("IF-1");
     } else if (phonenumber != "" && req.file) {
       img = req.file.filename;
-      sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}", phonenumber = "${phonenumber}", img = "${img}" WHERE user_id = ${user_id}`;
+      sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}",email = "${email}", phonenumber = "${phonenumber}", img = "${img}" WHERE user_id = ${user_id}`;
       console.log("IF-2");
     } else if (
       (phonenumber == "" || phonenumber == null || phonenumber == undefined) &&
       !req.file
     ) {
-      sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}",phonenumber = null WHERE user_id = ${user_id}`;
+      sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}",email = "${email}",phonenumber = null WHERE user_id = ${user_id}`;
       console.log("IF-3");
     } else if (phonenumber != "" && !req.file) {
-      sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}", phonenumber = "${phonenumber}" WHERE user_id = ${user_id}`;
+      sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}",email = "${email}", phonenumber = "${phonenumber}" WHERE user_id = ${user_id}`;
       console.log("IF-4");
     }
 
