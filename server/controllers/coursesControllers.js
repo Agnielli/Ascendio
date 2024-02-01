@@ -474,7 +474,11 @@ ORDER BY course.date DESC`;
   getPeopleVotesCourses = (req, res) =>{
     const {course_id} = req.params
 
-    let sql = `SELECT COUNT(*) as numero FROM user_rates_course WHERE course_id = ${course_id}`
+    let sql = `SELECT COUNT(*) as numero
+    FROM course
+    LEFT JOIN user_rates_course ON course.course_id = user_rates_course.course_id
+    LEFT JOIN user ON user_rates_course.user_id = user.user_id
+    WHERE course.course_id = ${course_id} AND user.is_deleted = 0 AND course.is_deleted = 0`
 
     connection.query(sql, (err, result) => {
       err ? res.status(500).json(err) : res.status(200).json(result);
