@@ -46,7 +46,7 @@ export const ModalCreateComment = ({ showModal, setShowModal, oneTrade }) => {
         <Form className="FormulariosContainer">
           <Form.Group className="mb-3" controlId="formGroupText">
             <Form.Control
-              maxlength="100"
+              maxlength="240"
               type="text"
               name="message"
               placeholder="¿Que quieres decir?"

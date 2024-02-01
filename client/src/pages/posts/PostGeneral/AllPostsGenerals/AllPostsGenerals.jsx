@@ -90,15 +90,11 @@ export const AllPostsGenerals = () => {
   return (
     <div className="allpostgenerals">
       <>
-      <Row className="d-flex justify-content-start align-items-start">
-          <Col
-            className="d-flex justify-content-center align-items-center"
-          >
+        <Row className="d-flex justify-content-start align-items-start">
+          <Col className="d-flex justify-content-center align-items-center">
             <h2>General Posts</h2>
           </Col>
-          <Col
-            className="d-flex justify-content-center align-items-center"
-          >
+          <Col className="d-flex justify-content-center align-items-center">
             <div className="input-container">
               <span className="material-symbols-outlined search-icon">
                 search
@@ -115,14 +111,20 @@ export const AllPostsGenerals = () => {
             xs={12}
             className="ascendio-home-row-hijo d-flex DivGrisParaBotones"
           >
-            <Button className="Button2 " onClick={() => navigate("/allpoststrades")}>
+            <Button
+              className="Button2 "
+              onClick={() => navigate("/allpoststrades")}
+            >
               TRADE POSTS
             </Button>
-            <Button className="Button2 " onClick={() => navigate("/allpostsgenerals")}>
+            <Button
+              className="Button2 "
+              onClick={() => navigate("/allpostsgenerals")}
+            >
               GENERAL POSTS
             </Button>
-        </Col>
-      </Row>
+          </Col>
+        </Row>
         <div className="d-flex flex-wrap justify-content-center gap-4">
           {lastTradesFilter[0] !== undefined ? (
             lastTradesFilter.map((elem) => {
@@ -140,7 +142,14 @@ export const AllPostsGenerals = () => {
                         </p>
                       )}
                     </div>
-                    <p>{elem.nickname}</p>
+                    <p>
+                      <Link
+                        className="home-link-traders"
+                        to={`http://localhost:5173/traderprofile/${elem.user_id}`}
+                      >
+                        {elem.nickname}
+                      </Link>
+                    </p>
                   </Card.Text>
                   <div className="DivImagenCard">
                     {elem.image_name !== null ? (
@@ -202,7 +211,7 @@ export const AllPostsGenerals = () => {
               disponibles en este momento.
             </h4>
           )}
-        </div> 
+        </div>
       </>
     </div>
   );
