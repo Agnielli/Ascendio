@@ -100,7 +100,6 @@ export const AllTrades = () => {
 
   return (
     <div className="alltrades">
-      <>
         <Row className="general-altradeposts title-input">
           <Col
             // lg={3}
@@ -128,6 +127,17 @@ export const AllTrades = () => {
               placeholder="🔍 Buscar Trades"
               value={search}
             /> */}
+          </Col>
+          <Col
+            xs={2}
+            className="ascendio-home-row-hijo d-flex gap-1 DivGrisParaBotones mt-2"
+          >
+            <Button className="Button2" onClick={() => setShowViews(false)}>
+              POSTS
+            </Button>
+            <Button className="Button2" onClick={() => setShowViews(true)}>
+              GRÁFICA
+            </Button>
           </Col>
         </Row>
         <div className="d-flex flex-wrap justify-content-center gap-4">
@@ -248,7 +258,6 @@ export const AllTrades = () => {
             </h4>
           )}
         </div>
-      </>
     </div>
   );
 };

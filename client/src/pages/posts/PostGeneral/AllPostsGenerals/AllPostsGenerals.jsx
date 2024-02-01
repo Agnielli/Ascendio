@@ -97,15 +97,13 @@ export const AllPostsGenerals = () => {
   return (
     <div className="allpostgenerals">
       <>
-        <Row className="generalallpostsReal title-input">
+      <Row className="general-altradeposts title-input">
           <Col
-            //lg={3}
             className="d-flex justify-content-center align-items-center"
           >
             <h2>General Posts</h2>
           </Col>
           <Col
-            //lg={9}
             className="d-flex justify-content-center align-items-center"
           >
             <div className="input-container">
@@ -120,7 +118,18 @@ export const AllPostsGenerals = () => {
               />
             </div>
           </Col>
-        </Row>
+          <Col
+            xs={12}
+            className="ascendio-home-row-hijo d-flex gap-1 DivGrisParaBotones mt-2"
+          >
+            <Button className="Button2" onClick={() => setShowViews(false)}>
+              POSTS
+            </Button>
+            <Button className="Button2" onClick={() => setShowViews(true)}>
+              GRÁFICA
+            </Button>
+        </Col>
+      </Row>
         <div className="d-flex flex-wrap justify-content-center gap-4">
           {lastTradesFilter[0] !== undefined ? (
             lastTradesFilter.map((elem) => {
@@ -201,7 +210,7 @@ export const AllPostsGenerals = () => {
               disponibles en este momento.
             </h4>
           )}
-        </div>
+        </div> 
       </>
     </div>
   );
