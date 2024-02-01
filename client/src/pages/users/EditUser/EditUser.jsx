@@ -3,9 +3,9 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { AscendioContext } from "../../../context/AscendioContext";
 import "./EditUser.scss";
-import "../../../../public/stylesheets/ButtonsApp.scss"
-import "../../../../public/stylesheets/FormulariosEInputs.scss"
-import "../../../../public/stylesheets/InputDesplegableApp.scss"
+import "../../../../public/stylesheets/ButtonsApp.scss";
+import "../../../../public/stylesheets/FormulariosEInputs.scss";
+import "../../../../public/stylesheets/InputDesplegableApp.scss";
 import { FormEdit } from "./EditUserData/FormEdit";
 import { ChangePassword } from "./ChangePassword/ChangePassword";
 import { DeleteUser } from "./DeleteUser/DeleteUser";
@@ -22,14 +22,14 @@ export const EditUser = () => {
   const [categories, setCategories] = useState(false);
   const [userCategory, setUserCategory] = useState();
   const [showCategories, setShowCategories] = useState(false);
-  const [msgSuccess, setMsgSuccess] = useState()
-  const [style, setStyle] = useState()
+  const [msgSuccess, setMsgSuccess] = useState();
+  const [style, setStyle] = useState();
 
   useEffect(() => {
     axios
       .get(`http://localhost:3000/posts/getcategories`)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setOptions(
           res.data.map((elem) => ({
             value: elem.category_id,
@@ -44,23 +44,23 @@ export const EditUser = () => {
   }, []);
 
   {
-    user &&
-      useEffect(() => {
+    useEffect(() => {
+      user &&
         axios
           .get(`http://localhost:3000/users/getcategoriesuser/${user.user_id}`)
           .then((res) => {
-            console.log(res);
+            // console.log(res);
             setUserCategory(res.data);
             setCategories(false);
           })
           .catch((err) => {
             console.log(err);
           });
-      }, [categories]);
+    }, [categories]);
   }
-  if (userCategory) {
-    console.log(userCategory);
-  }
+  // if (userCategory) {
+  //   console.log(userCategory);
+  // }
 
   const handleOption = (option) => {
     setSelectedOption(option);
@@ -77,10 +77,10 @@ export const EditUser = () => {
         { user_id: user.user_id, selectedValues } /* newFormData */
       )
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setCategories(true);
-        setMsgSuccess("Categorías cambiadas con éxito")
-        setStyle("EditUserMsgSuccess")
+        setMsgSuccess("Categorías cambiadas con éxito");
+        setStyle("EditUserMsgSuccess");
       })
       .catch((err) => {
         console.log(err);
@@ -126,55 +126,83 @@ export const EditUser = () => {
 
   return (
     <main>
-      <Row className="EditUserApp w-30 s-xs-90">    
-          
-            <Col xs={12} sm={12} className="p-0">
-              <Button className="Button5 ButtonEditUser1 InputsMinimumWidthEditUser mb-4 mt-4" onClick={verSection}>EDITAR DATOS DEL USUARIO</Button>
-              <Button className="Button5 ButtonEditUser1 InputsMinimumWidthEditUser mb-4" onClick={verCategoryUser}> EDITAR CATEGORÍA </Button>
-              <Button className="Button5 ButtonEditUser1 InputsMinimumWidthEditUser mb-4" onClick={verChangePassword}>EDITAR DATOS DE LOGIN </Button>
-              <Button className="Button5 ButtonEditUser1 InputsMinimumWidthEditUser mb-4" onClick={verDeleteUser}>ELIMINAR CUENTA </Button>
-            </Col>
-      
-            <Col xs={12} sm={6} className="p-0">
-              {showForm && (
-                <FormEdit setShowForm={setShowForm} user={user} setUser={setUser} />
-              )}
-              {showChangePassword && (
-                <ChangePassword
-                  setShowChangePassword={setShowChangePassword}
-                  user={user}
-                  setUser={setUser}
+      <Row className="EditUserApp w-30 s-xs-90">
+        <Col xs={12} sm={12} className="p-0">
+          <Button
+            className="Button5 ButtonEditUser1 InputsMinimumWidthEditUser mb-4 mt-4"
+            onClick={verSection}
+          >
+            EDITAR DATOS DEL USUARIO
+          </Button>
+          <Button
+            className="Button5 ButtonEditUser1 InputsMinimumWidthEditUser mb-4"
+            onClick={verCategoryUser}
+          >
+            {" "}
+            EDITAR CATEGORÍA{" "}
+          </Button>
+          <Button
+            className="Button5 ButtonEditUser1 InputsMinimumWidthEditUser mb-4"
+            onClick={verChangePassword}
+          >
+            EDITAR DATOS DE LOGIN{" "}
+          </Button>
+          <Button
+            className="Button5 ButtonEditUser1 InputsMinimumWidthEditUser mb-4"
+            onClick={verDeleteUser}
+          >
+            ELIMINAR CUENTA{" "}
+          </Button>
+        </Col>
+
+        <Col xs={12} sm={6} className="p-0">
+          {showForm && (
+            <FormEdit setShowForm={setShowForm} user={user} setUser={setUser} />
+          )}
+          {showChangePassword && (
+            <ChangePassword
+              setShowChangePassword={setShowChangePassword}
+              user={user}
+              setUser={setUser}
+            />
+          )}
+          {showDeleteUser && (
+            <DeleteUser
+              setShowDeleteUser={setShowDeleteUser}
+              user={user}
+              setUser={setUser}
+            />
+          )}
+          {showCategories && (
+            <Form onSubmit={handleSubmit} className=" FormularioDatosUsuario ">
+              <Form.Group controlId="formFile" className="mb-3">
+                <Form.Label>
+                  <h4>EDITAR CATEGORÍA:</h4>{" "}
+                </Form.Label>
+                <Select
+                  className="inputDesplegableRetocado"
+                  placeholder="Categoría.."
+                  options={options}
+                  value={selectedOption}
+                  onChange={handleOption}
+                  isMulti
                 />
-              )}
-              {showDeleteUser && (
-                <DeleteUser
-                  setShowDeleteUser={setShowDeleteUser}
-                  user={user}
-                  setUser={setUser}
-                />
-              )}
-              {showCategories && (
-                <Form onSubmit={handleSubmit} className=" FormularioDatosUsuario ">
-                  <Form.Group controlId="formFile" className="mb-3">
-                    <Form.Label><h4>EDITAR CATEGORÍA:</h4> </Form.Label>
-                    <Select className="inputDesplegableRetocado"
-                      placeholder="Categoría.."
-                      options={options}
-                      value={selectedOption}
-                      onChange={handleOption}
-                      isMulti
-                    />
-                  </Form.Group>
-                  <p className={style}>{msgSuccess}</p>
-                  <div className="DivGrisParaBotones mt-3">
-                    <Button className="Button3" type="submit">ACEPTAR</Button>
-                    <Button className="Button1" onClick={() => setShowCategories(false)}>CANCELAR</Button>
-                  </div>
-                </Form>
-              )}
-            </Col>
-        
-       
+              </Form.Group>
+              <p className={style}>{msgSuccess}</p>
+              <div className="DivGrisParaBotones mt-3">
+                <Button className="Button3" type="submit">
+                  ACEPTAR
+                </Button>
+                <Button
+                  className="Button1"
+                  onClick={() => setShowCategories(false)}
+                >
+                  CANCELAR
+                </Button>
+              </div>
+            </Form>
+          )}
+        </Col>
       </Row>
     </main>
   );
