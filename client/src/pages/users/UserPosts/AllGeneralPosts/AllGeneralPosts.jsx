@@ -22,17 +22,31 @@ export const AllGeneralPosts = ({
         .map((elem) => {
           return (
             <Card className="ESTILOCARDGENERAL" key={elem.post_id}>
-              {elem.resource_text !== null ? (
-                <Card.Img
-                  variant="top"
-                  src={`http://localhost:3000/images/generalPost/${elem.resource_text}`}
-                />
+              <Card.Text className="UserCARD">
+            <div className="avatarCard">
+              {user?.img ? (
+                <img src={`http://localhost:3000/images/users/${user.img}`} />
               ) : (
-                <Card.Img
-                  variant="top"
-                  src={"../../../../../public/images/trade/trades.png"}
-                />
+                <p className="letteruser">
+                  {user?.nickname.charAt(0).toUpperCase()}
+                </p>
               )}
+            </div>
+              <p>{user.nickname}</p></Card.Text>
+              <div className="DivImagenCard">
+                {elem.resource_text !== null ? (
+                  <Card.Img
+                    variant="top"
+                    src={`http://localhost:3000/images/generalPost/${elem.resource_text}`}
+                  />
+                ) : (
+                  <Card.Img
+                    className="CardSinFoto"
+                    variant="top"
+                    src={"../../../../public/images/iconos/logoascendio.png"}
+                  />
+                )}
+              </div>
               <Card.Body>
                 <Card.Title>
                   <h3>{elem.category_name} Post</h3>
