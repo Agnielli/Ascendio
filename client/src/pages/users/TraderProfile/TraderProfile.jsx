@@ -40,6 +40,15 @@ export const TraderProfile = () => {
   return (
     <>
       <Row className="traderProfileScss">
+        <Col xs={12} lg={12}>
+              <Button
+                variant="primary"
+                onClick={() => navigate("/showallusers")}
+                className="Button4"
+              >
+                VOLVER
+              </Button>
+            </Col>
         <Col xs={4} lg={4} className="d-flex justify-content-center p-0 ">
           <div>
             <div className="avatarProfilo">
@@ -173,15 +182,6 @@ export const TraderProfile = () => {
                 className="Button2"
               >
                 MOSTRAR CURSOS
-              </Button>
-            </div>
-            <div className="d-flex flex-column">
-              <Button
-                variant="primary"
-                onClick={() => navigate("/showallusers")}
-                className="Button2"
-              >
-                VOLVER
               </Button>
             </div>
           </div>
