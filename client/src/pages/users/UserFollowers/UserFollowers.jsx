@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { AscendioContext } from "../../../context/AscendioContext";
-import { Button, Card } from "react-bootstrap";
+import { Button, Card, Col, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 export const UserFollowers = () => {
@@ -95,56 +95,68 @@ export const UserFollowers = () => {
   };
 
   return (
-    <>
-      <div className="d-flex flex-column p-5">
-        <div className="d-flex gap-5">
-          <h2>Mis seguidores</h2>
-          <Button onClick={() => navigate("/profile")}>Volver</Button>
+    <Row>
+      <Col xl={12}>
+        <Row>
+          <Col>
+            <div className="d-flex gap-5">
+              <input
+                className="buscador"
+                onChange={handleChange}
+                placeholder="🔍..."
+                value={search}
+              />
+            </div>
+          </Col>
+        </Row>
+        <div className="d-flex flex-column p-5">
+          <div className="d-flex gap-5">
+            <h2>Mis seguidores</h2>
+            <Button className="Button3" onClick={() => navigate("/profile")}>
+              Volver
+            </Button>
+          </div>
         </div>
-        <div className="d-flex gap-5">
-          <input onChange={handleChange} placeholder="🔍..." value={search} />
-        </div>
-      </div>
-      <div className="d-flex gap-5 flex-wrap p-5">
-        {followersFilter?.map((elem) => {
-          return (
-            <Card style={{ width: "18rem" }} key={elem.user_id}>
-              {elem.img !== null ? (
-                <Card.Img
-                  variant="top"
-                  src={`http://localhost:3000/images/users/${elem.img}`}
-                />
-              ) : (
-                <Card.Img
-                  variant="top"
-                  src={`http://localhost:3000/images/users/descarga.png`}
-                />
-              )}
-
-              <Card.Body>
-                <Card.Title>{elem.nickname}</Card.Title>
-                <Card.Text></Card.Text>
-                {user.user_id !== elem.user_id ? (
-                  <Button
-                    variant="primary"
-                    onClick={() => pulsarSeguirONo(elem.user_id)}
-                  >
-                    {followingUsers.includes(elem.user_id)
-                      ? "Dejar de Seguir"
-                      : "Seguir También"}
-                  </Button>
+        <div className="d-flex gap-5 flex-wrap p-5">
+          {followersFilter?.map((elem) => {
+            return (
+              <Card style={{ width: "18rem" }} key={elem.user_id}>
+                {elem.img !== null ? (
+                  <Card.Img
+                    variant="top"
+                    src={`http://localhost:3000/images/users/${elem.img}`}
+                  />
                 ) : (
-                  <Button
-                    onClick={() => navigate(`/userposts/${user.user_id}`)}
-                  >
-                    Ir a posts
-                  </Button>
+                  <Card.Img
+                    variant="top"
+                    src={`http://localhost:3000/images/users/descarga.png`}
+                  />
                 )}
-              </Card.Body>
-            </Card>
-          );
-        })}
-      </div>
-    </>
+                <Card.Body>
+                  <Card.Title>{elem.nickname}</Card.Title>
+                  <Card.Text></Card.Text>
+                  {user.user_id !== elem.user_id ? (
+                    <Button
+                      variant="primary"
+                      onClick={() => pulsarSeguirONo(elem.user_id)}
+                    >
+                      {followingUsers.includes(elem.user_id)
+                        ? "Dejar de Seguir"
+                        : "Seguir También"}
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={() => navigate(`/userposts/${user.user_id}`)}
+                    >
+                      Ir a posts
+                    </Button>
+                  )}
+                </Card.Body>
+              </Card>
+            );
+          })}
+        </div>
+      </Col>
+    </Row>
   );
 };
