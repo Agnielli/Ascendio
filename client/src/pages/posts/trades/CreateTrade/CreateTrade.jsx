@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { AscendioContext } from "../../../../context/AscendioContext";
 import axios from "axios";
 import Select from "react-select";
+
 const initialValue = {
   currency: "",
   description: "",
@@ -13,7 +14,6 @@ const initialValue = {
   takeProfit: "",
   category_id: "",
 };
-
 export const CreateTrade = () => {
   const [createOneTrade, setCreateOneTrade] = useState(initialValue);
   const [file, setFile] = useState();
@@ -80,12 +80,12 @@ export const CreateTrade = () => {
     }
   };
   return (
-    <Row className="CreateTradeUser justify-content-center mt-5">
-      <Col xs={6} sm={6} xl={6}>
+    <Row className="CreateTradeUser justify-content-center">
+      <Col xl={6}>
         <Form className="FormulariosContainer d-flex flex-column">
           <Form.Group controlId="formFile" className="mb-3">
-            <Button className="Button3 ButtonImgCreateTradeInput">
-              IMAGEN
+            <Button className="Button5 ButtonImgCreateTradeInput">
+              <Form.Label>Imagen</Form.Label>
             </Button>
             <Form.Control type="file" onChange={handleFile} hidden />
           </Form.Group>
@@ -133,36 +133,33 @@ export const CreateTrade = () => {
             required
           />
           <br />
-
-          <Select
-            className="inputDesplegableRetocado textIndentPlaceholder"
-            id="category"
-            name="category_id"
-            placeholder="Categoría.."
-            value={createOneTrade.category_id}
-            onChange={handleChange}
-          >
-            <option value=""></option>
-            {options
-              .filter((elem) => elem.label !== "General")
-              .map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-          </Select>
-
+          
+            <Select
+              className="inputDesplegableRetocado textIndentPlaceholder"
+              placeholder="Categoría.."
+              id="category"
+              name="category_id"
+              value={createOneTrade.category_id}
+              onChange={handleChange}
+            >
+              <option value=""></option>
+              {options
+                .filter((elem) => elem.label !== "General")
+                .map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+            </Select>
+       
           <p>{msgError}</p>
           <br />
           <div>
-            <Button
-              className="Button3 ButtonsCreateTradeSpacing ButtonAcceptCancelCreateTrade"
-              onClick={handleSubmit}
-            >
-              ACEPTAR
+            <Button className="Button3 ButtonsCreateTradeSpacing" onClick={handleSubmit}>
+              Aceptar
             </Button>
-            <Button className="Button1 ButtonAcceptCancelCreateTrade" onClick={() => navigate("/profile")}>
-              CANCELAR
+            <Button className="Button1" onClick={() => navigate("/profile")}>
+              Cancelar
             </Button>
           </div>
         </Form>

@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AscendioContext } from "../../../context/AscendioContext";
-import { Button, Card, InputGroup, ListGroup } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Button, Col, Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import "./showallusers.scss";
 import "../../../../public/stylesheets/ButtonsApp.scss";
 
@@ -108,24 +108,27 @@ export const ShowAllUsers = () => {
   // console.log(options);
 
   return (
-    <div>
+    <div className="ShowAllUserPaddings2-10">
       {show === 1 && (
         <>
-          <div className="d-flex gap-1 m-4">
-            <Button className="mb-2 Button1" onClick={() => setShow(2)}>
-              Top Usuarios con más Aciertos
-            </Button>
-            <div className="input-container">
-              <span className="material-symbols-outlined search-icon">
-                search
-              </span>
-              <input
-                onChange={handleChange}
-                placeholder="Buscar"
-                value={search}
-                className="buscador"
-              />
-            </div>
+          <Row className="d-flex">
+            <Col className="d-flex justify-content-between">
+              <Button className="mb-2 Button1" onClick={() => setShow(2)}>
+                Top Usuarios con más Aciertos
+              </Button>
+
+              <div className="input-container">
+                <span className="material-symbols-outlined search-icon">
+                  search
+                </span>
+                <input
+                  onChange={handleChange}
+                  placeholder="Buscar"
+                  value={search}
+                  className="buscador"
+                />
+              </div>
+            </Col>
             {/* <div className="d-flex gap-5 mb-1">
               <input
                 onChange={handleChange}
@@ -147,7 +150,7 @@ export const ShowAllUsers = () => {
                 <option value="lastname">Lastname</option>
               </select>
             </InputGroup> */}
-          </div>
+          </Row>
 
           <h2 className="text-center mb-4">Top Usuarios con más Seguidores</h2>
           <div className="d-flex flex-column align-items-center flex-wrap gap-2">
@@ -182,7 +185,7 @@ export const ShowAllUsers = () => {
                     <div className="d-flex flex-column gap-2">
                       {user.user_id !== elem.user_id ? (
                         <Button
-                          className="Button1"
+                          className="Button3"
                           onClick={() => pulsarSeguirONo(elem.user_id)}
                         >
                           {followingUsers.includes(elem.user_id)
@@ -191,7 +194,7 @@ export const ShowAllUsers = () => {
                         </Button>
                       ) : null}
                       <Button
-                        className="Button1"
+                        className="Button3"
                         onClick={() =>
                           navigate(`/traderprofile/${elem.user_id}`)
                         }
@@ -214,24 +217,26 @@ export const ShowAllUsers = () => {
       )}
       {show === 2 && (
         <>
-          <div className="d-flex gap-1 m-4">
-            <Button className="mb-2 Button1 " onClick={() => setShow(1)}>
-              Top Usuarios con más Seguidores
-            </Button>
-            <div className="input-container">
-              <span className="material-symbols-outlined search-icon">
-                search
-              </span>
-              <input
-                onChange={handleChange}
-                placeholder="Buscar"
-                value={search}
-                className="buscador"
-              />
-            </div>
-          </div>
+          <Row>
+            <Col className="d-flex justify-content-between">
+              <Button className="mb-2 Button1 " onClick={() => setShow(1)}>
+                Top usuarios con más seguidores
+              </Button>
+              <div className="input-container">
+                <span className="material-symbols-outlined search-icon">
+                  search
+                </span>
+                <input
+                  onChange={handleChange}
+                  placeholder="Buscar"
+                  value={search}
+                  className="buscador"
+                />
+              </div>
+            </Col>
+          </Row>
 
-          <h2 className="text-center mb-4">Top Usuarios con más Aciertos</h2>
+          <h2 className="text-center mb-4">Top usuarios con más aciertos</h2>
           <div className="d-flex flex-column align-items-center flex-wrap gap-2">
             {allUsersFilter?.map((elem) => {
               return (
@@ -264,6 +269,7 @@ export const ShowAllUsers = () => {
                     <div className="d-flex flex-column gap-2">
                       {user.user_id !== elem.user_id ? (
                         <Button
+                          className="Button3"
                           variant="primary"
                           onClick={() => pulsarSeguirONo(elem.user_id)}
                         >
@@ -273,6 +279,7 @@ export const ShowAllUsers = () => {
                         </Button>
                       ) : null}
                       <Button
+                        className="Button3"
                         onClick={() =>
                           navigate(`/traderprofile/${elem.user_id}`)
                         }
