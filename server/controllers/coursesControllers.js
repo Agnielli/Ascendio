@@ -459,7 +459,7 @@ ORDER BY course.date DESC`;
   }
 
 
-  getOneBread = (req,res) => {
+  getOneBreadCrumbs = (req,res) => {
     const {course_id, section_id} = req.params;
     let sql = `SELECT course.title, section.section_title FROM course 
     LEFT JOIN section ON course.course_id = section.course_id
@@ -496,7 +496,7 @@ ORDER BY course.date DESC`;
   getOneRateOneCourseOneUser = (req, res) =>{
     const {course_id, user_id} = req.params
 
-    let sql = `SELECT * FROM user_rates_course WHERE user_id = ${user_id} AND course_id = ${course_id}`
+    let sql = `SELECT * FROM user_rates_course WHERE user_id = ${user_id} AND course_id = ${course_id};`
     
     connection.query(sql, (err, result) => {
       err ? res.status(500).json(err) : res.status(200).json(result);

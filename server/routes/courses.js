@@ -31,7 +31,7 @@ router.delete('/deleteresource/:course_id/:section_id/:topic_id/:resource_id', c
 router.get('/getallratesonecourse/:course_id', coursesControllers.getAllRatesOneCourse);
 router.get('/getoneresource/:course_id/:section_id/:topic_id', coursesControllers.getOneResource)
 router.get('/gettyperesource', coursesControllers.getTypeResource)
-router.get('/getOneBread/:course_id/:section_id', coursesControllers.getOneBread)
+router.get('/getOneBreadCrumbs/:course_id/:section_id', coursesControllers.getOneBreadCrumbs)
 router.put('/getpeoplevotescourses/:course_id', coursesControllers.getPeopleVotesCourses);
 router.post('/userrateonecourse/:course_id', coursesControllers.userRateOneCourse)
 router.get('/getonerateonecourseoneuser/:course_id/:user_id', coursesControllers.getOneRateOneCourseOneUser)
