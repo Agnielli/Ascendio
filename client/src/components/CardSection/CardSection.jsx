@@ -53,7 +53,7 @@ export const CardSection = ({
                   showTopic ? true : false || isIntoValidate && !isConfirmed ? true : false
                 }
               >
-                <span class="material-symbols-outlined addIcon">upload</span>
+                <span className="material-symbols-outlined addIcon">upload</span>
               </Button>
             )}
             {userId === userCourse && (
@@ -63,7 +63,7 @@ export const CardSection = ({
                 onClick={() => deleteSection(elem.section_id)}
                 disabled={isIntoValidate && !isConfirmed ? true : false}
               >
-                <span class="material-symbols-outlined deleteIcon">
+                <span className="material-symbols-outlined deleteIcon">
                   delete
                 </span>
               </button>

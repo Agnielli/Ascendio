@@ -40,6 +40,7 @@ export const CreateCourse = () => {
   }, []);
 
     
+  console.log("op", options);
     const handleFile = (e) => {
       setFile(e.target.files[0]);
     };

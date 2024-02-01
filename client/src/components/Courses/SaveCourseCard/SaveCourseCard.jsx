@@ -7,6 +7,7 @@ import { textSensitive } from "../../../helpers/utils";
 import { RatingStars } from "../RatingStars/RatingStars";
 import { AscendioContext } from "../../../context/AscendioContext";
 import "../../../../public/stylesheets/ButtonsApp.scss";
+import { CardOneCourse } from "../../CardOneCourse/CardOneCourse";
 
 export const SaveCourseCard = () => {
   const [allcourses, setAllcourses] = useState([]);
@@ -65,10 +66,12 @@ export const SaveCourseCard = () => {
         {findCourse?.map((elem) => {
           return (
             <Col xs={12} md={6} lg={4} xxl={3} className="d-flex"> {/* Añade la clase 'd-flex' */}
-            <Card
+            <CardOneCourse
+               elem={elem} />
+            {/* <Card
               key={elem.course_id}
               className="mapeoCursosGuardados text-center mb-4" 
-              style={{ width: "100%" }}> {/* Añade la el ancho para que se adapte bien */}
+              style={{ width: "100%" }}> 
               <Card.Img
                 style={{ height: "16rem", objectFit: "cover" }}
                 variant="top"
@@ -99,7 +102,7 @@ export const SaveCourseCard = () => {
                   </button>
                 </Card.Text>
               </Card.Body>
-            </Card>
+            </Card> */}
           </Col>
           );
         })}

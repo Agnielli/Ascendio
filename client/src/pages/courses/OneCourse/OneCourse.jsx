@@ -241,14 +241,11 @@ export const OneCourse = () => {
     }
   };
 
-  const newVote = peopleVotesCourse + 1
-
   const handlePurchase = () => {
     const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
     addToPurchase();
     setShowCardRate(true);
     setIsIntoPurchase(true);
-    setPeopleVotesCourse(newVote);
     localStorage.setItem('isFirstVisit', 'true');
 
     setTimeout(() => {
@@ -525,6 +522,8 @@ export const OneCourse = () => {
             setResetCourse={setResetCourse}
             setShowCardRate={setShowCardRate}
             rates={rates}
+            setPeopleVotesCourse={setPeopleVotesCourse}
+            peopleVotesCourse={peopleVotesCourse}
           />
         )}
 
