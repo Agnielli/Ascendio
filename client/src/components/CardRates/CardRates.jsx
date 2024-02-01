@@ -15,6 +15,7 @@ export const CardRates = ({ resetCourse, setResetCourse, setShowCardRate, rates}
   const [msgError, setMsgError] = useState("")
   const [myRate, setMyRate] = useState([]);
   const [sumar, setSumar] = useState(0) // COSAS NUEVAS
+  const [value, setValue] = useState('');
   const course_id = useParams().course_id;
   const { user } = useContext(AscendioContext);
   let usuario = user.user_id;
@@ -25,7 +26,7 @@ export const CardRates = ({ resetCourse, setResetCourse, setShowCardRate, rates}
     ))}
   }, [])
 
-  const regexNumber = /^[1-5]$/;
+  const regexNumber = /^[1-5]*$/;
 
   const handleSubmit = () => {
     if (!regexNumber.test(newRate.course_rates)) {
@@ -51,7 +52,7 @@ export const CardRates = ({ resetCourse, setResetCourse, setShowCardRate, rates}
     const regex = /^[1-5]$/;
   
     if (name === 'course_rates') {
-      if (regex.test(value)) {
+      if (regex.test(value) || value === '') {
         setNewRate({ ...newRate, [name]: value });
       } else {
         setMsgError("Inserta un valor entre 1 y 5");
