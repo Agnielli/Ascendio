@@ -140,7 +140,7 @@ export const CreateCourse = () => {
               onChange={handleChange}
             />
           </Form.Group>
-          <Form.Group className="mb-3 ">
+          <Form.Group className="mb-3">
             <Form.Label>Tags </Form.Label>
             <Select
               classNames="inputCreación"

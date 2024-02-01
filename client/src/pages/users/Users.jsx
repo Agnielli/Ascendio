@@ -34,7 +34,7 @@ export const Users = () => {
 
   return (
     <main>
-      <Row className="UserProfileScss">
+      <Row className="UserProfileScss py-5">
         <Col xs={4} lg={4} className="d-flex justify-content-center p-0 ">
           <div>
             <div className="avatarProfilo">
@@ -85,7 +85,7 @@ export const Users = () => {
                   className="d-flex justify-content-center p-0"
                 >
                   <div>
-                    <p className="PDatosPerfil">Trades Fallidos</p>
+                    <p className="PDatosPerfil">Trades fallidos</p>
                     <p className="TradesRed">
                       {statisticsUser.num_incorrect_posts}
                     </p>
@@ -100,7 +100,7 @@ export const Users = () => {
                   className="d-flex justify-content-center p-0"
                 >
                   <div>
-                    <p className="PDatosPerfil">Post Publicados</p>
+                    <p className="PDatosPerfil">Post publicados</p>
                     <Link
                       to={`/userposts/${user.user_id}`}
                       className="linksPerfil"
@@ -197,7 +197,7 @@ export const Users = () => {
                 onClick={() => navigate("/purchasecourse")}
               >
                 <img src="../../../public/images/iconos/cursosadquiridos.png" alt="" />
-                Cursos Adquiridos
+                Cursos Comprados
               </Button>
               <Button
                 className="Button5"
