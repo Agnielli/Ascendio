@@ -42,16 +42,13 @@ export const OneCourse = () => {
 
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
-
-
-
   
 
   const navigate = useNavigate();
 
   const openModal = () => {
     setShowModal(true);
-    setCourseToEdit();
+    setCourseToEdit(); 
   };
 
   const openModalDelete = () => {
@@ -258,7 +255,9 @@ export const OneCourse = () => {
     }, 0);
   };
 
-  
+  if(showCardRate){
+    window.scrollTo(0, 0);
+  }
 
   const handleValidate = () => {
     if (isIntoValidate) {
