@@ -20,7 +20,7 @@ export const Home = () => {
     axios
       .get("http://localhost:3000/posts/lasttrades")
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         setLastTrades(res.data);
         setTradesHoy(
           lastTrades.filter((elem) => {
@@ -28,7 +28,7 @@ export const Home = () => {
             const fechaHoy = new Date();
             const postsDeHoy = fechaHoy.getDate() === fechaPost.getDate();
             return postsDeHoy;
-          })
+            })
         );
       })
       .catch((err) => {
@@ -118,37 +118,51 @@ export const Home = () => {
                   return (
                     <Card
                       key={elem.post_id}
-                      className="ascendio-home-card-padre"
+                      className="ESTILOCARDGENERAL"
                     >
+                      <Card.Text className="UserCARD">
+            <div className="avatarCard">
+              {elem?.img ? (
+                <img src={`http://localhost:3000/images/users/${elem.img}`} />
+              ) : (
+                <p className="letteruser">
+                  {elem?.nickname.charAt(0).toUpperCase()}
+                </p>
+              )}
+            </div>
+              <p>{elem.nickname}</p></Card.Text>
+              <div className="DivImagenCard">
+                {elem.image_name !== null ? (
+                              <Card.Img
+                                variant="top"
+                                src={
+                                  elem.type === 1
+                                    ? `http://localhost:3000/images/generalPost/${elem.image_name}`
+                                    : `http://localhost:3000/images/trades/${elem.image_name}`
+                                }
+                                className="ascendio-home-card-imagen"
+                              />
+                            ) : (
+                              <Card.Img
+                                className="CardSinFoto"
+                                variant="top"
+                                src={"../../../../public/images/iconos/logoascendio.png"}
+                              />
+                            )}
+              </div>
                       {elem.type === 1 && ( // TIPO POST GENERAL
-                        <Card.Body className="ascendio-home-card-hijo">
-                          <Card.Title className="ascendio-home-card-titulo">
-                            <h3>{elem.nickname}</h3>
-                          </Card.Title>
-                          <Card.Text className="ascendio-home-card-texto">
+                        <Card.Body> 
+                          <Card.Title>
+                  
+                  <h3>General Post</h3>
+                </Card.Title>                   
+                          
+                          <Card.Text className="">
                             {elem.description}
-                          </Card.Text>
-                          {elem.image_name !== null ? (
-                            <Card.Img
-                              variant="top"
-                              src={
-                                elem.type === 1
-                                  ? `http://localhost:3000/images/generalPost/${elem.image_name}`
-                                  : `http://localhost:3000/images/trades/${elem.image_name}`
-                              }
-                              className="ascendio-home-card-imagen"
-                            />
-                          ) : (
-                            <Card.Img
-                              className="ascendio-home-card-imagen"
-                              variant="top"
-                              src={`http://localhost:3000/images/generalPost/postPorDefecto.png`}
-                            />
-                          )}
-                          <div className="ascendio-home-card-botonera DivGrisParaBotones">
+                          </Card.Text>                          
                             {user.user_id !== elem.user_id ? (
                               <Button
-                                className="Button2"
+                                className="ButtonSEGUIR"
                                 variant="primary"
                                 onClick={() => pulsarSeguirONo(elem.user_id)}
                               >
@@ -157,22 +171,21 @@ export const Home = () => {
                                   : "Seguir"}
                               </Button>
                             ) : null}
-                            <Button
+                            {/* <Button
                               className="Button2"
                               onClick={() => {
                                 navigate(`/OneTradePost/${elem.post_id}`);
                               }}
                             >
                               Ver Post
-                            </Button>
-                          </div>
+                            </Button> */}                        
                         </Card.Body>
                       )}
                       {/* Trades */}
                       {elem.type === 2 && (
                         <Card.Body className="ascendio-home-card-hijo">
-                          <Card.Title className="ascendio-home-card-titulo">
-                            <h3>{elem.nickname}</h3>
+                          <Card.Title>                        
+                  <h3>Trade de {elem.category_name}</h3>
                           </Card.Title>
                           <Card.Text className="ascendio-home-card-texto">
                             <p>Currency: {elem.currency}</p>
@@ -182,24 +195,11 @@ export const Home = () => {
                               {elem.correct === 0 && "Trade Errado"}
                               {elem.correct === 1 && "Trade Acertado"}
                             </p>
-                          </Card.Text>
-                          {elem.image_name !== null ? (
-                            <Card.Img
-                              className="ascendio-home-card-imagen"
-                              variant="top"
-                              src={`http://localhost:3000/images/trades/${elem.image_name}`}
-                            />
-                          ) : (
-                            <Card.Img
-                              className="ascendio-home-card-imagen"
-                              variant="top"
-                              src={`http://localhost:3000/images/trades/postPorDefecto.png`}
-                            />
-                          )}
+                          </Card.Text>                      
                           <div className="ascendio-home-card-botonera">
                             {user.user_id !== elem.user_id ? (
                               <Button
-                                className="Button2 button-with-ellipsis"
+                              className="ButtonSEGUIR"
                                 variant="primary"
                                 onClick={() => pulsarSeguirONo(elem.user_id)}
                               >
@@ -208,14 +208,14 @@ export const Home = () => {
                                   : "Seguir"}
                               </Button>
                             ) : null}
-                            <Button
+                            {/* <Button
                               className="Button2 button-with-ellipsis"
                               onClick={() => {
                                 navigate(`/OneTradePost/${elem.post_id}`);
                               }}
                             >
                               Ver Post
-                            </Button>
+                            </Button> */}
                           </div>
                         </Card.Body>
                       )}
