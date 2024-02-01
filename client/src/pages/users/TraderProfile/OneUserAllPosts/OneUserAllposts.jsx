@@ -159,10 +159,7 @@ export const OneUserAllPosts = ({
                   <Card
                   className="ESTILOCARDGENERAL"
                     key={elem.post_id}
-                  >
-
-              
-                  
+                  >  
                     
                       
                         <Card.Text>
@@ -176,8 +173,9 @@ export const OneUserAllPosts = ({
                                 {traderprofile?.nickname.charAt(0).toUpperCase()}
                               </p>
                             )}
-                          </div> <p>{elem.nickname}</p>
+                          </div> <p>{traderprofile.nickname}</p>
                         </Card.Text>
+                        
                         
                         <Card.Title>
                           <h3>{traderprofile.nickname}</h3>
@@ -189,7 +187,7 @@ export const OneUserAllPosts = ({
                               navigate(`/OneTradePost/${elem.post_id}`);
                             }}
                           >
-                            Ver más
+                            COMENTARIOS
                           </Button>
                         </div>
                     

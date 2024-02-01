@@ -1,7 +1,27 @@
 @use "../../../../../public/stylesheets/variables.scss" as *;
-
 // Generales
-
 .allpostgenerals {
   padding: 2vh 10vw;
+  .ascendio-home-row-hijo {
+    margin: 1rem 0;
+    width: 100%;
+    padding: 0 !important;
+    button {
+      width: 50%;
+      
+    }
+  }
+  @media (max-width: 515px) {
+    .UserProfileScss{
+      .DivGrisParaBotones{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .BobotnesCREARYCURSOS {
+          width: 100% !important; // Ocupar el 100% del ancho
+          margin-bottom: 5px; // Agregar espacio entre los botones
+        }
+      }
+    }
+  }
 }
