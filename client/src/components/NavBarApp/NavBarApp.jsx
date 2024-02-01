@@ -25,8 +25,8 @@ function NavBarApp() {
   return (
     <header>
       <Navbar expand="lg" className="BG-navbar ">
-        <Container fluid className="p-0">
-          <Navbar.Brand className="logoNav p-0 m-0" as={Link} to={redirectTo}>
+        <Container fluid >
+          <Navbar.Brand className="logoNav  m-0" as={Link} to={redirectTo}>
            ASCENDIO
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -86,9 +86,6 @@ function NavBarApp() {
                     </Nav.Link>
                     <Nav.Link as={Link} to="/showAllUsers">
                       USERS
-                    </Nav.Link>
-                    <Nav.Link as={Link} to="/tradingview">
-                      TRADING VIEW
                     </Nav.Link>
                     <div
                       className="d-flex user"

@@ -1,0 +1,138 @@
+@use "./variables.scss" as *;
+.ESTILOCARDGENERAL{
+  position: relative;
+  background-color: $accent2-color;
+  padding: 0 !important;
+  width: 30% !important;
+  min-width: 300px;
+  height: 500px;
+  border-radius: 40px;
+  img{
+    border-radius: 40px 40px 0 0;
+    width: 100%;
+    height: 200px; 
+    object-fit: cover;     
+  }
+
+  div.card-body{
+    padding: 0 16px 16px 16px;
+
+    div.card-title{
+      h3{
+        margin: 0 !important;
+        color: $accent-color;
+      }
+    }
+
+    p{
+      margin: 0 !important;
+    }
+
+    span{
+      color: $accent-color;
+    }
+
+  }
+
+  button.Button3 {
+    height: 40px;
+    position: absolute;
+    bottom: 16px;
+      right: 16px; 
+
+  }
+  .BotoneraTrades{    
+    position: absolute;
+    bottom: 16px;
+    background-color: white;
+    border-radius: 25px;
+    
+  }
+  
+}
+
+.TradeAcertado{
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+  background-color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  img {
+    width: 20px;
+    height: 20px;
+  }
+  &:hover{
+    background-color: #5de152;
+    img{
+      width: 30px;
+      height: 30px;      
+    }
+  }
+  &:active{
+    background-color: #39a72f;
+
+  }
+}
+
+.TradeErroneo{
+  padding: 0 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+  background-color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  img {
+    width: 20px;
+    height: 20px;
+  }
+  &:hover{
+    background-color:  #e63a40;
+    img{
+      width: 30px;
+      height: 30px;      
+    }
+  }
+  &:active{
+    background-color: #39a72f;
+
+  }
+}
+
+.TradePendiente{
+  padding: 0 !important;
+  display: flex;
+  background-color: white;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  img {
+    width: 20px;
+    height: 20px;
+  }
+  &:hover{
+    background-color: #0084ff;
+    border: 2;
+   
+    img{
+      width: 30px;
+      height: 30px;      
+    }
+  }
+  
+}
+
+
