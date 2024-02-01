@@ -6,7 +6,7 @@ import "./ShowAllCommentsPost.scss";
 
 export const ShowAllCommentsPost = ({ showModal, setShowModal, oneTrade }) => {
   const [showComments, setShowComments] = useState();
-  const [update, setUpade] = useState(false);
+  const [update, setUpdate] = useState(false);
 
   const { post_id } = oneTrade;
 
@@ -19,7 +19,7 @@ export const ShowAllCommentsPost = ({ showModal, setShowModal, oneTrade }) => {
         .then((res) => {
           console.log(res);
           setShowComments(res.data.result);
-          setUpade(false);
+          setUpdate(false);
         })
         .catch((error) => console.log(error));
     }
@@ -29,11 +29,30 @@ export const ShowAllCommentsPost = ({ showModal, setShowModal, oneTrade }) => {
     axios
       .put(`http://localhost:3000/comments/deletecomments/${comment_id}`)
       .then((res) => {
-        setUpade(true);
+        setUpdate(true);
       })
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const getMonthName = (monthNumber) => {
+    const monthNames = [
+      "Ene",
+      "Feb",
+      "Mar",
+      "Abr",
+      "May",
+      "Jun",
+      "Jul",
+      "Ago",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dic",
+    ];
+    const monthIndex = parseInt(monthNumber, 10) - 1;
+    return monthNames[monthIndex];
   };
 
   console.log(new Date());
@@ -41,34 +60,40 @@ export const ShowAllCommentsPost = ({ showModal, setShowModal, oneTrade }) => {
   return (
     <>
       <Row className="showallcommentsposts-padre">
-        <Col xxl={12} className="d-flex gap-5">
+        <Col xxl={12} className="showallcommentsposts-hijo">
           <h3>Comentarios del Post</h3>
         </Col>
-        <Col xxl={12} className="showallcommentsposts-hijo">
-          {showComments?.map((elem) => {
+        <Col xxl={12} className="showallcommentsposts-hijo2">
+          {showComments?.map((elem, index) => {
+            const isEven = index % 2 === 0;
+            const backgroundColor = isEven ? "lightColor" : "darkColor";
             return (
-              <Row key={elem.comment_id} className="showallcommentsposts-nieto">
-                <Col lg={1} xs={12} className="col">
-                  <h6>{elem.nickname}</h6>
+              <Row
+                key={elem.comment_id}
+                className={`showallcommentsposts-nieto  ${backgroundColor}`}
+              >
+                <Col lg={1} xs={12} className="nickname-oneposttrade">
+                  <h6>{elem.nickname}:</h6>
                 </Col>
-                <Col lg={7} xs={12} className="col">
+                <Col lg={9} xs={12} className="col">
                   <p>{elem.message}</p>
                 </Col>
-                <Col lg={2} xs={12} className="col">
-                  <h6>
-                    {elem.date.slice(11, 16)} /{" "}
-                    {elem.date.slice(0, 10).split("-").reverse().join("-")}
-                  </h6>
+                <Col lg={1} xs={12} className="date-oneposttrade">
+                  <p>
+                    {elem.date.slice(11, 16)} {elem.date.slice(8, 10)}-
+                    {getMonthName(elem.date.slice(5, 7))}
+                  </p>
                 </Col>
-                <Col lg={1} xs={12} className="col text-center">
+                <Col lg={1} xs={12} className="botonera-oneposttrade">
                   {user.user_id === elem.user_id && (
                     <Button
-                      className="Button1"
+                      className="boton-eliminar-comment"
                       onClick={() => {
                         deleteComment(elem.comment_id);
                       }}
                     >
-                      Eliminar
+                      <img src="../../../../../../public/images/iconos/papelera.png" alt="" />
+                      {/* ❌ */}
                     </Button>
                   )}
                 </Col>
@@ -76,9 +101,9 @@ export const ShowAllCommentsPost = ({ showModal, setShowModal, oneTrade }) => {
             );
           })}
         </Col>
-        <Col xxl={12}>
+        <Col xxl={12} className="showallcommentsposts-hijo3">
           <Button
-            className="Button1"
+            className="Button3"
             onClick={() => {
               setShowModal(true);
             }}
