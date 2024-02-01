@@ -51,7 +51,7 @@ export const AllCourses = () => {
           className="d-flex justify-content-between align-items-center py-5 divHeader"
           style={{ color: "white" }}
         >
-          <div>
+          <div className="text-center">
             <h2>{order ? "Últimos cursos" : "Top cursos"}</h2>
             <button onClick={() => setOrder(!order)} className="Button3">
               {order ? "Ver top cursos" : "Ver últimos cursos"}
@@ -75,9 +75,7 @@ export const AllCourses = () => {
           {findCourse?.map((elem) => {
             return (
               <Col xs={12} md={6} lg={4} xxl={3} className="d-flex">
-               <CardOneCourse
-               key={elem.course_id}
-               elem={elem}/>
+                <CardOneCourse key={elem.course_id} elem={elem} />
               </Col>
             );
           })}
