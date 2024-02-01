@@ -31,12 +31,12 @@ export const EnabledCourses = ({ elem, setUpdateCourses }) => {
             Descripción: {elem.description}
           </Card.Text>
           <Card.Text className="d-flex justify-content-center mt-auto">
-            <Button
+            <button
               className="Button3"
               onClick={() => disableOneCourse(elem.course_id)}
             >
               Desactivar Curso
-            </Button>
+            </button>
           </Card.Text>
         </Card.Body>
       </Card>

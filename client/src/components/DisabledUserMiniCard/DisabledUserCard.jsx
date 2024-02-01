@@ -40,13 +40,13 @@ export const DisabledUserCard = ({ elem, update, setUpdate }) => {
         </div>
       </div>
       <div className="AdminUserButton">
-        <Button
+        <button
           variant="danger"
           className="Button4"
           onClick={() => activateUser(elem.user_id)}
         >
           Activar
-        </Button>
+        </button>
       </div>
     </div>
   );

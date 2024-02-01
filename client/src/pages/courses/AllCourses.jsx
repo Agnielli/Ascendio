@@ -48,9 +48,9 @@ export const AllCourses = () => {
         >
           <div>
             <h2>{order ? "Últimos cursos" : "Top cursos"}</h2>
-            <Button onClick={() => setOrder(!order)} className="Button3">
+            <button onClick={() => setOrder(!order)} className="Button3">
               {order ? "Ver top cursos" : "Ver últimos cursos"}
-            </Button>
+            </button>
           </div>
           <div className="input-container">
             <span className="material-symbols-outlined search-icon">
@@ -97,12 +97,12 @@ export const AllCourses = () => {
                       {Number(elem?.price) === 0 ? "GRATIS" : `${elem?.price}€`}
                     </Card.Text>
                     <Card.Text className="d-flex justify-content-center mt-auto">
-                      <Button
+                      <button
                         className="Button3"
                         onClick={() => navigate(`/course/${elem.course_id}`)}
                       >
                         Más info
-                      </Button>
+                      </button>
                     </Card.Text>
                   </Card.Body>
                 </Card>

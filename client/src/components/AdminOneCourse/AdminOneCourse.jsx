@@ -34,9 +34,9 @@ export const AdminOneCourse = ({ elem, updateCourses, setUpdateCourses }) => {
             <Card.Text className="cardtitle">Autor: {elem.nickname}</Card.Text>
           </div>
           <div className="mt-auto">
-            <Button className="Button3" onClick={() => disableEnableCourse(elem?.course_id, elem?.is_disabled)}>
+            <button className="Button3" onClick={() => disableEnableCourse(elem?.course_id, elem?.is_disabled)}>
               {elem.is_disabled ? "Activar" : "Desactivar"}
-            </Button>
+            </button>
           </div>
         </Card.Body>
       </Card>

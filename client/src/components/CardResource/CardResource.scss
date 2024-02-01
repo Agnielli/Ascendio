@@ -11,6 +11,13 @@
     margin-left: 5%;
     padding-left: 7%;
     padding-right: 7%;
+
+    &:hover,
+    &:active {
+      background-color: transparent;
+      border: 1px solid $accent3-color;
+      box-shadow: 1px 1px 1px white, -1px -1px 1px white;
+    }
     
 
     .resourceIcon{

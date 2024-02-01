@@ -26,18 +26,18 @@ export const ModalDelOneCourse = ({
             </Form>
           </Modal.Body>
           <Modal.Footer className="modalDel">
-            <Button
+            <button
                className="Button3"
               onClick={() => deleteCourse(course_id)}
             >
               Aceptar
-            </Button>
-            <Button
+            </button>
+            <button
                  className="Button3"
               onClick={handleClose}
             >
               Cancelar
-            </Button>
+            </button>
           </Modal.Footer>
         </Modal>
       </Col>

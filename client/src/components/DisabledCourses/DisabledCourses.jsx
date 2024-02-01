@@ -26,9 +26,9 @@ export const DisabledCourses = ({ elem, setUpdateCourses }) => {
             <Card.Text className="d-flex justify-content-start descriptioncard flex-grow-1">Descripción: {elem.description}</Card.Text>
           </div>
           <div className="mt-auto">
-            <Button className="Button3" onClick={() => enableOneCourse(elem.course_id)}>
+            <button className="Button3" onClick={() => enableOneCourse(elem.course_id)}>
               Activar Curso
-            </Button>
+            </button>
           </div>
         </Card.Body>
       </Card>
