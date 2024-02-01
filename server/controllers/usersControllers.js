@@ -272,26 +272,52 @@ class usersControllers {
   //4-editar info de un usuario:
 
   editUser = (req, res) => {
-    const { nickname, name, lastname, email, phonenumber, user_id } =
-      JSON.parse(req.body.editUser);
+    const { nickname, name, lastname, phonenumber, user_id } = JSON.parse(
+      req.body.editUser
+    );
     let sql;
     let img;
+    console.log("REQBODY!", req.body);
+    console.log("TELEFONO", phonenumber);
 
-    if (req.file) {
+    if (
+      (phonenumber == "" || phonenumber == null || phonenumber == undefined) &&
+      req.file
+    ) {
       img = req.file.filename;
-      sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}", email = "${email}", phonenumber = ${phonenumber}, img = "${img}" WHERE user_id = ${user_id}`;
-    } else {
-      sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}", email = "${email}", phonenumber = ${phonenumber} WHERE user_id = ${user_id} AND (img IS NULL OR img = "")`;
+      sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}",phonenumber = null, img = "${img}" WHERE user_id = ${user_id}`;
+      console.log("IF-1");
+    } else if (phonenumber != "" && req.file) {
+      img = req.file.filename;
+      sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}", phonenumber = "${phonenumber}", img = "${img}" WHERE user_id = ${user_id}`;
+      console.log("IF-2");
+    } else if (
+      (phonenumber == "" || phonenumber == null || phonenumber == undefined) &&
+      !req.file
+    ) {
+      sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}",phonenumber = null WHERE user_id = ${user_id}`;
+      console.log("IF-3");
+    } else if (phonenumber != "" && !req.file) {
+      sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}", phonenumber = "${phonenumber}" WHERE user_id = ${user_id}`;
+      console.log("IF-4");
     }
+
     connection.query(sql, (error, result) => {
       if (error) {
-        res.status(400).json({ message: "Error en la SQL" });
+        res.status(400).json({ error, message: "Error en la SQL" });
       } else {
         console.log("TODO BIEN", result);
         res.status(200).json({ result, img });
       }
     });
   };
+
+  // if (req.file) {
+  //   img = req.file.filename;
+  //   sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}", email = "${email}", phonenumber = "${phonenumber}", img = "${img}" WHERE user_id = ${user_id}`;
+  // } else {
+  //   sql = `UPDATE user SET nickname = "${nickname}", name = "${name}", lastname = "${lastname}", email = "${email}", phonenumber = "${phonenumber}" WHERE user_id = ${user_id} AND (img IS NULL OR img = "")`;
+  // }
 
   // -------------
   getStatisticsUser = (req, res) => {
