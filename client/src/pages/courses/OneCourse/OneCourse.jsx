@@ -372,7 +372,7 @@ export const OneCourse = () => {
                   <button
                     className="Button1"
                     onClick={handlePurchase}
-                    disabled={isIntoPurchase ? true : false}
+                    disabled={isIntoValidate && !isConfirmed ? true : false}
                   >
                     {isIntoPurchase ? "Comprado" : "Comprar"}
                   </button>
@@ -431,6 +431,7 @@ export const OneCourse = () => {
                     resource={resource}
                     deleteResource={deleteResource}
                     isIntoValidate={isIntoValidate}
+                    isConfirmed={isConfirmed}
                   />
                 );
               })}
@@ -448,13 +449,11 @@ export const OneCourse = () => {
               />
             )}
 
-            {userId === userCourse && !addSection && !isIntoValidate && (
+            {userId === userCourse && !addSection &&(
               <button
                 className="Button1 d-flex m-3"
                 onClick={addNewSection}
-                /* disabled={
-                  addSection ? true : false || isIntoValidate ? true : false
-                } */
+                disabled={isIntoValidate && !isConfirmed ? true : false}
               >
                 Añadir Sección
               </button>
@@ -472,7 +471,7 @@ export const OneCourse = () => {
               )}
               {userId === userCourse && (
                 <Button
-                  disabled={isIntoValidate ? true : false}
+                disabled={isIntoValidate && !isConfirmed ? true : false}
                   // onClick={() => deleteCourse(course_id)}
                   onClick={openModalDelete}
                   variant="outline-danger"
