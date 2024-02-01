@@ -249,15 +249,26 @@ export const OneCourse = () => {
     setShowCardRate(true);
     setIsIntoPurchase(true);
     setPeopleVotesCourse(newVote);
+    localStorage.setItem('isFirstVisit', 'true');
 
     setTimeout(() => {
       window.scrollTo(0, scrollPosition);
     }, 0);
   };
 
-  if(showCardRate){
-    window.scrollTo(0, 0);
-  }
+  useEffect(() => {
+    const isFirstVisit = localStorage.getItem('isFirstVisit');
+
+    if (isFirstVisit === 'false' && showCardRate && isIntoPurchase) {
+      window.scrollTo(0, 0);
+    }
+
+    if (isFirstVisit === null) {
+      localStorage.setItem('isFirstVisit', 'true');
+    } else {
+      localStorage.setItem('isFirstVisit', 'false');
+    }
+  }, [showCardRate, isIntoPurchase]);
 
   const handleValidate = () => {
     if (isIntoValidate) {
