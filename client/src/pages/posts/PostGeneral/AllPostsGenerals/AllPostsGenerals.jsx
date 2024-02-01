@@ -91,10 +91,10 @@ export const AllPostsGenerals = () => {
     <div className="allpostgenerals">
       <>
         <Row className="d-flex justify-content-start align-items-start">
-          <Col className="d-flex justify-content-center align-items-center">
+          <Col className="d-flex justify-content-start align-items-center">
             <h2>General Posts</h2>
           </Col>
-          <Col className="d-flex justify-content-center align-items-center">
+          <Col className="d-flex justify-content-end align-items-center">
             <div className="input-container">
               <span className="material-symbols-outlined search-icon">
                 search
