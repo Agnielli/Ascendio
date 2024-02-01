@@ -152,73 +152,86 @@ export const ShowAllUsers = () => {
             </InputGroup> */}
           </Row>
 
-          <h2 className="text-center mb-4">Top Usuarios con más Seguidores</h2>
-          <div className="d-flex flex-column align-items-center flex-wrap gap-2">
-            {allUsersFilter?.map((elem) => {
-              return (
-                <div
-                  key={elem.user_id}
-                  className="cards-showuser d-flex align-items-center justify-content-between gap-1 gap-xl-4 mb-2"
-                >
-                  <div>
-                    <img
-                      className="userImg"
-                      src={
-                        elem.img != null
-                          ? `http://localhost:3000/images/users/${elem.img}`
-                          : `http://localhost:3000/images/users/descarga.png`
-                      }
-                      alt="Imagen de perfil del usuario"
-                    />
-                  </div>
-                  <div className="d-flex flex-column flex-xl-row align-items-center text-center gap-4">
-                    <div className="d-flex gap-2 gap-xl-3">
-                      <div className="">
-                        <p className="fw-bold">{elem.nickname}</p>
-                        <p>{elem.followers_count} Seguidores</p>
-                      </div>
-                    </div>
-                    <div className="">
-                      <p>{elem.correct_posts} Acertados</p>
-                      <p>{elem.incorrect_posts} Errados</p>
-                    </div>
-                    <div className="d-flex flex-column gap-2">
-                      {user.user_id !== elem.user_id ? (
-                        <Button
-                          className="Button3"
-                          onClick={() => pulsarSeguirONo(elem.user_id)}
-                        >
-                          {followingUsers.includes(elem.user_id)
-                            ? "Siguiendo"
-                            : "Seguir"}
-                        </Button>
-                      ) : null}
-                      <Button
-                        className="Button3"
-                        onClick={() =>
-                          navigate(`/traderprofile/${elem.user_id}`)
-                        }
-                      >
-                        Ver más
-                      </Button>
-                    </div>
-                  </div>
-                  {/* Seguidores: {elem.followers_count}
-                    Siguiendo: {elem.following_count}
-                    Cursos publicados: {elem.total_courses}
-                    Post publicados: {elem.total_posts}
-                    Trades Acertados: {elem.correct_posts}
-                    Trades Errados: {elem.incorrect_posts} */}
-                </div>
-              );
-            })}
-          </div>
+          <Row className="row-gap-4">
+            <Col
+              xs={12}
+              className="d-flex justify-content-center flex-column mt-4"
+            >
+              <h2 className="text-center mb-4">
+                Top Usuarios con más Seguidores
+              </h2>
+              <Row className="row-gap-4">
+                {allUsersFilter?.map((elem) => {
+                  return (
+                    <Col
+                      xs={12}
+                      key={elem.user_id}
+                      className="d-flex justify-content-center"
+                    >
+                      <Col className="cards-showuser flex-wrap d-flex align-items-center justify-content-between gap-xl-4 flex-xs-row">
+                        <div>
+                          <img
+                            className="userImg"
+                            src={
+                              elem.img != null
+                                ? `http://localhost:3000/images/users/${elem.img}`
+                                : `http://localhost:3000/images/users/descarga.png`
+                            }
+                            alt="Imagen de perfil del usuario"
+                          />
+                        </div>
+
+                        <div className="AdminUserStats d-flex justify-content-center justify-content-xl-start gap-2 gap-xl-3">
+                          <div>
+                            <p className="fw-bold">{elem.nickname}</p>
+                            <p>{elem.followers_count} Seguidores</p>
+                          </div>
+
+                          <div>
+                            <p>{elem.correct_posts} Acertados</p>
+                            <p>{elem.incorrect_posts} Errados</p>
+                          </div>
+                        </div>
+                        <div className="DivBotonesShowAllUsers d-flex flex-column gap-2">
+                          {user.user_id !== elem.user_id ? (
+                            <Button
+                              className="Button3"
+                              onClick={() => pulsarSeguirONo(elem.user_id)}
+                            >
+                              {followingUsers.includes(elem.user_id)
+                                ? "Siguiendo"
+                                : "Seguir"}
+                            </Button>
+                          ) : null}
+                          <Button
+                            className="Button3"
+                            onClick={() =>
+                              navigate(`/traderprofile/${elem.user_id}`)
+                            }
+                          >
+                            Ver más
+                          </Button>
+                        </div>
+
+                        {/* Seguidores: {elem.followers_count}
+                              Siguiendo: {elem.following_count}
+                              Cursos publicados: {elem.total_courses}
+                              Post publicados: {elem.total_posts}
+                              Trades Acertados: {elem.correct_posts}
+                              Trades Errados: {elem.incorrect_posts} */}
+                      </Col>
+                    </Col>
+                  );
+                })}
+              </Row>
+            </Col>
+          </Row>
         </>
       )}
       {show === 2 && (
         <>
           <Row>
-            <Col className="d-flex justify-content-between">
+            <Col xs={12} sm={12} md={12} className="d-flex justify-content-between">
               <Button className="mb-2 Button1 " onClick={() => setShow(1)}>
                 Top usuarios con más seguidores
               </Button>
@@ -266,7 +279,7 @@ export const ShowAllUsers = () => {
                       <p>{elem.correct_posts} Acertados</p>
                       <p>{elem.incorrect_posts} Errados</p>
                     </div>
-                    <div className="d-flex flex-column gap-2">
+                    <div className="d-flex gap-2">
                       {user.user_id !== elem.user_id ? (
                         <Button
                           className="Button3"

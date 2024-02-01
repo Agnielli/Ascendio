@@ -132,8 +132,7 @@ export const CreateTrade = () => {
             onChange={handleChange}
             required
           />
-          <br />
-          
+          <br />          
             <select
               className="inputDesplegableRetocado textIndentPlaceholder"
               placeholder="Categoría.."
@@ -150,8 +149,7 @@ export const CreateTrade = () => {
                     {option.label}
                   </option>
                 ))}
-            </select>
-       
+            </select>       
           <p>{msgError}</p>
           <br />
           <div>

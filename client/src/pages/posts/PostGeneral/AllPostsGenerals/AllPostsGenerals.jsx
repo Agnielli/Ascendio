@@ -202,7 +202,7 @@ export const AllPostsGenerals = () => {
               disponibles en este momento.
             </h4>
           )}
-        </div>
+        </div> 
       </>
     </div>
   );
