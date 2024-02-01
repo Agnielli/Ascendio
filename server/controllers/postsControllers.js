@@ -108,7 +108,27 @@ class postsControllers {
       post.date DESC;
   `;
 
-    connection.query(sql, (err, result) => {
+    let sql2 = `
+  SELECT 
+    post.*,
+    user.nickname,
+    user.user_id,
+    post_resource.text AS image_name,
+    category.category_name, -- Agregamos el nombre de la categoría
+    (SELECT COUNT(*) FROM user_follows_user WHERE followed_user_id = user.user_id) AS num_followers
+  FROM 
+    user
+  INNER JOIN 
+    post ON user.user_id = post.user_id
+  LEFT JOIN 
+    post_resource ON post.post_id = post_resource.post_id
+  LEFT JOIN 
+    category ON post.category_id = category.category_id -- Agregamos el JOIN con la tabla category
+  ORDER BY 
+    post.date DESC;
+`;
+
+    connection.query(sql2, (err, result) => {
       if (err) {
         res.status(500).json(err);
       } else {

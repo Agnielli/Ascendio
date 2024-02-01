@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Button, Form } from "react-bootstrap";
 import "./NewPAssword.scss";
+import { AscendioContext } from "../../../../../context/AscendioContext";
 
 const initialValue = {
   password: "",
@@ -12,13 +13,11 @@ const initialValue = {
 export const NewPassword = ({ user, setUser, setShowChangePassword }) => {
   const [NewPassword, setNewPassword] = useState(initialValue);
   const [msgError, setMsgError] = useState("");
-  const [msgError2, setMsgError2] = useState("");
   const [msgErrorEmail, setMsgErrorEmail] = useState("");
   const [editUser, setEditUser] = useState(initialValue);
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
   const [file, setFile] = useState();
-
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
   const [isPasswordFocused2, setIsPasswordFocused2] = useState(false);
 
@@ -58,7 +57,7 @@ export const NewPassword = ({ user, setUser, setShowChangePassword }) => {
 
   const handleSubmit = () => {
     if (!NewPassword.password || !NewPassword.password2) {
-      setMsgError("Algun campo no está relleno");
+      setMsgError("Rellena todos los campos");
     } else if (NewPassword.password !== NewPassword.password2) {
       setMsgError("Las contraseñas no coinciden");
     } else {
@@ -77,9 +76,16 @@ export const NewPassword = ({ user, setUser, setShowChangePassword }) => {
     }
   };
 
+  const isEmailValid = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const handleSubmitEmail = () => {
     if (!editUser.email) {
-      setMsgError("Los campos obligatorios deben estar rellenos");
+      setMsgErrorEmail("Los campos obligatorios deben estar rellenos.");
+    } else if (!isEmailValid(editUser.email)) {
+      setMsgErrorEmail("Correo electrónico no válido.");
     } else {
       const newFormData = new FormData();
       newFormData.append("editUser", JSON.stringify(editUser));
@@ -91,16 +97,19 @@ export const NewPassword = ({ user, setUser, setShowChangePassword }) => {
           if (res.data.img) {
             setUser({ ...editUser, img: res.data.img });
             console.log(res.data.img);
+            setMsgErrorEmail("Email actualizado con exito.");
           } else {
             setUser(editUser);
+            setMsgErrorEmail("Email actualizado con exito.");
           }
-          setMsgErrorEmail("Email actualizado con exito");
         })
         .catch((err) => {
           console.log(err);
+          setMsgErrorEmail("Este correo ya está registrado.");
         });
     }
   };
+
   const handleChangeEmail = (e) => {
     const { name, value } = e.target;
     setEditUser({ ...editUser, [name]: value });

@@ -87,8 +87,6 @@ export const Home = () => {
         });
     }
   };
-
-  console.log(tradesHoy);
   return (
     <Row className="ascendio-home-row-padre">
       <Col xs={12} className="ascendio-home-row-hijo">

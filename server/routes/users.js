@@ -27,10 +27,9 @@ router.get("/tradespostsuser/:id", usersControllers.getTradesPostsUser);
 router.get("/generalpostsuser/:id", usersControllers.getGeneralPostsUser);
 router.get("/showallusers", usersControllers.showAllUsers);
 router.get("/showalluserssuccesses", usersControllers.showAllUsersSuccesses);
-router.get("/traderprofile/:id", usersControllers.traderProfile)
+router.get("/traderprofile/:id", usersControllers.traderProfile);
 router.put("/deleteuser/:id", usersControllers.deleteUser);
-router.post("/usersendcategory", usersControllers.userSendCategory)
-router.get("/getcategoriesuser/:id",usersControllers.getCategoriesUser)
-
+router.post("/usersendcategory", usersControllers.userSendCategory);
+router.get("/getcategoriesuser/:id", usersControllers.getCategoriesUser);
 
 module.exports = router;
