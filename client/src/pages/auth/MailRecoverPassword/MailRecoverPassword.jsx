@@ -1,9 +1,9 @@
-import "../../../../public/stylesheets/ButtonsApp.scss"
+import "../../../../public/stylesheets/ButtonsApp.scss";
 import React, { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { ModalMailRevoverPassword } from "./ModalMailRecoverPassword/ModalMailRevoverPassword";
-import "./MailRecoverPassword.scss"
+import "./MailRecoverPassword.scss";
 
 import axios from "axios";
 const initialValue = {
@@ -36,13 +36,8 @@ export const MailRecoverPassword = () => {
           setShowModal(true);
         })
         .catch((err) => {
-          if (err.response.data.error?.errno === 400) {
-            setMsgError("Email no valido");
-          } else if (err.response.data.message) {
-            setMsgError("Email no valido");
-          } else {
-            console.log(err);
-          }
+          console.log(err);
+          setMsgError("Email no válido");
         });
     }
   };
@@ -55,7 +50,9 @@ export const MailRecoverPassword = () => {
         <Form>
           <h2>Ascendio</h2>
           <h3 className="mb-3">Recupera tu contraseña</h3>
-          <p>Introduce tu email para crear una nueva contraseña para tu cuenta </p>
+          <p>
+            Introduce tu email para crear una nueva contraseña para tu cuenta{" "}
+          </p>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label></Form.Label>
             <Form.Control
@@ -66,7 +63,7 @@ export const MailRecoverPassword = () => {
               //login.email
             />
           </Form.Group>
-          <p style={{ marginBottom: '1rem' }}>{msgError || '\u00A0'}</p>
+          <p style={{ marginBottom: "1rem" }}>{msgError || "\u00A0"}</p>
           <div className="DivGrisParaBotones d-flex justify-content-between mt-3 mb-1">
             <Button
               className="Button2"
@@ -75,7 +72,11 @@ export const MailRecoverPassword = () => {
             >
               Aceptar
             </Button>
-            <Button className="Button2" onClick={() => navigate("/login")} variant="outline-success">
+            <Button
+              className="Button2"
+              onClick={() => navigate("/login")}
+              variant="outline-success"
+            >
               Cancelar
             </Button>
           </div>

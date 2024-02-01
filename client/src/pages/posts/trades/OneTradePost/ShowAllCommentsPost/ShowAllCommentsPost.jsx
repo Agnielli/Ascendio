@@ -75,7 +75,7 @@ export const ShowAllCommentsPost = ({ showModal, setShowModal, oneTrade }) => {
                 <Col lg={1} xs={12} className="nickname-oneposttrade">
                   <h6>{elem.nickname}:</h6>
                 </Col>
-                <Col lg={9} xs={12} className="col">
+                <Col lg={9} xs={12} className="message-oneposttrade">
                   <p>{elem.message}</p>
                 </Col>
                 <Col lg={1} xs={12} className="date-oneposttrade">

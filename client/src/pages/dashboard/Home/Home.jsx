@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Button, Card, Col, ListGroup, Row } from "react-bootstrap";
 import { AscendioContext } from "../../../context/AscendioContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { TradingViewWidget } from "../Landing/TradingViewWidget/TradingViewWidget";
 import "./Home.scss";
 import "../../../../public/stylesheets/ButtonsApp.scss";
@@ -130,7 +130,14 @@ export const Home = () => {
                             </p>
                           )}
                         </div>
-                        <p>{elem.nickname}</p>
+                        <p>
+                          <Link
+                            className="home-link-traders"
+                            to={`http://localhost:5173/traderprofile/${elem.user_id}`}
+                          >
+                            {elem.nickname}
+                          </Link>
+                        </p>
                       </Card.Text>
                       <div className="DivImagenCard">
                         {elem.image_name !== null ? (

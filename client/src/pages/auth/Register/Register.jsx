@@ -43,15 +43,13 @@ export const Register = () => {
   };
   const verPassword2 = () => {
     setShowPassword2(!showPassword2);
-  };  
+  };
 
   const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setRegister({ ...register, [name]: value });
   };
-
-  
 
   const handleSubmit = () => {
     if (
@@ -68,6 +66,8 @@ export const Register = () => {
       setMsgError("Los correos no coinciden");
     } else if (register.password !== register.password2) {
       setMsgError("Las contraseñas no coinciden");
+    } else if (register.password.length < 10) {
+      setMsgError("Contraseña demasiado corta");
     } else {
       axios
         .post("http://localhost:3000/users/createuser", register)
@@ -101,11 +101,19 @@ export const Register = () => {
     <Row className="RegistroContainer FormulariosContainer d-flex flex-column align-items-center pt-5">
       <Col lg={4} md={4} xs={12}>
         <Form>
-        <img className="logoascendiologin" src="../../../../public/default.png" alt="logo ascendio" />
-          <h6 className="d-none d-sm-block">Descubre trades, conecta con otros usuarios y eleva tu conocimiento cripto en un solo lugar.</h6>
+          <img
+            className="logoascendiologin"
+            src="../../../../public/default.png"
+            alt="logo ascendio"
+          />
+          <h6 className="d-none d-sm-block">
+            Descubre trades, conecta con otros usuarios y eleva tu conocimiento
+            cripto en un solo lugar.
+          </h6>
           <Form.Group controlId="formBasicNickName">
             <Form.Label></Form.Label>
             <Form.Control
+              maxLength={12}
               name="nickname"
               onChange={handleChange}
               placeholder="Nombre de usuario"
@@ -117,6 +125,7 @@ export const Register = () => {
           <Form.Group controlId="formBasicName">
             <Form.Label></Form.Label>
             <Form.Control
+              maxLength={12}
               name="name"
               onChange={handleChange}
               placeholder="Nombre"
@@ -124,9 +133,10 @@ export const Register = () => {
               autoComplete="username"
             />
           </Form.Group>
-          <Form.Group  controlId="formBasicLastName">
+          <Form.Group controlId="formBasicLastName">
             <Form.Label></Form.Label>
             <Form.Control
+              maxLength={30}
               name="lastname"
               onChange={handleChange}
               placeholder="Apellido"
@@ -134,7 +144,7 @@ export const Register = () => {
               autoComplete="lastname"
             />
           </Form.Group>
-          <Form.Group  controlId="formBasicEmail">
+          <Form.Group controlId="formBasicEmail">
             <Form.Label></Form.Label>
             <Form.Control
               name="email"
@@ -158,7 +168,11 @@ export const Register = () => {
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
             <Form.Label></Form.Label>
-            <div className={`password-container ${isPasswordFocused ? 'eye-icon-focused' : ''}`}>
+            <div
+              className={`password-container ${
+                isPasswordFocused ? "eye-icon-focused" : ""
+              }`}
+            >
               <Form.Control
                 name="password"
                 onChange={handleChange}
@@ -204,7 +218,11 @@ export const Register = () => {
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
             <Form.Label></Form.Label>
-            <div className={`password-container ${isPasswordFocused2 ? 'eye-icon-focused' : ''}`}>
+            <div
+              className={`password-container ${
+                isPasswordFocused2 ? "eye-icon-focused" : ""
+              }`}
+            >
               <Form.Control
                 name="password2"
                 onChange={handleChange}
@@ -248,12 +266,16 @@ export const Register = () => {
               </span>
             </div>
           </Form.Group>
-          <p style={{ marginBottom: '1rem' }}>{msgError || '\u00A0'}</p>
+          <p style={{ marginBottom: "1rem" }}>{msgError || "\u00A0"}</p>
           <div className="DivGrisParaBotones d-flex justify-content-between mt-3 mb-1">
             <Button className="Button2" onClick={handleSubmit}>
               Aceptar
             </Button>
-            <Button  className="Button2" onClick={() => navigate("/")} variant="primary">
+            <Button
+              className="Button2"
+              onClick={() => navigate("/")}
+              variant="primary"
+            >
               Cancelar
             </Button>
           </div>
