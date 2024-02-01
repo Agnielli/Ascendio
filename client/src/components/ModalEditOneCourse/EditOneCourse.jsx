@@ -44,8 +44,8 @@ export const EditOneCourse = ({
     setMsgError("");
   };
   let regexPrice = /^(?:(\d{1,5}(?:\.\d{0,2})?)|\D+).*$/g;
-  let regexTitle = /^[\s\S]{0,50}$/;
-  let regexDescription = /^[\s\S]{0,250}$/;
+  let regexTitle = /^[\s\S'´`]{0,50}$/;
+  let regexDescription = /^[\s\S'´`]{0,250}$/;
   const handleSubmit = (e) => {
     if (!regexTitle.test(editCourse.title)) {
       setMsgError("No se permiten más de 50 caracteres");

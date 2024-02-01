@@ -13,7 +13,7 @@ export const FormAddSection = ({setAddSection,course_id, resetCourse, setResetCo
     setNewSection(e.target.value)
   }
 
-  let regexSection = /^[\s\S]{0,50}$/;
+  let regexSection = /^[\s\S'´`]{0,50}$/;
   
   const handleSubmit = () =>{
     let data = {newSection, course_id}
