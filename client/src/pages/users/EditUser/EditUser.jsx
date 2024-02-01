@@ -3,9 +3,9 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { AscendioContext } from "../../../context/AscendioContext";
 import "./EditUser.scss";
-import "../../../../public/stylesheets/ButtonsApp.scss"
-import "../../../../public/stylesheets/FormulariosEInputs.scss"
-import "../../../../public/stylesheets/InputDesplegableApp.scss"
+import "../../../../public/stylesheets/ButtonsApp.scss";
+import "../../../../public/stylesheets/FormulariosEInputs.scss";
+import "../../../../public/stylesheets/InputDesplegableApp.scss";
 import { FormEdit } from "./EditUserData/FormEdit";
 import { ChangePassword } from "./ChangePassword/ChangePassword";
 import { DeleteUser } from "./DeleteUser/DeleteUser";
@@ -22,8 +22,8 @@ export const EditUser = () => {
   const [categories, setCategories] = useState(false);
   const [userCategory, setUserCategory] = useState();
   const [showCategories, setShowCategories] = useState(false);
-  const [msgSuccess, setMsgSuccess] = useState()
-  const [style, setStyle] = useState()
+  const [msgSuccess, setMsgSuccess] = useState();
+  const [style, setStyle] = useState();
 
   useEffect(() => {
     axios
@@ -79,8 +79,8 @@ export const EditUser = () => {
       .then((res) => {
         console.log(res.data);
         setCategories(true);
-        setMsgSuccess("Categorías cambiadas con éxito")
-        setStyle("EditUserMsgSuccess")
+        setMsgSuccess("Categorías cambiadas con éxito");
+        setStyle("EditUserMsgSuccess");
       })
       .catch((err) => {
         console.log(err);
@@ -126,55 +126,86 @@ export const EditUser = () => {
 
   return (
     <main>
-      <Row className="EditUserApp w-30 s-xs-90">    
-          
-            <Col xs={12} sm={12} className="p-0">
-              <Button className="Button5 ButtonEditUser1 InputsMinimumWidthEditUser mb-4 mt-4" onClick={verSection}>EDITAR DATOS DEL USUARIO</Button>
-              <Button className="Button5 ButtonEditUser1 InputsMinimumWidthEditUser mb-4" onClick={verCategoryUser}> EDITAR CATEGORÍA </Button>
-              <Button className="Button5 ButtonEditUser1 InputsMinimumWidthEditUser mb-4" onClick={verChangePassword}>EDITAR DATOS DE LOGIN </Button>
-              <Button className="Button5 ButtonEditUser1 InputsMinimumWidthEditUser mb-4" onClick={verDeleteUser}>ELIMINAR CUENTA </Button>
-            </Col>
-      
-            <Col xs={12} sm={6} className="p-0">
-              {showForm && (
-                <FormEdit setShowForm={setShowForm} user={user} setUser={setUser} />
-              )}
-              {showChangePassword && (
-                <ChangePassword
-                  setShowChangePassword={setShowChangePassword}
-                  user={user}
-                  setUser={setUser}
+      <Row className="EditUserApp w-30 s-xs-90">
+        <Col xs={12} sm={12} md={12} lg={12} xl={6} className="p-0">
+          <Button
+            className="Button5 ButtonEditUser1 InputsMinimumWidthEditUser mb-4 mt-4"
+            onClick={verSection}
+          >
+            EDITAR DATOS DEL USUARIO
+          </Button>
+          <Button
+            className="Button5 ButtonEditUser1 InputsMinimumWidthEditUser mb-4"
+            onClick={verCategoryUser}
+          >
+            {" "}
+            EDITAR CATEGORÍA{" "}
+          </Button>
+          <Button
+            className="Button5 ButtonEditUser1 InputsMinimumWidthEditUser mb-4"
+            onClick={verChangePassword}
+          >
+            EDITAR DATOS DE LOGIN{" "}
+          </Button>
+          <Button
+            className="Button5 ButtonEditUser1 InputsMinimumWidthEditUser mb-4"
+            onClick={verDeleteUser}
+          >
+            ELIMINAR CUENTA{" "}
+          </Button>
+        </Col>
+
+        <Col
+          xs={6} sm={6} md={6} lg={6} xl={6}
+          className="p-0 justify-content-lx-center align-items-xxl-center"
+        >
+          {showForm && (
+            <FormEdit setShowForm={setShowForm} user={user} setUser={setUser} />
+          )}
+          {showChangePassword && (
+            <ChangePassword
+              setShowChangePassword={setShowChangePassword}
+              user={user}
+              setUser={setUser}
+            />
+          )}
+          {showDeleteUser && (
+            <DeleteUser
+              setShowDeleteUser={setShowDeleteUser}
+              user={user}
+              setUser={setUser}
+            />
+          )}
+          {showCategories && (
+            <Form onSubmit={handleSubmit} className=" FormularioDatosUsuario ">
+              <Form.Group controlId="formFile" className="mb-3">
+                <Form.Label>
+                  <h4>EDITAR CATEGORÍA:</h4>{" "}
+                </Form.Label>
+                <Select
+                  className="inputDesplegableRetocado"
+                  placeholder="Categoría.."
+                  options={options}
+                  value={selectedOption}
+                  onChange={handleOption}
+                  isMulti
                 />
-              )}
-              {showDeleteUser && (
-                <DeleteUser
-                  setShowDeleteUser={setShowDeleteUser}
-                  user={user}
-                  setUser={setUser}
-                />
-              )}
-              {showCategories && (
-                <Form onSubmit={handleSubmit} className=" FormularioDatosUsuario ">
-                  <Form.Group controlId="formFile" className="mb-3">
-                    <Form.Label><h4>EDITAR CATEGORÍA:</h4> </Form.Label>
-                    <Select className="inputDesplegableRetocado"
-                      placeholder="Categoría.."
-                      options={options}
-                      value={selectedOption}
-                      onChange={handleOption}
-                      isMulti
-                    />
-                  </Form.Group>
-                  <p className={style}>{msgSuccess}</p>
-                  <div className="DivGrisParaBotones mt-3">
-                    <Button className="Button3" type="submit">ACEPTAR</Button>
-                    <Button className="Button1" onClick={() => setShowCategories(false)}>CANCELAR</Button>
-                  </div>
-                </Form>
-              )}
-            </Col>
-        
-       
+              </Form.Group>
+              <p className={style}>{msgSuccess}</p>
+              <div className="DivGrisParaBotones mt-3">
+                <Button className="Button3" type="submit">
+                  ACEPTAR
+                </Button>
+                <Button
+                  className="Button1"
+                  onClick={() => setShowCategories(false)}
+                >
+                  CANCELAR
+                </Button>
+              </div>
+            </Form>
+          )}
+        </Col>
       </Row>
     </main>
   );
