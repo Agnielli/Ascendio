@@ -16,7 +16,7 @@ export const CorrectTradePosts = ({
 
   return (
     <>
-      <div className="d-flex flex-wrap">
+      <div className="d-flex flex-wrap justify-content-center AllTradesPostGap">
         {posts
           ?.filter((post) => post.type === 2 && post.correct === 1)
           .map((elem) => {

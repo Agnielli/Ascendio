@@ -92,7 +92,7 @@ export const OneUserAllPosts = ({
                     <p>{traderprofile?.nickname}</p>
                   </Card.Text>
                   <div className="DivImagenCard">
-                    {elem.image_name !== null ? (
+                    {elem.resource_text !== null ? (
                       <Card.Img
                         variant="top"
                         src={`http://localhost:3000/images/generalPost/${elem.resource_text}`}

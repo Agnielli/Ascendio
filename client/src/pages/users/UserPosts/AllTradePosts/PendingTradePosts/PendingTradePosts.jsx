@@ -16,7 +16,7 @@ export const PendingTradePosts = ({
 
   return (
     <>
-      <div className="d-flex gap-5 flex-wrap pe-5 ps-5">
+      <div className="d-flex justify-content-center gap-5 flex-wrap pe-5 ps-5">
         {posts
           ?.filter((post) => post.type === 2 && post.correct === null)
           .map((elem) => {
