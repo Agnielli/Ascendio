@@ -186,7 +186,7 @@ export const TraderProfile = () => {
             </div>
           </div>
         </Col>
-        <Col xs={12} lg={12}>
+        <Col xs={12} lg={12} className="p-0">
           <div>
             {showPosts && (
               <OneUserAllPosts

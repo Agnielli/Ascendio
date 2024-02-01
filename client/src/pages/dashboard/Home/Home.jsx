@@ -57,6 +57,7 @@ export const Home = () => {
   const pulsarSeguirONo = (id_followed) => {
     const data = [user.user_id, id_followed];
     const isFollowing = followingUsers.includes(id_followed); // devuelve true o false
+    console.log(data);
     if (isFollowing) {
       // Dejar de seguir
       axios
@@ -143,7 +144,7 @@ export const Home = () => {
                                 className="ascendio-home-card-imagen"
                               />
                             ) : (
-                              <Card.Img
+                              <Card.Img                              
                                 className="CardSinFoto"
                                 variant="top"
                                 src={"../../../../public/images/iconos/logoascendio.png"}
@@ -157,7 +158,7 @@ export const Home = () => {
                   <h3>General Post</h3>
                 </Card.Title>                   
                           
-                          <Card.Text className="">
+                          <Card.Text >
                             {elem.description}
                           </Card.Text>                          
                             {user.user_id !== elem.user_id ? (
@@ -171,29 +172,47 @@ export const Home = () => {
                                   : "Seguir"}
                               </Button>
                             ) : null}
-                            {/* <Button
-                              className="Button2"
+                            <button
+                              className="Button3"
                               onClick={() => {
                                 navigate(`/OneTradePost/${elem.post_id}`);
                               }}
                             >
-                              Ver Post
-                            </Button> */}                        
+                              COMENTARIOS
+                            </button>                        
                         </Card.Body>
                       )}
                       {/* Trades */}
                       {elem.type === 2 && (
-                        <Card.Body className="ascendio-home-card-hijo">
+                        <Card.Body >
                           <Card.Title>                        
                   <h3>Trade de {elem.category_name}</h3>
                           </Card.Title>
-                          <Card.Text className="ascendio-home-card-texto">
-                            <p>Currency: {elem.currency}</p>
+                          <Card.Text >
+                          {elem.currency !== null ? (
+                    <p>
+                      Currency: <span>{elem.currency}</span>
+                    </p>
+                  ) : null}
+                  <p>
+                    Descripción: <span>{elem.description}</span>
+                  </p>
+                  <p>
+                    Precio de entrada: <span>{elem.entry_price}</span>
+                  </p>
+                  <p>
+                    Precio de stop: <span>{elem.stop_loss}</span>
+                  </p>
+                  <p>
+                    Precio Profit: <span>{elem.take_profit}</span>
+                  </p>
                             <p>
                               Estado:{" "}
-                              {elem.correct === null && "Trade Pendiente"}
-                              {elem.correct === 0 && "Trade Errado"}
-                              {elem.correct === 1 && "Trade Acertado"}
+                              <span>
+                                {elem.correct === null && "Trade Pendiente"}
+                                {elem.correct === 0 && "Trade Errado"}
+                                {elem.correct === 1 && "Trade Acertado"}
+                              </span>
                             </p>
                           </Card.Text>                      
                           <div className="ascendio-home-card-botonera">
@@ -208,14 +227,14 @@ export const Home = () => {
                                   : "Seguir"}
                               </Button>
                             ) : null}
-                            {/* <Button
-                              className="Button2 button-with-ellipsis"
+                            <button
+                              className="Button3 button-with-ellipsis"
                               onClick={() => {
                                 navigate(`/OneTradePost/${elem.post_id}`);
                               }}
                             >
-                              Ver Post
-                            </Button> */}
+                              COMENTARIOS
+                            </button>
                           </div>
                         </Card.Body>
                       )}

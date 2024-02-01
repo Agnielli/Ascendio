@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Card, Col, ListGroup, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./oneUserAllPosts.scss";
+import "../../../../../public/stylesheets/ESTILOCARDGENERAL.scss";
 
 export const OneUserAllPosts = ({
   user_id,
@@ -56,13 +57,13 @@ export const OneUserAllPosts = ({
   // console.log("traders", traderprofile);
 
   return (
-    <>
-      <div className="d-flex justify-content-between DivGrisParaBotones w-100 mt-3 mb-3">
-        <Button onClick={() => setShow(2)} className="Button2">
-          Trades Posts
+    <div className="OneUserAllPostsScss">
+      <div className="d-flex w-100 mb-3">
+        <Button onClick={() => setShow(2)} className="Button4 m-0">
+          TRADE POSTS
         </Button>
-        <Button onClick={() => setShow(1)} className="Button2">
-          General Posts
+        <Button onClick={() => setShow(1)} className="Button4 m-0">
+          GENERAL POSTS
         </Button>
       </div>
       {show === 1 && (
@@ -72,16 +73,22 @@ export const OneUserAllPosts = ({
               generalposts.map((elem) => {
                 return (
                   <Card
-                    className="generalpost"
-                    style={{ width: "18rem", marginBottom: "1rem" }}
+                  className="ESTILOCARDGENERAL"
+                 
                     key={elem.post_id}
                   >
-                    <Row>
-                      <Col
-                        lg={3}
-                        md={12}
-                        className="col1 d-flex flex-column align-items-center justify-content-center gap-2 mb-1"
-                      >
+                    <Card.Text className="UserCARD">
+            <div className="avatarCard">
+              {elem?.img ? (
+                <img src={`http://localhost:3000/images/users/${elem.img}`} />
+              ) : (
+                <p className="letteruser">
+                  {elem?.nickname.charAt(0).toUpperCase()}
+                </p>
+              )}
+            </div>
+              <p>{elem.nickname}</p></Card.Text>
+                    
                         <div className="avatar">
                           {elem?.img_name ? (
                             <img
@@ -106,40 +113,28 @@ export const OneUserAllPosts = ({
                             Ver más
                           </Button>
                         </div>
-                      </Col>
+                      
                       {elem.resource_text && (
                         <>
-                          <Col
-                            lg={4}
-                            md={12}
-                            className="col3 d-flex flex-column align-items-center justify-content-center gap-2 mb-1"
-                          >
+                          
                             <p>{elem.description}</p>
-                          </Col>
-                          <Col
-                            lg={5}
-                            md={12}
-                            className="col2 d-flex flex-column align-items-center justify-content-center gap-2 mb-1"
-                          >
+                          
+                          
                             {elem.resource_text !== null && (
                               <Card.Img
                                 variant="top"
                                 src={`http://localhost:3000/images/generalPost/${elem.resource_text}`}
                               />
                             )}
-                          </Col>
+                          
                         </>
                       )}
                       {elem.resource_text == null && (
-                        <Col
-                          lg={9}
-                          md={12}
-                          className="col3 d-flex flex-column align-items-center justify-content-center gap-2 mb-1"
-                        >
+                        
                           <p>{elem.description}</p>
-                        </Col>
+                        
                       )}
-                    </Row>
+                    
                   </Card>
                 );
               })
@@ -162,27 +157,28 @@ export const OneUserAllPosts = ({
               tradesposts.map((elem) => {
                 return (
                   <Card
-                    className="tradepost"
-                    style={{ width: "18rem", marginBottom: "1rem" }}
+                  className="ESTILOCARDGENERAL"
                     key={elem.post_id}
                   >
-                    <Row>
-                      <Col
-                        lg={3}
-                        md={12}
-                        className="col1 d-flex flex-column align-items-center justify-content-center gap-2 mb-1"
-                      >
-                        <div className="avatar">
-                          {elem?.img_name ? ( // modificar el elem.im_name
-                            <img
-                              src={`http://localhost:3000/images/users/${user.img}`}
-                            />
-                          ) : (
-                            <p>
-                              {traderprofile?.nickname.charAt(0).toUpperCase()}
-                            </p>
-                          )}
-                        </div>
+
+              
+                  
+                    
+                      
+                        <Card.Text>
+                          <div className="avatarCard">
+                            {elem?.img_name ? ( // modificar el elem.im_name
+                              <img
+                                src={`http://localhost:3000/images/users/${user.img}`}
+                              />
+                            ) : (
+                              <p className="letteruser">
+                                {traderprofile?.nickname.charAt(0).toUpperCase()}
+                              </p>
+                            )}
+                          </div> <p>{elem.nickname}</p>
+                        </Card.Text>
+                        
                         <Card.Title>
                           <h3>{traderprofile.nickname}</h3>
                         </Card.Title>
@@ -196,15 +192,11 @@ export const OneUserAllPosts = ({
                             Ver más
                           </Button>
                         </div>
-                      </Col>
+                    
 
                       {elem.resource_text && (
                         <>
-                          <Col
-                            lg={4}
-                            md={12}
-                            className="col3 d-flex flex-column align-items-center justify-content-center gap-2 mb-1"
-                          >
+                          
                             <p>{elem.currency}</p>
                             <p>{elem.description}</p>
                             <p>
@@ -213,12 +205,8 @@ export const OneUserAllPosts = ({
                               {elem.correct === 0 && "Trade Errado ❌"}
                               {elem.correct === 1 && "Trade Acertado ✅"}
                             </p>
-                          </Col>
-                          <Col
-                            lg={5}
-                            md={12}
-                            className="col2 d-flex flex-column align-items-center justify-content-center gap-2 mb-1"
-                          >
+                          
+                          
                             {elem.resource_text !== null && (
                               <Card.Img
                                 className="tradeimagen"
@@ -233,26 +221,24 @@ export const OneUserAllPosts = ({
                                 src="/images/trade/trades.png"
                               />
                             )}
-                          </Col>
+                         
                         </>
                       )}
                       {elem.resource_text == null && (
-                        <Col
-                          lg={9}
-                          md={12}
-                          className="col3 d-flex flex-column align-items-center justify-content-center gap-2 mb-1"
-                        >
-                          <p>{elem.currency}</p>
-                          <p>{elem.description}</p>
-                          <p>
-                            Estado:{" "}
-                            {elem.correct === null && "Trade Pendiente ❓"}
-                            {elem.correct === 0 && "Trade Errado ❌"}
-                            {elem.correct === 1 && "Trade Acertado ✅"}
-                          </p>
-                        </Col>
+                        
+                          <div>
+                            <p>{elem.currency}</p>
+                            <p>{elem.description}</p>
+                            <p>
+                              Estado:{" "}
+                              {elem.correct === null && "Trade Pendiente ❓"}
+                              {elem.correct === 0 && "Trade Errado ❌"}
+                              {elem.correct === 1 && "Trade Acertado ✅"}
+                            </p>
+                          </div>
+                        
                       )}
-                    </Row>
+                   
                   </Card>
                 );
               })
@@ -268,6 +254,6 @@ export const OneUserAllPosts = ({
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
