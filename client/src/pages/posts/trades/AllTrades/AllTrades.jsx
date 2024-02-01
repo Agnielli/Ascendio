@@ -96,13 +96,13 @@ export const AllTrades = () => {
       <Row className="general-altradeposts title-input">
         <Col
           // lg={3}
-          className="d-flex justify-content-center align-items-center"
+          className="d-flex justify-content-start align-items-center"
         >
           <h2>Trade Posts</h2>
         </Col>
         <Col
           // lg={9}
-          className="d-flex justify-content-center align-items-center"
+          className="d-flex justify-content-end align-items-center"
         >
           <div className="input-container">
             <span className="material-symbols-outlined search-icon">
