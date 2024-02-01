@@ -23,6 +23,7 @@ export const EnabledCourses = ({ elem, setUpdateCourses }) => {
       >
         <Card.Img
           variant="top"
+          style={{ height: "16rem", objectFit: "cover" }}
           src={`http://localhost:3000/images/cursos/${elem.img}`}
         />
         <Card.Body className="d-flex flex-column">

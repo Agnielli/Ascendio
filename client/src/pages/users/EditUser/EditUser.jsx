@@ -22,6 +22,8 @@ export const EditUser = () => {
   const [categories, setCategories] = useState(false);
   const [userCategory, setUserCategory] = useState();
   const [showCategories, setShowCategories] = useState(false);
+  const [msgSuccess, setMsgSuccess] = useState()
+  const [style, setStyle] = useState()
 
   useEffect(() => {
     axios
@@ -77,6 +79,8 @@ export const EditUser = () => {
       .then((res) => {
         console.log(res.data);
         setCategories(true);
+        setMsgSuccess("Categorías cambiadas con éxito")
+        setStyle("EditUserMsgSuccess")
       })
       .catch((err) => {
         console.log(err);
@@ -124,11 +128,11 @@ export const EditUser = () => {
     <main>
       <Row className="EditUserApp w-30 s-xs-90">    
           
-            <Col xs={12} sm={6} className="p-0">
-              <Button className="Button5 ButtonEditUser1 mb-4 mt-4" onClick={verSection}>EDITAR DATOS DEL USUARIO</Button>
-              <Button className="Button5 ButtonEditUser1 mb-4" onClick={verCategoryUser}> EDITAR CATEGORÍA </Button>
-              <Button className="Button5 ButtonEditUser1 mb-4" onClick={verChangePassword}>EDITAR DATOS DE LOGIN </Button>
-              <Button className="Button5 ButtonEditUser1 mb-4" onClick={verDeleteUser}>ELIMINAR CUENTA </Button>
+            <Col xs={12} sm={12} className="p-0">
+              <Button className="Button5 ButtonEditUser1 InputsMinimumWidthEditUser mb-4 mt-4" onClick={verSection}>EDITAR DATOS DEL USUARIO</Button>
+              <Button className="Button5 ButtonEditUser1 InputsMinimumWidthEditUser mb-4" onClick={verCategoryUser}> EDITAR CATEGORÍA </Button>
+              <Button className="Button5 ButtonEditUser1 InputsMinimumWidthEditUser mb-4" onClick={verChangePassword}>EDITAR DATOS DE LOGIN </Button>
+              <Button className="Button5 ButtonEditUser1 InputsMinimumWidthEditUser mb-4" onClick={verDeleteUser}>ELIMINAR CUENTA </Button>
             </Col>
       
             <Col xs={12} sm={6} className="p-0">
@@ -161,6 +165,7 @@ export const EditUser = () => {
                       isMulti
                     />
                   </Form.Group>
+                  <p className={style}>{msgSuccess}</p>
                   <div className="DivGrisParaBotones mt-3">
                     <Button className="Button3" type="submit">ACEPTAR</Button>
                     <Button className="Button1" onClick={() => setShowCategories(false)}>CANCELAR</Button>

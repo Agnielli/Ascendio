@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./createTrade.scss";
-import { Form, Button, InputGroup } from "react-bootstrap";
+import { Form, Button, InputGroup, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { AscendioContext } from "../../../../context/AscendioContext";
 import axios from "axios";
+import Select from "react-select";
 const initialValue = {
   currency: "",
   description: "",
@@ -12,6 +13,7 @@ const initialValue = {
   takeProfit: "",
   category_id: "",
 };
+
 export const CreateTrade = () => {
   const [createOneTrade, setCreateOneTrade] = useState(initialValue);
   const [file, setFile] = useState();
@@ -30,7 +32,7 @@ export const CreateTrade = () => {
         );
       })
       .catch((err) => console.log(err));
-  }, [])
+  }, []);
   const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -64,12 +66,12 @@ export const CreateTrade = () => {
       axios
         .post("http://localhost:3000/posts/createtrade", newFormData)
         .then((res) => {
-          if(res.data.img){
-            setCreateOneTrade({...createOneTrade, img:res.data.img})
-            navigate('/profile');
-          }else{
-            setCreateOneTrade(createOneTrade)
-            navigate('/profile');
+          if (res.data.img) {
+            setCreateOneTrade({ ...createOneTrade, img: res.data.img });
+            navigate("/profile");
+          } else {
+            setCreateOneTrade(createOneTrade);
+            navigate("/profile");
           }
         })
         .catch((err) => {
@@ -78,85 +80,93 @@ export const CreateTrade = () => {
     }
   };
   return (
-    <div>
-      <Form.Group controlId="formFile" className="mb-3">
-        <Form.Label>Imagen</Form.Label>
-        <Form.Control type="file" onChange={handleFile} hidden />
-      </Form.Group>
-      <Form.Control
-        type="text"
-        placeholder="Escribir la moneda o acción"
-        name="currency"
-        value={createOneTrade.currency}
-        onChange={handleChange}
-        required
-      />
-      <br />
-      <Form.Control
-        type="text"
-        placeholder="Descripción"
-        name="description"
-        value={createOneTrade.description}
-        onChange={handleChange}
-      />
-      <br />
-      <Form.Control
-        type="text"
-        placeholder="Precio de entrada"
-        name="entryPrice"
-        value={createOneTrade.entryPrice}
-        onChange={handleChange}
-        required
-      />
-      <br />
-      <Form.Control
-        type="text"
-        placeholder="Stop Loss"
-        name="stopLoss"
-        value={createOneTrade.stopLoss}
-        onChange={handleChange}
-        required
-      />
-      <br />
-      <Form.Control
-        type="text"
-        placeholder="Take Profit"
-        name="takeProfit"
-        value={createOneTrade.takeProfit}
-        onChange={handleChange}
-        required
-      />
-      <br />
-      <InputGroup className="mb-3">
-        <label htmlFor="category">Categorías</label>
-        <select
-          id="category"
-          name="category_id"
-          value={createOneTrade.category_id}
-          onChange={handleChange}
-        >
-          <option value=""></option>
-          {options.filter(elem => elem.label !== "General").map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-      </InputGroup>
-      <p>{msgError}</p>
-      <br />
-      <Button onClick={handleSubmit}>Aceptar</Button>
-      <Button onClick={() => navigate("/profile")}>Cancelar</Button>
-    </div>
+    <Row className="CreateTradeUser justify-content-center mt-5">
+      <Col xs={6} sm={6} xl={6}>
+        <Form className="FormulariosContainer d-flex flex-column">
+          <Form.Group controlId="formFile" className="mb-3">
+            <Button className="Button3 ButtonImgCreateTradeInput">
+              IMAGEN
+            </Button>
+            <Form.Control type="file" onChange={handleFile} hidden />
+          </Form.Group>
+          <Form.Control
+            type="text"
+            placeholder="Escribir la moneda o acción"
+            name="currency"
+            value={createOneTrade.currency}
+            onChange={handleChange}
+            required
+          />
+          <br />
+          <Form.Control
+            type="text"
+            placeholder="Descripción"
+            name="description"
+            value={createOneTrade.description}
+            onChange={handleChange}
+          />
+          <br />
+          <Form.Control
+            type="text"
+            placeholder="Precio de entrada"
+            name="entryPrice"
+            value={createOneTrade.entryPrice}
+            onChange={handleChange}
+            required
+          />
+          <br />
+          <Form.Control
+            type="text"
+            placeholder="Stop Loss"
+            name="stopLoss"
+            value={createOneTrade.stopLoss}
+            onChange={handleChange}
+            required
+          />
+          <br />
+          <Form.Control
+            type="text"
+            placeholder="Take Profit"
+            name="takeProfit"
+            value={createOneTrade.takeProfit}
+            onChange={handleChange}
+            required
+          />
+          <br />
+
+          <Select
+            className="inputDesplegableRetocado textIndentPlaceholder"
+            id="category"
+            name="category_id"
+            placeholder="Categoría.."
+            value={createOneTrade.category_id}
+            onChange={handleChange}
+          >
+            <option value=""></option>
+            {options
+              .filter((elem) => elem.label !== "General")
+              .map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+          </Select>
+
+          <p>{msgError}</p>
+          <br />
+          <div>
+            <Button
+              className="Button3 ButtonsCreateTradeSpacing ButtonAcceptCancelCreateTrade"
+              onClick={handleSubmit}
+            >
+              ACEPTAR
+            </Button>
+            <Button className="Button1 ButtonAcceptCancelCreateTrade" onClick={() => navigate("/profile")}>
+              CANCELAR
+            </Button>
+          </div>
+        </Form>
+      </Col>
+    </Row>
   );
 };
-
-
-
-
-
-
-
-
-
-

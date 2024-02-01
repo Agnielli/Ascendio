@@ -42,16 +42,13 @@ export const OneCourse = () => {
 
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
-
-
-
   
 
   const navigate = useNavigate();
 
   const openModal = () => {
     setShowModal(true);
-    setCourseToEdit();
+    setCourseToEdit(); 
   };
 
   const openModalDelete = () => {
@@ -244,15 +241,23 @@ export const OneCourse = () => {
     }
   };
 
- 
+  const newVote = peopleVotesCourse + 1
+
   const handlePurchase = () => {
+    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
     addToPurchase();
     setShowCardRate(true);
     setIsIntoPurchase(true);
-    setPeopleVotesCourse(peopleVotesCourse + 1);
+    setPeopleVotesCourse(newVote);
+
+    setTimeout(() => {
+      window.scrollTo(0, scrollPosition);
+    }, 0);
   };
 
-  
+  if(showCardRate){
+    window.scrollTo(0, 0);
+  }
 
   const handleValidate = () => {
     if (isIntoValidate) {
@@ -372,7 +377,7 @@ export const OneCourse = () => {
                   <button
                     className="Button1"
                     onClick={handlePurchase}
-                    disabled={isIntoValidate && !isConfirmed ? true : false}
+                    disabled={isIntoPurchase || isIntoValidate && !isConfirmed ? true : false}
                   >
                     {isIntoPurchase ? "Comprado" : "Comprar"}
                   </button>
