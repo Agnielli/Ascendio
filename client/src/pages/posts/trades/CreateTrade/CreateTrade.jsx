@@ -134,7 +134,7 @@ export const CreateTrade = () => {
           />
           <br />
           
-            <Select
+            <select
               className="inputDesplegableRetocado textIndentPlaceholder"
               placeholder="Categoría.."
               id="category"
@@ -150,16 +150,16 @@ export const CreateTrade = () => {
                     {option.label}
                   </option>
                 ))}
-            </Select>
+            </select>
        
           <p>{msgError}</p>
           <br />
           <div>
             <Button className="Button3 ButtonsCreateTradeSpacing" onClick={handleSubmit}>
-              Aceptar
+              ACEPTAR
             </Button>
             <Button className="Button1" onClick={() => navigate("/profile")}>
-              Cancelar
+              CANCELAR
             </Button>
           </div>
         </Form>
