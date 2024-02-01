@@ -21,8 +21,9 @@ export const AllTradePosts = ({
 
   return (
     <>
-      <div className="BotoneraTiposDeTrade d-flex">
+      <div className="BotoneraTiposDeTrade d-flex botones">
         <Button
+          className="botontrade"
           onClick={
             showTrades === 1
               ? () => {
@@ -35,7 +36,8 @@ export const AllTradePosts = ({
         >
           {showTrades === 1 ? "TODOS" : "TRADES PENDIENTES"}
         </Button>
-        <Button
+        <Button  
+          className="botontrade"
           onClick={
             showTrades === 2
               ? () => {
@@ -49,6 +51,7 @@ export const AllTradePosts = ({
           {showTrades === 2 ? "TODOS" : "TRADES ACERTADOS"}
         </Button>
         <Button
+           className="botontrade"
           onClick={
             showTrades === 3
               ? () => {
@@ -63,12 +66,12 @@ export const AllTradePosts = ({
         </Button>
       </div>
       {showTrades === 0 && (
-        <div className="d-flex AllTradesPostGap flex-wrap">
+        <div className="d-flex justify-content-center AllTradesPostGap flex-wrap">
           {posts
             ?.filter((post) => post.type === 2)
             .map((elem) => {
               return (
-                <Card className="ESTILOCARDGENERAL" key={elem.post_id}>
+                <Card className="ESTILOCARDGENERAL mb-4" key={elem.post_id}>
                   <Card.Text className="UserCARD">
             <div className="avatarCard">
               {user?.img ? (
