@@ -1,0 +1,23 @@
+@use "../stylesheets/variables.scss" as *;
+
+.InputDesplegableSinBootstrap {
+  
+    background-color: $accent5-color;
+    height: 35.96px;
+    border-radius: 25px;
+    padding-bottom: 1rem !important;
+
+
+    &:focus {
+      box-shadow: 0 0 0 0.25rem $accent-color; 
+      outline: none !important; 
+      border: none;
+      background-color: $accent5-color;
+    }
+
+    & option {
+      background-color: $accent5-color;
+      color: black;
+    }
+  
+}
