@@ -10,7 +10,7 @@ const initialValue = {
   commentary: "",
 };
 
-export const CardRates = ({ resetCourse, setResetCourse, setShowCardRate, rates}) => {
+export const CardRates = ({ resetCourse, setResetCourse, setShowCardRate, rates, peopleVotesCourse, setPeopleVotesCourse}) => {
   const [newRate, setNewRate] = useState(initialValue);
   const [msgError, setMsgError] = useState("")
   const [myRate, setMyRate] = useState([]);
@@ -27,6 +27,7 @@ export const CardRates = ({ resetCourse, setResetCourse, setShowCardRate, rates}
   }, [])
 
   const regexNumber = /^[1-5]*$/;
+  const newVote = peopleVotesCourse + 1
 
   const handleSubmit = () => {
     if (!regexNumber.test(newRate.course_rates)) {
@@ -41,6 +42,7 @@ export const CardRates = ({ resetCourse, setResetCourse, setShowCardRate, rates}
     .post(`http://localhost:3000/courses/userrateonecourse/${course_id}`, data)
     .then((res)=>{
       setShowCardRate(false)
+      setPeopleVotesCourse(newVote);
     })
       .catch((err) => {
         console.log(err);

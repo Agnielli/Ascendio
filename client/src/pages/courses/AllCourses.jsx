@@ -6,6 +6,7 @@ import { Button, Card, Col, Row } from "react-bootstrap";
 import { textSensitive } from "../../helpers/utils";
 import { RatingStars } from "../../components/Courses/RatingStars/RatingStars";
 import "../../../public/stylesheets/ButtonsApp.scss";
+import { CardOneCourse } from "../../components/CardOneCourse/CardOneCourse";
 
 export const AllCourses = () => {
   const [allcourses, setAllcourses] = useState([]);
@@ -13,6 +14,7 @@ export const AllCourses = () => {
   const [filter, setFilter] = useState("");
   const [order, setOrder] = useState(false);
   const navigate = useNavigate();
+
   useEffect(() => {
     let url;
     if (order === false) {
@@ -23,6 +25,7 @@ export const AllCourses = () => {
     axios
       .get(url)
       .then((res) => {
+        console.log("ews", res.data);
         setAllcourses(res.data);
         setFindCourse(res.data);
       })
@@ -33,12 +36,14 @@ export const AllCourses = () => {
   const handleChange = (e) => {
     setFilter(e.target.value);
   };
+
   useEffect(() => {
     const tempArray = allcourses.filter((e) => {
       return textSensitive(e.title, filter);
     });
     setFindCourse(tempArray);
   }, [allcourses, filter]);
+
   return (
     <Col>
       <header className="headerAllCourses">
@@ -70,42 +75,9 @@ export const AllCourses = () => {
           {findCourse?.map((elem) => {
             return (
               <Col xs={12} md={6} lg={4} xxl={3} className="d-flex">
-                <Card
-                  // style={{ width: "22rem" }}
-                  key={elem.course_id}
-                  className="mapeoAllCourse text-center mb-4"
-                  style={{ width: "100%" }}
-                >
-                  <Card.Img
-                    style={{ height: "16rem", objectFit: "cover" }}
-                    variant="top"
-                    src={`http://localhost:3000/images/cursos/${elem.img}`}
-                  />
-                  <Card.Body className="d-flex flex-column gap-1">
-                    <Card.Text className="cardtitle"> {elem.title} </Card.Text>
-
-                    {elem.average_rating && (
-                      <RatingStars numberstars={elem.average_rating} />
-                    )}
-                    <Card.Subtitle className="tagsCourse">
-                      {elem.tags}
-                    </Card.Subtitle>
-                    <Card.Title className="descriptioncard d-flex justify-content-start flex-grow-1">
-                      {elem.description}
-                    </Card.Title>
-                    <Card.Text className="priceCourse cardtitle px-3 my-1">
-                      {Number(elem?.price) === 0 ? "GRATIS" : `${elem?.price}€`}
-                    </Card.Text>
-                    <Card.Text className="d-flex justify-content-center mt-auto">
-                      <Button
-                        className="Button3"
-                        onClick={() => navigate(`/course/${elem.course_id}`)}
-                      >
-                        Más info
-                      </Button>
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
+               <CardOneCourse
+               key={elem.course_id}
+               elem={elem}/>
               </Col>
             );
           })}

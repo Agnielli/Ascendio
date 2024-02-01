@@ -248,7 +248,7 @@ export const OneCourse = () => {
     addToPurchase();
     setShowCardRate(true);
     setIsIntoPurchase(true);
-    setPeopleVotesCourse(newVote);
+    //setPeopleVotesCourse(newVote);
 
     setTimeout(() => {
       window.scrollTo(0, scrollPosition);
@@ -514,6 +514,8 @@ export const OneCourse = () => {
             setResetCourse={setResetCourse}
             setShowCardRate={setShowCardRate}
             rates={rates}
+            setPeopleVotesCourse={setPeopleVotesCourse}
+            peopleVotesCourse={peopleVotesCourse}
           />
         )}
 

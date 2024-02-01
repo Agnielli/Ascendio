@@ -7,12 +7,14 @@ import { textSensitive } from "../../../helpers/utils";
 import { RatingStars } from "../RatingStars/RatingStars";
 import { AscendioContext } from "../../../context/AscendioContext";
 import "../../../../public/stylesheets/ButtonsApp.scss";
+import { CardOneCourse } from "../../CardOneCourse/CardOneCourse";
 
 
 export const PurchaseCourseCard = () => {
   const [allcourses, setAllcourses] = useState([]);
   const [findCourse, setFindCourse] = useState();
   const [filter, setFilter] = useState("");
+  const [tags, setTags] = useState("")
   const { user_id } = useContext(AscendioContext).user;
   const navigate = useNavigate();
 
@@ -38,6 +40,7 @@ export const PurchaseCourseCard = () => {
     });
     setFindCourse(tempArray);
   }, [allcourses, filter]);
+  console.log("0000", findCourse);
 
   return (
     <Col>
@@ -65,7 +68,9 @@ export const PurchaseCourseCard = () => {
         {findCourse?.map((elem) => {
           return (
             <Col xs={12} md={6} lg={4} xxl={3} className="d-flex">
-            <Card
+              <CardOneCourse
+              elem={elem} />
+            {/* <Card
               key={elem.course_id}
               className="mapeoCursosComprados text-center mb-4"
               style={{ width: "100%" }}>
@@ -98,7 +103,7 @@ export const PurchaseCourseCard = () => {
                   </Button>
                 </Card.Text>
               </Card.Body>
-            </Card>
+            </Card> */}
           </Col>
           );
         })}
