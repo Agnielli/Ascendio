@@ -47,12 +47,12 @@ export const CardOneCourse = ({elem}) => {
         {Number(elem?.price) === 0 ? "GRATIS" : `${elem?.price}€`}
       </Card.Text>
       <Card.Text className="d-flex justify-content-center mt-auto">
-        <Button
+        <button
           className="Button3"
           onClick={() => navigate(`/course/${elem.course_id}`)}
         >
           Más info
-        </Button>
+        </button>
       </Card.Text>
     </Card.Body>
   </Card>
