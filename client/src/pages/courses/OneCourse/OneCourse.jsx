@@ -386,7 +386,7 @@ export const OneCourse = () => {
 
                 {userId !== userCourse && (
                   <button
-                    className="Button1"
+                    className={isIntoPurchase ? "Button1 comprado" : "Button1"}
                     onClick={handlePurchase}
                     disabled={isIntoPurchase || isIntoValidate && !isConfirmed ? true : false}
                   >
