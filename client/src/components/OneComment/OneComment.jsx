@@ -22,7 +22,7 @@ export const OneComment = () => {
     <>
       {generalPost?.map((elem) => {
         return (
-          <Col xl={12} xs={12} key={elem.post_id}>
+          <Col xxl={12} xl={9} lg={9} md={9} sm={9} xs={9} key={elem.post_id}>
             <CommentCard elem={elem} />
           </Col>
         );
