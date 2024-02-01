@@ -133,10 +133,9 @@ export const CreateTrade = () => {
             required
           />
           <br />
-          
-            <Select
-              className="inputDesplegableRetocado textIndentPlaceholder"
-              placeholder="Categoría.."
+          <InputGroup className="mb-3">
+            <label htmlFor="category">Categorías</label>
+            <select
               id="category"
               name="category_id"
               value={createOneTrade.category_id}
@@ -150,12 +149,16 @@ export const CreateTrade = () => {
                     {option.label}
                   </option>
                 ))}
-            </Select>
-       
+            </select>
+          </InputGroup>
+
           <p>{msgError}</p>
           <br />
           <div>
-            <Button className="Button3 ButtonsCreateTradeSpacing" onClick={handleSubmit}>
+            <Button
+              className="Button3 ButtonsCreateTradeSpacing"
+              onClick={handleSubmit}
+            >
               Aceptar
             </Button>
             <Button className="Button1" onClick={() => navigate("/profile")}>
