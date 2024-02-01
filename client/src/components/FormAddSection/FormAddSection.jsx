@@ -43,7 +43,7 @@ export const FormAddSection = ({setAddSection,course_id, resetCourse, setResetCo
           <Form.Group controlId="">
             <Form.Label>Título de la sección </Form.Label>
             <Form.Control
-
+              autoFocus
               type="text"
               placeholder="Título de la sección"
               value={newSection}
