@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import './FormEdit.scss'
 
 const initialValue = {
   nickname: "",
@@ -14,6 +15,7 @@ export const FormEdit = ({ user, setUser, setShowForm }) => {
   const [editUser, setEditUser] = useState(initialValue);
   const [msgError, setMsgError] = useState("");
   const [file, setFile] = useState();
+  const [style, setStyle] = useState()
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,7 +37,8 @@ export const FormEdit = ({ user, setUser, setShowForm }) => {
       !editUser.lastname ||
       !editUser.password
     ) {
-      setMsgError("*Los campos obligatorios deben estar rellenos");
+      setMsgError("Los campos obligatorios deben estar rellenos");
+      setStyle("EditUserMsgFailure")
     } else {
       const newFormData = new FormData();
       newFormData.append("editUser", JSON.stringify(editUser));
@@ -51,7 +54,8 @@ export const FormEdit = ({ user, setUser, setShowForm }) => {
             setUser(editUser);
             console.log(res);
           }
-          setMsgError("Datos actualizadoos con exito");
+          setMsgError("Datos actualizados con exito");
+          setStyle("EditUserMsgSuccess")
         })
         .catch((err) => {
           console.log(err);
@@ -65,6 +69,8 @@ export const FormEdit = ({ user, setUser, setShowForm }) => {
   };
 
   console.log(editUser);
+
+ 
 
   return (
     <div className="FormularioDatosUsuario">
@@ -134,8 +140,8 @@ export const FormEdit = ({ user, setUser, setShowForm }) => {
             value={editUser?.phonenumber === null ? "" : editUser?.phonenumber}
           />
         </Form.Group>
-
-        <p style={{ marginBottom: '1rem' }}>{msgError || '\u00A0'}</p>
+        
+        <p className={style}>{msgError || '\u00A0'}</p>
 
         <div className="DivGrisParaBotones mt-3">
           <Button className="Button3" variant="primary me-2" onClick={handleSubmit}>

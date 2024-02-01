@@ -122,7 +122,7 @@ CREATE TABLE course (
   price DECIMAL(7,2) UNSIGNED NOT NULL,  -- 99999,99
   is_deleted BOOLEAN NOT NULL DEFAULT false,
   is_disabled BOOLEAN NOT NULL DEFAULT true,
-  is_completed BOOLEAN NOT NULL DEFAULT	false,
+  is_completed BOOLEAN NOT NULL DEFAULT	true,
   CONSTRAINT fk_user_7 FOREIGN KEY (user_id)
   references user(user_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
