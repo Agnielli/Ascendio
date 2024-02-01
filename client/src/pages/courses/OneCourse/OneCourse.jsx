@@ -377,7 +377,7 @@ export const OneCourse = () => {
                   <button
                     className="Button1"
                     onClick={handlePurchase}
-                    disabled={isIntoValidate && !isConfirmed ? true : false}
+                    disabled={isIntoPurchase || isIntoValidate && !isConfirmed ? true : false}
                   >
                     {isIntoPurchase ? "Comprado" : "Comprar"}
                   </button>
