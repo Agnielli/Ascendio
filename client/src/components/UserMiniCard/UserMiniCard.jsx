@@ -33,7 +33,6 @@ export const UserMiniCard = ({ elem, updateUsers, setUpdateUsers }) => {
           alt="Imagen de perfil del usuario"
         />
       </div>
-
       <div className="AdminUserStats d-flex justify-content-center justify-content-xl-start gap-2 gap-xl-3">
         <div>
           <p className="fw-bold">{elem.nickname}</p>
