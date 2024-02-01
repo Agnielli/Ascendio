@@ -244,12 +244,18 @@ export const OneCourse = () => {
     }
   };
 
- 
+  const newVote = peopleVotesCourse + 1
+
   const handlePurchase = () => {
+    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
     addToPurchase();
     setShowCardRate(true);
     setIsIntoPurchase(true);
-    setPeopleVotesCourse(peopleVotesCourse + 1);
+    setPeopleVotesCourse(newVote);
+
+    setTimeout(() => {
+      window.scrollTo(0, scrollPosition);
+    }, 0);
   };
 
   
