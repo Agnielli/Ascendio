@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { AscendioContext } from "../../../../context/AscendioContext";
 import axios from "axios";
 import Select from "react-select";
+import "../../../../../public/stylesheets/InputDesplegableSinBootstrap.scss"
 
 const initialValue = {
   currency: "",
@@ -84,9 +85,11 @@ export const CreateTrade = () => {
       <Col xl={6}>
         <Form className="FormulariosContainer d-flex flex-column">
           <Form.Group controlId="formFile" className="mb-3">
-            <Button className="Button5 ButtonImgCreateTradeInput">
-              <Form.Label>Imagen</Form.Label>
+            <Button className="Button3 ButtonImgCreateTradeInput">
+              <Form.Label> <img className="BotonFoto" src="../../../../../public/images/iconos/camara.png" alt="" /></Form.Label>
+            
             </Button>
+            
             <Form.Control type="file" onChange={handleFile} hidden />
           </Form.Group>
           <Form.Control
@@ -132,10 +135,10 @@ export const CreateTrade = () => {
             onChange={handleChange}
             required
           />
-          <br />
-          <InputGroup className="mb-3">
-            <label htmlFor="category">Categorías</label>
+          <br />          
             <select
+              className="InputDesplegableSinBootstrap textIndentPlaceholder"
+              placeholder="Categoría.."
               id="category"
               name="category_id"
               value={createOneTrade.category_id}
@@ -149,21 +152,16 @@ export const CreateTrade = () => {
                     {option.label}
                   </option>
                 ))}
-            </select>
-          </InputGroup>
-
+            </select>       
           <p>{msgError}</p>
           <br />
           <div>
-            <Button
-              className="Button3 ButtonsCreateTradeSpacing"
-              onClick={handleSubmit}
-            >
-              Aceptar
-            </Button>
-            <Button className="Button1" onClick={() => navigate("/profile")}>
-              Cancelar
-            </Button>
+            <button className="Button3 ButtonsCreateTradeSpacing" onClick={handleSubmit}>
+              ACEPTAR
+            </button>
+            <button className="Button1" onClick={() => navigate("/profile")}>
+              CANCELAR
+            </button>
           </div>
         </Form>
       </Col>

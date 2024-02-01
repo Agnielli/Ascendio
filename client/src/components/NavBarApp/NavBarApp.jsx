@@ -98,11 +98,8 @@ function NavBarApp() {
                       CURSOS
                     </Nav.Link>
                     <Nav.Link as={Link} to="/allpoststrades">
-                      TRADE POSTS
-                    </Nav.Link>
-                    <Nav.Link as={Link} to="/allpostsgenerals">
-                      GENERAL POSTS
-                    </Nav.Link>
+                    POSTS
+                    </Nav.Link>            
                     <Nav.Link as={Link} to="/showAllUsers">
                       USERS
                     </Nav.Link>

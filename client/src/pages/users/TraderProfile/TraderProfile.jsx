@@ -49,7 +49,7 @@ export const TraderProfile = () => {
                 VOLVER
               </Button>
             </Col>
-        <Col xs={4} lg={4} className="d-flex justify-content-center p-0 ">
+        <Col xs={12} lg={4} className="d-flex justify-content-center p-0 ">
           <div>
             <div className="avatarProfilo">
               {traderprofile?.user_image ? (
@@ -76,15 +76,10 @@ export const TraderProfile = () => {
                   traderprofile?.nickname.slice(1)
                 ).toString()}
               </h2>
-              {/* <p className="m-0 mb-2">
-                {traderprofile?.name.charAt(0).toUpperCase() + traderprofile?.name.slice(1)}{" "}
-                {traderprofile?.lastname.charAt(0).toUpperCase() +
-                  traderprofile.lastname.slice(1)}
-              </p> */}
             </div>
           </div>
         </Col>
-        <Col xs={8} lg={8} className=" text-center p-0">
+        <Col xs={12} lg={8} className=" text-center p-0">
           {traderprofile && (
             <div>
               <Row>

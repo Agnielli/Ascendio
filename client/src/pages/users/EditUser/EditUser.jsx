@@ -11,6 +11,7 @@ import { ChangePassword } from "./ChangePassword/ChangePassword";
 import { DeleteUser } from "./DeleteUser/DeleteUser";
 import axios from "axios";
 import Select from "react-select";
+import "../../../../public/stylesheets/InputDesplegableSinBootstrap.scss"
 
 export const EditUser = () => {
   const { user, setUser } = useContext(AscendioContext);

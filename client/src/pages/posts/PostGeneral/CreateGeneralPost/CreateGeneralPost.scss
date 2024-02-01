@@ -1,13 +1,19 @@
 .CreateGeneralPostUser {
+
+  .BotonFoto{  
+    width: 20px;
+    height: 20px;
+  }
   .CreateGeneralPostH2AscendioColor {
     color: #E15252;
   }
 
   .ButtonsCreateTradeSpacing {
-    margin-right: 2rem !important;
+    margin-right: 1rem !important;
   }
   
   .ButtonImgCreateTradeInput {
+    padding: 6px 35px !important;
     margin-top: 2rem !important;
     margin-bottom: 1.5rem !important;
   }
