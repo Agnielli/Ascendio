@@ -30,6 +30,7 @@ export const FormEdit = ({ user, setUser, setShowForm }) => {
   };
 
   const handleSubmit = () => {
+    console.log(editUser.phonenumber);
     if (
       !editUser.nickname ||
       !editUser.name ||

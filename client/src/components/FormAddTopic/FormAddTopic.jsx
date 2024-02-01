@@ -51,6 +51,7 @@ export const FormAddTopic = ({
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Título del tema</Form.Label>
             <Form.Control
+              autoFocus
               type="text"
               placeholder="Título del tema"
               value={newTopic}

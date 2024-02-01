@@ -81,6 +81,7 @@ export const ModalResource = ({
             {contenido === "1" ? (
               <Form.Group controlId="formFile" className="mb-3">
                 <Form.Control
+                  autoFocus
                   type="file"
                   onChange={handleFile}
                   accept="pdf"
@@ -93,6 +94,7 @@ export const ModalResource = ({
                 <Form.Control
                   type="text"
                   value={url}
+                  autoFocus
                   onChange={handleChange}
              
                 />

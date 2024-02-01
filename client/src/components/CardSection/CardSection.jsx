@@ -22,6 +22,7 @@ export const CardSection = ({
   setResource,
   deleteResource,
   isIntoValidate,
+  isConfirmed
 }) => {
   const [showTopic, setShowTopic] = useState(false);
   const [orderedTopics, setOrderedTopics] = useState([]);
@@ -49,7 +50,7 @@ export const CardSection = ({
                 variant="outline-success"
                 onClick={handleClick}
                 disabled={
-                  showTopic ? true : false || isIntoValidate ? true : false
+                  showTopic ? true : false || isIntoValidate && !isConfirmed ? true : false
                 }
               >
                 <span class="material-symbols-outlined addIcon">upload</span>
@@ -60,7 +61,7 @@ export const CardSection = ({
                 className="deleteSection"
                 variant="outline-success"
                 onClick={() => deleteSection(elem.section_id)}
-                disabled={isIntoValidate ? true : false}
+                disabled={isIntoValidate && !isConfirmed ? true : false}
               >
                 <span class="material-symbols-outlined deleteIcon">
                   delete
@@ -92,6 +93,7 @@ export const CardSection = ({
           userId={userId}
           userCourse={userCourse}
           isIntoValidate={isIntoValidate}
+          isConfirmed={isConfirmed}
           />
           );
         })}
