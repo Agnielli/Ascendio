@@ -7,16 +7,13 @@ import "./allTrades.scss";
 import "../../../../../public/stylesheets/ButtonsApp.scss";
 import "../../../../../public/stylesheets/ESTILOCARDGENERAL.scss";
 // import '../../../../../public/stylesheets/FormulariosEInputs.scss';
-
 export const AllTrades = () => {
   const [lastTrades, setLastTrades] = useState([]); // para enseñar: ULTIMOS TRADES o TOP SEGUIDORES o TOP ACERTADOS
   const [lastTradesFilter, setLastTradesFilter] = useState([]);
   const [search, setSearch] = useState("");
-
   const { user } = useContext(AscendioContext);
   const [followingUsers, setFollowingUsers] = useState([]); // Nuevo estado para almacenar usuarios seguidos
   const navigate = useNavigate();
-
   // para obtener los trades ordenados por fecha de subida (últimos trades)
   useEffect(() => {
     axios
@@ -31,7 +28,6 @@ export const AllTrades = () => {
       });
   }, []);
   console.log(lastTrades[0] === undefined);
-
   // para poner los botones en seguir o siguiendo si user existe
   user &&
     useEffect(() => {
@@ -47,7 +43,6 @@ export const AllTrades = () => {
           console.log(err);
         });
     }, [user]);
-
   // Función para seguir o dejar de seguir a un usuario
   const pulsarSeguirONo = (id_followed) => {
     const data = [user.user_id, id_followed];
@@ -82,7 +77,6 @@ export const AllTrades = () => {
         });
     }
   };
-
   const handleChange = (e) => {
     const searchFilter = e.target.value;
     setSearch(searchFilter);
@@ -97,7 +91,6 @@ export const AllTrades = () => {
       setLastTradesFilter(lastTrades);
     }
   };
-
   return (
     <div className="alltrades">
         <Row className="general-altradeposts title-input">
@@ -124,7 +117,7 @@ export const AllTrades = () => {
             </div>
             {/* <input
               onChange={handleChange}
-              placeholder="🔍 Buscar Trades"
+              placeholder=":lupa: Buscar Trades"
               value={search}
             /> */}
           </Col>
@@ -132,11 +125,11 @@ export const AllTrades = () => {
             xs={2}
             className="ascendio-home-row-hijo d-flex gap-1 DivGrisParaBotones mt-2"
           >
-            <Button className="Button2" onClick={() => setShowViews(false)}>
-              POSTS
+            <Button className="Button2" onClick={() => navigate("/allpoststrades")}>
+              TRADE POSTS
             </Button>
-            <Button className="Button2" onClick={() => setShowViews(true)}>
-              GRÁFICA
+            <Button className="Button2" onClick={() => navigate("/allpostsgenerals")}>
+              GENERAL POSTS
             </Button>
           </Col>
         </Row>
@@ -159,7 +152,6 @@ export const AllTrades = () => {
                     </div>
                     <p>{elem.nickname}</p>
                   </Card.Text>
-
                   <div className="DivImagenCard">
                     {elem.image_name !== null ? (
                       <Card.Img
@@ -185,7 +177,6 @@ export const AllTrades = () => {
                     <Card.Title>
                       <h3>Trade de {elem.category_name}</h3>
                     </Card.Title>
-
                     <div className="d-flex gap-2">
                       {
                         user.user_id !== elem.user_id ? (
@@ -216,7 +207,6 @@ export const AllTrades = () => {
                         COMENTARIOS
                       </button>
                     </div>
-
                     <Card.Text>
                       {elem.currency !== null ? (
                         <p>

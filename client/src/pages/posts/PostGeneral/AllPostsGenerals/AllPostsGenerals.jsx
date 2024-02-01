@@ -5,7 +5,6 @@ import { AscendioContext } from "../../../../context/AscendioContext";
 import { Link, useNavigate } from "react-router-dom";
 import "./allPostGenerals.scss";
 import "../../../../../public/stylesheets/ButtonsApp.scss";
-
 export const AllPostsGenerals = () => {
   const [lastTrades, setLastTrades] = useState([]); // para enseñar: ULTIMOS TRADES o TOP SEGUIDORES o TOP ACERTADOS
   const [lastTradesFilter, setLastTradesFilter] = useState([]);
@@ -13,7 +12,6 @@ export const AllPostsGenerals = () => {
   const { user } = useContext(AscendioContext);
   const [followingUsers, setFollowingUsers] = useState([]); // Nuevo estado para almacenar usuarios seguidos
   const navigate = useNavigate();
-
   // para obtener los trades ordenados por fecha de subida (últimos trades)
   useEffect(() => {
     axios
@@ -27,7 +25,6 @@ export const AllPostsGenerals = () => {
         console.log(err);
       });
   }, []);
-
   // para poner los botones en seguir o siguiendo si user existe
   user &&
     useEffect(() => {
@@ -43,12 +40,10 @@ export const AllPostsGenerals = () => {
           console.log(err);
         });
     }, [user]);
-
   // Función para seguir o dejar de seguir a un usuario
   const pulsarSeguirONo = (id_followed) => {
     const data = [user.user_id, id_followed];
     const isFollowing = followingUsers.includes(id_followed); // devuelve true o false
-
     if (isFollowing) {
       // Dejar de seguir
       axios
@@ -79,7 +74,6 @@ export const AllPostsGenerals = () => {
         });
     }
   };
-
   const handleChange = (e) => {
     const searchFilter = e.target.value;
     setSearch(searchFilter);
@@ -93,11 +87,10 @@ export const AllPostsGenerals = () => {
       setLastTradesFilter(lastTrades);
     }
   };
-
   return (
     <div className="allpostgenerals">
       <>
-      <Row className="general-altradeposts title-input">
+      <Row className="d-flex justify-content-start align-items-start">
           <Col
             className="d-flex justify-content-center align-items-center"
           >
@@ -120,13 +113,13 @@ export const AllPostsGenerals = () => {
           </Col>
           <Col
             xs={12}
-            className="ascendio-home-row-hijo d-flex gap-1 DivGrisParaBotones mt-2"
+            className="ascendio-home-row-hijo d-flex DivGrisParaBotones"
           >
-            <Button className="Button2" onClick={() => setShowViews(false)}>
-              POSTS
+            <Button className="Button2 " onClick={() => navigate("/allpoststrades")}>
+              TRADE POSTS
             </Button>
-            <Button className="Button2" onClick={() => setShowViews(true)}>
-              GRÁFICA
+            <Button className="Button2 " onClick={() => navigate("/allpostsgenerals")}>
+              GENERAL POSTS
             </Button>
         </Col>
       </Row>
@@ -175,7 +168,6 @@ export const AllPostsGenerals = () => {
                       <h3>{elem.nickname}</h3>
                     </Card.Title>
                     <Card.Text>{elem.description}</Card.Text>
-
                     <div className="d-flex gap-2">
                       {user.user_id !== elem.user_id ? (
                         <Button
