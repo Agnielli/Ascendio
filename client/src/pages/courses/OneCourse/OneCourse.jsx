@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AscendioContext } from "../../../context/AscendioContext";
 import axios from "axios";
 import "./OneCourse.scss";
-import { Accordion, Button, Card, Col, Row } from "react-bootstrap";
+import { Accordion, Card} from "react-bootstrap";
 import { EditOneCourse } from "../../../components/ModalEditOneCourse/EditOneCourse";
 import { useNavigate, useParams } from "react-router-dom";
 import { FormAddSection } from "../../../components/FormAddSection/FormAddSection";
@@ -477,7 +477,7 @@ export const OneCourse = () => {
                 </button>
               )}
               {userId === userCourse && (
-                <Button
+                <button
 
                 disabled={isIntoValidate && !isConfirmed ? true : false}
                   // onClick={() => deleteCourse(course_id)}
@@ -486,7 +486,7 @@ export const OneCourse = () => {
                   className="Button2"
                 >
                   Eliminar curso
-                </Button>
+                </button>
               )}
             </div>
           </Card.Body>

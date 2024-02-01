@@ -158,8 +158,9 @@
           }
         }
         .isdisabled{
-          background-color: rgba(255, 255, 255, 0.557);
+          background-color: transparent;
           color: #e1525267;
+          border: 3px solid #e1525267;
         }
       }
     }

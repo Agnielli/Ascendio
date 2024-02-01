@@ -35,12 +35,11 @@ export const DisabledCourses = ({ elem, setUpdateCourses }) => {
             </Card.Text>
           </div>
           <div className="mt-auto">
-            <Button
-              className="Button3"
-              onClick={() => enableOneCourse(elem.course_id)}
-            >
+
+            <button className="Button3" onClick={() => enableOneCourse(elem.course_id)}>
+
               Activar Curso
-            </Button>
+            </button>
           </div>
         </Card.Body>
       </Card>
