@@ -2,6 +2,8 @@ import React from "react";
 import { Button, Card, ListGroup } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./AllGeneralPosts.scss";
+import "../../../../../public/stylesheets/ButtonsApp.scss"
+import "../../../../../public/stylesheets/ESTILOCARDGENERAL.scss"
 
 export const AllGeneralPosts = ({
   posts,
@@ -16,7 +18,7 @@ export const AllGeneralPosts = ({
         ?.filter((post) => post.type === 1)
         .map((elem) => {
           return (
-            <Card className="ESTILOCARD" key={elem.post_id}>
+            <Card className="ESTILOCARDGENERAL" key={elem.post_id}>
               {elem.resource_text !== null ? (
                 <Card.Img
                   variant="top"
@@ -28,14 +30,15 @@ export const AllGeneralPosts = ({
               src={"../../../../../public/images/trade/trades.png"}
             />}
               <Card.Body>
-                <Card.Title>Categoría: {elem.category_name}</Card.Title>
+                <Card.Title><h3>{elem.category_name} Post</h3></Card.Title>
                 <Card.Text>Descripción: {elem.description}</Card.Text>
                 <Button
+                className="Button3"
                     onClick={() => {
                       navigate(`/oneGeneralPost/${elem.post_id}`);
                     }}
                   >
-                    Ir a comentarios del post
+                    COMENTARIOS
                   </Button>
               </Card.Body>
             </Card>

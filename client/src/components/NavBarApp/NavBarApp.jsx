@@ -30,9 +30,9 @@ function NavBarApp() {
   return (
     <header>
       <Navbar expand="lg" className="BG-navbar ">
-        <Container fluid className="p-0">
-          <Navbar.Brand className="logoNav p-0 m-0" as={Link} to={redirectTo}>
-            ASCENDIO
+        <Container fluid >
+          <Navbar.Brand className="logoNav  m-0" as={Link} to={redirectTo}>
+           ASCENDIO
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav w-100">
