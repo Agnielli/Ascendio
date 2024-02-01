@@ -10,6 +10,7 @@ export const Cardresource = ({
   section_id,
   topic_id,
   isIntoValidate,
+  isConfirmed,
   userId,
   userCourse,
 }) => {
@@ -37,7 +38,7 @@ export const Cardresource = ({
             <Button
               className="botonResource d-flex justify-content-center align-items-center"
               onClick={handleClick}
-              disabled={isIntoValidate ? true : false}
+              disabled={isIntoValidate && !isConfirmed ? true : false}
             >
               {resource[0]?.resource_type === 1 ? (
                 <span class="material-symbols-outlined resourceIcon">description</span> 
@@ -54,7 +55,7 @@ export const Cardresource = ({
                 onClick={() =>
                   deleteResource(section_id, topic_id, resource[0].resource_id)
                 }
-                disabled={isIntoValidate ? true : false}
+                disabled={isIntoValidate && !isConfirmed ? true : false}
               >
                 <span class="material-symbols-outlined delIcon">delete</span>
               </button>
