@@ -38,8 +38,8 @@ export const OneGeneralPost = () => {
       {oneTrade && (
         <Row className="onetradepost">
           <Col xxl={3}>
-            <Card className="ESTILOCARDGENERAL">
-              <Card.Title className="UserCARD">
+            <Card className="card-padre-onetradepost">
+              <Col className="UserCARD card-hijo1-onetradepost">
                 <Button
                   className="Button1"
                   onClick={() => navigate("/allpostsgenerals")}
@@ -52,39 +52,35 @@ export const OneGeneralPost = () => {
                     {oneTrade.post_user_nickname.charAt(0).toUpperCase()}
                   </p>
                 </div> */}
-                <p>{oneTrade.nickname}</p>
-
-                <Link to={`/traderprofile/${oneTrade.user_id}`}>
-                  <h2>{oneTrade.post_user_nickname}</h2>
-                </Link>
-              </Card.Title>
-              <div className="DivImagenCard">
-                {oneTrade.resource_text !== null ? (
-                  <Card.Img
-                    variant="top"
-                    src={`http://localhost:3000/images/trades/${oneTrade.resource_text}`}
-                    className="ascendio-home-card-imagen"
-                  />
-                ) : (
-                  <Card.Img
-                    className="CardSinFoto"
-                    variant="top"
-                    src={"../../../../public/images/iconos/logoascendio.png"}
-                  />
-                )}
-              </div>
-              <Card.Body>
-                <p>
-                  Descripción: <span>{oneTrade.description}</span>
-                </p>
-                <h4>
-                  {oneTrade.correct === null
-                    ? "Trade Pediente ❓"
-                    : oneTrade.correct === 1
-                    ? "Trade Acertado ✅"
-                    : "Trade Errado ❌"}
-                </h4>
-              </Card.Body>
+                <h3 className="nickname-card-onetradepost">
+                  <Link to={`/traderprofile/${oneTrade.user_id}`}>
+                    {oneTrade.post_user_nickname.charAt(0).toUpperCase() +
+                      oneTrade.post_user_nickname.slice(1).toLowerCase()}
+                  </Link>
+                </h3>
+              </Col>
+              <Col className="card-hijo2-onetradepost">
+                <div className="DivImagenCard">
+                  {oneTrade.resource_text !== null ? (
+                    <Card.Img
+                      variant="top"
+                      src={`http://localhost:3000/images/trades/${oneTrade.resource_text}`}
+                      className="ascendio-home-card-imagen"
+                    />
+                  ) : (
+                    <Card.Img
+                      className="CardSinFoto"
+                      variant="top"
+                      src={"../../../../public/images/iconos/logoascendio.png"}
+                    />
+                  )}
+                </div>
+                <Card.Body className="card-nieto-onetradpost">
+                  <p>
+                    Descripción: <span>{oneTrade.description}</span>
+                  </p>
+                </Card.Body>
+              </Col>
             </Card>
           </Col>
           <Col xxl={9}>
@@ -105,29 +101,6 @@ export const OneGeneralPost = () => {
           </Col>{" "}
         </Row>
       )}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
       {/* {oneTrade && (
         <>
