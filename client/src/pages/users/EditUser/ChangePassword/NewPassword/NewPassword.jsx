@@ -19,8 +19,7 @@ export const NewPassword = ({ user, setUser, setShowChangePassword }) => {
   const [showPassword2, setShowPassword2] = useState(false);
   const [file, setFile] = useState();
 
-  const [style, setStyle] = useState()
-
+  const [style, setStyle] = useState();
 
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
   const [isPasswordFocused2, setIsPasswordFocused2] = useState(false);
@@ -61,13 +60,11 @@ export const NewPassword = ({ user, setUser, setShowChangePassword }) => {
 
   const handleSubmit = () => {
     if (!NewPassword.password || !NewPassword.password2) {
-
       setMsgError("Algun campo no está relleno");
-      setStyle("EditUserMsgFailureResetPassword")
-
+      setStyle("EditUserMsgFailureResetPassword");
     } else if (NewPassword.password !== NewPassword.password2) {
       setMsgError("Las contraseñas no coinciden");
-      setStyle("EditUserMsgFailureResetPassword")
+      setStyle("EditUserMsgFailureResetPassword");
     } else {
       axios
         .put(`http://localhost:3000/users/updatepassword/${user?.user_id}`, {
@@ -77,7 +74,7 @@ export const NewPassword = ({ user, setUser, setShowChangePassword }) => {
         .then((res) => {
           console.log(res.data);
           setMsgError("Contraseña actualizada con exito");
-          setStyle("EditUserMsgSuccessResetPassword")
+          setStyle("EditUserMsgSuccessResetPassword");
         })
         .catch((err) => {
           console.log(err);
@@ -92,11 +89,15 @@ export const NewPassword = ({ user, setUser, setShowChangePassword }) => {
 
   const handleSubmitEmail = () => {
     if (!editUser.email) {
-
-      setMsgError("Los campos obligatorios deben estar rellenos");
-      setStyle("EditUserMsgFailureResetPassword")
-
-    } else {
+      setMsgErrorEmail("Los campos obligatorios deben estar rellenos");
+      setStyle("EditUserMsgFailureResetPassword");
+    } else if (!isEmailValid(editUser.email)) {
+      setMsgErrorEmail("Correo electrónico no válido");
+      setStyle("EditUserMsgFailureResetPassword");
+     } else if(editUser.email === user.email){
+      setMsgErrorEmail("Mismo email, introduce uno diferente.");
+      setStyle("EditUserMsgFailureResetPassword");
+    }else {
       const newFormData = new FormData();
       newFormData.append("editUser", JSON.stringify(editUser));
       newFormData.append("file", file);
@@ -107,14 +108,17 @@ export const NewPassword = ({ user, setUser, setShowChangePassword }) => {
           if (res.data.img) {
             setUser({ ...editUser, img: res.data.img });
             console.log(res.data.img);
+            setStyle("EditUserMsgSuccessResetPassword");
             setMsgErrorEmail("Email actualizado con exito.");
           } else {
+            setStyle("EditUserMsgSuccessResetPassword");
             setUser(editUser);
             setMsgErrorEmail("Email actualizado con exito.");
           }
         })
         .catch((err) => {
           console.log(err);
+          setStyle("EditUserMsgFailureResetPassword");
           setMsgErrorEmail("Este correo ya está registrado.");
         });
     }
@@ -140,9 +144,9 @@ export const NewPassword = ({ user, setUser, setShowChangePassword }) => {
             autoComplete="email"
           />
         </Form.Group>
-
-        <p className="EmailChangingMsg" style={{ marginBottom: "2rem" }}>{msgErrorEmail || "\u00A0"}</p>
-
+        <p className={style} style={{ marginBottom: "2rem" }}>
+          {msgErrorEmail || "\u00A0"}
+        </p>
         <Button
           className="Button3"
           variant="primary me-2"
@@ -254,11 +258,13 @@ export const NewPassword = ({ user, setUser, setShowChangePassword }) => {
             </span>
           </div>
         </Form.Group>
-
-        <p className={style} style={{ paddingBottom: "2rem" }}>{msgError || "\u00A0"}</p>
-        
+        <p className={style} style={{ paddingBottom: "2rem" }}>
+          {msgError || "\u00A0"}
+        </p>
+        <Button className="Button3" onClick={handleSubmit}>
+          CAMBIAR CONTRASEÑA
+        </Button>
       </Form>
-
       <div className="botonCancelarEditarLogin">
       <Button className="Button3" onClick={handleSubmit}>
           CAMBIAR CONTRASEÑA

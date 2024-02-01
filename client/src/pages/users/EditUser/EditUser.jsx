@@ -29,7 +29,7 @@ export const EditUser = () => {
     axios
       .get(`http://localhost:3000/posts/getcategories`)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setOptions(
           res.data.map((elem) => ({
             value: elem.category_id,
@@ -44,23 +44,23 @@ export const EditUser = () => {
   }, []);
 
   {
-    user &&
-      useEffect(() => {
+    useEffect(() => {
+      user &&
         axios
           .get(`http://localhost:3000/users/getcategoriesuser/${user.user_id}`)
           .then((res) => {
-            console.log(res);
+            // console.log(res);
             setUserCategory(res.data);
             setCategories(false);
           })
           .catch((err) => {
             console.log(err);
           });
-      }, [categories]);
+    }, [categories]);
   }
-  if (userCategory) {
-    console.log(userCategory);
-  }
+  // if (userCategory) {
+  //   console.log(userCategory);
+  // }
 
   const handleOption = (option) => {
     setSelectedOption(option);
@@ -77,7 +77,7 @@ export const EditUser = () => {
         { user_id: user.user_id, selectedValues } /* newFormData */
       )
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setCategories(true);
         setMsgSuccess("Categorías cambiadas con éxito");
         setStyle("EditUserMsgSuccess");
@@ -127,7 +127,9 @@ export const EditUser = () => {
   return (
     <main>
       <Row className="EditUserApp w-30 s-xs-90">
+
         <Col xs={12} sm={12} md={12} lg={12} xl={6} className="p-0">
+
           <Button
             className="Button5 ButtonEditUser1 InputsMinimumWidthEditUser mb-4 mt-4"
             onClick={verSection}
@@ -155,10 +157,12 @@ export const EditUser = () => {
           </Button>
         </Col>
 
+
         <Col
           xs={6} sm={6} md={6} lg={6} xl={6}
           className="p-0 justify-content-lx-center align-items-xxl-center"
         >
+
           {showForm && (
             <FormEdit setShowForm={setShowForm} user={user} setUser={setUser} />
           )}

@@ -60,22 +60,22 @@ export const ModalResource = ({
           </Modal.Header>
           <Modal.Body className="modalResource">
           <div className="d-flex ">
-            <Button
+            <button
               onClick={() => {
                 setContenido("1");
               }}
               className="Button4"
             >
               PDF
-            </Button>
-            <Button
+            </button>
+            <button
               onClick={() => {
                 setContenido("2");
               }}
               className="Button4"
             >
               Video
-            </Button>
+            </button>
             </div>
 
             {contenido === "1" ? (
@@ -102,19 +102,19 @@ export const ModalResource = ({
             ) : null}
           </Modal.Body>
           <Modal.Footer className="modalResource">
-            <Button
+            <button
               className="Button3"
               onClick={handleSubmit}
             >
               Aceptar
-            </Button>
+            </button>
 
-            <Button
+            <button
               className="Button3"
               onClick={handleClose}
             >
               Cancelar
-            </Button>
+            </button>
           </Modal.Footer>
         </Modal>
       </Col>
