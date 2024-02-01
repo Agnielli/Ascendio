@@ -35,7 +35,7 @@ export const Users = () => {
   return (
     <main>
       <Row className="UserProfileScss py-5">
-        <Col xs={4} lg={4} className="d-flex justify-content-center p-0 ">
+        <Col xs={12} lg={4} className="d-flex justify-content-center pt-2 ">
           <div>
             <div className="avatarProfilo">
               {user?.img ? (
@@ -56,14 +56,14 @@ export const Users = () => {
                 {user?.lastname.charAt(0).toUpperCase() +
                   user.lastname.slice(1)}
               </p>
-              <Button className="Button3" onClick={() => navigate("/edituser")}>
+              <button className="Button3" onClick={() => navigate("/edituser")}>
                 EDITAR USUARIO
-              </Button>
+              </button>
             </div>
           </div>
         </Col>
 
-        <Col xs={8} lg={8} className=" text-center p-0">
+        <Col xs={12} lg={8} className=" text-center py-5">
           {statisticsUser && (
             <div>
               <Row>
