@@ -107,7 +107,9 @@ class usersControllers {
     connection.query(sql, (error, result) => {
       if (error) return res.status(500).json(error);
       console.log(result);
-      if (!result || result.length === 0 || result[0].is_deleted == 1) {
+      //TODO: hay que poner el if COMENTANDO y eliminar el otro
+      //if (!result || result.length === 0 || result[0].is_deleted == 1 || result[0].is_confirmed == 0 || result[0].is_disabled == 1) { 
+      if (!result || result.length === 0 || result[0].is_deleted == 1 || result[0].is_confirmed == 1 || result[0].is_disabled == 1) { 
         res.status(401).json("Usuario no autorizado");
       } else {
         const user = result[0];
