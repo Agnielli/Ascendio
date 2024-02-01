@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Card, ListGroup } from "react-bootstrap";
 import { PendingTradePosts } from "./PendingTradePosts/PendingTradePosts";
 import { CorrectTradePosts } from "./CorrectTradePosts/CorrectTradePosts";
@@ -6,6 +6,8 @@ import { IncorrectTradePosts } from "./IncorrectTradePosts/IncorrectTradePosts";
 import "./AllTradePosts.scss";
 import "../../../../../public/stylesheets/ButtonsApp.scss";
 import "../../../../../public/stylesheets/ESTILOCARDGENERAL.scss";
+import { useNavigate } from "react-router-dom";
+import { AscendioContext } from "../../../../context/AscendioContext";
 
 export const AllTradePosts = ({
   posts,
@@ -14,6 +16,8 @@ export const AllTradePosts = ({
   markAPending,
 }) => {
   const [showTrades, setShowTrades] = useState(0);
+  const navigate = useNavigate();
+  const { user } = useContext(AscendioContext);
 
   return (
     <>
@@ -75,6 +79,7 @@ export const AllTradePosts = ({
                     </Card.Title>
                     <ListGroup variant="flush">
                       <Card.Text>
+                      <p>Nickname: {user?.nickname}</p>
                         <p>
                           Currency: <span>{elem.currency}</span>
                         </p>
@@ -99,73 +104,98 @@ export const AllTradePosts = ({
                           </span>
                         </p>
                       </Card.Text>
-
                       <div className="BotoneraTrades">
                         {elem.correct === null ? (
                           <div className="d-flex gap-1 m-0">
                             <Button
-                            className="TradeAcertado"
+                              className="TradeAcertado"
                               onClick={() =>
                                 markACorrect(elem.post_id, elem.correct)
                               }
                               variant="primary"
                             >
-                             <img src="../../../public/images/iconos/acertadonegro.png" alt="" />
+                              <img
+                                src="../../../public/images/iconos/acertadonegro.png"
+                                alt=""
+                              />
                             </Button>
                             <Button
-                            className="TradeErroneo"
+                              className="TradeErroneo"
                               onClick={() =>
                                 markAIncorrect(elem.post_id, elem.correct)
                               }
                               variant="primary"
                             >
-                             <img src="../../../public/images/iconos/erroneonegro.png" alt="" />
+                              <img
+                                src="../../../public/images/iconos/erroneonegro.png"
+                                alt=""
+                              />
                             </Button>
                           </div>
                         ) : elem.correct === 1 ? (
                           <div className="d-flex gap-1 m-0">
                             <Button
-                            className="TradeErroneo"
+                              className="TradeErroneo"
                               onClick={() =>
                                 markAIncorrect(elem.post_id, elem.correct)
                               }
                               variant="primary"
                             >
-                              <img src="../../../public/images/iconos/erroneonegro.png" alt="" />
+                              <img
+                                src="../../../public/images/iconos/erroneonegro.png"
+                                alt=""
+                              />
                             </Button>
                             <Button
-                            className="TradePendiente"
+                              className="TradePendiente"
                               onClick={() =>
                                 markAPending(elem.post_id, elem.correct)
                               }
                               variant="primary"
                             >
-                              <img src="../../../public/images/iconos/pendiente.png" alt="" />
+                              <img
+                                src="../../../public/images/iconos/pendiente.png"
+                                alt=""
+                              />
                             </Button>
                           </div>
                         ) : (
                           <div className="d-flex gap-1 m-0">
                             <Button
-                            className="TradeAcertado"
+                              className="TradeAcertado"
                               onClick={() =>
                                 markACorrect(elem.post_id, elem.correct)
                               }
                               variant="primary"
                             >
-                              <img src="../../../public/images/iconos/acertadonegro.png" alt="" />
+                              <img
+                                src="../../../public/images/iconos/acertadonegro.png"
+                                alt=""
+                              />
                             </Button>
                             <Button
-                            className="TradePendiente"
+                              className="TradePendiente"
                               onClick={() =>
                                 markAPending(elem.post_id, elem.correct)
                               }
                               variant="primary"
                             >
-                              <img src="../../../public/images/iconos/pendiente.png" alt="" />
+                              <img
+                                src="../../../public/images/iconos/pendiente.png"
+                                alt=""
+                              />
                             </Button>
                           </div>
                         )}
                       </div>
+                      <Button
+                        className="Button3"
+                        onClick={() => {
+                          navigate(`/oneGeneralPost/${elem.post_id}`);
+                        }}
+                      >
+                        COMENTARIOS
+                      </Button>
                     </ListGroup>
                   </Card.Body>
                 </Card>

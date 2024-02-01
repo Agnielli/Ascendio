@@ -90,20 +90,16 @@
   overflow: hidden; /* Oculta el texto que desborda el contenedor */
   text-overflow: ellipsis; /* Muestra puntos suspensivos (...) cuando el texto desborda */
 
-  &:active {
-    background-color: $accent2-color;
-    color: $accent2-color $accent2-color;
-  }
   &:hover {
     // background-color: $accent3-color ; este era el original
     background-color: $accent2-color;
     color: $accent2-color $accent2-color;
   }
-  // &:focus-visible {
-  //   border-color: #dc3545;
-  //   outline: 0;
-  //   box-shadow: 0 0 0 0.25rem #dc35466e;
-  // }
+
+  &:active {
+    background-color: $accent2-color;
+    color: $accent2-color $accent2-color;
+  }
 }
 
 //boton menus para sitios como dentro de editar perfil: de gris-rosa a rosa-gris

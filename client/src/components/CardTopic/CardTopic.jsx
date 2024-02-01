@@ -17,6 +17,7 @@ export const CardTopic = ({
   userId,
   userCourse,
   isIntoValidate,
+  isConfirmed
 }) => {
   const [showModalArchivo, setShowModalArchivo] = useState(false);
   const [resource, setResource] = useState();
@@ -50,7 +51,7 @@ export const CardTopic = ({
                 className="addTopic"
                 variant="outline-success"
                 onClick={handleClick}
-                disabled={isIntoValidate ? true : false}
+                disabled={isIntoValidate && !isConfirmed ? true : false}
               >
                 <span class="material-symbols-outlined addIcon">upload</span>
               </Button>
@@ -60,7 +61,7 @@ export const CardTopic = ({
                 className="deleteTopic"
                 variant="outline-danger"
                 onClick={() => deleteTopic(section_id, topic.topic_id)}
-                disabled={isIntoValidate ? true : false}
+                disabled={isIntoValidate && !isConfirmed ? true : false}
               >
                 <span class="material-symbols-outlined deleteIcon">
                   delete
@@ -92,6 +93,7 @@ export const CardTopic = ({
               userCourse={userCourse}
               section_id={section_id}
               topic_id={topic.topic_id}
+              isConfirmed={isConfirmed}
             />
           )}
        
