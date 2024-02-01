@@ -38,7 +38,7 @@ export const OneTradePost = () => {
     <>
       {oneTrade && (
         <Row className="onetradepost">
-          <Col xxl={3}>
+          <Col xxl={3} className="onetradepost-hijo">
             <Card className="card-padre-onetradepost">
               <Col className="UserCARD card-hijo1-onetradepost">
                 <Button
@@ -116,7 +116,7 @@ export const OneTradePost = () => {
               </Col>
             </Card>
           </Col>
-          <Col xxl={9}>
+          <Col xxl={9} className="onetradepost-hijo">
             <ShowAllCommentsPost
               showModal={showModal}
               setShowModal={setShowModal}

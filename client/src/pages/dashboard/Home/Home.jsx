@@ -113,7 +113,7 @@ export const Home = () => {
           </Row>
         ) : (
           <Row className="ascendio-home-post-padre">
-            <Col className="ascendio-home-col-cards col-12">
+            <Col className="ascendio-home-col-cards AllTradesPostGap col-12">
               {tradesHoy[0] !== undefined ? (
                 tradesHoy.map((elem) => {
                   return (
