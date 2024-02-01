@@ -1,11 +1,24 @@
+@use "../../../../../../public/stylesheets/variables.scss" as *;
 
-.comments {
+.showallcommentsposts-padre {
+  background-color: $accent2-color;
+  border-radius: 2rem;
+  max-height: 50vh;
+  max-width: 100%;
 
-  h3, p {
-    color: black;
-  }
-  .col {
-    color: black;
-    padding: 0;
+  .showallcommentsposts-hijo {
+    padding: 0.5rem;
+    max-height: calc(
+      50vh - 5rem
+    ); /* Establece la altura máxima al 50% del viewport height */
+    overflow-y: auto; /* Habilita el scroll vertical si se excede la altura máxima */
+    overflow-x: hidden; // temporal
+    max-width: 100%;
+    background-color: $accent2-color;
+    border-radius: 2rem;
+
+    .showallcommentsposts-nieto {
+      @include display-flex(row, center, center);
+    }
   }
 }
