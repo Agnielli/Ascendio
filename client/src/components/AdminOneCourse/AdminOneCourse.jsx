@@ -24,7 +24,7 @@ export const AdminOneCourse = ({ elem, updateCourses, setUpdateCourses }) => {
   };
 
   return (
-    <Col xs={12} md={6} lg={4} xxl={3} className="d-flex">
+
       <Card
         style={{ width: "100%" }}
         className="mapeoAllCourse text-center mb-4"
@@ -34,7 +34,7 @@ export const AdminOneCourse = ({ elem, updateCourses, setUpdateCourses }) => {
           variant="top"
           src={`http://localhost:3000/images/cursos/${elem.course_img}`}
         />
-        <Card.Body className="d-flex flex-column">
+        <Card.Body className="d-flex flex-column gap-1">
           <div>
             <Card.Title className="cardtitle">{elem.title}</Card.Title>
             <Card.Text className="descriptioncard">
@@ -51,6 +51,6 @@ export const AdminOneCourse = ({ elem, updateCourses, setUpdateCourses }) => {
           </div>
         </Card.Body>
       </Card>
-    </Col>
+
   );
 };

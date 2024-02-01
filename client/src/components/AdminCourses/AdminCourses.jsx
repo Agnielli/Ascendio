@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { AdminOneCourse } from "../AdminOneCourse/AdminOneCourse";
-import { Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 
 
 export const AdminCourses = () => {
@@ -23,12 +23,14 @@ export const AdminCourses = () => {
       <>
         {course?.map((elem) => {
           return (
-            <AdminOneCourse
-              elem={elem}
-              key={elem.course_id}
-              updateCourses={updateCourses}
-              setUpdateCourses={setUpdateCourses}
-            />
+            <Col xs={12} md={6} lg={4} xxl={3} className="d-flex justify-content-center">
+              <AdminOneCourse
+                elem={elem}
+                key={elem.course_id}
+                updateCourses={updateCourses}
+                setUpdateCourses={setUpdateCourses}
+              />
+            </Col>
           );
         })}
       </>
