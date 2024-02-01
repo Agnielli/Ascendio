@@ -20,7 +20,12 @@ function NavBarApp() {
     navigate("/");
   };
 
-  const redirectTo = user && user.type === 1 ? "/admin" : (user && user.type === 2 ? "/home" : "/");
+  const redirectTo =
+    user && user.type === 1
+      ? "/admin"
+      : user && user.type === 2
+      ? "/home"
+      : "/";
 
   return (
     <header>
@@ -30,7 +35,7 @@ function NavBarApp() {
            ASCENDIO
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav w-100" >
+          <Navbar.Collapse id="basic-navbar-nav w-100">
             <Nav className="me-auto d-flex w-100 ">
               <div className="d-flex justify-content-end w-100">
                 {!user && (
@@ -41,40 +46,52 @@ function NavBarApp() {
                     <Nav.Link as={Link} to="/contact">
                       CONTACT
                     </Nav.Link>
-                      <Button className="ButtonLogin" variant="outline-success" onClick={()=> navigate("/login")}>LOGIN</Button>
-                      <Button className="ButtonRegister" variant="outline-success" onClick={()=> navigate("/register")}>
-                        REGISTER
-                      </Button>
+                    <Button
+                      className="ButtonLogin"
+                      variant="outline-success"
+                      onClick={() => navigate("/login")}
+                    >
+                      LOGIN
+                    </Button>
+                    <Button
+                      className="ButtonRegister"
+                      variant="outline-success"
+                      onClick={() => navigate("/register")}
+                    >
+                      REGISTER
+                    </Button>
                   </div>
                 )}
                 {user?.type === 1 && (
-                 <div className=" navbarLinksBotones d-flex align-items-center">
-                  
+                  <div className=" navbarLinksBotones d-flex align-items-center">
                     <div
-                        className="d-flex user"
-                        onClick={() => navigate("/admin")}
-                      >
-                        <p className="mt-3 me-3 d-lg-none">{user.nickname}</p>
-                        <div className="avatar">
-                          {user?.img ? (
-                            <img
-                              src={`http://localhost:3000/images/users/${user.img}`}
-                            />
-                          ) : (
-                            <p className="letteruser">{user?.nickname.charAt(0).toUpperCase()}</p>
-                          )}
-                        </div>
+                      className="d-flex user"
+                      onClick={() => navigate("/admin")}
+                    >
+                      <p className="mt-3 me-3 d-lg-none">{user.nickname}</p>
+                      <div className="avatar">
+                        {user?.img ? (
+                          <img
+                            src={`http://localhost:3000/images/users/${user.img}`}
+                          />
+                        ) : (
+                          <p className="letteruser">
+                            {user?.nickname.charAt(0).toUpperCase()}
+                          </p>
+                        )}
                       </div>
-                      <Button className="ButtonLogin" variant="outline-success me-2 ms-2" onClick={logOut}>
-                        LogOut
-                      </Button>
+                    </div>
+                    <Button
+                      className="ButtonLogin"
+                      variant="outline-success me-2 ms-2"
+                      onClick={logOut}
+                    >
+                      LogOut
+                    </Button>
                   </div>
-      
-      
                 )}
                 {user?.type === 2 && (
                   <div className=" navbarLinksBotones d-flex align-items-center">
-      
                     <Nav.Link as={Link} to="/allcourses">
                       CURSOS
                     </Nav.Link>
@@ -91,23 +108,30 @@ function NavBarApp() {
                       className="d-flex user"
                       onClick={() => navigate("/profile")}
                     >
-                      <p className="mt-3 me-3 d-lg-none">{user.nickname.toUpperCase()}</p>
+                      <p className="mt-3 me-3 d-lg-none">
+                        {user.nickname.toUpperCase()}
+                      </p>
                       <div className="avatar">
                         {user?.img ? (
                           <img
                             src={`http://localhost:3000/images/users/${user.img}`}
                           />
                         ) : (
-                          <p className="letteruser">{user?.nickname.charAt(0).toUpperCase()}</p>
+                          <p className="letteruser">
+                            {user?.nickname.charAt(0).toUpperCase()}
+                          </p>
                         )}
                       </div>
                     </div>
-                    <Button className="ButtonLogin" variant="outline-success me-2 ms-2" onClick={logOut}>
+                    <Button
+                      className="ButtonLogin"
+                      variant="outline-success me-2 ms-2"
+                      onClick={logOut}
+                    >
                       LogOut
                     </Button>
-                    </div>
+                  </div>
                 )}
-      
               </div>
             </Nav>
           </Navbar.Collapse>

@@ -4,6 +4,7 @@ import { Button, Card, Col, ListGroup, Row } from "react-bootstrap";
 import { AscendioContext } from "../../../../context/AscendioContext";
 import { Link, useNavigate } from "react-router-dom";
 import "./allPostGenerals.scss";
+import "../../../../../public/stylesheets/ButtonsApp.scss";
 
 export const AllPostsGenerals = () => {
   const [lastTrades, setLastTrades] = useState([]); // para enseñar: ULTIMOS TRADES o TOP SEGUIDORES o TOP ACERTADOS
@@ -98,20 +99,31 @@ export const AllPostsGenerals = () => {
       <>
         <Row className="generalallpostsReal title-input">
           <Col
-            lg={3}
+            //lg={3}
             className="d-flex justify-content-center align-items-center"
           >
             <h2>General Posts</h2>
           </Col>
           <Col
-            lg={9}
+            //lg={9}
             className="d-flex justify-content-center align-items-center"
           >
-            <input
+            <div className="input-container">
+              <span className="material-symbols-outlined search-icon">
+                search
+              </span>
+              <input
+                onChange={handleChange}
+                placeholder="Buscar"
+                value={search}
+                className="buscador"
+              />
+            </div>
+            {/* <input
               onChange={handleChange}
               placeholder="🔍 Buscar Trades"
               value={search}
-            />
+            /> */}
           </Col>
         </Row>
         <div className="d-flex flex-wrap justify-content-center gap-4">

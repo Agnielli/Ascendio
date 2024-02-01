@@ -22,7 +22,7 @@ export const OneComment = () => {
     <>
       {generalPost?.map((elem) => {
         return (
-          <Col className="d-flex justify-content-center" key={elem.post_id} xl={3} lg={4} sm={6} xs={12}>
+          <Col xl={12} xs={12} key={elem.post_id}>
             <CommentCard elem={elem} />
           </Col>
         );

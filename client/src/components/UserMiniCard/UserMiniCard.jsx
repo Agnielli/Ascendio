@@ -44,7 +44,7 @@ export const UserMiniCard = ({ elem, updateUsers, setUpdateUsers }) => {
           <p>{elem.incorrect_posts} Errados</p>
         </div>
       </div>
-      <div className="AdminUserButton ">
+      <div className="AdminUserButton">
         <Button
           className="Button4"
           variant="danger"

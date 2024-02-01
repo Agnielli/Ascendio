@@ -101,20 +101,31 @@ export const AllTrades = () => {
       <>
         <Row className="general-altradeposts title-input">
           <Col
-            lg={3}
+            // lg={3}
             className="d-flex justify-content-center align-items-center"
           >
             <h2>Trade Posts</h2>
           </Col>
           <Col
-            lg={9}
+            // lg={9}
             className="d-flex justify-content-center align-items-center"
           >
-            <input
+            <div className="input-container">
+              <span className="material-symbols-outlined search-icon">
+                search
+              </span>
+              <input
+                onChange={handleChange}
+                placeholder="Buscar"
+                value={search}
+                className="buscador"
+              />
+            </div>
+            {/* <input
               onChange={handleChange}
               placeholder="🔍 Buscar Trades"
               value={search}
-            />
+            /> */}
           </Col>
         </Row>
         <div className="d-flex flex-wrap justify-content-center gap-4">
