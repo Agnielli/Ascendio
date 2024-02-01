@@ -258,7 +258,6 @@ export const NewPassword = ({ user, setUser, setShowChangePassword }) => {
             </span>
           </div>
         </Form.Group>
-
         <p className={style} style={{ paddingBottom: "2rem" }}>
           {msgError || "\u00A0"}
         </p>
@@ -266,8 +265,10 @@ export const NewPassword = ({ user, setUser, setShowChangePassword }) => {
           CAMBIAR CONTRASEÑA
         </Button>
       </Form>
-
       <div className="botonCancelarEditarLogin">
+      <Button className="Button3" onClick={handleSubmit}>
+          CAMBIAR CONTRASEÑA
+        </Button>
         <Button
           className="Button1"
           onClick={() => setShowChangePassword(false)}

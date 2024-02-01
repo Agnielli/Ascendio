@@ -87,6 +87,7 @@
 
   .FormularioDatosUsuario {
     margin-top: 24px;
+    min-width: 280px;
     background-color: $accent2-color;
     padding: 12px;
     border-radius: 25px;
@@ -102,7 +103,7 @@
   .botonCancelarEditarLogin {
     width: 100%;
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
     button {
       margin: 0 !important;
     }

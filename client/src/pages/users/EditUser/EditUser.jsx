@@ -127,7 +127,9 @@ export const EditUser = () => {
   return (
     <main>
       <Row className="EditUserApp w-30 s-xs-90">
-        <Col xs={12} sm={12} className="p-0">
+
+        <Col xs={12} sm={12} md={12} lg={12} xl={6} className="p-0">
+
           <Button
             className="Button5 ButtonEditUser1 InputsMinimumWidthEditUser mb-4 mt-4"
             onClick={verSection}
@@ -155,7 +157,12 @@ export const EditUser = () => {
           </Button>
         </Col>
 
-        <Col xs={12} sm={6} className="p-0">
+
+        <Col
+          xs={6} sm={6} md={6} lg={6} xl={6}
+          className="p-0 justify-content-lx-center align-items-xxl-center"
+        >
+
           {showForm && (
             <FormEdit setShowForm={setShowForm} user={user} setUser={setUser} />
           )}
