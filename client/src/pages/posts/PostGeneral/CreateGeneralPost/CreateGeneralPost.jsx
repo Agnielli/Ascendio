@@ -52,7 +52,9 @@ export const CreateGeneralPost = () => {
             <h2 className="CreateGeneralPostH2AscendioColor">CREAR POST GENERAL</h2>
             <br />
             <Button className="Button3 ButtonImgCreateTradeInput">
+
             <Form.Label><img className="BotonFoto" src="../../../../../public/images/iconos/camara.png" alt="" /></Form.Label>
+
                 </Button>
             <Form.Control type="file" onChange={handleFile} hidden />
           </Form.Group>

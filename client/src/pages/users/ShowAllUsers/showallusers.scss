@@ -88,4 +88,31 @@
   }
 }
 
+@media screen and (min-width: 1200px) {
+  .BuscadorShowAllUsers {
+    margin-left: 25rem !important;
+    transition: 0.5s;
+  }
+}
+
+@media screen and (max-width: 945px) {
+  span {
+    padding-bottom: 1rem !important;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .BuscadorShowAllUsers {
+    transition: 0.5s;
+  }
+}
+
+@media screen and (max-width: 682px) {
+  .RowShowAllUsersHeader {
+    flex-direction: column;
+    text-align: center !important;
+  }
+}
+
+
 
