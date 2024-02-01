@@ -6,7 +6,7 @@
 
   .tradingview-widget-container {
     width: 80%;
-    aspect-ratio: 2/1;
+    // aspect-ratio: 2/1;
     @include display-flex(column, center, center);
     flex-wrap: wrap;
     margin-bottom: 1rem;
@@ -25,7 +25,7 @@ div.tradingview-widget-copyright {
 
     .tradingview-widget-container {
       width: 80%;
-      aspect-ratio: 2/1;
+      // aspect-ratio: 2/1;
       @include display-flex(column, center, center);
       flex-wrap: wrap;
       margin-bottom: 1rem;
@@ -53,8 +53,8 @@ div.tradingview-widget-copyright {
   }
 }
 
-//RESPONSIVE tablet pequeña // HECHO 
-@media (min-width: 576px) and (max-width:768px) {
+//RESPONSIVE tablet pequeña // HECHO
+@media (min-width: 576px) and (max-width: 768px) {
   .ascendio-graphic-containerPrincipal {
     @include display-flex(column, center, center);
     min-width: 80%;
@@ -72,7 +72,6 @@ div.tradingview-widget-copyright {
     display: none;
   }
 }
-
 
 //RESPONSIVE MOVIL // HECHO
 @media (max-width: 576px) {
@@ -93,4 +92,3 @@ div.tradingview-widget-copyright {
     display: none;
   }
 }
-
