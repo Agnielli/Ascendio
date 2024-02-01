@@ -449,7 +449,9 @@ export const OneCourse = () => {
               />
             )}
 
+
             {userId === userCourse && !addSection &&(
+
               <button
                 className="Button1 d-flex m-3"
                 onClick={addNewSection}
@@ -462,7 +464,7 @@ export const OneCourse = () => {
             <div className="courseCardEnd gap-3 mt-5">
               {userId === userCourse && (
                 <button
-                  className="validarButton"
+                  className={`validarButton ${isIntoValidate && 'isdisabled'}`}
                   onClick={handleValidate}
                   disabled={isIntoValidate ? true : false}
                 >
@@ -471,6 +473,7 @@ export const OneCourse = () => {
               )}
               {userId === userCourse && (
                 <Button
+
                 disabled={isIntoValidate && !isConfirmed ? true : false}
                   // onClick={() => deleteCourse(course_id)}
                   onClick={openModalDelete}
