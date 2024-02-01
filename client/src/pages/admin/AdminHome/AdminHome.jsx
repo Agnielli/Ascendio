@@ -298,30 +298,32 @@ export const AdminHome = () => {
             {/* Aquí empiezan los cursos */}
             <Row className="ButtonsRow2 d-flex justify-content-center align-items-center text-center mb-5">
                 <Col xl={12} xs={4} className="d-flex flex-column flex-sm-row justify-content-center mt-5">
-                  <Button
+                  <button
                     className="ButtonNoBG"
                     onClick={() => showAllCourses()}
                   >
                     Todos
-                  </Button>
-                  <Button
+                  </button>
+                  <button
                     className="ButtonNoBG"
                     onClick={() => showAllEnabledCourses()}
                   >
                     Activos
-                  </Button>
-                  <Button
+                  </button>
+                  <button
                     className="ButtonNoBG"
                     onClick={() => showAllDisabledCourses()}
                   >
                     Bloqueados
-                  </Button>
+                  </button>
                 </Col>
               </Row>
               <Row>
-                {showCourses && <AdminCourses />}
-                {showDisabledCourses && <DisabledCoursesMap />}
-                {showEnabledCourses && <EnabledCoursesMap />}
+                <Col className="d-flex justify-content-center gap-3 pb-5">
+                  {showCourses && <AdminCourses />}
+                  {showDisabledCourses && <DisabledCoursesMap />}
+                  {showEnabledCourses && <EnabledCoursesMap />}
+                </Col>
               </Row>
             </>
           )}
