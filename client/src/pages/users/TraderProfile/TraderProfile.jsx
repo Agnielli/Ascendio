@@ -165,8 +165,8 @@ export const TraderProfile = () => {
           )}
         </Col>
         <Col className="p-0" xs={12} lg={12}>
-          <div className="d-flex justify-content-between DivGrisParaBotones w-100 mt-3 mb-3">
-            <div className="d-flex flex-column">
+          <div className="d-flex DivGrisParaBotones mt-3 mb-3">
+            <div className="BotonUser d-flex flex-column">
               <Button
                 variant="primary"
                 onClick={handleShowPost}
@@ -175,7 +175,7 @@ export const TraderProfile = () => {
                 MOSTRAR POSTS
               </Button>
             </div>
-            <div className="d-flex flex-column">
+            <div className="BotonUser d-flex flex-column">
               <Button
                 variant="primary"
                 onClick={handleShowCourses}
