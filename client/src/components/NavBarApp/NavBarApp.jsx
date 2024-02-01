@@ -31,8 +31,10 @@ function NavBarApp() {
     <header>
       <Navbar expand="lg" className="BG-navbar ">
         <Container fluid >
-          <Navbar.Brand className="logoNav  m-0" as={Link} to={redirectTo}>
-           ASCENDIO
+          
+          <Navbar.Brand className="logoNav  m-0" as={Link} to={redirectTo} >{  }
+          <img className="logoSize" src={`http://localhost:3000/images/cursos/default.png`}/>
+           SCENDIO
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav w-100">

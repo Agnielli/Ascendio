@@ -3,6 +3,14 @@ body {
   background-color: $tertiary-color;
 }
 
+.logoSize{
+  height: 35.5px;
+  padding-bottom: 6px;
+  margin-bottom: 3px;
+  margin-right: -1px;
+  content: url('http://localhost:3000/images/cursos/defaultblack.png');
+}
+
 @media (min-width: 992px) {
  
   .BG-navbar {
@@ -147,7 +155,10 @@ nav {
 
 @media (max-width: 992px) {
   
-  
+  .logoSize {
+    content: url('http://localhost:3000/images/cursos/default.png');
+}
+
   .BG-navbar {
     background-color: transparent;
     padding: 0 !important; // CRISTIAN
