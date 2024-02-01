@@ -22,6 +22,8 @@ export const EditUser = () => {
   const [categories, setCategories] = useState(false);
   const [userCategory, setUserCategory] = useState();
   const [showCategories, setShowCategories] = useState(false);
+  const [msgSuccess, setMsgSuccess] = useState()
+  const [style, setStyle] = useState()
 
   useEffect(() => {
     axios
@@ -77,6 +79,8 @@ export const EditUser = () => {
       .then((res) => {
         console.log(res.data);
         setCategories(true);
+        setMsgSuccess("Categorías cambiadas con éxito")
+        setStyle("EditUserMsgSuccess")
       })
       .catch((err) => {
         console.log(err);
@@ -161,6 +165,7 @@ export const EditUser = () => {
                       isMulti
                     />
                   </Form.Group>
+                  <p className={style}>{msgSuccess}</p>
                   <div className="DivGrisParaBotones mt-3">
                     <Button className="Button3" type="submit">ACEPTAR</Button>
                     <Button className="Button1" onClick={() => setShowCategories(false)}>CANCELAR</Button>
