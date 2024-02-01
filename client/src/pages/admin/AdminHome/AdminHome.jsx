@@ -268,29 +268,26 @@ export const AdminHome = () => {
 
           {showCourseButtons && (
             <>
-              <Row className="ButtonsRow2 d-flex justify-content-center align-items-center text-center m-5">
-                <Col lg={2} md={3} xs={12}>
+            {/* Aquí empiezan los cursos */}
+            <Row className="ButtonsRow2 d-flex justify-content-center align-items-center text-center mb-5">
+                <Col xl={12} xs={4} className="d-flex flex-column flex-sm-row justify-content-center mt-5">
                   <Button
                     className="ButtonNoBG"
                     onClick={() => showAllCourses()}
                   >
-                    Todos los cursos
+                    Todos
                   </Button>
-                </Col>
-                <Col lg={2} md={3} xs={12}>
                   <Button
                     className="ButtonNoBG"
                     onClick={() => showAllEnabledCourses()}
                   >
-                    Cursos Activos
+                    Activos
                   </Button>
-                </Col>
-                <Col lg={2} md={3} xs={12}>
                   <Button
                     className="ButtonNoBG"
                     onClick={() => showAllDisabledCourses()}
                   >
-                    Cursos Bloqueados
+                    Bloqueados
                   </Button>
                 </Col>
               </Row>
