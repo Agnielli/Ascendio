@@ -1,0 +1,20 @@
+@use "../../../../../public/stylesheets/variables.scss" as *;
+
+.CreateTradeUser {
+  .ButtonImgCreateTradeInput {
+    margin-top: 2rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .ButtonsCreateTradeSpacing {
+    margin-right: 2rem !important;
+  }
+
+  .textIndentPlaceholder {
+    text-indent: 0.6rem;
+  }
+
+  .ButtonAcceptCancelCreateTrade {
+    width: 13ch;
+  }
+}

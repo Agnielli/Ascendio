@@ -128,11 +128,11 @@ export const EditUser = () => {
     <main>
       <Row className="EditUserApp w-30 s-xs-90">    
           
-            <Col xs={12} sm={6} className="p-0">
-              <Button className="Button5 ButtonEditUser1 mb-4 mt-4" onClick={verSection}>EDITAR DATOS DEL USUARIO</Button>
-              <Button className="Button5 ButtonEditUser1 mb-4" onClick={verCategoryUser}> EDITAR CATEGORÍA </Button>
-              <Button className="Button5 ButtonEditUser1 mb-4" onClick={verChangePassword}>EDITAR DATOS DE LOGIN </Button>
-              <Button className="Button5 ButtonEditUser1 mb-4" onClick={verDeleteUser}>ELIMINAR CUENTA </Button>
+            <Col xs={12} sm={12} className="p-0">
+              <Button className="Button5 ButtonEditUser1 InputsMinimumWidthEditUser mb-4 mt-4" onClick={verSection}>EDITAR DATOS DEL USUARIO</Button>
+              <Button className="Button5 ButtonEditUser1 InputsMinimumWidthEditUser mb-4" onClick={verCategoryUser}> EDITAR CATEGORÍA </Button>
+              <Button className="Button5 ButtonEditUser1 InputsMinimumWidthEditUser mb-4" onClick={verChangePassword}>EDITAR DATOS DE LOGIN </Button>
+              <Button className="Button5 ButtonEditUser1 InputsMinimumWidthEditUser mb-4" onClick={verDeleteUser}>ELIMINAR CUENTA </Button>
             </Col>
       
             <Col xs={12} sm={6} className="p-0">

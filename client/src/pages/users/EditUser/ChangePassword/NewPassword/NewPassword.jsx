@@ -12,12 +12,12 @@ const initialValue = {
 export const NewPassword = ({ user, setUser, setShowChangePassword }) => {
   const [NewPassword, setNewPassword] = useState(initialValue);
   const [msgError, setMsgError] = useState("");
-  const [msgError2, setMsgError2] = useState("");
   const [msgErrorEmail, setMsgErrorEmail] = useState("");
   const [editUser, setEditUser] = useState(initialValue);
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
   const [file, setFile] = useState();
+  const [style, setStyle] = useState()
 
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
   const [isPasswordFocused2, setIsPasswordFocused2] = useState(false);
@@ -59,8 +59,10 @@ export const NewPassword = ({ user, setUser, setShowChangePassword }) => {
   const handleSubmit = () => {
     if (!NewPassword.password || !NewPassword.password2) {
       setMsgError("Algun campo no está relleno");
+      setStyle("EditUserMsgFailureResetPassword")
     } else if (NewPassword.password !== NewPassword.password2) {
       setMsgError("Las contraseñas no coinciden");
+      setStyle("EditUserMsgFailureResetPassword")
     } else {
       axios
         .put(`http://localhost:3000/users/updatepassword/${user?.user_id}`, {
@@ -70,6 +72,7 @@ export const NewPassword = ({ user, setUser, setShowChangePassword }) => {
         .then((res) => {
           console.log(res.data);
           setMsgError("Contraseña actualizada con exito");
+          setStyle("EditUserMsgSuccessResetPassword")
         })
         .catch((err) => {
           console.log(err);
@@ -80,6 +83,7 @@ export const NewPassword = ({ user, setUser, setShowChangePassword }) => {
   const handleSubmitEmail = () => {
     if (!editUser.email) {
       setMsgError("Los campos obligatorios deben estar rellenos");
+      setStyle("EditUserMsgFailureResetPassword")
     } else {
       const newFormData = new FormData();
       newFormData.append("editUser", JSON.stringify(editUser));
@@ -122,7 +126,7 @@ export const NewPassword = ({ user, setUser, setShowChangePassword }) => {
           />
         </Form.Group>
 
-        <p style={{ marginBottom: "2rem" }}>{msgErrorEmail || "\u00A0"}</p>
+        <p className="EmailChangingMsg" style={{ marginBottom: "2rem" }}>{msgErrorEmail || "\u00A0"}</p>
 
         <Button
           className="Button3"
@@ -236,7 +240,7 @@ export const NewPassword = ({ user, setUser, setShowChangePassword }) => {
           </div>
         </Form.Group>
 
-        <p style={{ marginBottom: "1rem" }}>{msgError || "\u00A0"}</p>
+        <p className={style} style={{ paddingBottom: "2rem" }}>{msgError || "\u00A0"}</p>
         <Button className="Button3" onClick={handleSubmit}>
           CAMBIAR CONTRASEÑA
         </Button>
