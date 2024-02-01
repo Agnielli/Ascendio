@@ -1,21 +1,11 @@
 
 .onetradepost {
-  .category {
-    h4 {
-      color: black;
-    }
-  }
+ padding: 2vh 10vw;
   
-  .description {
-    h4 {
-      color: black;
-    }
-  }
   
-  .tradeimagen {
-    max-width: 400px;
-    min-width: 280px;
-  }
+    h4 {
+      color: white;
+    }
   
   @media (max-width: 1200px) {
     .hide-on-small-screen {

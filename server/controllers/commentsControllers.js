@@ -56,7 +56,14 @@ class CommentsControllers {
   showAllComments = (req, res) => {
     const post_id = req.params.id;
     let sql = `SELECT comments.*, user.nickname FROM comments JOIN user ON comments.user_id = user.user_id WHERE comments.post_id = ${post_id};`;
-    connection.query(sql, (error, result) => {
+    let sql2 = `
+  SELECT comments.*, user.nickname
+  FROM comments
+  JOIN user ON comments.user_id = user.user_id
+  WHERE comments.post_id = ${post_id}
+  ORDER BY comments.date DESC;
+`;
+    connection.query(sql2, (error, result) => {
       if (error) {
         console.log(error);
         res.status(400).json({ message: "Error en la SQL2" });
