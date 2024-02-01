@@ -101,8 +101,8 @@ export const Register = () => {
     <Row className="RegistroContainer FormulariosContainer d-flex flex-column align-items-center pt-5">
       <Col lg={4} md={4} xs={12}>
         <Form>
-          <h2>ASCENDIO</h2>
-          <h5 className="d-none d-sm-block">Descubre trades, conecta con otros usuarios y eleva tu conocimiento cripto en un solo lugar.</h5>
+        <img className="logoascendiologin" src="../../../../public/default.png" alt="logo ascendio" />
+          <h6 className="d-none d-sm-block">Descubre trades, conecta con otros usuarios y eleva tu conocimiento cripto en un solo lugar.</h6>
           <Form.Group controlId="formBasicNickName">
             <Form.Label></Form.Label>
             <Form.Control
