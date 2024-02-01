@@ -18,10 +18,10 @@ export const AllPosts = ({
   const navigate = useNavigate();
 
   return (
-    <div className=" AllPostsScss d-flex flex-wrap">
+    <div className=" AllPostsScss d-flex justify-content-center flex-wrap">
       {posts?.map((elem) => {
         return (
-          <Card className="ESTILOCARDGENERAL" key={elem.post_id}>
+          <Card className="ESTILOCARDGENERAL mb-4" key={elem.post_id}>
             <Card.Text className="UserCARD">
             <div className="avatarCard">
               {user?.img ? (
