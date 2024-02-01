@@ -12,7 +12,7 @@ export const ResourceViewer = () => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:3000/courses/getOneBread/${course_id}/${section_id}`
+        `http://localhost:3000/courses/getOneBreadCrumbs/${course_id}/${section_id}`
       )
       .then((res) => {
         console.log(res.data);

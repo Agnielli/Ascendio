@@ -427,7 +427,7 @@ ORDER BY course.date DESC`;
     let sql = `SELECT course.user_id AS course_creator_user_id, user_rates_course.course_rates, user_rates_course.commentary, user.user_id AS user_rater_user_id, user.nickname FROM course
     LEFT JOIN user_rates_course ON course.course_id = user_rates_course.course_id
     LEFT JOIN user ON user_rates_course.user_id = user.user_id
-    WHERE course.course_id = ${course_id}  AND course.is_deleted = 0`
+    WHERE course.course_id = ${course_id} AND user.is_deleted = 0 AND course.is_deleted = 0`
     connection.query(sql, (err, result) => {
       err ? res.status(500).json(err) : res.status(200).json(result);
     
@@ -459,7 +459,7 @@ ORDER BY course.date DESC`;
   }
 
 
-  getOneBread = (req,res) => {
+  getOneBreadCrumbs = (req,res) => {
     const {course_id, section_id} = req.params;
     let sql = `SELECT course.title, section.section_title FROM course 
     LEFT JOIN section ON course.course_id = section.course_id
@@ -496,7 +496,7 @@ ORDER BY course.date DESC`;
   getOneRateOneCourseOneUser = (req, res) =>{
     const {course_id, user_id} = req.params
 
-    let sql = `SELECT * FROM user_rates_course WHERE user_id = ${user_id} AND course_id = ${course_id}`
+    let sql = `SELECT * FROM user_rates_course WHERE user_id = ${user_id} AND course_id = ${course_id};`
     
     connection.query(sql, (err, result) => {
       err ? res.status(500).json(err) : res.status(200).json(result);
