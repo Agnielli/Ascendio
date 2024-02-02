@@ -46,7 +46,8 @@
       margin-top: 8px;
 
       img {
-        object-fit: cover;
+        max-height: 100px;
+        object-fit: contain;
         border-radius: 5px;
       }
     }
