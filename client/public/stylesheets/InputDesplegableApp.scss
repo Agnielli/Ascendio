@@ -1,5 +1,11 @@
 @use "./variables.scss" as *;
 .inputDesplegableRetocado{
+  &:focus-visible {
+    background-color: $accent2-color;
+    border-color: white;
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem white;
+  }
 
   div.css-13cymwt-control{
     height: 35.98px;

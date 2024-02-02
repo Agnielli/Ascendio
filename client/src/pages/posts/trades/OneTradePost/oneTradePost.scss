@@ -2,6 +2,7 @@
 
 .onetradepost {
   padding: 2vh 10vw;
+
   @media (max-width: 1200px) {
     .hide-on-small-screen {
       display: none;
@@ -18,6 +19,10 @@
   border-radius: 2rem;
   background-color: $accent2-color;
   padding: 2rem !important;
+
+  button.Button1 {
+    margin-bottom: 1rem !important;
+  }
 
   .card-hijo1-onetradepost {
     @include display-flex(row, space-between, flex-start);

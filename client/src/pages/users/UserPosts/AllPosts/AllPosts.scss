@@ -5,3 +5,14 @@
   
 }
 
+@media (width <= 410px) {
+	.botones {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+	}
+
+  .botontrade {
+    width: 80% !important;
+  }
+}

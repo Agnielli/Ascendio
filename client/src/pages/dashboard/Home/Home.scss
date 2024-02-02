@@ -9,10 +9,16 @@
     margin-bottom: 1rem;
     width: 100%;
     padding: 0 !important;
+    
     button {
       width: 50%;
     }
   }
+}
+
+.home-link-traders {
+  text-decoration: none;
+  color: white;
 }
 
 .ascendio-home-post-padre {
@@ -26,7 +32,5 @@
     flex-wrap: wrap;
     gap: 0.5rem;
     padding: 0 !important;
-
-    
   }
 }

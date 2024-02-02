@@ -1,13 +1,18 @@
 @use "../../../../../public/stylesheets/variables.scss" as *;
 
 .CreateTradeUser {
+  .BotonFoto{  
+    width: 20px;
+    height: 20px;
+  }
   .ButtonImgCreateTradeInput {
+    padding: 6px 35px !important;
     margin-top: 2rem !important;
     margin-bottom: 1.5rem !important;
   }
 
   .ButtonsCreateTradeSpacing {
-    margin-right: 2rem !important;
+    margin-right: 1rem !important;
   }
 
   .textIndentPlaceholder {
@@ -21,4 +26,5 @@
   .LabelPicturesCreateTrade {
     color: #2E2D2D !important;
   }
+
 }

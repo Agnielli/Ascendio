@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import './FormEdit.scss'
+import "./FormEdit.scss";
 
 const initialValue = {
   nickname: "",
@@ -15,7 +15,7 @@ export const FormEdit = ({ user, setUser, setShowForm }) => {
   const [editUser, setEditUser] = useState(initialValue);
   const [msgError, setMsgError] = useState("");
   const [file, setFile] = useState();
-  const [style, setStyle] = useState()
+  const [style, setStyle] = useState();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -38,7 +38,7 @@ export const FormEdit = ({ user, setUser, setShowForm }) => {
       !editUser.password
     ) {
       setMsgError("Los campos obligatorios deben estar rellenos");
-      setStyle("EditUserMsgFailure")
+      setStyle("EditUserMsgFailure");
     } else {
       const newFormData = new FormData();
       newFormData.append("editUser", JSON.stringify(editUser));
@@ -55,7 +55,7 @@ export const FormEdit = ({ user, setUser, setShowForm }) => {
             console.log(res);
           }
           setMsgError("Datos actualizados con exito");
-          setStyle("EditUserMsgSuccess")
+          setStyle("EditUserMsgSuccess");
         })
         .catch((err) => {
           console.log(err);
@@ -69,8 +69,6 @@ export const FormEdit = ({ user, setUser, setShowForm }) => {
   };
 
   console.log(editUser);
-
- 
 
   return (
     <div className="FormularioDatosUsuario">
@@ -94,15 +92,19 @@ export const FormEdit = ({ user, setUser, setShowForm }) => {
           />
         </div>
         <div className="ciculoLapizEditar">
-          <img className="EditarFotoLapiz" src="../../../public/images/iconos/lapiznegro.png" alt="" /></div>
+          <img
+            className="EditarFotoLapiz"
+            src="../../../public/images/iconos/lapiznegro.png"
+            alt=""
+          />
+        </div>
       </div>
-      
 
       <Form className="FormulariosContainer d-flex flex-column">
-        
         <Form.Group className="mb-3" controlId="formBasicNickName">
           <Form.Label></Form.Label>
           <Form.Control
+            maxLength={12}
             name="nickname"
             onChange={handleChange}
             placeholder="Introduce un nombre de usuario"
@@ -114,6 +116,7 @@ export const FormEdit = ({ user, setUser, setShowForm }) => {
           <Form.Label></Form.Label>
           <Form.Control
             name="name"
+            maxLength={12}
             onChange={handleChange}
             placeholder="Introduce un nombre"
             value={editUser?.name}
@@ -124,6 +127,7 @@ export const FormEdit = ({ user, setUser, setShowForm }) => {
           <Form.Label></Form.Label>
           <Form.Control
             name="lastname"
+            maxLength={30}
             onChange={handleChange}
             placeholder="Introduce un apellido"
             value={editUser?.lastname}
@@ -134,20 +138,25 @@ export const FormEdit = ({ user, setUser, setShowForm }) => {
           <Form.Label></Form.Label>
           <Form.Control
             name="phonenumber"
+            maxLength={20}
             onChange={handleChange}
             type="text"
             placeholder="Introduce un número de teléfono"
             value={editUser?.phonenumber === null ? "" : editUser?.phonenumber}
           />
         </Form.Group>
-        
-        <p className={style}>{msgError || '\u00A0'}</p>
-
+        <p className={style}>{msgError || "\u00A0"}</p>
         <div className="DivGrisParaBotones mt-3">
-          <Button className="Button3" variant="primary me-2" onClick={handleSubmit}>
+          <Button
+            className="Button3"
+            variant="primary me-2"
+            onClick={handleSubmit}
+          >
             ACEPTAR
           </Button>
-          <Button  className="Button1" onClick={() => setShowForm(false)}>CANCELAR</Button>
+          <Button className="Button1" onClick={() => setShowForm(false)}>
+            CANCELAR
+          </Button>
         </div>
       </Form>
     </div>

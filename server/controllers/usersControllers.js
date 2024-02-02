@@ -170,14 +170,21 @@ class usersControllers {
           if (error) {
             res.status(500).json({ error });
           } else {
-            const nickname = result[0].nickname;
-            const token = jwt.sign(result[0].user_id, process.env.T_PASS);
-            let mess = `http://localhost:5173/recoverpassword/${token}`;
-            if (result != "") {
-              recoverMailer(email, nickname, mess);
-              res.status(200).json({ message: "Email recibido correctamente" });
-            } else {
+            console.log(result[0]);
+            if (result[0] === undefined) {
               res.status(400).json({ message: "Email no existe en la DB" });
+            } else {
+              const nickname = result[0].nickname;
+              const token = jwt.sign(result[0].user_id, process.env.T_PASS);
+              let mess = `http://localhost:5173/recoverpassword/${token}`;
+              if (result != "") {
+                recoverMailer(email, nickname, mess);
+                res
+                  .status(200)
+                  .json({ message: "Email recibido correctamente" });
+              } else {
+                res.status(400).json({ message: "Email no existe en la DB" });
+              }
             }
           }
         });

@@ -38,7 +38,7 @@ export const OneTradePost = () => {
     <>
       {oneTrade && (
         <Row className="onetradepost">
-          <Col xxl={3}>
+          <Col xxl={3} className="onetradepost-hijo">
             <Card className="card-padre-onetradepost">
               <Col className="UserCARD card-hijo1-onetradepost">
                 <Button
@@ -94,7 +94,8 @@ export const OneTradePost = () => {
                   </p>
                   <p>
                     Descripción: <span>{oneTrade.description}</span>
-                  </p>
+                  </p>            
+
                 </Card.Body>
               </Col>
               <Col className="card-hijo3-onetradepost">
@@ -108,15 +109,15 @@ export const OneTradePost = () => {
                   }
                 >
                   {oneTrade.correct === null
-                    ? "Trade Pediente ❓"
+                    ? "Trade Pediente"
                     : oneTrade.correct === 1
-                    ? "Trade Acertado ✅"
-                    : "Trade Errado ❌"}
+                    ? "Trade Acertado"
+                    : "Trade Fallido"}
                 </h4>
               </Col>
             </Card>
           </Col>
-          <Col xxl={9}>
+          <Col xxl={9} className="onetradepost-hijo">
             <ShowAllCommentsPost
               showModal={showModal}
               setShowModal={setShowModal}

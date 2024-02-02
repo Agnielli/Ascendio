@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AscendioContext } from "../../../context/AscendioContext";
 import { Button, Col, Row } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./showallusers.scss";
 import "../../../../public/stylesheets/ButtonsApp.scss";
 
@@ -185,7 +185,14 @@ export const ShowAllUsers = () => {
 
                         <div className="AdminUserStats d-flex justify-content-center justify-content-xl-start gap-2 gap-xl-3">
                           <div>
-                            <p className="fw-bold">{elem.nickname}</p>
+                            <p className="fw-bold">
+                              <Link
+                                className="home-link-traders"
+                                to={`http://localhost:5173/traderprofile/${elem.user_id}`}
+                              >
+                                {elem.nickname}
+                              </Link>
+                            </p>
                             <p>{elem.followers_count} Seguidores</p>
                           </div>
 
@@ -205,14 +212,14 @@ export const ShowAllUsers = () => {
                                 : "Seguir"}
                             </Button>
                           ) : null}
-                          <Button
+                          {/* <Button
                             className="Button3"
                             onClick={() =>
                               navigate(`/traderprofile/${elem.user_id}`)
                             }
                           >
                             Ver más
-                          </Button>
+                          </Button> */}
                         </div>
 
                         {/* Seguidores: {elem.followers_count}

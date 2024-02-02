@@ -65,6 +65,8 @@ export const NewPassword = ({ user, setUser, setShowChangePassword }) => {
     } else if (NewPassword.password !== NewPassword.password2) {
       setMsgError("Las contraseñas no coinciden");
       setStyle("EditUserMsgFailureResetPassword");
+    } else if (NewPassword.password.length < 10) {
+      setMsgError("Contraseña demasiado corta");
     } else {
       axios
         .put(`http://localhost:3000/users/updatepassword/${user?.user_id}`, {
@@ -94,10 +96,10 @@ export const NewPassword = ({ user, setUser, setShowChangePassword }) => {
     } else if (!isEmailValid(editUser.email)) {
       setMsgErrorEmail("Correo electrónico no válido");
       setStyle("EditUserMsgFailureResetPassword");
-     } else if(editUser.email === user.email){
+    } else if (editUser.email === user.email) {
       setMsgErrorEmail("Mismo email, introduce uno diferente.");
       setStyle("EditUserMsgFailureResetPassword");
-    }else {
+    } else {
       const newFormData = new FormData();
       newFormData.append("editUser", JSON.stringify(editUser));
       newFormData.append("file", file);
@@ -155,7 +157,6 @@ export const NewPassword = ({ user, setUser, setShowChangePassword }) => {
           CAMBIAR EMAIL
         </Button>
       </Form>
-
       <Form>
         <h4>EDITAR CONTRASEÑA:</h4>
         <Form.Group controlId="formBasicPassword">
@@ -266,7 +267,7 @@ export const NewPassword = ({ user, setUser, setShowChangePassword }) => {
         </Button>
       </Form>
       <div className="botonCancelarEditarLogin">
-      <Button className="Button3" onClick={handleSubmit}>
+        <Button className="Button3" onClick={handleSubmit}>
           CAMBIAR CONTRASEÑA
         </Button>
         <Button
