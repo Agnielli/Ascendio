@@ -107,9 +107,9 @@ function NavBarApp() {
                       className="d-flex user"
                       onClick={() => navigate("/profile")}
                     >
-                      <p className="mt-3 me-3 d-lg-none">
+                      {/* <p className="mt-3 me-3 d-lg-none">
                         {user.nickname.toUpperCase()}
-                      </p>
+                      </p> */}
                       <div className="avatar">
                         {user?.img ? (
                           <img
