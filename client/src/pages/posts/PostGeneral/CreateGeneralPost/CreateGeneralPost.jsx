@@ -3,7 +3,7 @@ import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { AscendioContext } from "../../../../context/AscendioContext";
 import axios from "axios";
-import './CreateGeneralPost.scss'
+import "./CreateGeneralPost.scss";
 
 const initialValue = {
   description: "",
@@ -25,7 +25,9 @@ export const CreateGeneralPost = () => {
     setFile(e.target.files[0]);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
     if (!generalPost.description || generalPost.description === "") {
       setMsgError("Descripción vacía");
     } else {
@@ -36,8 +38,12 @@ export const CreateGeneralPost = () => {
       axios
         .post("http://localhost:3000/posts/createpostgeneral", newFormData)
         .then((res) => {
-          console.log(res);
-          navigate("/profile");
+          if (res && res.status >= 200 && res.status < 300) {
+            navigate("/profile");
+          } else {
+            // Si la respuesta no es exitosa, puedes manejar el error aquí
+            console.error("Error en la solicitud:", res);
+          }
         })
         .catch((error) => console.log(error));
     }
@@ -49,13 +55,19 @@ export const CreateGeneralPost = () => {
         <Form className="FormulariosContainer">
           <Form.Group controlId="formFile" className="mb-3">
             <br />
-            <h2 className="CreateGeneralPostH2AscendioColor">CREAR POST GENERAL</h2>
+            <h2 className="CreateGeneralPostH2AscendioColor">
+              CREAR POST GENERAL
+            </h2>
             <br />
             <Button className="Button3 ButtonImgCreateTradeInput">
-
-            <Form.Label><img className="BotonFoto" src="../../../../../public/images/iconos/camara.png" alt="" /></Form.Label>
-
-                </Button>
+              <Form.Label>
+                <img
+                  className="BotonFoto"
+                  src="../../../../../public/images/iconos/camara.png"
+                  alt=""
+                />
+              </Form.Label>
+            </Button>
             <Form.Control type="file" onChange={handleFile} hidden />
           </Form.Group>
           <Form.Control
@@ -68,8 +80,18 @@ export const CreateGeneralPost = () => {
           />
           <p>{msgError}</p>
           <br />
-          <button className="Button3 ButtonsCreateTradeSpacing ButtonAcceptCancelCreateTrade" onClick={handleSubmit}>ACEPTAR</button>
-          <button className="Button1 ButtonAcceptCancelCreateTrade" onClick={() => navigate("/profile")}>CANCELAR</button>
+          <button
+            className="Button3 ButtonsCreateTradeSpacing ButtonAcceptCancelCreateTrade"
+            onClick={handleSubmit}
+          >
+            ACEPTAR
+          </button>
+          <button
+            className="Button1 ButtonAcceptCancelCreateTrade"
+            onClick={() => navigate("/profile")}
+          >
+            CANCELAR
+          </button>
         </Form>
       </Col>
     </Row>
