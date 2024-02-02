@@ -1,0 +1,65 @@
+.UserFollower {
+  .UserFollowerCard {
+    background-color: rgb(43, 42, 41);
+    width: 100%;
+    max-width: 42rem;
+    color: white;
+    border-radius: 6rem;
+    padding: 2rem;
+  }
+
+  p {
+    font-size: 2rem;
+  }
+
+  .DivContainer3divs {
+    width: 100% !important;
+  }
+
+  img {
+    border-radius: 50%;
+    width: 100px;
+    aspect-ratio: 1/1;
+  }
+ 
+  @media screen and (min-width: 600px) {
+    .ShowAllUserPaddings2-10 {
+      padding: 2vw 10vw;
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    .BuscadorShowAllUsers {
+      margin-left: 25rem !important;
+      transition: 0.5s;
+    }
+  }
+  
+  @media screen and (max-width: 1200px) {
+    .BuscadorShowAllUsers {
+      transition: 0.5s;
+    }
+  }
+  
+  @media screen and (max-width: 682px) {
+    .RowShowAllUsersHeader {
+      flex-direction: column;
+      text-align: center !important;
+    }
+  }
+  
+  @media screen and (max-width: 640px) {
+    .AdminUserImg {
+      width: 30%;
+    }
+
+    .AdminUserButton {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  
+}
+
