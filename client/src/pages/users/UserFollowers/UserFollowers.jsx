@@ -127,12 +127,12 @@ export const UserFollowers = () => {
                   className="Button4 mb-3"
                   onClick={() => navigate("/profile")}
                 >
-                  Volver
+                  VOLVER
                 </button>
               </Col>
               <Col lg={12} className="d-flex justify-content-between flex-column flex-md-row mb-2">
                 <div>
-                  <h2>Mis seguidores</h2>
+                  <h2>Segidores:</h2>
                 </div>
                 <div className="d-flex justify-content-end">
                   <div className="input-container BuscadorShowAllUsers">
