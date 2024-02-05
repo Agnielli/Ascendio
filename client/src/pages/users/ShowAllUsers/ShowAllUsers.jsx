@@ -14,7 +14,7 @@ export const ShowAllUsers = () => {
   const [search, setSearch] = useState("");
   const [options, setOptions] = useState("nickname");
   const { user } = useContext(AscendioContext);
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     if (show === 1) {
@@ -107,6 +107,14 @@ export const ShowAllUsers = () => {
 
   // console.log(options);
 
+  // let ratioTotal = 0;
+  // if (statisticsUser?.num_correct_posts !== 0) {
+  //   ratioTotal =
+  //     parseFloat(
+  //       statisticsUser?.num_correct_posts / statisticsUser?.num_trades
+  //     ) * 100;
+  // }
+
   return (
     <div className="ShowAllUserPaddings2-10">
       {show === 1 && (
@@ -116,15 +124,18 @@ export const ShowAllUsers = () => {
               <Row className="d-flex RowShowAllUsersHeader">
                 <Col>
                   <button className="mb-2 Button1" onClick={() => setShow(2)}>
-                    Top Usuarios con más Seguidores
+                    USUARIOS CON MÁS SEGUIDORES
                   </button>
                 </Col>
                 <Col>
                   <div className="input-container BuscadorShowAllUsers">
+                  <span className="material-symbols-outlined search-icon">
+              search
+            </span>
                     <input
                       className="buscador"
                       onChange={handleChange}
-                      placeholder="🔍..."
+                      placeholder="Buscar"
                       value={search}
                     />
                   </div>
@@ -158,10 +169,7 @@ export const ShowAllUsers = () => {
             <Col
               xs={12}
               className="d-flex justify-content-center flex-column mt-4"
-            >
-              <h2 className="text-center mb-4">
-                Top Usuarios con más Seguidores
-              </h2>
+            >        
               <Row className="row-gap-4">
                 {allUsersFilter?.map((elem) => {
                   return (
@@ -245,7 +253,7 @@ export const ShowAllUsers = () => {
               <Row className="d-flex RowShowAllUsersHeader">
                 <Col>
                   <button className="mb-2 Button1" onClick={() => setShow(1)}>
-                    Top Usuarios con más Aciertos
+                    USUARIOS CON MÁS ACIERTOS
                   </button>
                 </Col>
                 <Col>
@@ -267,9 +275,6 @@ export const ShowAllUsers = () => {
               xs={12}
               className="d-flex justify-content-center flex-column mt-4"
             >
-              <h2 className="text-center mb-4">
-                Top usuarios con más aciertos
-              </h2>
               <Row className="row-gap-4">
                 {allUsersFilter?.map((elem) => {
                   return (

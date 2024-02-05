@@ -1,3 +1,8 @@
+@use "../../../../public/stylesheets/variables.scss" as *;
+.ShowAllUserPaddings2-10{
+  padding: 2vw 10vw;
+
+
 .cards-showuser {
   background-color: rgb(43, 42, 41);
   width: 100%;
@@ -82,10 +87,23 @@
 }
 
 
+
+
 @media screen and (min-width: 600px) {
-  .ShowAllUserPaddings2-10 {
-    padding: 2vw 10vw;
-  }
+  .input-container {
+    span {
+      margin: 0 !important; 
+      padding: 0 !important;    
+    }
+      
+      .buscador {
+        height: 36px;
+      transition: 0.1s;
+      &:focus{
+        border: 0.25rem solid $accent-color !important;
+      }
+      }
+    }
 }
 
 @media screen and (min-width: 1200px) {
@@ -112,6 +130,7 @@
     flex-direction: column;
     text-align: center !important;
   }
+}
 }
 
 
