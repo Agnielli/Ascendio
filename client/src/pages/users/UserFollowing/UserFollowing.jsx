@@ -119,7 +119,7 @@ export const UserFollowing = () => {
   }
 
   return (
-    <>
+    <div className="UserFollowingScss">
       <Row>
         <Col>
           <Row className="d-flex RowShowAllUsersHeader">
@@ -139,7 +139,7 @@ export const UserFollowing = () => {
                 <input
                   className="buscador"
                   onChange={handleChange}
-                  placeholder="🔍..."
+                  placeholder="Buscar"
                   value={search}
                 />
               </div>
@@ -147,7 +147,7 @@ export const UserFollowing = () => {
           </Row>
         </Col>
       </Row>
-      <Row className="UserFollower row-gap-4 ShowAllUserPaddings2-10">
+      <Row className="UserFollower row-gap-4 ">
         {followingFilter?.map((elem) => {
           return (
             <Col xs={12} className="d-flex justify-content-center">
@@ -191,6 +191,6 @@ export const UserFollowing = () => {
           );
         })}
       </Row>
-    </>
+    </div>
   );
 };

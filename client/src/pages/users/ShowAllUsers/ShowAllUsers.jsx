@@ -119,7 +119,6 @@ export const ShowAllUsers = () => {
   };
 
   // console.log(options);
-
   // let ratioTotal = 0;
   // if (statisticsUser?.num_correct_posts !== 0) {
   //   ratioTotal =
@@ -135,7 +134,6 @@ export const ShowAllUsers = () => {
         statisticsUser?.num_correct_posts / statisticsUser?.num_trades
       ) * 100;
   }
-
   return (
     <div className="ShowAllUserPaddings2-10">
       {show === 1 && (
