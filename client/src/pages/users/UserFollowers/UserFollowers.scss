@@ -95,6 +95,8 @@
     }
   }
   .input-container {
+    display: flex;
+  align-items: center;
     span {
       margin: 0 !important;
       padding: 0 !important;
