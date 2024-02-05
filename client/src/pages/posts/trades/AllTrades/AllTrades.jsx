@@ -98,7 +98,7 @@ export const AllTrades = () => {
           // lg={3}
           className="d-flex justify-content-start align-items-center"
         >
-          <h2>Trade Posts</h2>
+          <h2 className="mb-0">Trade Posts</h2>
         </Col>
         <Col
           // lg={9}

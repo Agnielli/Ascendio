@@ -16,9 +16,24 @@
       margin: 0;
     }
   }
+
+  .input-container {
+  span {
+    margin: 0 !important; 
+    padding: 0 !important;     
+  }
+    
+    .buscador {
+      height: 36px;
+    transition: 0.1s;
+    &:focus{
+      border: 0.25rem solid $accent-color !important;
+    }
+    }
+  }
   @media (max-width: 515px) {
-    .UserProfileScss{
-      .DivGrisParaBotones{
+    .UserProfileScss {
+      .DivGrisParaBotones {
         display: flex;
         flex-direction: column;
         align-items: center;
