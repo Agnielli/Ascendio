@@ -32,7 +32,7 @@ nav {
     border-radius: 50%;
     background-color: #1d1d1b;
     color: #e15252;
-    border: 2px solid $accent-color;
+    border: 1px solid $accent-color;
 
     img {
       width: 100%;
@@ -116,7 +116,7 @@ nav {
 
   .ButtonLogin {
     padding: 6px 12px !important;
-    margin: 0 12px !important;
+    margin: 0 0 0 12px !important;
     color: white !important;
     font-weight: 500 !important;
     font-size: large !important;
@@ -170,12 +170,13 @@ nav {
     align-items: flex-end !important;
 
     .user {
+      margin-bottom: 12px;
       p {
         color: $accent-color;
         margin: 0 12px !important;
       }
       img {
-        border: 3px solid $accent-color;
+        border: 1px solid $accent-color;
       }
     }
 
