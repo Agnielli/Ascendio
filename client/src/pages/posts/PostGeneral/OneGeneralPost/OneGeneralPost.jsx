@@ -40,13 +40,13 @@ export const OneGeneralPost = () => {
           <Col xxl={3}>
             <Card className="card-padre-onetradepost">
               <Col className="UserCARD card-hijo1-onetradepost">
-                <Button
+                <button
                   className="Button1"
                   onClick={() => navigate("/allpostsgenerals")}
                   variant="primary"
                 >
-                  Volver
-                </Button>
+                  VOLVER
+                </button>
                 {/* <div className="avatarCard">
                   <p className="letteruser">
                     {oneTrade.post_user_nickname.charAt(0).toUpperCase()}

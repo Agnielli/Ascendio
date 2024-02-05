@@ -101,15 +101,15 @@ export const ShowAllCommentsPost = ({ showModal, setShowModal, oneTrade }) => {
             );
           })}
         </Col>
-        <Col xxl={12} className="showallcommentsposts-hijo3">
-          <Button
+        <Col xxl={12} className="showallcommentsposts-hijo3 mt-3">
+          <button
             className="Button3"
             onClick={() => {
               setShowModal(true);
             }}
           >
-            Comentar
-          </Button>
+            COMENTAR
+          </button>
         </Col>
       </Row>
     </>
