@@ -1,6 +1,6 @@
-@use "../../../../public/stylesheets/variables.scss" as *;
+@use '../../../../public/stylesheets/variables.scss' as *;
 
-.UserFollower {
+.UserFollowing {
   .UserFollowerCard {
     background-color: rgb(43, 42, 41);
     width: 100%;
@@ -8,48 +8,22 @@
     color: white;
     border-radius: 6rem;
     padding: 2rem;
-
-    img {
-      border-radius: 50%;
-      width: 100px;
-      aspect-ratio: 1/1;
-    }
-
-    button {
-      width: 14ch;
-    }
-
-    p {
-      color: white;
-      text-align: left;
-    }
   }
 
-  @media screen and (max-width: 640px) {
-    .AdminUserImg {
-      width: 30%;
-    }
-    .AdminUserStats {
-      width: 70%;
-    }
-    .UserButton {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-    }
+  p {
+    font-size: 2rem;
   }
 
-  @media screen and (max-width: 500px) {
-    .UserFollowerCard {
-      padding: 1rem;
-      border-radius: 3rem;
-
-      img {
-        width: 75px;
-      }
-    }
+  .DivContainer3divs {
+    width: 100% !important;
   }
 
+  img {
+    border-radius: 50%;
+    width: 100px;
+    aspect-ratio: 1/1;
+  }
+ 
   @media screen and (min-width: 600px) {
     .ShowAllUserPaddings2-10 {
       padding: 2vw 10vw;
@@ -62,20 +36,20 @@
       transition: 0.5s;
     }
   }
-
+  
   @media screen and (max-width: 1200px) {
     .BuscadorShowAllUsers {
       transition: 0.5s;
     }
   }
-
+  
   @media screen and (max-width: 682px) {
     .RowShowAllUsersHeader {
       flex-direction: column;
       text-align: center !important;
     }
   }
-
+  
   @media screen and (max-width: 640px) {
     .AdminUserImg {
       width: 30%;
@@ -101,4 +75,9 @@
       }
     }
   }
+
+  p {
+    font-size: 16px;
+  }
 }
+

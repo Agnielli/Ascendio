@@ -640,15 +640,15 @@ class usersControllers {
     COUNT(DISTINCT uf.followed_user_id) AS followers_count,
     COUNT(DISTINCT uf2.user_id) AS following_count,
     GROUP_CONCAT(DISTINCT cat.category_name ORDER BY cat.category_name ASC) AS category_names
-FROM user u
-LEFT JOIN post p ON u.user_id = p.user_id
-LEFT JOIN course c ON u.user_id = c.user_id
-LEFT JOIN user_follows_user uf ON u.user_id = uf.followed_user_id
-LEFT JOIN user_follows_user uf2 ON u.user_id = uf2.followed_user_id
-LEFT JOIN user_category uc ON u.user_id = uc.user_id
-LEFT JOIN category cat ON uc.category_id = cat.category_id
-WHERE u.user_id = ${user_id}
-GROUP BY u.user_id;`;
+    FROM user u
+    LEFT JOIN post p ON u.user_id = p.user_id
+    LEFT JOIN course c ON u.user_id = c.user_id
+    LEFT JOIN user_follows_user uf ON u.user_id = uf.followed_user_id
+    LEFT JOIN user_follows_user uf2 ON u.user_id = uf2.followed_user_id
+    LEFT JOIN user_category uc ON u.user_id = uc.user_id
+    LEFT JOIN category cat ON uc.category_id = cat.category_id
+    WHERE u.user_id = ${user_id}
+    GROUP BY u.user_id;`;
 
     connection.query(sql2, (err, result) => {
       if (err) {
@@ -658,6 +658,7 @@ GROUP BY u.user_id;`;
       }
     });
   };
+  
   // ---------------------------------------------------------------
   deleteUser = (req, res) => {
     const { id: user_id } = req.params;

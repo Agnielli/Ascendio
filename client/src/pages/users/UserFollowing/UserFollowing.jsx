@@ -1,18 +1,35 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { AscendioContext } from "../../../context/AscendioContext";
-import { Button, Card } from "react-bootstrap";
+import { Button, Card, Col, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import './UserFollowing.scss'
 
 export const UserFollowing = () => {
   const [following, setFollowing] = useState([]);
   const [followingFilter, setFollowingFilter] = useState([]);
+  const [statisticsUser, setStatisticsUser] = useState();
   const [search, setSearch] = useState("");
   const [followingUsers, setFollowingUsers] = useState([]); // Nuevo estado para almacenar usuarios seguidos
   const { user } = useContext(AscendioContext);
   const navigate = useNavigate();
 
+  //  Fiabilidad de cada usuario
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/users/statisticsuser/${user.user_id}`)
+      .then((res) => {
+        // console.log("datos del usuario", res.data);
+        setStatisticsUser(res.data.datos);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [user]);
+
   // para obtener los usuarios que nos siguen
+
   useEffect(() => {
     if (user) {
       axios
@@ -20,7 +37,7 @@ export const UserFollowing = () => {
         .then((res) => {
           console.log(res);
           setFollowing(res.data.datos);
-          setFollowingFilter(res.data.datos)
+          setFollowingFilter(res.data.datos);
         })
         .catch((err) => {
           console.log(err);
@@ -93,57 +110,89 @@ export const UserFollowing = () => {
     }
   };
 
+  let ratioTotal = 0;
+  if (statisticsUser?.num_correct_posts !== 0) {
+    ratioTotal =
+      parseFloat(
+        statisticsUser?.num_correct_posts / statisticsUser?.num_trades
+      ) * 100;
+  }
+
   return (
     <>
-      <div className="d-flex flex-column p-5">
-        <div className="d-flex  gap-5">
-          <h2>Siguiendo a:</h2>
-          <Button onClick={() => navigate("/profile")}>Volver</Button>
-        </div>
-        <div className="d-flex  gap-5">
-          <input onChange={handleChange} placeholder="🔍..." value={search} />
-        </div>
-      </div>
-      <div className="d-flex gap-5 flex-wrap p-5">
+      <Row>
+        <Col>
+          <Row className="d-flex RowShowAllUsersHeader">
+            <Col className="d-flex flex-column p-5">
+              <div>
+                <h2>Siguiendo a:</h2>
+                <Button className="Button4" onClick={() => navigate("/profile")}>
+                  Volver
+                </Button>
+              </div>
+            </Col>
+            <Col className="input-container mt-5 BuscadorShowAllUsers">
+              <input
+                className="buscador"
+                onChange={handleChange}
+                placeholder="🔍..."
+                value={search}
+              />
+            </Col>
+          </Row>
+        </Col>
+      </Row>
+      <Row className="UserFollowing row-gap-4 ShowAllUserPaddings2-10">
         {followingFilter?.map((elem) => {
           return (
-            <Card style={{ width: "18rem" }} key={elem.user_id}>
-              {elem.img !== null ? (
-                <Card.Img
-                  variant="top"
-                  src={`http://localhost:3000/images/users/${elem.img}`}
-                />
-              ) : (
-                <Card.Img
-                  variant="top"
-                  src={`http://localhost:3000/images/users/descarga.png`}
-                />
-              )}
-
-              <Card.Body>
-                <Card.Title>{elem.nickname}</Card.Title>
-                <Card.Text></Card.Text>
-                {user.user_id !== elem.user_id ? (
-                  <Button
-                    variant="primary"
-                    onClick={() => pulsarSeguirONo(elem.user_id)}
-                  >
-                    {followingUsers.includes(elem.user_id)
-                      ? "Dejar de Seguir"
-                      : "Seguir"}
-                  </Button>
-                ) : (
-                  <Button
-                    onClick={() => navigate(`/userposts/${user.user_id}`)}
-                  >
-                    Ir a posts
-                  </Button>
-                )}
-              </Card.Body>
-            </Card>
+            <Col xs={12} className="d-flex justify-content-center">
+              <div className="d-flex flex-row UserFollowerCard justify-content-between">
+                <div className="DivContainer3divs d-flex">
+                  <div className="AdminUserImg">
+                    <img
+                      src={
+                        elem.img != null
+                          ? `http://localhost:3000/images/users/${elem.img}`
+                          : `http://localhost:3000/images/users/descarga.png`
+                      }
+                      alt="Imagen de perfil del usuario"
+                    />
+                  </div>
+                  <div className="d-flex gap-5 align-items-center d-flex justify-content-evenly w-100">
+                    <div className="d-flex flex-column justify-content-center w-50">
+                      <div className="d-flex justify-content-center gap-2 gap-xl-3 ms-5 me-5">
+                        <h5 className="fw-bold">{elem.nickname}</h5>
+                      </div>
+                      <div className="d-flex justify-content-center">
+                      <h6>Fiabilidad: {parseFloat(ratioTotal.toFixed(2))} %</h6>
+                      </div>
+                    </div>
+                    <div className="">
+                      {user.user_id !== elem.user_id ? (
+                        <Button
+                          className="Button3"
+                          onClick={() => pulsarSeguirONo(elem.user_id)}
+                        >
+                          {followingUsers.includes(elem.user_id)
+                            ? "Dejar de Seguir"
+                            : "Seguir También"}
+                        </Button>
+                      ) : (
+                        <Button
+                          className="Button3"
+                          onClick={() => navigate(`/userposts/${user.user_id}`)}
+                        >
+                          Ir a posts
+                        </Button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Col>
           );
         })}
-      </div>
+      </Row>
     </>
   );
 };

@@ -8,12 +8,25 @@ import "./UserFollowers.scss";
 export const UserFollowers = () => {
   const [followers, setFollowers] = useState([]);
   const [followersFilter, setFollowersFilter] = useState([]);
+  const [statisticsUser, setStatisticsUser] = useState();
   const [search, setSearch] = useState("");
-
   const [followingUsers, setFollowingUsers] = useState([]); // Nuevo estado para almacenar usuarios seguidos
-
   const { user } = useContext(AscendioContext);
   const navigate = useNavigate();
+
+  // Fiabilidad de usuarios
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/users/statisticsuser/${user.user_id}`)
+      .then((res) => {
+        // console.log("datos del usuario", res.data);
+        setStatisticsUser(res.data.datos);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [user]);
 
   // para obtener los usuarios que me siguen
   useEffect(() => {
@@ -95,6 +108,14 @@ export const UserFollowers = () => {
     }
   };
 
+  let ratioTotal = 0;
+  if (statisticsUser?.num_correct_posts !== 0) {
+    ratioTotal =
+      parseFloat(
+        statisticsUser?.num_correct_posts / statisticsUser?.num_trades
+      ) * 100;
+  }
+
   return (
     <>
       <Row>
@@ -128,7 +149,7 @@ export const UserFollowers = () => {
         {followersFilter?.map((elem) => {
           return (
             <Col xs={12} className="d-flex justify-content-center">
-              <div className="d-flex flex-row UserFollowerCard">
+              <div className="flex-wrap d-flex align-items-center justify-content-between gap-xl-4 UserFollowerCard">
                 <div className="DivContainer3divs d-flex">
                   <div className="AdminUserImg">
                     <img
@@ -141,10 +162,15 @@ export const UserFollowers = () => {
                     />
                   </div>
                   <div className="d-flex gap-5 align-items-center d-flex justify-content-evenly w-100">
-                    <div className="d-flex justify-content-center justify-content-xl-start gap-2 gap-xl-3 ms-5 me-5">
-                      <p className="fw-bold">{elem.nickname}</p>
+                    <div className="d-flex flex-column justify-content-center text-center">
+                      <div className="d-flex justify-content-center justify-content-xl-start gap-2 gap-xl-3 ms-5 me-5">
+                        <p className="fw-bold">{elem.nickname}</p>
+                      </div>
+                      <div>
+                      Fiabilidad: {parseFloat(ratioTotal.toFixed(2))} %
+                      </div>
                     </div>
-                    <div className="">
+                    <div className="UserButton">
                       {user.user_id !== elem.user_id ? (
                         <Button
                           className="Button3"
