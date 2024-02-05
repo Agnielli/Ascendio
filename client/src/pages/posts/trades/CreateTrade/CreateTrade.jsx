@@ -7,6 +7,22 @@ import axios from "axios";
 import Select from "react-select";
 import "../../../../../public/stylesheets/InputDesplegableSinBootstrap.scss";
 
+const customStyles = {
+  option: (provided, state) => ({
+    ...provided,
+    backgroundColor: state.isFocused ? "#e0e0e0" : "$accent5-color",
+    color: state.isFocused ? "$accent-color" : "black",
+  }),
+  control: (provided, state) => ({
+    ...provided,
+    border: "1px solid #ccc",
+    borderRadius: "25px",
+    height: "45.96px",
+    padding: "10px",
+    boxShadow: state.isFocused ? `0 0 0 0.25rem $accent-color` : "none",
+  }),
+};
+
 const initialValue = {
   currency: "",
   description: "",
@@ -15,6 +31,7 @@ const initialValue = {
   takeProfit: "",
   category_id: "",
 };
+
 export const CreateTrade = () => {
   const [createOneTrade, setCreateOneTrade] = useState(initialValue);
   const [file, setFile] = useState();
@@ -80,6 +97,23 @@ export const CreateTrade = () => {
           console.log(err);
         });
     }
+
+    const customStyles = {
+      option: (provided, state) => ({
+        ...provided,
+        backgroundColor: state.isFocused ? "#e0e0e0" : "$accent5-color",
+        color: state.isFocused ? "$accent-color" : "black",
+      }),
+      control: (provided, state) => ({
+        ...provided,
+        border: "1px solid #ccc",
+        borderRadius: "25px",
+        height: "45.96px",
+        padding: "10px",
+        boxShadow: state.isFocused ? `0 0 0 0.25rem $accent-color` : "none",
+      }),
+    };
+
   };
   return (
     <Row className="CreateTradeUser justify-content-center">
@@ -144,14 +178,14 @@ export const CreateTrade = () => {
           />
           <br />
           <select
-            className="InputDesplegableSinBootstrap textIndentPlaceholder"
+            className="InputDesplegableSinBootstrap textIndentPlaceholder "
             placeholder="Categoría.."
             id="category"
             name="category_id"
             value={createOneTrade.category_id}
             onChange={handleChange}
           >
-            <option value=""></option>
+            <option value="" className="optionesvariety"></option>
             {options
               .filter((elem) => elem.label !== "General")
               .map((option) => (
