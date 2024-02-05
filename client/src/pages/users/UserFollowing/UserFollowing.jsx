@@ -124,69 +124,67 @@ export const UserFollowing = () => {
         <Col>
           <Row className="d-flex RowShowAllUsersHeader">
             <Col className="d-flex flex-column p-5">
-              <div>
-                <h2>Siguiendo a:</h2>
-                <Button className="Button4" onClick={() => navigate("/profile")}>
+              <div className="d-flex gap-5">
+                <h2>Mis seguidores</h2>
+                <Button
+                  className="Button4"
+                  onClick={() => navigate("/profile")}
+                >
                   Volver
                 </Button>
               </div>
             </Col>
-            <Col className="input-container mt-5 BuscadorShowAllUsers">
-              <input
-                className="buscador"
-                onChange={handleChange}
-                placeholder="🔍..."
-                value={search}
-              />
+            <Col>
+              <div className="input-container mt-5 BuscadorShowAllUsers">
+                <input
+                  className="buscador"
+                  onChange={handleChange}
+                  placeholder="🔍..."
+                  value={search}
+                />
+              </div>
             </Col>
           </Row>
         </Col>
       </Row>
-      <Row className="UserFollowing row-gap-4 ShowAllUserPaddings2-10">
+      <Row className="UserFollower row-gap-4 ShowAllUserPaddings2-10">
         {followingFilter?.map((elem) => {
           return (
             <Col xs={12} className="d-flex justify-content-center">
-              <div className="d-flex flex-row UserFollowerCard justify-content-between">
-                <div className="DivContainer3divs d-flex">
-                  <div className="AdminUserImg">
-                    <img
-                      src={
-                        elem.img != null
-                          ? `http://localhost:3000/images/users/${elem.img}`
-                          : `http://localhost:3000/images/users/descarga.png`
-                      }
-                      alt="Imagen de perfil del usuario"
-                    />
-                  </div>
-                  <div className="d-flex gap-5 align-items-center d-flex justify-content-evenly w-100">
-                    <div className="d-flex flex-column justify-content-center w-50">
-                      <div className="d-flex justify-content-center gap-2 gap-xl-3 ms-5 me-5">
-                        <h5 className="fw-bold">{elem.nickname}</h5>
-                      </div>
-                      <div className="d-flex justify-content-center">
-                      <h6>Fiabilidad: {parseFloat(ratioTotal.toFixed(2))} %</h6>
-                      </div>
-                    </div>
-                    <div className="">
-                      {user.user_id !== elem.user_id ? (
-                        <Button
-                          className="Button3"
-                          onClick={() => pulsarSeguirONo(elem.user_id)}
-                        >
-                          {followingUsers.includes(elem.user_id)
-                            ? "Dejar de Seguir"
-                            : "Seguir También"}
-                        </Button>
-                      ) : (
-                        <Button
-                          className="Button3"
-                          onClick={() => navigate(`/userposts/${user.user_id}`)}
-                        >
-                          Ir a posts
-                        </Button>
-                      )}
-                    </div>
-                  </div>
+              <div className="UserFollowerCard flex-wrap d-flex align-items-center justify-content-between">
+                <div className="UserImg">
+                  <img
+                    src={
+                      elem.img != null
+                        ? `http://localhost:3000/images/users/${elem.img}`
+                        : `http://localhost:3000/images/users/descarga.png`
+                    }
+                    alt="Imagen de perfil del usuario"
+                  />
+                </div>
+
+                <div className="UserStats d-flex flex-column justify-content-center justify-content-xl-start">
+                  <p className="fw-bold">{elem.nickname}</p>
+                  <p>Fiabilidad: {parseFloat(ratioTotal.toFixed(2))} %</p>
+                </div>
+                <div className="UserButton">
+                  {user.user_id !== elem.user_id ? (
+                    <Button
+                      className="Button3"
+                      onClick={() => pulsarSeguirONo(elem.user_id)}
+                    >
+                      {followingUsers.includes(elem.user_id)
+                        ? "Dejar de Seguir"
+                        : "Seguir También"}
+                    </Button>
+                  ) : (
+                    <Button
+                      className="Button3"
+                      onClick={() => navigate(`/userposts/${user.user_id}`)}
+                    >
+                      Ir a posts
+                    </Button>
+                  )}
                 </div>
               </div>
             </Col>

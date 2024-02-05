@@ -149,47 +149,40 @@ export const UserFollowers = () => {
         {followersFilter?.map((elem) => {
           return (
             <Col xs={12} className="d-flex justify-content-center">
-              <div className="flex-wrap d-flex align-items-center justify-content-between gap-xl-4 UserFollowerCard">
-                <div className="DivContainer3divs d-flex">
-                  <div className="AdminUserImg">
-                    <img
-                      src={
-                        elem.img != null
-                          ? `http://localhost:3000/images/users/${elem.img}`
-                          : `http://localhost:3000/images/users/descarga.png`
-                      }
-                      alt="Imagen de perfil del usuario"
-                    />
-                  </div>
-                  <div className="d-flex gap-5 align-items-center d-flex justify-content-evenly w-100">
-                    <div className="d-flex flex-column justify-content-center text-center">
-                      <div className="d-flex justify-content-center justify-content-xl-start gap-2 gap-xl-3 ms-5 me-5">
-                        <p className="fw-bold">{elem.nickname}</p>
-                      </div>
-                      <div>
-                      Fiabilidad: {parseFloat(ratioTotal.toFixed(2))} %
-                      </div>
-                    </div>
-                    <div className="UserButton">
-                      {user.user_id !== elem.user_id ? (
-                        <Button
-                          className="Button3"
-                          onClick={() => pulsarSeguirONo(elem.user_id)}
-                        >
-                          {followingUsers.includes(elem.user_id)
-                            ? "Dejar de Seguir"
-                            : "Seguir También"}
-                        </Button>
-                      ) : (
-                        <Button
-                          className="Button3"
-                          onClick={() => navigate(`/userposts/${user.user_id}`)}
-                        >
-                          Ir a posts
-                        </Button>
-                      )}
-                    </div>
-                  </div>
+              <div className="UserFollowerCard flex-wrap d-flex align-items-center justify-content-between">
+                <div className="UserImg">
+                  <img
+                    src={
+                      elem.img != null
+                        ? `http://localhost:3000/images/users/${elem.img}`
+                        : `http://localhost:3000/images/users/descarga.png`
+                    }
+                    alt="Imagen de perfil del usuario"
+                  />
+                </div>
+
+                <div className="UserStats d-flex flex-column justify-content-center justify-content-xl-start">
+                  <p className="fw-bold">{elem.nickname}</p>
+                  <p>Fiabilidad: {parseFloat(ratioTotal.toFixed(2))} %</p>
+                </div>
+                <div className="UserButton">
+                  {user.user_id !== elem.user_id ? (
+                    <Button
+                      className="Button3"
+                      onClick={() => pulsarSeguirONo(elem.user_id)}
+                    >
+                      {followingUsers.includes(elem.user_id)
+                        ? "Dejar de Seguir"
+                        : "Seguir También"}
+                    </Button>
+                  ) : (
+                    <Button
+                      className="Button3"
+                      onClick={() => navigate(`/userposts/${user.user_id}`)}
+                    >
+                      Ir a posts
+                    </Button>
+                  )}
                 </div>
               </div>
             </Col>

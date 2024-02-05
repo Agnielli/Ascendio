@@ -26,10 +26,10 @@
   }
 
   @media screen and (max-width: 640px) {
-    .AdminUserImg {
+    .UserImg {
       width: 30%;
     }
-    .AdminUserStats {
+    .UserStats {
       width: 70%;
     }
     .UserButton {
@@ -77,11 +77,11 @@
   }
 
   @media screen and (max-width: 640px) {
-    .AdminUserImg {
+    .UserImg {
       width: 30%;
     }
 
-    .AdminUserButton {
+    .UserButton {
       width: 100%;
       display: flex;
       justify-content: center;
