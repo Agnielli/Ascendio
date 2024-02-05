@@ -95,14 +95,14 @@ export const AllTrades = () => {
     <div className="alltrades">
       <Row className="general-altradeposts title-input">
         <Col
-          // lg={3}
-          className="d-flex justify-content-start align-items-center"
+          xs={12} md={6}
+          className="centrar-allposts"
         >
           <h2 className="mb-0">Trade Posts</h2>
         </Col>
         <Col
-          // lg={9}
-          className="d-flex justify-content-end align-items-center"
+          xs={12} md={6}
+          className="d-flex justify-content-end align-items-center centrar-allposts"
         >
           <div className="input-container">
             <span className="material-symbols-outlined search-icon">
@@ -123,7 +123,7 @@ export const AllTrades = () => {
         </Col>
         <Col
           xs={2}
-          className="ascendio-home-row-hijo d-flex gap-1 DivGrisParaBotones mt-2"
+          className="ascendio-home-row-hijo d-flex gap-1 mt-2 DivGrisParaBotones2"
         >
           <Button
             className="Button2"
@@ -139,7 +139,7 @@ export const AllTrades = () => {
           </Button>
         </Col>
       </Row>
-      <div className="d-flex flex-wrap justify-content-center gap-4">
+      <div className="d-flex w-100 flex-wrap justify-content-around gap-4">
         {lastTradesFilter[0] !== undefined ? (
           lastTradesFilter.map((elem) => {
             return (

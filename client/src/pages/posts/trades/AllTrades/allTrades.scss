@@ -1,12 +1,27 @@
 @use "../../../../../public/stylesheets/variables.scss" as *;
 // // Generales
 .alltrades {
-  padding: 2vh 10vw;
+  padding: 2vh 0;
+  width: 80%;
+  margin: 0 auto;
+
 
   .ascendio-home-row-hijo {
     margin-bottom: 1rem;
+    width: 80%;
+    display: flex;
     width: 100%;
-    padding: 0 !important;
+
+    .col1 {
+      display: flex;
+      justify-content: start;
+      align-items: center;
+    }
+
+    .col2 {
+      display: flex;
+      justify-content: end;
+    }
 
     button {
       width: 50%;
@@ -25,7 +40,7 @@
     
     .buscador {
       height: 36px;
-    transition: 0.1s;
+      transition: 0.1s;
     &:focus{
       border: 0.25rem solid $accent-color !important;
     }
@@ -42,6 +57,12 @@
           margin-bottom: 5px; // Agregar espacio entre los botones
         }
       }
+    }
+  }
+
+  @media (max-width: 770px) {
+    .centrar-allposts {
+      text-align: center;
     }
   }
 }
