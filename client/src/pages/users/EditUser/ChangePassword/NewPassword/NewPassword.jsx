@@ -58,7 +58,8 @@ export const NewPassword = ({ user, setUser, setShowChangePassword }) => {
     });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     if (!NewPassword.password || !NewPassword.password2) {
       setMsgError("Algun campo no está relleno");
       setStyle("EditUserMsgFailureResetPassword");
@@ -89,7 +90,8 @@ export const NewPassword = ({ user, setUser, setShowChangePassword }) => {
     return emailRegex.test(email);
   };
 
-  const handleSubmitEmail = () => {
+  const handleSubmitEmail = (e) => {
+    e.preventDefault();
     if (!editUser.email) {
       setMsgErrorEmail("Los campos obligatorios deben estar rellenos");
       setStyle("EditUserMsgFailureResetPassword");
@@ -149,13 +151,13 @@ export const NewPassword = ({ user, setUser, setShowChangePassword }) => {
         <p className={style} style={{ marginBottom: "2rem" }}>
           {msgErrorEmail || "\u00A0"}
         </p>
-        <Button
+        <button
           className="Button3"
           variant="primary me-2"
           onClick={handleSubmitEmail}
         >
           CAMBIAR EMAIL
-        </Button>
+        </button>
       </Form>
       <Form>
         <h4>EDITAR CONTRASEÑA:</h4>
@@ -262,20 +264,17 @@ export const NewPassword = ({ user, setUser, setShowChangePassword }) => {
         <p className={style} style={{ paddingBottom: "2rem" }}>
           {msgError || "\u00A0"}
         </p>
-        <Button className="Button3" onClick={handleSubmit}>
-          CAMBIAR CONTRASEÑA
-        </Button>
       </Form>
       <div className="botonCancelarEditarLogin">
-        <Button className="Button3" onClick={handleSubmit}>
+        <button className="Button3" onClick={handleSubmit}>
           CAMBIAR CONTRASEÑA
-        </Button>
-        <Button
+        </button>
+        <button
           className="Button1"
           onClick={() => setShowChangePassword(false)}
         >
           CANCELAR
-        </Button>
+        </button>
       </div>
     </div>
   );
