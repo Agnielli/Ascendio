@@ -110,3 +110,12 @@
     }
   }
 }
+
+@media (max-width: 400px) {
+  .Button5 {
+    img {
+      margin-left: 0 !important;
+      margin-right: 10px !important;
+    }
+  }
+}

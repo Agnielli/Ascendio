@@ -9,13 +9,25 @@ import "../../../../public/stylesheets/ButtonsApp.scss";
 export const ShowAllUsers = () => {
   const [show, setShow] = useState(1);
   const [followingUsers, setFollowingUsers] = useState([]);
+  const [statisticsUser, setStatisticsUser] = useState();
   const [allUsers, setAllUsers] = useState();
   const [allUsersFilter, setAllUsersFilter] = useState();
   const [search, setSearch] = useState("");
   const [options, setOptions] = useState("nickname");
   const { user } = useContext(AscendioContext);
-  const navigate = useNavigate(); 
-  
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/users/statisticsuser/${user.user_id}`)
+      .then((res) => {
+        // console.log("datos del usuario", res.data);
+        setStatisticsUser(res.data.datos);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [user]);
 
   useEffect(() => {
     if (show === 1) {
@@ -107,7 +119,21 @@ export const ShowAllUsers = () => {
   };
 
   // console.log(options);
+  // let ratioTotal = 0;
+  // if (statisticsUser?.num_correct_posts !== 0) {
+  //   ratioTotal =
+  //     parseFloat(
+  //       statisticsUser?.num_correct_posts / statisticsUser?.num_trades
+  //     ) * 100;
+  // }
 
+  let ratioTotal = 0;
+  if (statisticsUser?.num_correct_posts !== 0) {
+    ratioTotal =
+      parseFloat(
+        statisticsUser?.num_correct_posts / statisticsUser?.num_trades
+      ) * 100;
+  }
   return (
     <div className="ShowAllUserPaddings2-10">
       {show === 1 && (
@@ -122,9 +148,9 @@ export const ShowAllUsers = () => {
                 </Col>
                 <Col>
                   <div className="input-container BuscadorShowAllUsers">
-                  <span className="material-symbols-outlined search-icon">
-              search
-            </span>
+                    <span className="material-symbols-outlined search-icon">
+                      search
+                    </span>
                     <input
                       className="buscador"
                       onChange={handleChange}
@@ -162,7 +188,7 @@ export const ShowAllUsers = () => {
             <Col
               xs={12}
               className="d-flex justify-content-center flex-column mt-4"
-            >        
+            >
               <Row className="row-gap-4">
                 {allUsersFilter?.map((elem) => {
                   return (
@@ -195,11 +221,9 @@ export const ShowAllUsers = () => {
                               </Link>
                             </p>
                             <p>{elem.followers_count} Seguidores</p>
-                          </div>
-
-                          <div>
-                            <p>{elem.correct_posts} Acertados</p>
-                            <p>{elem.incorrect_posts} Errados</p>
+                            <p>
+                              Fiabilidad: {parseFloat(ratioTotal.toFixed(2))} %
+                            </p>
                           </div>
                         </div>
                         <div className="DivBotonesShowAllUsers d-flex flex-column gap-2">
