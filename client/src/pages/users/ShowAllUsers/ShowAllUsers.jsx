@@ -115,9 +115,9 @@ export const ShowAllUsers = () => {
             <Col>
               <Row className="d-flex RowShowAllUsersHeader">
                 <Col>
-                  <Button className="mb-2 Button1" onClick={() => setShow(2)}>
+                  <button className="mb-2 Button1" onClick={() => setShow(2)}>
                     Top Usuarios con más Seguidores
-                  </Button>
+                  </button>
                 </Col>
                 <Col>
                   <div className="input-container BuscadorShowAllUsers">
@@ -203,14 +203,14 @@ export const ShowAllUsers = () => {
                         </div>
                         <div className="DivBotonesShowAllUsers d-flex flex-column gap-2">
                           {user.user_id !== elem.user_id ? (
-                            <Button
+                            <button
                               className="Button3"
                               onClick={() => pulsarSeguirONo(elem.user_id)}
                             >
                               {followingUsers.includes(elem.user_id)
                                 ? "Siguiendo"
                                 : "Seguir"}
-                            </Button>
+                            </button>
                           ) : null}
                           {/* <Button
                             className="Button3"
@@ -244,9 +244,9 @@ export const ShowAllUsers = () => {
             <Col>
               <Row className="d-flex RowShowAllUsersHeader">
                 <Col>
-                  <Button className="mb-2 Button1" onClick={() => setShow(1)}>
+                  <button className="mb-2 Button1" onClick={() => setShow(1)}>
                     Top Usuarios con más Aciertos
-                  </Button>
+                  </button>
                 </Col>
                 <Col>
                   <div className="input-container BuscadorShowAllUsers">
@@ -306,23 +306,23 @@ export const ShowAllUsers = () => {
                         </div>
                         <div className="DivBotonesShowAllUsers d-flex flex-column gap-2">
                           {user.user_id !== elem.user_id ? (
-                            <Button
+                            <button
                               className="Button3"
                               onClick={() => pulsarSeguirONo(elem.user_id)}
                             >
                               {followingUsers.includes(elem.user_id)
                                 ? "Siguiendo"
                                 : "Seguir"}
-                            </Button>
+                            </button>
                           ) : null}
-                          <Button
+                          <button
                             className="Button3"
                             onClick={() =>
                               navigate(`/traderprofile/${elem.user_id}`)
                             }
                           >
                             Ver más
-                          </Button>
+                          </button>
                         </div>
 
                         {/* Seguidores: {elem.followers_count}

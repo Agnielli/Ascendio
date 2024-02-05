@@ -41,13 +41,13 @@ export const TraderProfile = () => {
     <>
       <Row className="traderProfileScss">
         <Col xs={12} lg={12}>
-              <Button
+              <button
                 variant="primary"
                 onClick={() => navigate("/showallusers")}
                 className="Button4"
               >
                 VOLVER
-              </Button>
+              </button>
             </Col>
         <Col xs={12} lg={4} className="d-flex justify-content-center p-0 ">
           <div>

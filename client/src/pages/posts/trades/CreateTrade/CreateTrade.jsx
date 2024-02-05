@@ -86,7 +86,7 @@ export const CreateTrade = () => {
       <Col xl={6}>
         <Form className="FormulariosContainer d-flex flex-column">
           <Form.Group controlId="formFile" className="mb-3">
-            <Button className="Button3 ButtonImgCreateTradeInput">
+            <div className="Button3 ButtonImgCreateTradeInput">
               <Form.Label>
                 {" "}
                 <img
@@ -95,7 +95,7 @@ export const CreateTrade = () => {
                   alt=""
                 />
               </Form.Label>
-            </Button>
+            </div>
 
             <Form.Control type="file" onChange={handleFile} hidden />
           </Form.Group>

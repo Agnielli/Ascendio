@@ -53,13 +53,8 @@ export const CreateGeneralPost = () => {
     <Row className="CreateGeneralPostUser justify-content-center">
       <Col xl={6}>
         <Form className="FormulariosContainer">
-          <Form.Group controlId="formFile" className="mb-3">
-            <br />
-            <h2 className="CreateGeneralPostH2AscendioColor">
-              CREAR POST GENERAL
-            </h2>
-            <br />
-            <Button className="Button3 ButtonImgCreateTradeInput">
+          <Form.Group controlId="formFile" className="mb-3">      
+            <div className="Button3 ButtonImgCreateTradeInput">
               <Form.Label>
                 <img
                   className="BotonFoto"
@@ -67,7 +62,7 @@ export const CreateGeneralPost = () => {
                   alt=""
                 />
               </Form.Label>
-            </Button>
+            </div>
             <Form.Control type="file" onChange={handleFile} hidden />
           </Form.Group>
           <Form.Control
