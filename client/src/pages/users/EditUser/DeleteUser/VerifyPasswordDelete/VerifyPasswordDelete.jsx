@@ -29,7 +29,8 @@ export const VerifyPasswordDelete = ({
   const handleChange = (e) => {
     setCurrentPassword(e.target.value);
   };
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     axios
       .post(`http://localhost:3000/users/verifypassword/${user?.user_id}`, {
         currentPassword,
@@ -106,20 +107,20 @@ export const VerifyPasswordDelete = ({
           {msgError || "\u00A0"}
         </p>
         <div className="DivGrisParaBotones mt-3">
-          <Button
+          <button
             className="Button3"
             variant="primary me-2"
             onClick={handleSubmit}
           >
             SIGUIENTE
-          </Button>
-          <Button
+          </button>
+          <button
             className="Button1"
             variant="primary me-2"
             onClick={() => setShowDeleteUser(false)}
           >
             CANCELAR
-          </Button>
+          </button>
         </div>
       </Form>
     </>

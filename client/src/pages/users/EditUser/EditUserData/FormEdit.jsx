@@ -29,7 +29,8 @@ export const FormEdit = ({ user, setUser, setShowForm }) => {
     setFile(selectedFile);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     console.log(editUser.phonenumber);
     if (
       !editUser.nickname ||
@@ -147,16 +148,16 @@ export const FormEdit = ({ user, setUser, setShowForm }) => {
         </Form.Group>
         <p className={style}>{msgError || "\u00A0"}</p>
         <div className="DivGrisParaBotones mt-3">
-          <Button
+          <button
             className="Button3"
             variant="primary me-2"
             onClick={handleSubmit}
           >
             ACEPTAR
-          </Button>
-          <Button className="Button1" onClick={() => setShowForm(false)}>
+          </button>
+          <button className="Button1" onClick={() => setShowForm(false)}>
             CANCELAR
-          </Button>
+          </button>
         </div>
       </Form>
     </div>

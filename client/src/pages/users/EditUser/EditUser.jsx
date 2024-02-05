@@ -198,15 +198,15 @@ export const EditUser = () => {
               </Form.Group>
               <p className={style}>{msgSuccess}</p>
               <div className="DivGrisParaBotones mt-3">
-                <Button className="Button3" type="submit">
+                <button className="Button3" type="submit">
                   ACEPTAR
-                </Button>
-                <Button
+                </button>
+                <button
                   className="Button1"
                   onClick={() => setShowCategories(false)}
                 >
                   CANCELAR
-                </Button>
+                </button>
               </div>
             </Form>
           )}
