@@ -209,7 +209,7 @@ export const Users = () => {
             </div>
           )}
           {showContent && (
-            <div className="d-flex flex-column">
+            <div className="d-flex flex-column icons-users">
               <Button
                 className="Button5"
                 onClick={() => navigate("/createtrade")}
