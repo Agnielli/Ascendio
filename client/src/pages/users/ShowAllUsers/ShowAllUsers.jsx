@@ -15,6 +15,7 @@ export const ShowAllUsers = () => {
   const [options, setOptions] = useState("nickname");
   const { user } = useContext(AscendioContext);
   const navigate = useNavigate(); 
+  
 
   useEffect(() => {
     if (show === 1) {
@@ -106,14 +107,6 @@ export const ShowAllUsers = () => {
   };
 
   // console.log(options);
-
-  // let ratioTotal = 0;
-  // if (statisticsUser?.num_correct_posts !== 0) {
-  //   ratioTotal =
-  //     parseFloat(
-  //       statisticsUser?.num_correct_posts / statisticsUser?.num_trades
-  //     ) * 100;
-  // }
 
   return (
     <div className="ShowAllUserPaddings2-10">
