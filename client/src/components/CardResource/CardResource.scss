@@ -23,6 +23,7 @@
     .resourceIcon{
       color: $accent3-color;
       font-size: 20px;
+      padding: 0 !important;
     }
   }
 
@@ -47,6 +48,14 @@
   }
 }
 @media (max-width: 972px) {
+  .pplCardResource{
+    .botonResource{
+      padding-left: 10%;
+      padding-right: 10%;
+    }
+  }
+}
+@media (max-width: 947px) {
   .pplCardResource{
     .botonResource{
       padding-left: 10%;

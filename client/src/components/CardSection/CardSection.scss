@@ -56,6 +56,7 @@
         align-items: center;
         .addIcon{
           color: #E15252;
+          padding: 0 !important;
         }
       }
       .deleteSection{
@@ -68,6 +69,7 @@
         align-items: center;
         .deleteIcon{
           color: #E15252;
+          padding: 0 !important;
         }
       }
     }
@@ -104,6 +106,7 @@
           aspect-ratio: 1/1;
           padding: 0.9rem;
           margin-left: 3rem;
+          
         }
         .deleteSection{
           width: 10px;
