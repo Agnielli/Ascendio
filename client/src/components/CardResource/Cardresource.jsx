@@ -41,10 +41,10 @@ export const Cardresource = ({
               disabled={isIntoValidate && !isConfirmed ? true : false}
             >
               {resource[0]?.resource_type === 1 ? (
-                <span class="material-symbols-outlined resourceIcon">description</span> 
+                <span class="material-symbols-outlined resourceIcon d-flex justify-content-center align-items-center">description</span> 
               ) : null}
               {resource[0]?.resource_type === 2 ? (
-                <span class="material-symbols-outlined resourceIcon">smart_display</span>
+                <span class="material-symbols-outlined resourceIcon d-flex justify-content-center align-items-center">smart_display</span>
               ) : null}
             </Button>
 
