@@ -31,6 +31,7 @@
           padding-bottom: 2%;
           .addIcon {
             color: $accent3-color;
+            padding: 0 !important;
           }
         }
         .deleteTopic {
@@ -45,6 +46,7 @@
           padding-bottom: 2%;
           .deleteIcon {
             color: $accent3-color;
+            padding: 0 !important;
           }
         }
       }
