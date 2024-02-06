@@ -72,19 +72,19 @@ export const ShowAllCommentsPost = ({ showModal, setShowModal, oneTrade }) => {
                 key={elem.comment_id}
                 className={`showallcommentsposts-nieto  ${backgroundColor}`}
               >
-                <Col lg={2} xs={12} className="nickname-oneposttrade">
+                <Col lg={2} xs={2} className="nickname-oneposttrade">
                   <h6>{elem.nickname}:</h6>
                 </Col>
-                <Col lg={8} xs={12} className="message-oneposttrade">
+                <Col lg={8} xs={8} className="message-oneposttrade">
                   <p>{elem.message}</p>
                 </Col>
-                <Col lg={1} xs={12} className="date-oneposttrade">
+                <Col lg={1} xs={1} className="date-oneposttrade">
                   <p>
                     {elem.date.slice(11, 16)} {elem.date.slice(8, 10)}-
                     {getMonthName(elem.date.slice(5, 7))}
                   </p>
                 </Col>
-                <Col lg={1} xs={12} className="botonera-oneposttrade">
+                <Col lg={1} xs={1} className="botonera-oneposttrade">
                   {user.user_id === elem.user_id && (
                     <Button
                       className="boton-eliminar-comment"

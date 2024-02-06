@@ -103,3 +103,11 @@
     @include display-flex(row, center, center);
   }
 }
+
+@media (width <= 1400px) {
+  .onetradepost {
+    display: flex; 
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
