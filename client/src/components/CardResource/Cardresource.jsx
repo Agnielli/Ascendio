@@ -47,19 +47,6 @@ export const Cardresource = ({
                 <span class="material-symbols-outlined resourceIcon d-flex justify-content-center align-items-center">smart_display</span>
               ) : null}
             </Button>
-
-            {/* {userId === userCourse && (
-              <button
-                className="delResource d-flex justify-content-center align-items-center m-0 p-1"
-                variant="outline-danger"
-                onClick={() =>
-                  deleteResource(section_id, topic_id, resource[0].resource_id)
-                }
-                disabled={isIntoValidate && !isConfirmed ? true : false}
-              >
-                <span class="material-symbols-outlined delIcon">delete</span>
-              </button>
-            )} */}
           </>
         )}
     </div>

@@ -64,7 +64,6 @@ export const CardRates = ({ resetCourse, setResetCourse, setShowCardRate, rates,
     }
   };
 
-
   return (
 
     <>{myRate.length === 0 &&
