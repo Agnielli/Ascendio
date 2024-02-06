@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./courses.scss";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
-import { Button, Card, Col, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import { textSensitive } from "../../helpers/utils";
-import { RatingStars } from "../../components/Courses/RatingStars/RatingStars";
 import "../../../public/stylesheets/ButtonsApp.scss";
 import { CardOneCourse } from "../../components/CardOneCourse/CardOneCourse";
 
@@ -13,7 +11,6 @@ export const AllCourses = () => {
   const [findCourse, setFindCourse] = useState();
   const [filter, setFilter] = useState("");
   const [order, setOrder] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     let url;
@@ -81,10 +78,10 @@ export const AllCourses = () => {
           })}
           {findCourse?.length === 0 && (
             <h4 className="alltrades-error-nohaypostsnitrades text-center">
-              No hay{" "}
+              No hay
               <span className="alltrades-error-nohaypostsnitrades-hijo">
                 Cursos
-              </span>{" "}
+              </span>
               disponibles en este momento.
             </h4>
           )}

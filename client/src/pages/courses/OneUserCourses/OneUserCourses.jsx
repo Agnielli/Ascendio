@@ -88,7 +88,6 @@ export const OneUserCourses = () => {
             return (
               <Col xs={12} md={6} lg={4} xxl={3} className="d-flex">
                 <Card
-                  // style={{ width: "22rem" }}
                   key={elem.course_id}
                   className="mapeoAllCourseOneUser text-center mb-4 d-flex flex-column"
                   style={{ width: "100%" }}

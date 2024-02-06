@@ -264,21 +264,6 @@ button{
   .oneCourse {
     .CardCourse {
       .oneCourseBody {
-        .optionsCourse {
-          .icons{
-           margin-left: 1.4rem;
-           padding-top: 2%;
-          }
-        }
-      }
-    }
-  }
-}
-
-@media (width < 694px) {
-  .oneCourse {
-    .CardCourse {
-      .oneCourseBody {
         .courseTitle{
           font-size: 2rem;
         }
