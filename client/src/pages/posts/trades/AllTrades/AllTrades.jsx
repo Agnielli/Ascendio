@@ -132,8 +132,7 @@ export const AllTrades = () => {
           </Button>
         </Col>
       </Row>
-      <div className="d-flex w-100 flex-wrap justify-content-around gap-4"></div>
-      <Col className="d-flex flex-wrap justify-content-center gap-4">
+      <div className="d-flex flex-wrap justify-content-center gap-4">
         {lastTradesFilter[0] !== undefined ? (
           lastTradesFilter.map((elem) => {
             return (
@@ -243,7 +242,7 @@ export const AllTrades = () => {
             disponibles en este momento.
           </h4>
         )}
-      </Col>
+      </div>
     </div>
   );
 };
