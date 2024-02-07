@@ -3,6 +3,7 @@
   padding: 2vh 0;
   width: 80%;
   margin: 0 auto;
+
   .ascendio-home-row-hijo {
     margin-bottom: 1rem;
     width: 80%;
@@ -25,16 +26,16 @@
     }
   }
   .input-container {
-  span {
-    margin: 0 !important;
-    padding: 0 !important;
-  }
+    span {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
     .buscador {
       height: 36px;
       transition: 0.1s;
-    &:focus{
-      border: 0.25rem solid $accent-color !important;
-    }
+      &:focus {
+        border: 0.25rem solid $accent-color !important;
+      }
     }
   }
   @media (max-width: 515px) {
@@ -56,24 +57,24 @@
     }
   }
 }
-.general-altradeposts{
+.general-altradeposts {
   max-width: 100%;
   width: 100%;
 }
-.ascendio-home-row-hijo{
+.ascendio-home-row-hijo {
   max-width: 100%;
   padding: 0 12px 0 12px !important;
-  button{
+  button {
     max-width: 50%;
     width: 50%;
   }
 }
-.col-home-arreglo{
-  @include display-flex(row,end,center);
+.col-home-arreglo {
+  @include display-flex(row, end, center);
 }
-.col-home-arreglo2{
-  @include display-flex(row,space-between,center);
-  button{
-   width: 100%;
+.col-home-arreglo2 {
+  @include display-flex(row, space-between, center);
+  button {
+    width: 100%;
   }
 }
