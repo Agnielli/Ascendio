@@ -1,5 +1,5 @@
 @use "../../../../../public/stylesheets/variables.scss" as *;
-// // Generales
+
 .alltrades {
   padding: 2vh 0;
   width: 80%;
@@ -66,3 +66,30 @@
     }
   }
 }
+
+.general-altradeposts{
+  max-width: 100%;
+  width: 100%;
+}
+
+.ascendio-home-row-hijo{
+  max-width: 100%;
+  padding: 0 12px 0 12px !important;
+  button{
+    max-width: 50%;
+    width: 50%;
+    
+  }
+}
+
+.col-home-arreglo{
+  @include display-flex(row,end,center);
+}
+
+.col-home-arreglo2{
+  @include display-flex(row,space-between,center);
+  button{
+   width: 100%;
+  }
+}
+

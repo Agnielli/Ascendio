@@ -70,40 +70,6 @@ export const PurchaseCourseCard = () => {
             <Col xs={12} md={6} lg={4} xxl={3} className="d-flex">
               <CardOneCourse
               elem={elem} />
-            {/* <Card
-              key={elem.course_id}
-              className="mapeoCursosComprados text-center mb-4"
-              style={{ width: "100%" }}>
-              <Card.Img
-                style={{ height: "16rem", objectFit: "cover" }}
-                variant="top"
-                src={`http://localhost:3000/images/cursos/${elem.img}`}
-              />
-              <Card.Body className="d-flex flex-column gap-1">
-                <Card.Text className="cardtitle"> {elem.title} </Card.Text>
-
-                {elem.average_rating && (
-                  <RatingStars numberstars={elem.average_rating} />
-                )}
-
-                <Card.Subtitle className="tagsCourse">{elem.tags}</Card.Subtitle>
-                <Card.Title className="descriptioncard d-flex justify-content-start">{elem.description}</Card.Title>
-
-                <Card.Text className="priceCourse cardtitle px-3 my-2">
-                  {Number(elem?.price) === 0
-                  ? "GRATIS"
-                  : `${elem?.price}€`}
-              </Card.Text>
-                <Card.Text className="d-flex justify-content-center mt-auto">
-                  <Button
-                    onClick={() => navigate(`/course/${elem.course_id}`)}
-                    className="Button3"
-                  >
-                    Más info
-                  </Button>
-                </Card.Text>
-              </Card.Body>
-            </Card> */}
           </Col>
           );
         })}

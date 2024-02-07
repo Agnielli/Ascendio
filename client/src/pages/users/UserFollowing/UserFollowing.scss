@@ -1,10 +1,10 @@
 @use '../../../../public/stylesheets/variables.scss' as *;
 
-.UserFollowing {
+.UserFollowingScss {
+  padding: 2vh 10vw;
   .UserFollowingCard {
     background-color: rgb(43, 42, 41);
     width: 100%;
-    max-width: 42rem;
     color: white;
     border-radius: 6rem;
     padding: 2rem;
@@ -12,6 +12,9 @@
 
   p {
     font-size: 2rem;
+  }
+  h3{
+    margin:8px;
   }
 
   .DivContainer3divs {
@@ -25,9 +28,7 @@
   }
  
   @media screen and (min-width: 600px) {
-    .ShowAllUserPaddings2-10 {
-      padding: 2vw 10vw;
-    }
+  
   }
 
   @media screen and (min-width: 1200px) {
@@ -63,6 +64,8 @@
   }
 
   .input-container {
+    display: flex;
+  align-items: center;
     span {
       margin: 0 !important;
       padding: 0 !important;

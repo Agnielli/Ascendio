@@ -19,8 +19,6 @@ export const AscendioProvider= ({children}) => {
     setToken(tokenLocalStorage)
     if(tokenLocalStorage){ 
       const {user_id,type} = jwtDecode(tokenLocalStorage).user;
-      //console.log(jwtDecode(tokenLocalStorage));
-      //console.log("el token", user_id, type);
       axios
         .get(`http://localhost:3000/users/oneuser/${user_id}`)
         .then((res)=>{
@@ -30,22 +28,6 @@ export const AscendioProvider= ({children}) => {
     }
     
   }, [isLogged,token])
-
-
-
-  // useEffect(() => {
-  //   setToken(tokenLocalStorage)
-  //   if(tokenLocalStorage){ 
-  //     const {user_id} = jwtDecode(tokenLocalStorage).user;
-  
-  //     axios
-  //       .get(`http://localhost:3000/courses/allcourses/${user_id}`)
-  //       .then((res)=>{
-  //         setUserCourse(res.data)
-  //       })
-  //       .catch((err)=>{console.log(err)})
-  //   }
-  // }, [isLogged,token])
 
   return (
     <AscendioContext.Provider value={{

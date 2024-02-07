@@ -116,6 +116,21 @@ export const AllTrades = () => {
             />
           </div>
           {/* <input
+    // <Row className="alltrades">
+//       <Col lg={6}>
+//         <h2>Trade Posts</h2>
+//       </Col>
+//       <Col lg={6} className="col-home-arreglo">
+//         <div className="input-container">
+//           <span className="material-symbols-outlined search-icon">search</span>
+//           <input
+//             onChange={handleChange}
+//             placeholder="Buscar"
+//             value={search}
+//             className="buscador"
+//           />
+//         </div>
+//         {/* <input
               onChange={handleChange}
               placeholder=":lupa: Buscar Trades"
               value={search}
@@ -140,6 +155,23 @@ export const AllTrades = () => {
         </Col>
       </Row>
       <div className="d-flex w-100 flex-wrap justify-content-around gap-4">
+      </Col>
+      <Col
+        xs={2}
+        lg={12}
+        className="DivGrisParaBotones col-home-arreglo2"
+      >
+        <Button className="Button2" onClick={() => navigate("/allpoststrades")}>
+          TRADE POSTS
+        </Button>
+        <Button
+          className="Button2"
+          onClick={() => navigate("/allpostsgenerals")}
+        >
+          GENERAL POSTS
+        </Button>
+      </Col>
+      <Col className="d-flex flex-wrap justify-content-center gap-4">
         {lastTradesFilter[0] !== undefined ? (
           lastTradesFilter.map((elem) => {
             return (
@@ -258,7 +290,169 @@ export const AllTrades = () => {
             disponibles en este momento.
           </h4>
         )}
-      </div>
-    </div>
+      </Col>
+    </Row>
+    // <div className="alltrades">
+    //   <Row className="general-altradeposts">
+    //     <Col lg={6}>
+    //       <h2>Trade Posts</h2>
+    //     </Col>
+    //     <Col lg={6}>
+    //       <div className="input-container">
+    //         <span className="material-symbols-outlined search-icon">
+    //           search
+    //         </span>
+    //         <input
+    //           onChange={handleChange}
+    //           placeholder="Buscar"
+    //           value={search}
+    //           className="buscador"
+    //         />
+    //       </div>
+    //       {/* <input
+    //           onChange={handleChange}
+    //           placeholder=":lupa: Buscar Trades"
+    //           value={search}
+    //         /> */}
+    //     </Col>
+    //     <Col
+    //       xs={2}
+    //       className="ascendio-home-row-hijo d-flex gap-1 DivGrisParaBotones mt-2"
+    //     >
+    //       <Button
+    //         className="Button2"
+    //         onClick={() => navigate("/allpoststrades")}
+    //       >
+    //         TRADE POSTS
+    //       </Button>
+    //       <Button
+    //         className="Button2"
+    //         onClick={() => navigate("/allpostsgenerals")}
+    //       >
+    //         GENERAL POSTS
+    //       </Button>
+    //     </Col>
+    //   </Row>
+    //   <div className="d-flex flex-wrap justify-content-center gap-4">
+    //     {lastTradesFilter[0] !== undefined ? (
+    //       lastTradesFilter.map((elem) => {
+    //         return (
+    //           <Card className="ESTILOCARDGENERAL" key={elem.post_id}>
+    //             <Card.Text className="UserCARD">
+    //               <div className="avatarCard">
+    //                 {elem?.img ? (
+    //                   <img
+    //                     src={`http://localhost:3000/images/users/${elem.img}`}
+    //                   />
+    //                 ) : (
+    //                   <p className="letteruser">
+    //                     {elem?.nickname.charAt(0).toUpperCase()}
+    //                   </p>
+    //                 )}
+    //               </div>
+    //               <p>
+    //                 <Link
+    //                   className="home-link-traders"
+    //                   to={`http://localhost:5173/traderprofile/${elem.user_id}`}
+    //                 >
+    //                   {elem.nickname}
+    //                 </Link>
+    //               </p>
+    //             </Card.Text>
+    //             <div className="DivImagenCard">
+    //               {elem.image_name !== null ? (
+    //                 <Card.Img
+    //                   variant="top"
+    //                   src={
+    //                     elem.type === 1
+    //                       ? `http://localhost:3000/images/generalPost/${elem.image_name}`
+    //                       : `http://localhost:3000/images/trades/${elem.image_name}`
+    //                   }
+    //                   className="ascendio-home-card-imagen"
+    //                 />
+    //               ) : (
+    //                 <Card.Img
+    //                   className="CardSinFoto"
+    //                   variant="top"
+    //                   src={"../../../../public/images/iconos/logoascendio.png"}
+    //                 />
+    //               )}
+    //             </div>
+    //             <Card.Body>
+    //               <Card.Title>
+    //                 <h3>Trade de {elem.category_name}</h3>
+    //               </Card.Title>
+    //               <div className="d-flex gap-2">
+    //                 {
+    //                   user.user_id !== elem.user_id ? (
+    //                     <Button
+    //                       className="ButtonSEGUIR"
+    //                       variant="primary"
+    //                       onClick={() => pulsarSeguirONo(elem.user_id)}
+    //                     >
+    //                       {followingUsers.includes(elem.user_id)
+    //                         ? "Siguiendo"
+    //                         : "Seguir"}
+    //                     </Button>
+    //                   ) : null
+    //                   // <Button
+    //                   //   onClick={() =>
+    //                   //     navigate(`/userposts/${user.user_id}`)
+    //                   //   }
+    //                   // >
+    //                   //   Ir a posts
+    //                   // </Button>
+    //                 }
+    //                 <button
+    //                   className="Button3 button-with-ellipsis"
+    //                   onClick={() => {
+    //                     navigate(`/OneTradePost/${elem.post_id}`);
+    //                   }}
+    //                 >
+    //                   COMENTARIOS
+    //                 </button>
+    //               </div>
+    //               <Card.Text>
+    //                 {elem.currency !== null ? (
+    //                   <p>
+    //                     Currency: <span>{elem.currency}</span>
+    //                   </p>
+    //                 ) : null}
+    //                 <p>
+    //                   Descripción: <span>{elem.description}</span>
+    //                 </p>
+    //                 <p>
+    //                   Precio de entrada: <span>{elem.entry_price}</span>
+    //                 </p>
+    //                 <p>
+    //                   Precio de stop: <span>{elem.stop_loss}</span>
+    //                 </p>
+    //                 <p>
+    //                   Precio Profit: <span>{elem.take_profit}</span>
+    //                 </p>
+    //                 <p>
+    //                   Estado:{" "}
+    //                   <span>
+    //                     {elem.correct === null && "Trade Pendiente"}
+    //                     {elem.correct === 0 && "Trade Errado"}
+    //                     {elem.correct === 1 && "Trade Acertado"}
+    //                   </span>
+    //                 </p>
+    //               </Card.Text>
+    //             </Card.Body>
+    //           </Card>
+    //         );
+    //       })
+    //     ) : (
+    //       <h4 className="alltrades-error-nohaypostsnitrades">
+    //         No hay{" "}
+    //         <span className="alltrades-error-nohaypostsnitrades-hijo">
+    //           Trade Posts
+    //         </span>{" "}
+    //         disponibles en este momento.
+    //       </h4>
+    //     )}
+    //   </div>
+    // </div>
   );
 };

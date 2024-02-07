@@ -119,78 +119,87 @@ export const UserFollowing = () => {
   }
 
   return (
-    <>
+    <div className="UserFollowingScss">
       <Row>
         <Col>
           <Row className="d-flex RowShowAllUsersHeader">
-            <Col className="d-flex flex-column p-5">
-              <div className="d-flex gap-5">
-                <h2>Mis seguidores</h2>
-                <Button
-                  className="Button4"
+            <Col className="d-flex flex-column">
+              <Col lg={12}>
+                <button
+                  className="Button4 mb-3"
                   onClick={() => navigate("/profile")}
                 >
-                  Volver
-                </Button>
-              </div>
-            </Col>
-            <Col>
-              <div className="input-container mt-5 BuscadorShowAllUsers">
-                <input
-                  className="buscador"
-                  onChange={handleChange}
-                  placeholder="🔍..."
-                  value={search}
-                />
-              </div>
+                  VOLVER
+                </button>
+              </Col>
+              <Col lg={12} className="d-flex justify-content-between flex-column flex-md-row mb-2">
+                <div>
+                  <h2>Siguiendo:</h2>
+                </div>
+                <div className="d-flex justify-content-end">
+                  <div className="input-container BuscadorShowAllUsers">
+                    <span className="material-symbols-outlined search-icon">
+                      search
+                    </span>
+                    <input
+                      className="buscador"
+                      onChange={handleChange}
+                      placeholder="Buscar"
+                      value={search}
+                    />
+                  </div>
+                </div>
+              </Col>
             </Col>
           </Row>
         </Col>
       </Row>
-      <Row className="UserFollower row-gap-4 ShowAllUserPaddings2-10">
+      <Row className="UserFollower row-gap-4 ">
         {followingFilter?.map((elem) => {
-          return (
-            <Col xs={12} className="d-flex justify-content-center">
-              <div className="UserFollowerCard flex-wrap d-flex align-items-center justify-content-between">
-                <div className="UserImg">
-                  <img
-                    src={
-                      elem.img != null
-                        ? `http://localhost:3000/images/users/${elem.img}`
-                        : `http://localhost:3000/images/users/descarga.png`
-                    }
-                    alt="Imagen de perfil del usuario"
-                  />
-                </div>
-
-                <div className="UserStats d-flex flex-column justify-content-center justify-content-xl-start">
-                  <p className="fw-bold">{elem.nickname}</p>
-                  <p>Fiabilidad: {parseFloat(ratioTotal.toFixed(2))} %</p>
-                </div>
-                <div className="UserButton">
+           return (
+            <Col xs={12} className="d-flex justify-content-center p-0">
+              <Col lg={12} className="UserFollowingCard flex-wrap d-flex align-items-center justify-content-between">
+                <Col lg={6} xs={12} className="d-flex flex-column flex-md-row">
+                  <div className="UserImg">
+                    <img
+                      src={
+                        elem.img != null
+                          ? `http://localhost:3000/images/users/${elem.img}`
+                          : `http://localhost:3000/images/users/descarga.png`
+                      }
+                      alt="Imagen de perfil del usuario"
+                    />
+                  </div>
+                  <div className="UserStats d-flex flex-column justify-content-center justify-content-xl-start">
+                    <h3 className="fw-bold">{elem.nickname.charAt(0).toUpperCase() + elem.nickname.slice(1)}</h3>
+                    <p>Fiabilidad: {parseFloat(ratioTotal.toFixed(2))} %</p>
+                  </div>
+                </Col>
+                <Col lg={6} xs={12} className="UserButton d-flex justify-content-end">
                   {user.user_id !== elem.user_id ? (
-                    <Button
+                    <button
                       className="Button3"
                       onClick={() => pulsarSeguirONo(elem.user_id)}
                     >
                       {followingUsers.includes(elem.user_id)
                         ? "Dejar de Seguir"
                         : "Seguir También"}
-                    </Button>
+                    </button>
                   ) : (
-                    <Button
+                    <button
                       className="Button3"
                       onClick={() => navigate(`/userposts/${user.user_id}`)}
                     >
                       Ir a posts
-                    </Button>
+                    </button>
                   )}
-                </div>
-              </div>
+                </Col>
+              </Col>
             </Col>
           );
         })}
+        
       </Row>
-    </>
+    </div>
   );
 };

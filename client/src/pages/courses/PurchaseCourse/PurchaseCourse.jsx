@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./purchaseCourse.scss";
-import { Button} from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 import { PurchaseCourseCard } from "../../../components/Courses/PurchaseCourseCard/PurchaseCourseCard";
 import axios from "axios";
 
 export const PurchaseCourse = () => {
   const [cursosComprados, setCursosComprados] = useState();
-  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -23,7 +20,6 @@ export const PurchaseCourse = () => {
 
   return (
     <div>
-      {/* <Button onClick={() => navigate("/profile")}>Volver</Button> */}
       <PurchaseCourseCard />
     </div>
   );
