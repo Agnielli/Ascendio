@@ -143,18 +143,15 @@ export const ShowAllUsers = () => {
               <Row className="d-flex RowShowAllUsersHeader">
                 <Col>
                   <button className="mb-2 Button1" onClick={() => setShow(2)}>
-                    USUARIOS CON MÁS SEGUIDORES
+                    USUARIOS CON MÁS ACIERTOS
                   </button>
                 </Col>
                 <Col>
                   <div className="input-container BuscadorShowAllUsers">
-                    <span className="material-symbols-outlined search-icon">
-                      search
-                    </span>
                     <input
                       className="buscador"
                       onChange={handleChange}
-                      placeholder="Buscar"
+                      placeholder="🔍..."
                       value={search}
                     />
                   </div>
@@ -162,28 +159,6 @@ export const ShowAllUsers = () => {
               </Row>
             </Col>
           </Row>
-          {/* <div className="d-flex gap-5 mb-1">
-              <input
-                onChange={handleChange}
-                placeholder="🔍..."
-                value={search}
-              />
-            </div> */}
-          {/* <InputGroup className="d-flex justify-content-center flex-column align-items-start">
-              <label htmlFor="filter">Filtrar por:</label>
-              <select
-                id="filter"
-                name="filter"
-                value={options}
-                onChange={(e) => setOptions(e.target.value)}
-              >
-                <option value="nickname">Nickname</option>
-                <option value="email">Email</option>
-                <option value="name">Name</option>
-                <option value="lastname">Lastname</option>
-              </select>
-            </InputGroup> */}
-
           <Row>
             <Col
               xs={12}
@@ -209,7 +184,6 @@ export const ShowAllUsers = () => {
                             alt="Imagen de perfil del usuario"
                           />
                         </div>
-
                         <div className="AdminUserStats d-flex justify-content-center justify-content-xl-start gap-2 gap-xl-3">
                           <div>
                             <p className="fw-bold">
@@ -237,22 +211,7 @@ export const ShowAllUsers = () => {
                                 : "Seguir"}
                             </button>
                           ) : null}
-                          {/* <Button
-                            className="Button3"
-                            onClick={() =>
-                              navigate(`/traderprofile/${elem.user_id}`)
-                            }
-                          >
-                            Ver más
-                          </Button> */}
                         </div>
-
-                        {/* Seguidores: {elem.followers_count}
-                              Siguiendo: {elem.following_count}
-                              Cursos publicados: {elem.total_courses}
-                              Post publicados: {elem.total_posts}
-                              Trades Acertados: {elem.correct_posts}
-                              Trades Errados: {elem.incorrect_posts} */}
                       </Col>
                     </Col>
                   );
@@ -262,7 +221,6 @@ export const ShowAllUsers = () => {
           </Row>
         </>
       )}
-
       {show === 2 && (
         <>
           <Row>
@@ -270,7 +228,7 @@ export const ShowAllUsers = () => {
               <Row className="d-flex RowShowAllUsersHeader">
                 <Col>
                   <button className="mb-2 Button1" onClick={() => setShow(1)}>
-                    USUARIOS CON MÁS ACIERTOS
+                    USUARIOS CON MÁS SEGUIDORES
                   </button>
                 </Col>
                 <Col>
@@ -317,7 +275,14 @@ export const ShowAllUsers = () => {
                         </div>
                         <div className="AdminUserStats d-flex justify-content-center justify-content-xl-start gap-2 gap-xl-3">
                           <div>
-                            <p className="fw-bold">{elem.nickname}</p>
+                            <p className="fw-bold">
+                              <Link
+                                className="home-link-traders"
+                                to={`http://localhost:5173/traderprofile/${elem.user_id}`}
+                              >
+                                {elem.nickname}
+                              </Link>
+                            </p>
                             <p>{elem.followers_count} Seguidores</p>
                           </div>
 
@@ -337,22 +302,7 @@ export const ShowAllUsers = () => {
                                 : "Seguir"}
                             </button>
                           ) : null}
-                          <button
-                            className="Button3"
-                            onClick={() =>
-                              navigate(`/traderprofile/${elem.user_id}`)
-                            }
-                          >
-                            Ver más
-                          </button>
                         </div>
-
-                        {/* Seguidores: {elem.followers_count}
-                    Siguiendo: {elem.following_count}
-                    Cursos publicados: {elem.total_courses}
-                    Post publicados: {elem.total_posts}
-                    Trades Acertados: {elem.correct_posts}
-                    Trades Errados: {elem.incorrect_posts} */}
                       </Col>
                     </Col>
                   );
