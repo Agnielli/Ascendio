@@ -72,14 +72,12 @@
     }
   }
 
-
   .EditUserMsgSuccess {
-    color: #39A72F !important;
+    color: #39a72f !important;
     padding-top: 1rem !important;
   }
-  
-  .ButtonEditUser1{
 
+  .ButtonEditUser1 {
     display: flex;
     width: 35vw;
     padding: 6px 0px 6px 20px !important;
@@ -108,7 +106,7 @@
       margin: 0 !important;
     }
   }
-  .InputDesplegableSinBootstrap{
+  .InputDesplegableSinBootstrap {
     width: 100%;
   }
 }
@@ -126,4 +124,8 @@
 
 .InputsMinimumWidthEditUser {
   min-width: 280px !important;
+}
+
+.select-option-black {
+  color: black;
 }
