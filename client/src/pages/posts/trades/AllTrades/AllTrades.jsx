@@ -92,25 +92,69 @@ export const AllTrades = () => {
     }
   };
   return (
-    <Row className="alltrades">
-      <Col lg={6}>
-        <h2>Trade Posts</h2>
-      </Col>
-      <Col lg={6} className="col-home-arreglo">
-        <div className="input-container">
-          <span className="material-symbols-outlined search-icon">search</span>
-          <input
-            onChange={handleChange}
-            placeholder="Buscar"
-            value={search}
-            className="buscador"
-          />
-        </div>
-        {/* <input
+    <div className="alltrades">
+      <Row className="general-altradeposts title-input">
+        <Col
+          xs={12} md={6}
+          className="centrar-allposts"
+        >
+          <h2 className="mb-0">Trade Posts</h2>
+        </Col>
+        <Col
+          xs={12} md={6}
+          className="d-flex justify-content-end align-items-center centrar-allposts"
+        >
+          <div className="input-container">
+            <span className="material-symbols-outlined search-icon">
+              search
+            </span>
+            <input
+              onChange={handleChange}
+              placeholder="Buscar"
+              value={search}
+              className="buscador"
+            />
+          </div>
+          {/* <input
+    // <Row className="alltrades">
+//       <Col lg={6}>
+//         <h2>Trade Posts</h2>
+//       </Col>
+//       <Col lg={6} className="col-home-arreglo">
+//         <div className="input-container">
+//           <span className="material-symbols-outlined search-icon">search</span>
+//           <input
+//             onChange={handleChange}
+//             placeholder="Buscar"
+//             value={search}
+//             className="buscador"
+//           />
+//         </div>
+//         {/* <input
               onChange={handleChange}
               placeholder=":lupa: Buscar Trades"
               value={search}
             /> */}
+        </Col>
+        <Col
+          xs={2}
+          className="ascendio-home-row-hijo d-flex gap-1 mt-2 DivGrisParaBotones2"
+        >
+          <Button
+            className="Button2"
+            onClick={() => navigate("/allpoststrades")}
+          >
+            TRADE POSTS
+          </Button>
+          <Button
+            className="Button2"
+            onClick={() => navigate("/allpostsgenerals")}
+          >
+            GENERAL POSTS
+          </Button>
+        </Col>
+      </Row>
+      <div className="d-flex w-100 flex-wrap justify-content-around gap-4">
       </Col>
       <Col
         xs={2}

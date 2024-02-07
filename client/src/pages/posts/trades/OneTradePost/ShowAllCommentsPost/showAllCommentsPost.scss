@@ -8,6 +8,7 @@
   max-width: 100%;
   padding: 2rem;
   min-height: 60vh;
+  overflow-x: auto;
 
   .showallcommentsposts-hijo {
     height: 10%;
@@ -94,3 +95,21 @@
 //   border: none;
 // }
 // }
+
+@media (width <= 649px) {
+  .nickname-oneposttrade {
+    width: 100%;
+  }
+
+  .message-oneposttrade {
+    width: 100%;
+  }
+
+  .date-oneposttrade {
+    width: 80%;
+  }
+
+  .boton-eliminar-comment {
+    width: 20%;
+  }
+}

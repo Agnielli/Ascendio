@@ -48,11 +48,6 @@ export const OneTradePost = () => {
                 >
                   Volver
                 </button>
-                {/* <div className="avatarCard">
-                  <p className="letteruser">
-                    {oneTrade.post_user_nickname.charAt(0).toUpperCase()}
-                  </p>
-                </div> */}
                 <h3 className="nickname-card-onetradepost">
                   <Link to={`/traderprofile/${oneTrade.user_id}`}>
                     {oneTrade.post_user_nickname.charAt(0).toUpperCase() +
@@ -117,7 +112,7 @@ export const OneTradePost = () => {
               </Col>
             </Card>
           </Col>
-          <Col xxl={9} className="onetradepost-hijo">
+          <Col xxl={9} className="onetradepost-hijo d-flex justify-content-center">
             <ShowAllCommentsPost
               showModal={showModal}
               setShowModal={setShowModal}
