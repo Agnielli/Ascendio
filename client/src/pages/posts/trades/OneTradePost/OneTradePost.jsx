@@ -30,7 +30,7 @@ export const OneTradePost = () => {
     <>
       {oneTrade && (
         <Row className="onetradepost">
-          <Col xxl={3} className="onetradepost-hijo">
+          <Col xs={12} xl={3} xxl={3} className="onetradepost-hijo">
             <Card className="card-padre-onetradepost">
               <Col className="UserCARD card-hijo1-onetradepost">
                 <button
@@ -103,14 +103,19 @@ export const OneTradePost = () => {
               </Col>
             </Card>
           </Col>
-          <Col xxl={9} className="onetradepost-hijo d-flex justify-content-center">
+          <Col
+            xs={12}
+            xl={9}
+            xxl={9}
+            className="onetradepost-hijo d-flex justify-content-center"
+          >
             <ShowAllCommentsPost
               showModal={showModal}
               setShowModal={setShowModal}
               oneTrade={oneTrade}
             />
           </Col>
-          <Col xxl={12}>
+          <Col xs={12}>
             {showModal && (
               <ModalCreateComment
                 showModal={showModal}
