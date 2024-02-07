@@ -6,18 +6,12 @@ import { ModalCreateComment } from "./ModalCreateComment/ModalCreateComment";
 import { ShowAllCommentsPost } from "./ShowAllCommentsPost/ShowAllCommentsPost";
 import "./oneTradePost.scss";
 // import "../../../../../public/stylesheets/ESTILOCARDGENERAL.scss";
-
 export const OneTradePost = () => {
   const [oneTrade, setOneTrade] = useState();
-
   const [showModal, setShowModal] = useState(false);
-
   const post = useParams();
-
   console.log(post);
-
   const navigate = useNavigate();
-
   useEffect(() => {
     if (post) {
       axios
@@ -31,9 +25,7 @@ export const OneTradePost = () => {
         });
     }
   }, [post]);
-
   console.log(oneTrade);
-
   return (
     <>
       {oneTrade && (
@@ -89,8 +81,7 @@ export const OneTradePost = () => {
                   </p>
                   <p>
                     Descripción: <span>{oneTrade.description}</span>
-                  </p>            
-
+                  </p>
                 </Card.Body>
               </Col>
               <Col className="card-hijo3-onetradepost">

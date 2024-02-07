@@ -3,15 +3,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { AscendioContext } from "../../../../../context/AscendioContext";
 import "./ShowAllCommentsPost.scss";
-
 export const ShowAllCommentsPost = ({ showModal, setShowModal, oneTrade }) => {
   const [showComments, setShowComments] = useState();
   const [update, setUpdate] = useState(false);
-
   const { post_id } = oneTrade;
-
   const { user } = useContext(AscendioContext);
-
   useEffect(() => {
     if (post_id) {
       axios
@@ -24,7 +20,6 @@ export const ShowAllCommentsPost = ({ showModal, setShowModal, oneTrade }) => {
         .catch((error) => console.log(error));
     }
   }, [update, showModal]);
-
   const deleteComment = (comment_id) => {
     axios
       .put(`http://localhost:3000/comments/deletecomments/${comment_id}`)
@@ -35,7 +30,6 @@ export const ShowAllCommentsPost = ({ showModal, setShowModal, oneTrade }) => {
         console.log(error);
       });
   };
-
   const getMonthName = (monthNumber) => {
     const monthNames = [
       "Ene",
@@ -54,9 +48,7 @@ export const ShowAllCommentsPost = ({ showModal, setShowModal, oneTrade }) => {
     const monthIndex = parseInt(monthNumber, 10) - 1;
     return monthNames[monthIndex];
   };
-
   console.log(new Date());
-
   return (
     <>
       <Row className="showallcommentsposts-padre">
@@ -93,7 +85,7 @@ export const ShowAllCommentsPost = ({ showModal, setShowModal, oneTrade }) => {
                       }}
                     >
                       <img src="../../../../../../public/images/iconos/papelera.png" alt="" />
-                      {/* ❌ */}
+                      {/* :x: */}
                     </Button>
                   )}
                 </Col>
