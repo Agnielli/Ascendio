@@ -1,43 +1,34 @@
 @use "../../../../../public/stylesheets/variables.scss" as *;
-
 .alltrades {
   padding: 2vh 0;
   width: 80%;
   margin: 0 auto;
-
-
   .ascendio-home-row-hijo {
     margin-bottom: 1rem;
     width: 80%;
     display: flex;
     width: 100%;
-
     .col1 {
       display: flex;
       justify-content: start;
       align-items: center;
     }
-
     .col2 {
       display: flex;
       justify-content: end;
     }
-
     button {
       width: 50%;
     }
-
     h2 {
       margin: 0;
     }
   }
-
   .input-container {
   span {
-    margin: 0 !important; 
-    padding: 0 !important;     
+    margin: 0 !important;
+    padding: 0 !important;
   }
-    
     .buscador {
       height: 36px;
       transition: 0.1s;
@@ -59,37 +50,30 @@
       }
     }
   }
-
   @media (max-width: 770px) {
     .centrar-allposts {
       text-align: center;
     }
   }
 }
-
 .general-altradeposts{
   max-width: 100%;
   width: 100%;
 }
-
 .ascendio-home-row-hijo{
   max-width: 100%;
   padding: 0 12px 0 12px !important;
   button{
     max-width: 50%;
     width: 50%;
-    
   }
 }
-
 .col-home-arreglo{
   @include display-flex(row,end,center);
 }
-
 .col-home-arreglo2{
   @include display-flex(row,space-between,center);
   button{
    width: 100%;
   }
 }
-

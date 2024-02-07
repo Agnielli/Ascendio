@@ -1,5 +1,4 @@
 @use "../../../../../../public/stylesheets/variables.scss" as *;
-
 .showallcommentsposts-padre {
   background-color: $accent2-color;
   border-radius: 2rem;
@@ -9,13 +8,11 @@
   padding: 2rem;
   min-height: 60vh;
   overflow-x: auto;
-
   .showallcommentsposts-hijo {
     height: 10%;
     @include display-flex(row, flex-start, flex-start);
     color: $accent-color;
   }
-
   .showallcommentsposts-hijo2 {
     height: 80%; /* Establece la altura máxima al 50% del viewport height */
     overflow-y: auto; /* Habilita el scroll vertical si se excede la altura máxima */
@@ -24,21 +21,18 @@
     background-color: $accent2-color;
     border-radius: 2rem;
     @include display-flex(column, flex-start, center);
-
     .showallcommentsposts-nieto {
       height: auto;
       width: 100%;
       max-width: 100%;
       @include display-flex(row, center, center);
-
       &.lightColor {
-        background-color: #1f1e1e;
+        background-color: #1F1E1E;
         border-radius: 1rem;
       }
       &.darkColor {
-        background-color: #2e2d2d;
+        background-color: #2E2D2D;
       }
-
       .nickname-oneposttrade {
         h6 {
           @include display-flex(row, flex-start center);
@@ -46,13 +40,11 @@
           color: $primary-color;
         }
       }
-
       .message-oneposttrade{
         p{
           word-wrap: break-word;
         }
       }
-
       .date-oneposttrade {
         padding: 0 !important;
         p {
@@ -61,11 +53,9 @@
           color: $primary-color;
         }
       }
-
       .botonera-oneposttrade {
         padding: 0 !important;
         @include display-flex(row, end, flex-start);
-
         .boton-eliminar-comment {
           background-color: transparent !important;
           border: none;
@@ -75,7 +65,6 @@
         }
       }
     }
-
     .showallcommentsposts-hijo3 {
       max-height: 10%;
       height: 10%;
@@ -87,7 +76,6 @@
     border-radius: 25px;
   }
 }
-
 // .botonera-oneposttrade{
 //   @include display-flex(row,end,flex-start);
 //   .boton-eliminar-comment{
@@ -95,20 +83,16 @@
 //   border: none;
 // }
 // }
-
 @media (width <= 649px) {
   .nickname-oneposttrade {
     width: 100%;
   }
-
   .message-oneposttrade {
     width: 100%;
   }
-
   .date-oneposttrade {
     width: 80%;
   }
-
   .boton-eliminar-comment {
     width: 20%;
   }
